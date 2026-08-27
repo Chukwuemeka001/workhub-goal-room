@@ -1,0 +1,43 @@
+1
+00:00:00,000 --> 00:00:08,000
+WebMCP makes a website callable by agents. WorkHub Goal Room makes each call state-aware, authority-checked, evidence-bound, and owner-controlled.
+
+2
+00:00:08,000 --> 00:00:24,000
+A callable action is not automatically a legal action. An agent can act on stale state, bind evidence to the wrong Plan, or mistake PASS for acceptance.
+
+3
+00:00:24,000 --> 00:00:38,000
+Goal Room registers exactly five WebMCP tools. Every consequential call enters the same authority kernel and is revalidated against the current legal frontier.
+
+4
+00:00:38,000 --> 00:00:50,000
+Owner confirmation, verifier authorship, final acceptance, and external effects are intentionally not WebMCP tools.
+
+5
+00:00:50,000 --> 00:01:06,000
+The agent proposed Plan v1, but work is blocked until the owner confirms it. Then the agent may claim only an admitted step.
+
+6
+00:01:06,000 --> 00:01:22,000
+The agent submits exact candidate bytes and their SHA-256 digest. Candidate v1 enters deterministic verification and fails.
+
+7
+00:01:22,000 --> 00:01:38,000
+The original evidence and FAIL receipt remain immutable. The agent submits corrected Candidate v2.
+
+8
+00:01:38,000 --> 00:01:54,000
+The internal verifier records PASS. PASS does not accept the Goal; it only permits the agent to request completion for this exact candidate.
+
+9
+00:01:54,000 --> 00:02:14,000
+The frontier moves to the owner. The agent and verifier are blocked. Only the owner can accept the exact verified candidate.
+
+10
+00:02:14,000 --> 00:02:30,000
+After acceptance, every lifecycle stage is complete and there is no further governed action.
+
+11
+00:02:30,000 --> 00:02:34,000
+Humans and agents can share one state machine without sharing one authority level.

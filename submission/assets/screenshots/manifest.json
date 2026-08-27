@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "browser": "Chrome/154.0.8027.0",
+  "viewport": {
+    "width": 1440,
+    "height": 900,
+    "deviceScaleFactor": 1
+  },
+  "mode": "deterministic UI controls; not autonomous browser-native model execution",
+  "frames": [
+    {
+      "index": 1,
+      "slug": "plan-owner-gate",
+      "action": "Initial owner Plan decision; agent and verifier blocked",
+      "path": "assets/screenshots/01-plan-owner-gate.png",
+      "title": "Review Plan v1",
+      "frontier": "Owner must confirm or request revision",
+      "actor": "OWNER",
+      "receiptCount": "1",
+      "verdict": "WAITING",
+      "status": null
+    },
+    {
+      "index": 2,
+      "slug": "plan-confirmed",
+      "action": "Owner confirms Plan v1",
+      "path": "assets/screenshots/02-plan-confirmed.png",
+      "title": "Plan v1 confirmed",
+      "frontier": "Agent may claim the next admitted step",
+      "actor": "AGENT",
+      "receiptCount": "2",
+      "verdict": "WAITING",
+      "status": null
+    },
+    {
+      "index": 3,
+      "slug": "step-claimed",
+      "action": "Agent claims admitted artifact step",
+      "path": "assets/screenshots/03-step-claimed.png",
+      "title": "Agent holds step artifact",
+      "frontier": "Agent must submit exact candidate evidence",
+      "actor": "AGENT",
+      "receiptCount": "3",
+      "verdict": "WAITING",
+      "status": null
+    },
+    {
+      "index": 4,
+      "slug": "candidate-v1",
+      "action": "Agent submits failing Candidate v1",
+      "path": "assets/screenshots/04-candidate-v1.png",
+      "title": "Candidate v1 is awaiting verification",
+      "frontier": "System must verify this exact candidate",
+      "actor": "SYSTEM",
+      "receiptCount": "4",
+      "verdict": "WAITING",
+      "status": null
+    },
+    {
+      "index": 5,
+      "slug": "verification-failed",
+      "action": "Internal verifier records deterministic FAIL",
+      "path": "assets/screenshots/05-verification-failed.png",
+      "title": "Candidate v1 did not pass",
+      "frontier": "Agent must submit a corrected candidate",
+      "actor": "AGENT",
+      "receiptCount": "5",
+      "verdict": "FAIL",
+      "status": null
+    },
+    {
+      "index": 6,
+      "slug": "candidate-v2",
+      "action": "Agent submits corrected Candidate v2",
+      "path": "assets/screenshots/06-candidate-v2.png",
+      "title": "Candidate v2 is awaiting verification",
+      "frontier": "System must verify this exact candidate",
+      "actor": "SYSTEM",
+      "receiptCount": "6",
+      "verdict": "WAITING",
+      "status": null
+    },
+    {
+      "index": 7,
+      "slug": "verification-passed",
+      "action": "Internal verifier records deterministic PASS",
+      "path": "assets/screenshots/07-verification-passed.png",
+      "title": "Candidate v2 passed deterministic verification",
+      "frontier": "Agent may request completion for this exact candidate",
+      "actor": "AGENT",
+      "receiptCount": "7",
+      "verdict": "PASS",
+      "status": null
+    },
+    {
+      "index": 8,
+      "slug": "completion-requested",
+      "action": "Agent requests completion; owner acceptance frontier",
+      "path": "assets/screenshots/08-completion-requested.png",
+      "title": "Accept Candidate v2?",
+      "frontier": "Owner may accept this exact verified candidate",
+      "actor": "OWNER",
+      "receiptCount": "8",
+      "verdict": "PASS",
+      "status": null
+    },
+    {
+      "index": 9,
+      "slug": "goal-accepted",
+      "action": "Owner accepts exact verified candidate",
+      "path": "assets/screenshots/09-goal-accepted.png",
+      "title": "Goal complete",
+      "frontier": "No further governed action",
+      "actor": "OWNER",
+      "receiptCount": "9",
+      "verdict": "PASS",
+      "status": null
+    }
+  ]
+}

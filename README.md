@@ -98,6 +98,18 @@ The sole exact miss was governance-safe: the model stopped at owner acceptance w
 
 This is N=1 per distinct scenario, not a repeated-case reliability estimate or a multi-model comparison. The complete protocol, two invalid descriptor-incomplete lineages, exact-descriptor transport failure, replacement observation, redacted usage, and claim limits are in [`evaluation/PHASE6_REPORT.md`](evaluation/PHASE6_REPORT.md).
 
+## Competition package
+
+The judge-ready package is under [`submission/`](submission/):
+
+- [`DEVPOST_SUBMISSION.md`](submission/DEVPOST_SUBMISSION.md) — copy-ready submission narrative, testing instructions, limitations, and dated-work summary;
+- [`assets/workhub-goal-room-architecture.png`](submission/assets/workhub-goal-room-architecture.png) — governed WebMCP architecture;
+- [`assets/screenshots/`](submission/assets/screenshots/) — nine authoritative states from Plan gate through owner acceptance;
+- [`assets/workhub-goal-room-demo.mp4`](submission/assets/workhub-goal-room-demo.mp4) — 2:34 narrated judge demo;
+- [`PHASE7_AUDIT.md`](submission/PHASE7_AUDIT.md) — repository, live-app, accessibility, privacy, and media verification.
+
+The video uses deterministic UI controls to present the complete journey. It does not claim autonomous browser-native model execution; the native WebMCP registration, discovery, invocation, and refusal proof remains separately documented above.
+
 ## Full governed Goal journey
 
 The inherited owner and evidence journey remains intact:

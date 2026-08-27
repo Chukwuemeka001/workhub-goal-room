@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">WorkHub Goal Room governed WebMCP architecture</title>
+  <desc id="desc">Five WebMCP tools pass through strict callback validation into an authority kernel. Owner and verifier actions enter the kernel through separate inaccessible boundaries. The kernel produces immutable receipts, legal frontier state, and the shared Goal Room interface.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#1e293b" stroke-width="1"/></pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#67e8f9"/></marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#34d399"/></marker>
+    <marker id="arrowRose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#fb7185"/></marker>
+    <filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#000" flood-opacity=".35"/></filter>
+    <style>
+      text{font-family:'SFMono-Regular',Consolas,'Liberation Mono',monospace;fill:#e2e8f0}.title{font:700 34px system-ui,sans-serif}.subtitle{font:16px system-ui,sans-serif;fill:#94a3b8}.label{font-size:17px;font-weight:700}.small{font-size:13px;fill:#cbd5e1}.tiny{font-size:11px;fill:#94a3b8}.caps{font-size:11px;letter-spacing:2px;font-weight:700}.box{stroke-width:2;rx:14}.agent{fill:#082f49;stroke:#22d3ee}.adapter{fill:#083344;stroke:#67e8f9}.kernel{fill:#052e2b;stroke:#34d399}.owner{fill:#4c0519;stroke:#fb7185}.verify{fill:#3b0764;stroke:#c084fc}.state{fill:#172554;stroke:#818cf8}.ui{fill:#0f172a;stroke:#94a3b8}.boundary{fill:none;stroke:#475569;stroke-width:2;stroke-dasharray:9 7;rx:20}.flow{fill:none;stroke:#67e8f9;stroke-width:3;marker-end:url(#arrow)}.green{stroke:#34d399;marker-end:url(#arrowGreen)}.rose{stroke:#fb7185;stroke-dasharray:9 7;marker-end:url(#arrowRose)}
+    </style>
+  </defs>
+  <rect width="1600" height="1000" fill="#020617"/><rect width="1600" height="1000" fill="url(#grid)" opacity=".65"/>
+  <circle cx="78" cy="68" r="8" fill="#34d399"/><text x="100" y="79" class="title">WorkHub Goal Room</text>
+  <text x="100" y="108" class="subtitle">Governed WebMCP architecture · state-aware · authority-checked · evidence-bound · owner-controlled</text>
+
+  <!-- arrows are intentionally behind components -->
+  <path class="flow" d="M325 305H445"/><path class="flow green" d="M725 305H840"/>
+  <path class="flow green" d="M1110 305H1240"/>
+  <path class="flow rose" d="M940 680V415"/><path class="flow" d="M1000 415V680"/>
+  <path class="flow" d="M1050 415V590H1260V680"/><path class="flow green" d="M1300 680V560H1070V415"/>
+  <path class="flow" d="M840 410H760V745H735"/>
+
+  <rect x="55" y="155" width="1500" height="430" class="boundary"/><text x="80" y="182" class="caps" fill="#64748b">AGENT-CALLABLE SURFACE</text>
+  <rect x="80" y="225" width="245" height="160" class="box agent" filter="url(#shadow)"/>
+  <text x="105" y="258" class="caps" fill="#67e8f9">AGENT / CHATGPT</text><text x="105" y="292" class="label">Discovers 5 tools</text>
+  <text x="105" y="322" class="small">Reads frontier</text><text x="105" y="346" class="small">Requests bounded action</text>
+
+  <rect x="445" y="205" width="280" height="200" class="box adapter" filter="url(#shadow)"/>
+  <text x="470" y="238" class="caps" fill="#67e8f9">THIN WEBMCP ADAPTER</text>
+  <text x="470" y="273" class="small">get_goal_room_state</text><text x="470" y="298" class="small">propose_plan</text><text x="470" y="323" class="small">claim_step</text><text x="470" y="348" class="small">submit_artifact</text><text x="470" y="373" class="small">request_completion</text>
+
+  <rect x="840" y="195" width="270" height="220" class="box kernel" filter="url(#shadow)"/>
+  <text x="865" y="228" class="caps" fill="#6ee7b7">AUTHORITY KERNEL</text><text x="865" y="263" class="label">Revalidates every call</text>
+  <text x="865" y="294" class="small">actor · state version · exact input</text><text x="865" y="319" class="small">Plan/step/candidate binding</text><text x="865" y="344" class="small">idempotency · evidence · frontier</text><text x="865" y="377" class="small" fill="#6ee7b7">Fail closed on mismatch</text>
+
+  <rect x="1240" y="205" width="280" height="200" class="box state" filter="url(#shadow)"/>
+  <text x="1265" y="238" class="caps" fill="#a5b4fc">AUTHORITATIVE STATE</text><text x="1265" y="273" class="label">Goal + Plan + evidence</text>
+  <text x="1265" y="304" class="small">Immutable receipts</text><text x="1265" y="329" class="small">Deterministic verdicts</text><text x="1265" y="354" class="small">Next legal action</text><text x="1265" y="379" class="small">Owner-required boundary</text>
+
+  <rect x="80" y="680" width="655" height="160" class="box ui" filter="url(#shadow)"/>
+  <text x="105" y="714" class="caps" fill="#cbd5e1">SHARED GOAL ROOM UI</text><text x="105" y="750" class="label">Plan → Claim → Evidence → Verify → Complete → Accept</text>
+  <text x="105" y="783" class="small">One authoritative frontier · status beyond color · receipts visible</text><text x="105" y="812" class="small">Human and agent share state—not authority</text>
+
+  <rect x="840" y="680" width="250" height="160" class="box owner" filter="url(#shadow)"/>
+  <text x="865" y="714" class="caps" fill="#fda4af">OWNER-ONLY UI</text><text x="865" y="750" class="label">Confirm Plan</text><text x="865" y="778" class="label">Accept Goal</text><text x="865" y="812" class="tiny">Never registered as WebMCP tools</text>
+
+  <rect x="1210" y="680" width="310" height="160" class="box verify" filter="url(#shadow)"/>
+  <text x="1235" y="714" class="caps" fill="#d8b4fe">INTERNAL VERIFIER</text><text x="1235" y="750" class="label">Exact release rules</text><text x="1235" y="780" class="small">Immutable FAIL / PASS</text><text x="1235" y="812" class="tiny">Inaccessible through WebMCP</text>
+
+  <rect x="55" y="630" width="1500" height="260" class="boundary"/><text x="80" y="658" class="caps" fill="#64748b">NON-AGENT AUTHORITY + HUMAN EXPERIENCE</text>
+
+  <rect x="55" y="925" width="1490" height="1" fill="#1e293b"/>
+  <circle cx="90" cy="958" r="6" fill="#22d3ee"/><text x="106" y="963" class="tiny">WebMCP call</text>
+  <circle cx="275" cy="958" r="6" fill="#34d399"/><text x="291" y="963" class="tiny">Governed transition</text>
+  <circle cx="510" cy="958" r="6" fill="#fb7185"/><text x="526" y="963" class="tiny">Owner-only boundary</text>
+  <text x="1515" y="963" text-anchor="end" class="tiny">Apache-2.0 · clean-room competition edition · no external effects</text>
+</svg>
