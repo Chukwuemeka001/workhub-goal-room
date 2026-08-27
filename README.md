@@ -4,9 +4,15 @@ A clean-room, public competition edition demonstrating one idea:
 
 > WebMCP should make an agent’s next legal action explicit, governed, and visible to the human sharing the page.
 
-## Current scope: Phase 0
+## Phase 0 result
 
-This commit proves only that a qualifying WebMCP client can:
+**PASS — verified August 27, 2026 in Google Chrome Canary 154 with the browser's WebMCP testing and DevTools experiments enabled.**
+
+The page tool was discovered through `document.modelContext.getTools()`, invoked through `document.modelContext.executeTool()`, returned a structured result, and visibly updated the shared page to show “Phase 0 is alive” with invocation count `1`.
+
+This proves WebMCP registration, browser discovery, typed invocation, structured return, and shared-page state change. It does **not** claim autonomous model tool selection or implement the later Goal Room governance phases.
+
+A qualifying client can:
 
 1. discover `workhub_goal_room_ping`;
 2. invoke it with a short message;

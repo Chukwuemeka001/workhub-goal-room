@@ -6,4 +6,5 @@ coverage/
 .env.*
 !.env.example
 .browseros-phase0/
+.chrome-canary-phase0/
 evidence/
