@@ -37,11 +37,11 @@ WebMCP Leverage is the first tie-break criterion.[1]
 - [x] Live URL: https://chukwuemeka001.github.io/workhub-goal-room/
 - [x] Five real `document.modelContext.registerTool(...)` registrations
 - [x] Public source, tests, assets, and run instructions
-- [ ] Final Devpost text
-- [ ] Architecture image
-- [ ] Judge-facing screenshots
+- [x] Final Devpost text
+- [x] Architecture image
+- [x] Judge-facing screenshots
 - [ ] Public YouTube demo under 3:00 with audio
-- [ ] Final repository/live-app audit
+- [x] Final repository/live-app audit
 - [ ] Owner approval of exact final submission
 - [ ] Devpost submission completed before internal target
 

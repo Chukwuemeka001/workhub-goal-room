@@ -67,8 +67,8 @@ Before and after the call:
 - Desktop horizontal overflow at 1440×900: **0 px**.
 - Mobile horizontal overflow at 390×844: **0 px**.
 - Mobile authoritative status bounds: left `10`, right `380`, width `370` within a 390px viewport.
-- Nine captured states show owner → agent → system → agent → owner frontier progression.
-- Receipt count advances monotonically from 1 through 9.
+- Nine top-of-room state captures show owner → agent → system → agent → owner frontier progression.
+- A tenth capture visibly shows all nine ordered immutable receipts, from Plan proposal through owner acceptance.
 - Deterministic FAIL leads to corrected evidence; PASS remains distinct from owner acceptance.
 - Final state shows Goal complete and no further governed action.
 
@@ -89,27 +89,34 @@ Git diff check                    passed
 
 - Source: `submission/assets/workhub-goal-room-architecture.svg`
 - Export: 1600×1000 PNG
-- PNG SHA-256: `74576068bb814dad05a3bf879d0dac8308896f8ae3d0769a5746104dacbcca18`
-- Visual review: no clipping, text collision, arrow-over-text defect, or materially misleading authority path.
+- PNG SHA-256: `bc29064ffff67d1e112cc395578e3ea720a3753f3aec60e2bfd2e75876bcc30b`
+- WebMCP calls, governed dispatch/verdict, state projection, owner-only dispatch, and verifier invocation use distinct legend colors and paths.
+- Visual review: no clipping, text collision, arrow-over-text defect, forbidden-authority implication, or materially misleading path.
 
 ### Screenshots
 
-- Nine 1440×900 PNG frames captured from the functioning app in Canary 154.
+- Ten 1440×900 PNG frames captured from the functioning app in Canary 154.
+- Frames 1–9 show the authoritative progression; frame 10 shows the complete receipt history.
 - Manifest labels the mode as deterministic UI controls, not autonomous browser-native model execution.
-- Manifest SHA-256: `9cda82c0ce38892216e07a1c12b0fc464cd2342630f25369250bc2a169f17cc7`
+- Manifest SHA-256: `9c8ba0dd69bfb134af6ac8deb80e71f9b5878a63b6561cdb95d1283b0a6f92ec`
+- Receipt-history PNG SHA-256: `688ee8cc6823eae23629a3cb514c9c2e0a2ea93b591389a7e7a82f78cc8079d4`
 
 ### Demo video
 
 - Path: `submission/assets/workhub-goal-room-demo.mp4`
-- Container duration: **154.0 seconds (2:34)** — under the 3:00 limit
+- Capture mode: continuous Chrome DevTools `Page.startScreencast` of the functioning app
+- Raw capture: **105 actual presentation frames over 148.79 seconds**
+- Container duration: **150.03 seconds (2:30)** — under the 3:00 limit
 - Resolution/frame rate: **1440×900 at 30 fps**
 - Video: H.264 High profile
 - Audio: AAC, 48 kHz, mono
 - Mean/max audio level: `-21.6 dB` / `-0.9 dB`
-- File size: 5,122,958 bytes
-- MP4 SHA-256: `84c6350b817a8c56d19e96a9b519233d31b435617c33c305c0dc1c07f53caab5`
-- English captions end at the exact 2:34 container boundary.
-- Sampled title, architecture, correction, PASS, owner-gate, and accepted frames were visually reviewed.
+- File size: 5,920,324 bytes
+- MP4 SHA-256: `8a1745619ea4b1b6bda03898abd07a748bde2444b2fc26bc6a2dca9c126f094e`
+- The video visibly shows five native registrations, a real state callback, a real malformed-call refusal, cursor movement/control activation, every live state mutation, receipt scrolling, and final no-action state.
+- Ten English caption cues were aligned to actual narration pause boundaries; the last cue ends at 149.085 seconds within the 149.952-second audio stream.
+- The complete mux decoded without errors; no black interval was detected; sampled tool, refusal, state, receipt, and final frames were visually reviewed.
+- Reproducible capture source: `submission/scripts/record-live-demo.py`; receipt: `submission/assets/live-demo-capture.json`.
 - No music or third-party copyrighted media is included.
 
 ## Public/private boundary
@@ -126,7 +133,7 @@ Temporary Devpost HTML snapshots, disposable browser profile, Vite server, Canar
 
 ## Claim boundary
 
-The polished video is a deterministic UI presentation of the functioning product. It is not evidence of direct autonomous browser-native model execution. Native WebMCP registration, discovery, invocation, mutation, and governed refusal were proven separately. Fresh-model evidence remains one valid observation per distinct scenario with one model/provider and is not a repeated reliability estimate.
+The polished video is a continuous screencast of the functioning product. Its inspector is populated from the real native registrations and executes captured native callbacks; the complete Goal journey then uses deterministic operator clicks. It is not evidence of autonomous model execution. Fresh-model evidence remains one valid observation per distinct scenario with one model/provider and is not a repeated reliability estimate.
 
 ## Remaining owner-gated actions
 

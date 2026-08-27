@@ -6,9 +6,11 @@
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#67e8f9"/></marker>
     <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#34d399"/></marker>
     <marker id="arrowRose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#fb7185"/></marker>
+    <marker id="arrowSlate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#94a3b8"/></marker>
+    <marker id="arrowViolet" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#c084fc"/></marker>
     <filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#000" flood-opacity=".35"/></filter>
     <style>
-      text{font-family:'SFMono-Regular',Consolas,'Liberation Mono',monospace;fill:#e2e8f0}.title{font:700 34px system-ui,sans-serif}.subtitle{font:16px system-ui,sans-serif;fill:#94a3b8}.label{font-size:17px;font-weight:700}.small{font-size:13px;fill:#cbd5e1}.tiny{font-size:11px;fill:#94a3b8}.caps{font-size:11px;letter-spacing:2px;font-weight:700}.box{stroke-width:2;rx:14}.agent{fill:#082f49;stroke:#22d3ee}.adapter{fill:#083344;stroke:#67e8f9}.kernel{fill:#052e2b;stroke:#34d399}.owner{fill:#4c0519;stroke:#fb7185}.verify{fill:#3b0764;stroke:#c084fc}.state{fill:#172554;stroke:#818cf8}.ui{fill:#0f172a;stroke:#94a3b8}.boundary{fill:none;stroke:#475569;stroke-width:2;stroke-dasharray:9 7;rx:20}.flow{fill:none;stroke:#67e8f9;stroke-width:3;marker-end:url(#arrow)}.green{stroke:#34d399;marker-end:url(#arrowGreen)}.rose{stroke:#fb7185;stroke-dasharray:9 7;marker-end:url(#arrowRose)}
+      text{font-family:'SFMono-Regular',Consolas,'Liberation Mono',monospace;fill:#e2e8f0}.title{font:700 34px system-ui,sans-serif}.subtitle{font:16px system-ui,sans-serif;fill:#94a3b8}.label{font-size:17px;font-weight:700}.small{font-size:13px;fill:#cbd5e1}.tiny{font-size:11px;fill:#94a3b8}.caps{font-size:11px;letter-spacing:2px;font-weight:700}.box{stroke-width:2;rx:14}.agent{fill:#082f49;stroke:#22d3ee}.adapter{fill:#083344;stroke:#67e8f9}.kernel{fill:#052e2b;stroke:#34d399}.owner{fill:#4c0519;stroke:#fb7185}.verify{fill:#3b0764;stroke:#c084fc}.state{fill:#172554;stroke:#818cf8}.ui{fill:#0f172a;stroke:#94a3b8}.boundary{fill:none;stroke:#475569;stroke-width:2;stroke-dasharray:9 7;rx:20}.flow{fill:none;stroke-width:3}.webmcp{stroke:#67e8f9;marker-end:url(#arrow)}.governed{stroke:#34d399;marker-end:url(#arrowGreen)}.projection{stroke:#94a3b8;marker-end:url(#arrowSlate)}.ownerflow{stroke:#fb7185;stroke-dasharray:9 7;marker-end:url(#arrowRose)}.verifyflow{stroke:#c084fc;marker-end:url(#arrowViolet)}
     </style>
   </defs>
   <rect width="1600" height="1000" fill="#020617"/><rect width="1600" height="1000" fill="url(#grid)" opacity=".65"/>
@@ -16,11 +18,11 @@
   <text x="100" y="108" class="subtitle">Governed WebMCP architecture · state-aware · authority-checked · evidence-bound · owner-controlled</text>
 
   <!-- arrows are intentionally behind components -->
-  <path class="flow" d="M325 305H445"/><path class="flow green" d="M725 305H840"/>
-  <path class="flow green" d="M1110 305H1240"/>
-  <path class="flow rose" d="M940 680V415"/><path class="flow" d="M1000 415V680"/>
-  <path class="flow" d="M1050 415V590H1260V680"/><path class="flow green" d="M1300 680V560H1070V415"/>
-  <path class="flow" d="M840 410H760V745H735"/>
+  <path class="flow webmcp" d="M325 305H445"/><path class="flow governed" d="M725 305H840"/>
+  <path class="flow governed" d="M1110 305H1240"/>
+  <path class="flow ownerflow" d="M940 680V415"/><path class="flow projection" d="M1000 415V680"/>
+  <path class="flow verifyflow" d="M1050 415V590H1260V680"/><path class="flow governed" d="M1300 680V560H1070V415"/>
+  <path class="flow projection" d="M840 410H760V745H735"/>
 
   <rect x="55" y="155" width="1500" height="430" class="boundary"/><text x="80" y="182" class="caps" fill="#64748b">AGENT-CALLABLE SURFACE</text>
   <rect x="80" y="225" width="245" height="160" class="box agent" filter="url(#shadow)"/>
@@ -53,7 +55,9 @@
 
   <rect x="55" y="925" width="1490" height="1" fill="#1e293b"/>
   <circle cx="90" cy="958" r="6" fill="#22d3ee"/><text x="106" y="963" class="tiny">WebMCP call</text>
-  <circle cx="275" cy="958" r="6" fill="#34d399"/><text x="291" y="963" class="tiny">Governed transition</text>
-  <circle cx="510" cy="958" r="6" fill="#fb7185"/><text x="526" y="963" class="tiny">Owner-only boundary</text>
-  <text x="1515" y="963" text-anchor="end" class="tiny">Apache-2.0 · clean-room competition edition · no external effects</text>
+  <circle cx="260" cy="958" r="6" fill="#34d399"/><text x="276" y="963" class="tiny">Governed dispatch / verdict</text>
+  <circle cx="535" cy="958" r="6" fill="#94a3b8"/><text x="551" y="963" class="tiny">State projection</text>
+  <circle cx="720" cy="958" r="6" fill="#fb7185"/><text x="736" y="963" class="tiny">Owner-only dispatch</text>
+  <circle cx="945" cy="958" r="6" fill="#c084fc"/><text x="961" y="963" class="tiny">Verifier invocation</text>
+  <text x="1515" y="990" text-anchor="end" class="tiny">Apache-2.0 · clean-room competition edition · no external effects</text>
 </svg>

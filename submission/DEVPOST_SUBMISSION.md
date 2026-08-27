@@ -67,7 +67,7 @@ A separate Phase 6 calibration qualified the scorer on 13/13 oracle fixtures and
 
 ### Honest limitations
 
-This is a focused competition edition: one synthetic release Goal, browser-local state, no accounts or organizations, no persistent backend, and no real deployment or messaging effects. The verifier checks one deliberately narrow JSON contract. The full demo journey may use deterministic UI controls for presentation; native WebMCP browser invocation is separately evidenced and must not be confused with autonomous multi-turn browser operation.
+This is a focused competition edition: one synthetic release Goal, browser-local state, no accounts or organizations, no persistent backend, and no real deployment or messaging effects. The verifier checks one deliberately narrow JSON contract. The demo continuously records the functioning app, uses an inspector populated from the real native registrations/callbacks, and then uses deterministic operator controls for the full journey; it does not claim autonomous model execution.
 
 ## How the project meets the judging criteria
 

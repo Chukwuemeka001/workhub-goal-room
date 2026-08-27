@@ -64,7 +64,7 @@ No WebMCP tool may confirm or revise a Plan as owner, author a verification verd
 - Deterministic release verifier checks a deliberately narrow JSON contract.
 - Owner and verifier actions are represented by explicit UI controls for demonstration.
 - Fresh-model evidence is N=1 per distinct scenario using one model/provider.
-- The polished demo may use deterministic UI controls to show the full journey; it must not be described as autonomous browser-native model execution.
+- The polished demo uses a native-registration/callback inspector plus deterministic operator controls for the full journey; it must not be described as autonomous model execution.
 - The real native WebMCP proof is separately evidenced in the repository and prior deployed verification.
 
 ## Forbidden claims

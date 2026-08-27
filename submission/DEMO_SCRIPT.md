@@ -1,10 +1,10 @@
 # Judge demo narration and timeline
 
-**Target duration:** 2:34
+**Target duration:** 2:30
 
-**Verified container duration:** 2:34.0
+**Verified container duration:** 2:30.03
 
-**Mode:** Narrated architecture plus deterministic UI journey captured from the functioning app. This is not autonomous browser-native model execution.
+**Mode:** Continuous Chrome DevTools screencast of the functioning app. It visibly enumerates native registrations, executes real captured callbacks, and uses deterministic operator clicks. This is not autonomous model execution.
 
 ## Narration
 
@@ -32,13 +32,16 @@ WorkHub Goal Room demonstrates a simple principle: humans and agents can share o
 
 | Time | Visual |
 |---:|---|
-| 0:00–0:12 | Title card and primary claim |
-| 0:12–0:43 | Architecture diagram; highlight five tools, kernel, owner/verifier boundaries |
-| 0:43–0:58 | Initial Plan owner gate |
-| 0:58–1:10 | Plan confirmed, then step claimed |
-| 1:10–1:27 | Candidate v1 submitted and deterministic FAIL |
-| 1:27–1:43 | Corrected Candidate v2 submitted |
-| 1:43–2:00 | Deterministic PASS; emphasize PASS ≠ acceptance |
-| 2:00–2:18 | Completion requested; owner is sole frontier |
-| 2:18–2:32 | Goal accepted; no further governed action |
-| 2:32–2:34 | Repository/live links and bounded limitations |
+| 0:00–0:06 | Live app title and WebMCP-connected state |
+| 0:06–0:17 | Five native registrations captured from `document.modelContext.registerTool` |
+| 0:17–0:28 | Real read-only callback and structured state result |
+| 0:28–0:38 | Real malformed callback, `INVALID_TOOL_INPUT`, unchanged frontier |
+| 0:38–0:50 | Owner Plan gate and visible confirmation click |
+| 0:50–1:09 | Step claim and Candidate v1 submission |
+| 1:09–1:20 | Deterministic FAIL |
+| 1:20–1:29 | Corrected Candidate v2 submission |
+| 1:29–1:41 | Deterministic PASS; emphasize PASS ≠ acceptance |
+| 1:41–1:53 | Completion request; owner is sole frontier |
+| 1:53–2:03 | Visible owner acceptance click and completed Goal |
+| 2:03–2:13 | Scroll to nine immutable receipts |
+| 2:13–2:30 | Return to final no-action state and claim boundary |

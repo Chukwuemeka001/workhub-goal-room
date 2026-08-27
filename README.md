@@ -104,11 +104,11 @@ The judge-ready package is under [`submission/`](submission/):
 
 - [`DEVPOST_SUBMISSION.md`](submission/DEVPOST_SUBMISSION.md) — copy-ready submission narrative, testing instructions, limitations, and dated-work summary;
 - [`assets/workhub-goal-room-architecture.png`](submission/assets/workhub-goal-room-architecture.png) — governed WebMCP architecture;
-- [`assets/screenshots/`](submission/assets/screenshots/) — nine authoritative states from Plan gate through owner acceptance;
-- [`assets/workhub-goal-room-demo.mp4`](submission/assets/workhub-goal-room-demo.mp4) — 2:34 narrated judge demo;
+- [`assets/screenshots/`](submission/assets/screenshots/) — ten authoritative state and receipt-history captures;
+- [`assets/workhub-goal-room-demo.mp4`](submission/assets/workhub-goal-room-demo.mp4) — 2:30 continuous narrated judge demo;
 - [`PHASE7_AUDIT.md`](submission/PHASE7_AUDIT.md) — repository, live-app, accessibility, privacy, and media verification.
 
-The video uses deterministic UI controls to present the complete journey. It does not claim autonomous browser-native model execution; the native WebMCP registration, discovery, invocation, and refusal proof remains separately documented above.
+The video is a continuous Chrome DevTools screencast of the functioning app. It visibly enumerates the native registrations, runs a real read-only callback and malformed-call refusal, then uses deterministic operator clicks for the complete journey. It does not claim autonomous model execution.
 
 ## Full governed Goal journey
 

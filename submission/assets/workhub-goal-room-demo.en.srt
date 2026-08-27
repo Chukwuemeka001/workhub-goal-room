@@ -1,43 +1,39 @@
 1
-00:00:00,000 --> 00:00:08,000
+00:00:00,000 --> 00:00:09,641
 WebMCP makes a website callable by agents. WorkHub Goal Room makes each call state-aware, authority-checked, evidence-bound, and owner-controlled.
 
 2
-00:00:08,000 --> 00:00:24,000
-A callable action is not automatically a legal action. An agent can act on stale state, bind evidence to the wrong Plan, or mistake PASS for acceptance.
+00:00:10,648 --> 00:00:22,415
+A callable action is not automatically a legal action. An agent can act on stale state, bind evidence to the wrong Plan, or mistake a machine PASS for human acceptance.
 
 3
-00:00:24,000 --> 00:00:38,000
-Goal Room registers exactly five WebMCP tools. Every consequential call enters the same authority kernel and is revalidated against the current legal frontier.
+00:00:23,390 --> 00:00:47,672
+Goal Room registers exactly five WebMCP tools. Every consequential call enters the same authority kernel, which revalidates actor, state, exact input, idempotency, evidence, and legal frontier. Invalid calls fail closed.
 
 4
-00:00:38,000 --> 00:00:50,000
-Owner confirmation, verifier authorship, final acceptance, and external effects are intentionally not WebMCP tools.
+00:00:48,649 --> 00:01:04,317
+Owner confirmation, verifier authorship, final acceptance, deployment, messaging, payments, and other external effects are intentionally not WebMCP tools.
 
 5
-00:00:50,000 --> 00:01:06,000
-The agent proposed Plan v1, but work is blocked until the owner confirms it. Then the agent may claim only an admitted step.
+00:01:05,320 --> 00:01:23,650
+The agent proposed Plan v1, but work is blocked until the owner decides. The owner confirms the Plan. The agent claims an admitted step and submits exact candidate bytes and their SHA-256 digest.
 
 6
-00:01:06,000 --> 00:01:22,000
-The agent submits exact candidate bytes and their SHA-256 digest. Candidate v1 enters deterministic verification and fails.
+00:01:24,660 --> 00:01:37,749
+Candidate v1 enters deterministic verification and fails. The original evidence and FAIL receipt remain immutable. The agent submits corrected Candidate v2.
 
 7
-00:01:22,000 --> 00:01:38,000
-The original evidence and FAIL receipt remain immutable. The agent submits corrected Candidate v2.
+00:01:38,708 --> 00:01:48,662
+The internal verifier records PASS. PASS does not accept the Goal. It only permits the agent to request completion for this exact candidate.
 
 8
-00:01:38,000 --> 00:01:54,000
-The internal verifier records PASS. PASS does not accept the Goal; it only permits the agent to request completion for this exact candidate.
+00:01:49,658 --> 00:02:04,124
+The frontier moves to the owner. The agent and verifier are blocked. Only the owner can accept the verified candidate. After acceptance, no further governed action remains.
 
 9
-00:01:54,000 --> 00:02:14,000
-The frontier moves to the owner. The agent and verifier are blocked. Only the owner can accept the exact verified candidate.
+00:02:05,072 --> 00:02:20,841
+The public repository contains the complete clean-room implementation, Apache-2.0 license, ninety tests, bounded reliability evidence, and run instructions. The demo uses synthetic browser-local state and creates no external effects.
 
 10
-00:02:14,000 --> 00:02:30,000
-After acceptance, every lifecycle stage is complete and there is no further governed action.
-
-11
-00:02:30,000 --> 00:02:34,000
+00:02:21,822 --> 00:02:29,085
 Humans and agents can share one state machine without sharing one authority level.
