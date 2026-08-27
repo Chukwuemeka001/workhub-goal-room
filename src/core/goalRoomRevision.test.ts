@@ -127,6 +127,33 @@ describe("Goal Room owner Plan revision", () => {
     ).toEqual(room.getState());
   });
 
+  it("reports the current frontier when a confirmed Plan decision is refused", async () => {
+    const room = await proposedRoom();
+    await room.dispatch({
+      type: "CONFIRM_PLAN",
+      actor: "owner",
+      expectedStateVersion: 1,
+      idempotencyKey: "confirm-v1",
+      planVersion: 1,
+    });
+
+    const result = await room.dispatch({
+      type: "CONFIRM_PLAN",
+      actor: "owner",
+      expectedStateVersion: 2,
+      idempotencyKey: "confirm-wrong-version",
+      planVersion: 99,
+    });
+
+    expect(result).toMatchObject({
+      accepted: false,
+      reasonCode: "PLAN_VERSION_MISMATCH",
+      stateVersion: 2,
+      nextLegalAction: "AGENT_CLAIM_OPEN_STEP",
+      ownerRequired: false,
+    });
+  });
+
   it("refuses a non-owner revision request without mutating the Plan", async () => {
     const room = await proposedRoom();
     const before = room.getState();

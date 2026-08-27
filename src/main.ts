@@ -2,6 +2,7 @@ import "./style.css";
 import { createGoalRoom, type Receipt } from "./core/goalRoom";
 import { createOwnerDecisionController } from "./ownerController";
 import type { OwnerViewModel } from "./ownerView";
+import { createReceiptLabels, prepareRevisionNote } from "./ownerUi";
 import { installGoalRoomPing } from "./webmcp";
 
 function requiredElement<T extends HTMLElement>(id: string): T {
@@ -59,28 +60,11 @@ await room.dispatch({
   ],
 });
 
-function commandLabel(receipt: Receipt, proposedPlanVersion?: number): string {
-  if (receipt.command.type === "PROPOSE_PLAN") {
-    return `Agent proposed Plan v${proposedPlanVersion ?? "?"}`;
-  }
-  if (receipt.command.type === "CONFIRM_PLAN") {
-    return receipt.accepted
-      ? `Owner confirmed Plan v${receipt.command.planVersion}`
-      : `Plan confirmation refused · ${receipt.reasonCode ?? "unknown"}`;
-  }
-  return receipt.accepted
-    ? `Owner requested revision to Plan v${receipt.command.planVersion}`
-    : `Revision request refused · ${receipt.reasonCode ?? "unknown"}`;
-}
-
 function renderReceipts(receipts: Receipt[]) {
-  let proposedPlanVersion = 0;
-  const labeledReceipts = receipts.map((receipt) => ({
+  const labels = createReceiptLabels(receipts);
+  const labeledReceipts = receipts.map((receipt, index) => ({
     receipt,
-    label: commandLabel(
-      receipt,
-      receipt.command.type === "PROPOSE_PLAN" ? ++proposedPlanVersion : undefined,
-    ),
+    label: labels[index],
   }));
   elements.receiptList.replaceChildren(
     ...labeledReceipts
@@ -168,12 +152,20 @@ elements.revise.addEventListener("click", () => {
 
 elements.cancelRevision.addEventListener("click", () => elements.dialog.close());
 
+elements.input.addEventListener("input", () => elements.input.setCustomValidity(""));
+
 elements.form.addEventListener("submit", async (event) => {
   event.preventDefault();
+  elements.input.setCustomValidity("");
   if (!elements.form.reportValidity()) return;
-  const note = elements.input.value.trim();
+  const prepared = prepareRevisionNote(elements.input.value);
+  if (!prepared.valid) {
+    elements.input.setCustomValidity("Enter at least 3 non-whitespace characters.");
+    elements.input.reportValidity();
+    return;
+  }
   elements.dialog.close();
-  await controller.requestRevision(note);
+  await controller.requestRevision(prepared.note);
 });
 
 elements.reset.addEventListener("click", () => window.location.reload());

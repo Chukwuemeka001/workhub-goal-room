@@ -276,6 +276,13 @@ function nextLegalAction(state: GoalRoomState): string {
   return "AGENT_CLAIM_OPEN_STEP";
 }
 
+function currentFrontier(state: GoalRoomState) {
+  return {
+    nextLegalAction: nextLegalAction(state),
+    ownerRequired: state.phase === "PLAN_PROPOSED",
+  };
+}
+
 function evaluate(state: GoalRoomState, command: Command): DispatchResult {
   if (command.expectedStateVersion !== state.stateVersion) {
     return {
@@ -293,8 +300,7 @@ function evaluate(state: GoalRoomState, command: Command): DispatchResult {
         accepted: false,
         reasonCode: "OWNER_ONLY",
         stateVersion: state.stateVersion,
-        nextLegalAction: "OWNER_CONFIRM_OR_REVISE_PLAN",
-        ownerRequired: true,
+        ...currentFrontier(state),
       };
     }
     if (
@@ -323,8 +329,7 @@ function evaluate(state: GoalRoomState, command: Command): DispatchResult {
         accepted: false,
         reasonCode: "OWNER_ONLY",
         stateVersion: state.stateVersion,
-        nextLegalAction: "OWNER_CONFIRM_OR_REVISE_PLAN",
-        ownerRequired: true,
+        ...currentFrontier(state),
       };
     }
     if (
@@ -335,8 +340,7 @@ function evaluate(state: GoalRoomState, command: Command): DispatchResult {
         accepted: false,
         reasonCode: "PLAN_VERSION_MISMATCH",
         stateVersion: state.stateVersion,
-        nextLegalAction: "OWNER_CONFIRM_OR_REVISE_PLAN",
-        ownerRequired: true,
+        ...currentFrontier(state),
       };
     }
     return {
