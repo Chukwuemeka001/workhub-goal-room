@@ -10,6 +10,51 @@ function roomFixture() {
 }
 
 describe("installGoalRoomTools compatibility", () => {
+  it("does not retry unrelated registration errors as compatibility failures", () => {
+    const registerTool = vi.fn(() => {
+      throw new Error("REGISTER_FAILED");
+    });
+
+    expect(() =>
+      installGoalRoomTools({
+        documentLike: { modelContext: { registerTool } },
+        navigatorLike: {},
+        room: roomFixture(),
+        onInvocation: vi.fn(),
+      }),
+    ).toThrow("REGISTER_FAILED");
+    expect(registerTool).toHaveBeenCalledTimes(1);
+  });
+
+  it("aborts the complete surface on a terminal later registration failure", () => {
+    const acceptedSignals: AbortSignal[] = [];
+    const registerTool = vi.fn((tool, options) => {
+      if (tool.name === "claim_step") {
+        throw new TypeError("REGISTER_FAILED");
+      }
+      const signal = options instanceof AbortSignal ? options : options.signal;
+      acceptedSignals.push(signal);
+    });
+
+    expect(() =>
+      installGoalRoomTools({
+        documentLike: { modelContext: { registerTool } },
+        navigatorLike: {},
+        room: roomFixture(),
+        onInvocation: vi.fn(),
+      }),
+    ).toThrow("REGISTER_FAILED");
+
+    expect(registerTool.mock.calls.map(([tool]) => tool.name)).toEqual([
+      "get_goal_room_state",
+      "propose_plan",
+      "claim_step",
+      "claim_step",
+    ]);
+    expect(acceptedSignals).toHaveLength(2);
+    expect(acceptedSignals.every((signal) => signal.aborted)).toBe(true);
+  });
+
   it("prefers document.modelContext and disposes every registration", () => {
     const documentRegister = vi.fn();
     const navigatorRegister = vi.fn();
@@ -32,7 +77,9 @@ describe("installGoalRoomTools compatibility", () => {
 
   it("falls back to navigator and the direct AbortSignal registration shape", () => {
     const registerTool = vi.fn((_tool, options) => {
-      if (!(options instanceof AbortSignal)) throw new Error("direct signal required");
+      if (!(options instanceof AbortSignal)) {
+        throw new TypeError("direct signal required");
+      }
     });
 
     const installed = installGoalRoomTools({

@@ -13,6 +13,43 @@ async function digestText(value: string): Promise<string> {
 }
 
 describe("governed Goal Room WebMCP tools", () => {
+  it("returns authoritative accepted results when reporting throws", async () => {
+    const registerTool = vi.fn();
+    const room = createGoalRoom({
+      goal: "Ship a governed release",
+      doneLooksLike: ["Owner accepts exact verified evidence"],
+    });
+    installGoalRoomTools({
+      documentLike: { modelContext: { registerTool } },
+      navigatorLike: {},
+      room,
+      onInvocation: () => {
+        throw new Error("RENDER_FAILED");
+      },
+    });
+    const tool = registerTool.mock.calls
+      .map(([definition]) => definition)
+      .find(({ name }) => name === "propose_plan");
+    const input = {
+      expectedStateVersion: 0,
+      idempotencyKey: "reporting-failure-plan",
+      steps: [{ id: "artifact", title: "Produce exact evidence" }],
+    };
+
+    await expect(tool.execute(input)).resolves.toMatchObject({
+      accepted: true,
+      currentStateVersion: 1,
+      nextLegalAction: "OWNER_CONFIRM_OR_REVISE_PLAN",
+      ownerRequired: true,
+    });
+    await expect(tool.execute(structuredClone(input))).resolves.toMatchObject({
+      accepted: true,
+      currentStateVersion: 1,
+    });
+    expect(room.getState().phase).toBe("PLAN_PROPOSED");
+    expect(room.getReceipts()).toHaveLength(1);
+  });
+
   it("enforces every declared maximum before command admission", async () => {
     const cases = [
       [

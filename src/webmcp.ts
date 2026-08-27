@@ -106,7 +106,8 @@ export function installGoalRoomTools({
   const register = (tool: ToolDefinition) => {
     try {
       modelContext.registerTool(tool, { signal: controller.signal });
-    } catch {
+    } catch (error) {
+      if (!(error instanceof TypeError)) throw error;
       modelContext.registerTool(tool, controller.signal);
     }
   };
@@ -114,7 +115,11 @@ export function installGoalRoomTools({
     toolName: string,
     result: Record<string, unknown>,
   ) => {
-    onInvocation({ toolName, result });
+    try {
+      onInvocation({ toolName, result });
+    } catch {
+      // Reporting is observational and cannot obscure an authoritative result.
+    }
     return result;
   };
   const closedToolRefusal = (toolName: string, reasonCode: string) => {
@@ -373,11 +378,16 @@ export function installGoalRoomTools({
     },
   };
 
-  register(stateTool);
-  register(proposePlanTool);
-  register(claimStepTool);
-  register(submitArtifactTool);
-  register(requestCompletionTool);
+  try {
+    register(stateTool);
+    register(proposePlanTool);
+    register(claimStepTool);
+    register(submitArtifactTool);
+    register(requestCompletionTool);
+  } catch (error) {
+    controller.abort();
+    throw error;
+  }
   return {
     status: "registered",
     dispose: () => controller.abort(),
