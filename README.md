@@ -2,26 +2,66 @@
 
 A clean-room, public competition edition demonstrating one idea:
 
-> WebMCP makes a website callable by agents. WorkHub Goal Room makes the next legal action explicit, governed, evidence-bound, and visible to the human sharing the page.
+> WebMCP makes a website callable by agents. WorkHub Goal Room makes each call state-aware, authority-checked, evidence-bound, receipt-backed, and visible to the human sharing the page.
 
-## Current scope: Phase 3 evidence and deterministic verification
+## Current scope: Phase 4 governed WebMCP tools and refusals
 
-The Goal Room now carries one synthetic Goal from owner-confirmed Plan scope through immutable candidate evidence, independent deterministic verification, correction, completion request, and final owner acceptance.
+The Goal Room exposes exactly five browser-native agent tools:
 
-The visible experience:
+```text
+get_goal_room_state
+propose_plan
+claim_step
+submit_artifact
+request_completion
+```
 
-1. shows the Goal and exact “Done Looks Like” conditions;
-2. lets only the owner confirm the exact active Plan version;
-3. lets the agent claim an admitted Plan step;
-4. binds every candidate to exact UTF-8 content and a recomputed SHA-256 digest;
-5. runs a fixed deterministic release rule set outside agent authority;
-6. preserves failed candidates, verdicts, and correction history immutably;
-7. refuses completion before the active candidate has PASS;
-8. makes PASS eligible for the next governed action without accepting the Goal;
-9. lets only the owner accept the exact candidate held by the PASS and completion-request chain;
-10. records accepted and refused attempts as deterministic SHA-256-linked receipts.
+It deliberately exposes no tool for:
 
-The browser demo deliberately exercises both outcomes:
+- owner Plan confirmation or revision decisions;
+- deterministic verification authorship;
+- owner Goal acceptance;
+- deployment or any other external effect.
+
+Tool omission improves legibility. The existing Goal Room kernel remains the authority boundary: every mutation is reconstructed as an `agent` command and revalidated for exact input shape, state version, idempotency key, Plan/step custody, candidate digest, verification prerequisites, and the current legal frontier.
+
+Every tool response reports:
+
+```text
+accepted
+reasonCode (when refused)
+missingConditions (when applicable)
+currentStateVersion
+nextLegalAction
+ownerRequired
+```
+
+The page independently projects accepted/refused WebMCP outcomes and rerenders authoritative state and receipts. Tool-level malformed input is visible but never admitted as a receipt; a valid command that is legally refused produces an append-only refusal receipt.
+
+## Governed browser-native proof
+
+**Locally verified August 27, 2026 in Google Chrome Canary 154 with the exact `enable-webmcp-testing` and `devtools-webmcp-support` experiments enabled in an isolated profile.**
+
+Observed runtime:
+
+```text
+document.modelContext: object
+registerTool: function
+getTools: function
+executeTool: function
+```
+
+Canary discovered exactly the five tools above and returned their strict serialized JSON Schemas. Browser-native testing-API invocation proved:
+
+1. an unknown-field state request was refused as `INVALID_TOOL_INPUT` with no state or receipt mutation;
+2. a legally premature `claim_step` was refused as `STEP_NOT_ADMITTED`, preserved the owner gate, and created a visible refusal receipt;
+3. after the owner confirmed Plan v1 in the UI, the same native `claim_step` path was accepted, advanced the room to `STEP_CLAIMED`, and created a visible accepted receipt.
+
+This proves registration, discovery, browser-native invocation, shared-state mutation, and governed refusal. It does **not** claim autonomous model tool selection; that requires separate repeated fresh-model trials.
+
+## Full governed Goal journey
+
+The inherited owner and evidence journey remains intact:
 
 ```text
 owner confirms Plan v1
@@ -35,7 +75,7 @@ owner confirms Plan v1
   → owner accepts the exact verified candidate
 ```
 
-At every intermediate point the page shows the current legal actor and action. `PASS` is displayed with the explicit boundary:
+`PASS` remains explicitly distinct from owner acceptance:
 
 ```text
 PASS means the explicit checks succeeded.
@@ -56,69 +96,69 @@ The synthetic public candidate is exact JSON with only these fields:
 
 Rule set `workhub_goal_room_release/v1` checks:
 
-- the artifact is valid JSON with the exact closed shape and no more than 4 KiB of UTF-8 candidate content;
-- `publicUrl` is a parseable `https:` URL with a non-empty hostname;
-- `demoDurationSeconds` is an integer from 1 through 180;
-- `verificationCommand` is exactly `npm test`.
+- no more than 4 KiB of UTF-8 candidate content;
+- exact closed JSON shape;
+- a parseable `https:` URL with a non-empty hostname;
+- integer demo duration from 1 through 180;
+- verification command exactly `npm test`.
 
-Results contain a closed, sorted list of finding codes. They are produced by the room's internal deterministic verifier operation. Ordinary commands cannot inject `RECORD_VERIFICATION`, even if a caller supplies a mathematically correct PASS payload.
+The room's internal deterministic verifier alone records the closed, sorted finding list. WebMCP callers cannot inject `RECORD_VERIFICATION` or reuse PASS for changed bytes.
 
 ## Authority model
 
 ```text
-agent
-  may propose and revise a Plan
+agent via WebMCP
+  may read governed state
+  may propose a Plan
   may claim admitted work
   may submit exact candidate evidence
   may correct a failed candidate
-  may request completion after PASS
+  may request completion after exact PASS
 
-system verifier
+system verifier (not a WebMCP tool)
   recomputes deterministic rules
   records digest-bound PASS or FAIL
   cannot modify candidate bytes
   cannot accept the Goal
 
-owner
-  confirms exact Plan scope
+owner via human UI
+  confirms or revises exact Plan scope
   retains final acceptance authority
-  accepts only the exact candidate bound through PASS and completion request
+  accepts only the candidate bound through PASS and completion request
 ```
 
-This clean-room implementation adapts established WorkHub concepts—immutable candidate custody, deterministic verification, exact binding, append-only receipts, idempotency, replay, and authority separation—without importing private code, paths, data, credentials, or production integrations.
+This clean-room implementation adapts established WorkHub concepts—immutable custody, deterministic verification, exact binding, phase-truthful refusal, append-only receipts, idempotency, replay, and authority separation—without importing private code, paths, data, credentials, or production integrations.
 
-## Reliability properties
+## Reliability and tests
 
-- admission-time command snapshots;
-- serialized dispatch;
-- exact idempotent retry with collision refusal;
-- stale-state refusal;
-- defensive state and receipt clones;
-- contiguous SHA-256-linked receipts;
-- replay that re-evaluates legal outcomes instead of trusting stored `accepted` flags;
-- immutable Plan, candidate, and verification histories;
-- candidate digest and rule-version binding;
-- structured missing conditions for premature completion.
+Coverage includes:
 
-## Phase 0 WebMCP result
+- exact five-tool registration and strict schemas;
+- document/navigator host selection and registration-signature fallback;
+- unsupported clients and disposal;
+- runtime exact-key and plain-object validation in addition to JSON Schema;
+- malformed-value closure without state/receipt mutation;
+- stale-state refusal with the current legal frontier;
+- exact idempotent retry and changed-key collision refusal;
+- recomputed UTF-8 SHA-256 candidate custody;
+- premature-completion missing conditions;
+- PASS-before-completion and owner-only acceptance;
+- serialized dispatch, defensive clones, SHA-linked receipts, and replay;
+- truthful visible accepted/refused invocation labels;
+- the complete FAIL → correction → PASS → completion → owner acceptance browser journey;
+- responsive mobile layout with bounded digest presentation.
 
-**PASS — verified August 27, 2026 in Google Chrome Canary 154 with the browser's WebMCP testing and DevTools experiments enabled.**
+## What this demonstration does not prove
 
-The page tool was discovered through `document.modelContext.getTools()`, invoked through `document.modelContext.executeTool()`, returned a structured result, and visibly updated the shared page.
+This phase does **not** implement or claim:
 
-Phase 3 retains this small registration proof. Expanding the governed agent-facing WebMCP action surface is intentionally deferred to Phase 4; Phase 3 establishes the domain and owner experience first.
-
-## Current claim limits
-
-This phase does **not** implement:
-
-- production authentication or authenticated actor identity;
+- production authentication or cryptographic actor identity;
+- autonomous model tool selection reliability;
 - durable server-side persistence;
-- real deployment or other external effects;
+- real deployment, payment, messaging, or other external effects;
 - multiple Goals, organizations, or generalized multi-agent orchestration;
-- private Atlas or production WorkHub integration.
-
-The repository is a browser-compatible synthetic governance demonstration, not a production authorization system or hostile-filesystem security boundary.
+- private Atlas or production WorkHub integration;
+- hostile-filesystem or production authorization security.
 
 ## Local development
 

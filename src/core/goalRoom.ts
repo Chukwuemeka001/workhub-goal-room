@@ -627,7 +627,7 @@ function nextLegalAction(state: GoalRoomState): string {
   return "AGENT_SUBMIT_CORRECTED_CANDIDATE";
 }
 
-function currentFrontier(state: GoalRoomState) {
+export function getGoalRoomFrontier(state: GoalRoomState) {
   return {
     nextLegalAction: nextLegalAction(state),
     ownerRequired:
@@ -645,7 +645,7 @@ function evaluate(
       accepted: false,
       reasonCode: "STALE_STATE",
       stateVersion: state.stateVersion,
-      ...currentFrontier(state),
+      ...getGoalRoomFrontier(state),
     };
   }
 
@@ -655,7 +655,7 @@ function evaluate(
         accepted: false,
         reasonCode: "OWNER_ONLY",
         stateVersion: state.stateVersion,
-        ...currentFrontier(state),
+        ...getGoalRoomFrontier(state),
       };
     }
     if (
@@ -684,7 +684,7 @@ function evaluate(
         accepted: false,
         reasonCode: "OWNER_ONLY",
         stateVersion: state.stateVersion,
-        ...currentFrontier(state),
+        ...getGoalRoomFrontier(state),
       };
     }
     if (
@@ -698,7 +698,7 @@ function evaluate(
         accepted: false,
         reasonCode: "CANDIDATE_BINDING_MISMATCH",
         stateVersion: state.stateVersion,
-        ...currentFrontier(state),
+        ...getGoalRoomFrontier(state),
       };
     }
     return {
@@ -715,7 +715,7 @@ function evaluate(
         accepted: false,
         reasonCode: "AGENT_ONLY",
         stateVersion: state.stateVersion,
-        ...currentFrontier(state),
+        ...getGoalRoomFrontier(state),
       };
     }
     if (
@@ -729,7 +729,7 @@ function evaluate(
         reasonCode: "VERIFICATION_REQUIRED",
         missingConditions: ["ACTIVE_CANDIDATE_MUST_PASS_RELEASE_RULES"],
         stateVersion: state.stateVersion,
-        ...currentFrontier(state),
+        ...getGoalRoomFrontier(state),
       };
     }
     return {
@@ -779,7 +779,7 @@ function evaluate(
         accepted: false,
         reasonCode: "STEP_CLAIM_REQUIRED",
         stateVersion: state.stateVersion,
-        ...currentFrontier(state),
+        ...getGoalRoomFrontier(state),
       };
     }
     if (command.actor !== "agent") {
@@ -787,7 +787,7 @@ function evaluate(
         accepted: false,
         reasonCode: "AGENT_ONLY",
         stateVersion: state.stateVersion,
-        ...currentFrontier(state),
+        ...getGoalRoomFrontier(state),
       };
     }
     if (observedCandidateDigest !== command.sha256) {
@@ -795,7 +795,7 @@ function evaluate(
         accepted: false,
         reasonCode: "CANDIDATE_DIGEST_MISMATCH",
         stateVersion: state.stateVersion,
-        ...currentFrontier(state),
+        ...getGoalRoomFrontier(state),
       };
     }
     return {
@@ -812,7 +812,7 @@ function evaluate(
         accepted: false,
         reasonCode: "AGENT_ONLY",
         stateVersion: state.stateVersion,
-        ...currentFrontier(state),
+        ...getGoalRoomFrontier(state),
       };
     }
     if (
@@ -824,7 +824,7 @@ function evaluate(
         accepted: false,
         reasonCode: "STEP_NOT_ADMITTED",
         stateVersion: state.stateVersion,
-        ...currentFrontier(state),
+        ...getGoalRoomFrontier(state),
       };
     }
     return {
@@ -841,7 +841,7 @@ function evaluate(
         accepted: false,
         reasonCode: "OWNER_ONLY",
         stateVersion: state.stateVersion,
-        ...currentFrontier(state),
+        ...getGoalRoomFrontier(state),
       };
     }
     if (
@@ -852,7 +852,7 @@ function evaluate(
         accepted: false,
         reasonCode: "PLAN_VERSION_MISMATCH",
         stateVersion: state.stateVersion,
-        ...currentFrontier(state),
+        ...getGoalRoomFrontier(state),
       };
     }
     return {

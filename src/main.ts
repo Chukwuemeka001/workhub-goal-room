@@ -7,7 +7,8 @@ import {
   createReceiptLabels,
   prepareRevisionNote,
 } from "./ownerUi";
-import { installGoalRoomPing } from "./webmcp";
+import { installGoalRoomTools } from "./webmcp";
+import { formatWebMcpInvocation } from "./webmcpUi";
 
 function requiredElement<T extends HTMLElement>(id: string): T {
   const element = document.getElementById(id);
@@ -329,10 +330,16 @@ elements.form.addEventListener("submit", async (event) => {
 
 elements.reset.addEventListener("click", () => window.location.reload());
 
-const installation = installGoalRoomPing({
+const installation = installGoalRoomTools({
   documentLike: document,
   navigatorLike: navigator,
-  onPing: () => undefined,
+  room,
+  onInvocation: (record) => {
+    elements.webmcpStatus.textContent = formatWebMcpInvocation(record);
+    elements.webmcpStatus.dataset.outcome =
+      record.result.accepted === true ? "accepted" : "refused";
+    render(createOwnerViewModel(room.getState(), room.getReceipts()));
+  },
 });
 elements.webmcpStatus.dataset.status = installation.status;
 elements.webmcpStatus.textContent =

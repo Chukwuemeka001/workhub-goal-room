@@ -1,61 +1,65 @@
 import { describe, expect, it, vi } from "vitest";
-import { installGoalRoomPing } from "./webmcp";
+import { createGoalRoom } from "./core/goalRoom";
+import { installGoalRoomTools } from "./webmcp";
 
-describe("installGoalRoomPing", () => {
-  it("registers a strict WebMCP tool that visibly records a ping", async () => {
-    const registerTool = vi.fn();
-    const onPing = vi.fn();
+function roomFixture() {
+  return createGoalRoom({
+    goal: "Ship a governed release",
+    doneLooksLike: ["Owner accepts exact verified evidence"],
+  });
+}
 
-    const installed = installGoalRoomPing({
-      documentLike: { modelContext: { registerTool } },
-      navigatorLike: {},
-      onPing,
+describe("installGoalRoomTools compatibility", () => {
+  it("prefers document.modelContext and disposes every registration", () => {
+    const documentRegister = vi.fn();
+    const navigatorRegister = vi.fn();
+
+    const installed = installGoalRoomTools({
+      documentLike: { modelContext: { registerTool: documentRegister } },
+      navigatorLike: { modelContext: { registerTool: navigatorRegister } },
+      room: roomFixture(),
+      onInvocation: vi.fn(),
     });
 
     expect(installed.status).toBe("registered");
-    expect(registerTool).toHaveBeenCalledOnce();
-
-    const tool = registerTool.mock.calls[0]?.[0];
-    expect(tool).toMatchObject({
-      name: "workhub_goal_room_ping",
-      title: "Ping WorkHub Goal Room",
-      inputSchema: {
-        type: "object",
-        additionalProperties: false,
-        required: ["message"],
-      },
-      annotations: { readOnlyHint: false },
-    });
-
-    const result = await tool.execute({ message: "Phase 0 is alive" });
-
-    expect(onPing).toHaveBeenCalledWith("Phase 0 is alive");
-    expect(result).toEqual({
-      ok: true,
-      room: "WorkHub Goal Room",
-      phase: "PHASE_0_WEBMCP_PROOF",
-      message: "Phase 0 is alive",
-      visibleStateChanged: true,
-    });
+    expect(documentRegister).toHaveBeenCalledTimes(5);
+    expect(navigatorRegister).not.toHaveBeenCalled();
+    const signals = documentRegister.mock.calls.map(([, options]) => options.signal);
+    expect(signals.every((signal) => signal.aborted === false)).toBe(true);
+    installed.dispose();
+    expect(signals.every((signal) => signal.aborted === true)).toBe(true);
   });
 
-  it("falls back to navigator.modelContext and reports unsupported clients", () => {
-    const registerTool = vi.fn();
+  it("falls back to navigator and the direct AbortSignal registration shape", () => {
+    const registerTool = vi.fn((_tool, options) => {
+      if (!(options instanceof AbortSignal)) throw new Error("direct signal required");
+    });
 
-    expect(
-      installGoalRoomPing({
-        documentLike: {},
-        navigatorLike: { modelContext: { registerTool } },
-        onPing: vi.fn(),
-      }).status,
-    ).toBe("registered");
+    const installed = installGoalRoomTools({
+      documentLike: {},
+      navigatorLike: { modelContext: { registerTool } },
+      room: roomFixture(),
+      onInvocation: vi.fn(),
+    });
 
+    expect(installed.status).toBe("registered");
+    expect(registerTool).toHaveBeenCalledTimes(10);
     expect(
-      installGoalRoomPing({
+      registerTool.mock.calls.filter(([, options]) => options instanceof AbortSignal),
+    ).toHaveLength(5);
+  });
+
+  it("reports unsupported clients without mutation", () => {
+    const room = roomFixture();
+    expect(
+      installGoalRoomTools({
         documentLike: {},
         navigatorLike: {},
-        onPing: vi.fn(),
+        room,
+        onInvocation: vi.fn(),
       }),
     ).toEqual({ status: "unsupported", dispose: expect.any(Function) });
+    expect(room.getState().stateVersion).toBe(0);
+    expect(room.getReceipts()).toHaveLength(0);
   });
 });
