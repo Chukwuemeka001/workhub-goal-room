@@ -4,7 +4,7 @@
   "baseCommit": "83b1e5aca8b640b2d445da95ab21257359c9b50a",
   "oracleCases": 13,
   "oraclePasses": 13,
-  "negativeCases": 5,
-  "negativeDetections": 5,
+  "negativeCases": 7,
+  "negativeDetections": 7,
   "passed": true
 }

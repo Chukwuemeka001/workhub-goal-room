@@ -14,6 +14,7 @@
       "name": "get_goal_room_state",
       "title": "Get governed Goal Room state",
       "description": "Read the current Goal Room state, state version, owner gate, and next legal action without changing the room.",
+      "annotations": { "readOnlyHint": true, "untrustedContentHint": true },
       "inputSchema": {
         "type": "object",
         "additionalProperties": false,
@@ -25,6 +26,7 @@
       "name": "propose_plan",
       "title": "Propose an immutable Goal Plan",
       "description": "Propose a versioned Plan as the agent. This never confirms the Plan; the owner must confirm or request revision.",
+      "annotations": { "readOnlyHint": false },
       "inputSchema": {
         "type": "object",
         "additionalProperties": false,
@@ -53,6 +55,7 @@
       "name": "claim_step",
       "title": "Claim an admitted Plan step",
       "description": "Claim one step from the exact owner-confirmed Plan version as the agent.",
+      "annotations": { "readOnlyHint": false },
       "inputSchema": {
         "type": "object",
         "additionalProperties": false,
@@ -69,6 +72,7 @@
       "name": "submit_artifact",
       "title": "Submit exact candidate evidence",
       "description": "Submit immutable candidate bytes and their declared SHA-256 for the currently claimed Plan step. WorkHub recomputes the digest.",
+      "annotations": { "readOnlyHint": false },
       "inputSchema": {
         "type": "object",
         "additionalProperties": false,
@@ -87,6 +91,7 @@
       "name": "request_completion",
       "title": "Request final owner acceptance",
       "description": "Request completion for the exact active candidate after deterministic PASS. This does not accept the Goal.",
+      "annotations": { "readOnlyHint": false },
       "inputSchema": {
         "type": "object",
         "additionalProperties": false,

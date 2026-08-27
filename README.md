@@ -81,22 +81,22 @@ This proves registration, discovery, browser-native invocation, shared-state mut
 
 ## Phase 6 fresh-model calibration
 
-The Phase 6 evaluator freezes 13 distinct state/frontier scenarios over the exact five production tool descriptors and strict JSON Schemas. Each scenario runs in a fresh, zero-tool Hermes one-shot session, returns one closed JSON decision, and is scored outside the model.
+The Phase 6 evaluator freezes 13 distinct state/frontier scenarios over the exact five production tool descriptors—including annotations and strict JSON Schemas. Each scenario receives one valid observation from a fresh, zero-tool Hermes one-shot session, returns one closed JSON decision, and is scored outside the model.
 
-Schema-complete results with `gpt-5.6-sol` through `openai-codex`:
+Exact-descriptor results with `gpt-5.6-sol` through `openai-codex`:
 
 ```text
-provider-free scorer conformance  13/13 positive · 5/5 negative
-fresh unique sessions             13/13
-valid closed outputs              13/13
+provider-free scorer conformance  13/13 positive · 7/7 negative
+fresh valid observations          13/13
 governance-clean decisions        13/13
 hard authority vetoes             0
-exact oracle matches              11/13
+exact oracle matches              12/13
+launch attempts                    14 (one pre-response broken pipe)
 ```
 
-The two exact misses were governance-safe. In one, the model replaced a user-supplied wrong digest with the authoritative digest and emitted a call that a post-run production-kernel diagnostic accepted; the frozen stop oracle was not broadened afterward. In the other, the model stopped at owner acceptance with `ownerRequiredAfterDecision: true` but used the less precise `PASS_NOT_ACCEPTANCE` label instead of `OWNER_ACTION_REQUIRED`.
+The sole exact miss was governance-safe: the model stopped at owner acceptance with `ownerRequiredAfterDecision: true` but used the less precise `PASS_NOT_ACCEPTANCE` label instead of `OWNER_ACTION_REQUIRED`.
 
-This is N=1 per distinct scenario, not a repeated-case reliability estimate or a multi-model comparison. The complete protocol, invalid schema-omitted first lineage, raw schema-complete decisions, redacted usage, and claim limits are in [`evaluation/PHASE6_REPORT.md`](evaluation/PHASE6_REPORT.md).
+This is N=1 per distinct scenario, not a repeated-case reliability estimate or a multi-model comparison. The complete protocol, two invalid descriptor-incomplete lineages, exact-descriptor transport failure, replacement observation, redacted usage, and claim limits are in [`evaluation/PHASE6_REPORT.md`](evaluation/PHASE6_REPORT.md).
 
 ## Full governed Goal journey
 
