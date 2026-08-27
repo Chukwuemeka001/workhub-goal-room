@@ -7,7 +7,7 @@
       name="description"
       content="WorkHub Goal Room — a governed shared workspace for one human and one agent working toward one consequential Goal."
     />
-    <title>WorkHub Goal Room — Owner Plan Decision</title>
+    <title>WorkHub Goal Room — Evidence & Verification</title>
   </head>
   <body>
     <main class="room-shell">
@@ -16,11 +16,11 @@
           <p class="eyebrow">WORKHUB GOAL ROOM</p>
           <h1>One Goal. One legal next action.</h1>
           <p class="header-copy">
-            The agent may propose. You decide what becomes authorized work.
+            The agent may produce. WorkHub verifies exact evidence. You retain final acceptance.
           </p>
         </div>
         <div class="header-state">
-          <span class="phase-badge">PHASE 2</span>
+          <span class="phase-badge">PHASE 3</span>
           <span id="room-status" class="status-pill" aria-live="polite"></span>
         </div>
       </header>
@@ -46,6 +46,8 @@
           <div id="decision-actions" class="decision-actions">
             <button id="confirm-plan" class="button primary" type="button"></button>
             <button id="revise-plan" class="button secondary" type="button"></button>
+            <button id="advance-demo" class="button primary" type="button"></button>
+            <button id="accept-goal" class="button primary" type="button"></button>
           </div>
         </article>
 
@@ -69,20 +71,47 @@
         <blockquote id="revision-note" class="revision-note" hidden></blockquote>
       </section>
 
+      <section id="evidence-card" class="evidence-card" aria-labelledby="evidence-heading" hidden>
+        <div class="section-heading">
+          <div>
+            <p class="label">EVIDENCE & DETERMINISTIC VERIFICATION</p>
+            <h2 id="evidence-heading">Candidate <span id="candidate-version"></span></h2>
+          </div>
+          <span id="verdict-status" class="verdict-status">WAITING</span>
+        </div>
+        <div class="evidence-grid">
+          <div>
+            <p class="label">SHA-256 CANDIDATE DIGEST</p>
+            <code id="candidate-digest" class="candidate-digest"></code>
+          </div>
+          <div>
+            <p class="label">RULE SET</p>
+            <code id="rule-set" class="rule-set">Not yet run</code>
+          </div>
+        </div>
+        <div class="checks-block">
+          <p class="label">DETERMINISTIC CHECKS</p>
+          <ul id="finding-list" class="finding-list"></ul>
+          <p id="pass-boundary" class="pass-boundary" hidden>
+            PASS means the explicit checks succeeded. PASS does not accept the Goal.
+          </p>
+        </div>
+      </section>
+
       <section class="lower-grid">
         <article class="boundary-card">
           <p class="label">AGENT CAN</p>
           <ul>
-            <li>Propose a Plan</li>
-            <li>Explain its proposed steps</li>
-            <li>Continue only after the legal gate opens</li>
+            <li>Claim an admitted Plan step</li>
+            <li>Submit exact candidate evidence</li>
+            <li>Correct work after deterministic FAIL</li>
           </ul>
         </article>
         <article class="boundary-card cannot">
           <p class="label">AGENT CANNOT</p>
           <ul>
-            <li>Confirm its own Plan</li>
-            <li>Replace a pending Plan silently</li>
+            <li>Write its own verification verdict</li>
+            <li>Reuse PASS for changed candidate bytes</li>
             <li>Accept the final Goal</li>
           </ul>
         </article>
