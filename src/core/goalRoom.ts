@@ -296,7 +296,13 @@ export function createGoalRoom(input: GoalRoomInput) {
 
   return {
     dispatch(command: Command): Promise<DispatchResult> {
-      const operation = dispatchTail.then(() => dispatchOnce(command));
+      let snapshot: Command;
+      try {
+        snapshot = structuredClone(command);
+      } catch {
+        return Promise.reject(new Error("INVALID_COMMAND"));
+      }
+      const operation = dispatchTail.then(() => dispatchOnce(snapshot));
       dispatchTail = operation.then(
         () => undefined,
         () => undefined,

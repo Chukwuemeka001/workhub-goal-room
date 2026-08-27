@@ -352,6 +352,26 @@ describe("Goal Room concurrency and retry safety", () => {
     expect(room.getReceipts()[0]).toMatchObject({ sequence: 1, previousHash: "GENESIS" });
   });
 
+  it("snapshots a queued command at dispatch admission", async () => {
+    const room = createGoalRoom({ goal: "Ship safely", doneLooksLike: ["Owner accepts"] });
+    const command = {
+      type: "PROPOSE_PLAN" as const,
+      actor: "agent" as const,
+      expectedStateVersion: 0,
+      idempotencyKey: "snapshot-proposal",
+      steps: [{ id: "metadata", title: "Original" }],
+    };
+
+    const pending = room.dispatch(command);
+    command.steps[0]!.title = "Mutated after dispatch";
+    await pending;
+
+    expect(room.getState().activePlan?.steps[0]?.title).toBe("Original");
+    expect(room.getReceipts()[0]?.command).toMatchObject({
+      steps: [{ id: "metadata", title: "Original" }],
+    });
+  });
+
   it.each([
     ["non-agent actor", { actor: "system" }],
     ["empty Plan", { steps: [] }],
