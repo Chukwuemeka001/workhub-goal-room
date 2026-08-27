@@ -34,6 +34,11 @@ Across all 12 viewport/checkpoint combinations:
 
 ## Interaction and accessibility evidence
 
+- Goal Contract revision sheet classifies owner prose as a `Goal Contract revision request`.
+- The sheet states that it does not edit/confirm v1 or authorize Plan work; the agent must propose immutable v2.
+- Revision textarea receives focus when the dialog opens.
+- `role="dialog"`, `aria-modal`, labelled title/help, Escape, backdrop, Cancel, and close-button paths are present.
+- Tested at 393×852 and keyboard-constrained 393×552: zero horizontal overflow, all sheet content/actions visible, and minimum sheet button height 44px.
 - Context disclosure control height repaired from 34px to 44px.
 - Persistent mobile dock and tab bar use fixed positioning at mobile width.
 - Goal owner gate exposes `Request changes` and `Confirm Goal` buttons.

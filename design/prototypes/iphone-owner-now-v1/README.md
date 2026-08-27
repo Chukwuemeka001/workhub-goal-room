@@ -25,8 +25,12 @@ Primary **Operate**, secondary **Inspect**.
 
 ## Trade-offs
 
-- Strong at: one-handed owner decisions, two-second authority comprehension, honest completion semantics, iPhone-native hierarchy.
-- Weak at: this first prototype does not yet implement full tab content, keyboard-open revision sheet, or landscape composition.
+- Strong at: one-handed owner decisions, two-second authority comprehension, honest completion semantics, iPhone-native hierarchy, and typed Goal revision with keyboard-constrained layout.
+- Weak at: this prototype does not yet implement full tab content or landscape composition.
+
+## Revision interaction
+
+`Request changes` opens a bottom sheet bound to Goal Contract v1. Owner prose is explicitly classified as a Goal Contract revision request. The sheet explains that v1 remains immutable, the request does not confirm a Goal or authorize Plan work, and the agent must propose v2.
 
 ## Best for
 

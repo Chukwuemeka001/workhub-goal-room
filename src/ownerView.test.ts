@@ -3,6 +3,109 @@ import { createGoalRoom } from "./core/goalRoom";
 import { createOwnerViewModel } from "./ownerView";
 
 describe("Goal Room owner view model", () => {
+  it("projects owner intent without implying an admitted Goal", () => {
+    const room = createGoalRoom({ ownerIntent: "Build a governed challenge entry." });
+
+    expect(createOwnerViewModel(room.getState(), room.getReceipts())).toMatchObject({
+      goal: "",
+      doneLooksLike: [],
+      statusLabel: "Owner intent captured — Goal not admitted",
+      ownerAttention: {
+        required: false,
+        title: "Agent must propose a Goal Contract",
+      },
+      actions: {
+        confirm: { visible: false },
+        revise: { visible: false },
+      },
+      nextLegalAction: {
+        label: "Agent must propose Goal Contract v1",
+        actor: "agent",
+      },
+      plan: null,
+    });
+  });
+
+  it("centers the owner Goal Contract decision before Plan admission", async () => {
+    const room = createGoalRoom({ ownerIntent: "Build a governed challenge entry." });
+    await room.dispatch({
+      type: "PROPOSE_GOAL_CONTRACT", actor: "agent", expectedStateVersion: 0,
+      idempotencyKey: "goal-v1",
+      goal: "Publish a verified entry", why: "Prove governance",
+      doneLooksLike: ["Owner accepts"], constraints: [], nonGoals: [],
+      evidenceRequired: ["PASS"], openQuestions: [],
+    });
+
+    expect(createOwnerViewModel(room.getState(), room.getReceipts())).toMatchObject({
+      statusLabel: "Waiting for your Goal decision",
+      ownerAttention: {
+        required: true,
+        title: "Review Goal Contract v1",
+      },
+      actions: {
+        confirm: { visible: true, label: "Confirm Goal v1" },
+        revise: { visible: true, label: "Request Goal revision" },
+      },
+      nextLegalAction: {
+        label: "Owner must confirm or request Goal revision",
+        actor: "owner",
+      },
+      plan: null,
+    });
+  });
+
+  it("projects a Goal revision request as an agent frontier", async () => {
+    const room = createGoalRoom({ ownerIntent: "Build a governed challenge entry." });
+    await room.dispatch({
+      type: "PROPOSE_GOAL_CONTRACT", actor: "agent", expectedStateVersion: 0,
+      idempotencyKey: "goal-v1", goal: "Publish a verified entry", why: "Prove governance",
+      doneLooksLike: ["Owner accepts"], constraints: [], nonGoals: [],
+      evidenceRequired: ["PASS"], openQuestions: [],
+    });
+    await room.dispatch({
+      type: "REQUEST_GOAL_REVISION", actor: "owner", expectedStateVersion: 1,
+      idempotencyKey: "revise-goal", goalContractVersion: 1,
+      note: "Make the proof judge-observable.",
+    });
+
+    expect(createOwnerViewModel(room.getState(), room.getReceipts())).toMatchObject({
+      statusLabel: "Waiting for revised Goal Contract",
+      ownerAttention: {
+        required: false,
+        title: "Goal revision requested",
+        body: "The agent must respond with Goal Contract v2 before you decide again.",
+      },
+      actions: { confirm: { visible: false }, revise: { visible: false } },
+      nextLegalAction: { label: "Agent must propose Goal Contract v2", actor: "agent" },
+      plan: null,
+    });
+  });
+
+  it("projects confirmed Goal scope without implying work or acceptance", async () => {
+    const room = createGoalRoom({ ownerIntent: "Build a governed challenge entry." });
+    await room.dispatch({
+      type: "PROPOSE_GOAL_CONTRACT", actor: "agent", expectedStateVersion: 0,
+      idempotencyKey: "goal-v1", goal: "Publish a verified entry", why: "Prove governance",
+      doneLooksLike: ["Owner accepts"], constraints: [], nonGoals: [],
+      evidenceRequired: ["PASS"], openQuestions: [],
+    });
+    await room.dispatch({
+      type: "CONFIRM_GOAL_CONTRACT", actor: "owner", expectedStateVersion: 1,
+      idempotencyKey: "confirm-goal", goalContractVersion: 1,
+    });
+
+    expect(createOwnerViewModel(room.getState(), room.getReceipts())).toMatchObject({
+      statusLabel: "Goal confirmed — Plan required",
+      ownerAttention: {
+        required: false,
+        title: "Goal Contract v1 confirmed",
+      },
+      actions: { confirm: { visible: false }, revise: { visible: false } },
+      nextLegalAction: { label: "Agent must propose Plan v1", actor: "agent" },
+      plan: null,
+    });
+  });
+
   it("shows only Plan as active before owner confirmation", async () => {
     const room = createGoalRoom({
       goal: "Publish a verified WebMCP Challenge entry",

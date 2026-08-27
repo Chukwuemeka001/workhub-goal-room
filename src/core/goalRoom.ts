@@ -14,6 +14,7 @@ export type PlanStep = {
 
 export type PlanVersion = {
   version: number;
+  goalContractVersion: number;
   status: "PROPOSED" | "REVISION_REQUESTED" | "CONFIRMED";
   proposedBy: Actor;
   steps: PlanStep[];
@@ -23,9 +24,25 @@ export type PlanVersion = {
   };
 };
 
+export type GoalContractVersion = {
+  version: number;
+  status: "PROPOSED" | "REVISION_REQUESTED" | "CONFIRMED";
+  proposedBy: "agent";
+  goal: string;
+  why: string;
+  doneLooksLike: string[];
+  constraints: string[];
+  nonGoals: string[];
+  evidenceRequired: string[];
+  openQuestions: string[];
+  revisionRequest?: { requestedBy: "owner"; note: string };
+};
+
 export type GoalRoomInput = {
   goal: string;
   doneLooksLike: string[];
+} | {
+  ownerIntent: string;
 };
 
 export type StepClaim = {
@@ -65,7 +82,14 @@ export type VerificationRecord = {
 export type GoalRoomState = {
   goal: string;
   doneLooksLike: string[];
+  ownerIntent: string | null;
+  activeGoalContract: GoalContractVersion | null;
+  goalContractHistory: GoalContractVersion[];
   phase:
+    | "INTENT_DRAFT"
+    | "GOAL_CONTRACT_PROPOSED"
+    | "GOAL_CONTRACT_REVISION_REQUESTED"
+    | "GOAL_CONTRACT_CONFIRMED"
     | "DRAFT"
     | "PLAN_PROPOSED"
     | "PLAN_REVISION_REQUESTED"
@@ -88,11 +112,43 @@ export type GoalRoomState = {
   goalAcceptance: GoalAcceptance | null;
 };
 
+export type ProposeGoalContractCommand = {
+  type: "PROPOSE_GOAL_CONTRACT";
+  actor: Actor;
+  expectedStateVersion: number;
+  idempotencyKey: string;
+  goal: string;
+  why: string;
+  doneLooksLike: string[];
+  constraints: string[];
+  nonGoals: string[];
+  evidenceRequired: string[];
+  openQuestions: string[];
+};
+
+export type RequestGoalRevisionCommand = {
+  type: "REQUEST_GOAL_REVISION";
+  actor: Actor;
+  expectedStateVersion: number;
+  idempotencyKey: string;
+  goalContractVersion: number;
+  note: string;
+};
+
+export type ConfirmGoalContractCommand = {
+  type: "CONFIRM_GOAL_CONTRACT";
+  actor: Actor;
+  expectedStateVersion: number;
+  idempotencyKey: string;
+  goalContractVersion: number;
+};
+
 export type ProposePlanCommand = {
   type: "PROPOSE_PLAN";
   actor: Actor;
   expectedStateVersion: number;
   idempotencyKey: string;
+  goalContractVersion?: number;
   steps: PlanStep[];
 };
 
@@ -162,6 +218,9 @@ export type RecordVerificationCommand = {
 };
 
 export type Command =
+  | ProposeGoalContractCommand
+  | RequestGoalRevisionCommand
+  | ConfirmGoalContractCommand
   | ProposePlanCommand
   | ConfirmPlanCommand
   | RequestPlanRevisionCommand
@@ -173,6 +232,8 @@ export type Command =
 export type ReasonCode =
   | "OWNER_ONLY"
   | "AGENT_ONLY"
+  | "GOAL_VERSION_MISMATCH"
+  | "GOAL_PROPOSAL_NOT_ALLOWED"
   | "PLAN_VERSION_MISMATCH"
   | "PLAN_PROPOSAL_NOT_ALLOWED"
   | "STEP_NOT_ADMITTED"
@@ -203,9 +264,54 @@ export type Receipt = {
 };
 
 function initialState(input: GoalRoomInput): GoalRoomState {
+  if ("ownerIntent" in input) {
+    return {
+      goal: "",
+      doneLooksLike: [],
+      ownerIntent: input.ownerIntent,
+      activeGoalContract: null,
+      goalContractHistory: [],
+      phase: "INTENT_DRAFT",
+      stateVersion: 0,
+      activePlan: null,
+      planHistory: [],
+      activeClaim: null,
+      activeCandidate: null,
+      candidateHistory: [],
+      activeVerification: null,
+      verificationHistory: [],
+      activeCompletionRequest: null,
+      goalAcceptance: null,
+    };
+  }
   return {
     goal: input.goal,
     doneLooksLike: [...input.doneLooksLike],
+    ownerIntent: null,
+    activeGoalContract: {
+      version: 1,
+      status: "CONFIRMED",
+      proposedBy: "agent",
+      goal: input.goal,
+      why: "Legacy pre-admitted Goal",
+      doneLooksLike: [...input.doneLooksLike],
+      constraints: [],
+      nonGoals: [],
+      evidenceRequired: [...input.doneLooksLike],
+      openQuestions: [],
+    },
+    goalContractHistory: [{
+      version: 1,
+      status: "CONFIRMED",
+      proposedBy: "agent",
+      goal: input.goal,
+      why: "Legacy pre-admitted Goal",
+      doneLooksLike: [...input.doneLooksLike],
+      constraints: [],
+      nonGoals: [],
+      evidenceRequired: [...input.doneLooksLike],
+      openQuestions: [],
+    }],
     phase: "DRAFT",
     stateVersion: 0,
     activePlan: null,
@@ -235,6 +341,12 @@ function hasExactKeys(record: Record<string, unknown>, keys: string[]): boolean 
 const LOWER_HEX_64 = /^[0-9a-f]{64}$/;
 const MAX_CANDIDATE_CONTENT_BYTES = 4 * 1024;
 
+function isNonEmptyStringArray(value: unknown, allowEmpty = false): value is string[] {
+  return Array.isArray(value) &&
+    (allowEmpty || value.length > 0) &&
+    value.every((item) => typeof item === "string" && item.trim().length > 0);
+}
+
 function validateCommand(value: unknown): asserts value is Command {
   if (!isPlainRecord(value)) throw new Error("INVALID_COMMAND");
   const commonValid =
@@ -245,10 +357,62 @@ function validateCommand(value: unknown): asserts value is Command {
     (value.actor === "agent" || value.actor === "owner" || value.actor === "system");
   if (!commonValid) throw new Error("INVALID_COMMAND");
 
-  if (value.type === "PROPOSE_PLAN") {
+  if (value.type === "PROPOSE_GOAL_CONTRACT") {
     if (
-      !hasExactKeys(value, ["type", "actor", "expectedStateVersion", "idempotencyKey", "steps"]) ||
+      !hasExactKeys(value, [
+        "type", "actor", "expectedStateVersion", "idempotencyKey", "goal", "why",
+        "doneLooksLike", "constraints", "nonGoals", "evidenceRequired", "openQuestions",
+      ]) ||
       value.actor !== "agent" ||
+      typeof value.goal !== "string" || value.goal.trim().length === 0 ||
+      typeof value.why !== "string" || value.why.trim().length === 0 ||
+      !isNonEmptyStringArray(value.doneLooksLike) ||
+      !isNonEmptyStringArray(value.constraints, true) ||
+      !isNonEmptyStringArray(value.nonGoals, true) ||
+      !isNonEmptyStringArray(value.evidenceRequired) ||
+      !isNonEmptyStringArray(value.openQuestions, true)
+    ) {
+      throw new Error("INVALID_COMMAND");
+    }
+    return;
+  }
+
+  if (value.type === "CONFIRM_GOAL_CONTRACT") {
+    if (
+      !hasExactKeys(value, [
+        "type", "actor", "expectedStateVersion", "idempotencyKey", "goalContractVersion",
+      ]) ||
+      !Number.isSafeInteger(value.goalContractVersion) ||
+      (value.goalContractVersion as number) < 1
+    ) {
+      throw new Error("INVALID_COMMAND");
+    }
+    return;
+  }
+
+  if (value.type === "REQUEST_GOAL_REVISION") {
+    if (
+      !hasExactKeys(value, [
+        "type", "actor", "expectedStateVersion", "idempotencyKey", "goalContractVersion", "note",
+      ]) ||
+      !Number.isSafeInteger(value.goalContractVersion) ||
+      (value.goalContractVersion as number) < 1 ||
+      typeof value.note !== "string" || value.note.trim().length === 0
+    ) {
+      throw new Error("INVALID_COMMAND");
+    }
+    return;
+  }
+
+  if (value.type === "PROPOSE_PLAN") {
+    const exactShape =
+      hasExactKeys(value, ["type", "actor", "expectedStateVersion", "idempotencyKey", "steps"]) ||
+      hasExactKeys(value, ["type", "actor", "expectedStateVersion", "idempotencyKey", "goalContractVersion", "steps"]);
+    if (
+      !exactShape ||
+      value.actor !== "agent" ||
+      (value.goalContractVersion !== undefined &&
+        (!Number.isSafeInteger(value.goalContractVersion) || (value.goalContractVersion as number) < 1)) ||
       !Array.isArray(value.steps) ||
       value.steps.length === 0
     ) {
@@ -428,9 +592,35 @@ function applyAcceptedCommand(
   state: GoalRoomState,
   command: Command,
 ): GoalRoomState {
+  if (command.type === "PROPOSE_GOAL_CONTRACT") {
+    const goalContract: GoalContractVersion = {
+      version: state.goalContractHistory.length + 1,
+      status: "PROPOSED",
+      proposedBy: "agent",
+      goal: command.goal.trim(),
+      why: command.why.trim(),
+      doneLooksLike: command.doneLooksLike.map((item) => item.trim()),
+      constraints: command.constraints.map((item) => item.trim()),
+      nonGoals: command.nonGoals.map((item) => item.trim()),
+      evidenceRequired: command.evidenceRequired.map((item) => item.trim()),
+      openQuestions: command.openQuestions.map((item) => item.trim()),
+    };
+    return {
+      ...state,
+      goal: goalContract.goal,
+      doneLooksLike: [...goalContract.doneLooksLike],
+      phase: "GOAL_CONTRACT_PROPOSED",
+      stateVersion: state.stateVersion + 1,
+      activeGoalContract: goalContract,
+      goalContractHistory: [...state.goalContractHistory, goalContract],
+    };
+  }
+
   if (command.type === "PROPOSE_PLAN") {
     const plan: PlanVersion = {
       version: state.planHistory.length + 1,
+      goalContractVersion:
+        command.goalContractVersion ?? state.activeGoalContract?.version ?? 0,
       status: "PROPOSED",
       proposedBy: command.actor,
       steps: command.steps.map((step) => ({ ...step })),
@@ -441,6 +631,53 @@ function applyAcceptedCommand(
       stateVersion: state.stateVersion + 1,
       activePlan: plan,
       planHistory: [...state.planHistory, plan],
+    };
+  }
+
+  if (command.type === "CONFIRM_GOAL_CONTRACT") {
+    if (
+      command.actor !== "owner" ||
+      state.activeGoalContract?.status !== "PROPOSED" ||
+      state.activeGoalContract.version !== command.goalContractVersion
+    ) {
+      throw new Error("REPLAY_AUTHORITY_MISMATCH");
+    }
+    const confirmedGoal: GoalContractVersion = {
+      ...state.activeGoalContract,
+      status: "CONFIRMED",
+    };
+    return {
+      ...state,
+      phase: "GOAL_CONTRACT_CONFIRMED",
+      stateVersion: state.stateVersion + 1,
+      activeGoalContract: confirmedGoal,
+      goalContractHistory: state.goalContractHistory.map((goal) =>
+        goal.version === confirmedGoal.version ? confirmedGoal : goal,
+      ),
+    };
+  }
+
+  if (command.type === "REQUEST_GOAL_REVISION") {
+    if (
+      command.actor !== "owner" ||
+      state.activeGoalContract?.status !== "PROPOSED" ||
+      state.activeGoalContract.version !== command.goalContractVersion
+    ) {
+      throw new Error("REPLAY_AUTHORITY_MISMATCH");
+    }
+    const revisedGoal: GoalContractVersion = {
+      ...state.activeGoalContract,
+      status: "REVISION_REQUESTED",
+      revisionRequest: { requestedBy: "owner", note: command.note.trim() },
+    };
+    return {
+      ...state,
+      phase: "GOAL_CONTRACT_REVISION_REQUESTED",
+      stateVersion: state.stateVersion + 1,
+      activeGoalContract: revisedGoal,
+      goalContractHistory: state.goalContractHistory.map((goal) =>
+        goal.version === revisedGoal.version ? revisedGoal : goal,
+      ),
     };
   }
 
@@ -615,6 +852,10 @@ function applyAcceptedCommand(
 }
 
 function nextLegalAction(state: GoalRoomState): string {
+  if (state.phase === "INTENT_DRAFT") return "AGENT_PROPOSE_GOAL_CONTRACT";
+  if (state.phase === "GOAL_CONTRACT_PROPOSED") return "OWNER_CONFIRM_OR_REVISE_GOAL";
+  if (state.phase === "GOAL_CONTRACT_REVISION_REQUESTED") return "AGENT_PROPOSE_REVISED_GOAL_CONTRACT";
+  if (state.phase === "GOAL_CONTRACT_CONFIRMED") return "AGENT_PROPOSE_PLAN";
   if (state.phase === "DRAFT") return "AGENT_PROPOSE_PLAN";
   if (state.phase === "PLAN_PROPOSED") return "OWNER_CONFIRM_OR_REVISE_PLAN";
   if (state.phase === "PLAN_REVISION_REQUESTED") return "AGENT_PROPOSE_REVISED_PLAN";
@@ -631,6 +872,7 @@ export function getGoalRoomFrontier(state: GoalRoomState) {
   return {
     nextLegalAction: nextLegalAction(state),
     ownerRequired:
+      state.phase === "GOAL_CONTRACT_PROPOSED" ||
       state.phase === "PLAN_PROPOSED" || state.phase === "COMPLETION_REQUESTED",
   };
 }
@@ -646,6 +888,82 @@ function evaluate(
       reasonCode: "STALE_STATE",
       stateVersion: state.stateVersion,
       ...getGoalRoomFrontier(state),
+    };
+  }
+
+  if (command.type === "PROPOSE_GOAL_CONTRACT") {
+    if (
+      state.phase !== "INTENT_DRAFT" &&
+      state.phase !== "GOAL_CONTRACT_REVISION_REQUESTED"
+    ) {
+      return {
+        accepted: false,
+        reasonCode: "GOAL_PROPOSAL_NOT_ALLOWED",
+        stateVersion: state.stateVersion,
+        ...getGoalRoomFrontier(state),
+      };
+    }
+    return {
+      accepted: true,
+      stateVersion: state.stateVersion + 1,
+      nextLegalAction: "OWNER_CONFIRM_OR_REVISE_GOAL",
+      ownerRequired: true,
+    };
+  }
+
+  if (command.type === "CONFIRM_GOAL_CONTRACT") {
+    if (command.actor !== "owner") {
+      return {
+        accepted: false,
+        reasonCode: "OWNER_ONLY",
+        stateVersion: state.stateVersion,
+        ...getGoalRoomFrontier(state),
+      };
+    }
+    if (
+      state.activeGoalContract?.status !== "PROPOSED" ||
+      state.activeGoalContract.version !== command.goalContractVersion
+    ) {
+      return {
+        accepted: false,
+        reasonCode: "GOAL_VERSION_MISMATCH",
+        stateVersion: state.stateVersion,
+        ...getGoalRoomFrontier(state),
+      };
+    }
+    return {
+      accepted: true,
+      stateVersion: state.stateVersion + 1,
+      nextLegalAction: "AGENT_PROPOSE_PLAN",
+      ownerRequired: false,
+    };
+  }
+
+  if (command.type === "REQUEST_GOAL_REVISION") {
+    if (command.actor !== "owner") {
+      return {
+        accepted: false,
+        reasonCode: "OWNER_ONLY",
+        stateVersion: state.stateVersion,
+        ...getGoalRoomFrontier(state),
+      };
+    }
+    if (
+      state.activeGoalContract?.status !== "PROPOSED" ||
+      state.activeGoalContract.version !== command.goalContractVersion
+    ) {
+      return {
+        accepted: false,
+        reasonCode: "GOAL_VERSION_MISMATCH",
+        stateVersion: state.stateVersion,
+        ...getGoalRoomFrontier(state),
+      };
+    }
+    return {
+      accepted: true,
+      stateVersion: state.stateVersion + 1,
+      nextLegalAction: "AGENT_PROPOSE_REVISED_GOAL_CONTRACT",
+      ownerRequired: false,
     };
   }
 
@@ -864,16 +1182,23 @@ function evaluate(
   }
 
   if (command.type === "PROPOSE_PLAN") {
-    if (
-      state.phase !== "DRAFT" &&
-      state.phase !== "PLAN_REVISION_REQUESTED"
-    ) {
+    const v2GoalBindingValid =
+      state.phase === "GOAL_CONTRACT_CONFIRMED" &&
+      state.activeGoalContract?.status === "CONFIRMED" &&
+      command.goalContractVersion === state.activeGoalContract.version;
+    const legacyOrRevisionBindingValid =
+      (state.phase === "DRAFT" || state.phase === "PLAN_REVISION_REQUESTED") &&
+      (command.goalContractVersion === undefined ||
+        command.goalContractVersion === state.activeGoalContract?.version);
+    if (!v2GoalBindingValid && !legacyOrRevisionBindingValid) {
       return {
         accepted: false,
-        reasonCode: "PLAN_PROPOSAL_NOT_ALLOWED",
+        reasonCode:
+          state.phase === "GOAL_CONTRACT_CONFIRMED"
+            ? "GOAL_VERSION_MISMATCH"
+            : "PLAN_PROPOSAL_NOT_ALLOWED",
         stateVersion: state.stateVersion,
-        nextLegalAction: nextLegalAction(state),
-        ownerRequired: state.phase === "PLAN_PROPOSED",
+        ...getGoalRoomFrontier(state),
       };
     }
     return {

@@ -261,6 +261,40 @@
     }
     .toast[data-visible="true"] { opacity: 1; transform: none; }
 
+    .sheet-layer {
+      position: fixed;
+      z-index: 40;
+      inset: 0;
+      display: grid;
+      align-items: end;
+      background: rgba(0,0,0,.62);
+    }
+    .sheet-layer[hidden] { display: none; }
+    .revision-sheet {
+      width: min(100%, 430px);
+      max-height: calc(100svh - 12px);
+      margin: 0 auto;
+      overflow: auto;
+      padding: 10px 17px calc(18px + env(safe-area-inset-bottom));
+      border: 1px solid var(--line-strong);
+      border-bottom: 0;
+      border-radius: 22px 22px 0 0;
+      background: #15171b;
+      box-shadow: 0 -24px 70px rgba(0,0,0,.55);
+    }
+    .sheet-handle { width: 34px; height: 4px; margin: 0 auto 14px; border-radius: 4px; background: rgba(255,255,255,.18); }
+    .sheet-heading { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
+    .sheet-heading h2 { margin: 0; font-size: 19px; font-weight: 620; letter-spacing: -.02em; }
+    .sheet-heading p { margin: 5px 0 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
+    .sheet-close { flex: 0 0 auto; width: 44px; height: 44px; border: 0; border-radius: 50%; color: var(--soft); background: rgba(255,255,255,.06); cursor: pointer; }
+    .revision-label { display: block; margin-top: 17px; color: var(--soft); font-size: 11px; font-weight: 620; }
+    .revision-note { width: 100%; min-height: 92px; margin-top: 8px; resize: vertical; padding: 12px 13px; border: 1px solid var(--line-strong); border-radius: 12px; outline: none; color: var(--text); background: #0e1013; font: inherit; font-size: 16px; line-height: 1.4; }
+    .revision-note:focus { border-color: rgba(241,180,95,.65); box-shadow: 0 0 0 3px rgba(241,180,95,.1); }
+    .interpretation { margin-top: 10px; padding: 11px 12px; border: 1px solid rgba(241,180,95,.2); border-radius: 11px; background: var(--owner-bg); }
+    .interpretation strong { display: block; color: #f5c986; font-size: 10px; }
+    .interpretation span { display: block; margin-top: 4px; color: var(--soft); font-size: 10px; line-height: 1.4; }
+    .sheet-actions { display: grid; grid-template-columns: .72fr 1.28fr; gap: 8px; margin-top: 13px; }
+
     @media (max-width: 980px) {
       .review-shell { grid-template-columns: minmax(393px,430px) minmax(220px,280px); }
       .review-panel:first-child { display: none; }
@@ -346,6 +380,29 @@
       </nav>
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
     </section>
+
+    <div class="sheet-layer" id="revision-layer" hidden>
+      <section class="revision-sheet" role="dialog" aria-modal="true" aria-labelledby="revision-title" aria-describedby="revision-help">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="sheet-heading">
+          <div>
+            <h2 id="revision-title">Request a Goal revision</h2>
+            <p id="revision-help">Describe what must change in Goal Contract v1. The agent must propose a new immutable version.</p>
+          </div>
+          <button class="sheet-close" id="revision-close" type="button" aria-label="Close revision sheet">×</button>
+        </div>
+        <label class="revision-label" for="revision-note">Revision note</label>
+        <textarea class="revision-note" id="revision-note" maxlength="600">Make the Done Looks Like criteria judge-observable and keep submission outside agent authority.</textarea>
+        <div class="interpretation">
+          <strong>Interpreted as · Goal Contract revision request</strong>
+          <span>This records owner direction against v1. It does not edit v1, confirm a Goal, or authorize Plan work.</span>
+        </div>
+        <div class="sheet-actions">
+          <button class="action secondary" id="revision-cancel" type="button">Cancel</button>
+          <button class="action primary" id="revision-submit" type="button">Request revision</button>
+        </div>
+      </section>
+    </div>
 
     <aside class="review-panel" aria-label="Design principles">
       <h1>Glance test</h1>
@@ -496,6 +553,16 @@
       showToast.timer = setTimeout(() => $("toast").dataset.visible = "false", 1800);
     }
 
+    function openRevision() {
+      $("revision-layer").hidden = false;
+      requestAnimationFrame(() => $("revision-note").focus());
+    }
+
+    function closeRevision() {
+      $("revision-layer").hidden = true;
+      document.querySelector('.dock-actions button')?.focus();
+    }
+
     function render() {
       const s = states[active];
       $("goal-kicker").textContent = s.goalKicker;
@@ -522,7 +589,10 @@
           const status = document.createElement("div"); status.className = "action status"; status.setAttribute("role", "status"); status.textContent = label; return status;
         }
         const button = document.createElement("button"); button.type = "button"; button.className = `action ${type}`; button.textContent = label;
-        button.addEventListener("click", () => showToast(type === "primary" ? `${label} is the legal frontier in this prototype state.` : `${label} opened as contextual owner input.`));
+        button.addEventListener("click", () => {
+          if (label === "Request changes") { openRevision(); return; }
+          showToast(type === "primary" ? `${label} is the legal frontier in this prototype state.` : `${label} opened as contextual owner input.`);
+        });
         return button;
       }));
       document.querySelectorAll(".state-picker button").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.state === active)));
@@ -539,6 +609,16 @@
     }
 
     $("context-toggle").addEventListener("click", () => { contextOpen = !contextOpen; render(); });
+    $("revision-close").addEventListener("click", closeRevision);
+    $("revision-cancel").addEventListener("click", closeRevision);
+    $("revision-submit").addEventListener("click", () => {
+      const note = $("revision-note").value.trim();
+      if (!note) { $("revision-note").focus(); return; }
+      closeRevision();
+      showToast("Revision request prepared for governed dispatch against Goal Contract v1.");
+    });
+    $("revision-layer").addEventListener("click", event => { if (event.target === $("revision-layer")) closeRevision(); });
+    document.addEventListener("keydown", event => { if (event.key === "Escape" && !$("revision-layer").hidden) closeRevision(); });
     document.querySelectorAll('[role="tab"]').forEach(tab => tab.addEventListener("click", () => {
       document.querySelectorAll('[role="tab"]').forEach(item => item.setAttribute("aria-selected", String(item === tab)));
       showToast(`${tab.dataset.tab} selected. This first prototype keeps the authoritative checkpoint visible while testing navigation.`);

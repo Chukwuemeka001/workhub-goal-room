@@ -57,6 +57,10 @@ const lifecycleStatuses: Record<
   GoalRoomState["phase"],
   readonly LifecycleStage["status"][]
 > = {
+  INTENT_DRAFT: ["pending", "pending", "pending", "pending", "pending", "pending"],
+  GOAL_CONTRACT_PROPOSED: ["pending", "pending", "pending", "pending", "pending", "pending"],
+  GOAL_CONTRACT_REVISION_REQUESTED: ["pending", "pending", "pending", "pending", "pending", "pending"],
+  GOAL_CONTRACT_CONFIRMED: ["pending", "pending", "pending", "pending", "pending", "pending"],
   DRAFT: ["active", "pending", "pending", "pending", "pending", "pending"],
   PLAN_PROPOSED: ["active", "pending", "pending", "pending", "pending", "pending"],
   PLAN_REVISION_REQUESTED: ["active", "pending", "pending", "pending", "pending", "pending"],
@@ -130,6 +134,77 @@ export function createOwnerViewModel(
 ): OwnerViewModel {
   const common = baseView(state, receipts);
   const plan = state.activePlan;
+  if (state.phase === "INTENT_DRAFT") {
+    return {
+      ...common,
+      statusLabel: "Owner intent captured — Goal not admitted",
+      ownerAttention: {
+        required: false,
+        title: "Agent must propose a Goal Contract",
+        body: "Intent is context only. Planning remains blocked until you confirm an exact Goal Contract.",
+      },
+      actions: hiddenActions(0),
+      nextLegalAction: {
+        label: "Agent must propose Goal Contract v1",
+        actor: "agent",
+      },
+    };
+  }
+  if (state.phase === "GOAL_CONTRACT_PROPOSED") {
+    const goalVersion = state.activeGoalContract?.version ?? 0;
+    return {
+      ...common,
+      statusLabel: "Waiting for your Goal decision",
+      ownerAttention: {
+        required: true,
+        title: `Review Goal Contract v${goalVersion}`,
+        body: "Planning remains blocked until you confirm this exact Goal or request a revision.",
+      },
+      actions: {
+        ...hiddenActions(0),
+        confirm: { visible: true, label: `Confirm Goal v${goalVersion}` },
+        revise: { visible: true, label: "Request Goal revision" },
+      },
+      nextLegalAction: {
+        label: "Owner must confirm or request Goal revision",
+        actor: "owner",
+      },
+    };
+  }
+  if (state.phase === "GOAL_CONTRACT_REVISION_REQUESTED") {
+    const nextVersion = (state.activeGoalContract?.version ?? 0) + 1;
+    return {
+      ...common,
+      statusLabel: "Waiting for revised Goal Contract",
+      ownerAttention: {
+        required: false,
+        title: "Goal revision requested",
+        body: `The agent must respond with Goal Contract v${nextVersion} before you decide again.`,
+      },
+      actions: hiddenActions(0),
+      nextLegalAction: {
+        label: `Agent must propose Goal Contract v${nextVersion}`,
+        actor: "agent",
+      },
+    };
+  }
+  if (state.phase === "GOAL_CONTRACT_CONFIRMED") {
+    const goalVersion = state.activeGoalContract?.version ?? 0;
+    return {
+      ...common,
+      statusLabel: "Goal confirmed — Plan required",
+      ownerAttention: {
+        required: false,
+        title: `Goal Contract v${goalVersion} confirmed`,
+        body: "No work is admitted until the agent proposes a Plan bound to this exact Goal version.",
+      },
+      actions: hiddenActions(0),
+      nextLegalAction: {
+        label: "Agent must propose Plan v1",
+        actor: "agent",
+      },
+    };
+  }
   if (!plan) throw new Error("Owner view state is not implemented");
 
   if (state.phase === "PLAN_PROPOSED") {

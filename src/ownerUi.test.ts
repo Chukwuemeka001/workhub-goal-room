@@ -24,6 +24,40 @@ describe("owner UI policies", () => {
     );
   });
 
+  it("labels immutable Goal proposals and owner Goal decisions truthfully", async () => {
+    const room = createGoalRoom({ ownerIntent: "Build a governed challenge entry." });
+    const contract = {
+      goal: "Publish a verified entry", why: "Prove governance",
+      doneLooksLike: ["Owner accepts"], constraints: [], nonGoals: [],
+      evidenceRequired: ["PASS"], openQuestions: [],
+    };
+    await room.dispatch({
+      type: "PROPOSE_GOAL_CONTRACT", actor: "agent", expectedStateVersion: 0,
+      idempotencyKey: "goal-v1", ...contract,
+    });
+    await room.dispatch({
+      type: "REQUEST_GOAL_REVISION", actor: "owner", expectedStateVersion: 1,
+      idempotencyKey: "revise-goal-v1", goalContractVersion: 1,
+      note: "Add judge-observable proof.",
+    });
+    await room.dispatch({
+      type: "PROPOSE_GOAL_CONTRACT", actor: "agent", expectedStateVersion: 2,
+      idempotencyKey: "goal-v2", ...contract,
+      evidenceRequired: ["PASS", "Judge-observable receipt"],
+    });
+    await room.dispatch({
+      type: "CONFIRM_GOAL_CONTRACT", actor: "owner", expectedStateVersion: 3,
+      idempotencyKey: "confirm-goal-v2", goalContractVersion: 2,
+    });
+
+    expect(createReceiptLabels(room.getReceipts())).toEqual([
+      "Agent proposed Goal Contract v1",
+      "Owner requested revision to Goal Contract v1",
+      "Agent proposed Goal Contract v2",
+      "Owner confirmed Goal Contract v2",
+    ]);
+  });
+
   it("labels claim, candidate, and system verification receipts truthfully", async () => {
     const room = createGoalRoom({ goal: "Ship", doneLooksLike: ["Accepted"] });
     await room.dispatch({

@@ -20,10 +20,23 @@ export function createBoundaryMessage(view: OwnerViewModel): string {
 
 function commandLabel(
   receipt: Receipt,
+  proposedGoalVersion?: number,
   proposedPlanVersion?: number,
   candidateVersion?: number,
 ): string {
   switch (receipt.command.type) {
+    case "PROPOSE_GOAL_CONTRACT":
+      return receipt.accepted
+        ? `Agent proposed Goal Contract v${proposedGoalVersion ?? "?"}`
+        : `Goal proposal refused · ${receipt.reasonCode ?? "unknown"}`;
+    case "REQUEST_GOAL_REVISION":
+      return receipt.accepted
+        ? `Owner requested revision to Goal Contract v${receipt.command.goalContractVersion}`
+        : `Goal revision request refused · ${receipt.reasonCode ?? "unknown"}`;
+    case "CONFIRM_GOAL_CONTRACT":
+      return receipt.accepted
+        ? `Owner confirmed Goal Contract v${receipt.command.goalContractVersion}`
+        : `Goal confirmation refused · ${receipt.reasonCode ?? "unknown"}`;
     case "PROPOSE_PLAN":
       return receipt.accepted
         ? `Agent proposed Plan v${proposedPlanVersion ?? "?"}`
@@ -60,9 +73,14 @@ function commandLabel(
 }
 
 export function createReceiptLabels(receipts: Receipt[]): string[] {
+  let proposedGoalVersion = 0;
   let proposedPlanVersion = 0;
   let candidateVersion = 0;
   return receipts.map((receipt) => {
+    const goalVersion =
+      receipt.command.type === "PROPOSE_GOAL_CONTRACT" && receipt.accepted
+        ? ++proposedGoalVersion
+        : undefined;
     const planVersion =
       receipt.command.type === "PROPOSE_PLAN" && receipt.accepted
         ? ++proposedPlanVersion
@@ -71,7 +89,7 @@ export function createReceiptLabels(receipts: Receipt[]): string[] {
       receipt.command.type === "SUBMIT_CANDIDATE" && receipt.accepted
         ? ++candidateVersion
         : undefined;
-    return commandLabel(receipt, planVersion, acceptedCandidateVersion);
+    return commandLabel(receipt, goalVersion, planVersion, acceptedCandidateVersion);
   });
 }
 
