@@ -7,6 +7,7 @@ describe("Goal Room owner view model", () => {
     const room = createGoalRoom({ ownerIntent: "Build a governed challenge entry." });
 
     expect(createOwnerViewModel(room.getState(), room.getReceipts())).toMatchObject({
+      ownerIntent: "Build a governed challenge entry.",
       goal: "",
       doneLooksLike: [],
       statusLabel: "Owner intent captured — Goal not admitted",

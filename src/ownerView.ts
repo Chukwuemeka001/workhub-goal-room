@@ -7,6 +7,7 @@ export type LifecycleStage = {
 };
 
 export type OwnerViewModel = {
+  ownerIntent: string | null;
   goal: string;
   doneLooksLike: string[];
   statusLabel: string;
@@ -85,6 +86,7 @@ function createLifecycle(state: GoalRoomState): LifecycleStage[] {
 function baseView(state: GoalRoomState, receipts: Receipt[]) {
   const plan = state.activePlan;
   return {
+    ownerIntent: state.ownerIntent,
     goal: state.goal,
     doneLooksLike: [...state.doneLooksLike],
     plan: plan
