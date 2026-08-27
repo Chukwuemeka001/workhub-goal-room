@@ -9,3 +9,4 @@ coverage/
 .chrome-canary-phase0/
 .chrome-phase2/
 evidence/
+evaluation/*.artifacts/

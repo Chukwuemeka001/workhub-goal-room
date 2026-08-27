@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "kind": "phase6-demo-rehearsal",
+  "browser": "Chrome Canary 154.0.8027.0",
+  "url": "http://127.0.0.1:4190/",
+  "mode": "deterministic UI journey automation",
+  "automatedActionSeconds": 0.41,
+  "states": [
+    { "status": "Waiting for your Plan decision", "actor": "OWNER", "receipts": 1 },
+    { "status": "Plan confirmed — work may begin", "actor": "AGENT", "receipts": 2 },
+    { "status": "Step claimed — evidence required", "actor": "AGENT", "receipts": 3 },
+    { "status": "Evidence submitted — verification required", "actor": "SYSTEM", "receipts": 4 },
+    { "status": "Verification failed — correction required", "actor": "AGENT", "receipts": 5 },
+    { "status": "Evidence submitted — verification required", "actor": "SYSTEM", "receipts": 6 },
+    { "status": "Verification passed — owner has not accepted the Goal", "actor": "AGENT", "receipts": 7 },
+    { "status": "Verified result — awaiting owner acceptance", "actor": "OWNER", "receipts": 8 },
+    { "status": "Goal accepted by owner", "actor": "OWNER", "receipts": 9 }
+  ],
+  "final": {
+    "nextLegalAction": "No further governed action",
+    "lifecycle": [
+      "Plan — complete",
+      "Claim — complete",
+      "Evidence — complete",
+      "Verify — complete",
+      "Complete — complete",
+      "Accept — complete"
+    ]
+  },
+  "mobile": {
+    "viewport": [390, 844],
+    "documentHorizontalOverflow": 0,
+    "bodyHorizontalOverflow": 0
+  },
+  "claimBoundary": "This rehearsal exercised the deterministic browser UI journey. Native WebMCP discovery and invocation were independently verified in the Phase 5 Canary proof; this receipt does not relabel UI automation as native WebMCP invocation."
+}

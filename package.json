@@ -9,6 +9,8 @@
     "build": "tsc --noEmit && vite build",
     "test": "vitest run",
     "test:watch": "vitest",
+    "eval:phase6": "node --experimental-strip-types scripts/phase6-evaluate.ts",
+    "eval:phase6:conformance": "npm run eval:phase6 -- conformance --out evaluation/phase6-conformance.json",
     "preview": "vite preview"
   },
   "devDependencies": {

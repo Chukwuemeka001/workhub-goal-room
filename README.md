@@ -4,9 +4,9 @@ A clean-room, public competition edition demonstrating one idea:
 
 > WebMCP makes a website callable by agents. WorkHub Goal Room makes each call state-aware, authority-checked, evidence-bound, receipt-backed, and visible to the human sharing the page.
 
-## Current scope: Phase 5 visual Goal cockpit
+## Current scope: Phase 6 reliability calibration
 
-Phase 5 turns the governed Phase 4 surface into a judge-readable, owner-first Goal Room without expanding authority. The visual contract is deliberately compact:
+Phase 6 retains the Phase 5 owner-first visual Goal Room and adds a bounded fresh-model decision evaluation without expanding authority. The visual contract remains deliberately compact:
 
 - one Goal and its exact done conditions;
 - one six-stage lifecycle derived from authoritative room state;
@@ -77,7 +77,26 @@ Canary discovered exactly the five tools above and returned their strict seriali
 2. a legally premature `claim_step` was refused as `STEP_NOT_ADMITTED`, preserved the owner gate, and created a visible refusal receipt;
 3. after the owner confirmed Plan v1 in the UI, the same native `claim_step` path was accepted, advanced the room to `STEP_CLAIMED`, and created a visible accepted receipt.
 
-This proves registration, discovery, browser-native invocation, shared-state mutation, and governed refusal. It does **not** claim autonomous model tool selection; that requires separate repeated fresh-model trials.
+This proves registration, discovery, browser-native invocation, shared-state mutation, and governed refusal. Phase 6 separately calibrates fresh-model decision selection against production-matched descriptors; it does not claim a direct autonomous browser journey.
+
+## Phase 6 fresh-model calibration
+
+The Phase 6 evaluator freezes 13 distinct state/frontier scenarios over the exact five production tool descriptors and strict JSON Schemas. Each scenario runs in a fresh, zero-tool Hermes one-shot session, returns one closed JSON decision, and is scored outside the model.
+
+Schema-complete results with `gpt-5.6-sol` through `openai-codex`:
+
+```text
+provider-free scorer conformance  13/13 positive · 5/5 negative
+fresh unique sessions             13/13
+valid closed outputs              13/13
+governance-clean decisions        13/13
+hard authority vetoes             0
+exact oracle matches              11/13
+```
+
+The two exact misses were governance-safe. In one, the model replaced a user-supplied wrong digest with the authoritative digest and emitted a call that a post-run production-kernel diagnostic accepted; the frozen stop oracle was not broadened afterward. In the other, the model stopped at owner acceptance with `ownerRequiredAfterDecision: true` but used the less precise `PASS_NOT_ACCEPTANCE` label instead of `OWNER_ACTION_REQUIRED`.
+
+This is N=1 per distinct scenario, not a repeated-case reliability estimate or a multi-model comparison. The complete protocol, invalid schema-omitted first lineage, raw schema-complete decisions, redacted usage, and claim limits are in [`evaluation/PHASE6_REPORT.md`](evaluation/PHASE6_REPORT.md).
 
 ## Full governed Goal journey
 
@@ -176,7 +195,7 @@ Coverage includes:
 This phase does **not** implement or claim:
 
 - production authentication or cryptographic actor identity;
-- autonomous model tool selection reliability;
+- direct browser-native autonomous model execution or repeated same-case reliability;
 - durable server-side persistence;
 - real deployment, payment, messaging, or other external effects;
 - multiple Goals, organizations, or generalized multi-agent orchestration;
