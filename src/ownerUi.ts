@@ -1,5 +1,11 @@
 import type { Receipt } from "./core/goalRoom";
-import type { OwnerViewModel } from "./ownerView";
+import type { LifecycleStage, OwnerViewModel } from "./ownerView";
+
+export function createLifecycleAccessibleLabel(
+  stage: Pick<LifecycleStage, "label" | "status">,
+): string {
+  return `${stage.label} — ${stage.status}`;
+}
 
 export function createBoundaryMessage(view: OwnerViewModel): string {
   if (view.nextLegalAction.label === "No further governed action") {

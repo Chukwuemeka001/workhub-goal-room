@@ -4,6 +4,7 @@ import { createOwnerDecisionController } from "./ownerController";
 import { createOwnerViewModel, type OwnerViewModel } from "./ownerView";
 import {
   createBoundaryMessage,
+  createLifecycleAccessibleLabel,
   createReceiptLabels,
   prepareRevisionNote,
 } from "./ownerUi";
@@ -176,6 +177,7 @@ function render(view: OwnerViewModel) {
       label.textContent = stage.label;
       item.dataset.status = stage.status;
       item.dataset.stage = stage.id;
+      item.setAttribute("aria-label", createLifecycleAccessibleLabel(stage));
       if (stage.status === "active") item.setAttribute("aria-current", "step");
       item.append(marker, label);
       return item;

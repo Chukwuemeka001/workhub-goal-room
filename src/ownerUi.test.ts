@@ -3,11 +3,27 @@ import { createGoalRoom } from "./core/goalRoom";
 import { createOwnerViewModel } from "./ownerView";
 import {
   createBoundaryMessage,
+  createLifecycleAccessibleLabel,
   createReceiptLabels,
   prepareRevisionNote,
 } from "./ownerUi";
 
 describe("owner UI policies", () => {
+  it("announces every lifecycle status without relying on color", () => {
+    expect(createLifecycleAccessibleLabel({ label: "Plan", status: "complete" })).toBe(
+      "Plan — complete",
+    );
+    expect(createLifecycleAccessibleLabel({ label: "Evidence", status: "active" })).toBe(
+      "Evidence — active",
+    );
+    expect(createLifecycleAccessibleLabel({ label: "Verify", status: "failed" })).toBe(
+      "Verify — failed",
+    );
+    expect(createLifecycleAccessibleLabel({ label: "Accept", status: "pending" })).toBe(
+      "Accept — pending",
+    );
+  });
+
   it("labels claim, candidate, and system verification receipts truthfully", async () => {
     const room = createGoalRoom({ goal: "Ship", doneLooksLike: ["Accepted"] });
     await room.dispatch({

@@ -325,7 +325,7 @@ h3 {
   gap: 14px;
   margin-top: 14px;
 }
-.detail-card, .receipt-card { padding: 0 22px; border-radius: 12px; }
+.detail-card, .receipt-card { min-width: 0; padding: 0 22px; border-radius: 12px; }
 .detail-card > summary, .receipt-card > summary { cursor: pointer; list-style: none; }
 .detail-card > summary::-webkit-details-marker, .receipt-card > summary::-webkit-details-marker { display: none; }
 .section-heading, .receipt-heading {
@@ -355,7 +355,7 @@ details[open] > .section-heading::after, details[open] > .receipt-heading::after
 }
 .plan-steps li {
   display: grid;
-  grid-template-columns: 34px 1fr;
+  grid-template-columns: 34px minmax(0, 1fr);
   gap: 12px;
   padding: 13px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.055);
@@ -363,6 +363,11 @@ details[open] > .section-heading::after, details[open] > .receipt-heading::after
   font-size: 0.82rem;
 }
 .step-number { color: var(--quiet); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.7rem; }
+.plan-steps li > span:last-child, .revision-note {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
 .revision-note {
   margin: 0 0 20px;
   padding: 14px 16px;
@@ -509,7 +514,14 @@ footer {
   .room-shell { width: min(100% - 20px, 480px); padding-top: 12px; }
   .room-header { align-items: flex-start; }
   .header-state { align-items: flex-end; flex-direction: column; }
-  .status-pill { max-width: 190px; text-align: right; }
+  .status-pill {
+    max-width: 220px;
+    overflow: visible;
+    text-align: right;
+    text-overflow: clip;
+    white-space: normal;
+    line-height: 1.35;
+  }
   .hero { padding: 25px 2px 19px; }
   h1 { font-size: clamp(2rem, 10vw, 2.8rem); }
   .goal-panel, .lifecycle-panel, .attention-card, .next-action-card, .boundary-card { padding: 18px; }
