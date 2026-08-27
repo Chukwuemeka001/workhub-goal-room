@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="WorkHub Goal Room Phase 0 — a public WebMCP invocation proof."
+    />
+    <title>WorkHub Goal Room — Phase 0</title>
+  </head>
+  <body>
+    <main class="room-shell">
+      <header class="room-header">
+        <div>
+          <p class="eyebrow">WORKHUB GOAL ROOM</p>
+          <h1>Prove the governed agent surface.</h1>
+        </div>
+        <div class="phase-badge">PHASE 0</div>
+      </header>
+
+      <section class="goal-card" aria-labelledby="goal-heading">
+        <div>
+          <p class="label">THE GOAL</p>
+          <h2 id="goal-heading">Verify one real WebMCP call.</h2>
+          <p>
+            A qualifying agent should discover the page tool, invoke it, and
+            visibly change this shared room.
+          </p>
+        </div>
+        <div class="status-card">
+          <span class="status-dot" aria-hidden="true"></span>
+          <div>
+            <p class="label">CLIENT STATUS</p>
+            <p id="webmcp-status" data-status="checking" aria-live="polite">
+              Checking WebMCP support…
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="proof-grid" aria-label="Phase 0 proof state">
+        <article class="proof-card highlight">
+          <p class="label">LAST AGENT MESSAGE</p>
+          <p id="last-message" data-state="waiting" aria-live="polite">
+            Waiting for a WebMCP invocation.
+          </p>
+        </article>
+        <article class="proof-card count-card">
+          <p class="label">VISIBLE INVOCATIONS</p>
+          <p id="invocation-count" class="count" aria-live="polite">0</p>
+        </article>
+      </section>
+
+      <section class="tool-card">
+        <div>
+          <p class="label">DISCOVERABLE TOOL</p>
+          <code>workhub_goal_room_ping</code>
+        </div>
+        <p>
+          This spike proves registration and shared-page state only. Plan
+          authority, verification, receipts, and owner acceptance arrive after
+          this gate is green.
+        </p>
+      </section>
+
+      <footer>
+        <span>Standalone competition edition</span>
+        <span>No private WorkHub dependency</span>
+      </footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

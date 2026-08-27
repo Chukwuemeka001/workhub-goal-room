@@ -1,0 +1,212 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  color: #eaf0ff;
+  background: #070b14;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(91, 73, 255, 0.18), transparent 34rem),
+    radial-gradient(circle at 8% 88%, rgba(15, 184, 172, 0.1), transparent 30rem),
+    #070b14;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.28;
+  background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.room-shell {
+  position: relative;
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 56px 0 32px;
+}
+
+.room-header, .goal-card, .proof-grid, .tool-card, footer {
+  display: flex;
+  align-items: center;
+}
+
+.room-header {
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 24px;
+}
+
+h1, h2, p { margin: 0; }
+
+h1 {
+  max-width: 720px;
+  margin-top: 8px;
+  font-size: clamp(2rem, 5vw, 4.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+h2 {
+  margin: 8px 0 10px;
+  font-size: clamp(1.45rem, 2.5vw, 2.25rem);
+  letter-spacing: -0.035em;
+}
+
+.eyebrow, .label {
+  color: #8ea0c5;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.eyebrow { color: #9c91ff; }
+
+.phase-badge {
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  border: 1px solid rgba(156, 145, 255, 0.5);
+  border-radius: 999px;
+  color: #c9c3ff;
+  background: rgba(92, 74, 220, 0.15);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.goal-card, .tool-card, .proof-card {
+  border: 1px solid rgba(148, 163, 196, 0.16);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(16px);
+}
+
+.goal-card {
+  justify-content: space-between;
+  gap: 40px;
+  padding: clamp(24px, 4vw, 44px);
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(20, 27, 45, 0.94), rgba(13, 18, 31, 0.9));
+}
+
+.goal-card > div:first-child { max-width: 640px; }
+.goal-card p:not(.label) { color: #aebbd5; line-height: 1.65; }
+
+.status-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 265px;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(5, 9, 18, 0.72);
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #8793ad;
+  box-shadow: 0 0 20px currentColor;
+}
+
+#webmcp-status { margin-top: 5px; font-weight: 700; }
+#webmcp-status[data-status="registered"] { color: #61e8bd; }
+#webmcp-status[data-status="unsupported"] { color: #ffb55e; }
+
+.proof-grid {
+  align-items: stretch;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.proof-card {
+  flex: 1;
+  min-height: 180px;
+  padding: 28px;
+  border-radius: 24px;
+  background: rgba(13, 18, 31, 0.8);
+}
+
+.highlight {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#last-message {
+  margin-top: 40px;
+  color: #d7d2ff;
+  font-size: clamp(1.35rem, 3vw, 2.4rem);
+  font-weight: 730;
+  letter-spacing: -0.035em;
+}
+
+#last-message[data-state="changed"] { animation: arrive 520ms ease-out; }
+
+.count-card {
+  flex: 0 0 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.count {
+  font-size: 5rem;
+  font-weight: 760;
+  letter-spacing: -0.07em;
+}
+
+.tool-card {
+  justify-content: space-between;
+  gap: 32px;
+  margin-top: 18px;
+  padding: 24px 28px;
+  border-radius: 22px;
+  background: rgba(13, 18, 31, 0.68);
+}
+
+.tool-card code {
+  display: block;
+  margin-top: 8px;
+  color: #80e5d5;
+  font-size: 0.92rem;
+}
+
+.tool-card > p {
+  max-width: 580px;
+  color: #8f9db9;
+  line-height: 1.55;
+}
+
+footer {
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 4px 0;
+  color: #5f6d88;
+  font-size: 0.78rem;
+}
+
+@keyframes arrive {
+  0% { opacity: 0.25; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 760px) {
+  .room-shell { padding-top: 32px; }
+  .room-header, .goal-card, .proof-grid, .tool-card { align-items: stretch; flex-direction: column; }
+  .phase-badge { align-self: flex-start; }
+  .status-card, .count-card { min-width: 0; }
+  .count-card { flex-basis: auto; }
+  footer { align-items: flex-start; flex-direction: column; }
+}
