@@ -1,5 +1,11 @@
 import type { GoalRoomState, PlanStep, Receipt } from "./core/goalRoom";
 
+export type LifecycleStage = {
+  id: "plan" | "claim" | "evidence" | "verify" | "completion" | "acceptance";
+  label: string;
+  status: "complete" | "active" | "pending" | "failed";
+};
+
 export type OwnerViewModel = {
   goal: string;
   doneLooksLike: string[];
@@ -35,7 +41,42 @@ export type OwnerViewModel = {
     findingCodes: string[];
   };
   receiptCount: number;
+  lifecycle: LifecycleStage[];
 };
+
+const lifecycleStages = [
+  ["plan", "Plan"],
+  ["claim", "Claim"],
+  ["evidence", "Evidence"],
+  ["verify", "Verify"],
+  ["completion", "Complete"],
+  ["acceptance", "Accept"],
+] as const;
+
+const lifecycleStatuses: Record<
+  GoalRoomState["phase"],
+  readonly LifecycleStage["status"][]
+> = {
+  DRAFT: ["active", "pending", "pending", "pending", "pending", "pending"],
+  PLAN_PROPOSED: ["active", "pending", "pending", "pending", "pending", "pending"],
+  PLAN_REVISION_REQUESTED: ["active", "pending", "pending", "pending", "pending", "pending"],
+  PLAN_CONFIRMED: ["complete", "active", "pending", "pending", "pending", "pending"],
+  STEP_CLAIMED: ["complete", "complete", "active", "pending", "pending", "pending"],
+  CANDIDATE_SUBMITTED: ["complete", "complete", "complete", "active", "pending", "pending"],
+  VERIFICATION_FAILED: ["complete", "complete", "active", "failed", "pending", "pending"],
+  VERIFICATION_PASSED: ["complete", "complete", "complete", "complete", "active", "pending"],
+  COMPLETION_REQUESTED: ["complete", "complete", "complete", "complete", "complete", "active"],
+  GOAL_ACCEPTED: ["complete", "complete", "complete", "complete", "complete", "complete"],
+};
+
+function createLifecycle(state: GoalRoomState): LifecycleStage[] {
+  const statuses = lifecycleStatuses[state.phase];
+  return lifecycleStages.map(([id, label], index) => ({
+    id,
+    label,
+    status: statuses[index],
+  }));
+}
 
 function baseView(state: GoalRoomState, receipts: Receipt[]) {
   const plan = state.activePlan;
@@ -70,6 +111,7 @@ function baseView(state: GoalRoomState, receipts: Receipt[]) {
         : { findingCodes: [] }),
     },
     receiptCount: receipts.length,
+    lifecycle: createLifecycle(state),
   };
 }
 

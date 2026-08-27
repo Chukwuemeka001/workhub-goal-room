@@ -20,6 +20,7 @@ const elements = {
   status: requiredElement("room-status"),
   goal: requiredElement("goal-heading"),
   doneList: requiredElement<HTMLUListElement>("done-list"),
+  lifecycleRail: requiredElement<HTMLOListElement>("lifecycle-rail"),
   attention: requiredElement("owner-attention"),
   attentionTitle: requiredElement("attention-title"),
   attentionBody: requiredElement("attention-body"),
@@ -163,6 +164,21 @@ function render(view: OwnerViewModel) {
       const li = document.createElement("li");
       li.textContent = item;
       return li;
+    }),
+  );
+  elements.lifecycleRail.replaceChildren(
+    ...view.lifecycle.map((stage) => {
+      const item = document.createElement("li");
+      const marker = document.createElement("span");
+      const label = document.createElement("span");
+      marker.className = "lifecycle-marker";
+      marker.setAttribute("aria-hidden", "true");
+      label.textContent = stage.label;
+      item.dataset.status = stage.status;
+      item.dataset.stage = stage.id;
+      if (stage.status === "active") item.setAttribute("aria-current", "step");
+      item.append(marker, label);
+      return item;
     }),
   );
   elements.attention.dataset.required = String(view.ownerAttention.required);

@@ -3,6 +3,31 @@ import { createGoalRoom } from "./core/goalRoom";
 import { createOwnerViewModel } from "./ownerView";
 
 describe("Goal Room owner view model", () => {
+  it("shows only Plan as active before owner confirmation", async () => {
+    const room = createGoalRoom({
+      goal: "Publish a verified WebMCP Challenge entry",
+      doneLooksLike: ["Owner accepts"],
+    });
+    await room.dispatch({
+      type: "PROPOSE_PLAN",
+      actor: "agent",
+      expectedStateVersion: 0,
+      idempotencyKey: "proposal-lifecycle",
+      steps: [{ id: "artifact", title: "Produce exact evidence" }],
+    });
+
+    expect(
+      createOwnerViewModel(room.getState(), room.getReceipts()).lifecycle,
+    ).toEqual([
+      { id: "plan", label: "Plan", status: "active" },
+      { id: "claim", label: "Claim", status: "pending" },
+      { id: "evidence", label: "Evidence", status: "pending" },
+      { id: "verify", label: "Verify", status: "pending" },
+      { id: "completion", label: "Complete", status: "pending" },
+      { id: "acceptance", label: "Accept", status: "pending" },
+    ]);
+  });
+
   it("shows digest-bound FAIL then PASS without implying owner acceptance", async () => {
     const room = createGoalRoom({
       goal: "Publish a verified WebMCP Challenge entry",
@@ -30,6 +55,14 @@ describe("Goal Room owner view model", () => {
       planVersion: 1,
       stepId: "artifact",
     });
+    expect(createOwnerViewModel(room.getState(), room.getReceipts()).lifecycle).toMatchObject([
+      { id: "plan", status: "complete" },
+      { id: "claim", status: "complete" },
+      { id: "evidence", status: "active" },
+      { id: "verify", status: "pending" },
+      { id: "completion", status: "pending" },
+      { id: "acceptance", status: "pending" },
+    ]);
     const digest = async (content: string) => {
       const bytes = new TextEncoder().encode(content);
       const hash = await crypto.subtle.digest("SHA-256", bytes);
@@ -53,6 +86,14 @@ describe("Goal Room owner view model", () => {
       content: failedContent,
       sha256: failedSha,
     });
+    expect(createOwnerViewModel(room.getState(), room.getReceipts()).lifecycle).toMatchObject([
+      { id: "plan", status: "complete" },
+      { id: "claim", status: "complete" },
+      { id: "evidence", status: "complete" },
+      { id: "verify", status: "active" },
+      { id: "completion", status: "pending" },
+      { id: "acceptance", status: "pending" },
+    ]);
     await room.verifyActiveCandidate("verify-v1");
 
     expect(createOwnerViewModel(room.getState(), room.getReceipts())).toMatchObject({
@@ -69,6 +110,14 @@ describe("Goal Room owner view model", () => {
         label: "Agent must submit a corrected candidate",
         actor: "agent",
       },
+      lifecycle: [
+        { id: "plan", status: "complete" },
+        { id: "claim", status: "complete" },
+        { id: "evidence", status: "active" },
+        { id: "verify", status: "failed" },
+        { id: "completion", status: "pending" },
+        { id: "acceptance", status: "pending" },
+      ],
       evidence: {
         visible: true,
         candidateVersion: 1,
@@ -115,6 +164,14 @@ describe("Goal Room owner view model", () => {
         label: "Agent may request completion for this exact candidate",
         actor: "agent",
       },
+      lifecycle: [
+        { id: "plan", status: "complete" },
+        { id: "claim", status: "complete" },
+        { id: "evidence", status: "complete" },
+        { id: "verify", status: "complete" },
+        { id: "completion", status: "active" },
+        { id: "acceptance", status: "pending" },
+      ],
       evidence: {
         candidateVersion: 2,
         digest: passedSha,
@@ -123,6 +180,37 @@ describe("Goal Room owner view model", () => {
         findingCodes: [],
       },
     });
+
+    await room.dispatch({
+      type: "REQUEST_COMPLETION",
+      actor: "agent",
+      expectedStateVersion: 7,
+      idempotencyKey: "request-completion",
+      candidateSha256: passedSha,
+    });
+    expect(createOwnerViewModel(room.getState(), room.getReceipts()).lifecycle).toMatchObject([
+      { id: "plan", status: "complete" },
+      { id: "claim", status: "complete" },
+      { id: "evidence", status: "complete" },
+      { id: "verify", status: "complete" },
+      { id: "completion", status: "complete" },
+      { id: "acceptance", status: "active" },
+    ]);
+    await room.dispatch({
+      type: "ACCEPT_GOAL",
+      actor: "owner",
+      expectedStateVersion: 8,
+      idempotencyKey: "owner-acceptance",
+      candidateSha256: passedSha,
+    });
+    expect(createOwnerViewModel(room.getState(), room.getReceipts()).lifecycle).toMatchObject([
+      { id: "plan", status: "complete" },
+      { id: "claim", status: "complete" },
+      { id: "evidence", status: "complete" },
+      { id: "verify", status: "complete" },
+      { id: "completion", status: "complete" },
+      { id: "acceptance", status: "complete" },
+    ]);
   });
 
   it("centers the exact owner decision for a proposed Plan", async () => {
@@ -203,6 +291,14 @@ describe("Goal Room owner view model", () => {
         label: "Agent may claim the next admitted step",
         actor: "agent",
       },
+      lifecycle: [
+        { id: "plan", status: "complete" },
+        { id: "claim", status: "active" },
+        { id: "evidence", status: "pending" },
+        { id: "verify", status: "pending" },
+        { id: "completion", status: "pending" },
+        { id: "acceptance", status: "pending" },
+      ],
       plan: { version: 1, status: "CONFIRMED" },
       receiptCount: 2,
     });

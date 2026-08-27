@@ -4,7 +4,27 @@ A clean-room, public competition edition demonstrating one idea:
 
 > WebMCP makes a website callable by agents. WorkHub Goal Room makes each call state-aware, authority-checked, evidence-bound, receipt-backed, and visible to the human sharing the page.
 
-## Current scope: Phase 4 governed WebMCP tools and refusals
+## Current scope: Phase 5 visual Goal cockpit
+
+Phase 5 turns the governed Phase 4 surface into a judge-readable, owner-first Goal Room without expanding authority. The visual contract is deliberately compact:
+
+- one Goal and its exact done conditions;
+- one six-stage lifecycle derived from authoritative room state;
+- one dominant current-frontier card;
+- one explicit actor holding authority now;
+- progressive disclosure for Plan, evidence, deterministic findings, and receipts;
+- visually distinct active, complete, failed, and pending stages;
+- PASS visibly stops before final owner acceptance.
+
+The Goal lifecycle is:
+
+```text
+Plan → Claim → Evidence → Verify → Complete → Accept
+```
+
+A failed verification returns the active frontier to Evidence while retaining Verify as failed. A passing verification completes Verify and activates Complete; Accept remains pending until the agent requests completion. Only the owner can complete Accept.
+
+## Governed WebMCP surface
 
 The Goal Room exposes exactly five browser-native agent tools:
 
@@ -145,8 +165,11 @@ Coverage includes:
 - PASS-before-completion and owner-only acceptance;
 - serialized dispatch, defensive clones, SHA-linked receipts, and replay;
 - truthful visible accepted/refused invocation labels;
+- authoritative lifecycle projections for proposed, confirmed, claimed, submitted, failed, passed, completion-requested, and accepted states;
+- literal rendering of hostile revision text with no injected DOM nodes or script execution;
+- named lifecycle navigation and native focusable controls in the browser accessibility tree;
 - the complete FAIL → correction → PASS → completion → owner acceptance browser journey;
-- responsive mobile layout with bounded digest presentation.
+- 1440×900 desktop and 390×844 mobile layouts with zero horizontal overflow and bounded digest presentation.
 
 ## What this demonstration does not prove
 
