@@ -2,7 +2,11 @@ import "./style.css";
 import { createGoalRoom, type Receipt } from "./core/goalRoom";
 import { createOwnerDecisionController } from "./ownerController";
 import { createOwnerViewModel, type OwnerViewModel } from "./ownerView";
-import { createReceiptLabels, prepareRevisionNote } from "./ownerUi";
+import {
+  createBoundaryMessage,
+  createReceiptLabels,
+  prepareRevisionNote,
+} from "./ownerUi";
 import { installGoalRoomPing } from "./webmcp";
 
 function requiredElement<T extends HTMLElement>(id: string): T {
@@ -182,12 +186,7 @@ function render(view: OwnerViewModel) {
   elements.nextActor.textContent = view.nextLegalAction.actor.toUpperCase();
   elements.nextActor.dataset.actor = view.nextLegalAction.actor;
   elements.nextAction.textContent = view.nextLegalAction.label;
-  elements.agentBoundary.textContent =
-    view.nextLegalAction.actor === "owner"
-      ? "The agent and verifier are blocked until you decide."
-      : view.nextLegalAction.actor === "system"
-        ? "The agent cannot write or override this verdict."
-        : "No owner action is required right now.";
+  elements.agentBoundary.textContent = createBoundaryMessage(view);
 
   elements.planVersion.textContent = view.plan ? `v${view.plan.version}` : "";
   elements.planStatus.textContent = view.plan?.status.replaceAll("_", " ") ?? "WAITING";

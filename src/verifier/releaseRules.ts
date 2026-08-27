@@ -15,6 +15,16 @@ export type ReleaseVerificationResult = {
   findingCodes: ReleaseFindingCode[];
 };
 
+function isValidHttpsUrl(value: unknown): boolean {
+  if (typeof value !== "string") return false;
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" && url.hostname.length > 0;
+  } catch {
+    return false;
+  }
+}
+
 export function verifyReleaseCandidate(content: string): ReleaseVerificationResult {
   let parsed: unknown;
   try {
@@ -55,10 +65,7 @@ export function verifyReleaseCandidate(content: string): ReleaseVerificationResu
   ) {
     findingCodes.push("DEMO_DURATION_OUT_OF_RANGE");
   }
-  if (
-    typeof artifact.publicUrl !== "string" ||
-    !artifact.publicUrl.startsWith("https://")
-  ) {
+  if (!isValidHttpsUrl(artifact.publicUrl)) {
     findingCodes.push("PUBLIC_URL_MUST_BE_HTTPS");
   }
   if (artifact.verificationCommand !== "npm test") {

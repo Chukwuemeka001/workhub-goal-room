@@ -56,8 +56,8 @@ The synthetic public candidate is exact JSON with only these fields:
 
 Rule set `workhub_goal_room_release/v1` checks:
 
-- the artifact is valid JSON with the exact closed shape;
-- `publicUrl` uses HTTPS;
+- the artifact is valid JSON with the exact closed shape and no more than 4 KiB of UTF-8 candidate content;
+- `publicUrl` is a parseable `https:` URL with a non-empty hostname;
 - `demoDurationSeconds` is an integer from 1 through 180;
 - `verificationCommand` is exactly `npm test`.
 

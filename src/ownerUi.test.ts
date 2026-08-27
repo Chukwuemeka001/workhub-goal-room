@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 import { createGoalRoom } from "./core/goalRoom";
-import { createReceiptLabels, prepareRevisionNote } from "./ownerUi";
+import { createOwnerViewModel } from "./ownerView";
+import {
+  createBoundaryMessage,
+  createReceiptLabels,
+  prepareRevisionNote,
+} from "./ownerUi";
 
 describe("owner UI policies", () => {
   it("labels claim, candidate, and system verification receipts truthfully", async () => {
@@ -70,6 +75,11 @@ describe("owner UI policies", () => {
       `Agent requested owner acceptance · ${sha256.slice(0, 8)}`,
       `Owner accepted Goal · ${sha256.slice(0, 8)}`,
     ]);
+    expect(
+      createBoundaryMessage(
+        createOwnerViewModel(room.getState(), room.getReceipts()),
+      ),
+    ).toBe("Goal accepted. No further action is required.");
   });
 
   it("labels only accepted proposals as immutable Plan versions", async () => {

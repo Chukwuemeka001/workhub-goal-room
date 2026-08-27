@@ -233,6 +233,7 @@ function hasExactKeys(record: Record<string, unknown>, keys: string[]): boolean 
 }
 
 const LOWER_HEX_64 = /^[0-9a-f]{64}$/;
+const MAX_CANDIDATE_CONTENT_BYTES = 4 * 1024;
 
 function validateCommand(value: unknown): asserts value is Command {
   if (!isPlainRecord(value)) throw new Error("INVALID_COMMAND");
@@ -329,6 +330,8 @@ function validateCommand(value: unknown): asserts value is Command {
       value.stepId.trim().length === 0 ||
       typeof value.content !== "string" ||
       value.content.length === 0 ||
+      new TextEncoder().encode(value.content).byteLength >
+        MAX_CANDIDATE_CONTENT_BYTES ||
       typeof value.sha256 !== "string" ||
       !LOWER_HEX_64.test(value.sha256)
     ) {

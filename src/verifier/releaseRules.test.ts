@@ -21,6 +21,21 @@ describe("deterministic release verifier", () => {
     });
   });
 
+  it("fails a URL-shaped HTTPS prefix without a hostname", () => {
+    const content = JSON.stringify({
+      publicUrl: "https://",
+      demoDurationSeconds: 1,
+      verificationCommand: "npm test",
+    });
+
+    expect(verifyReleaseCandidate(content)).toEqual({
+      ruleSetId: RELEASE_RULE_SET_ID,
+      ruleSetVersion: RELEASE_RULE_SET_VERSION,
+      verdict: "FAIL",
+      findingCodes: ["PUBLIC_URL_MUST_BE_HTTPS"],
+    });
+  });
+
   it("fails closed on malformed artifact JSON", () => {
     expect(verifyReleaseCandidate("{not-json")).toEqual({
       ruleSetId: RELEASE_RULE_SET_ID,

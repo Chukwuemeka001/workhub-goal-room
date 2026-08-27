@@ -1,4 +1,16 @@
 import type { Receipt } from "./core/goalRoom";
+import type { OwnerViewModel } from "./ownerView";
+
+export function createBoundaryMessage(view: OwnerViewModel): string {
+  if (view.nextLegalAction.label === "No further governed action") {
+    return "Goal accepted. No further action is required.";
+  }
+  return view.nextLegalAction.actor === "owner"
+    ? "The agent and verifier are blocked until you decide."
+    : view.nextLegalAction.actor === "system"
+      ? "The agent cannot write or override this verdict."
+      : "No owner action is required right now.";
+}
 
 function commandLabel(
   receipt: Receipt,

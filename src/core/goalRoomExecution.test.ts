@@ -36,6 +36,36 @@ async function confirmedRoom() {
 }
 
 describe("Goal Room candidate custody", () => {
+  it("rejects candidate content above the 4 KiB UTF-8 admission bound", async () => {
+    const { room } = await confirmedRoom();
+    await room.dispatch({
+      type: "CLAIM_STEP",
+      actor: "agent",
+      expectedStateVersion: 2,
+      idempotencyKey: "claim-artifact",
+      planVersion: 1,
+      stepId: "artifact",
+    });
+    const content = "🙂".repeat(1025);
+    const before = room.getState();
+    const receiptCount = room.getReceipts().length;
+
+    await expect(
+      room.dispatch({
+        type: "SUBMIT_CANDIDATE",
+        actor: "agent",
+        expectedStateVersion: 3,
+        idempotencyKey: "oversized-candidate",
+        planVersion: 1,
+        stepId: "artifact",
+        content,
+        sha256: await digestText(content),
+      }),
+    ).rejects.toThrow("INVALID_COMMAND");
+    expect(room.getState()).toEqual(before);
+    expect(room.getReceipts()).toHaveLength(receiptCount);
+  });
+
   it("records an exact digest-bound candidate after the admitted claim", async () => {
     const { input, room } = await confirmedRoom();
     await room.dispatch({
