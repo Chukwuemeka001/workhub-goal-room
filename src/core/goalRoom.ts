@@ -75,6 +75,65 @@ function initialState(input: GoalRoomInput): GoalRoomState {
   };
 }
 
+function isPlainRecord(value: unknown): value is Record<string, unknown> {
+  if (value === null || typeof value !== "object") return false;
+  const prototype = Object.getPrototypeOf(value);
+  return prototype === Object.prototype || prototype === null;
+}
+
+function hasExactKeys(record: Record<string, unknown>, keys: string[]): boolean {
+  const actual = Object.keys(record).sort();
+  const expected = [...keys].sort();
+  return actual.length === expected.length && actual.every((key, index) => key === expected[index]);
+}
+
+function validateCommand(value: unknown): asserts value is Command {
+  if (!isPlainRecord(value)) throw new Error("INVALID_COMMAND");
+  const commonValid =
+    Number.isSafeInteger(value.expectedStateVersion) &&
+    (value.expectedStateVersion as number) >= 0 &&
+    typeof value.idempotencyKey === "string" &&
+    value.idempotencyKey.trim().length > 0 &&
+    (value.actor === "agent" || value.actor === "owner" || value.actor === "system");
+  if (!commonValid) throw new Error("INVALID_COMMAND");
+
+  if (value.type === "PROPOSE_PLAN") {
+    if (
+      !hasExactKeys(value, ["type", "actor", "expectedStateVersion", "idempotencyKey", "steps"]) ||
+      value.actor !== "agent" ||
+      !Array.isArray(value.steps) ||
+      value.steps.length === 0
+    ) {
+      throw new Error("INVALID_COMMAND");
+    }
+    const ids = new Set<string>();
+    for (const step of value.steps) {
+      if (
+        !isPlainRecord(step) ||
+        !hasExactKeys(step, ["id", "title"]) ||
+        typeof step.id !== "string" ||
+        step.id.trim().length === 0 ||
+        typeof step.title !== "string" ||
+        step.title.trim().length === 0 ||
+        ids.has(step.id)
+      ) {
+        throw new Error("INVALID_COMMAND");
+      }
+      ids.add(step.id);
+    }
+    return;
+  }
+
+  if (
+    value.type !== "CONFIRM_PLAN" ||
+    !hasExactKeys(value, ["type", "actor", "expectedStateVersion", "idempotencyKey", "planVersion"]) ||
+    !Number.isSafeInteger(value.planVersion) ||
+    (value.planVersion as number) < 1
+  ) {
+    throw new Error("INVALID_COMMAND");
+  }
+}
+
 function canonical(value: unknown): string {
   if (value === null || typeof value !== "object") {
     return JSON.stringify(value);
@@ -210,27 +269,39 @@ export function createGoalRoom(input: GoalRoomInput) {
     { command: string; result: DispatchResult }
   >();
 
-  return {
-    async dispatch(command: Command): Promise<DispatchResult> {
-      const commandValue = canonical(command);
-      const prior = idempotency.get(command.idempotencyKey);
-      if (prior) {
-        if (prior.command !== commandValue) {
-          throw new Error("IDEMPOTENCY_KEY_REUSE");
-        }
-        return structuredClone(prior.result);
-      }
+  let dispatchTail: Promise<void> = Promise.resolve();
 
-      const result = evaluate(state, command);
-      if (result.accepted) {
-        state = applyAcceptedCommand(state, command);
+  async function dispatchOnce(command: Command): Promise<DispatchResult> {
+    validateCommand(command);
+    const commandValue = canonical(command);
+    const prior = idempotency.get(command.idempotencyKey);
+    if (prior) {
+      if (prior.command !== commandValue) {
+        throw new Error("IDEMPOTENCY_KEY_REUSE");
       }
-      receipts.push(await makeReceipt(receipts, command, result));
-      idempotency.set(command.idempotencyKey, {
-        command: commandValue,
-        result: structuredClone(result),
-      });
-      return structuredClone(result);
+      return structuredClone(prior.result);
+    }
+
+    const result = evaluate(state, command);
+    if (result.accepted) {
+      state = applyAcceptedCommand(state, command);
+    }
+    receipts.push(await makeReceipt(receipts, command, result));
+    idempotency.set(command.idempotencyKey, {
+      command: commandValue,
+      result: structuredClone(result),
+    });
+    return structuredClone(result);
+  }
+
+  return {
+    dispatch(command: Command): Promise<DispatchResult> {
+      const operation = dispatchTail.then(() => dispatchOnce(command));
+      dispatchTail = operation.then(
+        () => undefined,
+        () => undefined,
+      );
+      return operation;
     },
     getState(): GoalRoomState {
       return structuredClone(state);
@@ -247,23 +318,46 @@ export async function replayGoalRoom(
 ): Promise<GoalRoomState> {
   let state = initialState(input);
   let previousHash = "GENESIS";
+  const idempotency = new Map<string, string>();
 
-  for (const receipt of receipts) {
+  for (const [index, receipt] of receipts.entries()) {
     const { hash, ...body } = receipt;
+    if (
+      receipt.sequence !== index + 1 ||
+      !Number.isSafeInteger(receipt.sequence)
+    ) {
+      throw new Error("RECEIPT_SEQUENCE_MISMATCH");
+    }
     if (
       receipt.previousHash !== previousHash ||
       (await sha256(body)) !== hash
     ) {
       throw new Error("RECEIPT_HASH_MISMATCH");
     }
-    if (receipt.accepted) {
-      state = applyAcceptedCommand(state, receipt.command);
-      if (state.stateVersion !== receipt.stateVersion) {
-        throw new Error("REPLAY_STATE_VERSION_MISMATCH");
+
+    validateCommand(receipt.command);
+    const commandValue = canonical(receipt.command);
+    const priorCommand = idempotency.get(receipt.command.idempotencyKey);
+    if (priorCommand !== undefined) {
+      if (priorCommand !== commandValue) {
+        throw new Error("IDEMPOTENCY_KEY_REUSE");
       }
-    } else if (state.stateVersion !== receipt.stateVersion) {
-      throw new Error("REPLAY_STATE_VERSION_MISMATCH");
+      throw new Error("REPLAY_DUPLICATE_IDEMPOTENCY");
     }
+
+    const expected = evaluate(state, receipt.command);
+    if (
+      receipt.accepted !== expected.accepted ||
+      receipt.reasonCode !== expected.reasonCode ||
+      receipt.stateVersion !== expected.stateVersion
+    ) {
+      throw new Error("REPLAY_OUTCOME_MISMATCH");
+    }
+
+    if (expected.accepted) {
+      state = applyAcceptedCommand(state, receipt.command);
+    }
+    idempotency.set(receipt.command.idempotencyKey, commandValue);
     previousHash = hash;
   }
 
