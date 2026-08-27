@@ -7,9 +7,13 @@ export type PlanStep = {
 
 export type PlanVersion = {
   version: number;
-  status: "PROPOSED" | "CONFIRMED";
+  status: "PROPOSED" | "REVISION_REQUESTED" | "CONFIRMED";
   proposedBy: Actor;
   steps: PlanStep[];
+  revisionRequest?: {
+    requestedBy: "owner";
+    note: string;
+  };
 };
 
 export type GoalRoomInput = {
@@ -20,9 +24,14 @@ export type GoalRoomInput = {
 export type GoalRoomState = {
   goal: string;
   doneLooksLike: string[];
-  phase: "DRAFT" | "PLAN_PROPOSED" | "PLAN_CONFIRMED";
+  phase:
+    | "DRAFT"
+    | "PLAN_PROPOSED"
+    | "PLAN_REVISION_REQUESTED"
+    | "PLAN_CONFIRMED";
   stateVersion: number;
   activePlan: PlanVersion | null;
+  planHistory: PlanVersion[];
 };
 
 export type ProposePlanCommand = {
@@ -41,10 +50,23 @@ export type ConfirmPlanCommand = {
   planVersion: number;
 };
 
-export type Command = ProposePlanCommand | ConfirmPlanCommand;
+export type RequestPlanRevisionCommand = {
+  type: "REQUEST_PLAN_REVISION";
+  actor: Actor;
+  expectedStateVersion: number;
+  idempotencyKey: string;
+  planVersion: number;
+  note: string;
+};
+
+export type Command =
+  | ProposePlanCommand
+  | ConfirmPlanCommand
+  | RequestPlanRevisionCommand;
 export type ReasonCode =
   | "OWNER_ONLY"
   | "PLAN_VERSION_MISMATCH"
+  | "PLAN_PROPOSAL_NOT_ALLOWED"
   | "STALE_STATE";
 
 export type DispatchResult = {
@@ -72,6 +94,7 @@ function initialState(input: GoalRoomInput): GoalRoomState {
     phase: "DRAFT",
     stateVersion: 0,
     activePlan: null,
+    planHistory: [],
   };
 }
 
@@ -124,6 +147,26 @@ function validateCommand(value: unknown): asserts value is Command {
     return;
   }
 
+  if (value.type === "REQUEST_PLAN_REVISION") {
+    if (
+      !hasExactKeys(value, [
+        "type",
+        "actor",
+        "expectedStateVersion",
+        "idempotencyKey",
+        "planVersion",
+        "note",
+      ]) ||
+      !Number.isSafeInteger(value.planVersion) ||
+      (value.planVersion as number) < 1 ||
+      typeof value.note !== "string" ||
+      value.note.trim().length === 0
+    ) {
+      throw new Error("INVALID_COMMAND");
+    }
+    return;
+  }
+
   if (
     value.type !== "CONFIRM_PLAN" ||
     !hasExactKeys(value, ["type", "actor", "expectedStateVersion", "idempotencyKey", "planVersion"]) ||
@@ -161,16 +204,45 @@ function applyAcceptedCommand(
   command: Command,
 ): GoalRoomState {
   if (command.type === "PROPOSE_PLAN") {
+    const plan: PlanVersion = {
+      version: state.planHistory.length + 1,
+      status: "PROPOSED",
+      proposedBy: command.actor,
+      steps: command.steps.map((step) => ({ ...step })),
+    };
     return {
       ...state,
       phase: "PLAN_PROPOSED",
       stateVersion: state.stateVersion + 1,
-      activePlan: {
-        version: (state.activePlan?.version ?? 0) + 1,
-        status: "PROPOSED",
-        proposedBy: command.actor,
-        steps: command.steps.map((step) => ({ ...step })),
+      activePlan: plan,
+      planHistory: [...state.planHistory, plan],
+    };
+  }
+
+  if (command.type === "REQUEST_PLAN_REVISION") {
+    if (
+      command.actor !== "owner" ||
+      state.activePlan?.status !== "PROPOSED" ||
+      state.activePlan.version !== command.planVersion
+    ) {
+      throw new Error("REPLAY_AUTHORITY_MISMATCH");
+    }
+    const revisedPlan: PlanVersion = {
+      ...state.activePlan,
+      status: "REVISION_REQUESTED",
+      revisionRequest: {
+        requestedBy: "owner",
+        note: command.note.trim(),
       },
+    };
+    return {
+      ...state,
+      phase: "PLAN_REVISION_REQUESTED",
+      stateVersion: state.stateVersion + 1,
+      activePlan: revisedPlan,
+      planHistory: state.planHistory.map((plan) =>
+        plan.version === revisedPlan.version ? revisedPlan : plan,
+      ),
     };
   }
 
@@ -182,17 +254,25 @@ function applyAcceptedCommand(
     throw new Error("REPLAY_AUTHORITY_MISMATCH");
   }
 
+  const confirmedPlan: PlanVersion = {
+    ...state.activePlan,
+    status: "CONFIRMED",
+  };
   return {
     ...state,
     phase: "PLAN_CONFIRMED",
     stateVersion: state.stateVersion + 1,
-    activePlan: { ...state.activePlan, status: "CONFIRMED" },
+    activePlan: confirmedPlan,
+    planHistory: state.planHistory.map((plan) =>
+      plan.version === confirmedPlan.version ? confirmedPlan : plan,
+    ),
   };
 }
 
 function nextLegalAction(state: GoalRoomState): string {
   if (state.phase === "DRAFT") return "AGENT_PROPOSE_PLAN";
   if (state.phase === "PLAN_PROPOSED") return "OWNER_CONFIRM_OR_REVISE_PLAN";
+  if (state.phase === "PLAN_REVISION_REQUESTED") return "AGENT_PROPOSE_REVISED_PLAN";
   return "AGENT_CLAIM_OPEN_STEP";
 }
 
@@ -204,6 +284,36 @@ function evaluate(state: GoalRoomState, command: Command): DispatchResult {
       stateVersion: state.stateVersion,
       nextLegalAction: nextLegalAction(state),
       ownerRequired: state.phase === "PLAN_PROPOSED",
+    };
+  }
+
+  if (command.type === "REQUEST_PLAN_REVISION") {
+    if (command.actor !== "owner") {
+      return {
+        accepted: false,
+        reasonCode: "OWNER_ONLY",
+        stateVersion: state.stateVersion,
+        nextLegalAction: "OWNER_CONFIRM_OR_REVISE_PLAN",
+        ownerRequired: true,
+      };
+    }
+    if (
+      state.activePlan?.status !== "PROPOSED" ||
+      state.activePlan.version !== command.planVersion
+    ) {
+      return {
+        accepted: false,
+        reasonCode: "PLAN_VERSION_MISMATCH",
+        stateVersion: state.stateVersion,
+        nextLegalAction: nextLegalAction(state),
+        ownerRequired: state.phase === "PLAN_PROPOSED",
+      };
+    }
+    return {
+      accepted: true,
+      stateVersion: state.stateVersion + 1,
+      nextLegalAction: "AGENT_PROPOSE_REVISED_PLAN",
+      ownerRequired: false,
     };
   }
 
@@ -237,12 +347,28 @@ function evaluate(state: GoalRoomState, command: Command): DispatchResult {
     };
   }
 
-  return {
-    accepted: true,
-    stateVersion: state.stateVersion + 1,
-    nextLegalAction: "OWNER_CONFIRM_OR_REVISE_PLAN",
-    ownerRequired: true,
-  };
+  if (command.type === "PROPOSE_PLAN") {
+    if (
+      state.phase !== "DRAFT" &&
+      state.phase !== "PLAN_REVISION_REQUESTED"
+    ) {
+      return {
+        accepted: false,
+        reasonCode: "PLAN_PROPOSAL_NOT_ALLOWED",
+        stateVersion: state.stateVersion,
+        nextLegalAction: nextLegalAction(state),
+        ownerRequired: state.phase === "PLAN_PROPOSED",
+      };
+    }
+    return {
+      accepted: true,
+      stateVersion: state.stateVersion + 1,
+      nextLegalAction: "OWNER_CONFIRM_OR_REVISE_PLAN",
+      ownerRequired: true,
+    };
+  }
+
+  throw new Error("INVALID_COMMAND");
 }
 
 async function makeReceipt(

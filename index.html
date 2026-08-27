@@ -5,70 +5,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="WorkHub Goal Room Phase 0 — a public WebMCP invocation proof."
+      content="WorkHub Goal Room — a governed shared workspace for one human and one agent working toward one consequential Goal."
     />
-    <title>WorkHub Goal Room — Phase 0</title>
+    <title>WorkHub Goal Room — Owner Plan Decision</title>
   </head>
   <body>
     <main class="room-shell">
       <header class="room-header">
         <div>
           <p class="eyebrow">WORKHUB GOAL ROOM</p>
-          <h1>Prove the governed agent surface.</h1>
+          <h1>One Goal. One legal next action.</h1>
+          <p class="header-copy">
+            The agent may propose. You decide what becomes authorized work.
+          </p>
         </div>
-        <div class="phase-badge">PHASE 0</div>
+        <div class="header-state">
+          <span class="phase-badge">PHASE 2</span>
+          <span id="room-status" class="status-pill" aria-live="polite"></span>
+        </div>
       </header>
 
-      <section class="goal-card" aria-labelledby="goal-heading">
+      <section class="goal-panel" aria-labelledby="goal-heading">
         <div>
-          <p class="label">THE GOAL</p>
-          <h2 id="goal-heading">Verify one real WebMCP call.</h2>
-          <p>
-            A qualifying agent should discover the page tool, invoke it, and
-            visibly change this shared room.
-          </p>
+          <p class="label">GOAL</p>
+          <h2 id="goal-heading"></h2>
         </div>
-        <div class="status-card">
-          <span class="status-dot" aria-hidden="true"></span>
+        <div>
+          <p class="label">DONE LOOKS LIKE</p>
+          <ul id="done-list" class="done-list"></ul>
+        </div>
+      </section>
+
+      <section class="decision-grid">
+        <article id="owner-attention" class="attention-card" aria-labelledby="attention-title">
           <div>
-            <p class="label">CLIENT STATUS</p>
-            <p id="webmcp-status" data-status="checking" aria-live="polite">
-              Checking WebMCP support…
-            </p>
+            <p class="label">WHAT NEEDS YOU</p>
+            <h2 id="attention-title"></h2>
+            <p id="attention-body" class="attention-copy"></p>
           </div>
-        </div>
+          <div id="decision-actions" class="decision-actions">
+            <button id="confirm-plan" class="button primary" type="button"></button>
+            <button id="revise-plan" class="button secondary" type="button"></button>
+          </div>
+        </article>
+
+        <aside class="next-action-card" aria-labelledby="next-action-heading">
+          <p class="label">NEXT LEGAL ACTION</p>
+          <div id="next-actor" class="actor-badge"></div>
+          <h3 id="next-action-heading"></h3>
+          <p id="agent-boundary" class="boundary-copy"></p>
+        </aside>
       </section>
 
-      <section class="proof-grid" aria-label="Phase 0 proof state">
-        <article class="proof-card highlight">
-          <p class="label">LAST AGENT MESSAGE</p>
-          <p id="last-message" data-state="waiting" aria-live="polite">
-            Waiting for a WebMCP invocation.
-          </p>
-        </article>
-        <article class="proof-card count-card">
-          <p class="label">VISIBLE INVOCATIONS</p>
-          <p id="invocation-count" class="count" aria-live="polite">0</p>
-        </article>
+      <section class="plan-card" aria-labelledby="plan-heading">
+        <div class="section-heading">
+          <div>
+            <p class="label">PROPOSED SCOPE</p>
+            <h2 id="plan-heading">Plan <span id="plan-version"></span></h2>
+          </div>
+          <span id="plan-status" class="plan-status"></span>
+        </div>
+        <ol id="plan-steps" class="plan-steps"></ol>
+        <blockquote id="revision-note" class="revision-note" hidden></blockquote>
       </section>
 
-      <section class="tool-card">
-        <div>
-          <p class="label">DISCOVERABLE TOOL</p>
-          <code>workhub_goal_room_ping</code>
-        </div>
-        <p>
-          This spike proves registration and shared-page state only. Plan
-          authority, verification, receipts, and owner acceptance arrive after
-          this gate is green.
-        </p>
+      <section class="lower-grid">
+        <article class="boundary-card">
+          <p class="label">AGENT CAN</p>
+          <ul>
+            <li>Propose a Plan</li>
+            <li>Explain its proposed steps</li>
+            <li>Continue only after the legal gate opens</li>
+          </ul>
+        </article>
+        <article class="boundary-card cannot">
+          <p class="label">AGENT CANNOT</p>
+          <ul>
+            <li>Confirm its own Plan</li>
+            <li>Replace a pending Plan silently</li>
+            <li>Accept the final Goal</li>
+          </ul>
+        </article>
+        <article class="receipt-card">
+          <div class="receipt-heading">
+            <div>
+              <p class="label">ACTIVITY & RECEIPTS</p>
+              <p><strong id="receipt-count">0</strong> recorded attempts</p>
+            </div>
+            <button id="reset-demo" class="text-button" type="button">Reset demo</button>
+          </div>
+          <ol id="receipt-list" class="receipt-list"></ol>
+        </article>
       </section>
 
       <footer>
-        <span>Standalone competition edition</span>
-        <span>No private WorkHub dependency</span>
+        <span id="webmcp-status" data-status="checking">Checking WebMCP…</span>
+        <span>Standalone public competition edition</span>
       </footer>
     </main>
+
+    <dialog id="revision-dialog" class="revision-dialog">
+      <form id="revision-form" method="dialog">
+        <div>
+          <p class="label">REQUEST REVISION</p>
+          <h2>What should change?</h2>
+          <p>
+            Your note will be attached to this Plan version. The agent must
+            respond with a new immutable proposal.
+          </p>
+        </div>
+        <label for="revision-input">Revision note</label>
+        <textarea
+          id="revision-input"
+          name="revision-note"
+          rows="5"
+          required
+          minlength="3"
+          maxlength="500"
+          placeholder="For example: separate final verification and add the three-minute demo limit."
+        ></textarea>
+        <div class="dialog-actions">
+          <button id="cancel-revision" class="button secondary" type="button">Cancel</button>
+          <button class="button primary" type="submit">Send revision request</button>
+        </div>
+      </form>
+    </dialog>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

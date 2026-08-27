@@ -2,29 +2,68 @@
 
 A clean-room, public competition edition demonstrating one idea:
 
-> WebMCP should make an agent’s next legal action explicit, governed, and visible to the human sharing the page.
+> WebMCP makes a website callable by agents. WorkHub Goal Room makes the next legal action explicit, governed, and visible to the human sharing the page.
 
-## Phase 0 result
+## Current scope: Phase 2 owner Plan decision
+
+The Goal Room now presents one synthetic Goal and a proposed Plan as a governed owner decision.
+
+The visible experience:
+
+1. shows the Goal and exact “Done Looks Like” conditions;
+2. centers the one decision that needs the owner;
+3. lets only the owner confirm the exact active Plan version;
+4. lets the owner request a revision with an immutable note;
+5. preserves prior Plan versions when a revised Plan is proposed;
+6. shows the next legal actor and action;
+7. records accepted and refused attempts as deterministic SHA-256-linked receipts;
+8. distinguishes Plan confirmation from final Goal acceptance.
+
+The Phase 2 state sequence is:
+
+```text
+DRAFT
+  → agent proposes Plan v1
+PLAN_PROPOSED
+  → owner confirms exact Plan
+PLAN_CONFIRMED
+
+or
+
+PLAN_PROPOSED
+  → owner requests revision
+PLAN_REVISION_REQUESTED
+  → agent proposes immutable Plan v2
+PLAN_PROPOSED
+```
+
+Retries are idempotent, stale state versions fail closed, agent self-confirmation is refused, and replay re-evaluates the same transition rules used by live dispatch.
+
+## Phase 0 WebMCP result
 
 **PASS — verified August 27, 2026 in Google Chrome Canary 154 with the browser's WebMCP testing and DevTools experiments enabled.**
 
-The page tool was discovered through `document.modelContext.getTools()`, invoked through `document.modelContext.executeTool()`, returned a structured result, and visibly updated the shared page to show “Phase 0 is alive” with invocation count `1`.
+The page tool was discovered through `document.modelContext.getTools()`, invoked through `document.modelContext.executeTool()`, returned a structured result, and visibly updated the shared page.
 
-This proves WebMCP registration, browser discovery, typed invocation, structured return, and shared-page state change. It does **not** claim autonomous model tool selection or implement the later Goal Room governance phases.
+Phase 2 retains this small registration proof. Expanding the agent-facing WebMCP action surface is intentionally deferred to the governed WebMCP phase; the owner page does not duplicate agent reasoning or expose owner-only actions to the agent.
 
-A qualifying client can:
+## Current claim limits
 
-1. discover `workhub_goal_room_ping`;
-2. invoke it with a short message;
-3. visibly change the same Goal Room page;
-4. receive a structured confirmation.
+This phase does **not** yet implement:
 
-It does **not** yet implement Plan authority, admitted work, candidate custody, independent verification, owner acceptance, production authentication, or real external effects.
+- step claiming or artifact submission;
+- independent deterministic verification;
+- final owner acceptance;
+- production authentication or persistence;
+- real deployment or other external effects;
+- multiple Goals, organizations, or private WorkHub integration.
+
+The repository is a browser-compatible synthetic demonstration, not a production authorization system or hostile-filesystem security boundary.
 
 ## Local development
 
 ```bash
-npm install
+npm ci
 npm test
 npm run dev
 ```
@@ -35,10 +74,6 @@ npm run dev
 npm run build
 npm run preview
 ```
-
-## Phase 0 judge prompt
-
-> Open this page, inspect its available WebMCP tools, and call the WorkHub Goal Room ping tool with the message “Phase 0 is alive”. Then report whether the page visibly changed.
 
 ## Public/private boundary
 
