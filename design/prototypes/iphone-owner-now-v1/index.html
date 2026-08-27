@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>WorkHub Goal Room V2 — iPhone Owner Now Prototype</title>
+  <style>
+    :root {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      color-scheme: dark;
+      --canvas: #08090a;
+      --phone: #0b0c0e;
+      --surface: #111317;
+      --surface-raised: #17191e;
+      --line: rgba(255,255,255,.085);
+      --line-strong: rgba(255,255,255,.15);
+      --text: #f5f5f3;
+      --soft: #c9cbd0;
+      --muted: #8b8e96;
+      --quiet: #5f6269;
+      --owner: #f1b45f;
+      --owner-bg: rgba(241,180,95,.12);
+      --agent: #69c7bd;
+      --agent-bg: rgba(105,199,189,.11);
+      --system: #8e9cff;
+      --system-bg: rgba(142,156,255,.12);
+      --fail: #f1a45f;
+      --pass: #5ed19a;
+      --safe-bottom: max(18px, env(safe-area-inset-bottom));
+    }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      margin: 0;
+      background: #050607;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    button { font: inherit; }
+    button, [role="tab"] { -webkit-tap-highlight-color: transparent; }
+    button:focus-visible { outline: 2px solid #f6c983; outline-offset: 3px; }
+
+    .review-shell {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(230px, 300px) minmax(393px, 430px) minmax(230px, 300px);
+      justify-content: center;
+      align-items: start;
+      gap: 34px;
+      padding: 34px 24px;
+      background:
+        radial-gradient(circle at 50% 15%, rgba(255,255,255,.045), transparent 28rem),
+        #050607;
+    }
+    .review-panel {
+      position: sticky;
+      top: 34px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,.018);
+    }
+    .review-panel h1 { margin: 0; font-size: 16px; font-weight: 620; letter-spacing: -.01em; }
+    .review-panel > p { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .state-picker { display: grid; gap: 7px; margin-top: 18px; }
+    .state-picker button {
+      min-height: 48px;
+      padding: 10px 11px;
+      border: 1px solid transparent;
+      border-radius: 9px;
+      color: var(--muted);
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+    }
+    .state-picker button span { display: block; color: var(--soft); font-size: 12px; font-weight: 570; }
+    .state-picker button small { display: block; margin-top: 3px; font-size: 10px; line-height: 1.3; }
+    .state-picker button[aria-pressed="true"] {
+      border-color: var(--line-strong);
+      color: var(--text);
+      background: rgba(255,255,255,.045);
+    }
+    .principles { margin: 0; padding: 0; list-style: none; }
+    .principles li { padding: 10px 0; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 11px; line-height: 1.45; }
+    .principles li:last-child { border: 0; }
+    .principles strong { display: block; margin-bottom: 2px; color: var(--soft); font-weight: 580; }
+
+    .phone {
+      position: relative;
+      width: 393px;
+      min-height: 852px;
+      overflow: clip;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 45px;
+      background: var(--phone);
+      box-shadow: 0 32px 90px rgba(0,0,0,.58), inset 0 0 0 7px #08090b;
+    }
+    .phone::before {
+      content: "";
+      position: absolute;
+      z-index: 10;
+      top: 10px;
+      left: 50%;
+      width: 106px;
+      height: 28px;
+      transform: translateX(-50%);
+      border-radius: 20px;
+      background: #030405;
+    }
+    .app {
+      min-height: 852px;
+      padding: 48px 17px 154px;
+      background:
+        radial-gradient(circle at 90% 4%, rgba(241,180,95,.06), transparent 14rem),
+        var(--phone);
+    }
+    .app-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .brand { display: flex; align-items: center; gap: 9px; }
+    .brand-mark {
+      display: grid;
+      width: 29px;
+      height: 29px;
+      place-items: center;
+      border-radius: 8px;
+      color: #0c0d0f;
+      background: var(--text);
+      font-size: 12px;
+      font-weight: 740;
+    }
+    .brand-copy strong { display: block; font-size: 12px; font-weight: 620; letter-spacing: -.01em; }
+    .brand-copy span { display: block; margin-top: 1px; color: var(--quiet); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
+    .connection { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 10px; }
+    .connection::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--agent); box-shadow: 0 0 0 3px rgba(105,199,189,.1); }
+
+    .goal-summary { margin-top: 24px; }
+    .kicker { color: var(--quiet); font-size: 9px; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }
+    .goal-title { margin: 7px 0 0; max-width: 340px; font-size: 26px; font-weight: 610; line-height: 1.08; letter-spacing: -.035em; text-wrap: balance; }
+    .goal-meta { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+    .pill { display: inline-flex; min-height: 24px; align-items: center; gap: 5px; padding: 4px 8px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: rgba(255,255,255,.02); font-size: 9px; font-weight: 580; }
+    .pill[data-tone="owner"] { border-color: rgba(241,180,95,.25); color: #f5c986; background: var(--owner-bg); }
+    .pill[data-tone="agent"] { border-color: rgba(105,199,189,.22); color: #91d9d1; background: var(--agent-bg); }
+    .pill[data-tone="system"] { border-color: rgba(142,156,255,.22); color: #b4beff; background: var(--system-bg); }
+    .pill[data-tone="fail"] { border-color: rgba(241,164,95,.25); color: #f4bb84; background: rgba(241,164,95,.1); }
+    .pill[data-tone="pass"] { border-color: rgba(94,209,154,.24); color: #8be0b8; background: rgba(94,209,154,.1); }
+
+    .journey { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin: 25px 0 0; padding: 0; list-style: none; }
+    .journey li { min-width: 0; }
+    .journey-track { height: 3px; border-radius: 4px; background: rgba(255,255,255,.075); }
+    .journey li[data-status="complete"] .journey-track { background: rgba(105,199,189,.62); }
+    .journey li[data-status="active"] .journey-track { background: var(--owner); box-shadow: 0 0 0 2px rgba(241,180,95,.08); }
+    .journey-label { display: block; margin-top: 7px; overflow: hidden; color: var(--quiet); font-size: 8px; font-weight: 590; text-overflow: ellipsis; white-space: nowrap; }
+    .journey li[data-status="active"] .journey-label { color: var(--soft); }
+    .journey li[data-status="complete"] .journey-label { color: #8cbdb6; }
+
+    .now-card {
+      margin-top: 24px;
+      padding: 18px;
+      border: 1px solid rgba(241,180,95,.24);
+      border-radius: 17px;
+      background: linear-gradient(145deg, rgba(241,180,95,.105), rgba(255,255,255,.025) 60%);
+      box-shadow: 0 18px 46px rgba(0,0,0,.24);
+    }
+    .now-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .actor { display: inline-flex; min-height: 25px; align-items: center; gap: 7px; padding: 5px 8px; border-radius: 999px; font-size: 9px; font-weight: 650; letter-spacing: .03em; }
+    .actor::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .actor[data-actor="owner"] { color: #f5c986; background: var(--owner-bg); }
+    .actor[data-actor="agent"] { color: #91d9d1; background: var(--agent-bg); }
+    .actor[data-actor="system"] { color: #b4beff; background: var(--system-bg); }
+    .state-code { color: var(--quiet); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 9px; }
+    .now-title { margin: 15px 0 0; font-size: 22px; font-weight: 600; line-height: 1.12; letter-spacing: -.025em; text-wrap: balance; }
+    .now-body { margin: 9px 0 0; color: var(--soft); font-size: 13px; line-height: 1.5; text-wrap: pretty; }
+    .boundary { display: flex; gap: 9px; margin-top: 15px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.08); color: var(--muted); font-size: 10px; line-height: 1.45; }
+    .boundary svg { flex: 0 0 auto; margin-top: 1px; color: var(--owner); }
+
+    .context-block { margin-top: 17px; }
+    .context-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .context-heading h2 { margin: 0; font-size: 12px; font-weight: 620; }
+    .context-heading button { min-width: 58px; min-height: 44px; border: 0; color: var(--muted); background: transparent; font-size: 10px; cursor: pointer; }
+    .contract {
+      margin-top: 9px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,.018);
+    }
+    .contract-row { padding: 13px 14px; border-bottom: 1px solid var(--line); }
+    .contract-row:last-child { border: 0; }
+    .contract-row dt { color: var(--quiet); font-size: 8px; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
+    .contract-row dd { margin: 5px 0 0; color: var(--soft); font-size: 11px; line-height: 1.45; overflow-wrap: anywhere; }
+    .checks { display: grid; gap: 8px; margin: 10px 0 0; padding: 0; list-style: none; }
+    .checks li { display: grid; grid-template-columns: 17px 1fr; gap: 8px; color: var(--soft); font-size: 11px; line-height: 1.4; }
+    .check-mark { display: grid; width: 17px; height: 17px; place-items: center; border-radius: 50%; color: var(--quiet); background: rgba(255,255,255,.06); font-size: 9px; }
+    .checks li[data-result="fail"] .check-mark { color: #23170b; background: var(--fail); }
+    .checks li[data-result="pass"] .check-mark { color: #071a12; background: var(--pass); }
+    .digest { display: block; margin-top: 7px; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 9px; line-height: 1.45; overflow-wrap: anywhere; }
+
+    .dock {
+      position: absolute;
+      z-index: 6;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: 10px 17px calc(var(--safe-bottom) + 64px);
+      border-top: 1px solid var(--line);
+      background: rgba(11,12,14,.94);
+      backdrop-filter: saturate(145%) blur(18px);
+    }
+    .dock-actions { display: grid; grid-template-columns: minmax(0,.72fr) minmax(0,1.28fr); gap: 8px; }
+    .dock-actions[data-single="true"] { grid-template-columns: 1fr; }
+    .action {
+      min-height: 50px;
+      padding: 11px 13px;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      color: var(--text);
+      background: rgba(255,255,255,.035);
+      font-size: 12px;
+      font-weight: 620;
+      cursor: pointer;
+    }
+    .action.primary { border-color: #d99a49; color: #201407; background: #efb35e; }
+    .action.status { display: grid; place-items: center; border-color: rgba(105,199,189,.2); color: #91d9d1; background: var(--agent-bg); cursor: default; }
+    .action:active { transform: scale(.985); }
+    .tabbar {
+      position: absolute;
+      z-index: 7;
+      right: 12px;
+      bottom: var(--safe-bottom);
+      left: 12px;
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      height: 58px;
+      padding: 5px;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: #111318;
+      box-shadow: 0 12px 32px rgba(0,0,0,.4);
+    }
+    .tabbar button { min-width: 0; border: 0; border-radius: 12px; color: var(--quiet); background: transparent; font-size: 9px; font-weight: 610; cursor: pointer; }
+    .tabbar button[aria-selected="true"] { color: var(--text); background: rgba(255,255,255,.065); }
+
+    .toast {
+      position: absolute;
+      z-index: 20;
+      right: 22px;
+      bottom: 148px;
+      left: 22px;
+      padding: 12px 14px;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      color: var(--soft);
+      background: #1b1d22;
+      box-shadow: 0 18px 45px rgba(0,0,0,.45);
+      font-size: 11px;
+      line-height: 1.4;
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .toast[data-visible="true"] { opacity: 1; transform: none; }
+
+    @media (max-width: 980px) {
+      .review-shell { grid-template-columns: minmax(393px,430px) minmax(220px,280px); }
+      .review-panel:first-child { display: none; }
+    }
+    @media (max-width: 680px) {
+      body { background: var(--phone); }
+      .review-shell { display: block; min-height: 100svh; padding: 0; background: var(--phone); }
+      .review-panel { display: none; }
+      .phone { width: 100%; min-height: 100svh; overflow: visible; border: 0; border-radius: 0; box-shadow: none; }
+      .phone::before { top: max(10px, env(safe-area-inset-top)); }
+      .app { min-height: 100svh; padding-top: max(48px, calc(env(safe-area-inset-top) + 38px)); }
+      .dock { position: fixed; }
+      .tabbar { position: fixed; }
+    }
+    @media (max-width: 375px) {
+      .app { padding-right: 14px; padding-left: 14px; }
+      .goal-title { font-size: 23px; }
+      .now-card { padding: 16px; }
+      .now-title { font-size: 20px; }
+      .dock { padding-right: 14px; padding-left: 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="review-shell">
+    <aside class="review-panel" aria-label="Prototype brief">
+      <h1>Owner Now · iPhone V1</h1>
+      <p>Operate first, inspect second. One Goal, one frontier, one legal action.</p>
+      <div class="state-picker" aria-label="Prototype checkpoint picker"></div>
+    </aside>
+
+    <section class="phone" aria-label="iPhone Goal Room prototype">
+      <div class="app">
+        <header class="app-header">
+          <div class="brand">
+            <span class="brand-mark" aria-hidden="true">W</span>
+            <span class="brand-copy"><strong>Goal Room</strong><span>WorkHub</span></span>
+          </div>
+          <span class="connection">WebMCP connected</span>
+        </header>
+
+        <section class="goal-summary" aria-labelledby="goal-title">
+          <p class="kicker" id="goal-kicker">Goal</p>
+          <h1 class="goal-title" id="goal-title"></h1>
+          <div class="goal-meta" id="goal-meta"></div>
+        </section>
+
+        <ol class="journey" id="journey" aria-label="Goal journey"></ol>
+
+        <article class="now-card" aria-labelledby="now-title">
+          <div class="now-top">
+            <span class="actor" id="actor"></span>
+            <code class="state-code" id="state-code"></code>
+          </div>
+          <h2 class="now-title" id="now-title"></h2>
+          <p class="now-body" id="now-body"></p>
+          <div class="boundary">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1.5 12 3.6v3.1c0 3-2 5-5 5.8-3-.8-5-2.8-5-5.8V3.6L7 1.5Z" stroke="currentColor" stroke-width="1.2"/><path d="m4.8 7 1.4 1.4 3-3" stroke="currentColor" stroke-width="1.2"/></svg>
+            <span id="boundary"></span>
+          </div>
+        </article>
+
+        <section class="context-block" aria-labelledby="context-title">
+          <div class="context-heading">
+            <h2 id="context-title"></h2>
+            <button id="context-toggle" type="button">Collapse</button>
+          </div>
+          <dl class="contract" id="contract"></dl>
+        </section>
+      </div>
+
+      <div class="dock">
+        <div class="dock-actions" id="dock-actions"></div>
+      </div>
+      <nav class="tabbar" aria-label="Goal Room sections" role="tablist">
+        <button role="tab" aria-selected="true" data-tab="Now">Now</button>
+        <button role="tab" aria-selected="false" data-tab="Plan">Plan</button>
+        <button role="tab" aria-selected="false" data-tab="Proof">Proof</button>
+        <button role="tab" aria-selected="false" data-tab="Activity">Activity</button>
+      </nav>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </section>
+
+    <aside class="review-panel" aria-label="Design principles">
+      <h1>Glance test</h1>
+      <ul class="principles">
+        <li><strong>Goal or intent</strong>Visible before any dashboard machinery.</li>
+        <li><strong>Authority now</strong>Owner, agent, or system is named in the dominant card.</li>
+        <li><strong>Legal frontier</strong>One primary action; privileged actions never appear for agents.</li>
+        <li><strong>Truthful completion</strong>FAIL, PASS, and owner acceptance remain separate.</li>
+        <li><strong>One-handed control</strong>Decision dock remains above the home indicator.</li>
+      </ul>
+    </aside>
+  </main>
+
+  <script>
+    const stages = ["Define", "Plan", "Work", "Verify", "Accept"];
+    const states = {
+      intent: {
+        picker: "Intent → agent proposal",
+        pickerNote: "Goal is not admitted",
+        goalKicker: "Owner intent · draft",
+        goal: "Ship a WebMCP entry that proves governed human–agent work",
+        meta: [["Not yet a Goal", "owner"], ["Intent r1", "neutral"]],
+        stage: 0,
+        actor: "agent",
+        stateCode: "S1 · INTENT_DRAFT",
+        title: "Propose the Goal Contract",
+        body: "Turn the owner’s intent into one falsifiable outcome with explicit proof, constraints, and non-goals.",
+        boundary: "Planning and work remain blocked until the owner confirms the proposed Goal Contract.",
+        contextTitle: "Owner intent",
+        rows: [
+          ["Intent", "Build the clearest possible challenge entry without weakening owner authority."],
+          ["Still unresolved", "What exact evidence should count as done? What must remain outside agent authority?"],
+          ["Origin", "Owner authored · 2 minutes ago"]
+        ],
+        actions: [["Edit intent", "secondary"], ["Agent preparing", "status"]]
+      },
+      goal: {
+        picker: "Goal Contract → owner gate",
+        pickerNote: "Plan is still blocked",
+        goalKicker: "Goal Contract v1 · proposed",
+        goal: "Publish a verified WebMCP Challenge entry",
+        meta: [["Owner decision", "owner"], ["Goal v1", "neutral"], ["Agent proposed", "agent"]],
+        stage: 0,
+        actor: "owner",
+        stateCode: "S2 · GOAL_PROPOSED",
+        title: "Does this describe the right destination?",
+        body: "The agent has converted your intent into a versioned Goal Contract. Confirm it or request an exact revision.",
+        boundary: "Confirming the Goal admits planning—not execution and not final acceptance.",
+        contextTitle: "Goal Contract v1",
+        rows: [
+          ["Why", "Prove that WebMCP actions can remain state-aware, evidence-bound, and owner-controlled."],
+          ["Done looks like", "Public app works · governed refusal is visible · exact evidence passes · owner accepts"],
+          ["Constraints", "Under-three-minute demo · no external effects · public clean-room source"],
+          ["Non-goals", "Accounts, organizations, production deployment, broad autonomy"]
+        ],
+        actions: [["Request changes", "secondary"], ["Confirm Goal", "primary"]]
+      },
+      fail: {
+        picker: "Verification FAIL → correction",
+        pickerNote: "Owner is not asked to approve",
+        goalKicker: "Confirmed Goal · v2",
+        goal: "Publish a verified WebMCP Challenge entry",
+        meta: [["Verification failed", "fail"], ["Candidate v1", "neutral"], ["Goal v2", "neutral"]],
+        stage: 3,
+        actor: "agent",
+        stateCode: "S8 · VERIFY_FAILED",
+        title: "Correct Candidate v1",
+        body: "The evidence is preserved, but two release checks failed. The agent must submit a new immutable candidate.",
+        boundary: "FAIL reopens evidence. It does not change the confirmed Goal or ask the owner to accept incomplete work.",
+        contextTitle: "Proof · Candidate v1",
+        rows: [
+          ["Digest", "4f7c6e21…9a03"],
+          ["Checks", "__CHECKS_FAIL__"],
+          ["Next legal action", "Agent submits corrected Candidate v2 bound to Plan v2"]
+        ],
+        actions: [["View evidence", "secondary"], ["Agent correcting", "status"]]
+      },
+      pass: {
+        picker: "PASS → owner acceptance",
+        pickerNote: "PASS is not completion",
+        goalKicker: "Confirmed Goal · v2",
+        goal: "Publish a verified WebMCP Challenge entry",
+        meta: [["Your approval", "owner"], ["PASS", "pass"], ["Candidate v2", "neutral"]],
+        stage: 4,
+        actor: "owner",
+        stateCode: "S12 · COMPLETION_REQUESTED",
+        title: "Accept the verified result?",
+        body: "Candidate v2 passed the exact release checks. The agent requested completion, but only you can accept the Goal.",
+        boundary: "Acceptance binds to this exact digest. Changed bytes require new evidence and verification.",
+        contextTitle: "Verified result · Candidate v2",
+        rows: [
+          ["Digest", "d803c87f…6b2a"],
+          ["Checks", "__CHECKS_PASS__"],
+          ["Agent request", "Completion requested for this exact verified candidate"]
+        ],
+        actions: [["Request correction", "secondary"], ["Accept result", "primary"]]
+      }
+    };
+
+    const $ = (id) => document.getElementById(id);
+    let active = "intent";
+    let contextOpen = true;
+
+    function renderJourney(activeIndex) {
+      $("journey").replaceChildren(...stages.map((label, index) => {
+        const li = document.createElement("li");
+        li.dataset.status = index < activeIndex ? "complete" : index === activeIndex ? "active" : "pending";
+        li.setAttribute("aria-label", `${label} — ${li.dataset.status}`);
+        if (index === activeIndex) li.setAttribute("aria-current", "step");
+        const track = document.createElement("span"); track.className = "journey-track"; track.setAttribute("aria-hidden", "true");
+        const text = document.createElement("span"); text.className = "journey-label"; text.textContent = label;
+        li.append(track, text); return li;
+      }));
+    }
+
+    function renderRows(rows) {
+      const frag = [];
+      for (const [label, value] of rows) {
+        const wrap = document.createElement("div"); wrap.className = "contract-row";
+        const dt = document.createElement("dt"); dt.textContent = label;
+        const dd = document.createElement("dd");
+        if (value === "__CHECKS_FAIL__" || value === "__CHECKS_PASS__") {
+          const pass = value.endsWith("PASS__");
+          const checks = pass
+            ? ["HTTPS public URL", "Demo under 180 seconds", "Verification command is npm test"]
+            : ["Public URL must use HTTPS", "Demo exceeds the 180-second limit"];
+          const ul = document.createElement("ul"); ul.className = "checks";
+          for (const check of checks) {
+            const li = document.createElement("li"); li.dataset.result = pass ? "pass" : "fail";
+            const mark = document.createElement("span"); mark.className = "check-mark"; mark.textContent = pass ? "✓" : "!";
+            const copy = document.createElement("span"); copy.textContent = check;
+            li.append(mark, copy); ul.append(li);
+          }
+          dd.append(ul);
+        } else {
+          dd.textContent = value;
+          if (label === "Digest") dd.className = "digest";
+        }
+        wrap.append(dt, dd); frag.push(wrap);
+      }
+      $("contract").replaceChildren(...frag);
+    }
+
+    function showToast(message) {
+      $("toast").textContent = message;
+      $("toast").dataset.visible = "true";
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => $("toast").dataset.visible = "false", 1800);
+    }
+
+    function render() {
+      const s = states[active];
+      $("goal-kicker").textContent = s.goalKicker;
+      $("goal-title").textContent = s.goal;
+      $("goal-meta").replaceChildren(...s.meta.map(([label,tone]) => {
+        const span = document.createElement("span"); span.className = "pill"; span.textContent = label;
+        if (tone !== "neutral") span.dataset.tone = tone;
+        return span;
+      }));
+      renderJourney(s.stage);
+      $("actor").textContent = `${s.actor.toUpperCase()} acts now`;
+      $("actor").dataset.actor = s.actor;
+      $("state-code").textContent = s.stateCode;
+      $("now-title").textContent = s.title;
+      $("now-body").textContent = s.body;
+      $("boundary").textContent = s.boundary;
+      $("context-title").textContent = s.contextTitle;
+      $("contract").hidden = !contextOpen;
+      $("context-toggle").textContent = contextOpen ? "Collapse" : "Expand";
+      renderRows(s.rows);
+      $("dock-actions").dataset.single = String(s.actions.length === 1);
+      $("dock-actions").replaceChildren(...s.actions.map(([label,type]) => {
+        if (type === "status") {
+          const status = document.createElement("div"); status.className = "action status"; status.setAttribute("role", "status"); status.textContent = label; return status;
+        }
+        const button = document.createElement("button"); button.type = "button"; button.className = `action ${type}`; button.textContent = label;
+        button.addEventListener("click", () => showToast(type === "primary" ? `${label} is the legal frontier in this prototype state.` : `${label} opened as contextual owner input.`));
+        return button;
+      }));
+      document.querySelectorAll(".state-picker button").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.state === active)));
+    }
+
+    const picker = document.querySelector(".state-picker");
+    for (const [key,s] of Object.entries(states)) {
+      const button = document.createElement("button"); button.type = "button"; button.dataset.state = key;
+      const title = document.createElement("span"); title.textContent = s.picker;
+      const note = document.createElement("small"); note.textContent = s.pickerNote;
+      button.append(title,note);
+      button.addEventListener("click", () => { active = key; render(); });
+      picker.append(button);
+    }
+
+    $("context-toggle").addEventListener("click", () => { contextOpen = !contextOpen; render(); });
+    document.querySelectorAll('[role="tab"]').forEach(tab => tab.addEventListener("click", () => {
+      document.querySelectorAll('[role="tab"]').forEach(item => item.setAttribute("aria-selected", String(item === tab)));
+      showToast(`${tab.dataset.tab} selected. This first prototype keeps the authoritative checkpoint visible while testing navigation.`);
+    }));
+
+    render();
+  </script>
+</body>
+</html>
