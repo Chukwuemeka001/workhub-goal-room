@@ -19,6 +19,8 @@
     "qa:desktop": "node scripts/desktop-qa.mjs",
     "qa:phase8-visual": "node scripts/phase8-visual-qa.mjs",
     "test:v3": "vitest run qualification/v3Contract.test.ts qualification/v3Replay.test.ts qualification/v3Infrastructure.test.ts",
+    "test:production-journey": "vitest run src/phase8Journey.test.ts",
+    "qa:production-journey": "node scripts/production-journey-qa.mjs && node scripts/production-journey-receipt.mjs",
     "qa:v3:visual": "node scripts/v3-browser-qa.mjs visual",
     "qa:v3:responsive": "node scripts/v3-browser-qa.mjs responsive",
     "qa:v3:a11y": "node scripts/v3-browser-qa.mjs a11y",

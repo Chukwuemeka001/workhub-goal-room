@@ -1,0 +1,1304 @@
+{
+  "schemaVersion": 1,
+  "kind": "goal-room-real-production-journey",
+  "testedSource": {
+    "commit": "e3e13db45ac8c54959cad3ec702298ffb6a2883b",
+    "tree": "e578012de3dd82f7f08c037aaf902dfaec947952",
+    "note": "Reviewed production parent; Phase 3 harness/evidence is externally bound after commit."
+  },
+  "route": {
+    "url": "http://127.0.0.1:4177/index.html",
+    "entry": "/index.html",
+    "sourceEntry": "src/main.ts",
+    "localHttp": true,
+    "fixtureImports": [],
+    "bundleLeaks": []
+  },
+  "browser": {
+    "executable": "/Users/emeka/Applications/BrowserOS.app/Contents/MacOS/BrowserOS",
+    "version": "BrowserOS 148.0.7948.97",
+    "isolatedDisposableProfile": true,
+    "headless": true
+  },
+  "invocation": {
+    "class": "captured-registered-webmcp-descriptor-callbacks",
+    "browserNativeTestingApi": false,
+    "autonomousModelSelection": false,
+    "claim": "Production callback integration proof only; Phase 4 alone proves native browser getTools/executeTool."
+  },
+  "tools": [
+    {
+      "name": "get_goal_room_state",
+      "title": "Get governed Goal Room state",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {},
+        "required": []
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "untrustedContentHint": true
+      }
+    },
+    {
+      "name": "propose_goal_contract",
+      "title": "Propose an immutable Goal Contract",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "expectedStateVersion": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "idempotencyKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "goal": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "why": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "doneLooksLike": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 16,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          },
+          "constraints": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 16,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          },
+          "nonGoals": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 16,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          },
+          "evidenceRequired": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 16,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          },
+          "openQuestions": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 16,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          }
+        },
+        "required": [
+          "expectedStateVersion",
+          "idempotencyKey",
+          "goal",
+          "why",
+          "doneLooksLike",
+          "constraints",
+          "nonGoals",
+          "evidenceRequired",
+          "openQuestions"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "consequentialHint": false,
+        "untrustedContentHint": true
+      }
+    },
+    {
+      "name": "propose_plan",
+      "title": "Propose an immutable Goal Plan",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "expectedStateVersion": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "idempotencyKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "goalContractVersion": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "steps": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 8,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                },
+                "title": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 160
+                }
+              },
+              "required": [
+                "id",
+                "title"
+              ]
+            }
+          }
+        },
+        "required": [
+          "expectedStateVersion",
+          "idempotencyKey",
+          "steps"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": false
+      }
+    },
+    {
+      "name": "claim_step",
+      "title": "Claim an admitted Plan step",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "expectedStateVersion": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "idempotencyKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "planVersion": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "stepId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          }
+        },
+        "required": [
+          "expectedStateVersion",
+          "idempotencyKey",
+          "planVersion",
+          "stepId"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": false
+      }
+    },
+    {
+      "name": "submit_artifact",
+      "title": "Submit exact candidate evidence",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "expectedStateVersion": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "idempotencyKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "planVersion": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "stepId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "content": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "required": [
+          "expectedStateVersion",
+          "idempotencyKey",
+          "planVersion",
+          "stepId",
+          "content",
+          "sha256"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": false
+      }
+    },
+    {
+      "name": "request_completion",
+      "title": "Request final owner acceptance",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "expectedStateVersion": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "idempotencyKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "candidateSha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "required": [
+          "expectedStateVersion",
+          "idempotencyKey",
+          "candidateSha256"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": false
+      }
+    }
+  ],
+  "checkpoints": [
+    {
+      "label": "fresh",
+      "actor": "owner",
+      "trigger": "production load",
+      "stateVersion": 0,
+      "phase": "INTENT_DRAFT",
+      "currentActor": "owner",
+      "nextLegalAction": "OWNER_SET_INTENT",
+      "candidate": null,
+      "verification": null
+    },
+    {
+      "label": "owner-intent",
+      "actor": "owner",
+      "trigger": "visible desktop intent form",
+      "stateVersion": 1,
+      "phase": "INTENT_DRAFT",
+      "currentActor": "agent",
+      "nextLegalAction": "AGENT_PROPOSE_GOAL_CONTRACT",
+      "candidate": null,
+      "verification": null
+    },
+    {
+      "label": "goal-v1",
+      "actor": "agent",
+      "trigger": "captured propose_goal_contract callback",
+      "stateVersion": 2,
+      "phase": "GOAL_CONTRACT_PROPOSED",
+      "currentActor": "owner",
+      "nextLegalAction": "OWNER_CONFIRM_OR_REVISE_GOAL",
+      "candidate": null,
+      "verification": null
+    },
+    {
+      "label": "goal-revision",
+      "actor": "owner",
+      "trigger": "visible revision dialog",
+      "stateVersion": 3,
+      "phase": "GOAL_CONTRACT_REVISION_REQUESTED",
+      "currentActor": "agent",
+      "nextLegalAction": "AGENT_PROPOSE_REVISED_GOAL_CONTRACT",
+      "candidate": null,
+      "verification": null
+    },
+    {
+      "label": "goal-v2-confirmed",
+      "actor": "owner",
+      "trigger": "visible confirm control after callback proposal",
+      "stateVersion": 5,
+      "phase": "GOAL_CONTRACT_CONFIRMED",
+      "currentActor": "agent",
+      "nextLegalAction": "AGENT_PROPOSE_PLAN",
+      "candidate": null,
+      "verification": null
+    },
+    {
+      "label": "plan-revision",
+      "actor": "owner",
+      "trigger": "visible revision dialog",
+      "stateVersion": 7,
+      "phase": "PLAN_REVISION_REQUESTED",
+      "currentActor": "agent",
+      "nextLegalAction": "AGENT_PROPOSE_REVISED_PLAN",
+      "candidate": null,
+      "verification": null
+    },
+    {
+      "label": "plan-v2-confirmed",
+      "actor": "owner",
+      "trigger": "visible confirm control after callback proposal",
+      "stateVersion": 9,
+      "phase": "PLAN_CONFIRMED",
+      "currentActor": "agent",
+      "nextLegalAction": "AGENT_CLAIM_OPEN_STEP",
+      "candidate": null,
+      "verification": null
+    },
+    {
+      "label": "claim",
+      "actor": "agent",
+      "trigger": "captured claim_step callback",
+      "stateVersion": 10,
+      "phase": "STEP_CLAIMED",
+      "currentActor": "agent",
+      "nextLegalAction": "AGENT_SUBMIT_CANDIDATE",
+      "candidate": null,
+      "verification": null
+    },
+    {
+      "label": "candidate-v1-fail",
+      "actor": "system",
+      "trigger": "production systemVerifierAdapter automatic observation",
+      "stateVersion": 12,
+      "phase": "VERIFICATION_FAILED",
+      "currentActor": "agent",
+      "nextLegalAction": "AGENT_SUBMIT_CORRECTED_CANDIDATE",
+      "candidate": {
+        "version": 1,
+        "digest": "366409db392f0cf346ce06bcebff7211c3247be602266082c7d7918fce714ccd"
+      },
+      "verification": {
+        "verdict": "FAIL",
+        "ruleSet": {
+          "id": "workhub_goal_room_release",
+          "version": 1
+        },
+        "findingCodes": [
+          "DEMO_DURATION_OUT_OF_RANGE",
+          "PUBLIC_URL_MUST_BE_HTTPS",
+          "VERIFICATION_COMMAND_MISMATCH"
+        ]
+      }
+    },
+    {
+      "label": "candidate-v2-pass-s12",
+      "actor": "system",
+      "trigger": "production systemVerifierAdapter automatic observation",
+      "stateVersion": 14,
+      "phase": "VERIFICATION_PASSED",
+      "currentActor": "agent",
+      "nextLegalAction": "AGENT_REQUEST_COMPLETION",
+      "candidate": {
+        "version": 2,
+        "digest": "e1e20662b54e45a838bf8fd094e51997013a82c17411089ab676dc391ce33f1d"
+      },
+      "verification": {
+        "verdict": "PASS",
+        "ruleSet": {
+          "id": "workhub_goal_room_release",
+          "version": 1
+        },
+        "findingCodes": []
+      }
+    },
+    {
+      "label": "completion-s13",
+      "actor": "agent",
+      "trigger": "captured request_completion callback",
+      "stateVersion": 15,
+      "phase": "COMPLETION_REQUESTED",
+      "currentActor": "owner",
+      "nextLegalAction": "OWNER_ACCEPT_OR_REQUEST_WORK",
+      "candidate": {
+        "version": 2,
+        "digest": "e1e20662b54e45a838bf8fd094e51997013a82c17411089ab676dc391ce33f1d"
+      },
+      "verification": {
+        "verdict": "PASS",
+        "ruleSet": {
+          "id": "workhub_goal_room_release",
+          "version": 1
+        },
+        "findingCodes": []
+      }
+    },
+    {
+      "label": "sealed-s14",
+      "actor": "owner",
+      "trigger": "visible exact-candidate confirmation dialog",
+      "stateVersion": 16,
+      "phase": "GOAL_ACCEPTED",
+      "currentActor": "none",
+      "nextLegalAction": "GOAL_ACCEPTED_NO_FURTHER_ACTION",
+      "candidate": {
+        "version": 2,
+        "digest": "e1e20662b54e45a838bf8fd094e51997013a82c17411089ab676dc391ce33f1d"
+      },
+      "verification": {
+        "verdict": "PASS",
+        "ruleSet": {
+          "id": "workhub_goal_room_release",
+          "version": 1
+        },
+        "findingCodes": []
+      }
+    }
+  ],
+  "negatives": {
+    "unknownKeyActorInjection": "INVALID_TOOL_INPUT/zero mutation",
+    "staleVersion": "STALE_STATE",
+    "prematureClaim": "STEP_NOT_ADMITTED",
+    "wrongPlan": "STEP_NOT_ADMITTED",
+    "wrongStep": "STEP_NOT_ADMITTED",
+    "digestMismatch": "CANDIDATE_DIGEST_MISMATCH",
+    "prematureCompletion": "VERIFICATION_REQUIRED",
+    "privilegedToolDescriptorsAbsent": true,
+    "changedIdempotencyReuse": "IDEMPOTENCY_KEY_REUSE",
+    "duplicateCandidateCallback": "prior result/no new receipt/no duplicate verifier",
+    "reporterFailure": {
+      "productionBrowserInjected": false,
+      "proofClass": "focused unit/source check; production composition has no safe reporter injection seam"
+    },
+    "hostileMaximum": {
+      "injectionCalls": 0,
+      "injectedNodes": 0,
+      "literal": true
+    }
+  },
+  "modal": {
+    "binding": {
+      "open": true,
+      "version": "Candidate v2 (e1e20662b5…1ce33f1d)",
+      "digest": "e1e20662b54e45a838bf8fd094e51997013a82c17411089ab676dc391ce33f1d",
+      "ruleSet": "workhub_goal_room_release/v1",
+      "consequence": "This acceptance is irreversible. It seals the Goal Room for this exact PASS-bound candidate.",
+      "focusInside": true
+    },
+    "escape": {
+      "open": false,
+      "focusReturned": true
+    },
+    "cancel": {
+      "open": false,
+      "focusReturned": true
+    },
+    "mutationCount": 1
+  },
+  "terminal": {
+    "buttons": 0,
+    "actor": "owner",
+    "copy": "Goal accepted. No further governed action.",
+    "currentActor": "none",
+    "nextLegalAction": "GOAL_ACCEPTED_NO_FURTHER_ACTION"
+  },
+  "compositions": [
+    {
+      "width": 320,
+      "height": 568,
+      "expected": "mobile-room",
+      "innerWidth": 320,
+      "active": [
+        "mobile-room"
+      ],
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "minControlHeight": 56,
+      "axMainNames": [
+        "WorkHub Goal Room mobile"
+      ]
+    },
+    {
+      "width": 393,
+      "height": 852,
+      "expected": "mobile-room",
+      "innerWidth": 393,
+      "active": [
+        "mobile-room"
+      ],
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "minControlHeight": 56,
+      "axMainNames": [
+        "WorkHub Goal Room mobile"
+      ]
+    },
+    {
+      "width": 1199,
+      "height": 900,
+      "expected": "mobile-room",
+      "innerWidth": 1199,
+      "active": [
+        "mobile-room"
+      ],
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "minControlHeight": 56,
+      "axMainNames": [
+        "WorkHub Goal Room mobile"
+      ]
+    },
+    {
+      "width": 1200,
+      "height": 900,
+      "expected": "desktop-surface",
+      "innerWidth": 1200,
+      "active": [
+        "desktop-surface"
+      ],
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "minControlHeight": 44,
+      "axMainNames": [
+        "WorkHub Goal Room desktop Mission Room"
+      ]
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "expected": "desktop-surface",
+      "innerWidth": 1440,
+      "active": [
+        "desktop-surface"
+      ],
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "minControlHeight": 44,
+      "axMainNames": [
+        "WorkHub Goal Room desktop Mission Room"
+      ]
+    }
+  ],
+  "receipts": [
+    {
+      "accepted": false,
+      "command": {
+        "actor": "agent",
+        "expectedStateVersion": 0,
+        "idempotencyKey": "pj-premature-claim",
+        "planVersion": 1,
+        "stepId": "release",
+        "type": "CLAIM_STEP"
+      },
+      "previousHash": "GENESIS",
+      "reasonCode": "STEP_NOT_ADMITTED",
+      "sequence": 1,
+      "stateVersion": 0,
+      "hash": "63e0df2ef43ee41438c3d913b3fc6a9aeab43cc17596f5059da363e83b441c57"
+    },
+    {
+      "accepted": true,
+      "command": {
+        "actor": "owner",
+        "expectedStateVersion": 0,
+        "idempotencyKey": "owner-intent-s0",
+        "intent": "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "type": "SET_OWNER_INTENT"
+      },
+      "previousHash": "63e0df2ef43ee41438c3d913b3fc6a9aeab43cc17596f5059da363e83b441c57",
+      "sequence": 2,
+      "stateVersion": 1,
+      "hash": "ba4d0579f488730f18eb9fc9980fde62ea1f0ba2299802aedbc966f249a17855"
+    },
+    {
+      "accepted": true,
+      "command": {
+        "actor": "agent",
+        "constraints": [
+          "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        ],
+        "doneLooksLike": [
+          "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        ],
+        "evidenceRequired": [
+          "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        ],
+        "expectedStateVersion": 1,
+        "goal": "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "idempotencyKey": "pj-goal-v1",
+        "nonGoals": [
+          "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        ],
+        "openQuestions": [
+          "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        ],
+        "type": "PROPOSE_GOAL_CONTRACT",
+        "why": "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+      },
+      "previousHash": "ba4d0579f488730f18eb9fc9980fde62ea1f0ba2299802aedbc966f249a17855",
+      "sequence": 3,
+      "stateVersion": 2,
+      "hash": "d05830d24e647755b3c7f76d8672dcbc7c2afe44a930ebb5b0d9c9f3a08d660d"
+    },
+    {
+      "accepted": true,
+      "command": {
+        "actor": "owner",
+        "expectedStateVersion": 2,
+        "goalContractVersion": 1,
+        "idempotencyKey": "owner-revise-goal-v1-s2",
+        "note": "Replace hostile stress copy with the exact public-safe Goal and close the question.",
+        "type": "REQUEST_GOAL_REVISION"
+      },
+      "previousHash": "d05830d24e647755b3c7f76d8672dcbc7c2afe44a930ebb5b0d9c9f3a08d660d",
+      "sequence": 4,
+      "stateVersion": 3,
+      "hash": "0b8f75d7281faab60f1da43027130cdd594051d785a57fc4bb68b53495b79d2e"
+    },
+    {
+      "accepted": false,
+      "command": {
+        "actor": "agent",
+        "constraints": [
+          "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        ],
+        "doneLooksLike": [
+          "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        ],
+        "evidenceRequired": [
+          "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        ],
+        "expectedStateVersion": 2,
+        "goal": "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "idempotencyKey": "pj-stale-goal",
+        "nonGoals": [
+          "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        ],
+        "openQuestions": [
+          "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        ],
+        "type": "PROPOSE_GOAL_CONTRACT",
+        "why": "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+      },
+      "previousHash": "0b8f75d7281faab60f1da43027130cdd594051d785a57fc4bb68b53495b79d2e",
+      "reasonCode": "STALE_STATE",
+      "sequence": 5,
+      "stateVersion": 3,
+      "hash": "36236bf6ad83521c5a01cbe3d60c437e0cd4da9de938688a9ec6bed2fce00f78"
+    },
+    {
+      "accepted": true,
+      "command": {
+        "actor": "agent",
+        "constraints": [
+          "No external effects"
+        ],
+        "doneLooksLike": [
+          "Owner accepts corrected Candidate v2 only after deterministic PASS"
+        ],
+        "evidenceRequired": [
+          "Hash-linked replay-clean receipt ledger"
+        ],
+        "expectedStateVersion": 3,
+        "goal": "Qualify the complete governed production journey",
+        "idempotencyKey": "pj-goal-v2",
+        "nonGoals": [
+          "Autonomous model selection"
+        ],
+        "openQuestions": [],
+        "type": "PROPOSE_GOAL_CONTRACT",
+        "why": "Keep Agent, Owner, and System authority observable."
+      },
+      "previousHash": "36236bf6ad83521c5a01cbe3d60c437e0cd4da9de938688a9ec6bed2fce00f78",
+      "sequence": 6,
+      "stateVersion": 4,
+      "hash": "12d9113fcf3c2404a73c5e28bc79eff532a251ce4f2d793e20baf672f69437fa"
+    },
+    {
+      "accepted": true,
+      "command": {
+        "actor": "owner",
+        "expectedStateVersion": 4,
+        "goalContractVersion": 2,
+        "idempotencyKey": "owner-confirm-goal-v2-s4",
+        "type": "CONFIRM_GOAL_CONTRACT"
+      },
+      "previousHash": "12d9113fcf3c2404a73c5e28bc79eff532a251ce4f2d793e20baf672f69437fa",
+      "sequence": 7,
+      "stateVersion": 5,
+      "hash": "e4f3ffae3f1aad8ecc7049309318073f7390b03f3fd7cec616fdae94f70ef24d"
+    },
+    {
+      "accepted": true,
+      "command": {
+        "actor": "agent",
+        "expectedStateVersion": 5,
+        "goalContractVersion": 2,
+        "idempotencyKey": "pj-plan-v1",
+        "steps": [
+          {
+            "id": "release",
+            "title": "Produce governed release evidence"
+          }
+        ],
+        "type": "PROPOSE_PLAN"
+      },
+      "previousHash": "e4f3ffae3f1aad8ecc7049309318073f7390b03f3fd7cec616fdae94f70ef24d",
+      "sequence": 8,
+      "stateVersion": 6,
+      "hash": "0900b853356c591d0edc1c29bb355cbbac624b78d41bea5cbb55a4dd3bd49a5d"
+    },
+    {
+      "accepted": true,
+      "command": {
+        "actor": "owner",
+        "expectedStateVersion": 6,
+        "idempotencyKey": "owner-revise-v1-s6",
+        "note": "Bind the step explicitly to corrected Candidate v2 and deterministic evidence.",
+        "planVersion": 1,
+        "type": "REQUEST_PLAN_REVISION"
+      },
+      "previousHash": "0900b853356c591d0edc1c29bb355cbbac624b78d41bea5cbb55a4dd3bd49a5d",
+      "sequence": 9,
+      "stateVersion": 7,
+      "hash": "c41ea81206d2cddb90cecd941155b680348cd1b5e0fe377ef4a3b897c37b7d1c"
+    },
+    {
+      "accepted": true,
+      "command": {
+        "actor": "agent",
+        "expectedStateVersion": 7,
+        "goalContractVersion": 2,
+        "idempotencyKey": "pj-plan-v2",
+        "steps": [
+          {
+            "id": "release",
+            "title": "Produce corrected Candidate v2 and deterministic evidence"
+          }
+        ],
+        "type": "PROPOSE_PLAN"
+      },
+      "previousHash": "c41ea81206d2cddb90cecd941155b680348cd1b5e0fe377ef4a3b897c37b7d1c",
+      "sequence": 10,
+      "stateVersion": 8,
+      "hash": "07d23251d8fa77539a91a56c7d53a6d467986d3aedb8747fd5f306580f2ab88c"
+    },
+    {
+      "accepted": true,
+      "command": {
+        "actor": "owner",
+        "expectedStateVersion": 8,
+        "idempotencyKey": "owner-confirm-v2-s8",
+        "planVersion": 2,
+        "type": "CONFIRM_PLAN"
+      },
+      "previousHash": "07d23251d8fa77539a91a56c7d53a6d467986d3aedb8747fd5f306580f2ab88c",
+      "sequence": 11,
+      "stateVersion": 9,
+      "hash": "a4f6e5d1a26fd4363ee663e9c43c2aaf9a7d8faaf8ca7f71282d5135bb46eb45"
+    },
+    {
+      "accepted": false,
+      "command": {
+        "actor": "agent",
+        "expectedStateVersion": 9,
+        "idempotencyKey": "pj-wrong-plan",
+        "planVersion": 1,
+        "stepId": "release",
+        "type": "CLAIM_STEP"
+      },
+      "previousHash": "a4f6e5d1a26fd4363ee663e9c43c2aaf9a7d8faaf8ca7f71282d5135bb46eb45",
+      "reasonCode": "STEP_NOT_ADMITTED",
+      "sequence": 12,
+      "stateVersion": 9,
+      "hash": "6021c411a41dc731423af5a58ba6a9d6e45b077c503a6cffc4f6bb2bef8a523f"
+    },
+    {
+      "accepted": false,
+      "command": {
+        "actor": "agent",
+        "expectedStateVersion": 9,
+        "idempotencyKey": "pj-wrong-step",
+        "planVersion": 2,
+        "stepId": "other",
+        "type": "CLAIM_STEP"
+      },
+      "previousHash": "6021c411a41dc731423af5a58ba6a9d6e45b077c503a6cffc4f6bb2bef8a523f",
+      "reasonCode": "STEP_NOT_ADMITTED",
+      "sequence": 13,
+      "stateVersion": 9,
+      "hash": "298bb0d2cbb4655950fc23e8096be2bf00f7c354dbe287cf685fee6b48defa25"
+    },
+    {
+      "accepted": true,
+      "command": {
+        "actor": "agent",
+        "expectedStateVersion": 9,
+        "idempotencyKey": "pj-claim",
+        "planVersion": 2,
+        "stepId": "release",
+        "type": "CLAIM_STEP"
+      },
+      "previousHash": "298bb0d2cbb4655950fc23e8096be2bf00f7c354dbe287cf685fee6b48defa25",
+      "sequence": 14,
+      "stateVersion": 10,
+      "hash": "656e81936f248d8d046de2ce7231bad28cba2a30ebde83599471134a5a176571"
+    },
+    {
+      "accepted": false,
+      "command": {
+        "actor": "agent",
+        "content": "{}",
+        "expectedStateVersion": 10,
+        "idempotencyKey": "pj-bad-digest",
+        "planVersion": 2,
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "stepId": "release",
+        "type": "SUBMIT_CANDIDATE"
+      },
+      "previousHash": "656e81936f248d8d046de2ce7231bad28cba2a30ebde83599471134a5a176571",
+      "reasonCode": "CANDIDATE_DIGEST_MISMATCH",
+      "sequence": 15,
+      "stateVersion": 10,
+      "hash": "543582c53f050f18c1f21786bcf830029335bf3acc00577a898906fb95abe053"
+    },
+    {
+      "accepted": true,
+      "command": {
+        "actor": "agent",
+        "content": "{\"publicUrl\":\"http://example.test/production\",\"demoDurationSeconds\":181,\"verificationCommand\":\"npm run build\"}",
+        "expectedStateVersion": 10,
+        "idempotencyKey": "pj-candidate-v1",
+        "planVersion": 2,
+        "sha256": "366409db392f0cf346ce06bcebff7211c3247be602266082c7d7918fce714ccd",
+        "stepId": "release",
+        "type": "SUBMIT_CANDIDATE"
+      },
+      "previousHash": "543582c53f050f18c1f21786bcf830029335bf3acc00577a898906fb95abe053",
+      "sequence": 16,
+      "stateVersion": 11,
+      "hash": "c935762196047e927f2bb2ed092116380d232d234df16691d73d30f3a315a3e1"
+    },
+    {
+      "accepted": true,
+      "command": {
+        "actor": "system",
+        "candidateSha256": "366409db392f0cf346ce06bcebff7211c3247be602266082c7d7918fce714ccd",
+        "expectedStateVersion": 11,
+        "findingCodes": [
+          "DEMO_DURATION_OUT_OF_RANGE",
+          "PUBLIC_URL_MUST_BE_HTTPS",
+          "VERIFICATION_COMMAND_MISMATCH"
+        ],
+        "idempotencyKey": "system-verify:v1:366409db392f0cf346ce06bcebff7211c3247be602266082c7d7918fce714ccd",
+        "ruleSetId": "workhub_goal_room_release",
+        "ruleSetVersion": 1,
+        "type": "RECORD_VERIFICATION",
+        "verdict": "FAIL"
+      },
+      "previousHash": "c935762196047e927f2bb2ed092116380d232d234df16691d73d30f3a315a3e1",
+      "sequence": 17,
+      "stateVersion": 12,
+      "hash": "ed78a79e2324afc8baa4af3c632f12b6445557140bcfd730fb07b3f781d4e782"
+    },
+    {
+      "accepted": false,
+      "command": {
+        "actor": "agent",
+        "candidateSha256": "366409db392f0cf346ce06bcebff7211c3247be602266082c7d7918fce714ccd",
+        "expectedStateVersion": 12,
+        "idempotencyKey": "pj-premature-completion",
+        "type": "REQUEST_COMPLETION"
+      },
+      "missingConditions": [
+        "ACTIVE_CANDIDATE_MUST_PASS_RELEASE_RULES"
+      ],
+      "previousHash": "ed78a79e2324afc8baa4af3c632f12b6445557140bcfd730fb07b3f781d4e782",
+      "reasonCode": "VERIFICATION_REQUIRED",
+      "sequence": 18,
+      "stateVersion": 12,
+      "hash": "4a54332b81d9903b1b1571ff33ae25d23cb6cd515f288e4e275bed1d9b4d055d"
+    },
+    {
+      "accepted": true,
+      "command": {
+        "actor": "agent",
+        "content": "{\"publicUrl\":\"https://example.test/production\",\"demoDurationSeconds\":180,\"verificationCommand\":\"npm test\"}",
+        "expectedStateVersion": 12,
+        "idempotencyKey": "pj-candidate-v2",
+        "planVersion": 2,
+        "sha256": "e1e20662b54e45a838bf8fd094e51997013a82c17411089ab676dc391ce33f1d",
+        "stepId": "release",
+        "type": "SUBMIT_CANDIDATE"
+      },
+      "previousHash": "4a54332b81d9903b1b1571ff33ae25d23cb6cd515f288e4e275bed1d9b4d055d",
+      "sequence": 19,
+      "stateVersion": 13,
+      "hash": "9003bf70c408154bbed7954340e7fbe1f12d0e115f1e13e8ba508fdeefff19d6"
+    },
+    {
+      "accepted": true,
+      "command": {
+        "actor": "system",
+        "candidateSha256": "e1e20662b54e45a838bf8fd094e51997013a82c17411089ab676dc391ce33f1d",
+        "expectedStateVersion": 13,
+        "findingCodes": [],
+        "idempotencyKey": "system-verify:v2:e1e20662b54e45a838bf8fd094e51997013a82c17411089ab676dc391ce33f1d",
+        "ruleSetId": "workhub_goal_room_release",
+        "ruleSetVersion": 1,
+        "type": "RECORD_VERIFICATION",
+        "verdict": "PASS"
+      },
+      "previousHash": "9003bf70c408154bbed7954340e7fbe1f12d0e115f1e13e8ba508fdeefff19d6",
+      "sequence": 20,
+      "stateVersion": 14,
+      "hash": "30d3bffedfc4a3ad7a41ecdc6f26564bd6444d93dd58f3af2df42638c1d04176"
+    },
+    {
+      "accepted": true,
+      "command": {
+        "actor": "agent",
+        "candidateSha256": "e1e20662b54e45a838bf8fd094e51997013a82c17411089ab676dc391ce33f1d",
+        "expectedStateVersion": 14,
+        "idempotencyKey": "pj-completion",
+        "type": "REQUEST_COMPLETION"
+      },
+      "previousHash": "30d3bffedfc4a3ad7a41ecdc6f26564bd6444d93dd58f3af2df42638c1d04176",
+      "sequence": 21,
+      "stateVersion": 15,
+      "hash": "daf3ce8f5be497c7b8a21ef2833a8369cee04a5460e3519c34da21160d076c35"
+    },
+    {
+      "accepted": true,
+      "command": {
+        "actor": "owner",
+        "candidateSha256": "e1e20662b54e45a838bf8fd094e51997013a82c17411089ab676dc391ce33f1d",
+        "expectedStateVersion": 15,
+        "idempotencyKey": "owner-accept-e1e20662b54e45a838bf8fd094e51997013a82c17411089ab676dc391ce33f1d-s15",
+        "type": "ACCEPT_GOAL"
+      },
+      "previousHash": "daf3ce8f5be497c7b8a21ef2833a8369cee04a5460e3519c34da21160d076c35",
+      "sequence": 22,
+      "stateVersion": 16,
+      "hash": "27dd043bfbefc422de2d76214f3170f6717cb3f44618bf350dcc492849803c5f"
+    }
+  ],
+  "receiptSummary": {
+    "count": 22,
+    "finalHash": "27dd043bfbefc422de2d76214f3170f6717cb3f44618bf350dcc492849803c5f",
+    "actorCounts": {
+      "owner": 6,
+      "agent": 14,
+      "system": 2
+    },
+    "ordered": true,
+    "hashLinked": true,
+    "appendOnly": true,
+    "replay": "validated by test:production-journey against replayGoalRoom"
+  },
+  "finalState": {
+    "goal": "Qualify the complete governed production journey",
+    "doneLooksLike": [
+      "Owner accepts corrected Candidate v2 only after deterministic PASS"
+    ],
+    "ownerIntent": "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "seededOwnerIntent": null,
+    "activeGoalContract": {
+      "version": 2,
+      "status": "CONFIRMED",
+      "proposedBy": "agent",
+      "goal": "Qualify the complete governed production journey",
+      "why": "Keep Agent, Owner, and System authority observable.",
+      "doneLooksLike": [
+        "Owner accepts corrected Candidate v2 only after deterministic PASS"
+      ],
+      "constraints": [
+        "No external effects"
+      ],
+      "nonGoals": [
+        "Autonomous model selection"
+      ],
+      "evidenceRequired": [
+        "Hash-linked replay-clean receipt ledger"
+      ],
+      "openQuestions": []
+    },
+    "goalContractHistory": [
+      {
+        "version": 1,
+        "status": "REVISION_REQUESTED",
+        "proposedBy": "agent",
+        "goal": "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "why": "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "doneLooksLike": [
+          "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        ],
+        "constraints": [
+          "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        ],
+        "nonGoals": [
+          "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        ],
+        "evidenceRequired": [
+          "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        ],
+        "openQuestions": [
+          "<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&\"'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        ],
+        "revisionRequest": {
+          "requestedBy": "owner",
+          "note": "Replace hostile stress copy with the exact public-safe Goal and close the question."
+        }
+      },
+      {
+        "version": 2,
+        "status": "CONFIRMED",
+        "proposedBy": "agent",
+        "goal": "Qualify the complete governed production journey",
+        "why": "Keep Agent, Owner, and System authority observable.",
+        "doneLooksLike": [
+          "Owner accepts corrected Candidate v2 only after deterministic PASS"
+        ],
+        "constraints": [
+          "No external effects"
+        ],
+        "nonGoals": [
+          "Autonomous model selection"
+        ],
+        "evidenceRequired": [
+          "Hash-linked replay-clean receipt ledger"
+        ],
+        "openQuestions": []
+      }
+    ],
+    "phase": "GOAL_ACCEPTED",
+    "stateVersion": 16,
+    "activePlan": {
+      "version": 2,
+      "goalContractVersion": 2,
+      "status": "CONFIRMED",
+      "proposedBy": "agent",
+      "steps": [
+        {
+          "id": "release",
+          "title": "Produce corrected Candidate v2 and deterministic evidence"
+        }
+      ]
+    },
+    "planHistory": [
+      {
+        "version": 1,
+        "goalContractVersion": 2,
+        "status": "REVISION_REQUESTED",
+        "proposedBy": "agent",
+        "steps": [
+          {
+            "id": "release",
+            "title": "Produce governed release evidence"
+          }
+        ],
+        "revisionRequest": {
+          "requestedBy": "owner",
+          "note": "Bind the step explicitly to corrected Candidate v2 and deterministic evidence."
+        }
+      },
+      {
+        "version": 2,
+        "goalContractVersion": 2,
+        "status": "CONFIRMED",
+        "proposedBy": "agent",
+        "steps": [
+          {
+            "id": "release",
+            "title": "Produce corrected Candidate v2 and deterministic evidence"
+          }
+        ]
+      }
+    ],
+    "activeClaim": {
+      "planVersion": 2,
+      "stepId": "release",
+      "claimedBy": "agent"
+    },
+    "activeCandidate": {
+      "version": 2,
+      "planVersion": 2,
+      "stepId": "release",
+      "content": "{\"publicUrl\":\"https://example.test/production\",\"demoDurationSeconds\":180,\"verificationCommand\":\"npm test\"}",
+      "sha256": "e1e20662b54e45a838bf8fd094e51997013a82c17411089ab676dc391ce33f1d",
+      "submittedBy": "agent"
+    },
+    "candidateHistory": [
+      {
+        "version": 1,
+        "planVersion": 2,
+        "stepId": "release",
+        "content": "{\"publicUrl\":\"http://example.test/production\",\"demoDurationSeconds\":181,\"verificationCommand\":\"npm run build\"}",
+        "sha256": "366409db392f0cf346ce06bcebff7211c3247be602266082c7d7918fce714ccd",
+        "submittedBy": "agent"
+      },
+      {
+        "version": 2,
+        "planVersion": 2,
+        "stepId": "release",
+        "content": "{\"publicUrl\":\"https://example.test/production\",\"demoDurationSeconds\":180,\"verificationCommand\":\"npm test\"}",
+        "sha256": "e1e20662b54e45a838bf8fd094e51997013a82c17411089ab676dc391ce33f1d",
+        "submittedBy": "agent"
+      }
+    ],
+    "activeVerification": {
+      "candidateSha256": "e1e20662b54e45a838bf8fd094e51997013a82c17411089ab676dc391ce33f1d",
+      "ruleSetId": "workhub_goal_room_release",
+      "ruleSetVersion": 1,
+      "verdict": "PASS",
+      "findingCodes": [],
+      "actor": "system"
+    },
+    "verificationHistory": [
+      {
+        "candidateSha256": "366409db392f0cf346ce06bcebff7211c3247be602266082c7d7918fce714ccd",
+        "ruleSetId": "workhub_goal_room_release",
+        "ruleSetVersion": 1,
+        "verdict": "FAIL",
+        "findingCodes": [
+          "DEMO_DURATION_OUT_OF_RANGE",
+          "PUBLIC_URL_MUST_BE_HTTPS",
+          "VERIFICATION_COMMAND_MISMATCH"
+        ],
+        "actor": "system"
+      },
+      {
+        "candidateSha256": "e1e20662b54e45a838bf8fd094e51997013a82c17411089ab676dc391ce33f1d",
+        "ruleSetId": "workhub_goal_room_release",
+        "ruleSetVersion": 1,
+        "verdict": "PASS",
+        "findingCodes": [],
+        "actor": "system"
+      }
+    ],
+    "activeCompletionRequest": {
+      "candidateSha256": "e1e20662b54e45a838bf8fd094e51997013a82c17411089ab676dc391ce33f1d",
+      "requestedBy": "agent"
+    },
+    "goalAcceptance": {
+      "candidateSha256": "e1e20662b54e45a838bf8fd094e51997013a82c17411089ab676dc391ce33f1d",
+      "acceptedBy": "owner"
+    }
+  },
+  "reloadReset": {
+    "phase": "INTENT_DRAFT",
+    "stateVersion": 0,
+    "ownerIntent": null,
+    "disclosedAsBrowserLocalReset": true
+  },
+  "screenshots": [
+    {
+      "path": "evaluation/production-journey/goal-revision-1440x900.png",
+      "sha256": "2f072bbbbf18bd3f143f7a78d4cd1ec9b9755e39b73a3d3e154fa98f843106e9",
+      "bytes": 173881,
+      "width": 1440,
+      "height": 900,
+      "mode": "headless-cdp-production-entry"
+    },
+    {
+      "path": "evaluation/production-journey/plan-revision-1440x900.png",
+      "sha256": "deccd54c143e5cd46bc191537e6b2ba28e60cfca27d6bb15fa50a556a299b0dd",
+      "bytes": 180398,
+      "width": 1440,
+      "height": 900,
+      "mode": "headless-cdp-production-entry"
+    },
+    {
+      "path": "evaluation/production-journey/candidate-v1-fail-1440x900.png",
+      "sha256": "655f0a295186699909510c6f3434fc3d5c7fb08e802e091dca009bac70ac2da8",
+      "bytes": 191801,
+      "width": 1440,
+      "height": 900,
+      "mode": "headless-cdp-production-entry"
+    },
+    {
+      "path": "evaluation/production-journey/candidate-v2-pass-s12-1440x900.png",
+      "sha256": "2ab2de064921e9e20fc8f38fbf213685d55c2f31055c4f634b4d09a68b045b91",
+      "bytes": 224979,
+      "width": 1440,
+      "height": 900,
+      "mode": "headless-cdp-production-entry"
+    },
+    {
+      "path": "evaluation/production-journey/s13-exact-candidate-modal-1440x900.png",
+      "sha256": "68198de29887ad52616a33d8db8b12d5a0adb9a7bc99872400c327860246f695",
+      "bytes": 146983,
+      "width": 1440,
+      "height": 900,
+      "mode": "headless-cdp-production-entry"
+    },
+    {
+      "path": "evaluation/production-journey/s14-sealed-1440x900.png",
+      "sha256": "8001d8a431fa3dda9d1f8449888fe872b2f13474565898bf8ade35deeec43deb",
+      "bytes": 198485,
+      "width": 1440,
+      "height": 900,
+      "mode": "headless-cdp-production-entry"
+    },
+    {
+      "path": "evaluation/production-journey/s14-mobile-393x852.png",
+      "sha256": "de7f2929a71d43324f2f02dc3190115309c6a9721d5baad65a52bcb8d434cc54",
+      "bytes": 58997,
+      "width": 393,
+      "height": 852,
+      "mode": "headless-cdp-production-entry"
+    },
+    {
+      "path": "evaluation/production-journey/breakpoint-xor-1199x900.png",
+      "sha256": "5e1980a51accfb488d28fe2cfbf5dbf7fba44faea120e48313375d479703b785",
+      "bytes": 78275,
+      "width": 1199,
+      "height": 900,
+      "mode": "headless-cdp-production-entry"
+    },
+    {
+      "path": "evaluation/production-journey/breakpoint-xor-1200x900.png",
+      "sha256": "c6c9f4679d934af7f11e6b47223691c077c5c1c8b0d9b55e0c2871614fb89b4e",
+      "bytes": 188588,
+      "width": 1200,
+      "height": 900,
+      "mode": "headless-cdp-production-entry"
+    }
+  ],
+  "cleanup": {
+    "profilePath": "redacted disposable task profile; removed in finally",
+    "localPort": 4177
+  }
+}

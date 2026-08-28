@@ -1,4 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
+import { readFile } from "node:fs/promises";
+import { resolve } from "node:path";
 import { createGoalRoom, replayGoalRoom, type GoalRoomState } from "./core/goalRoom";
 import { createOwnerDecisionController } from "./ownerController";
 import { installGoalRoomTools } from "./webmcp";
@@ -225,5 +227,16 @@ describe("Phase 8 installed-surface full journey qualification", () => {
     const result = await runFullJourney();
     expect(result.finalState).toMatchObject({ phase: "GOAL_ACCEPTED", stateVersion: 16 });
     expect(result.checkpoints).toMatchSnapshot();
+  });
+
+  it("replays the captured real-production browser receipt ledger", async () => {
+    const evidencePath = resolve("evaluation/production-journey/journey.json");
+    const evidence = JSON.parse(await readFile(evidencePath, "utf8"));
+    expect(evidence.kind).toBe("goal-room-real-production-journey");
+    expect(evidence.route).toMatchObject({ entry: "/index.html", fixtureImports: [] });
+    expect(evidence.invocation.class).toBe("captured-registered-webmcp-descriptor-callbacks");
+    expect(evidence.receipts).toHaveLength(22);
+    expect(await replayGoalRoom({ ownerIntent: null }, evidence.receipts)).toEqual(evidence.finalState);
+    expect(evidence.finalState).toMatchObject({ phase: "GOAL_ACCEPTED", stateVersion: 16 });
   });
 });

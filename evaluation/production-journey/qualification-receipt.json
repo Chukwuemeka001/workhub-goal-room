@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "kind": "goal-room-production-journey-qualification-receipt",
+  "testedProductionIdentity": {
+    "commit": "e3e13db45ac8c54959cad3ec702298ffb6a2883b",
+    "tree": "e578012de3dd82f7f08c037aaf902dfaec947952",
+    "note": "Reviewed production parent; Phase 3 harness/evidence is externally bound after commit."
+  },
+  "evidenceCommit": "recorded_after_commit_in_git",
+  "evidenceTree": "recorded_after_commit_in_git",
+  "journeySha256": "30240a871cab9e86c2c89bfcfffd72d8f452da09f5442b9a399d5aecd6d882b1",
+  "route": {
+    "url": "http://127.0.0.1:4177/index.html",
+    "entry": "/index.html",
+    "sourceEntry": "src/main.ts",
+    "localHttp": true,
+    "fixtureImports": [],
+    "bundleLeaks": []
+  },
+  "browser": {
+    "executable": "/Users/emeka/Applications/BrowserOS.app/Contents/MacOS/BrowserOS",
+    "version": "BrowserOS 148.0.7948.97",
+    "isolatedDisposableProfile": true,
+    "headless": true
+  },
+  "invocation": {
+    "class": "captured-registered-webmcp-descriptor-callbacks",
+    "browserNativeTestingApi": false,
+    "autonomousModelSelection": false,
+    "claim": "Production callback integration proof only; Phase 4 alone proves native browser getTools/executeTool."
+  },
+  "results": {
+    "checkpoints": 12,
+    "receipts": 22,
+    "finalReceiptHash": "27dd043bfbefc422de2d76214f3170f6717cb3f44618bf350dcc492849803c5f",
+    "screenshotCount": 9,
+    "compositionCount": 5,
+    "finalPhase": "GOAL_ACCEPTED",
+    "replay": "validated by test:production-journey against replayGoalRoom",
+    "reloadReset": {
+      "phase": "INTENT_DRAFT",
+      "stateVersion": 0,
+      "ownerIntent": null,
+      "disclosedAsBrowserLocalReset": true
+    }
+  },
+  "negativeControls": {
+    "unknownKeyActorInjection": "INVALID_TOOL_INPUT/zero mutation",
+    "staleVersion": "STALE_STATE",
+    "prematureClaim": "STEP_NOT_ADMITTED",
+    "wrongPlan": "STEP_NOT_ADMITTED",
+    "wrongStep": "STEP_NOT_ADMITTED",
+    "digestMismatch": "CANDIDATE_DIGEST_MISMATCH",
+    "prematureCompletion": "VERIFICATION_REQUIRED",
+    "privilegedToolDescriptorsAbsent": true,
+    "changedIdempotencyReuse": "IDEMPOTENCY_KEY_REUSE",
+    "duplicateCandidateCallback": "prior result/no new receipt/no duplicate verifier",
+    "reporterFailure": {
+      "productionBrowserInjected": false,
+      "proofClass": "focused unit/source check; production composition has no safe reporter injection seam"
+    },
+    "hostileMaximum": {
+      "injectionCalls": 0,
+      "injectedNodes": 0,
+      "literal": true
+    }
+  },
+  "protectedParity": [
+    {
+      "path": "src/core/goalRoom.ts",
+      "expectedSha256": "04d8e89e49ea2b14e8d22ddb404c54e923b01743390a61745bc6d2f21556ff29",
+      "actualSha256": "04d8e89e49ea2b14e8d22ddb404c54e923b01743390a61745bc6d2f21556ff29",
+      "unchanged": true
+    },
+    {
+      "path": "src/ownerController.ts",
+      "expectedSha256": "c20507f4dfa034c5398bd6c77e4fc85b23c32587b7088b383cfdd59bf9f93adb",
+      "actualSha256": "c20507f4dfa034c5398bd6c77e4fc85b23c32587b7088b383cfdd59bf9f93adb",
+      "unchanged": true
+    },
+    {
+      "path": "src/verifier/releaseRules.ts",
+      "expectedSha256": "ed94538ab54029f9b1159ad597629336fcea771ff77f1f709dc4085bac5512aa",
+      "actualSha256": "ed94538ab54029f9b1159ad597629336fcea771ff77f1f709dc4085bac5512aa",
+      "unchanged": true
+    },
+    {
+      "path": "src/webmcp.ts",
+      "expectedSha256": "021cf979a63bfe39706e9a8247fcac7f75afbc65b59aa9f0d936334bb29574e2",
+      "actualSha256": "021cf979a63bfe39706e9a8247fcac7f75afbc65b59aa9f0d936334bb29574e2",
+      "unchanged": true
+    }
+  ],
+  "sourceHashes": [
+    {
+      "path": "index.html",
+      "sha256": "af61f3cb96672a9cad8413609d995d1caac147d1312afb773ff354b4a855c067",
+      "bytes": 2519
+    },
+    {
+      "path": "src/main.ts",
+      "sha256": "980de99ebdcbdc3851be2e709bfc4b65687390821f92a4bad2cc7cf37e7e9e30",
+      "bytes": 6155
+    },
+    {
+      "path": "src/systemVerifierAdapter.ts",
+      "sha256": "27b47944affa5b917da2d5f081bdf6c2107d5f8983c954cf523e44d4b7ed3d09",
+      "bytes": 2581
+    },
+    {
+      "path": "scripts/production-journey-qa.mjs",
+      "sha256": "9dc31dd8cf45740376fac35ca0a7182dc6b4da691a132d933dc583e64b2e2968",
+      "bytes": 28945
+    },
+    {
+      "path": "scripts/production-journey-receipt.mjs",
+      "sha256": "c97525c4d513a0ae9165d606b9ac9242add365914915bd198e50aefe0b5c1d0a",
+      "bytes": 5153
+    },
+    {
+      "path": "src/phase8Journey.test.ts",
+      "sha256": "4b21c55f721e3dd4221043b942c9575a3282f4507367d7257d788c82cd590319",
+      "bytes": 12035
+    },
+    {
+      "path": "package.json",
+      "sha256": "5a0e2b9abece1a6a6dc656ad7552023e78f1554d65c3d702db89f28729746ec6",
+      "bytes": 2126
+    },
+    {
+      "path": "evaluation/production-journey/README.md",
+      "sha256": "d479c67457138184a9e45539abc07a5230989cc270bfe76c3943d84ba89c0c5f",
+      "bytes": 1866
+    }
+  ],
+  "screenshotHashes": [
+    {
+      "path": "evaluation/production-journey/goal-revision-1440x900.png",
+      "sha256": "2f072bbbbf18bd3f143f7a78d4cd1ec9b9755e39b73a3d3e154fa98f843106e9",
+      "bytes": 173881,
+      "width": 1440,
+      "height": 900,
+      "mode": "headless-cdp-production-entry"
+    },
+    {
+      "path": "evaluation/production-journey/plan-revision-1440x900.png",
+      "sha256": "deccd54c143e5cd46bc191537e6b2ba28e60cfca27d6bb15fa50a556a299b0dd",
+      "bytes": 180398,
+      "width": 1440,
+      "height": 900,
+      "mode": "headless-cdp-production-entry"
+    },
+    {
+      "path": "evaluation/production-journey/candidate-v1-fail-1440x900.png",
+      "sha256": "655f0a295186699909510c6f3434fc3d5c7fb08e802e091dca009bac70ac2da8",
+      "bytes": 191801,
+      "width": 1440,
+      "height": 900,
+      "mode": "headless-cdp-production-entry"
+    },
+    {
+      "path": "evaluation/production-journey/candidate-v2-pass-s12-1440x900.png",
+      "sha256": "2ab2de064921e9e20fc8f38fbf213685d55c2f31055c4f634b4d09a68b045b91",
+      "bytes": 224979,
+      "width": 1440,
+      "height": 900,
+      "mode": "headless-cdp-production-entry"
+    },
+    {
+      "path": "evaluation/production-journey/s13-exact-candidate-modal-1440x900.png",
+      "sha256": "68198de29887ad52616a33d8db8b12d5a0adb9a7bc99872400c327860246f695",
+      "bytes": 146983,
+      "width": 1440,
+      "height": 900,
+      "mode": "headless-cdp-production-entry"
+    },
+    {
+      "path": "evaluation/production-journey/s14-sealed-1440x900.png",
+      "sha256": "8001d8a431fa3dda9d1f8449888fe872b2f13474565898bf8ade35deeec43deb",
+      "bytes": 198485,
+      "width": 1440,
+      "height": 900,
+      "mode": "headless-cdp-production-entry"
+    },
+    {
+      "path": "evaluation/production-journey/s14-mobile-393x852.png",
+      "sha256": "de7f2929a71d43324f2f02dc3190115309c6a9721d5baad65a52bcb8d434cc54",
+      "bytes": 58997,
+      "width": 393,
+      "height": 852,
+      "mode": "headless-cdp-production-entry"
+    },
+    {
+      "path": "evaluation/production-journey/breakpoint-xor-1199x900.png",
+      "sha256": "5e1980a51accfb488d28fe2cfbf5dbf7fba44faea120e48313375d479703b785",
+      "bytes": 78275,
+      "width": 1199,
+      "height": 900,
+      "mode": "headless-cdp-production-entry"
+    },
+    {
+      "path": "evaluation/production-journey/breakpoint-xor-1200x900.png",
+      "sha256": "c6c9f4679d934af7f11e6b47223691c077c5c1c8b0d9b55e0c2871614fb89b4e",
+      "bytes": 188588,
+      "width": 1200,
+      "height": 900,
+      "mode": "headless-cdp-production-entry"
+    }
+  ]
+}
