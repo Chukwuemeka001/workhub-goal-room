@@ -27,6 +27,12 @@ Define -> Plan -> Work -> Verify -> Accept
 
 A failed verification returns the active frontier to Evidence while retaining Verify as failed. A passing verification completes Verify and activates Complete; Accept remains pending until the agent requests completion. Only the owner can complete Accept.
 
+## Judge quick start and recovery
+
+Use a qualifying ChatGPT in-app browser or Chrome/Canary build with WebMCP support. The page requires no login or credentials, keeps one synthetic Goal in the current browser lifecycle, and performs no external effects. Reload starts a fresh room; there is intentionally no reset mutation control. `PASS` means the deterministic checks succeeded, not that the Owner accepted the Goal.
+
+The production page includes a keyboard-focusable **Judge help and room limits** disclosure. See [`SECURITY.md`](SECURITY.md), [`PRIVACY.md`](PRIVACY.md), and the evidence-limited [`evaluation/manual-accessibility-v3.md`](evaluation/manual-accessibility-v3.md).
+
 ## Governed WebMCP surface
 
 The Goal Room exposes exactly six browser-native agent tools:

@@ -13,7 +13,7 @@ describe("dedicated production iPhone composition", () => {
   it("has a separate mobile root while retaining the Phase 4 desktop surface", () => {
     expect(html).toContain('id="mobile-room"');
     expect(html).toContain('class="desktop-surface"');
-    expect(html).toContain('</main>\n    </div>\n\n    <dialog id="revision-dialog"');
+    expect(html.indexOf('</main>\n    </div>')).toBeLessThan(html.indexOf('<dialog id="revision-dialog"'));
     expect(main).toContain("createMobileSurface");
     expect(css).toContain("@media (max-width: 1199px)");
     expect(css).toContain(".desktop-surface { display: none;")

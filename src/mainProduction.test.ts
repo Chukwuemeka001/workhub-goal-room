@@ -83,4 +83,17 @@ describe("production Goal inception UI", () => {
     expect(desktopUi).toContain("node.textContent = value");
     expect(desktopUi).toContain("event.text");
   });
+
+  it("publishes a keyboard-discoverable judge help boundary without a reset mutation", () => {
+    expect(html).toContain('<aside class="judge-help" aria-labelledby="judge-help-title">');
+    expect(html).toContain('<summary id="judge-help-title">Judge help and room limits</summary>');
+    expect(html).toContain("Reload starts a fresh room");
+    expect(html).toContain("PASS is not owner acceptance");
+    expect(html).not.toMatch(/reset[-_ ]room/i);
+  });
+
+  it("sends no referrer while leaving CSP absent until full qualifying-client proof exists", () => {
+    expect(html).toContain('<meta name="referrer" content="no-referrer" />');
+    expect(html).not.toMatch(/Content-Security-Policy/i);
+  });
 });

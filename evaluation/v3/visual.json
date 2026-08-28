@@ -3005,7 +3005,7 @@
       "width": 1440,
       "height": 900,
       "expected": "desktop",
-      "sha256": "64bd8a0b34dd32a88e6193298e13bbfabf6cae1a2620867d98b5ffbd965e92f0"
+      "sha256": "b2249ba37edeeb3f1d2d75acbb3f6af8d219bdd07000ba8618160c8d83246675"
     },
     {
       "path": "evaluation/v3/v3-s14-393x852.png",

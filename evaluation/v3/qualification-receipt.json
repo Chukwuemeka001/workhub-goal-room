@@ -382,8 +382,8 @@
   "sourceHashes": [
     {
       "path": "index.html",
-      "sha256": "af61f3cb96672a9cad8413609d995d1caac147d1312afb773ff354b4a855c067",
-      "bytes": 2519
+      "sha256": "c56ec0437472e065ba8d419f451a453951dfe840a1c5339e3a49a995ed53729d",
+      "bytes": 3238
     },
     {
       "path": "design/GOAL_ROOM_V3_VISUAL_CONTRACT.md",
@@ -422,8 +422,8 @@
     },
     {
       "path": "qualification/v3Infrastructure.test.ts",
-      "sha256": "46de205192b55117274d37eb657188e2c31e351f62f1f3a611e590cb4d673b29",
-      "bytes": 2771
+      "sha256": "de62af0ac748cc6b36dab0d8b1ac1b177436c53c73a67766305efcd3ea2bb364",
+      "bytes": 3285
     },
     {
       "path": "src/custodyView.ts",
@@ -487,8 +487,8 @@
     },
     {
       "path": "src/style.css",
-      "sha256": "5f08e120db1739cb164ba0823f7bd897fd4ee4d777e72f99942b42b72978c212",
-      "bytes": 12170
+      "sha256": "a914fa141c4cfb5bdd02b4252a8e0b39b5b41e2febe1df906b74a4e85b1e9db6",
+      "bytes": 12807
     },
     {
       "path": "scripts/composition-production-qa.mjs",
@@ -517,13 +517,13 @@
     },
     {
       "path": "package.json",
-      "sha256": "5a0e2b9abece1a6a6dc656ad7552023e78f1554d65c3d702db89f28729746ec6",
-      "bytes": 2126
+      "sha256": "c9d8f9903b09c912ed6e936863ca4ba5bae281e29eda055a894e3abf41756b61",
+      "bytes": 2259
     },
     {
       "path": "README.md",
-      "sha256": "0d611a170a3899d17598c030322045d3229278214c3ca86ae40c5e2b86f53ecc",
-      "bytes": 12010
+      "sha256": "b451585d06b0c6f2f14f94227e8302d71a8fc3a940ae3c20cf8fd0aaf56181fd",
+      "bytes": 14341
     }
   ],
   "screenshotHashes": [
@@ -651,7 +651,7 @@
       "width": 1440,
       "height": 900,
       "expected": "desktop",
-      "sha256": "64bd8a0b34dd32a88e6193298e13bbfabf6cae1a2620867d98b5ffbd965e92f0"
+      "sha256": "b2249ba37edeeb3f1d2d75acbb3f6af8d219bdd07000ba8618160c8d83246675"
     },
     {
       "path": "evaluation/v3/v3-s14-393x852.png",

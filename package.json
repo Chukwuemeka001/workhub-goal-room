@@ -28,6 +28,7 @@
     "qa:v3:fixtures": "node scripts/v3-fixture-exclusion.mjs",
     "qa:v3:protected": "node scripts/v3-protected-bytes.mjs",
     "qa:v3:receipt": "node scripts/v3-receipt.mjs",
+    "qa:phase5": "node scripts/phase5-validate.mjs",
     "qa:v3:native": "node --test scripts/v3-native-webmcp-proof.node-test.mjs",
     "qa:v3:all": "npm run test:v3 && npm run qa:v3:protected && npm run qa:v3:visual && npm run qa:v3:responsive && npm run qa:v3:a11y && npm run qa:v3:hostile && npm run qa:v3:fixtures && npm run qa:v3:receipt",
     "preview": "vite preview"

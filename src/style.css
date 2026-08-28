@@ -32,6 +32,25 @@ button:disabled { cursor: wait; opacity: 0.58; }
 [hidden] { display: none !important; }
 h1, h2, h3, p, dl, dd { margin: 0; }
 
+.judge-help {
+  width: min(760px, calc(100% - 32px));
+  margin: 22px auto 40px;
+  color: var(--text-soft);
+}
+.judge-help details { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.judge-help summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+.judge-help-copy { display: grid; gap: 9px; padding: 0 0 16px; }
+.judge-help-copy p { font-size: 0.76rem; line-height: 1.55; }
+.judge-help-copy a { margin-right: 16px; color: #f0bd72; }
+
 /* Production uses one composition at a time. Mobile owns every viewport below 1200px. */
 .mobile-room { display: none; }
 
@@ -129,6 +148,7 @@ button:focus, textarea:focus, summary:focus, [tabindex]:focus {
 @media (max-width: 1199px) {
   html, body { max-width: 100%; overflow-x: clip; }
   .desktop-surface { display: none; }
+  .judge-help { margin-bottom: calc(176px + env(safe-area-inset-bottom)); }
   .mobile-room {
     display: block;
     width: min(100%, 780px);

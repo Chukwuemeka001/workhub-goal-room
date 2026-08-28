@@ -57,4 +57,16 @@ describe("Goal Room V3 qualification infrastructure", () => {
       expect(read(path), path).not.toMatch(/[—–]/);
     }
   });
+
+  it("ships public security, privacy, manual accessibility, and validated Phase 5 evidence", () => {
+    for (const path of [
+      "SECURITY.md",
+      "PRIVACY.md",
+      "evaluation/manual-accessibility-v3.md",
+      "evaluation/phase5-qualification.json",
+      "scripts/phase5-validate.mjs",
+    ]) expect(existsSync(new URL(path, root)), path).toBe(true);
+    const packageJson = JSON.parse(read("package.json"));
+    expect(packageJson.scripts["qa:phase5"]).toBe("node scripts/phase5-validate.mjs");
+  });
 });

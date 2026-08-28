@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "kind": "workhub-goal-room-phase5-qualification",
+  "testedStartCommit": "e1cd53ad7a51c8c0c8e137cafb36a58e37c443eb",
+  "testedStartTree": "8268d86eee4c826d1a9435820e9c21319665d678",
+  "commit": "recorded_after_commit_in_git",
+  "tdd": {
+    "judgeHelpReferrerRed": "npx vitest run src/mainProduction.test.ts: 2 failed, 8 passed; missing semantic help and referrer metadata",
+    "judgeHelpReferrerGreen": "npx vitest run src/mainProduction.test.ts: 10 passed",
+    "artifactsRed": "npx vitest run qualification/v3Infrastructure.test.ts: 1 failed, 4 passed; SECURITY.md absent",
+    "artifactsGreen": "npx vitest run qualification/v3Infrastructure.test.ts: 5 passed"
+  },
+  "voiceOver": {
+    "actuallyRunning": true,
+    "captionPanelOpened": true,
+    "observedStrings": ["Chrome Canary is launched in the background", "Login failed"],
+    "pageCheckpointGate": "inconclusive",
+    "claimLimit": "No page-level VoiceOver speech/navigation checkpoint is claimed; see evaluation/manual-accessibility-v3.md",
+    "offBeforeRepositoryEdits": true
+  },
+  "security": {
+    "referrerPolicy": "HTML meta no-referrer",
+    "csp": "omitted: full GitHub Pages plus native WebMCP compatibility under policy not proven",
+    "syntheticDataOnly": true,
+    "externalEffects": false,
+    "persistence": "none in application source; reload creates a fresh room",
+    "staticScan": "validated by scripts/phase5-validate.mjs"
+  },
+  "evidenceReferences": [
+    "evaluation/production-journey/journey.json",
+    "evaluation/v3/a11y.json",
+    "evaluation/v3/hostile.json",
+    "evaluation/v3/responsive.json"
+  ],
+  "protectedStartGitObjects": {
+    "src/core/goalRoom.ts": "4e2927f77d84e38adef6f75e2e85f90b6dcbe621",
+    "src/ownerController.ts": "0223725d7629a0ff99b50541aae3b398a4a0d5ce",
+    "src/verifier/releaseRules.ts": "a9c1fd34c8729bc00e1de880ec5e35828a15eb98",
+    "src/webmcp.ts": "463bd8fe58eaab5a6ee02a3f06864f39f412f0bc",
+    "package-lock.json": "22dc79b31c1ea9a7efe907690910bf6875360094"
+  },
+  "findings": {
+    "P0": 0,
+    "P1": 0,
+    "newP2": 0,
+    "deferredBaselineP2": 9,
+    "independentReview": "pending"
+  }
+}

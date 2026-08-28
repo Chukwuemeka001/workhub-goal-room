@@ -8,7 +8,7 @@
   },
   "evidenceCommit": "recorded_after_commit_in_git",
   "evidenceTree": "recorded_after_commit_in_git",
-  "journeySha256": "9bcebdd13234bb81ab2f92260fad1793bffc6c654f0eeac7e4cb1d2a5837f7e2",
+  "journeySha256": "9dc252d29f8d8ea420e6a382dda0fdf504f2d51fa6a49b76b31721283196178d",
   "route": {
     "url": "http://127.0.0.1:4177/index.html",
     "entry": "/index.html",
@@ -94,8 +94,8 @@
   "sourceHashes": [
     {
       "path": "index.html",
-      "sha256": "af61f3cb96672a9cad8413609d995d1caac147d1312afb773ff354b4a855c067",
-      "bytes": 2519
+      "sha256": "c56ec0437472e065ba8d419f451a453951dfe840a1c5339e3a49a995ed53729d",
+      "bytes": 3238
     },
     {
       "path": "src/main.ts",
@@ -124,8 +124,8 @@
     },
     {
       "path": "package.json",
-      "sha256": "5a0e2b9abece1a6a6dc656ad7552023e78f1554d65c3d702db89f28729746ec6",
-      "bytes": 2126
+      "sha256": "c9d8f9903b09c912ed6e936863ca4ba5bae281e29eda055a894e3abf41756b61",
+      "bytes": 2259
     },
     {
       "path": "evaluation/production-journey/README.md",
@@ -136,72 +136,72 @@
   "screenshotHashes": [
     {
       "path": "evaluation/production-journey/goal-revision-1440x900.png",
-      "sha256": "2f072bbbbf18bd3f143f7a78d4cd1ec9b9755e39b73a3d3e154fa98f843106e9",
-      "bytes": 173881,
+      "sha256": "851b310b1c8f82396aa1bd8cb4b6834c7286744a5b8a98d510de40f6c0679d09",
+      "bytes": 165431,
       "width": 1440,
       "height": 900,
       "mode": "headless-cdp-production-entry"
     },
     {
       "path": "evaluation/production-journey/plan-revision-1440x900.png",
-      "sha256": "deccd54c143e5cd46bc191537e6b2ba28e60cfca27d6bb15fa50a556a299b0dd",
-      "bytes": 180398,
+      "sha256": "f45ed87614b319841ba6bf647b57b52b837c2910f14a79e0a5336040b590479e",
+      "bytes": 173484,
       "width": 1440,
       "height": 900,
       "mode": "headless-cdp-production-entry"
     },
     {
       "path": "evaluation/production-journey/candidate-v1-fail-1440x900.png",
-      "sha256": "655f0a295186699909510c6f3434fc3d5c7fb08e802e091dca009bac70ac2da8",
-      "bytes": 191801,
+      "sha256": "d9afc7be8c3215241673e4507595df64e09e9409730f0538b8bd27675db82d81",
+      "bytes": 181257,
       "width": 1440,
       "height": 900,
       "mode": "headless-cdp-production-entry"
     },
     {
       "path": "evaluation/production-journey/candidate-v2-pass-s12-1440x900.png",
-      "sha256": "2ab2de064921e9e20fc8f38fbf213685d55c2f31055c4f634b4d09a68b045b91",
-      "bytes": 224979,
+      "sha256": "0f5a0febdd83d547a1266c368a5e512367f74b89521b9961ef41301a6db3f787",
+      "bytes": 214925,
       "width": 1440,
       "height": 900,
       "mode": "headless-cdp-production-entry"
     },
     {
       "path": "evaluation/production-journey/s13-exact-candidate-modal-1440x900.png",
-      "sha256": "68198de29887ad52616a33d8db8b12d5a0adb9a7bc99872400c327860246f695",
-      "bytes": 146983,
+      "sha256": "36051c382c83275c753a1775d79b543e49a6d876a73c38047abb5061cbcd7be8",
+      "bytes": 141852,
       "width": 1440,
       "height": 900,
       "mode": "headless-cdp-production-entry"
     },
     {
       "path": "evaluation/production-journey/s14-sealed-1440x900.png",
-      "sha256": "c4b95eb3d6e3eb0bc9cc921e9bdf5eb159b445db08cf00b14196f2777ce7028a",
-      "bytes": 170694,
+      "sha256": "3bbe41d03e838177eee7b78541efeccd17ed7a01928b0960d9f262f90f5a7abe",
+      "bytes": 161616,
       "width": 1440,
       "height": 900,
       "mode": "headless-cdp-production-entry"
     },
     {
       "path": "evaluation/production-journey/s14-mobile-393x852.png",
-      "sha256": "de7f2929a71d43324f2f02dc3190115309c6a9721d5baad65a52bcb8d434cc54",
-      "bytes": 58997,
+      "sha256": "e655f8cca051a6681acfa9b6b98123338d555b8e7aa180bce3b3d1b572018ccb",
+      "bytes": 53705,
       "width": 393,
       "height": 852,
       "mode": "headless-cdp-production-entry"
     },
     {
       "path": "evaluation/production-journey/breakpoint-xor-1199x900.png",
-      "sha256": "5e1980a51accfb488d28fe2cfbf5dbf7fba44faea120e48313375d479703b785",
-      "bytes": 78275,
+      "sha256": "b2eaf0454940ea862fe973fe07a14db6bcf95119a69243f1b79c8903dc8ea503",
+      "bytes": 62045,
       "width": 1199,
       "height": 900,
       "mode": "headless-cdp-production-entry"
     },
     {
       "path": "evaluation/production-journey/breakpoint-xor-1200x900.png",
-      "sha256": "39c8c09bc7dc86481c5b3cd4164111aa4354b692bdf6a60541c73056ec1de3fc",
-      "bytes": 161896,
+      "sha256": "16f99404504d3c5bff1d56385a63bad4a2c83fb4ddd33f620521e555dc547828",
+      "bytes": 149046,
       "width": 1200,
       "height": 900,
       "mode": "headless-cdp-production-entry"
