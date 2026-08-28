@@ -7,15 +7,17 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "test": "npm run test:browser-resolver && vitest run && npm run test:composition",
+    "test": "npm run test:browser-resolver && vitest run --exclude qa/phase8VisualHarness.test.ts && npm run test:composition",
     "test:browser-resolver": "node --test scripts/browser-resolver.node-test.mjs",
-    "test:unit": "vitest run",
+    "test:unit": "vitest run --exclude qa/phase8VisualHarness.test.ts",
+    "test:phase8-visual": "vitest run qa/phase8VisualHarness.test.ts",
     "test:composition": "node scripts/composition-production-qa.mjs",
     "test:watch": "vitest",
     "eval:phase6": "node --experimental-strip-types scripts/phase6-evaluate.ts",
     "eval:phase6:conformance": "npm run eval:phase6 -- conformance --out evaluation/phase6-conformance.json",
     "qa:mobile": "node scripts/mobile-qa.mjs",
     "qa:desktop": "node scripts/desktop-qa.mjs",
+    "qa:phase8-visual": "node scripts/phase8-visual-qa.mjs",
     "preview": "vite preview"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 {
   "kind": "phase8-native-canary-production-qualification",
-  "testedProductionCommit": "666217f75f0d1ea978f6f951e77db6262d54f2fe",
-  "testedProductionTree": "57e8be75d110e6dec3350dd93310d71af653f080",
+  "testedProductionCommit": "c4602a9d5d1fde8451e76fcc1e6e0797f693d70c",
+  "testedProductionTree": "c4c9b4105175df6284b49ebfca30b7b8f411f8b6",
   "archive": "local production dist built with npm run build from tested production tree plus test-only Phase8 files excluded by Vite",
   "browser": {
     "product": "Google Chrome Canary",
