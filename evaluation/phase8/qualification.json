@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "kind": "phase8-deterministic-qualification",
+  "qualificationCommit": "recorded_after_commit_in_git",
+  "testedProductionCommit": "666217f75f0d1ea978f6f951e77db6262d54f2fe",
+  "testedProductionTree": "57e8be75d110e6dec3350dd93310d71af653f080",
+  "scope": "test-only full journey, qualification harness stability, and public-safe native/visual evidence; no product feature redesign",
+  "tdd": {
+    "journeyRed": {
+      "command": "npm test -- --run src/phase8Journey.test.ts",
+      "result": "1 test failed: PHASE8_JOURNEY_NOT_IMPLEMENTED"
+    },
+    "journeyGreen": {
+      "command": "./node_modules/.bin/vitest run src/phase8Journey.test.ts --update",
+      "result": "1 test passed; 1 mutation snapshot written"
+    },
+    "mobileHarnessRed": {
+      "command": "CHROME_BIN='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' npm run qa:mobile",
+      "result": "Page.captureScreenshot exceeded the inherited 15 second CDP timeout"
+    },
+    "mobileHarnessGreen": {
+      "command": "CHROME_BIN='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' npm run qa:mobile",
+      "result": "9 states; 37 measurements; 8 trusted-keyboard checkpoints; 5 screenshots; 0 failures after timeout bound increased to 60 seconds"
+    }
+  },
+  "deterministicJourney": {
+    "providerFree": true,
+    "agentActions": "all six installed production WebMCP definitions execute their real callbacks",
+    "ownerActions": "createOwnerDecisionController dispatches exact owner kernel commands",
+    "verification": "room.verifyActiveCandidate only",
+    "stateVersions": "S0 initial through S16 GOAL_ACCEPTED",
+    "receipts": 18,
+    "exactRetryDuplicateReceipts": 0,
+    "malformedMutationOrReceipt": false,
+    "staleStateMutation": false,
+    "candidateVerdicts": ["v1 FAIL", "v2 PASS"],
+    "passIsAcceptance": false,
+    "replayEqualsLiveFinalState": true,
+    "receiptChainValidatedByReplay": true,
+    "mutationSnapshot": "src/__snapshots__/phase8Journey.test.ts.snap"
+  },
+  "gates": {
+    "focused": "1/1 passed",
+    "full": "23 files; 166/166 passed",
+    "typescriptAndProductionBuild": "passed; 18 modules; JS 71.09 kB; CSS 26.98 kB",
+    "npmAudit": "0 vulnerabilities",
+    "providerFreeConformance": "17/17 oracle; 7/7 negative detections",
+    "desktopQa": "21 viewport/state rows; 8 trusted-keyboard checkpoints; 0 failures",
+    "mobileQa": "37 viewport/state rows including landscape and keyboard-open; 8 trusted-keyboard checkpoints; invalid-to-corrected intent form; 0 failures",
+    "nativeCanary": "six discovered; malformed callback no state/receipt mutation; accepted Goal proposal visible with two receipts",
+    "ax": "Chrome AX-tree inspection only, not automated VoiceOver; one visible main, one tabpanel, four named tabs, named owner buttons; hidden mobile composition excluded",
+    "reducedMotion": "media matched; zero nonzero computed animations or transitions",
+    "privacyScan": "no private home paths or secret-like fields in evaluation/phase8",
+    "independentExactCommitReview": "pending; builder did not self-claim independent review"
+  },
+  "visualMatrix": {
+    "desktop": [[1280, 800], [1440, 900], [1728, 1117]],
+    "mobile": [[375, 667], [393, 852], [430, 932]],
+    "landscape": [852, 393],
+    "keyboardOpen": [393, 552],
+    "states": ["intent", "Goal v1/v2 revision", "Plan v1/v2 revision", "FAIL", "PASS", "completion", "accepted", "max producer-valid content"],
+    "documentHorizontalOverflowMax": 0,
+    "bodyHorizontalOverflowMax": 0,
+    "controlCollisions": 0,
+    "injectedElements": 0,
+    "hostileMarkupRenderedLiterally": true,
+    "sourceEvidence": ["evaluation/desktop-phase6/measurements.json", "evaluation/mobile-phase5/measurements.json"]
+  },
+  "nativeReplay": {
+    "commands": [
+      "npm ci",
+      "npm run build",
+      "npm run preview -- --host 127.0.0.1 --port 4188 --strictPort",
+      "node evaluation/phase8/replay-native.mjs"
+    ],
+    "evidence": [
+      "evaluation/phase8/native-canary.json",
+      "evaluation/phase8/cdp-transcript.redacted.json",
+      "evaluation/phase8/native-goal-1440x900.png"
+    ]
+  },
+  "claimLayers": {
+    "providerFreeInProcessGovernance": "demonstrated",
+    "browserNativeRegistrationDiscoveryInvocation": "demonstrated with Canary testing API",
+    "sharedDesktopStateMutation": "demonstrated",
+    "autonomousModelSelectionOrJourney": "not tested and not claimed",
+    "actualVoiceOverSpeechNavigation": "not tested and not claimed",
+    "externalEffects": "none"
+  },
+  "findings": {
+    "P0": 0,
+    "P1": 0,
+    "newP2": 0,
+    "deferredBaselineP2": 7,
+    "qualificationHarnessRepair": "mobile screenshot timeout bound increased from 15 to 60 seconds after reproducible timeout; no product behavior changed"
+  }
+}

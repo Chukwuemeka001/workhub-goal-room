@@ -1,0 +1,231 @@
+{
+  "kind": "phase8-native-canary-production-qualification",
+  "testedProductionCommit": "666217f75f0d1ea978f6f951e77db6262d54f2fe",
+  "testedProductionTree": "57e8be75d110e6dec3350dd93310d71af653f080",
+  "archive": "local production dist built with npm run build from tested production tree plus test-only Phase8 files excluded by Vite",
+  "browser": {
+    "product": "Google Chrome Canary",
+    "version": "154.0.8028.0 canary",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+  },
+  "flags": [
+    "enable-webmcp-testing",
+    "devtools-webmcp-support"
+  ],
+  "commandLineFeatureMapping": [
+    "WebMCPTesting",
+    "DevToolsWebMCPSupport"
+  ],
+  "profile": "fresh disposable unsigned-in profile outside Git; deleted by replay script",
+  "reloads": 0,
+  "context": {
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "secureContext": true,
+    "url": "http://127.0.0.1:4188/",
+    "documentModelContext": "object",
+    "navigatorModelContext": "undefined",
+    "registerTool": "function",
+    "testingMethods": [
+      "ontoolchange",
+      "executeTool",
+      "getTools",
+      "registerTool",
+      "constructor"
+    ]
+  },
+  "registrationOrder": [
+    "get_goal_room_state",
+    "propose_goal_contract",
+    "propose_plan",
+    "claim_step",
+    "submit_artifact",
+    "request_completion"
+  ],
+  "nativeEnumerationOrder": [
+    "claim_step",
+    "get_goal_room_state",
+    "propose_goal_contract",
+    "propose_plan",
+    "request_completion",
+    "submit_artifact"
+  ],
+  "discovered": [
+    {
+      "index": 0,
+      "name": "claim_step",
+      "title": "Claim an admitted Plan step",
+      "description": "Claim one step from the exact owner-confirmed Plan version as the agent.",
+      "inputSchema": "{\"type\":\"object\",\"additionalProperties\":false,\"properties\":{\"expectedStateVersion\":{\"type\":\"integer\",\"minimum\":0},\"idempotencyKey\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":160},\"planVersion\":{\"type\":\"integer\",\"minimum\":1},\"stepId\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":80}},\"required\":[\"expectedStateVersion\",\"idempotencyKey\",\"planVersion\",\"stepId\"]}",
+      "annotations": {
+        "consequentialHint": false,
+        "readOnlyHint": false,
+        "untrustedContentHint": false
+      }
+    },
+    {
+      "index": 1,
+      "name": "get_goal_room_state",
+      "title": "Get governed Goal Room state",
+      "description": "Read a compact recovery-oriented projection of the current authority frontier without changing the room.",
+      "inputSchema": "{\"type\":\"object\",\"additionalProperties\":false,\"properties\":{},\"required\":[]}",
+      "annotations": {
+        "consequentialHint": false,
+        "readOnlyHint": true,
+        "untrustedContentHint": true
+      }
+    },
+    {
+      "index": 2,
+      "name": "propose_goal_contract",
+      "title": "Propose an immutable Goal Contract",
+      "description": "Propose Goal Contract data as the agent after owner intent or an owner revision request. Nonblank checks trim whitespace, while maxLength counts raw Unicode code points exactly like JSON Schema; accepted values are then stored trimmed. This never confirms the Goal or authorizes Plan work; the owner must confirm or request revision.",
+      "inputSchema": "{\"type\":\"object\",\"additionalProperties\":false,\"properties\":{\"expectedStateVersion\":{\"type\":\"integer\",\"minimum\":0},\"idempotencyKey\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":160},\"goal\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":1000},\"why\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":1000},\"doneLooksLike\":{\"type\":\"array\",\"minItems\":1,\"maxItems\":16,\"items\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":500}},\"constraints\":{\"type\":\"array\",\"minItems\":0,\"maxItems\":16,\"items\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":500}},\"nonGoals\":{\"type\":\"array\",\"minItems\":0,\"maxItems\":16,\"items\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":500}},\"evidenceRequired\":{\"type\":\"array\",\"minItems\":1,\"maxItems\":16,\"items\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":500}},\"openQuestions\":{\"type\":\"array\",\"minItems\":0,\"maxItems\":16,\"items\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":500}}},\"required\":[\"expectedStateVersion\",\"idempotencyKey\",\"goal\",\"why\",\"doneLooksLike\",\"constraints\",\"nonGoals\",\"evidenceRequired\",\"openQuestions\"]}",
+      "annotations": {
+        "consequentialHint": false,
+        "readOnlyHint": false,
+        "untrustedContentHint": true
+      }
+    },
+    {
+      "index": 3,
+      "name": "propose_plan",
+      "title": "Propose an immutable Goal Plan",
+      "description": "Propose a versioned Plan as the agent. In GOAL_CONTRACT_CONFIRMED, pass the exact goalContractVersion exposed by get_goal_room_state; legacy DRAFT and PLAN_REVISION_REQUESTED calls may omit it. This never confirms the Plan; the owner must confirm or request revision.",
+      "inputSchema": "{\"type\":\"object\",\"additionalProperties\":false,\"properties\":{\"expectedStateVersion\":{\"type\":\"integer\",\"minimum\":0},\"idempotencyKey\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":160},\"goalContractVersion\":{\"type\":\"integer\",\"minimum\":1},\"steps\":{\"type\":\"array\",\"minItems\":1,\"maxItems\":8,\"items\":{\"type\":\"object\",\"additionalProperties\":false,\"properties\":{\"id\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":80},\"title\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":160}},\"required\":[\"id\",\"title\"]}}},\"required\":[\"expectedStateVersion\",\"idempotencyKey\",\"steps\"]}",
+      "annotations": {
+        "consequentialHint": false,
+        "readOnlyHint": false,
+        "untrustedContentHint": false
+      }
+    },
+    {
+      "index": 4,
+      "name": "request_completion",
+      "title": "Request final owner acceptance",
+      "description": "Request completion for the exact active candidate after deterministic PASS. This does not accept the Goal.",
+      "inputSchema": "{\"type\":\"object\",\"additionalProperties\":false,\"properties\":{\"expectedStateVersion\":{\"type\":\"integer\",\"minimum\":0},\"idempotencyKey\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":160},\"candidateSha256\":{\"type\":\"string\",\"pattern\":\"^[0-9a-f]{64}$\"}},\"required\":[\"expectedStateVersion\",\"idempotencyKey\",\"candidateSha256\"]}",
+      "annotations": {
+        "consequentialHint": false,
+        "readOnlyHint": false,
+        "untrustedContentHint": false
+      }
+    },
+    {
+      "index": 5,
+      "name": "submit_artifact",
+      "title": "Submit exact candidate evidence",
+      "description": "Submit immutable candidate bytes and their declared SHA-256 for the currently claimed Plan step. WorkHub recomputes the digest.",
+      "inputSchema": "{\"type\":\"object\",\"additionalProperties\":false,\"properties\":{\"expectedStateVersion\":{\"type\":\"integer\",\"minimum\":0},\"idempotencyKey\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":160},\"planVersion\":{\"type\":\"integer\",\"minimum\":1},\"stepId\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":80},\"content\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":4096},\"sha256\":{\"type\":\"string\",\"pattern\":\"^[0-9a-f]{64}$\"}},\"required\":[\"expectedStateVersion\",\"idempotencyKey\",\"planVersion\",\"stepId\",\"content\",\"sha256\"]}",
+      "annotations": {
+        "consequentialHint": false,
+        "readOnlyHint": false,
+        "untrustedContentHint": false
+      }
+    }
+  ],
+  "controls": {
+    "stateBefore": {
+      "phase": "INTENT_DRAFT",
+      "currentStateVersion": 1
+    },
+    "malformed": {
+      "accepted": false,
+      "reasonCode": "INVALID_TOOL_INPUT",
+      "currentStateVersion": 1,
+      "nextLegalAction": "AGENT_PROPOSE_GOAL_CONTRACT",
+      "ownerRequired": false
+    },
+    "stateAfterMalformed": {
+      "phase": "INTENT_DRAFT",
+      "currentStateVersion": 1
+    },
+    "receiptCountBefore": 1,
+    "receiptCountAfterMalformed": 1,
+    "accepted": {
+      "accepted": true,
+      "nextLegalAction": "OWNER_CONFIRM_OR_REVISE_GOAL",
+      "ownerRequired": true,
+      "currentStateVersion": 2
+    }
+  },
+  "visible": {
+    "bodyIncludesGoal": true,
+    "bodyIncludesReceipt": true,
+    "connection": "WebMCP accepted propose_goal_contract · S2",
+    "desktopVisible": true,
+    "mobileHidden": true,
+    "documentOverflow": 0,
+    "receiptCount": 2
+  },
+  "accessibility": {
+    "claim": "Chrome accessibility tree inspection; not automated VoiceOver speech/navigation",
+    "namedRoleCount": 115,
+    "roles": {
+      "RootWebArea": 1,
+      "main": 1,
+      "sectionheader": 1,
+      "region": 3,
+      "navigation": 1,
+      "complementary": 1,
+      "StaticText": 40,
+      "heading": 9,
+      "tablist": 1,
+      "tabpanel": 1,
+      "InlineTextBox": 42,
+      "button": 2,
+      "tab": 4,
+      "DisclosureTriangle": 2,
+      "ListMarker": 6
+    },
+    "requiredNamedNodes": [
+      {
+        "role": "main",
+        "name": "WorkHub Goal Room desktop Mission Room"
+      },
+      {
+        "role": "navigation",
+        "name": "Causal Goal chapter"
+      },
+      {
+        "role": "tabpanel",
+        "name": "Goal"
+      },
+      {
+        "role": "button",
+        "name": "Request Goal revision"
+      },
+      {
+        "role": "button",
+        "name": "Confirm Goal v1"
+      },
+      {
+        "role": "tab",
+        "name": "Goal"
+      },
+      {
+        "role": "tab",
+        "name": "Plan"
+      },
+      {
+        "role": "tab",
+        "name": "Proof"
+      },
+      {
+        "role": "tab",
+        "name": "Activity"
+      }
+    ]
+  },
+  "reducedMotion": {
+    "mediaMatches": true,
+    "nonZeroAnimations": 0,
+    "nonZeroTransitions": 0
+  },
+  "screenshot": {
+    "path": "evaluation/phase8/native-goal-1440x900.png",
+    "sha256": "b62d9c3f8223408094d0f6a818b6d49dd4e5adebb842ddf09e88cc6070f8afa4",
+    "width": 1440,
+    "height": 900
+  },
+  "claimLimit": "Native Canary registration, discovery, testing-API invocation, malformed callback no-mutation, and visible shared-state mutation only; no autonomous model-selection claim."
+}

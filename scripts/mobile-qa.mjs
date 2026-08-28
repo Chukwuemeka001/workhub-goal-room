@@ -49,7 +49,7 @@ try {
   });
   const call = (method, params = {}) => new Promise((resolveCall, reject) => {
     const id = ++nextId;
-    const timer = setTimeout(() => { pending.delete(id); reject(new Error(`CDP timeout: ${method}`)); }, 15000);
+    const timer = setTimeout(() => { pending.delete(id); reject(new Error(`CDP timeout: ${method}`)); }, 60000);
     pending.set(id, { resolve: resolveCall, reject, timer });
     socket.send(JSON.stringify({ id, method, params }));
   });

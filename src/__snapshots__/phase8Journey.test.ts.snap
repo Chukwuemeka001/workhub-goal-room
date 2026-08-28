@@ -1,0 +1,204 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Phase 8 installed-surface full journey qualification > replays the exact governed Goal-to-acceptance journey 1`] = `
+[
+  {
+    "accepted": false,
+    "candidates": [],
+    "goalVersions": [],
+    "phase": "INTENT_DRAFT",
+    "planBindings": [],
+    "receipts": 1,
+    "verdicts": [],
+    "version": 1,
+  },
+  {
+    "accepted": false,
+    "candidates": [],
+    "goalVersions": [
+      "1:PROPOSED",
+    ],
+    "phase": "GOAL_CONTRACT_PROPOSED",
+    "planBindings": [],
+    "receipts": 2,
+    "verdicts": [],
+    "version": 2,
+  },
+  {
+    "accepted": false,
+    "candidates": [],
+    "goalVersions": [
+      "1:REVISION_REQUESTED",
+    ],
+    "phase": "GOAL_CONTRACT_REVISION_REQUESTED",
+    "planBindings": [],
+    "receipts": 3,
+    "verdicts": [],
+    "version": 3,
+  },
+  {
+    "accepted": false,
+    "candidates": [],
+    "goalVersions": [
+      "1:REVISION_REQUESTED",
+      "2:CONFIRMED",
+    ],
+    "phase": "GOAL_CONTRACT_CONFIRMED",
+    "planBindings": [],
+    "receipts": 6,
+    "verdicts": [],
+    "version": 5,
+  },
+  {
+    "accepted": false,
+    "candidates": [],
+    "goalVersions": [
+      "1:REVISION_REQUESTED",
+      "2:CONFIRMED",
+    ],
+    "phase": "PLAN_REVISION_REQUESTED",
+    "planBindings": [
+      "1:REVISION_REQUESTED:g2",
+    ],
+    "receipts": 8,
+    "verdicts": [],
+    "version": 7,
+  },
+  {
+    "accepted": false,
+    "candidates": [],
+    "goalVersions": [
+      "1:REVISION_REQUESTED",
+      "2:CONFIRMED",
+    ],
+    "phase": "PLAN_CONFIRMED",
+    "planBindings": [
+      "1:REVISION_REQUESTED:g2",
+      "2:CONFIRMED:g2",
+    ],
+    "receipts": 10,
+    "verdicts": [],
+    "version": 9,
+  },
+  {
+    "accepted": false,
+    "candidates": [],
+    "goalVersions": [
+      "1:REVISION_REQUESTED",
+      "2:CONFIRMED",
+    ],
+    "phase": "STEP_CLAIMED",
+    "planBindings": [
+      "1:REVISION_REQUESTED:g2",
+      "2:CONFIRMED:g2",
+    ],
+    "receipts": 11,
+    "verdicts": [],
+    "version": 10,
+  },
+  {
+    "accepted": false,
+    "candidates": [
+      "1:a6d69ea5902a",
+    ],
+    "goalVersions": [
+      "1:REVISION_REQUESTED",
+      "2:CONFIRMED",
+    ],
+    "phase": "CANDIDATE_SUBMITTED",
+    "planBindings": [
+      "1:REVISION_REQUESTED:g2",
+      "2:CONFIRMED:g2",
+    ],
+    "receipts": 12,
+    "verdicts": [],
+    "version": 11,
+  },
+  {
+    "accepted": false,
+    "candidates": [
+      "1:a6d69ea5902a",
+    ],
+    "goalVersions": [
+      "1:REVISION_REQUESTED",
+      "2:CONFIRMED",
+    ],
+    "phase": "VERIFICATION_FAILED",
+    "planBindings": [
+      "1:REVISION_REQUESTED:g2",
+      "2:CONFIRMED:g2",
+    ],
+    "receipts": 14,
+    "verdicts": [
+      "FAIL:a6d69ea5902a",
+    ],
+    "version": 12,
+  },
+  {
+    "accepted": false,
+    "candidates": [
+      "1:a6d69ea5902a",
+      "2:ece21ee47720",
+    ],
+    "goalVersions": [
+      "1:REVISION_REQUESTED",
+      "2:CONFIRMED",
+    ],
+    "phase": "VERIFICATION_PASSED",
+    "planBindings": [
+      "1:REVISION_REQUESTED:g2",
+      "2:CONFIRMED:g2",
+    ],
+    "receipts": 16,
+    "verdicts": [
+      "FAIL:a6d69ea5902a",
+      "PASS:ece21ee47720",
+    ],
+    "version": 14,
+  },
+  {
+    "accepted": false,
+    "candidates": [
+      "1:a6d69ea5902a",
+      "2:ece21ee47720",
+    ],
+    "goalVersions": [
+      "1:REVISION_REQUESTED",
+      "2:CONFIRMED",
+    ],
+    "phase": "COMPLETION_REQUESTED",
+    "planBindings": [
+      "1:REVISION_REQUESTED:g2",
+      "2:CONFIRMED:g2",
+    ],
+    "receipts": 17,
+    "verdicts": [
+      "FAIL:a6d69ea5902a",
+      "PASS:ece21ee47720",
+    ],
+    "version": 15,
+  },
+  {
+    "accepted": true,
+    "candidates": [
+      "1:a6d69ea5902a",
+      "2:ece21ee47720",
+    ],
+    "goalVersions": [
+      "1:REVISION_REQUESTED",
+      "2:CONFIRMED",
+    ],
+    "phase": "GOAL_ACCEPTED",
+    "planBindings": [
+      "1:REVISION_REQUESTED:g2",
+      "2:CONFIRMED:g2",
+    ],
+    "receipts": 18,
+    "verdicts": [
+      "FAIL:a6d69ea5902a",
+      "PASS:ece21ee47720",
+    ],
+    "version": 16,
+  },
+]
+`;
