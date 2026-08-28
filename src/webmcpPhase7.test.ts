@@ -87,7 +87,7 @@ describe("Phase 7 safe WebMCP surface", () => {
       { expectedStateVersion: 0, idempotencyKey: " ", ...goal },
       { expectedStateVersion: 0, idempotencyKey: "k".repeat(161), ...goal },
       { expectedStateVersion: 0, idempotencyKey: "k", ...goal, goal: " " },
-      { expectedStateVersion: 0, idempotencyKey: "k", ...goal, goal: "🙂".repeat(251) },
+      { expectedStateVersion: 0, idempotencyKey: "k", ...goal, goal: "🙂".repeat(1001) },
       { expectedStateVersion: 0, idempotencyKey: "k", ...goal, doneLooksLike: [] },
       { expectedStateVersion: 0, idempotencyKey: "k", ...goal, constraints: Array(17).fill("x") },
       { expectedStateVersion: 0, idempotencyKey: "k", ...goal, openQuestions: [" "] },

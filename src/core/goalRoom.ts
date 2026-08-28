@@ -370,10 +370,26 @@ function normalizeOwnerIntent(
   return normalized;
 }
 
-function isNonEmptyStringArray(value: unknown, allowEmpty = false): value is string[] {
+function hasAtMostCodePoints(value: string, maximum: number): boolean {
+  let count = 0;
+  for (const _codePoint of value) {
+    count += 1;
+    if (count > maximum) return false;
+  }
+  return true;
+}
+
+function isBoundedGoalString(value: unknown, maximum: number): value is string {
+  if (typeof value !== "string") return false;
+  const normalized = value.trim();
+  return normalized.length > 0 && hasAtMostCodePoints(normalized, maximum);
+}
+
+function isGoalContractList(value: unknown, allowEmpty = false): value is string[] {
   return Array.isArray(value) &&
+    value.length <= 16 &&
     (allowEmpty || value.length > 0) &&
-    value.every((item) => typeof item === "string" && item.trim().length > 0);
+    value.every((item) => isBoundedGoalString(item, 500));
 }
 
 function validateCommand(value: unknown): asserts value is Command {
@@ -403,13 +419,13 @@ function validateCommand(value: unknown): asserts value is Command {
         "doneLooksLike", "constraints", "nonGoals", "evidenceRequired", "openQuestions",
       ]) ||
       value.actor !== "agent" ||
-      typeof value.goal !== "string" || value.goal.trim().length === 0 ||
-      typeof value.why !== "string" || value.why.trim().length === 0 ||
-      !isNonEmptyStringArray(value.doneLooksLike) ||
-      !isNonEmptyStringArray(value.constraints, true) ||
-      !isNonEmptyStringArray(value.nonGoals, true) ||
-      !isNonEmptyStringArray(value.evidenceRequired) ||
-      !isNonEmptyStringArray(value.openQuestions, true)
+      !isBoundedGoalString(value.goal, 1000) ||
+      !isBoundedGoalString(value.why, 1000) ||
+      !isGoalContractList(value.doneLooksLike) ||
+      !isGoalContractList(value.constraints, true) ||
+      !isGoalContractList(value.nonGoals, true) ||
+      !isGoalContractList(value.evidenceRequired) ||
+      !isGoalContractList(value.openQuestions, true)
     ) {
       throw new Error("INVALID_COMMAND");
     }

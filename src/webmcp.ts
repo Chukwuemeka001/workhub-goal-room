@@ -55,17 +55,10 @@ function isBoundedNonBlankString(value: unknown, maxLength: number): value is st
   );
 }
 
-function isBoundedUtf8String(
-  value: unknown,
-  maxCharacters: number,
-  maxBytes = maxCharacters,
-): value is string {
-  if (!isBoundedNonBlankString(value, maxCharacters)) return false;
+function isBoundedUnicodeString(value: unknown, maxCodePoints: number): value is string {
+  if (typeof value !== "string") return false;
   const normalized = value.trim();
-  return (
-    normalized.length <= maxCharacters &&
-    new TextEncoder().encode(normalized).byteLength <= maxBytes
-  );
+  return normalized.length > 0 && Array.from(normalized).length <= maxCodePoints;
 }
 
 function isGoalList(value: unknown, allowEmpty: boolean): value is string[] {
@@ -73,7 +66,7 @@ function isGoalList(value: unknown, allowEmpty: boolean): value is string[] {
     Array.isArray(value) &&
     value.length <= 16 &&
     (allowEmpty || value.length >= 1) &&
-    value.every((item) => isBoundedUtf8String(item, 500))
+    value.every((item) => isBoundedUnicodeString(item, 500))
   );
 }
 
@@ -215,15 +208,12 @@ export function installGoalRoomTools({
         return [];
       })();
       const recentRefusalReceipt = room.getReceipts?.().filter((receipt) => !receipt.accepted).at(-1);
-      const goalContract = state.activeGoalContract === null ? null : {
-        version: state.activeGoalContract.version,
-        status: state.activeGoalContract.status,
-        openQuestions: [...state.activeGoalContract.openQuestions],
-      };
-      const plan = state.activePlan === null ? null : {
-        version: state.activePlan.version,
-        status: state.activePlan.status,
-      };
+      const goalContract = state.activeGoalContract === null
+        ? null
+        : structuredClone(state.activeGoalContract);
+      const plan = state.activePlan === null
+        ? null
+        : structuredClone(state.activePlan);
       const claim = state.activeClaim === null ? null : { ...state.activeClaim };
       const candidate = state.activeCandidate === null ? null : {
         version: state.activeCandidate.version,
@@ -244,12 +234,15 @@ export function installGoalRoomTools({
         readOnly: true,
         currentStateVersion: state.stateVersion,
         phase: state.phase,
-        ownerIntent: state.phase === "INTENT_DRAFT" ? state.ownerIntent : null,
+        ownerIntent: state.ownerIntent,
         goalContract,
         goalRevisionRequest: state.activeGoalContract?.revisionRequest
           ? { ...state.activeGoalContract.revisionRequest }
           : null,
         plan,
+        planRevisionRequest: state.activePlan?.revisionRequest
+          ? { ...state.activePlan.revisionRequest }
+          : null,
         currentActor,
         legalAgentActions,
         ...frontier,
@@ -262,12 +255,7 @@ export function installGoalRoomTools({
           reasonCode: recentRefusalReceipt.reasonCode,
           missingConditions: [...(recentRefusalReceipt.missingConditions ?? [])],
         },
-        state: {
-          goal: state.goal,
-          doneLooksLike: [...state.doneLooksLike],
-          phase: state.phase,
-          stateVersion: state.stateVersion,
-        },
+        state: structuredClone(state),
       };
       return recordResult("get_goal_room_state", result);
     },
@@ -276,7 +264,7 @@ export function installGoalRoomTools({
     name: "propose_goal_contract",
     title: "Propose an immutable Goal Contract",
     description:
-      "Propose Goal Contract data as the agent after owner intent or an owner revision request. UTF-8 bounds are enforced. This never confirms the Goal or authorizes Plan work; the owner must confirm or request revision.",
+      "Propose Goal Contract data as the agent after owner intent or an owner revision request. Bounds use trimmed Unicode code points, matching JSON Schema maxLength. This never confirms the Goal or authorizes Plan work; the owner must confirm or request revision.",
     inputSchema: {
       type: "object",
       additionalProperties: false,
@@ -305,8 +293,8 @@ export function installGoalRoomTools({
       if (
         !hasExactToolKeys(input, keys) ||
         !hasValidMutationEnvelope(input) ||
-        !isBoundedUtf8String(input.goal, 1000) ||
-        !isBoundedUtf8String(input.why, 1000) ||
+        !isBoundedUnicodeString(input.goal, 1000) ||
+        !isBoundedUnicodeString(input.why, 1000) ||
         !isGoalList(input.doneLooksLike, false) ||
         !isGoalList(input.constraints, true) ||
         !isGoalList(input.nonGoals, true) ||
@@ -334,13 +322,14 @@ export function installGoalRoomTools({
     name: "propose_plan",
     title: "Propose an immutable Goal Plan",
     description:
-      "Propose a versioned Plan as the agent. This never confirms the Plan; the owner must confirm or request revision.",
+      "Propose a versioned Plan as the agent. In GOAL_CONTRACT_CONFIRMED, pass the exact goalContractVersion exposed by get_goal_room_state; legacy DRAFT and PLAN_REVISION_REQUESTED calls may omit it. This never confirms the Plan; the owner must confirm or request revision.",
     inputSchema: {
       type: "object",
       additionalProperties: false,
       properties: {
         expectedStateVersion: { type: "integer", minimum: 0 },
         idempotencyKey: { type: "string", minLength: 1, maxLength: 160 },
+        goalContractVersion: { type: "integer", minimum: 1 },
         steps: {
           type: "array",
           minItems: 1,
@@ -360,17 +349,26 @@ export function installGoalRoomTools({
     },
     annotations: { readOnlyHint: false },
     async execute(input) {
+      const exactShape =
+        hasExactToolKeys(input, ["expectedStateVersion", "idempotencyKey", "steps"]) ||
+        hasExactToolKeys(input, [
+          "expectedStateVersion", "idempotencyKey", "goalContractVersion", "steps",
+        ]);
       if (
-        !hasExactToolKeys(input, [
-          "expectedStateVersion",
-          "idempotencyKey",
-          "steps",
-        ]) ||
+        !exactShape ||
         !hasValidMutationEnvelope(input) ||
+        (input.goalContractVersion !== undefined &&
+          (!Number.isSafeInteger(input.goalContractVersion) || input.goalContractVersion < 1)) ||
         !Array.isArray(input.steps) ||
         input.steps.length < 1 ||
         input.steps.length > 8 ||
         !input.steps.every(isValidPlanStep)
+      ) {
+        return invalidToolInput("propose_plan");
+      }
+      if (
+        room.getState().phase === "GOAL_CONTRACT_CONFIRMED" &&
+        input.goalContractVersion === undefined
       ) {
         return invalidToolInput("propose_plan");
       }
@@ -379,6 +377,9 @@ export function installGoalRoomTools({
         actor: "agent",
         expectedStateVersion: input.expectedStateVersion,
         idempotencyKey: input.idempotencyKey,
+        ...(input.goalContractVersion === undefined
+          ? {}
+          : { goalContractVersion: input.goalContractVersion }),
         steps: input.steps,
       });
     },

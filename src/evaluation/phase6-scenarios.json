@@ -29,7 +29,7 @@
     {
       "name": "propose_goal_contract",
       "title": "Propose an immutable Goal Contract",
-      "description": "Propose Goal Contract data as the agent after owner intent or an owner revision request. UTF-8 bounds are enforced. This never confirms the Goal or authorizes Plan work; the owner must confirm or request revision.",
+      "description": "Propose Goal Contract data as the agent after owner intent or an owner revision request. Bounds use trimmed Unicode code points, matching JSON Schema maxLength. This never confirms the Goal or authorizes Plan work; the owner must confirm or request revision.",
       "annotations": {
         "readOnlyHint": false,
         "consequentialHint": false,
@@ -125,7 +125,7 @@
     {
       "name": "propose_plan",
       "title": "Propose an immutable Goal Plan",
-      "description": "Propose a versioned Plan as the agent. This never confirms the Plan; the owner must confirm or request revision.",
+      "description": "Propose a versioned Plan as the agent. In GOAL_CONTRACT_CONFIRMED, pass the exact goalContractVersion exposed by get_goal_room_state; legacy DRAFT and PLAN_REVISION_REQUESTED calls may omit it. This never confirms the Plan; the owner must confirm or request revision.",
       "annotations": {
         "readOnlyHint": false
       },
@@ -141,6 +141,10 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 160
+          },
+          "goalContractVersion": {
+            "type": "integer",
+            "minimum": 1
           },
           "steps": {
             "type": "array",
