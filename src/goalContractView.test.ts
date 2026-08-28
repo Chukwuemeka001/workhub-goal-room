@@ -100,4 +100,33 @@ describe("Goal Contract origin and decision projection", () => {
       ],
     });
   });
+
+  it("preserves normalized seeded intent as origin and labels a later accepted SET as revision", async () => {
+    const room = createGoalRoom({ ownerIntent: "  Original owner intent.  " });
+    await room.dispatch({
+      type: "SET_OWNER_INTENT",
+      actor: "owner",
+      expectedStateVersion: 0,
+      idempotencyKey: "revise-seeded-intent",
+      intent: "  Revised owner intent.  ",
+    });
+
+    expect(room.getReceipts()).toHaveLength(1);
+    expect(createGoalContractView(room.getState(), room.getReceipts()).history).toEqual([
+      {
+        kind: "OWNER_INTENT",
+        actor: "owner",
+        authority: "CONTEXT_ONLY",
+        label: "Owner intent",
+        text: "Original owner intent.",
+      },
+      {
+        kind: "OWNER_INTENT",
+        actor: "owner",
+        authority: "CONTEXT_ONLY",
+        label: "Owner revised intent",
+        text: "Revised owner intent.",
+      },
+    ]);
+  });
 });

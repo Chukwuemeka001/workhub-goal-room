@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { createGoalRoom, getGoalRoomFrontier, replayGoalRoom, type Command } from "./goalRoom";
+import {
+  MAX_OWNER_INTENT_LENGTH,
+  createGoalRoom,
+  getGoalRoomFrontier,
+  replayGoalRoom,
+  type Command,
+} from "./goalRoom";
 
 const proposedContract = {
   goal: "Publish a verified WebMCP Challenge entry",
@@ -24,6 +30,70 @@ describe("Goal Room Goal Contract authority", () => {
       activeGoalContract: null,
       activePlan: null,
     });
+    expect(room.getReceipts()).toEqual([]);
+    expect(getGoalRoomFrontier(room.getState())).toEqual({
+      nextLegalAction: "OWNER_SET_INTENT",
+      ownerRequired: true,
+    });
+  });
+
+  it("normalizes seeded owner intent without fabricating a receipt and replays identically", async () => {
+    const input = { ownerIntent: "  Build governed work.  " };
+    const room = createGoalRoom(input);
+
+    expect(room.getState().ownerIntent).toBe("Build governed work.");
+    expect(getGoalRoomFrontier(room.getState())).toEqual({
+      nextLegalAction: "AGENT_PROPOSE_GOAL_CONTRACT",
+      ownerRequired: false,
+    });
+    expect(room.getReceipts()).toEqual([]);
+    expect(await replayGoalRoom(input, room.getReceipts())).toEqual(room.getState());
+  });
+
+  it("accepts exactly 1000 post-trim seeded owner-intent characters", () => {
+    const boundaryIntent = "x".repeat(MAX_OWNER_INTENT_LENGTH);
+    const seeded = createGoalRoom({ ownerIntent: `  ${boundaryIntent}  ` });
+
+    expect(seeded.getState().ownerIntent).toBe(boundaryIntent);
+    expect(seeded.getReceipts()).toEqual([]);
+  });
+
+  it("accepts exactly 1000 post-trim dispatched owner-intent characters", async () => {
+    const boundaryIntent = "x".repeat(MAX_OWNER_INTENT_LENGTH);
+    const dispatched = createGoalRoom({ ownerIntent: null });
+
+    await expect(dispatched.dispatch({
+      type: "SET_OWNER_INTENT",
+      actor: "owner",
+      expectedStateVersion: 0,
+      idempotencyKey: "boundary-owner-intent",
+      intent: `  ${boundaryIntent}  `,
+    })).resolves.toMatchObject({ accepted: true, stateVersion: 1 });
+    expect(dispatched.getState().ownerIntent).toBe(boundaryIntent);
+  });
+
+  it.each([
+    ["whitespace-only", "   "],
+    ["1001 post-trim characters", "x".repeat(MAX_OWNER_INTENT_LENGTH + 1)],
+  ])("fails closed on explicit %s seeded owner intent", (_label, ownerIntent) => {
+    expect(() => createGoalRoom({ ownerIntent })).toThrow("INVALID_OWNER_INTENT");
+  });
+
+  it.each([
+    ["whitespace-only", "   "],
+    ["1001 post-trim characters", `  ${"x".repeat(MAX_OWNER_INTENT_LENGTH + 1)}  `],
+  ])("rejects %s dispatched owner intent without state or receipt mutation", async (_label, intent) => {
+    const room = createGoalRoom({ ownerIntent: null });
+    const before = room.getState();
+
+    await expect(room.dispatch({
+      type: "SET_OWNER_INTENT",
+      actor: "owner",
+      expectedStateVersion: 0,
+      idempotencyKey: "invalid-owner-intent",
+      intent,
+    })).rejects.toThrow("INVALID_COMMAND");
+    expect(room.getState()).toEqual(before);
     expect(room.getReceipts()).toEqual([]);
     expect(getGoalRoomFrontier(room.getState())).toEqual({
       nextLegalAction: "OWNER_SET_INTENT",

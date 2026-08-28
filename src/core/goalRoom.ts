@@ -83,6 +83,7 @@ export type GoalRoomState = {
   goal: string;
   doneLooksLike: string[];
   ownerIntent: string | null;
+  seededOwnerIntent: string | null;
   activeGoalContract: GoalContractVersion | null;
   goalContractHistory: GoalContractVersion[];
   phase:
@@ -275,10 +276,14 @@ export type Receipt = {
 
 function initialState(input: GoalRoomInput): GoalRoomState {
   if ("ownerIntent" in input) {
+    const ownerIntent = input.ownerIntent === null
+      ? null
+      : normalizeOwnerIntent(input.ownerIntent, "INVALID_OWNER_INTENT");
     return {
       goal: "",
       doneLooksLike: [],
-      ownerIntent: input.ownerIntent,
+      ownerIntent,
+      seededOwnerIntent: ownerIntent,
       activeGoalContract: null,
       goalContractHistory: [],
       phase: "INTENT_DRAFT",
@@ -298,6 +303,7 @@ function initialState(input: GoalRoomInput): GoalRoomState {
     goal: input.goal,
     doneLooksLike: [...input.doneLooksLike],
     ownerIntent: null,
+    seededOwnerIntent: null,
     activeGoalContract: {
       version: 1,
       status: "CONFIRMED",
@@ -352,6 +358,18 @@ const LOWER_HEX_64 = /^[0-9a-f]{64}$/;
 const MAX_CANDIDATE_CONTENT_BYTES = 4 * 1024;
 export const MAX_OWNER_INTENT_LENGTH = 1_000;
 
+function normalizeOwnerIntent(
+  value: unknown,
+  errorCode: "INVALID_COMMAND" | "INVALID_OWNER_INTENT",
+): string {
+  if (typeof value !== "string") throw new Error(errorCode);
+  const normalized = value.trim();
+  if (normalized.length < 1 || normalized.length > MAX_OWNER_INTENT_LENGTH) {
+    throw new Error(errorCode);
+  }
+  return normalized;
+}
+
 function isNonEmptyStringArray(value: unknown, allowEmpty = false): value is string[] {
   return Array.isArray(value) &&
     (allowEmpty || value.length > 0) &&
@@ -369,16 +387,12 @@ function validateCommand(value: unknown): asserts value is Command {
   if (!commonValid) throw new Error("INVALID_COMMAND");
 
   if (value.type === "SET_OWNER_INTENT") {
-    if (
-      !hasExactKeys(value, [
-        "type", "actor", "expectedStateVersion", "idempotencyKey", "intent",
-      ]) ||
-      typeof value.intent !== "string" ||
-      value.intent.trim().length === 0 ||
-      value.intent.length > MAX_OWNER_INTENT_LENGTH
-    ) {
+    if (!hasExactKeys(value, [
+      "type", "actor", "expectedStateVersion", "idempotencyKey", "intent",
+    ])) {
       throw new Error("INVALID_COMMAND");
     }
+    normalizeOwnerIntent(value.intent, "INVALID_COMMAND");
     return;
   }
 
@@ -623,7 +637,7 @@ function applyAcceptedCommand(
     }
     return {
       ...state,
-      ownerIntent: command.intent.trim(),
+      ownerIntent: normalizeOwnerIntent(command.intent, "INVALID_COMMAND"),
       stateVersion: state.stateVersion + 1,
     };
   }

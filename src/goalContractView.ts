@@ -29,21 +29,18 @@ export function createGoalContractView(
   receipts: Receipt[],
 ): GoalContractView {
   const history: GoalOriginEvent[] = [];
-  const hasAcceptedIntentReceipt = receipts.some(
-    (receipt) => receipt.accepted && receipt.command.type === "SET_OWNER_INTENT",
-  );
-  if (!hasAcceptedIntentReceipt && state.ownerIntent !== null) {
+  if (state.seededOwnerIntent !== null) {
     history.push({
       kind: "OWNER_INTENT",
       actor: "owner",
       authority: "CONTEXT_ONLY",
       label: "Owner intent",
-      text: state.ownerIntent,
+      text: state.seededOwnerIntent,
     });
   }
 
   let goalVersion = 0;
-  let intentRevision = 0;
+  let intentRevision = state.seededOwnerIntent === null ? 0 : 1;
   for (const receipt of receipts) {
     if (!receipt.accepted) continue;
     const command = receipt.command;
