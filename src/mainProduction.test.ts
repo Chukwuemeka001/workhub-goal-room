@@ -25,6 +25,13 @@ describe("production Goal inception UI", () => {
     expect(main).toContain("controller.requestRevision");
   });
 
+  it("clears revision draft, validation, and binding on every dialog close path", () => {
+    expect(main).toContain('dialog.addEventListener("close", resetRevisionDialog)');
+    expect(main).toContain('revisionInput.value = ""');
+    expect(main).toContain('revisionInput.setCustomValidity("")');
+    expect(main).toContain("revisionBinding = null");
+  });
+
   it("requires exact-candidate modal confirmation before the controller acceptance path", () => {
     expect(html).toContain('id="acceptance-dialog"');
     expect(html).toContain('aria-labelledby="acceptance-dialog-title"');

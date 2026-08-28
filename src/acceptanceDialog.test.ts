@@ -9,9 +9,13 @@ class FakeNode {
   addEventListener(type: string, listener: (event: { preventDefault(): void }) => unknown) {
     this.listeners.set(type, [...(this.listeners.get(type) ?? []), listener]);
   }
-  async emit(type: string) {
+  ownerDocument = { activeElement: null as FakeNode | null };
+  children: FakeNode[] = [];
+  focus() { this.ownerDocument.activeElement = this; }
+  contains(node: unknown) { return this.children.includes(node as FakeNode); }
+  async emit(type: string, extra: Record<string, unknown> = {}) {
     let prevented = false;
-    const event = { preventDefault: () => { prevented = true; } };
+    const event = { preventDefault: () => { prevented = true; }, ...extra };
     for (const listener of this.listeners.get(type) ?? []) await listener(event);
     return prevented;
   }
@@ -31,6 +35,9 @@ function fixture() {
     dialog: new FakeNode(), form: new FakeNode(), cancel: new FakeNode(), confirm: new FakeNode(),
     title: new FakeNode(), candidate: new FakeNode(), digest: new FakeNode(), ruleSet: new FakeNode(), consequence: new FakeNode(),
   };
+  nodes.dialog.children = [nodes.cancel, nodes.confirm];
+  nodes.cancel.ownerDocument = nodes.dialog.ownerDocument;
+  nodes.confirm.ownerDocument = nodes.dialog.ownerDocument;
   const submitted: AcceptanceBinding[] = [];
   const dialog = createAcceptanceDialog(nodes, async (exact) => { submitted.push(exact); });
   return { nodes, submitted, dialog };
@@ -72,5 +79,19 @@ describe("exact-candidate acceptance confirmation", () => {
     expect(nodes.confirm.disabled).toBe(false);
     expect(nodes.dialog.open).toBe(false);
     expect(dialog.binding()).toBeNull();
+  });
+
+  it("cycles trusted Tab focus inside the open modal in both directions", async () => {
+    const { nodes, dialog } = fixture();
+    dialog.open(binding);
+    expect(nodes.dialog.ownerDocument.activeElement).toBe(nodes.cancel);
+
+    nodes.confirm.focus();
+    expect(await nodes.dialog.emit("keydown", { key: "Tab", shiftKey: false })).toBe(true);
+    expect(nodes.dialog.ownerDocument.activeElement).toBe(nodes.cancel);
+
+    nodes.cancel.focus();
+    expect(await nodes.dialog.emit("keydown", { key: "Tab", shiftKey: true })).toBe(true);
+    expect(nodes.dialog.ownerDocument.activeElement).toBe(nodes.confirm);
   });
 });

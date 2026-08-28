@@ -130,18 +130,18 @@ try {
     });
     const query = new URLSearchParams({ story });
     if (options.tab ?? matrix.tab) query.set("tab", options.tab ?? matrix.tab);
-    if (mode === "hostile") query.set("hostile", "1");
+    if (mode === "hostile" || options.hostile) query.set("hostile", "1");
     await call("Page.navigate", { url: `${origin}/qualification/v3-fixture.html?${query}` });
     await waitFor(
       async () => evaluate("document.readyState === 'complete' && window.__v3Qualification?.ready === true"),
       `${mode} ${story} ${viewport.width}x${viewport.height}`,
     );
   }
-  async function pressKey(key) {
-    const virtualKeyCodes = { Home: 36, End: 35, ArrowLeft: 37, ArrowRight: 39 };
+  async function pressKey(key, modifiers = 0) {
+    const virtualKeyCodes = { Home: 36, End: 35, ArrowLeft: 37, ArrowRight: 39, Tab: 9, Escape: 27 };
     const windowsVirtualKeyCode = virtualKeyCodes[key];
-    await call("Input.dispatchKeyEvent", { type: "keyDown", key, code: key, windowsVirtualKeyCode });
-    await call("Input.dispatchKeyEvent", { type: "keyUp", key, code: key, windowsVirtualKeyCode });
+    await call("Input.dispatchKeyEvent", { type: "keyDown", key, code: key, modifiers, windowsVirtualKeyCode });
+    await call("Input.dispatchKeyEvent", { type: "keyUp", key, code: key, modifiers, windowsVirtualKeyCode });
   }
 
   const rows = [];
@@ -183,6 +183,8 @@ try {
   const screenshots = [];
   let reducedMotion = null;
   let zoom = null;
+  const acceptanceFocus = [];
+  const hostilePanels = [];
 
   if (mode === "a11y") {
     for (const viewport of [responsiveViewports[1], responsiveViewports[6]]) {
@@ -212,6 +214,26 @@ try {
       keyboard.push({ viewport, initialOwnerCalls, sequence });
       if (initialOwnerCalls.length || sequence.some((entry) => entry.activeId !== entry.selected || entry.ownerCalls.length)) modeFailures.push({ kind: "keyboard", viewport, sequence });
     }
+    for (const viewport of [responsiveViewports[1], responsiveViewports[6]]) {
+      await navigate("S13", viewport);
+      const selector = viewport.expected === "mobile" ? ".mobile-action-dock .mobile-button.primary" : ".desktop-owner-action .desktop-action.primary";
+      await evaluate(`document.querySelector(${JSON.stringify(selector)}).click()`);
+      const sequence = [await evaluate(`({activeId:document.activeElement?.id??null,inside:document.querySelector('#acceptance-dialog').contains(document.activeElement),open:document.querySelector('#acceptance-dialog').open})`)];
+      for (let index = 0; index < 10; index += 1) {
+        await pressKey("Tab");
+        sequence.push(await evaluate(`({activeId:document.activeElement?.id??null,inside:document.querySelector('#acceptance-dialog').contains(document.activeElement),open:document.querySelector('#acceptance-dialog').open})`));
+      }
+      await evaluate("document.querySelector('#cancel-acceptance').focus()");
+      await pressKey("Tab", 8);
+      const reverse = await evaluate(`({activeId:document.activeElement?.id??null,inside:document.querySelector('#acceptance-dialog').contains(document.activeElement),open:document.querySelector('#acceptance-dialog').open})`);
+      await pressKey("Escape");
+      const closed = await evaluate(`({open:document.querySelector('#acceptance-dialog').open,ownerCalls:window.__v3Qualification.ownerCalls()})`);
+      const row = { viewport, sequence, reverse, closed };
+      acceptanceFocus.push(row);
+      if (sequence.some((entry) => !entry.open || !entry.inside) || !reverse.open || !reverse.inside || reverse.activeId !== "confirm-acceptance" || closed.open || closed.ownerCalls.includes("confirm-acceptance")) {
+        modeFailures.push({ kind: "acceptance-focus", ...row });
+      }
+    }
     await navigate("S12", responsiveViewports[6]);
     await call("Emulation.setEmulatedMedia", { features: [{ name: "prefers-reduced-motion", value: "reduce" }] });
     reducedMotion = await evaluate(`(()=>{const styles=[...document.querySelectorAll('*')].map(node=>getComputedStyle(node));return {matches:matchMedia('(prefers-reduced-motion: reduce)').matches,animations:styles.filter(style=>parseFloat(style.animationDuration)>0).length,transitions:styles.filter(style=>parseFloat(style.transitionDuration)>0).length}})()`);
@@ -229,6 +251,17 @@ try {
     if (zoom.overflow.documentX !== 0 || zoom.overflow.bodyX !== 0 || zoom.hostile.injectedNodeCount !== 0 || zoom.hostile.longestTextWidth > 1) {
       modeFailures.push({ kind: "zoom-hostile", zoom });
     }
+    for (const viewport of [responsiveViewports[0], responsiveViewports[5], responsiveViewports[7]]) {
+      for (const tab of ["goal", "plan", "proof", "activity"]) {
+        await navigate("S12", viewport, { tab, hostile: true });
+        const measurement = await evaluate("window.__v3Qualification.measurements()");
+        const row = { viewport, tab, overflow: measurement.overflow, hostile: measurement.hostile };
+        hostilePanels.push(row);
+        if (row.overflow.documentX !== 0 || row.overflow.bodyX !== 0 || row.overflow.activeX !== 0 || row.hostile.injectedNodeCount !== 0 || row.hostile.longestTextWidth > 1) {
+          modeFailures.push({ kind: "hostile-panel", ...row });
+        }
+      }
+    }
   }
 
   if (mode === "visual") {
@@ -237,14 +270,22 @@ try {
       { story: "S09", viewport: responsiveViewports[6] },
       { story: "S10", viewport: responsiveViewports[6] },
       { story: "S12", viewport: responsiveViewports[1] },
+      { story: "S12", viewport: responsiveViewports[6], tab: "proof", suffix: "proof" },
+      { story: "S13", viewport: responsiveViewports[6] },
+      { story: "S13", viewport: responsiveViewports[1] },
+      { story: "S13", viewport: responsiveViewports[6], openAcceptance: true, suffix: "modal" },
       { story: "S14", viewport: responsiveViewports[6] },
       { story: "S14", viewport: responsiveViewports[1] },
+      { story: "S03", viewport: responsiveViewports[0], hostile: true, tab: "activity", suffix: "hostile" },
+      { story: "S03", viewport: responsiveViewports[7], hostile: true, tab: "activity", suffix: "hostile" },
     ];
     for (const capture of captures) {
-      await navigate(capture.story, capture.viewport);
+      await navigate(capture.story, capture.viewport, capture);
+      if (capture.openAcceptance) await evaluate("document.querySelector('.desktop-owner-action .desktop-action.primary').click()");
       const result = await call("Page.captureScreenshot", { format: "png", fromSurface: true, captureBeyondViewport: false });
       const bytes = Buffer.from(result.data, "base64");
-      const name = `v3-${capture.story.toLowerCase()}-${capture.viewport.width}x${capture.viewport.height}.png`;
+      const qualifier = capture.suffix ? `-${capture.suffix}` : "";
+      const name = `v3-${capture.story.toLowerCase()}${qualifier}-${capture.viewport.width}x${capture.viewport.height}.png`;
       await writeFile(join(output, name), bytes);
       screenshots.push({ path: `evaluation/v3/${name}`, story: capture.story, ...capture.viewport, sha256: sha256(bytes), ...pngDimensions(bytes) });
     }
@@ -283,6 +324,8 @@ try {
     rows,
     accessibility,
     keyboard,
+    acceptanceFocus,
+    hostilePanels,
     reducedMotion,
     zoom,
     screenshots,

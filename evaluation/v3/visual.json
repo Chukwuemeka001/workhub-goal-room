@@ -2876,6 +2876,8 @@
   ],
   "accessibility": [],
   "keyboard": [],
+  "acceptanceFocus": [],
+  "hostilePanels": [],
   "reducedMotion": null,
   "zoom": null,
   "screenshots": [
@@ -2886,7 +2888,7 @@
       "width": 1440,
       "height": 900,
       "expected": "desktop",
-      "sha256": "6d91c6ea30c21a0a4646b99d1b24785404554b758b9c149320b56fc65958150a"
+      "sha256": "ec7ce1a65c49588640f225befda1b0212bb0d1ee484d4899f2e261c16d4962e4"
     },
     {
       "path": "evaluation/v3/v3-s09-1440x900.png",
@@ -2895,7 +2897,7 @@
       "width": 1440,
       "height": 900,
       "expected": "desktop",
-      "sha256": "7002f19ba9bb00bdb44e79a0f18b39041506c5a58f6a71b15b354aadbeb0032c"
+      "sha256": "14a12fe3e2af09e6c387a47af69f34ad64f0ae39bfd702dfc36a6867c5a34fc6"
     },
     {
       "path": "evaluation/v3/v3-s10-1440x900.png",
@@ -2904,7 +2906,7 @@
       "width": 1440,
       "height": 900,
       "expected": "desktop",
-      "sha256": "64709b79afa4af41433c5a8ee13808b7ea2a6a82ed0d6c7d67a651bcf74fdfe4"
+      "sha256": "9f0d71315d9e8f795ef819e59696a0c5bcf2cc2f41c56369e2244b4d158229ab"
     },
     {
       "path": "evaluation/v3/v3-s12-393x852.png",
@@ -2916,13 +2918,49 @@
       "sha256": "0e99cc17c21323c14fbf89d7b695a7c2484a0cca4d55d7cf0de6264ad4372de4"
     },
     {
+      "path": "evaluation/v3/v3-s12-proof-1440x900.png",
+      "story": "S12",
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "expected": "desktop",
+      "sha256": "331a7cfd07b5d90cad321496724c39ff5e9430a440a8a9eda2ae25fad21d56d8"
+    },
+    {
+      "path": "evaluation/v3/v3-s13-1440x900.png",
+      "story": "S13",
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "expected": "desktop",
+      "sha256": "f93d8d692146fa1572514d074f52e6f6807cb30fabedd732aad56b3574110d7c"
+    },
+    {
+      "path": "evaluation/v3/v3-s13-393x852.png",
+      "story": "S13",
+      "name": "phone",
+      "width": 393,
+      "height": 852,
+      "expected": "mobile",
+      "sha256": "cf469f37b584ff74cc1598a4bc8bbda364e7fbf89463b599c1a58d127842595a"
+    },
+    {
+      "path": "evaluation/v3/v3-s13-modal-1440x900.png",
+      "story": "S13",
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "expected": "desktop",
+      "sha256": "3aba48d03ba89c0645885445a2999738b8cca0b68e783413dcfb177827f02e59"
+    },
+    {
       "path": "evaluation/v3/v3-s14-1440x900.png",
       "story": "S14",
       "name": "desktop",
       "width": 1440,
       "height": 900,
       "expected": "desktop",
-      "sha256": "f30415657f11e28cd8ffb5906c2f6eac9fc41f381e7c8618156b1e4acf92dd7b"
+      "sha256": "64bd8a0b34dd32a88e6193298e13bbfabf6cae1a2620867d98b5ffbd965e92f0"
     },
     {
       "path": "evaluation/v3/v3-s14-393x852.png",
@@ -2932,6 +2970,24 @@
       "height": 852,
       "expected": "mobile",
       "sha256": "23559f6178ba791276230c37666b42566e5b2c4c102c0d83c004991f0f66c51c"
+    },
+    {
+      "path": "evaluation/v3/v3-s03-hostile-320x568.png",
+      "story": "S03",
+      "name": "minimum",
+      "width": 320,
+      "height": 568,
+      "expected": "mobile",
+      "sha256": "d0eb06393451868a38ac3102440696d05cc53ea4efe286ed823541ecf5bdfdf9"
+    },
+    {
+      "path": "evaluation/v3/v3-s03-hostile-1728x1117.png",
+      "story": "S03",
+      "name": "wide-desktop",
+      "width": 1728,
+      "height": 1117,
+      "expected": "desktop",
+      "sha256": "49b369ce13b060380ffdcd27a538ad2642733e0b5dd009bf3c38857b367c4ca6"
     }
   ],
   "failures": []

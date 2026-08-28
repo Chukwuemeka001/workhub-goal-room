@@ -5,6 +5,7 @@ import { createDesktopView } from "../src/desktopView";
 import { createMobileSurface } from "../src/mobileUi";
 import { createMobileView } from "../src/mobileView";
 import { createOwnerViewModel } from "../src/ownerView";
+import { createAcceptanceDialog, type AcceptanceDialogNodes } from "../src/acceptanceDialog";
 import {
   V3_HOSTILE_MARKERS,
   V3_STORY_CATALOG,
@@ -21,10 +22,24 @@ const state = story.state;
 const receipts = story.receipts;
 const ownerView = createOwnerViewModel(state, receipts);
 const ownerCalls: string[] = [];
+const acceptanceDialog = createAcceptanceDialog({
+  dialog: document.querySelector<HTMLDialogElement>("#acceptance-dialog")!,
+  form: document.querySelector<HTMLFormElement>("#acceptance-form")!,
+  cancel: document.querySelector<HTMLButtonElement>("#cancel-acceptance")!,
+  confirm: document.querySelector<HTMLButtonElement>("#confirm-acceptance")!,
+  title: document.querySelector<HTMLElement>("#acceptance-dialog-title")!,
+  candidate: document.querySelector<HTMLElement>("#acceptance-candidate-version")!,
+  digest: document.querySelector<HTMLElement>("#acceptance-candidate-digest")!,
+  ruleSet: document.querySelector<HTMLElement>("#acceptance-rule-set")!,
+  consequence: document.querySelector<HTMLElement>("#acceptance-dialog-consequence")!,
+} as unknown as AcceptanceDialogNodes, async () => { ownerCalls.push("confirm-acceptance"); });
 const actions = {
   onSetIntent: async () => { ownerCalls.push("set-intent"); },
   onPrimary: async (kind: string) => { ownerCalls.push(`primary:${kind}`); },
-  onOpenAcceptance: () => { ownerCalls.push("open-acceptance"); },
+  onOpenAcceptance: (binding: Parameters<typeof acceptanceDialog.open>[0]) => {
+    ownerCalls.push("open-acceptance");
+    acceptanceDialog.open(binding);
+  },
   onOpenRevision: (kind: string, version: number) => { ownerCalls.push(`revision:${kind}:v${version}`); },
 };
 
@@ -182,6 +197,7 @@ Object.assign(window, {
     registrationOrder: replay.registrationOrder,
     finalReceiptHash: replay.finalReceiptHash,
     ownerCalls: () => [...ownerCalls],
+    acceptanceBinding: () => acceptanceDialog.binding(),
     selectedTabs: () => ({ desktop: desktop.selectedTab(), mobile: mobile.selectedTab() }),
   },
 });

@@ -32365,7 +32365,7 @@
   "screenshots": [
     {
       "path": "evaluation/phase8/visual-goal-1440x900.png",
-      "sha256": "4b28073643e874d0d9ac09cfe2bc27721aeb749a9cf88eccc5a2c9ee7b9c2060",
+      "sha256": "c941479320bc6875ca85806ecf055c135f62ac530731ceaf06c48be9eb553100",
       "width": 1440,
       "height": 900,
       "state": "goal",
@@ -32373,7 +32373,7 @@
     },
     {
       "path": "evaluation/phase8/visual-fail-1440x900.png",
-      "sha256": "2f9d3caff0bc07d45225b750d5fc4edcf05d5813de18144e32d26b20305b14b8",
+      "sha256": "3cbeb115be58585f856cc12faf29e2b5e7202fa5308ef03c720a6827e87c1cde",
       "width": 1440,
       "height": 900,
       "state": "fail",
@@ -32381,7 +32381,7 @@
     },
     {
       "path": "evaluation/phase8/visual-accepted-1440x900.png",
-      "sha256": "df5cd6e5547a28628836c35a6db874e298681cc04a6659ee7d0afa8a4a887571",
+      "sha256": "985f79518481eeeccde55da543b0f396d34bc574905034e13769503f495d630c",
       "width": 1440,
       "height": 900,
       "state": "accepted",

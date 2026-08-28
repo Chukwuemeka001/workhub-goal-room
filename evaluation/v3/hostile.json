@@ -43,15 +43,15 @@
       "S09"
     ],
     "finalReceiptHashes": [
-      "7a05ff58859695cf07c0bbb6164606565eae8c71e103db84d04b4db67fa7e830",
-      "253b044ab73028712d703ec10b1f5b72071258fe06384a583c748dbaeabbfacc",
-      "ff26c88890fdc75c33f0fadc63972b83bd171890f5688b771005195c4e99f6ae",
-      "76810b96683623ae11444194cac0c1fdcc7c3bbcc773887d9877afcaa4874906",
-      "dd8c2fb507e646f84683cb7f53c535b08d2d3084c3f7bb0149f9db361f2d582d",
-      "b2455a915dc174b153ae05972d4f1853eca7035c78470651b48abccf8f2a491a",
-      "19555528a1859428e188ff3bc1e3b2d339421c2b79c6e5a1495d1f612c594359",
-      "03d9da228b9d243b7173cf89e6652e0b8ca4851f2e2ceb9bbe3042ece1f961e9",
-      "0b491a8ab7997b0f693112ea09c0f666d8af3fd981c6bbc9810e2042560eb695"
+      "c1220b3c91e665e4e9c78fe76e30fab66cdd83dc757092527ef3faa4773bf4c0",
+      "97f273c418cd57ee76b1c429a1dbbc4b9487997e1137bb94f4e47d3f5fa3b9bc",
+      "eddd54123a418b07af6345ad43fcefb7280a8df6e560d1161bd3807b60d382b8",
+      "91bba8a106c3dbc2623b5fad7bea89e7ada263abe8dea091caa01d39070456f9",
+      "abdfc26dce5ea2a32ff2419f7d488d779f4c8b605a3b0f19c307308f6aa7cb2e",
+      "bfde1da6547e9b690622200081353e0cc15c53d0b0ce310f5e1a573924873a4a",
+      "30355d8c2b650527e3fbc6c69127cdcff889983237bf555f47fc445fc3383a69",
+      "142fb56430458a40bff3ca0e1d3fe39f2246e2b7df802b70c5f9a2f4d9f5df5e",
+      "275ea33ae8a85996efe80649f2d3fd2cd131ae04475c6a3c952ee4162824c64a"
     ]
   },
   "rows": [
@@ -63,9 +63,9 @@
         "kernelPhase": "INTENT_DRAFT",
         "presentation": "canonical",
         "stateVersion": 1,
-        "stateDigest": "35ce946021c7affe28fd7dc5f5e617e6cc93da6fc70853b3d778a9dcdf4db4de",
+        "stateDigest": "f127e43024df7908b701356b1249ee6ae5129c377faf77d6edb429d3c6f6d8b7",
         "receiptCount": 1,
-        "receiptHash": "7a05ff58859695cf07c0bbb6164606565eae8c71e103db84d04b4db67fa7e830"
+        "receiptHash": "c1220b3c91e665e4e9c78fe76e30fab66cdd83dc757092527ef3faa4773bf4c0"
       },
       "viewport": {
         "name": "minimum",
@@ -252,9 +252,9 @@
         "kernelPhase": "GOAL_CONTRACT_PROPOSED",
         "presentation": "canonical",
         "stateVersion": 2,
-        "stateDigest": "89a5e96a415ab0a031295540623e65508b15eee7550a4a96a63e6e4a55437566",
+        "stateDigest": "549a58f88e7649a5f4e12adfef39516b9e36842662b5b11c522e2187a80e862b",
         "receiptCount": 2,
-        "receiptHash": "253b044ab73028712d703ec10b1f5b72071258fe06384a583c748dbaeabbfacc"
+        "receiptHash": "97f273c418cd57ee76b1c429a1dbbc4b9487997e1137bb94f4e47d3f5fa3b9bc"
       },
       "viewport": {
         "name": "minimum",
@@ -441,9 +441,9 @@
         "kernelPhase": "GOAL_CONTRACT_REVISION_REQUESTED",
         "presentation": "canonical",
         "stateVersion": 3,
-        "stateDigest": "ff536c86d412a6966f610a7f5aaca6034523da5b68d4278b0ef543edf5dfbb50",
+        "stateDigest": "bbfbebfe67c515b4b4bbd07bb9e13b1125f15d26b63e707f28fa0f50ab2d4f59",
         "receiptCount": 3,
-        "receiptHash": "ff26c88890fdc75c33f0fadc63972b83bd171890f5688b771005195c4e99f6ae"
+        "receiptHash": "eddd54123a418b07af6345ad43fcefb7280a8df6e560d1161bd3807b60d382b8"
       },
       "viewport": {
         "name": "minimum",
@@ -608,9 +608,9 @@
         "kernelPhase": "PLAN_PROPOSED",
         "presentation": "canonical",
         "stateVersion": 6,
-        "stateDigest": "a437a2fa06093ac4f05855c81d1d106c66feda18c0f3eebaef318f17d76c4013",
+        "stateDigest": "442efe87bbdd2befa3aeded858557a939a2a7d2effb509a34781630d0522aca9",
         "receiptCount": 6,
-        "receiptHash": "76810b96683623ae11444194cac0c1fdcc7c3bbcc773887d9877afcaa4874906"
+        "receiptHash": "91bba8a106c3dbc2623b5fad7bea89e7ada263abe8dea091caa01d39070456f9"
       },
       "viewport": {
         "name": "minimum",
@@ -797,9 +797,9 @@
         "kernelPhase": "PLAN_REVISION_REQUESTED",
         "presentation": "canonical",
         "stateVersion": 7,
-        "stateDigest": "1823c7d6413c5645093d3b21131f9419e90fe6b7e069c4d3b92c7a7e5227101e",
+        "stateDigest": "0168a719089fc886d8bbef5e8933d58e5d3d61907c777dad484117d0b2af8983",
         "receiptCount": 7,
-        "receiptHash": "dd8c2fb507e646f84683cb7f53c535b08d2d3084c3f7bb0149f9db361f2d582d"
+        "receiptHash": "abdfc26dce5ea2a32ff2419f7d488d779f4c8b605a3b0f19c307308f6aa7cb2e"
       },
       "viewport": {
         "name": "minimum",
@@ -964,9 +964,9 @@
         "kernelPhase": "CANDIDATE_SUBMITTED",
         "presentation": "synthetic-test-only-transient",
         "stateVersion": 11,
-        "stateDigest": "30ce65ba0fc84a2e6f31257ecb331fce362327149df96ae90acacd67d5fe515a",
+        "stateDigest": "9355b0595b41f4f79408b88463e16ae774ba6a172b7e6d582915599225e2102d",
         "receiptCount": 11,
-        "receiptHash": "b2455a915dc174b153ae05972d4f1853eca7035c78470651b48abccf8f2a491a"
+        "receiptHash": "bfde1da6547e9b690622200081353e0cc15c53d0b0ce310f5e1a573924873a4a"
       },
       "viewport": {
         "name": "minimum",
@@ -1131,9 +1131,9 @@
         "kernelPhase": "VERIFICATION_FAILED",
         "presentation": "canonical",
         "stateVersion": 12,
-        "stateDigest": "a110a89cb8f6489efac9cba915111fb2bac4e290a320511f2bd5919a7338b011",
+        "stateDigest": "2d3bd1b10fce7e639a064df9494931b50c33e3d9df3d73c23fd4fb8f0871fee0",
         "receiptCount": 12,
-        "receiptHash": "19555528a1859428e188ff3bc1e3b2d339421c2b79c6e5a1495d1f612c594359"
+        "receiptHash": "30355d8c2b650527e3fbc6c69127cdcff889983237bf555f47fc445fc3383a69"
       },
       "viewport": {
         "name": "minimum",
@@ -1298,9 +1298,9 @@
         "kernelPhase": "VERIFICATION_PASSED",
         "presentation": "canonical",
         "stateVersion": 14,
-        "stateDigest": "4b36b4c8ecb0de358744b1d1fed3fdd380227f6aa62f9973619b33a64146d62c",
+        "stateDigest": "13af47ecc11d7c489c7b2e7e92ef4fd5fee0b5e2fc6d98ac0cbe7e25200b3a3c",
         "receiptCount": 14,
-        "receiptHash": "03d9da228b9d243b7173cf89e6652e0b8ca4851f2e2ceb9bbe3042ece1f961e9"
+        "receiptHash": "142fb56430458a40bff3ca0e1d3fe39f2246e2b7df802b70c5f9a2f4d9f5df5e"
       },
       "viewport": {
         "name": "minimum",
@@ -1465,9 +1465,9 @@
         "kernelPhase": "GOAL_ACCEPTED",
         "presentation": "canonical",
         "stateVersion": 16,
-        "stateDigest": "cdf421b333727952c08f3159498e53e70645f18f22e9536509baa498ef4e0eb8",
+        "stateDigest": "336a7c40c3463204bb324e5c1026ab83f84f3fa6edd72f71a8564ea106e7ff7f",
         "receiptCount": 16,
-        "receiptHash": "0b491a8ab7997b0f693112ea09c0f666d8af3fd981c6bbc9810e2042560eb695"
+        "receiptHash": "275ea33ae8a85996efe80649f2d3fd2cd131ae04475c6a3c952ee4162824c64a"
       },
       "viewport": {
         "name": "minimum",
@@ -1632,9 +1632,9 @@
         "kernelPhase": "INTENT_DRAFT",
         "presentation": "canonical",
         "stateVersion": 1,
-        "stateDigest": "35ce946021c7affe28fd7dc5f5e617e6cc93da6fc70853b3d778a9dcdf4db4de",
+        "stateDigest": "f127e43024df7908b701356b1249ee6ae5129c377faf77d6edb429d3c6f6d8b7",
         "receiptCount": 1,
-        "receiptHash": "7a05ff58859695cf07c0bbb6164606565eae8c71e103db84d04b4db67fa7e830"
+        "receiptHash": "c1220b3c91e665e4e9c78fe76e30fab66cdd83dc757092527ef3faa4773bf4c0"
       },
       "viewport": {
         "name": "desktop-boundary",
@@ -1680,10 +1680,10 @@
           {
             "id": "desktop-owner-intent",
             "x": 551,
-            "y": 754.078125,
-            "top": 754.078125,
+            "y": 652.734375,
+            "top": 652.734375,
             "right": 772,
-            "bottom": 866.078125,
+            "bottom": 764.734375,
             "left": 551,
             "width": 221,
             "height": 112
@@ -1691,10 +1691,10 @@
           {
             "id": null,
             "x": 551,
-            "y": 875.078125,
-            "top": 875.078125,
+            "y": 773.734375,
+            "top": 773.734375,
             "right": 772,
-            "bottom": 919.078125,
+            "bottom": 817.734375,
             "left": 551,
             "width": 221,
             "height": 44
@@ -1702,10 +1702,10 @@
           {
             "id": "desktop-tab-goal",
             "x": 834,
-            "y": 529.078125,
-            "top": 529.078125,
+            "y": 427.734375,
+            "top": 427.734375,
             "right": 919,
-            "bottom": 573.078125,
+            "bottom": 471.734375,
             "left": 834,
             "width": 85,
             "height": 44
@@ -1713,10 +1713,10 @@
           {
             "id": "desktop-tab-plan",
             "x": 919,
-            "y": 529.078125,
-            "top": 529.078125,
+            "y": 427.734375,
+            "top": 427.734375,
             "right": 1004,
-            "bottom": 573.078125,
+            "bottom": 471.734375,
             "left": 919,
             "width": 85,
             "height": 44
@@ -1724,10 +1724,10 @@
           {
             "id": "desktop-tab-proof",
             "x": 1004,
-            "y": 529.078125,
-            "top": 529.078125,
+            "y": 427.734375,
+            "top": 427.734375,
             "right": 1089,
-            "bottom": 573.078125,
+            "bottom": 471.734375,
             "left": 1004,
             "width": 85,
             "height": 44
@@ -1735,10 +1735,10 @@
           {
             "id": "desktop-tab-activity",
             "x": 1089,
-            "y": 529.078125,
-            "top": 529.078125,
+            "y": 427.734375,
+            "top": 427.734375,
             "right": 1174,
-            "bottom": 573.078125,
+            "bottom": 471.734375,
             "left": 1089,
             "width": 85,
             "height": 44
@@ -1746,10 +1746,10 @@
           {
             "id": null,
             "x": 26,
-            "y": 1022.1875,
-            "top": 1022.1875,
+            "y": 1029.734375,
+            "top": 1029.734375,
             "right": 407.65625,
-            "bottom": 1066.1875,
+            "bottom": 1073.734375,
             "left": 26,
             "width": 381.65625,
             "height": 44
@@ -1757,10 +1757,10 @@
           {
             "id": null,
             "x": 408.65625,
-            "y": 1022.1875,
-            "top": 1022.1875,
+            "y": 1029.734375,
+            "top": 1029.734375,
             "right": 790.328125,
-            "bottom": 1066.1875,
+            "bottom": 1073.734375,
             "left": 408.65625,
             "width": 381.671875,
             "height": 44
@@ -1768,10 +1768,10 @@
           {
             "id": null,
             "x": 791.328125,
-            "y": 1022.1875,
-            "top": 1022.1875,
+            "y": 1029.734375,
+            "top": 1029.734375,
             "right": 1173.984375,
-            "bottom": 1066.1875,
+            "bottom": 1073.734375,
             "left": 791.328125,
             "width": 382.65625,
             "height": 44
@@ -1832,9 +1832,9 @@
         "kernelPhase": "GOAL_CONTRACT_PROPOSED",
         "presentation": "canonical",
         "stateVersion": 2,
-        "stateDigest": "89a5e96a415ab0a031295540623e65508b15eee7550a4a96a63e6e4a55437566",
+        "stateDigest": "549a58f88e7649a5f4e12adfef39516b9e36842662b5b11c522e2187a80e862b",
         "receiptCount": 2,
-        "receiptHash": "253b044ab73028712d703ec10b1f5b72071258fe06384a583c748dbaeabbfacc"
+        "receiptHash": "97f273c418cd57ee76b1c429a1dbbc4b9487997e1137bb94f4e47d3f5fa3b9bc"
       },
       "viewport": {
         "name": "desktop-boundary",
@@ -1880,10 +1880,10 @@
           {
             "id": null,
             "x": 551,
-            "y": 595,
-            "top": 595,
+            "y": 720.390625,
+            "top": 720.390625,
             "right": 772,
-            "bottom": 639,
+            "bottom": 764.390625,
             "left": 551,
             "width": 221,
             "height": 44
@@ -1891,10 +1891,10 @@
           {
             "id": null,
             "x": 551,
-            "y": 649,
-            "top": 649,
+            "y": 774.390625,
+            "top": 774.390625,
             "right": 772,
-            "bottom": 693,
+            "bottom": 818.390625,
             "left": 551,
             "width": 221,
             "height": 44
@@ -1902,10 +1902,10 @@
           {
             "id": "desktop-tab-goal",
             "x": 834,
-            "y": 303,
-            "top": 303,
+            "y": 428.390625,
+            "top": 428.390625,
             "right": 919,
-            "bottom": 347,
+            "bottom": 472.390625,
             "left": 834,
             "width": 85,
             "height": 44
@@ -1913,10 +1913,10 @@
           {
             "id": "desktop-tab-plan",
             "x": 919,
-            "y": 303,
-            "top": 303,
+            "y": 428.390625,
+            "top": 428.390625,
             "right": 1004,
-            "bottom": 347,
+            "bottom": 472.390625,
             "left": 919,
             "width": 85,
             "height": 44
@@ -1924,10 +1924,10 @@
           {
             "id": "desktop-tab-proof",
             "x": 1004,
-            "y": 303,
-            "top": 303,
+            "y": 428.390625,
+            "top": 428.390625,
             "right": 1089,
-            "bottom": 347,
+            "bottom": 472.390625,
             "left": 1004,
             "width": 85,
             "height": 44
@@ -1935,10 +1935,10 @@
           {
             "id": "desktop-tab-activity",
             "x": 1089,
-            "y": 303,
-            "top": 303,
+            "y": 428.390625,
+            "top": 428.390625,
             "right": 1174,
-            "bottom": 347,
+            "bottom": 472.390625,
             "left": 1089,
             "width": 85,
             "height": 44
@@ -1946,10 +1946,10 @@
           {
             "id": null,
             "x": 26,
-            "y": 890.78125,
-            "top": 890.78125,
+            "y": 1030.390625,
+            "top": 1030.390625,
             "right": 407.65625,
-            "bottom": 934.78125,
+            "bottom": 1074.390625,
             "left": 26,
             "width": 381.65625,
             "height": 44
@@ -1957,10 +1957,10 @@
           {
             "id": null,
             "x": 408.65625,
-            "y": 890.78125,
-            "top": 890.78125,
+            "y": 1030.390625,
+            "top": 1030.390625,
             "right": 790.328125,
-            "bottom": 934.78125,
+            "bottom": 1074.390625,
             "left": 408.65625,
             "width": 381.671875,
             "height": 44
@@ -1968,10 +1968,10 @@
           {
             "id": null,
             "x": 791.328125,
-            "y": 890.78125,
-            "top": 890.78125,
+            "y": 1030.390625,
+            "top": 1030.390625,
             "right": 1173.984375,
-            "bottom": 934.78125,
+            "bottom": 1074.390625,
             "left": 791.328125,
             "width": 382.65625,
             "height": 44
@@ -2032,9 +2032,9 @@
         "kernelPhase": "GOAL_CONTRACT_REVISION_REQUESTED",
         "presentation": "canonical",
         "stateVersion": 3,
-        "stateDigest": "ff536c86d412a6966f610a7f5aaca6034523da5b68d4278b0ef543edf5dfbb50",
+        "stateDigest": "bbfbebfe67c515b4b4bbd07bb9e13b1125f15d26b63e707f28fa0f50ab2d4f59",
         "receiptCount": 3,
-        "receiptHash": "ff26c88890fdc75c33f0fadc63972b83bd171890f5688b771005195c4e99f6ae"
+        "receiptHash": "eddd54123a418b07af6345ad43fcefb7280a8df6e560d1161bd3807b60d382b8"
       },
       "viewport": {
         "name": "desktop-boundary",
@@ -2080,10 +2080,10 @@
           {
             "id": "desktop-tab-goal",
             "x": 834,
-            "y": 305,
-            "top": 305,
+            "y": 428.390625,
+            "top": 428.390625,
             "right": 919,
-            "bottom": 349,
+            "bottom": 472.390625,
             "left": 834,
             "width": 85,
             "height": 44
@@ -2091,10 +2091,10 @@
           {
             "id": "desktop-tab-plan",
             "x": 919,
-            "y": 305,
-            "top": 305,
+            "y": 428.390625,
+            "top": 428.390625,
             "right": 1004,
-            "bottom": 349,
+            "bottom": 472.390625,
             "left": 919,
             "width": 85,
             "height": 44
@@ -2102,10 +2102,10 @@
           {
             "id": "desktop-tab-proof",
             "x": 1004,
-            "y": 305,
-            "top": 305,
+            "y": 428.390625,
+            "top": 428.390625,
             "right": 1089,
-            "bottom": 349,
+            "bottom": 472.390625,
             "left": 1004,
             "width": 85,
             "height": 44
@@ -2113,10 +2113,10 @@
           {
             "id": "desktop-tab-activity",
             "x": 1089,
-            "y": 305,
-            "top": 305,
+            "y": 428.390625,
+            "top": 428.390625,
             "right": 1174,
-            "bottom": 349,
+            "bottom": 472.390625,
             "left": 1089,
             "width": 85,
             "height": 44
@@ -2124,10 +2124,10 @@
           {
             "id": null,
             "x": 26,
-            "y": 907,
-            "top": 907,
+            "y": 1030.390625,
+            "top": 1030.390625,
             "right": 407.65625,
-            "bottom": 951,
+            "bottom": 1074.390625,
             "left": 26,
             "width": 381.65625,
             "height": 44
@@ -2135,10 +2135,10 @@
           {
             "id": null,
             "x": 408.65625,
-            "y": 907,
-            "top": 907,
+            "y": 1030.390625,
+            "top": 1030.390625,
             "right": 790.328125,
-            "bottom": 951,
+            "bottom": 1074.390625,
             "left": 408.65625,
             "width": 381.671875,
             "height": 44
@@ -2146,10 +2146,10 @@
           {
             "id": null,
             "x": 791.328125,
-            "y": 907,
-            "top": 907,
+            "y": 1030.390625,
+            "top": 1030.390625,
             "right": 1173.984375,
-            "bottom": 951,
+            "bottom": 1074.390625,
             "left": 791.328125,
             "width": 382.65625,
             "height": 44
@@ -2210,9 +2210,9 @@
         "kernelPhase": "PLAN_PROPOSED",
         "presentation": "canonical",
         "stateVersion": 6,
-        "stateDigest": "a437a2fa06093ac4f05855c81d1d106c66feda18c0f3eebaef318f17d76c4013",
+        "stateDigest": "442efe87bbdd2befa3aeded858557a939a2a7d2effb509a34781630d0522aca9",
         "receiptCount": 6,
-        "receiptHash": "76810b96683623ae11444194cac0c1fdcc7c3bbcc773887d9877afcaa4874906"
+        "receiptHash": "91bba8a106c3dbc2623b5fad7bea89e7ada263abe8dea091caa01d39070456f9"
       },
       "viewport": {
         "name": "desktop-boundary",
@@ -2258,10 +2258,10 @@
           {
             "id": null,
             "x": 551,
-            "y": 595,
-            "top": 595,
+            "y": 720.484375,
+            "top": 720.484375,
             "right": 772,
-            "bottom": 639,
+            "bottom": 764.484375,
             "left": 551,
             "width": 221,
             "height": 44
@@ -2269,10 +2269,10 @@
           {
             "id": null,
             "x": 551,
-            "y": 649,
-            "top": 649,
+            "y": 774.484375,
+            "top": 774.484375,
             "right": 772,
-            "bottom": 693,
+            "bottom": 818.484375,
             "left": 551,
             "width": 221,
             "height": 44
@@ -2280,10 +2280,10 @@
           {
             "id": "desktop-tab-goal",
             "x": 834,
-            "y": 303,
-            "top": 303,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 919,
-            "bottom": 347,
+            "bottom": 472.484375,
             "left": 834,
             "width": 85,
             "height": 44
@@ -2291,10 +2291,10 @@
           {
             "id": "desktop-tab-plan",
             "x": 919,
-            "y": 303,
-            "top": 303,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 1004,
-            "bottom": 347,
+            "bottom": 472.484375,
             "left": 919,
             "width": 85,
             "height": 44
@@ -2302,10 +2302,10 @@
           {
             "id": "desktop-tab-proof",
             "x": 1004,
-            "y": 303,
-            "top": 303,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 1089,
-            "bottom": 347,
+            "bottom": 472.484375,
             "left": 1004,
             "width": 85,
             "height": 44
@@ -2313,10 +2313,10 @@
           {
             "id": "desktop-tab-activity",
             "x": 1089,
-            "y": 303,
-            "top": 303,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 1174,
-            "bottom": 347,
+            "bottom": 472.484375,
             "left": 1089,
             "width": 85,
             "height": 44
@@ -2324,10 +2324,10 @@
           {
             "id": null,
             "x": 26,
-            "y": 905,
-            "top": 905,
+            "y": 1030.484375,
+            "top": 1030.484375,
             "right": 407.65625,
-            "bottom": 949,
+            "bottom": 1074.484375,
             "left": 26,
             "width": 381.65625,
             "height": 44
@@ -2335,10 +2335,10 @@
           {
             "id": null,
             "x": 408.65625,
-            "y": 905,
-            "top": 905,
+            "y": 1030.484375,
+            "top": 1030.484375,
             "right": 790.328125,
-            "bottom": 949,
+            "bottom": 1074.484375,
             "left": 408.65625,
             "width": 381.671875,
             "height": 44
@@ -2346,10 +2346,10 @@
           {
             "id": null,
             "x": 791.328125,
-            "y": 905,
-            "top": 905,
+            "y": 1030.484375,
+            "top": 1030.484375,
             "right": 1173.984375,
-            "bottom": 949,
+            "bottom": 1074.484375,
             "left": 791.328125,
             "width": 382.65625,
             "height": 44
@@ -2410,9 +2410,9 @@
         "kernelPhase": "PLAN_REVISION_REQUESTED",
         "presentation": "canonical",
         "stateVersion": 7,
-        "stateDigest": "1823c7d6413c5645093d3b21131f9419e90fe6b7e069c4d3b92c7a7e5227101e",
+        "stateDigest": "0168a719089fc886d8bbef5e8933d58e5d3d61907c777dad484117d0b2af8983",
         "receiptCount": 7,
-        "receiptHash": "dd8c2fb507e646f84683cb7f53c535b08d2d3084c3f7bb0149f9db361f2d582d"
+        "receiptHash": "abdfc26dce5ea2a32ff2419f7d488d779f4c8b605a3b0f19c307308f6aa7cb2e"
       },
       "viewport": {
         "name": "desktop-boundary",
@@ -2458,10 +2458,10 @@
           {
             "id": "desktop-tab-goal",
             "x": 834,
-            "y": 305,
-            "top": 305,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 919,
-            "bottom": 349,
+            "bottom": 472.484375,
             "left": 834,
             "width": 85,
             "height": 44
@@ -2469,10 +2469,10 @@
           {
             "id": "desktop-tab-plan",
             "x": 919,
-            "y": 305,
-            "top": 305,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 1004,
-            "bottom": 349,
+            "bottom": 472.484375,
             "left": 919,
             "width": 85,
             "height": 44
@@ -2480,10 +2480,10 @@
           {
             "id": "desktop-tab-proof",
             "x": 1004,
-            "y": 305,
-            "top": 305,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 1089,
-            "bottom": 349,
+            "bottom": 472.484375,
             "left": 1004,
             "width": 85,
             "height": 44
@@ -2491,10 +2491,10 @@
           {
             "id": "desktop-tab-activity",
             "x": 1089,
-            "y": 305,
-            "top": 305,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 1174,
-            "bottom": 349,
+            "bottom": 472.484375,
             "left": 1089,
             "width": 85,
             "height": 44
@@ -2502,10 +2502,10 @@
           {
             "id": null,
             "x": 26,
-            "y": 907,
-            "top": 907,
+            "y": 1030.484375,
+            "top": 1030.484375,
             "right": 407.65625,
-            "bottom": 951,
+            "bottom": 1074.484375,
             "left": 26,
             "width": 381.65625,
             "height": 44
@@ -2513,10 +2513,10 @@
           {
             "id": null,
             "x": 408.65625,
-            "y": 907,
-            "top": 907,
+            "y": 1030.484375,
+            "top": 1030.484375,
             "right": 790.328125,
-            "bottom": 951,
+            "bottom": 1074.484375,
             "left": 408.65625,
             "width": 381.671875,
             "height": 44
@@ -2524,10 +2524,10 @@
           {
             "id": null,
             "x": 791.328125,
-            "y": 907,
-            "top": 907,
+            "y": 1030.484375,
+            "top": 1030.484375,
             "right": 1173.984375,
-            "bottom": 951,
+            "bottom": 1074.484375,
             "left": 791.328125,
             "width": 382.65625,
             "height": 44
@@ -2588,9 +2588,9 @@
         "kernelPhase": "CANDIDATE_SUBMITTED",
         "presentation": "synthetic-test-only-transient",
         "stateVersion": 11,
-        "stateDigest": "30ce65ba0fc84a2e6f31257ecb331fce362327149df96ae90acacd67d5fe515a",
+        "stateDigest": "9355b0595b41f4f79408b88463e16ae774ba6a172b7e6d582915599225e2102d",
         "receiptCount": 11,
-        "receiptHash": "b2455a915dc174b153ae05972d4f1853eca7035c78470651b48abccf8f2a491a"
+        "receiptHash": "bfde1da6547e9b690622200081353e0cc15c53d0b0ce310f5e1a573924873a4a"
       },
       "viewport": {
         "name": "desktop-boundary",
@@ -2636,10 +2636,10 @@
           {
             "id": "desktop-tab-goal",
             "x": 834,
-            "y": 340.796875,
-            "top": 340.796875,
+            "y": 428.28125,
+            "top": 428.28125,
             "right": 919,
-            "bottom": 384.796875,
+            "bottom": 472.28125,
             "left": 834,
             "width": 85,
             "height": 44
@@ -2647,10 +2647,10 @@
           {
             "id": "desktop-tab-plan",
             "x": 919,
-            "y": 340.796875,
-            "top": 340.796875,
+            "y": 428.28125,
+            "top": 428.28125,
             "right": 1004,
-            "bottom": 384.796875,
+            "bottom": 472.28125,
             "left": 919,
             "width": 85,
             "height": 44
@@ -2658,10 +2658,10 @@
           {
             "id": "desktop-tab-proof",
             "x": 1004,
-            "y": 340.796875,
-            "top": 340.796875,
+            "y": 428.28125,
+            "top": 428.28125,
             "right": 1089,
-            "bottom": 384.796875,
+            "bottom": 472.28125,
             "left": 1004,
             "width": 85,
             "height": 44
@@ -2669,10 +2669,10 @@
           {
             "id": "desktop-tab-activity",
             "x": 1089,
-            "y": 340.796875,
-            "top": 340.796875,
+            "y": 428.28125,
+            "top": 428.28125,
             "right": 1174,
-            "bottom": 384.796875,
+            "bottom": 472.28125,
             "left": 1089,
             "width": 85,
             "height": 44
@@ -2680,10 +2680,10 @@
           {
             "id": null,
             "x": 26,
-            "y": 942.796875,
-            "top": 942.796875,
+            "y": 1030.28125,
+            "top": 1030.28125,
             "right": 407.65625,
-            "bottom": 986.796875,
+            "bottom": 1074.28125,
             "left": 26,
             "width": 381.65625,
             "height": 44
@@ -2691,10 +2691,10 @@
           {
             "id": null,
             "x": 408.65625,
-            "y": 942.796875,
-            "top": 942.796875,
+            "y": 1030.28125,
+            "top": 1030.28125,
             "right": 790.328125,
-            "bottom": 986.796875,
+            "bottom": 1074.28125,
             "left": 408.65625,
             "width": 381.671875,
             "height": 44
@@ -2702,10 +2702,10 @@
           {
             "id": null,
             "x": 791.328125,
-            "y": 942.796875,
-            "top": 942.796875,
+            "y": 1030.28125,
+            "top": 1030.28125,
             "right": 1173.984375,
-            "bottom": 986.796875,
+            "bottom": 1074.28125,
             "left": 791.328125,
             "width": 382.65625,
             "height": 44
@@ -2766,9 +2766,9 @@
         "kernelPhase": "VERIFICATION_FAILED",
         "presentation": "canonical",
         "stateVersion": 12,
-        "stateDigest": "a110a89cb8f6489efac9cba915111fb2bac4e290a320511f2bd5919a7338b011",
+        "stateDigest": "2d3bd1b10fce7e639a064df9494931b50c33e3d9df3d73c23fd4fb8f0871fee0",
         "receiptCount": 12,
-        "receiptHash": "19555528a1859428e188ff3bc1e3b2d339421c2b79c6e5a1495d1f612c594359"
+        "receiptHash": "30355d8c2b650527e3fbc6c69127cdcff889983237bf555f47fc445fc3383a69"
       },
       "viewport": {
         "name": "desktop-boundary",
@@ -2814,10 +2814,10 @@
           {
             "id": "desktop-tab-goal",
             "x": 834,
-            "y": 303,
-            "top": 303,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 919,
-            "bottom": 347,
+            "bottom": 472.484375,
             "left": 834,
             "width": 85,
             "height": 44
@@ -2825,10 +2825,10 @@
           {
             "id": "desktop-tab-plan",
             "x": 919,
-            "y": 303,
-            "top": 303,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 1004,
-            "bottom": 347,
+            "bottom": 472.484375,
             "left": 919,
             "width": 85,
             "height": 44
@@ -2836,10 +2836,10 @@
           {
             "id": "desktop-tab-proof",
             "x": 1004,
-            "y": 303,
-            "top": 303,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 1089,
-            "bottom": 347,
+            "bottom": 472.484375,
             "left": 1004,
             "width": 85,
             "height": 44
@@ -2847,10 +2847,10 @@
           {
             "id": "desktop-tab-activity",
             "x": 1089,
-            "y": 303,
-            "top": 303,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 1174,
-            "bottom": 347,
+            "bottom": 472.484375,
             "left": 1089,
             "width": 85,
             "height": 44
@@ -2858,10 +2858,10 @@
           {
             "id": null,
             "x": 26,
-            "y": 905,
-            "top": 905,
+            "y": 1030.484375,
+            "top": 1030.484375,
             "right": 407.65625,
-            "bottom": 949,
+            "bottom": 1074.484375,
             "left": 26,
             "width": 381.65625,
             "height": 44
@@ -2869,10 +2869,10 @@
           {
             "id": null,
             "x": 408.65625,
-            "y": 905,
-            "top": 905,
+            "y": 1030.484375,
+            "top": 1030.484375,
             "right": 790.328125,
-            "bottom": 949,
+            "bottom": 1074.484375,
             "left": 408.65625,
             "width": 381.671875,
             "height": 44
@@ -2880,10 +2880,10 @@
           {
             "id": null,
             "x": 791.328125,
-            "y": 905,
-            "top": 905,
+            "y": 1030.484375,
+            "top": 1030.484375,
             "right": 1173.984375,
-            "bottom": 949,
+            "bottom": 1074.484375,
             "left": 791.328125,
             "width": 382.65625,
             "height": 44
@@ -2944,9 +2944,9 @@
         "kernelPhase": "VERIFICATION_PASSED",
         "presentation": "canonical",
         "stateVersion": 14,
-        "stateDigest": "4b36b4c8ecb0de358744b1d1fed3fdd380227f6aa62f9973619b33a64146d62c",
+        "stateDigest": "13af47ecc11d7c489c7b2e7e92ef4fd5fee0b5e2fc6d98ac0cbe7e25200b3a3c",
         "receiptCount": 14,
-        "receiptHash": "03d9da228b9d243b7173cf89e6652e0b8ca4851f2e2ceb9bbe3042ece1f961e9"
+        "receiptHash": "142fb56430458a40bff3ca0e1d3fe39f2246e2b7df802b70c5f9a2f4d9f5df5e"
       },
       "viewport": {
         "name": "desktop-boundary",
@@ -2992,10 +2992,10 @@
           {
             "id": "desktop-tab-goal",
             "x": 834,
-            "y": 303,
-            "top": 303,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 919,
-            "bottom": 347,
+            "bottom": 472.484375,
             "left": 834,
             "width": 85,
             "height": 44
@@ -3003,10 +3003,10 @@
           {
             "id": "desktop-tab-plan",
             "x": 919,
-            "y": 303,
-            "top": 303,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 1004,
-            "bottom": 347,
+            "bottom": 472.484375,
             "left": 919,
             "width": 85,
             "height": 44
@@ -3014,10 +3014,10 @@
           {
             "id": "desktop-tab-proof",
             "x": 1004,
-            "y": 303,
-            "top": 303,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 1089,
-            "bottom": 347,
+            "bottom": 472.484375,
             "left": 1004,
             "width": 85,
             "height": 44
@@ -3025,10 +3025,10 @@
           {
             "id": "desktop-tab-activity",
             "x": 1089,
-            "y": 303,
-            "top": 303,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 1174,
-            "bottom": 347,
+            "bottom": 472.484375,
             "left": 1089,
             "width": 85,
             "height": 44
@@ -3036,10 +3036,10 @@
           {
             "id": null,
             "x": 26,
-            "y": 905,
-            "top": 905,
+            "y": 1030.484375,
+            "top": 1030.484375,
             "right": 407.65625,
-            "bottom": 949,
+            "bottom": 1074.484375,
             "left": 26,
             "width": 381.65625,
             "height": 44
@@ -3047,10 +3047,10 @@
           {
             "id": null,
             "x": 408.65625,
-            "y": 905,
-            "top": 905,
+            "y": 1030.484375,
+            "top": 1030.484375,
             "right": 790.328125,
-            "bottom": 949,
+            "bottom": 1074.484375,
             "left": 408.65625,
             "width": 381.671875,
             "height": 44
@@ -3058,10 +3058,10 @@
           {
             "id": null,
             "x": 791.328125,
-            "y": 905,
-            "top": 905,
+            "y": 1030.484375,
+            "top": 1030.484375,
             "right": 1173.984375,
-            "bottom": 949,
+            "bottom": 1074.484375,
             "left": 791.328125,
             "width": 382.65625,
             "height": 44
@@ -3122,9 +3122,9 @@
         "kernelPhase": "GOAL_ACCEPTED",
         "presentation": "canonical",
         "stateVersion": 16,
-        "stateDigest": "cdf421b333727952c08f3159498e53e70645f18f22e9536509baa498ef4e0eb8",
+        "stateDigest": "336a7c40c3463204bb324e5c1026ab83f84f3fa6edd72f71a8564ea106e7ff7f",
         "receiptCount": 16,
-        "receiptHash": "0b491a8ab7997b0f693112ea09c0f666d8af3fd981c6bbc9810e2042560eb695"
+        "receiptHash": "275ea33ae8a85996efe80649f2d3fd2cd131ae04475c6a3c952ee4162824c64a"
       },
       "viewport": {
         "name": "desktop-boundary",
@@ -3170,10 +3170,10 @@
           {
             "id": "desktop-tab-goal",
             "x": 834,
-            "y": 303,
-            "top": 303,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 919,
-            "bottom": 347,
+            "bottom": 472.484375,
             "left": 834,
             "width": 85,
             "height": 44
@@ -3181,10 +3181,10 @@
           {
             "id": "desktop-tab-plan",
             "x": 919,
-            "y": 303,
-            "top": 303,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 1004,
-            "bottom": 347,
+            "bottom": 472.484375,
             "left": 919,
             "width": 85,
             "height": 44
@@ -3192,10 +3192,10 @@
           {
             "id": "desktop-tab-proof",
             "x": 1004,
-            "y": 303,
-            "top": 303,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 1089,
-            "bottom": 347,
+            "bottom": 472.484375,
             "left": 1004,
             "width": 85,
             "height": 44
@@ -3203,10 +3203,10 @@
           {
             "id": "desktop-tab-activity",
             "x": 1089,
-            "y": 303,
-            "top": 303,
+            "y": 428.484375,
+            "top": 428.484375,
             "right": 1174,
-            "bottom": 347,
+            "bottom": 472.484375,
             "left": 1089,
             "width": 85,
             "height": 44
@@ -3214,10 +3214,10 @@
           {
             "id": null,
             "x": 26,
-            "y": 905,
-            "top": 905,
+            "y": 1030.484375,
+            "top": 1030.484375,
             "right": 407.65625,
-            "bottom": 949,
+            "bottom": 1074.484375,
             "left": 26,
             "width": 381.65625,
             "height": 44
@@ -3225,10 +3225,10 @@
           {
             "id": null,
             "x": 408.65625,
-            "y": 905,
-            "top": 905,
+            "y": 1030.484375,
+            "top": 1030.484375,
             "right": 790.328125,
-            "bottom": 949,
+            "bottom": 1074.484375,
             "left": 408.65625,
             "width": 381.671875,
             "height": 44
@@ -3236,10 +3236,10 @@
           {
             "id": null,
             "x": 791.328125,
-            "y": 905,
-            "top": 905,
+            "y": 1030.484375,
+            "top": 1030.484375,
             "right": 1173.984375,
-            "bottom": 949,
+            "bottom": 1074.484375,
             "left": 791.328125,
             "width": 382.65625,
             "height": 44
@@ -3300,9 +3300,9 @@
         "kernelPhase": "INTENT_DRAFT",
         "presentation": "canonical",
         "stateVersion": 1,
-        "stateDigest": "35ce946021c7affe28fd7dc5f5e617e6cc93da6fc70853b3d778a9dcdf4db4de",
+        "stateDigest": "f127e43024df7908b701356b1249ee6ae5129c377faf77d6edb429d3c6f6d8b7",
         "receiptCount": 1,
-        "receiptHash": "7a05ff58859695cf07c0bbb6164606565eae8c71e103db84d04b4db67fa7e830"
+        "receiptHash": "c1220b3c91e665e4e9c78fe76e30fab66cdd83dc757092527ef3faa4773bf4c0"
       },
       "viewport": {
         "name": "wide-desktop",
@@ -3348,10 +3348,10 @@
           {
             "id": "desktop-owner-intent",
             "x": 827.71875,
-            "y": 868.796875,
-            "top": 868.796875,
+            "y": 781.46875,
+            "top": 781.46875,
             "right": 1108.71875,
-            "bottom": 980.796875,
+            "bottom": 893.46875,
             "left": 827.71875,
             "width": 281,
             "height": 112
@@ -3359,10 +3359,10 @@
           {
             "id": null,
             "x": 827.71875,
-            "y": 989.796875,
-            "top": 989.796875,
+            "y": 902.46875,
+            "top": 902.46875,
             "right": 1108.71875,
-            "bottom": 1033.796875,
+            "bottom": 946.46875,
             "left": 827.71875,
             "width": 281,
             "height": 44
@@ -3370,10 +3370,10 @@
           {
             "id": "desktop-tab-goal",
             "x": 1218.71875,
-            "y": 624.125,
-            "top": 624.125,
+            "y": 536.796875,
+            "top": 536.796875,
             "right": 1316.21875,
-            "bottom": 668.125,
+            "bottom": 580.796875,
             "left": 1218.71875,
             "width": 97.5,
             "height": 44
@@ -3381,10 +3381,10 @@
           {
             "id": "desktop-tab-plan",
             "x": 1316.21875,
-            "y": 624.125,
-            "top": 624.125,
+            "y": 536.796875,
+            "top": 536.796875,
             "right": 1413.71875,
-            "bottom": 668.125,
+            "bottom": 580.796875,
             "left": 1316.21875,
             "width": 97.5,
             "height": 44
@@ -3392,10 +3392,10 @@
           {
             "id": "desktop-tab-proof",
             "x": 1413.71875,
-            "y": 624.125,
-            "top": 624.125,
+            "y": 536.796875,
+            "top": 536.796875,
             "right": 1511.21875,
-            "bottom": 668.125,
+            "bottom": 580.796875,
             "left": 1413.71875,
             "width": 97.5,
             "height": 44
@@ -3403,10 +3403,10 @@
           {
             "id": "desktop-tab-activity",
             "x": 1511.21875,
-            "y": 624.125,
-            "top": 624.125,
+            "y": 536.796875,
+            "top": 536.796875,
             "right": 1608.71875,
-            "bottom": 668.125,
+            "bottom": 580.796875,
             "left": 1511.21875,
             "width": 97.5,
             "height": 44
@@ -3414,10 +3414,10 @@
           {
             "id": null,
             "x": 119.28125,
-            "y": 1127.796875,
-            "top": 1127.796875,
+            "y": 1138.796875,
+            "top": 1138.796875,
             "right": 614.75,
-            "bottom": 1171.796875,
+            "bottom": 1182.796875,
             "left": 119.28125,
             "width": 495.46875,
             "height": 44
@@ -3425,10 +3425,10 @@
           {
             "id": null,
             "x": 615.75,
-            "y": 1127.796875,
-            "top": 1127.796875,
+            "y": 1138.796875,
+            "top": 1138.796875,
             "right": 1111.234375,
-            "bottom": 1171.796875,
+            "bottom": 1182.796875,
             "left": 615.75,
             "width": 495.484375,
             "height": 44
@@ -3436,10 +3436,10 @@
           {
             "id": null,
             "x": 1112.234375,
-            "y": 1127.796875,
-            "top": 1127.796875,
+            "y": 1138.796875,
+            "top": 1138.796875,
             "right": 1608.703125,
-            "bottom": 1171.796875,
+            "bottom": 1182.796875,
             "left": 1112.234375,
             "width": 496.46875,
             "height": 44
@@ -3500,9 +3500,9 @@
         "kernelPhase": "GOAL_CONTRACT_PROPOSED",
         "presentation": "canonical",
         "stateVersion": 2,
-        "stateDigest": "89a5e96a415ab0a031295540623e65508b15eee7550a4a96a63e6e4a55437566",
+        "stateDigest": "549a58f88e7649a5f4e12adfef39516b9e36842662b5b11c522e2187a80e862b",
         "receiptCount": 2,
-        "receiptHash": "253b044ab73028712d703ec10b1f5b72071258fe06384a583c748dbaeabbfacc"
+        "receiptHash": "97f273c418cd57ee76b1c429a1dbbc4b9487997e1137bb94f4e47d3f5fa3b9bc"
       },
       "viewport": {
         "name": "wide-desktop",
@@ -3548,10 +3548,10 @@
           {
             "id": null,
             "x": 827.71875,
-            "y": 581.203125,
-            "top": 581.203125,
+            "y": 804.96875,
+            "top": 804.96875,
             "right": 1108.71875,
-            "bottom": 625.203125,
+            "bottom": 848.96875,
             "left": 827.71875,
             "width": 281,
             "height": 44
@@ -3559,10 +3559,10 @@
           {
             "id": null,
             "x": 827.71875,
-            "y": 635.203125,
-            "top": 635.203125,
+            "y": 858.96875,
+            "top": 858.96875,
             "right": 1108.71875,
-            "bottom": 679.203125,
+            "bottom": 902.96875,
             "left": 827.71875,
             "width": 281,
             "height": 44
@@ -3570,10 +3570,10 @@
           {
             "id": "desktop-tab-goal",
             "x": 1218.71875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.96875,
+            "top": 536.96875,
             "right": 1316.21875,
-            "bottom": 357.203125,
+            "bottom": 580.96875,
             "left": 1218.71875,
             "width": 97.5,
             "height": 44
@@ -3581,10 +3581,10 @@
           {
             "id": "desktop-tab-plan",
             "x": 1316.21875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.96875,
+            "top": 536.96875,
             "right": 1413.71875,
-            "bottom": 357.203125,
+            "bottom": 580.96875,
             "left": 1316.21875,
             "width": 97.5,
             "height": 44
@@ -3592,10 +3592,10 @@
           {
             "id": "desktop-tab-proof",
             "x": 1413.71875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.96875,
+            "top": 536.96875,
             "right": 1511.21875,
-            "bottom": 357.203125,
+            "bottom": 580.96875,
             "left": 1413.71875,
             "width": 97.5,
             "height": 44
@@ -3603,10 +3603,10 @@
           {
             "id": "desktop-tab-activity",
             "x": 1511.21875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.96875,
+            "top": 536.96875,
             "right": 1608.71875,
-            "bottom": 357.203125,
+            "bottom": 580.96875,
             "left": 1511.21875,
             "width": 97.5,
             "height": 44
@@ -3614,10 +3614,10 @@
           {
             "id": null,
             "x": 119.28125,
-            "y": 884.640625,
-            "top": 884.640625,
+            "y": 1138.96875,
+            "top": 1138.96875,
             "right": 614.75,
-            "bottom": 928.640625,
+            "bottom": 1182.96875,
             "left": 119.28125,
             "width": 495.46875,
             "height": 44
@@ -3625,10 +3625,10 @@
           {
             "id": null,
             "x": 615.75,
-            "y": 884.640625,
-            "top": 884.640625,
+            "y": 1138.96875,
+            "top": 1138.96875,
             "right": 1111.234375,
-            "bottom": 928.640625,
+            "bottom": 1182.96875,
             "left": 615.75,
             "width": 495.484375,
             "height": 44
@@ -3636,10 +3636,10 @@
           {
             "id": null,
             "x": 1112.234375,
-            "y": 884.640625,
-            "top": 884.640625,
+            "y": 1138.96875,
+            "top": 1138.96875,
             "right": 1608.703125,
-            "bottom": 928.640625,
+            "bottom": 1182.96875,
             "left": 1112.234375,
             "width": 496.46875,
             "height": 44
@@ -3700,9 +3700,9 @@
         "kernelPhase": "GOAL_CONTRACT_REVISION_REQUESTED",
         "presentation": "canonical",
         "stateVersion": 3,
-        "stateDigest": "ff536c86d412a6966f610a7f5aaca6034523da5b68d4278b0ef543edf5dfbb50",
+        "stateDigest": "bbfbebfe67c515b4b4bbd07bb9e13b1125f15d26b63e707f28fa0f50ab2d4f59",
         "receiptCount": 3,
-        "receiptHash": "ff26c88890fdc75c33f0fadc63972b83bd171890f5688b771005195c4e99f6ae"
+        "receiptHash": "eddd54123a418b07af6345ad43fcefb7280a8df6e560d1161bd3807b60d382b8"
       },
       "viewport": {
         "name": "wide-desktop",
@@ -3748,10 +3748,10 @@
           {
             "id": "desktop-tab-goal",
             "x": 1218.71875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.96875,
+            "top": 536.96875,
             "right": 1316.21875,
-            "bottom": 357.203125,
+            "bottom": 580.96875,
             "left": 1218.71875,
             "width": 97.5,
             "height": 44
@@ -3759,10 +3759,10 @@
           {
             "id": "desktop-tab-plan",
             "x": 1316.21875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.96875,
+            "top": 536.96875,
             "right": 1413.71875,
-            "bottom": 357.203125,
+            "bottom": 580.96875,
             "left": 1316.21875,
             "width": 97.5,
             "height": 44
@@ -3770,10 +3770,10 @@
           {
             "id": "desktop-tab-proof",
             "x": 1413.71875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.96875,
+            "top": 536.96875,
             "right": 1511.21875,
-            "bottom": 357.203125,
+            "bottom": 580.96875,
             "left": 1413.71875,
             "width": 97.5,
             "height": 44
@@ -3781,10 +3781,10 @@
           {
             "id": "desktop-tab-activity",
             "x": 1511.21875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.96875,
+            "top": 536.96875,
             "right": 1608.71875,
-            "bottom": 357.203125,
+            "bottom": 580.96875,
             "left": 1511.21875,
             "width": 97.5,
             "height": 44
@@ -3792,10 +3792,10 @@
           {
             "id": null,
             "x": 119.28125,
-            "y": 915.203125,
-            "top": 915.203125,
+            "y": 1138.96875,
+            "top": 1138.96875,
             "right": 614.75,
-            "bottom": 959.203125,
+            "bottom": 1182.96875,
             "left": 119.28125,
             "width": 495.46875,
             "height": 44
@@ -3803,10 +3803,10 @@
           {
             "id": null,
             "x": 615.75,
-            "y": 915.203125,
-            "top": 915.203125,
+            "y": 1138.96875,
+            "top": 1138.96875,
             "right": 1111.234375,
-            "bottom": 959.203125,
+            "bottom": 1182.96875,
             "left": 615.75,
             "width": 495.484375,
             "height": 44
@@ -3814,10 +3814,10 @@
           {
             "id": null,
             "x": 1112.234375,
-            "y": 915.203125,
-            "top": 915.203125,
+            "y": 1138.96875,
+            "top": 1138.96875,
             "right": 1608.703125,
-            "bottom": 959.203125,
+            "bottom": 1182.96875,
             "left": 1112.234375,
             "width": 496.46875,
             "height": 44
@@ -3878,9 +3878,9 @@
         "kernelPhase": "PLAN_PROPOSED",
         "presentation": "canonical",
         "stateVersion": 6,
-        "stateDigest": "a437a2fa06093ac4f05855c81d1d106c66feda18c0f3eebaef318f17d76c4013",
+        "stateDigest": "442efe87bbdd2befa3aeded858557a939a2a7d2effb509a34781630d0522aca9",
         "receiptCount": 6,
-        "receiptHash": "76810b96683623ae11444194cac0c1fdcc7c3bbcc773887d9877afcaa4874906"
+        "receiptHash": "91bba8a106c3dbc2623b5fad7bea89e7ada263abe8dea091caa01d39070456f9"
       },
       "viewport": {
         "name": "wide-desktop",
@@ -3926,10 +3926,10 @@
           {
             "id": null,
             "x": 827.71875,
-            "y": 581.203125,
-            "top": 581.203125,
+            "y": 804.421875,
+            "top": 804.421875,
             "right": 1108.71875,
-            "bottom": 625.203125,
+            "bottom": 848.421875,
             "left": 827.71875,
             "width": 281,
             "height": 44
@@ -3937,10 +3937,10 @@
           {
             "id": null,
             "x": 827.71875,
-            "y": 635.203125,
-            "top": 635.203125,
+            "y": 858.421875,
+            "top": 858.421875,
             "right": 1108.71875,
-            "bottom": 679.203125,
+            "bottom": 902.421875,
             "left": 827.71875,
             "width": 281,
             "height": 44
@@ -3948,10 +3948,10 @@
           {
             "id": "desktop-tab-goal",
             "x": 1218.71875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1316.21875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1218.71875,
             "width": 97.5,
             "height": 44
@@ -3959,10 +3959,10 @@
           {
             "id": "desktop-tab-plan",
             "x": 1316.21875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1413.71875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1316.21875,
             "width": 97.5,
             "height": 44
@@ -3970,10 +3970,10 @@
           {
             "id": "desktop-tab-proof",
             "x": 1413.71875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1511.21875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1413.71875,
             "width": 97.5,
             "height": 44
@@ -3981,10 +3981,10 @@
           {
             "id": "desktop-tab-activity",
             "x": 1511.21875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1608.71875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1511.21875,
             "width": 97.5,
             "height": 44
@@ -3992,10 +3992,10 @@
           {
             "id": null,
             "x": 119.28125,
-            "y": 915.203125,
-            "top": 915.203125,
+            "y": 1138.421875,
+            "top": 1138.421875,
             "right": 614.75,
-            "bottom": 959.203125,
+            "bottom": 1182.421875,
             "left": 119.28125,
             "width": 495.46875,
             "height": 44
@@ -4003,10 +4003,10 @@
           {
             "id": null,
             "x": 615.75,
-            "y": 915.203125,
-            "top": 915.203125,
+            "y": 1138.421875,
+            "top": 1138.421875,
             "right": 1111.234375,
-            "bottom": 959.203125,
+            "bottom": 1182.421875,
             "left": 615.75,
             "width": 495.484375,
             "height": 44
@@ -4014,10 +4014,10 @@
           {
             "id": null,
             "x": 1112.234375,
-            "y": 915.203125,
-            "top": 915.203125,
+            "y": 1138.421875,
+            "top": 1138.421875,
             "right": 1608.703125,
-            "bottom": 959.203125,
+            "bottom": 1182.421875,
             "left": 1112.234375,
             "width": 496.46875,
             "height": 44
@@ -4078,9 +4078,9 @@
         "kernelPhase": "PLAN_REVISION_REQUESTED",
         "presentation": "canonical",
         "stateVersion": 7,
-        "stateDigest": "1823c7d6413c5645093d3b21131f9419e90fe6b7e069c4d3b92c7a7e5227101e",
+        "stateDigest": "0168a719089fc886d8bbef5e8933d58e5d3d61907c777dad484117d0b2af8983",
         "receiptCount": 7,
-        "receiptHash": "dd8c2fb507e646f84683cb7f53c535b08d2d3084c3f7bb0149f9db361f2d582d"
+        "receiptHash": "abdfc26dce5ea2a32ff2419f7d488d779f4c8b605a3b0f19c307308f6aa7cb2e"
       },
       "viewport": {
         "name": "wide-desktop",
@@ -4126,10 +4126,10 @@
           {
             "id": "desktop-tab-goal",
             "x": 1218.71875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1316.21875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1218.71875,
             "width": 97.5,
             "height": 44
@@ -4137,10 +4137,10 @@
           {
             "id": "desktop-tab-plan",
             "x": 1316.21875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1413.71875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1316.21875,
             "width": 97.5,
             "height": 44
@@ -4148,10 +4148,10 @@
           {
             "id": "desktop-tab-proof",
             "x": 1413.71875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1511.21875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1413.71875,
             "width": 97.5,
             "height": 44
@@ -4159,10 +4159,10 @@
           {
             "id": "desktop-tab-activity",
             "x": 1511.21875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1608.71875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1511.21875,
             "width": 97.5,
             "height": 44
@@ -4170,10 +4170,10 @@
           {
             "id": null,
             "x": 119.28125,
-            "y": 915.203125,
-            "top": 915.203125,
+            "y": 1138.421875,
+            "top": 1138.421875,
             "right": 614.75,
-            "bottom": 959.203125,
+            "bottom": 1182.421875,
             "left": 119.28125,
             "width": 495.46875,
             "height": 44
@@ -4181,10 +4181,10 @@
           {
             "id": null,
             "x": 615.75,
-            "y": 915.203125,
-            "top": 915.203125,
+            "y": 1138.421875,
+            "top": 1138.421875,
             "right": 1111.234375,
-            "bottom": 959.203125,
+            "bottom": 1182.421875,
             "left": 615.75,
             "width": 495.484375,
             "height": 44
@@ -4192,10 +4192,10 @@
           {
             "id": null,
             "x": 1112.234375,
-            "y": 915.203125,
-            "top": 915.203125,
+            "y": 1138.421875,
+            "top": 1138.421875,
             "right": 1608.703125,
-            "bottom": 959.203125,
+            "bottom": 1182.421875,
             "left": 1112.234375,
             "width": 496.46875,
             "height": 44
@@ -4256,9 +4256,9 @@
         "kernelPhase": "CANDIDATE_SUBMITTED",
         "presentation": "synthetic-test-only-transient",
         "stateVersion": 11,
-        "stateDigest": "30ce65ba0fc84a2e6f31257ecb331fce362327149df96ae90acacd67d5fe515a",
+        "stateDigest": "9355b0595b41f4f79408b88463e16ae774ba6a172b7e6d582915599225e2102d",
         "receiptCount": 11,
-        "receiptHash": "b2455a915dc174b153ae05972d4f1853eca7035c78470651b48abccf8f2a491a"
+        "receiptHash": "bfde1da6547e9b690622200081353e0cc15c53d0b0ce310f5e1a573924873a4a"
       },
       "viewport": {
         "name": "wide-desktop",
@@ -4304,10 +4304,10 @@
           {
             "id": "desktop-tab-goal",
             "x": 1218.71875,
-            "y": 351,
-            "top": 351,
+            "y": 536.21875,
+            "top": 536.21875,
             "right": 1316.21875,
-            "bottom": 395,
+            "bottom": 580.21875,
             "left": 1218.71875,
             "width": 97.5,
             "height": 44
@@ -4315,10 +4315,10 @@
           {
             "id": "desktop-tab-plan",
             "x": 1316.21875,
-            "y": 351,
-            "top": 351,
+            "y": 536.21875,
+            "top": 536.21875,
             "right": 1413.71875,
-            "bottom": 395,
+            "bottom": 580.21875,
             "left": 1316.21875,
             "width": 97.5,
             "height": 44
@@ -4326,10 +4326,10 @@
           {
             "id": "desktop-tab-proof",
             "x": 1413.71875,
-            "y": 351,
-            "top": 351,
+            "y": 536.21875,
+            "top": 536.21875,
             "right": 1511.21875,
-            "bottom": 395,
+            "bottom": 580.21875,
             "left": 1413.71875,
             "width": 97.5,
             "height": 44
@@ -4337,10 +4337,10 @@
           {
             "id": "desktop-tab-activity",
             "x": 1511.21875,
-            "y": 351,
-            "top": 351,
+            "y": 536.21875,
+            "top": 536.21875,
             "right": 1608.71875,
-            "bottom": 395,
+            "bottom": 580.21875,
             "left": 1511.21875,
             "width": 97.5,
             "height": 44
@@ -4348,10 +4348,10 @@
           {
             "id": null,
             "x": 119.28125,
-            "y": 953,
-            "top": 953,
+            "y": 1138.21875,
+            "top": 1138.21875,
             "right": 614.75,
-            "bottom": 997,
+            "bottom": 1182.21875,
             "left": 119.28125,
             "width": 495.46875,
             "height": 44
@@ -4359,10 +4359,10 @@
           {
             "id": null,
             "x": 615.75,
-            "y": 953,
-            "top": 953,
+            "y": 1138.21875,
+            "top": 1138.21875,
             "right": 1111.234375,
-            "bottom": 997,
+            "bottom": 1182.21875,
             "left": 615.75,
             "width": 495.484375,
             "height": 44
@@ -4370,10 +4370,10 @@
           {
             "id": null,
             "x": 1112.234375,
-            "y": 953,
-            "top": 953,
+            "y": 1138.21875,
+            "top": 1138.21875,
             "right": 1608.703125,
-            "bottom": 997,
+            "bottom": 1182.21875,
             "left": 1112.234375,
             "width": 496.46875,
             "height": 44
@@ -4434,9 +4434,9 @@
         "kernelPhase": "VERIFICATION_FAILED",
         "presentation": "canonical",
         "stateVersion": 12,
-        "stateDigest": "a110a89cb8f6489efac9cba915111fb2bac4e290a320511f2bd5919a7338b011",
+        "stateDigest": "2d3bd1b10fce7e639a064df9494931b50c33e3d9df3d73c23fd4fb8f0871fee0",
         "receiptCount": 12,
-        "receiptHash": "19555528a1859428e188ff3bc1e3b2d339421c2b79c6e5a1495d1f612c594359"
+        "receiptHash": "30355d8c2b650527e3fbc6c69127cdcff889983237bf555f47fc445fc3383a69"
       },
       "viewport": {
         "name": "wide-desktop",
@@ -4482,10 +4482,10 @@
           {
             "id": "desktop-tab-goal",
             "x": 1218.71875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1316.21875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1218.71875,
             "width": 97.5,
             "height": 44
@@ -4493,10 +4493,10 @@
           {
             "id": "desktop-tab-plan",
             "x": 1316.21875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1413.71875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1316.21875,
             "width": 97.5,
             "height": 44
@@ -4504,10 +4504,10 @@
           {
             "id": "desktop-tab-proof",
             "x": 1413.71875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1511.21875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1413.71875,
             "width": 97.5,
             "height": 44
@@ -4515,10 +4515,10 @@
           {
             "id": "desktop-tab-activity",
             "x": 1511.21875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1608.71875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1511.21875,
             "width": 97.5,
             "height": 44
@@ -4526,10 +4526,10 @@
           {
             "id": null,
             "x": 119.28125,
-            "y": 915.203125,
-            "top": 915.203125,
+            "y": 1138.421875,
+            "top": 1138.421875,
             "right": 614.75,
-            "bottom": 959.203125,
+            "bottom": 1182.421875,
             "left": 119.28125,
             "width": 495.46875,
             "height": 44
@@ -4537,10 +4537,10 @@
           {
             "id": null,
             "x": 615.75,
-            "y": 915.203125,
-            "top": 915.203125,
+            "y": 1138.421875,
+            "top": 1138.421875,
             "right": 1111.234375,
-            "bottom": 959.203125,
+            "bottom": 1182.421875,
             "left": 615.75,
             "width": 495.484375,
             "height": 44
@@ -4548,10 +4548,10 @@
           {
             "id": null,
             "x": 1112.234375,
-            "y": 915.203125,
-            "top": 915.203125,
+            "y": 1138.421875,
+            "top": 1138.421875,
             "right": 1608.703125,
-            "bottom": 959.203125,
+            "bottom": 1182.421875,
             "left": 1112.234375,
             "width": 496.46875,
             "height": 44
@@ -4612,9 +4612,9 @@
         "kernelPhase": "VERIFICATION_PASSED",
         "presentation": "canonical",
         "stateVersion": 14,
-        "stateDigest": "4b36b4c8ecb0de358744b1d1fed3fdd380227f6aa62f9973619b33a64146d62c",
+        "stateDigest": "13af47ecc11d7c489c7b2e7e92ef4fd5fee0b5e2fc6d98ac0cbe7e25200b3a3c",
         "receiptCount": 14,
-        "receiptHash": "03d9da228b9d243b7173cf89e6652e0b8ca4851f2e2ceb9bbe3042ece1f961e9"
+        "receiptHash": "142fb56430458a40bff3ca0e1d3fe39f2246e2b7df802b70c5f9a2f4d9f5df5e"
       },
       "viewport": {
         "name": "wide-desktop",
@@ -4660,10 +4660,10 @@
           {
             "id": "desktop-tab-goal",
             "x": 1218.71875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1316.21875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1218.71875,
             "width": 97.5,
             "height": 44
@@ -4671,10 +4671,10 @@
           {
             "id": "desktop-tab-plan",
             "x": 1316.21875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1413.71875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1316.21875,
             "width": 97.5,
             "height": 44
@@ -4682,10 +4682,10 @@
           {
             "id": "desktop-tab-proof",
             "x": 1413.71875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1511.21875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1413.71875,
             "width": 97.5,
             "height": 44
@@ -4693,10 +4693,10 @@
           {
             "id": "desktop-tab-activity",
             "x": 1511.21875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1608.71875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1511.21875,
             "width": 97.5,
             "height": 44
@@ -4704,10 +4704,10 @@
           {
             "id": null,
             "x": 119.28125,
-            "y": 916.296875,
-            "top": 916.296875,
+            "y": 1139.515625,
+            "top": 1139.515625,
             "right": 614.75,
-            "bottom": 960.296875,
+            "bottom": 1183.515625,
             "left": 119.28125,
             "width": 495.46875,
             "height": 44
@@ -4715,10 +4715,10 @@
           {
             "id": null,
             "x": 615.75,
-            "y": 916.296875,
-            "top": 916.296875,
+            "y": 1139.515625,
+            "top": 1139.515625,
             "right": 1111.234375,
-            "bottom": 960.296875,
+            "bottom": 1183.515625,
             "left": 615.75,
             "width": 495.484375,
             "height": 44
@@ -4726,10 +4726,10 @@
           {
             "id": null,
             "x": 1112.234375,
-            "y": 916.296875,
-            "top": 916.296875,
+            "y": 1139.515625,
+            "top": 1139.515625,
             "right": 1608.703125,
-            "bottom": 960.296875,
+            "bottom": 1183.515625,
             "left": 1112.234375,
             "width": 496.46875,
             "height": 44
@@ -4790,9 +4790,9 @@
         "kernelPhase": "GOAL_ACCEPTED",
         "presentation": "canonical",
         "stateVersion": 16,
-        "stateDigest": "cdf421b333727952c08f3159498e53e70645f18f22e9536509baa498ef4e0eb8",
+        "stateDigest": "336a7c40c3463204bb324e5c1026ab83f84f3fa6edd72f71a8564ea106e7ff7f",
         "receiptCount": 16,
-        "receiptHash": "0b491a8ab7997b0f693112ea09c0f666d8af3fd981c6bbc9810e2042560eb695"
+        "receiptHash": "275ea33ae8a85996efe80649f2d3fd2cd131ae04475c6a3c952ee4162824c64a"
       },
       "viewport": {
         "name": "wide-desktop",
@@ -4838,10 +4838,10 @@
           {
             "id": "desktop-tab-goal",
             "x": 1218.71875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1316.21875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1218.71875,
             "width": 97.5,
             "height": 44
@@ -4849,10 +4849,10 @@
           {
             "id": "desktop-tab-plan",
             "x": 1316.21875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1413.71875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1316.21875,
             "width": 97.5,
             "height": 44
@@ -4860,10 +4860,10 @@
           {
             "id": "desktop-tab-proof",
             "x": 1413.71875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1511.21875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1413.71875,
             "width": 97.5,
             "height": 44
@@ -4871,10 +4871,10 @@
           {
             "id": "desktop-tab-activity",
             "x": 1511.21875,
-            "y": 313.203125,
-            "top": 313.203125,
+            "y": 536.421875,
+            "top": 536.421875,
             "right": 1608.71875,
-            "bottom": 357.203125,
+            "bottom": 580.421875,
             "left": 1511.21875,
             "width": 97.5,
             "height": 44
@@ -4882,10 +4882,10 @@
           {
             "id": null,
             "x": 119.28125,
-            "y": 915.203125,
-            "top": 915.203125,
+            "y": 1138.421875,
+            "top": 1138.421875,
             "right": 614.75,
-            "bottom": 959.203125,
+            "bottom": 1182.421875,
             "left": 119.28125,
             "width": 495.46875,
             "height": 44
@@ -4893,10 +4893,10 @@
           {
             "id": null,
             "x": 615.75,
-            "y": 915.203125,
-            "top": 915.203125,
+            "y": 1138.421875,
+            "top": 1138.421875,
             "right": 1111.234375,
-            "bottom": 959.203125,
+            "bottom": 1182.421875,
             "left": 615.75,
             "width": 495.484375,
             "height": 44
@@ -4904,10 +4904,10 @@
           {
             "id": null,
             "x": 1112.234375,
-            "y": 915.203125,
-            "top": 915.203125,
+            "y": 1138.421875,
+            "top": 1138.421875,
             "right": 1608.703125,
-            "bottom": 959.203125,
+            "bottom": 1182.421875,
             "left": 1112.234375,
             "width": 496.46875,
             "height": 44
@@ -4963,6 +4963,441 @@
   ],
   "accessibility": [],
   "keyboard": [],
+  "acceptanceFocus": [],
+  "hostilePanels": [
+    {
+      "viewport": {
+        "name": "minimum",
+        "width": 320,
+        "height": 568,
+        "expected": "mobile"
+      },
+      "tab": "goal",
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      }
+    },
+    {
+      "viewport": {
+        "name": "minimum",
+        "width": 320,
+        "height": 568,
+        "expected": "mobile"
+      },
+      "tab": "plan",
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      }
+    },
+    {
+      "viewport": {
+        "name": "minimum",
+        "width": 320,
+        "height": 568,
+        "expected": "mobile"
+      },
+      "tab": "proof",
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      }
+    },
+    {
+      "viewport": {
+        "name": "minimum",
+        "width": 320,
+        "height": 568,
+        "expected": "mobile"
+      },
+      "tab": "activity",
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      }
+    },
+    {
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop"
+      },
+      "tab": "goal",
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      }
+    },
+    {
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop"
+      },
+      "tab": "plan",
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      }
+    },
+    {
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop"
+      },
+      "tab": "proof",
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      }
+    },
+    {
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop"
+      },
+      "tab": "activity",
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      }
+    },
+    {
+      "viewport": {
+        "name": "wide-desktop",
+        "width": 1728,
+        "height": 1117,
+        "expected": "desktop"
+      },
+      "tab": "goal",
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      }
+    },
+    {
+      "viewport": {
+        "name": "wide-desktop",
+        "width": 1728,
+        "height": 1117,
+        "expected": "desktop"
+      },
+      "tab": "plan",
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      }
+    },
+    {
+      "viewport": {
+        "name": "wide-desktop",
+        "width": 1728,
+        "height": 1117,
+        "expected": "desktop"
+      },
+      "tab": "proof",
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      }
+    },
+    {
+      "viewport": {
+        "name": "wide-desktop",
+        "width": 1728,
+        "height": 1117,
+        "expected": "desktop"
+      },
+      "tab": "activity",
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      }
+    }
+  ],
   "reducedMotion": null,
   "zoom": {
     "story": {
@@ -4971,9 +5406,9 @@
       "kernelPhase": "GOAL_CONTRACT_REVISION_REQUESTED",
       "presentation": "canonical",
       "stateVersion": 3,
-      "stateDigest": "ff536c86d412a6966f610a7f5aaca6034523da5b68d4278b0ef543edf5dfbb50",
+      "stateDigest": "bbfbebfe67c515b4b4bbd07bb9e13b1125f15d26b63e707f28fa0f50ab2d4f59",
       "receiptCount": 3,
-      "receiptHash": "ff26c88890fdc75c33f0fadc63972b83bd171890f5688b771005195c4e99f6ae"
+      "receiptHash": "eddd54123a418b07af6345ad43fcefb7280a8df6e560d1161bd3807b60d382b8"
     },
     "viewport": {
       "width": 1440,
@@ -5013,10 +5448,10 @@
         {
           "id": "desktop-tab-goal",
           "x": 1003.921875,
-          "y": 308.296875,
-          "top": 308.296875,
+          "y": 427.828125,
+          "top": 427.828125,
           "right": 1101.421875,
-          "bottom": 352.296875,
+          "bottom": 471.828125,
           "left": 1003.921875,
           "width": 97.5,
           "height": 44
@@ -5024,10 +5459,10 @@
         {
           "id": "desktop-tab-plan",
           "x": 1101.421875,
-          "y": 308.296875,
-          "top": 308.296875,
+          "y": 427.828125,
+          "top": 427.828125,
           "right": 1198.921875,
-          "bottom": 352.296875,
+          "bottom": 471.828125,
           "left": 1101.421875,
           "width": 97.5,
           "height": 44
@@ -5035,10 +5470,10 @@
         {
           "id": "desktop-tab-proof",
           "x": 1198.921875,
-          "y": 308.296875,
-          "top": 308.296875,
+          "y": 427.828125,
+          "top": 427.828125,
           "right": 1296.421875,
-          "bottom": 352.296875,
+          "bottom": 471.828125,
           "left": 1198.921875,
           "width": 97.5,
           "height": 44
@@ -5046,10 +5481,10 @@
         {
           "id": "desktop-tab-activity",
           "x": 1296.421875,
-          "y": 308.296875,
-          "top": 308.296875,
+          "y": 427.828125,
+          "top": 427.828125,
           "right": 1393.921875,
-          "bottom": 352.296875,
+          "bottom": 471.828125,
           "left": 1296.421875,
           "width": 97.5,
           "height": 44
@@ -5057,10 +5492,10 @@
         {
           "id": null,
           "x": 46.078125,
-          "y": 910.296875,
-          "top": 910.296875,
+          "y": 1029.828125,
+          "top": 1029.828125,
           "right": 494.359375,
-          "bottom": 954.296875,
+          "bottom": 1073.828125,
           "left": 46.078125,
           "width": 448.28125,
           "height": 44
@@ -5068,10 +5503,10 @@
         {
           "id": null,
           "x": 495.359375,
-          "y": 910.296875,
-          "top": 910.296875,
+          "y": 1029.828125,
+          "top": 1029.828125,
           "right": 943.640625,
-          "bottom": 954.296875,
+          "bottom": 1073.828125,
           "left": 495.359375,
           "width": 448.28125,
           "height": 44
@@ -5079,10 +5514,10 @@
         {
           "id": null,
           "x": 944.640625,
-          "y": 910.296875,
-          "top": 910.296875,
+          "y": 1029.828125,
+          "top": 1029.828125,
           "right": 1393.921875,
-          "bottom": 954.296875,
+          "bottom": 1073.828125,
           "left": 944.640625,
           "width": 449.28125,
           "height": 44

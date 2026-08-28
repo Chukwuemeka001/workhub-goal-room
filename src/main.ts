@@ -48,6 +48,12 @@ function openRevision(kind: "goal" | "plan", version: number) {
   revisionInput.focus();
 }
 
+function resetRevisionDialog() {
+  revisionInput.value = "";
+  revisionInput.setCustomValidity("");
+  revisionBinding = null;
+}
+
 const mobileSurface = createMobileSurface(requiredElement("mobile-room"), {
   onSetIntent: (intent) => controller.setOwnerIntent(intent),
   onPrimary: async (kind) => {
@@ -80,6 +86,7 @@ controller = createOwnerDecisionController({ room, render });
 controller.render();
 
 cancelRevision.addEventListener("click", () => dialog.close());
+dialog.addEventListener("close", resetRevisionDialog);
 revisionInput.addEventListener("input", () => revisionInput.setCustomValidity(""));
 revisionForm.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -96,8 +103,6 @@ revisionForm.addEventListener("submit", async (event) => {
   else if (revisionBinding?.kind === "plan") await controller.requestRevision(prepared.note);
   else throw new Error("OWNER_DECISION_NOT_AVAILABLE");
   dialog.close();
-  revisionInput.value = "";
-  revisionBinding = null;
 });
 
 const installation = installGoalRoomTools({

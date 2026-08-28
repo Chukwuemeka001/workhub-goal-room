@@ -4795,6 +4795,161 @@
       ]
     }
   ],
+  "acceptanceFocus": [
+    {
+      "viewport": {
+        "name": "phone",
+        "width": 393,
+        "height": 852,
+        "expected": "mobile"
+      },
+      "sequence": [
+        {
+          "activeId": "cancel-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "confirm-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "cancel-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "confirm-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "cancel-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "confirm-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "cancel-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "confirm-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "cancel-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "confirm-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "cancel-acceptance",
+          "inside": true,
+          "open": true
+        }
+      ],
+      "reverse": {
+        "activeId": "confirm-acceptance",
+        "inside": true,
+        "open": true
+      },
+      "closed": {
+        "open": false,
+        "ownerCalls": [
+          "open-acceptance"
+        ]
+      }
+    },
+    {
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900,
+        "expected": "desktop"
+      },
+      "sequence": [
+        {
+          "activeId": "cancel-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "confirm-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "cancel-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "confirm-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "cancel-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "confirm-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "cancel-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "confirm-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "cancel-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "confirm-acceptance",
+          "inside": true,
+          "open": true
+        },
+        {
+          "activeId": "cancel-acceptance",
+          "inside": true,
+          "open": true
+        }
+      ],
+      "reverse": {
+        "activeId": "confirm-acceptance",
+        "inside": true,
+        "open": true
+      },
+      "closed": {
+        "open": false,
+        "ownerCalls": [
+          "open-acceptance"
+        ]
+      }
+    }
+  ],
+  "hostilePanels": [],
   "reducedMotion": {
     "matches": true,
     "animations": 0,

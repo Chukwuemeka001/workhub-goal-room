@@ -21,6 +21,22 @@
     <div class="desktop-surface">
       <main id="desktop-room" class="desktop-room" aria-label="WorkHub Goal Room desktop Mission Room"></main>
     </div>
+    <dialog id="acceptance-dialog" class="acceptance-dialog" aria-labelledby="acceptance-dialog-title" aria-describedby="acceptance-dialog-consequence">
+      <form id="acceptance-form" method="dialog">
+        <p class="dialog-label">OWNER CONFIRMATION · QUALIFICATION</p>
+        <h2 id="acceptance-dialog-title">Accept this candidate?</h2>
+        <p id="acceptance-dialog-consequence"></p>
+        <dl class="acceptance-binding">
+          <div><dt>Candidate</dt><dd id="acceptance-candidate-version"></dd></div>
+          <div><dt>SHA-256</dt><dd><code id="acceptance-candidate-digest"></code></dd></div>
+          <div><dt>PASS rule set</dt><dd><code id="acceptance-rule-set"></code></dd></div>
+        </dl>
+        <div class="dialog-actions">
+          <button id="cancel-acceptance" class="button secondary" type="button">Cancel</button>
+          <button id="confirm-acceptance" class="button primary" type="submit">Confirm acceptance</button>
+        </div>
+      </form>
+    </dialog>
     <script type="module" src="/qualification/v3-fixture.ts"></script>
   </body>
 </html>

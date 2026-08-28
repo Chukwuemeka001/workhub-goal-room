@@ -12,7 +12,26 @@ import desktopQa from "../scripts/desktop-qa.mjs?raw";
 const css = readFileSync(new URL("./style.css", import.meta.url), "utf8");
 const desktopCss = readFileSync(new URL("./desktop.css", import.meta.url), "utf8");
 
+function relativeLuminance(hex: string) {
+  const channels = [1, 3, 5].map((offset) => Number.parseInt(hex.slice(offset, offset + 2), 16) / 255);
+  const linear = channels.map((channel) => channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4);
+  return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2];
+}
+
+function contrast(foreground: string, background: string) {
+  const [lighter, darker] = [relativeLuminance(foreground), relativeLuminance(background)].sort((a, b) => b - a);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
 describe("production desktop Mission Room", () => {
+  it("keeps quiet normal-sized text at WCAG AA contrast on every desktop surface", () => {
+    const quiet = desktopCss.match(/--d-quiet:\s*(#[0-9a-f]{6})/i)?.[1];
+    expect(quiet).toBeDefined();
+    for (const background of ["#090a0b", "#101214", "#0d0f10", "#101315"]) {
+      expect(contrast(quiet!, background), `${quiet} on ${background}`).toBeGreaterThanOrEqual(4.5);
+    }
+  });
+
   it("qualifies the V3 chapter rail above fold without promoting collapsed lifecycle detail", () => {
     expect(desktopFixture).toContain("chapterRailAboveFold");
     expect(desktopQa).toContain("!entry.chapterRailAboveFold");

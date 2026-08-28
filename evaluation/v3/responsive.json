@@ -19880,6 +19880,8 @@
   ],
   "accessibility": [],
   "keyboard": [],
+  "acceptanceFocus": [],
+  "hostilePanels": [],
   "reducedMotion": null,
   "zoom": null,
   "screenshots": [],
