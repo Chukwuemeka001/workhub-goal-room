@@ -3,6 +3,72 @@ import { createGoalRoom } from "./core/goalRoom";
 import { createOwnerViewModel } from "./ownerView";
 
 describe("Goal Room owner view model", () => {
+  it("keeps agent and system frontiers read-only for the owner", async () => {
+    const room = createGoalRoom({
+      goal: "Publish a verified WebMCP Challenge entry",
+      doneLooksLike: ["Owner accepts"],
+    });
+    const expectReadOnlyFrontier = (actor: "agent" | "system") => {
+      const view = createOwnerViewModel(room.getState(), room.getReceipts());
+      expect(view.nextLegalAction.actor).toBe(actor);
+      expect(view.actions).not.toHaveProperty("demo");
+      expect(Object.values(view.actions).some((action) => action.visible)).toBe(false);
+    };
+
+    await room.dispatch({
+      type: "PROPOSE_PLAN", actor: "agent", expectedStateVersion: 0,
+      idempotencyKey: "read-only-plan", steps: [{ id: "artifact", title: "Produce evidence" }],
+    });
+    await room.dispatch({
+      type: "CONFIRM_PLAN", actor: "owner", expectedStateVersion: 1,
+      idempotencyKey: "read-only-confirm", planVersion: 1,
+    });
+    expectReadOnlyFrontier("agent");
+
+    await room.dispatch({
+      type: "CLAIM_STEP", actor: "agent", expectedStateVersion: 2,
+      idempotencyKey: "read-only-claim", planVersion: 1, stepId: "artifact",
+    });
+    expectReadOnlyFrontier("agent");
+
+    const content = JSON.stringify({
+      publicUrl: "http://example.test", demoDurationSeconds: 181,
+      verificationCommand: "npm run build",
+    });
+    const bytes = new TextEncoder().encode(content);
+    const hash = await crypto.subtle.digest("SHA-256", bytes);
+    const sha256 = [...new Uint8Array(hash)]
+      .map((byte) => byte.toString(16).padStart(2, "0"))
+      .join("");
+    await room.dispatch({
+      type: "SUBMIT_CANDIDATE", actor: "agent", expectedStateVersion: 3,
+      idempotencyKey: "read-only-candidate", planVersion: 1, stepId: "artifact",
+      content, sha256,
+    });
+    expectReadOnlyFrontier("system");
+
+    await room.verifyActiveCandidate("read-only-verification-fail");
+    expectReadOnlyFrontier("agent");
+
+    const correctedContent = JSON.stringify({
+      publicUrl: "https://example.test", demoDurationSeconds: 180,
+      verificationCommand: "npm test",
+    });
+    const correctedBytes = new TextEncoder().encode(correctedContent);
+    const correctedHash = await crypto.subtle.digest("SHA-256", correctedBytes);
+    const correctedSha256 = [...new Uint8Array(correctedHash)]
+      .map((byte) => byte.toString(16).padStart(2, "0"))
+      .join("");
+    await room.dispatch({
+      type: "SUBMIT_CANDIDATE", actor: "agent", expectedStateVersion: 5,
+      idempotencyKey: "read-only-corrected", planVersion: 1, stepId: "artifact",
+      content: correctedContent, sha256: correctedSha256,
+    });
+    expectReadOnlyFrontier("system");
+    await room.verifyActiveCandidate("read-only-verification-pass");
+    expectReadOnlyFrontier("agent");
+  });
+
   it("asks the owner for initial intent before exposing the agent frontier", () => {
     const room = createGoalRoom({ ownerIntent: null });
 
@@ -238,7 +304,6 @@ describe("Goal Room owner view model", () => {
         title: "Candidate v1 did not pass",
       },
       actions: {
-        demo: { visible: true, label: "Submit corrected Candidate v2" },
         acceptGoal: { visible: false },
       },
       nextLegalAction: {
@@ -292,7 +357,6 @@ describe("Goal Room owner view model", () => {
         title: "Candidate v2 passed deterministic verification",
       },
       actions: {
-        demo: { visible: true, label: "Agent requests completion" },
         acceptGoal: { visible: false },
       },
       nextLegalAction: {

@@ -21,6 +21,14 @@ describe("production Goal inception UI", () => {
     expect(main).toContain("controller.requestRevision");
   });
 
+  it("does not expose an owner path that performs agent or system actions", () => {
+    expect(html).not.toContain('id="advance-demo"');
+    expect(main).not.toContain('requiredElement<HTMLButtonElement>("advance-demo")');
+    expect(main).not.toContain("runDemoAction");
+    expect(main).not.toContain('actor: "agent"');
+    expect(main).not.toContain("verifyActiveCandidate");
+  });
+
   it("renders authority-adjacent prose as literal text without innerHTML", () => {
     expect(main).not.toMatch(/\.innerHTML\s*=/);
     expect(main).toContain("goalHistory.replaceChildren");

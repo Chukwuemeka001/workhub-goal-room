@@ -21,7 +21,6 @@ export type OwnerViewModel = {
     setIntent: { visible: boolean; label: string };
     confirm: { visible: boolean; label: string };
     revise: { visible: boolean; label: string };
-    demo: { visible: boolean; label: string };
     acceptGoal: { visible: boolean; label: string };
   };
   goalContract: GoalContractView;
@@ -130,7 +129,6 @@ function hiddenActions(planVersion: number) {
     setIntent: { visible: false, label: "Set owner intent" },
     confirm: { visible: false, label: `Confirm Plan v${planVersion}` },
     revise: { visible: false, label: "Request revision" },
-    demo: { visible: false, label: "Run next governed action" },
     acceptGoal: { visible: false, label: "Accept Goal" },
   };
 }
@@ -283,10 +281,7 @@ export function createOwnerViewModel(
         title: `Plan v${plan.version} confirmed`,
         body: "The agent may claim an admitted step. The Goal is not yet accepted.",
       },
-      actions: {
-        ...hiddenActions(plan.version),
-        demo: { visible: true, label: "Agent claims the artifact step" },
-      },
+      actions: hiddenActions(plan.version),
       nextLegalAction: {
         label: "Agent may claim the next admitted step",
         actor: "agent",
@@ -303,10 +298,7 @@ export function createOwnerViewModel(
         title: `Agent holds step ${state.activeClaim?.stepId ?? "—"}`,
         body: "The claim grants custody of this admitted step, not authority to verify or accept it.",
       },
-      actions: {
-        ...hiddenActions(plan.version),
-        demo: { visible: true, label: "Submit failing Candidate v1" },
-      },
+      actions: hiddenActions(plan.version),
       nextLegalAction: {
         label: "Agent must submit exact candidate evidence",
         actor: "agent",
@@ -323,10 +315,7 @@ export function createOwnerViewModel(
         title: `Candidate v${state.activeCandidate?.version ?? "—"} is awaiting verification`,
         body: "WorkHub recorded the exact bytes and SHA-256 digest. The agent cannot grade this candidate.",
       },
-      actions: {
-        ...hiddenActions(plan.version),
-        demo: { visible: true, label: "Run deterministic verification" },
-      },
+      actions: hiddenActions(plan.version),
       nextLegalAction: {
         label: "System must verify this exact candidate",
         actor: "system",
@@ -343,13 +332,7 @@ export function createOwnerViewModel(
         title: `Candidate v${state.activeCandidate?.version ?? "—"} did not pass`,
         body: "The failed candidate and verdict remain immutable. The agent may submit a corrected version.",
       },
-      actions: {
-        ...hiddenActions(plan.version),
-        demo: {
-          visible: true,
-          label: `Submit corrected Candidate v${(state.activeCandidate?.version ?? 0) + 1}`,
-        },
-      },
+      actions: hiddenActions(plan.version),
       nextLegalAction: {
         label: "Agent must submit a corrected candidate",
         actor: "agent",
@@ -366,10 +349,7 @@ export function createOwnerViewModel(
         title: `Candidate v${state.activeCandidate?.version ?? "—"} passed deterministic verification`,
         body: "PASS proves the explicit checks succeeded. It does not grant final acceptance authority.",
       },
-      actions: {
-        ...hiddenActions(plan.version),
-        demo: { visible: true, label: "Agent requests completion" },
-      },
+      actions: hiddenActions(plan.version),
       nextLegalAction: {
         label: "Agent may request completion for this exact candidate",
         actor: "agent",

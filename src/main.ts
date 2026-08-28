@@ -36,7 +36,6 @@ const elements = {
   decisionActions: requiredElement("decision-actions"),
   confirm: requiredElement<HTMLButtonElement>("confirm-plan"),
   revise: requiredElement<HTMLButtonElement>("revise-plan"),
-  advance: requiredElement<HTMLButtonElement>("advance-demo"),
   acceptGoal: requiredElement<HTMLButtonElement>("accept-goal"),
   nextActor: requiredElement("next-actor"),
   nextAction: requiredElement("next-action-heading"),
@@ -65,25 +64,6 @@ const elements = {
 };
 
 const room = createGoalRoom({ ownerIntent: null });
-
-const failedCandidate = JSON.stringify({
-  publicUrl: "http://example.test/workhub-goal-room",
-  demoDurationSeconds: 181,
-  verificationCommand: "npm run build",
-});
-const passingCandidate = JSON.stringify({
-  publicUrl: "https://chukwuemeka001.github.io/workhub-goal-room/",
-  demoDurationSeconds: 180,
-  verificationCommand: "npm test",
-});
-
-async function digestText(value: string): Promise<string> {
-  const bytes = new TextEncoder().encode(value);
-  const digest = await crypto.subtle.digest("SHA-256", bytes);
-  return [...new Uint8Array(digest)]
-    .map((byte) => byte.toString(16).padStart(2, "0"))
-    .join("");
-}
 
 function renderReceipts(receipts: Receipt[]) {
   const labels = createReceiptLabels(receipts);
@@ -203,16 +183,13 @@ function render(view: OwnerViewModel) {
 
   elements.confirm.textContent = view.actions.confirm.label;
   elements.revise.textContent = view.actions.revise.label;
-  elements.advance.textContent = view.actions.demo.label;
   elements.acceptGoal.textContent = view.actions.acceptGoal.label;
   elements.confirm.hidden = !view.actions.confirm.visible;
   elements.revise.hidden = !view.actions.revise.visible;
-  elements.advance.hidden = !view.actions.demo.visible;
   elements.acceptGoal.hidden = !view.actions.acceptGoal.visible;
   elements.decisionActions.hidden = !(
     view.actions.confirm.visible ||
     view.actions.revise.visible ||
-    view.actions.demo.visible ||
     view.actions.acceptGoal.visible
   );
 
@@ -271,55 +248,7 @@ elements.ownerIntentForm.addEventListener("submit", async (event) => {
 function setActionButtonsDisabled(disabled: boolean) {
   elements.confirm.disabled = disabled;
   elements.revise.disabled = disabled;
-  elements.advance.disabled = disabled;
   elements.acceptGoal.disabled = disabled;
-}
-
-async function runDemoAction() {
-  const state = room.getState();
-  if (state.phase === "PLAN_CONFIRMED") {
-    await room.dispatch({
-      type: "CLAIM_STEP",
-      actor: "agent",
-      expectedStateVersion: state.stateVersion,
-      idempotencyKey: "demo-claim-artifact",
-      planVersion: state.activePlan?.version ?? 0,
-      stepId: "artifact",
-    });
-  } else if (state.phase === "STEP_CLAIMED") {
-    await room.dispatch({
-      type: "SUBMIT_CANDIDATE",
-      actor: "agent",
-      expectedStateVersion: state.stateVersion,
-      idempotencyKey: "demo-candidate-v1",
-      planVersion: state.activeClaim?.planVersion ?? 0,
-      stepId: state.activeClaim?.stepId ?? "",
-      content: failedCandidate,
-      sha256: await digestText(failedCandidate),
-    });
-  } else if (state.phase === "CANDIDATE_SUBMITTED") {
-    await room.verifyActiveCandidate(`demo-verification-v${state.activeCandidate?.version ?? 0}`);
-  } else if (state.phase === "VERIFICATION_FAILED") {
-    await room.dispatch({
-      type: "SUBMIT_CANDIDATE",
-      actor: "agent",
-      expectedStateVersion: state.stateVersion,
-      idempotencyKey: "demo-candidate-v2",
-      planVersion: state.activeClaim?.planVersion ?? 0,
-      stepId: state.activeClaim?.stepId ?? "",
-      content: passingCandidate,
-      sha256: await digestText(passingCandidate),
-    });
-  } else if (state.phase === "VERIFICATION_PASSED") {
-    await room.dispatch({
-      type: "REQUEST_COMPLETION",
-      actor: "agent",
-      expectedStateVersion: state.stateVersion,
-      idempotencyKey: "demo-request-completion",
-      candidateSha256: state.activeCandidate?.sha256 ?? "",
-    });
-  }
-  render(createOwnerViewModel(room.getState(), room.getReceipts()));
 }
 
 elements.confirm.addEventListener("click", async () => {
@@ -345,15 +274,6 @@ elements.revise.addEventListener("click", () => {
     : "Your note is an owner decision on this exact Plan version. The agent must propose a new immutable version.";
   elements.dialog.showModal();
   elements.input.focus();
-});
-
-elements.advance.addEventListener("click", async () => {
-  setActionButtonsDisabled(true);
-  try {
-    await runDemoAction();
-  } finally {
-    setActionButtonsDisabled(false);
-  }
 });
 
 elements.acceptGoal.addEventListener("click", async () => {
