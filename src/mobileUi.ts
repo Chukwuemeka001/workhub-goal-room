@@ -129,7 +129,10 @@ export function createMobileSurface(
     live.setAttribute("role", "status");
     live.setAttribute("aria-live", "polite");
     live.setAttribute("aria-atomic", "true");
-    frontier.append(text("p", `Authority now · ${view.frontier.actor.toUpperCase()}`, "mobile-actor"), frontierHeading, live, text("p", view.frontier.boundary, "mobile-boundary"));
+    const authorityLabel = view.frontier.actor === "none"
+      ? "ROOM SEALED · NO CURRENT AUTHORITY"
+      : `Authority now · ${view.frontier.actor.toUpperCase()}`;
+    frontier.append(text("p", authorityLabel, "mobile-actor"), frontierHeading, live, text("p", view.frontier.boundary, "mobile-boundary"));
 
     const actionDock = el("section", "mobile-action-dock");
     actionDock.setAttribute("aria-label", "Owner action");

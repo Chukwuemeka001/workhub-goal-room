@@ -20,7 +20,7 @@ describe("pure canonical custody projection", () => {
       fail: ["VERIFICATION_FAILED", "Verify", "agent", "AGENT_SUBMIT_CORRECTED_CANDIDATE"],
       pass: ["VERIFICATION_PASSED", "Verify", "agent", "AGENT_REQUEST_COMPLETION"],
       completion: ["COMPLETION_REQUESTED", "Accept", "owner", "OWNER_ACCEPT_OR_REQUEST_WORK"],
-      accepted: ["GOAL_ACCEPTED", "Accept", "owner", "GOAL_ACCEPTED_NO_FURTHER_ACTION"],
+      accepted: ["GOAL_ACCEPTED", "Accept", null, "GOAL_ACCEPTED_NO_FURTHER_ACTION"],
     } as const;
 
     for (const [name, snapshot] of all) {
@@ -58,7 +58,7 @@ describe("pure canonical custody projection", () => {
     expect(failed.lanes.find((lane) => lane.actor === "system")).toMatchObject({ current: false, status: "failed" });
 
     const accepted = createCustodyView(all.get("accepted")!.state, all.get("accepted")!.receipts);
-    expect(accepted).toMatchObject({ terminal: true, sealed: true, ownerAttention: false });
+    expect(accepted).toMatchObject({ terminal: true, sealed: true, ownerAttention: false, currentActor: null });
     expect(accepted.candidate).toMatchObject({ completionBound: true, acceptanceBound: true });
     expect(accepted.lanes.every((lane) => lane.current === false)).toBe(true);
   });

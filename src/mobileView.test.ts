@@ -79,7 +79,7 @@ describe("pure mobile authority projection", () => {
       fail: ["Proof", "agent", "Agent must submit a corrected candidate", false, "waiting"],
       pass: ["Proof", "agent", "Agent may request completion for this exact candidate", false, "waiting"],
       completion: ["Acceptance", "owner", "Owner may accept this exact verified candidate", true, "accept-goal"],
-      accepted: ["Accepted", "owner", "No further governed action", false, "terminal"],
+      accepted: ["Accepted", "none", "No further governed action", false, "terminal"],
     } as const;
     for (const [name, tuple] of Object.entries(expected)) {
       const view = project(all.get(name)!);

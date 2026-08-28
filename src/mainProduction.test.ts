@@ -31,6 +31,7 @@ describe("production Goal inception UI", () => {
     expect(html).toContain('id="acceptance-candidate-digest"');
     expect(main).toContain("acceptanceDialog.open");
     expect(main).toContain("controller.acceptGoal()");
+    expect(main.match(/controller\.acceptGoal\(\)/g) ?? []).toHaveLength(1);
     expect(acceptance).toContain('addEventListener("cancel"');
     expect(acceptance).toContain('addEventListener("submit"');
     expect(acceptance).not.toContain("room.dispatch");

@@ -12,7 +12,7 @@ export type CustodyView = {
   phase: GoalRoomState["phase"];
   stateVersion: number;
   chapter: "Define" | "Plan" | "Work" | "Verify" | "Accept";
-  currentActor: Actor;
+  currentActor: Actor | null;
   legalNextAction: string;
   ownerAttention: boolean;
   candidate: null | {
@@ -50,11 +50,11 @@ const chapterByPhase: Record<GoalRoomState["phase"], CustodyView["chapter"]> = {
   GOAL_ACCEPTED: "Accept",
 };
 
-function actorFor(action: string, state: GoalRoomState): Actor {
+function actorFor(action: string, state: GoalRoomState): Actor | null {
   if (action.startsWith("OWNER_")) return "owner";
   if (action.startsWith("SYSTEM_")) return "system";
   if (action.startsWith("AGENT_")) return "agent";
-  return state.phase === "GOAL_ACCEPTED" ? "owner" : "agent";
+  return state.phase === "GOAL_ACCEPTED" ? null : "agent";
 }
 
 export function createCustodyView(state: GoalRoomState, receipts: Receipt[]): CustodyView {

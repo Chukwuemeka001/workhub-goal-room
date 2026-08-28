@@ -25,7 +25,7 @@ export type MobileView = {
     constraints: string[];
     nonGoals: string[];
   };
-  frontier: { actor: "agent" | "owner" | "system"; text: string; liveText: string; boundary: string };
+  frontier: { actor: "agent" | "owner" | "system" | "none"; text: string; liveText: string; boundary: string };
   ownerAttention: boolean;
   custody: CustodyView;
   actionDock: {
@@ -149,6 +149,7 @@ export function createMobileView(
   const labels = createReceiptLabels(receipts);
   const verification = state.activeVerification;
   const verificationByDigest = new Map(state.verificationHistory.map((record) => [record.candidateSha256, record.verdict]));
+  const custody = createCustodyView(state, receipts);
   const checks = verification?.verdict === "PASS"
     ? ["HTTPS public URL passed", "Demo duration is within 180 seconds", "Verification command is exactly npm test"]
     : [];
@@ -166,13 +167,15 @@ export function createMobileView(
       nonGoals: activeGoal ? [...activeGoal.nonGoals] : [],
     },
     frontier: {
-      actor: view.nextLegalAction.actor,
+      actor: custody.currentActor ?? "none",
       text: view.nextLegalAction.label,
-      liveText: `${view.nextLegalAction.actor}: ${view.nextLegalAction.label}`,
+      liveText: custody.currentActor === null
+        ? `Room sealed: ${view.nextLegalAction.label}`
+        : `${custody.currentActor}: ${view.nextLegalAction.label}`,
       boundary: view.ownerAttention.body,
     },
     ownerAttention: view.ownerAttention.required,
-    custody: createCustodyView(state, receipts),
+    custody,
     actionDock: actionDock(state, view),
     tabs: tabs.map((tab) => ({ ...tab })),
     plan: {

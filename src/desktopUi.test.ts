@@ -6,11 +6,19 @@ import main from "./main.ts?raw";
 import desktopUi from "./desktopUi.ts?raw";
 import packageJson from "../package.json?raw";
 import vite from "../vite.config.ts?raw";
+import desktopFixture from "../qa/desktop-fixture.ts?raw";
+import desktopQa from "../scripts/desktop-qa.mjs?raw";
 
 const css = readFileSync(new URL("./style.css", import.meta.url), "utf8");
 const desktopCss = readFileSync(new URL("./desktop.css", import.meta.url), "utf8");
 
 describe("production desktop Mission Room", () => {
+  it("qualifies the V3 chapter rail above fold without promoting collapsed lifecycle detail", () => {
+    expect(desktopFixture).toContain("chapterRailAboveFold");
+    expect(desktopQa).toContain("!entry.chapterRailAboveFold");
+    expect(desktopQa).not.toContain("!entry.lifecycleAboveFold");
+  });
+
   it("uses a separate desktop composition in required Goal-to-progressive-detail order", () => {
     expect(html).toContain('id="desktop-room"');
     expect(desktopUi).toContain("root.replaceChildren(goalHeader, stateBar, custody, workspace, progressive)");

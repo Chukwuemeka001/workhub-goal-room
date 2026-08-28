@@ -4,6 +4,7 @@ import type { MobileView } from "../src/mobileView";
 
 const hostile = "<img src=x onerror=alert(1)>";
 const digest = "7bb959aebadc1b0d557990440771bda517f53dfeca69b78f651650c941ffdf27";
+const failedDigest = "1".repeat(64);
 const base: MobileView = {
   chapter: "Intent",
   status: "Owner intent captured — Goal not admitted",
@@ -12,13 +13,13 @@ const base: MobileView = {
   ownerAttention: false,
   actionDock: { kind: "revise-intent", primaryLabel: "Revise owner intent", secondaryKind: null, secondaryLabel: null, waitingText: "No owner action is required right now." },
   tabs: [
-    { id: "now", label: "Now", panelHeading: "Current frontier" },
+    { id: "goal", label: "Goal", panelHeading: "Goal Contract" },
     { id: "plan", label: "Plan", panelHeading: "Goal and Plan" },
     { id: "proof", label: "Proof", panelHeading: "Evidence and verification" },
     { id: "activity", label: "Activity", panelHeading: "Origin, decisions, and receipts" },
   ],
   plan: { version: null, goalContractVersion: null, status: "NOT PROPOSED", steps: [] },
-  proof: { candidateVersion: null, digest: null, checks: [], findings: [], verdict: "WAITING", passIsNotAcceptance: false, completionCandidateDigest: null, acceptedCandidateDigest: null },
+  proof: { candidateVersion: null, digest: null, checks: [], findings: [], verdict: "WAITING", passIsNotAcceptance: false, completionCandidateDigest: null, acceptedCandidateDigest: null, history: [] },
   activity: { origin: [{ kind: "OWNER_INTENT", actor: "owner", authority: "CONTEXT_ONLY", label: "Owner captured intent", text: `literal ${hostile}` }], receipts: [{ sequence: 1, accepted: true, label: "Owner captured intent", source: "Owner" }] },
 };
 const empty: MobileView = {
@@ -40,7 +41,7 @@ const fail: MobileView = {
   frontier: { actor: "agent", text: "Agent must submit a corrected candidate", liveText: "agent: Agent must submit a corrected candidate", boundary: "The failed candidate and verdict remain immutable. The agent may submit a corrected version." },
   actionDock: { kind: "waiting", primaryLabel: null, secondaryKind: null, secondaryLabel: null, waitingText: "No owner action is required. Agent correction is required." },
   plan: { version: 2, goalContractVersion: 1, status: "CONFIRMED", steps: [{ id: "release", title: `Ship ${hostile} exact release` }], revisionDelta: `Keep ${hostile} literal revision note` },
-  proof: { candidateVersion: 1, digest, checks: [], findings: ["PUBLIC_URL_MUST_BE_HTTPS", "VERIFICATION_COMMAND_MISMATCH"], verdict: "FAIL", passIsNotAcceptance: false, completionCandidateDigest: null, acceptedCandidateDigest: null },
+  proof: { candidateVersion: 1, digest: failedDigest, checks: [], findings: ["PUBLIC_URL_MUST_BE_HTTPS", "VERIFICATION_COMMAND_MISMATCH"], verdict: "FAIL", passIsNotAcceptance: false, completionCandidateDigest: null, acceptedCandidateDigest: null, history: [{ version: 1, digest: failedDigest, verdict: "FAIL" }] },
 };
 const plan: MobileView = {
   ...structuredClone(goal), chapter: "Plan", status: "Waiting for your Plan decision", ownerAttention: true,
@@ -53,17 +54,17 @@ const pass: MobileView = {
   ...structuredClone(fail), status: "Verification passed — owner has not accepted the Goal",
   frontier: { actor: "agent", text: "Agent may request completion for this exact candidate", liveText: "agent: Agent may request completion for this exact candidate", boundary: "PASS proves the explicit checks succeeded. It does not grant final acceptance authority." },
   actionDock: { kind: "waiting", primaryLabel: null, secondaryKind: null, secondaryLabel: null, waitingText: "No owner action is required. Agent completion request is required." },
-  proof: { candidateVersion: 2, digest, checks: ["HTTPS public URL passed", "Demo duration is within 180 seconds", "Verification command is exactly npm test"], findings: [], verdict: "PASS", passIsNotAcceptance: true, completionCandidateDigest: null, acceptedCandidateDigest: null },
+  proof: { candidateVersion: 2, digest, checks: ["HTTPS public URL passed", "Demo duration is within 180 seconds", "Verification command is exactly npm test"], findings: [], verdict: "PASS", passIsNotAcceptance: true, completionCandidateDigest: null, acceptedCandidateDigest: null, history: [{ version: 1, digest: failedDigest, verdict: "FAIL" }, { version: 2, digest, verdict: "PASS" }] },
 };
 const completion: MobileView = {
   ...structuredClone(fail), chapter: "Acceptance", status: "Verified result — awaiting owner acceptance", ownerAttention: true,
   frontier: { actor: "owner", text: "Owner may accept this exact verified candidate", liveText: "owner: Owner may accept this exact verified candidate", boundary: "The candidate passed deterministic checks. Only you can accept the Goal." },
   actionDock: { kind: "accept-goal", primaryLabel: "Accept Goal", secondaryKind: null, secondaryLabel: null, waitingText: "Owner decision required" },
-  proof: { candidateVersion: 2, digest, checks: ["HTTPS public URL passed", "Demo duration is within 180 seconds", "Verification command is exactly npm test"], findings: [], verdict: "PASS", passIsNotAcceptance: true, completionCandidateDigest: digest, acceptedCandidateDigest: null },
+  proof: { candidateVersion: 2, digest, checks: ["HTTPS public URL passed", "Demo duration is within 180 seconds", "Verification command is exactly npm test"], findings: [], verdict: "PASS", passIsNotAcceptance: true, completionCandidateDigest: digest, acceptedCandidateDigest: null, history: [{ version: 1, digest: failedDigest, verdict: "FAIL" }, { version: 2, digest, verdict: "PASS" }] },
 };
 const terminal: MobileView = {
   ...structuredClone(completion), chapter: "Accepted", status: "Goal accepted by owner", ownerAttention: false,
-  frontier: { actor: "owner", text: "No further governed action", liveText: "owner: No further governed action", boundary: "The owner accepted the exact candidate that passed deterministic verification." },
+  frontier: { actor: "none", text: "No further governed action", liveText: "Room sealed: No further governed action", boundary: "The owner accepted the exact candidate that passed deterministic verification." },
   actionDock: { kind: "terminal", primaryLabel: null, secondaryKind: null, secondaryLabel: null, waitingText: "Goal accepted" },
   proof: { ...structuredClone(completion.proof), passIsNotAcceptance: false, acceptedCandidateDigest: digest },
 };
@@ -88,6 +89,7 @@ const keyboardEvents: Array<{ key: string; trusted: boolean; defaultPrevented: b
 const surface = createMobileSurface(root, {
   onSetIntent: async (intent) => { ownerCalls.push("set-intent"); intentCalls.push(intent); },
   onPrimary: async (kind) => { ownerCalls.push(`primary:${kind}`); },
+  onOpenAcceptance: () => { ownerCalls.push("open-acceptance"); },
   onOpenRevision: (kind, version) => {
     ownerCalls.push(`revision:${kind}:${version}`);
     const subject = kind === "goal" ? "Goal Contract" : "Plan";

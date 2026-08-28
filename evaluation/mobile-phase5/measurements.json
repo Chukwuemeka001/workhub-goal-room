@@ -12,9 +12,9 @@
   "keyboardSequence": [
     {
       "key": "initial",
-      "focusedTabId": "mobile-tab-now",
-      "selectedTab": "now",
-      "panelBinding": "mobile-tab-now",
+      "focusedTabId": "mobile-tab-goal",
+      "selectedTab": "goal",
+      "panelBinding": "mobile-tab-goal",
       "authorityStable": true,
       "ownerCalls": []
     },
@@ -36,9 +36,9 @@
     },
     {
       "key": "ArrowRight",
-      "focusedTabId": "mobile-tab-now",
-      "selectedTab": "now",
-      "panelBinding": "mobile-tab-now",
+      "focusedTabId": "mobile-tab-goal",
+      "selectedTab": "goal",
+      "panelBinding": "mobile-tab-goal",
       "authorityStable": true,
       "ownerCalls": []
     },
@@ -52,25 +52,25 @@
     },
     {
       "key": "Home",
-      "focusedTabId": "mobile-tab-now",
-      "selectedTab": "now",
-      "panelBinding": "mobile-tab-now",
+      "focusedTabId": "mobile-tab-goal",
+      "selectedTab": "goal",
+      "panelBinding": "mobile-tab-goal",
       "authorityStable": true,
       "ownerCalls": []
     },
     {
       "key": "Enter",
-      "focusedTabId": "mobile-tab-now",
-      "selectedTab": "now",
-      "panelBinding": "mobile-tab-now",
+      "focusedTabId": "mobile-tab-goal",
+      "selectedTab": "goal",
+      "panelBinding": "mobile-tab-goal",
       "authorityStable": true,
       "ownerCalls": []
     },
     {
       "key": "Space",
-      "focusedTabId": "mobile-tab-now",
-      "selectedTab": "now",
-      "panelBinding": "mobile-tab-now",
+      "focusedTabId": "mobile-tab-goal",
+      "selectedTab": "goal",
+      "panelBinding": "mobile-tab-goal",
       "authorityStable": true,
       "ownerCalls": []
     }
@@ -80,7 +80,7 @@
       "key": "ArrowRight",
       "trusted": true,
       "defaultPrevented": true,
-      "targetId": "mobile-tab-now"
+      "targetId": "mobile-tab-goal"
     },
     {
       "key": "End",
@@ -98,7 +98,7 @@
       "key": "ArrowLeft",
       "trusted": true,
       "defaultPrevented": true,
-      "targetId": "mobile-tab-now"
+      "targetId": "mobile-tab-goal"
     },
     {
       "key": "Home",
@@ -110,13 +110,13 @@
       "key": "Enter",
       "trusted": true,
       "defaultPrevented": false,
-      "targetId": "mobile-tab-now"
+      "targetId": "mobile-tab-goal"
     },
     {
       "key": " ",
       "trusted": true,
       "defaultPrevented": false,
-      "targetId": "mobile-tab-now"
+      "targetId": "mobile-tab-goal"
     }
   ],
   "intentRecovery": {
@@ -801,8 +801,8 @@
       "dockInsideViewport": true,
       "tabInsideViewport": true,
       "dialog": {
-        "top": 40.09375,
-        "bottom": 511.90625,
+        "top": 45.34375,
+        "bottom": 506.65625,
         "inside": true,
         "focused": true
       },

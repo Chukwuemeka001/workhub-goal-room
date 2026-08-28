@@ -427,8 +427,8 @@
     },
     {
       "path": "src/custodyView.ts",
-      "sha256": "05942752a081c13a2472f87145d233ad1657447c3e1f6dde7517917bcd57498d",
-      "bytes": 3833
+      "sha256": "f7ee9b0250f6e9935d61e513700b04a57e12f44acde9a5ccd64cc8a3d92a11a9",
+      "bytes": 3844
     },
     {
       "path": "src/toolSurfaceView.ts",
@@ -442,8 +442,8 @@
     },
     {
       "path": "src/main.ts",
-      "sha256": "f4adf752c92350d584dab6ddb338bacebbca7ca022150092234a54a4869738c9",
-      "bytes": 5570
+      "sha256": "bbcb0b1b5b4f280323e8f464cefc00071559ec067c6d1af43bd93b10af0c8721",
+      "bytes": 5524
     },
     {
       "path": "src/desktopUi.ts",
@@ -457,13 +457,13 @@
     },
     {
       "path": "src/mobileUi.ts",
-      "sha256": "93ff4d3034770732bbef84d343038bb6a78bc45dd157f5ab900c4a9f382609c7",
-      "bytes": 12038
+      "sha256": "4871949c9961d23538cbbbf4f574b7be8611a78417c841c0a7f3de925045ad8e",
+      "bytes": 12166
     },
     {
       "path": "src/mobileView.ts",
-      "sha256": "651c582bcd2526b66b5204b9ae6a94036e2fdc4be220e77a8c0e8f1d177f1b52",
-      "bytes": 7854
+      "sha256": "c938e18a742474c403ec5e677217d811341306833c58428d71978ceb20ae0be0",
+      "bytes": 7974
     },
     {
       "path": "src/ownerUi.ts",
@@ -579,7 +579,7 @@
       "width": 393,
       "height": 852,
       "expected": "mobile",
-      "sha256": "1e584369b3ce4b82284a1068a5aa6a474195b9cfb3ea37d3ddb72c31960d01eb"
+      "sha256": "23559f6178ba791276230c37666b42566e5b2c4c102c0d83c004991f0f66c51c"
     }
   ]
 }

@@ -34,6 +34,7 @@ function measurements() {
   const now = document.querySelector<HTMLElement>(".desktop-now")!.getBoundingClientRect();
   const inspector = document.querySelector<HTMLElement>(".desktop-inspector")!.getBoundingClientRect();
   const progressive = document.querySelector<HTMLElement>(".desktop-progressive")!.getBoundingClientRect();
+  const chapterRail = document.querySelector<HTMLElement>(".desktop-chapter")!.getBoundingClientRect();
   const authoritative = [...document.querySelectorAll<HTMLElement>(".desktop-goal-identity,.desktop-now,.desktop-inspector-panel")];
   return {
     state: name,
@@ -48,6 +49,8 @@ function measurements() {
     inspector: { x: inspector.x, y: inspector.y, width: inspector.width, height: inspector.height, area: inspector.width * inspector.height, visible: inspector.top < innerHeight && inspector.bottom > 0 },
     lifecycleVisible: getComputedStyle(document.querySelector<HTMLElement>(".desktop-progressive")!).display !== "none",
     lifecycleAboveFold: progressive.top < innerHeight,
+    chapterRailVisible: getComputedStyle(document.querySelector<HTMLElement>(".desktop-chapter")!).display !== "none",
+    chapterRailAboveFold: chapterRail.top >= 0 && chapterRail.bottom <= innerHeight,
     frontierDominant: now.width > inspector.width * 1.8 && now.width * now.height > inspector.width * inspector.height,
     desktopVisible: getComputedStyle(document.querySelector<HTMLElement>(".desktop-surface")!).display !== "none",
     mobileHidden: getComputedStyle(document.querySelector<HTMLElement>(".mobile-room")!).display === "none",

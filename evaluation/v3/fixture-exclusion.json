@@ -16,9 +16,9 @@
   "leaks": [],
   "builtFiles": [
     {
-      "path": "assets/index-7EloIADQ.js",
-      "sha256": "13cf47dc8cfb6b548b53b8706d06b27c723977405b0dddf4573de4eead73284f",
-      "bytes": 77640
+      "path": "assets/index-CFDpuGC-.js",
+      "sha256": "c7bd3979c32b875cb5f79f64e76c8e1057fa10c15a5c0ab268beb753269ed08c",
+      "bytes": 77775
     },
     {
       "path": "assets/index-FqWWkrkR.css",
@@ -27,7 +27,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "fec49287b228f9aab8184d08d70bd5074056bdc9942ef988ce4f4f4adfbe4815",
+      "sha256": "783bb92a209e542909ae5884837208d7031811d7327d93a1d1a2d8c5720b2c92",
       "bytes": 2618
     }
   ],

@@ -53,7 +53,7 @@ const mobileSurface = createMobileSurface(requiredElement("mobile-room"), {
   onPrimary: async (kind) => {
     if (kind === "confirm-goal") await controller.confirmGoalContract();
     else if (kind === "confirm-plan") await controller.confirmPlan();
-    else if (kind === "accept-goal") await controller.acceptGoal();
+    else if (kind === "accept-goal") return;
   },
   onOpenAcceptance: (binding) => acceptanceDialog.open(binding),
   onOpenRevision: openRevision,
@@ -63,7 +63,7 @@ const desktopSurface = createDesktopSurface(requiredElement("desktop-room"), {
   onPrimary: async (kind) => {
     if (kind === "confirm-goal") await controller.confirmGoalContract();
     else if (kind === "confirm-plan") await controller.confirmPlan();
-    else if (kind === "accept-goal") await controller.acceptGoal();
+    else if (kind === "accept-goal") return;
   },
   onOpenAcceptance: (binding) => acceptanceDialog.open(binding),
   onOpenRevision: openRevision,

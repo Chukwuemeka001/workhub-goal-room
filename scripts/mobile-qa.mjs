@@ -113,7 +113,7 @@ try {
   })()`);
   await navigate(`${origin}/qa/mobile-fixture.html?state=goal`, 393, 852);
   const keyboardAuthorityBefore = await evaluate("JSON.stringify(window.__mobileQa.view)");
-  await evaluate("document.querySelector('#mobile-tab-now').focus()");
+  await evaluate("document.querySelector('#mobile-tab-goal').focus()");
   const keyboardSequence = [];
   const readKeyboardState = async (key) => keyboardSequence.push(await evaluate(`({
     key: ${JSON.stringify(key)},
@@ -164,14 +164,14 @@ try {
   );
   if (!semantic.authorityStable || !semantic.selectedSemantics || semantic.focusedTabId !== "mobile-tab-proof" || !semantic.panelSemantics || semantic.tabCount !== 4 || !semantic.conciseLiveRegions) failures.push({ semantic });
   const expectedKeyboardSequence = [
-    ["mobile-tab-now", "now", "mobile-tab-now"],
+    ["mobile-tab-goal", "goal", "mobile-tab-goal"],
     ["mobile-tab-plan", "plan", "mobile-tab-plan"],
     ["mobile-tab-activity", "activity", "mobile-tab-activity"],
-    ["mobile-tab-now", "now", "mobile-tab-now"],
+    ["mobile-tab-goal", "goal", "mobile-tab-goal"],
     ["mobile-tab-activity", "activity", "mobile-tab-activity"],
-    ["mobile-tab-now", "now", "mobile-tab-now"],
-    ["mobile-tab-now", "now", "mobile-tab-now"],
-    ["mobile-tab-now", "now", "mobile-tab-now"],
+    ["mobile-tab-goal", "goal", "mobile-tab-goal"],
+    ["mobile-tab-goal", "goal", "mobile-tab-goal"],
+    ["mobile-tab-goal", "goal", "mobile-tab-goal"],
   ];
   if (keyboardSequence.some((entry, index) =>
     entry.focusedTabId !== expectedKeyboardSequence[index][0] ||
