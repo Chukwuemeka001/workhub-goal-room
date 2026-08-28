@@ -10,7 +10,7 @@ type EventNode = {
   addEventListener(type: string, listener: (event: EventLike) => unknown): void;
 };
 type TextNode = { textContent: string | null };
-type FocusNode = EventNode & { focus(): void };
+type FocusNode = EventNode & { focus(): void; isConnected?: boolean };
 
 export type AcceptanceDialogNodes = {
   dialog: EventNode & {
@@ -34,6 +34,7 @@ export function createAcceptanceDialog(
   onConfirm: (binding: AcceptanceBinding) => Promise<void>,
 ) {
   let exactBinding: AcceptanceBinding | null = null;
+  let returnFocus: FocusNode | null = null;
 
   const reset = () => {
     exactBinding = null;
@@ -43,6 +44,9 @@ export function createAcceptanceDialog(
     event?.preventDefault();
     nodes.dialog.close();
     reset();
+    const target = returnFocus;
+    returnFocus = null;
+    if (target?.isConnected !== false) target?.focus();
   };
 
   nodes.cancel.addEventListener("click", closeWithoutMutation);
@@ -76,6 +80,10 @@ export function createAcceptanceDialog(
   return {
     open(binding: AcceptanceBinding) {
       exactBinding = { ...binding };
+      const active = nodes.dialog.ownerDocument?.activeElement as Partial<FocusNode> | null | undefined;
+      returnFocus = active && typeof active.focus === "function" && !nodes.dialog.contains(active)
+        ? active as FocusNode
+        : null;
       nodes.title.textContent = `Accept Candidate v${binding.candidateVersion}?`;
       nodes.candidate.textContent = `Candidate v${binding.candidateVersion} (${binding.compactDigest})`;
       nodes.digest.textContent = binding.digest;

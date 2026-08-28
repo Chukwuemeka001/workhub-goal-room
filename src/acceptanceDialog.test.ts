@@ -94,4 +94,21 @@ describe("exact-candidate acceptance confirmation", () => {
     expect(await nodes.dialog.emit("keydown", { key: "Tab", shiftKey: true })).toBe(true);
     expect(nodes.dialog.ownerDocument.activeElement).toBe(nodes.confirm);
   });
+
+  it("returns focus to the invoking trigger after Cancel and Escape", async () => {
+    for (const closeKind of ["click", "cancel"] as const) {
+      const { nodes, dialog } = fixture();
+      const trigger = new FakeNode();
+      trigger.ownerDocument = nodes.dialog.ownerDocument;
+      trigger.focus();
+      dialog.open(binding);
+      expect(nodes.dialog.ownerDocument.activeElement).toBe(nodes.cancel);
+
+      if (closeKind === "click") await nodes.cancel.emit("click");
+      else await nodes.dialog.emit("cancel");
+
+      expect(nodes.dialog.open).toBe(false);
+      expect(nodes.dialog.ownerDocument.activeElement).toBe(trigger);
+    }
+  });
 });

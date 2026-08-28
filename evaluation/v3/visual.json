@@ -2891,6 +2891,42 @@
       "sha256": "ec7ce1a65c49588640f225befda1b0212bb0d1ee484d4899f2e261c16d4962e4"
     },
     {
+      "path": "evaluation/v3/v3-s02-1440x900.png",
+      "story": "S02",
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "expected": "desktop",
+      "sha256": "bfe601560307187e4fd1f56f84efb142f1767ec04aa9f5f1f4532bd09aee6e38"
+    },
+    {
+      "path": "evaluation/v3/v3-s03-1440x900.png",
+      "story": "S03",
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "expected": "desktop",
+      "sha256": "270d8d65eb3de06a10ae6202c2d9868741baa0e0aeee44f02949e516fc6c1296"
+    },
+    {
+      "path": "evaluation/v3/v3-s07-1440x900.png",
+      "story": "S07",
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "expected": "desktop",
+      "sha256": "36ebc75434a6ff422106fa5dff45ed140753ddecdca09f48367469afc36c5060"
+    },
+    {
+      "path": "evaluation/v3/v3-s08-1440x900.png",
+      "story": "S08",
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "expected": "desktop",
+      "sha256": "dfda69e9f7f6c40ae0eb89679bde343a54db9e28d794eb8825055afb4e0ebc7b"
+    },
+    {
       "path": "evaluation/v3/v3-s09-1440x900.png",
       "story": "S09",
       "name": "desktop",
@@ -2954,6 +2990,15 @@
       "sha256": "3aba48d03ba89c0645885445a2999738b8cca0b68e783413dcfb177827f02e59"
     },
     {
+      "path": "evaluation/v3/v3-s13-modal-393x852.png",
+      "story": "S13",
+      "name": "phone",
+      "width": 393,
+      "height": 852,
+      "expected": "mobile",
+      "sha256": "a19933d823a5eab81a9b4bb9d9f95c64b8485fef66a7ec92511930ee6ba208d2"
+    },
+    {
       "path": "evaluation/v3/v3-s14-1440x900.png",
       "story": "S14",
       "name": "desktop",
@@ -2970,6 +3015,24 @@
       "height": 852,
       "expected": "mobile",
       "sha256": "23559f6178ba791276230c37666b42566e5b2c4c102c0d83c004991f0f66c51c"
+    },
+    {
+      "path": "evaluation/v3/v3-s12-boundary-mobile-1199x900.png",
+      "story": "S12",
+      "name": "mobile-boundary",
+      "width": 1199,
+      "height": 900,
+      "expected": "mobile",
+      "sha256": "878974106b29fa0bfe45368c19c6eec223dbf57866a7112be251e67ab3d15a94"
+    },
+    {
+      "path": "evaluation/v3/v3-s12-boundary-desktop-1200x900.png",
+      "story": "S12",
+      "name": "desktop-boundary",
+      "width": 1200,
+      "height": 900,
+      "expected": "desktop",
+      "sha256": "4febb82978197e155f37fddf9a93c8cc4f13712f061d2cf38b76db9045624673"
     },
     {
       "path": "evaluation/v3/v3-s03-hostile-320x568.png",

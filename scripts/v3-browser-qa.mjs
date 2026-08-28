@@ -217,7 +217,7 @@ try {
     for (const viewport of [responsiveViewports[1], responsiveViewports[6]]) {
       await navigate("S13", viewport);
       const selector = viewport.expected === "mobile" ? ".mobile-action-dock .mobile-button.primary" : ".desktop-owner-action .desktop-action.primary";
-      await evaluate(`document.querySelector(${JSON.stringify(selector)}).click()`);
+      await evaluate(`window.__v3AcceptanceTrigger=document.querySelector(${JSON.stringify(selector)});window.__v3AcceptanceTrigger.focus();window.__v3AcceptanceTrigger.click()`);
       const sequence = [await evaluate(`({activeId:document.activeElement?.id??null,inside:document.querySelector('#acceptance-dialog').contains(document.activeElement),open:document.querySelector('#acceptance-dialog').open})`)];
       for (let index = 0; index < 10; index += 1) {
         await pressKey("Tab");
@@ -227,10 +227,13 @@ try {
       await pressKey("Tab", 8);
       const reverse = await evaluate(`({activeId:document.activeElement?.id??null,inside:document.querySelector('#acceptance-dialog').contains(document.activeElement),open:document.querySelector('#acceptance-dialog').open})`);
       await pressKey("Escape");
-      const closed = await evaluate(`({open:document.querySelector('#acceptance-dialog').open,ownerCalls:window.__v3Qualification.ownerCalls()})`);
-      const row = { viewport, sequence, reverse, closed };
+      const closed = await evaluate(`({open:document.querySelector('#acceptance-dialog').open,returned:document.activeElement===window.__v3AcceptanceTrigger,ownerCalls:window.__v3Qualification.ownerCalls()})`);
+      await evaluate("window.__v3AcceptanceTrigger.click()");
+      await evaluate("document.querySelector('#cancel-acceptance').click()");
+      const cancelClosed = await evaluate(`({open:document.querySelector('#acceptance-dialog').open,returned:document.activeElement===window.__v3AcceptanceTrigger,ownerCalls:window.__v3Qualification.ownerCalls()})`);
+      const row = { viewport, sequence, reverse, closed, cancelClosed };
       acceptanceFocus.push(row);
-      if (sequence.some((entry) => !entry.open || !entry.inside) || !reverse.open || !reverse.inside || reverse.activeId !== "confirm-acceptance" || closed.open || closed.ownerCalls.includes("confirm-acceptance")) {
+      if (sequence.some((entry) => !entry.open || !entry.inside) || !reverse.open || !reverse.inside || reverse.activeId !== "confirm-acceptance" || closed.open || !closed.returned || closed.ownerCalls.includes("confirm-acceptance") || cancelClosed.open || !cancelClosed.returned || cancelClosed.ownerCalls.includes("confirm-acceptance")) {
         modeFailures.push({ kind: "acceptance-focus", ...row });
       }
     }
@@ -267,6 +270,10 @@ try {
   if (mode === "visual") {
     const captures = [
       { story: "S01", viewport: responsiveViewports[6] },
+      { story: "S02", viewport: responsiveViewports[6] },
+      { story: "S03", viewport: responsiveViewports[6] },
+      { story: "S07", viewport: responsiveViewports[6] },
+      { story: "S08", viewport: responsiveViewports[6] },
       { story: "S09", viewport: responsiveViewports[6] },
       { story: "S10", viewport: responsiveViewports[6] },
       { story: "S12", viewport: responsiveViewports[1] },
@@ -274,14 +281,20 @@ try {
       { story: "S13", viewport: responsiveViewports[6] },
       { story: "S13", viewport: responsiveViewports[1] },
       { story: "S13", viewport: responsiveViewports[6], openAcceptance: true, suffix: "modal" },
+      { story: "S13", viewport: responsiveViewports[1], openAcceptance: true, suffix: "modal" },
       { story: "S14", viewport: responsiveViewports[6] },
       { story: "S14", viewport: responsiveViewports[1] },
+      { story: "S12", viewport: responsiveViewports[4], suffix: "boundary-mobile" },
+      { story: "S12", viewport: responsiveViewports[5], suffix: "boundary-desktop" },
       { story: "S03", viewport: responsiveViewports[0], hostile: true, tab: "activity", suffix: "hostile" },
       { story: "S03", viewport: responsiveViewports[7], hostile: true, tab: "activity", suffix: "hostile" },
     ];
     for (const capture of captures) {
       await navigate(capture.story, capture.viewport, capture);
-      if (capture.openAcceptance) await evaluate("document.querySelector('.desktop-owner-action .desktop-action.primary').click()");
+      if (capture.openAcceptance) {
+        const selector = capture.viewport.expected === "mobile" ? ".mobile-action-dock .mobile-button.primary" : ".desktop-owner-action .desktop-action.primary";
+        await evaluate(`document.querySelector(${JSON.stringify(selector)}).click()`);
+      }
       const result = await call("Page.captureScreenshot", { format: "png", fromSurface: true, captureBeyondViewport: false });
       const bytes = Buffer.from(result.data, "base64");
       const qualifier = capture.suffix ? `-${capture.suffix}` : "";

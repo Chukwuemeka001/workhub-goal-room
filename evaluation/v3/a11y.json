@@ -4867,7 +4867,16 @@
       },
       "closed": {
         "open": false,
+        "returned": true,
         "ownerCalls": [
+          "open-acceptance"
+        ]
+      },
+      "cancelClosed": {
+        "open": false,
+        "returned": true,
+        "ownerCalls": [
+          "open-acceptance",
           "open-acceptance"
         ]
       }
@@ -4943,7 +4952,16 @@
       },
       "closed": {
         "open": false,
+        "returned": true,
         "ownerCalls": [
+          "open-acceptance"
+        ]
+      },
+      "cancelClosed": {
+        "open": false,
+        "returned": true,
+        "ownerCalls": [
+          "open-acceptance",
           "open-acceptance"
         ]
       }
