@@ -46,7 +46,7 @@ Navigation method: Canary was foreground and VoiceOver commands were sent throug
 
 Production states were positioned through captured production descriptor callbacks plus visible production Owner controls and the production System verifier. Those transitions are explicitly **not** native WebMCP proof. The screenshots prove the displayed Caption Panel checkpoint and visible production state; they do not establish every utterance, uninterrupted rotor order, every focus-return transition, or full WCAG conformance. Dialog labels/descriptions and physical-key containment/return are additionally supported by the separate keyboard and automated evidence classes.
 
-Selected public-safe screenshots and their SHA-256 hashes are in `evaluation/voiceover-v3/manifest.json`. VoiceOver was stopped after the run and verified absent.
+Selected public-safe screenshots and their SHA-256 hashes are in `evaluation/voiceover-v3/manifest.json`. These evidence copies are cropped to the Canary/Caption Panel region and mask only non-evidence desktop pixels; the observed WorkHub and Caption Panel content is unchanged. VoiceOver was stopped after the run and verified absent.
 
 ## Automated production and qualification evidence
 

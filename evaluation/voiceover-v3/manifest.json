@@ -2,77 +2,77 @@
   "schemaVersion": 1,
   "kind": "actual-macos-voiceover-caption-panel-evidence",
   "date": "2026-08-28",
-  "captureScope": "Synthetic production Goal Room; VoiceOver Caption Panel visible",
+  "captureScope": "Synthetic production Goal Room; VoiceOver Caption Panel visible; images cropped and masked to exclude unrelated desktop content",
   "files": [
     {
       "path": "evaluation/voiceover-v3/vo-goal-revision-dialog.png",
-      "sha256": "fa25aee88f92990fc6a7bac404979a8fa1cac0b3fd2362d3a72caac4d4bce3c0",
-      "bytes": 2797829,
-      "width": 3360,
-      "height": 2100
+      "sha256": "9d1282f35f42e4223d98e6b9fe8107d378296b7b81ecc6bf1d218091a2e2d3cb",
+      "bytes": 394717,
+      "width": 2395,
+      "height": 1845
     },
     {
       "path": "evaluation/voiceover-v3/vo-initial-authority-owner.png",
-      "sha256": "a7399254e8a96510c16301d1485871eaf2649ebc53312497e0c65466a7b6affc",
-      "bytes": 2810835,
-      "width": 3360,
-      "height": 2100
+      "sha256": "931cd9cf5ca674cc0c0601e34a631bc99cd92847f3b1adc68145008080d37fd2",
+      "bytes": 398280,
+      "width": 2395,
+      "height": 1845
     },
     {
       "path": "evaluation/voiceover-v3/vo-initial-heading1.png",
-      "sha256": "e1221d97d82b03bdb0fc9487bd9a4049b79a48e7d98c63ca878ef5e1dda6644a",
-      "bytes": 2811735,
-      "width": 3360,
-      "height": 2100
+      "sha256": "b3186dd1b83c5fff96a297ee6650daa7e138be12c1a14f057c809c580db8f014",
+      "bytes": 399348,
+      "width": 2395,
+      "height": 1845
     },
     {
       "path": "evaluation/voiceover-v3/vo-plan-revision-dialog.png",
-      "sha256": "1dd51bbb2e044c92e779177d2a36435269f55801e0435de99440bcd5abdc5795",
-      "bytes": 2778163,
-      "width": 3360,
-      "height": 2100
+      "sha256": "5789eeed8bb20977c580a3a621b913dec886edc6b4d6d6db1146d955b6968b88",
+      "bytes": 376505,
+      "width": 2395,
+      "height": 1845
     },
     {
       "path": "evaluation/voiceover-v3/vo-s13-acceptance-dialog.png",
-      "sha256": "646084efaaf1e125e4046cee61be1f48ed44093fec5d8c7bbd9a71213d623245",
-      "bytes": 2705021,
-      "width": 3360,
-      "height": 2100
+      "sha256": "27f4305457e1e0226f2e3545ef3bca25284e91d0d9a8f10b4672ddd1b00f6442",
+      "bytes": 315892,
+      "width": 2395,
+      "height": 1845
     },
     {
       "path": "evaluation/voiceover-v3/vo-s14-goal-complete.png",
-      "sha256": "0215746ed2b6bd4df7252f7ad66a9bc97db459612ff714e3657f9aead42b6714",
-      "bytes": 2731937,
-      "width": 3360,
-      "height": 2100
+      "sha256": "5a22d8c926530e060994014a4c5afe8d62a4fd5c9b32672b917821100bd1ab9e",
+      "bytes": 329760,
+      "width": 2395,
+      "height": 1845
     },
     {
       "path": "evaluation/voiceover-v3/vo-system-fail-heading.png",
-      "sha256": "13f8f65ad2e65af3a21cb56af071a42dd94d30de23b56112b784d7e7ad67a803",
-      "bytes": 2767634,
-      "width": 3360,
-      "height": 2100
+      "sha256": "aa15a70e6eac797e867e5a57beda8f076990e04e2fb7307c5d7b0be632e1303e",
+      "bytes": 363947,
+      "width": 2395,
+      "height": 1845
     },
     {
       "path": "evaluation/voiceover-v3/vo-system-pass-heading.png",
-      "sha256": "720972253852971a66c62d5b053e8352c9288fe3ae61e624ee594667bee8a97d",
-      "bytes": 2822302,
-      "width": 3360,
-      "height": 2100
+      "sha256": "4cc7bf859d88afd42ba0dd34363890c94de5ae9c6b7a2722fefec2846b0d8765",
+      "bytes": 414334,
+      "width": 2395,
+      "height": 1845
     },
     {
       "path": "evaluation/voiceover-v3/vo-webarea-group.png",
-      "sha256": "78d0e46d23c7098ecc8db0b9195dfd148320b9557428b02f00ae66495819bede",
-      "bytes": 2787958,
-      "width": 3360,
-      "height": 2100
+      "sha256": "3a97bb8e64816e8db697731254680131b6d7bcbd0faa5b98810dc9e14e8d4657",
+      "bytes": 403045,
+      "width": 2395,
+      "height": 1845
     },
     {
       "path": "evaluation/voiceover-v3/vo-webcontent-entered.png",
-      "sha256": "b8409543c2884d084f54f3f0843b6dcf624fd9fe09b6035ef5ddb1810db0310d",
-      "bytes": 2819717,
-      "width": 3360,
-      "height": 2100
+      "sha256": "9d9edd69599053b36781af23c44254654b3e2a3529e5a9428143202a41996391",
+      "bytes": 427180,
+      "width": 2395,
+      "height": 1845
     }
   ],
   "claimLimit": "Screenshots prove only the displayed Caption Panel checkpoint strings and visible production state; captured production descriptor callbacks positioned states and are not native WebMCP proof. No full WCAG conformance claim."
