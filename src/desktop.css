@@ -14,3 +14,6 @@
 .desktop-action:focus-visible,.desktop-tab:focus-visible,.desktop-detail summary:focus-visible,.desktop-intent-form textarea:focus-visible{outline:3px solid #efbd73;outline-offset:2px}
 @media(max-width:1180px){.desktop-room{grid-template-columns:minmax(570px,1fr) 292px;padding-inline:18px;column-gap:14px}.desktop-goal-header{grid-template-columns:145px minmax(0,1fr) 260px}.desktop-now{min-height:320px;grid-template-columns:minmax(0,1fr) 240px;padding:28px;gap:24px}.desktop-inspector-panel{padding:17px}}
 @media(prefers-reduced-motion:reduce){.desktop-room *,.desktop-room *::before,.desktop-room *::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+@media (max-width: 620px), (max-height: 620px) and (max-width: 932px) {
+  .desktop-surface { display: none; }
+}

@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "test": "vitest run",
+    "test": "vitest run && npm run test:composition",
+    "test:unit": "vitest run",
+    "test:composition": "node scripts/composition-production-qa.mjs",
     "test:watch": "vitest",
     "eval:phase6": "node --experimental-strip-types scripts/phase6-evaluate.ts",
     "eval:phase6:conformance": "npm run eval:phase6 -- conformance --out evaluation/phase6-conformance.json",
