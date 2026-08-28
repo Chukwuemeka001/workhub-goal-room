@@ -3,194 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="WorkHub Goal Room — one governed Goal, one truthful frontier, and final owner acceptance."
-    />
-    <title>WorkHub Goal Room — Visual Goal Cockpit</title>
+    <meta name="description" content="WorkHub Goal Room — one governed Goal, one truthful frontier, and final owner acceptance." />
+    <title>WorkHub Goal Room — Mission Room</title>
   </head>
   <body>
     <main id="mobile-room" class="mobile-room" aria-label="WorkHub Goal Room mobile"></main>
     <div class="desktop-surface">
-    <main class="room-shell">
-      <header class="room-header">
-        <div class="brand-lockup">
-          <span class="brand-mark" aria-hidden="true">W</span>
-          <div>
-            <p class="eyebrow">WORKHUB</p>
-            <p class="product-name">Goal Room</p>
-          </div>
-        </div>
-        <div class="header-state">
-          <span class="phase-badge">PHASE 4</span>
-          <span id="room-status" class="status-pill" aria-live="polite"></span>
-        </div>
-      </header>
-
-      <section class="hero" aria-labelledby="page-title">
-        <div>
-          <p class="label">GOVERNED HUMAN–AGENT WORK</p>
-          <h1 id="page-title">One Goal. One legal next action.</h1>
-        </div>
-        <p class="header-copy">
-          The agent proposes and produces. WorkHub controls custody, evidence, and verification. You retain final acceptance.
-        </p>
-      </section>
-
-      <section id="owner-intent-panel" class="goal-panel" aria-labelledby="owner-intent-heading">
-        <div class="goal-copy">
-          <p class="label">OWNER INTENT · CONTEXT ONLY</p>
-          <h2 id="owner-intent-heading">Describe the outcome you want</h2>
-          <p id="owner-intent-display" class="header-copy"></p>
-        </div>
-        <form id="owner-intent-form">
-          <label for="owner-intent-input">Owner intent</label>
-          <textarea
-            id="owner-intent-input"
-            name="owner-intent"
-            rows="4"
-            required
-            maxlength="1000"
-            placeholder="Describe the desired outcome. This does not admit a Goal, Plan, or work."
-          ></textarea>
-          <button id="owner-intent-submit" class="button primary" type="submit">Set owner intent</button>
-        </form>
-      </section>
-
-      <section class="goal-panel" aria-labelledby="goal-heading">
-        <div class="goal-copy">
-          <p class="label">GOAL CONTRACT</p>
-          <h2 id="goal-heading"></h2>
-          <p id="goal-contract-status" class="plan-status"></p>
-        </div>
-        <div class="done-block">
-          <p class="label">DONE LOOKS LIKE</p>
-          <ul id="done-list" class="done-list"></ul>
-        </div>
-      </section>
-
-      <details class="receipt-card" open>
-        <summary class="receipt-heading">
-          <div>
-            <p class="label">ORIGIN & DECISIONS</p>
-            <p>Intent is context; typed proposals and owner decisions govern.</p>
-          </div>
-          <span class="summary-hint">History</span>
-        </summary>
-        <ol id="goal-history" class="receipt-list"></ol>
-      </details>
-
-      <nav class="lifecycle-panel" aria-label="Goal lifecycle progress">
-        <div class="lifecycle-heading">
-          <p class="label">GOAL LIFECYCLE</p>
-          <p>Progress is derived from authoritative room state.</p>
-        </div>
-        <ol id="lifecycle-rail" class="lifecycle-rail"></ol>
-      </nav>
-
-      <section class="decision-grid" aria-label="Current governed frontier">
-        <article id="owner-attention" class="attention-card" aria-labelledby="attention-title">
-          <div>
-            <p class="label">CURRENT FRONTIER</p>
-            <h2 id="attention-title"></h2>
-            <p id="attention-body" class="attention-copy"></p>
-          </div>
-          <div id="decision-actions" class="decision-actions">
-            <button id="confirm-plan" class="button primary" type="button"></button>
-            <button id="revise-plan" class="button secondary" type="button"></button>
-            <button id="accept-goal" class="button primary" type="button"></button>
-          </div>
-        </article>
-
-        <aside class="next-action-card" aria-labelledby="next-action-heading">
-          <p class="label">AUTHORITY NOW</p>
-          <div id="next-actor" class="actor-badge"></div>
-          <h3 id="next-action-heading"></h3>
-          <p id="agent-boundary" class="boundary-copy"></p>
-          <p class="authority-chain">Agent proposes <span>→</span> WorkHub governs <span>→</span> Owner accepts</p>
-        </aside>
-      </section>
-
-      <section class="detail-grid" aria-label="Goal details">
-        <details class="detail-card plan-card" open>
-          <summary class="section-heading">
-            <div>
-              <p class="label">CONFIRMED SCOPE</p>
-              <h2 id="plan-heading">Plan <span id="plan-version"></span></h2>
-            </div>
-            <span id="plan-status" class="plan-status"></span>
-          </summary>
-          <ol id="plan-steps" class="plan-steps"></ol>
-          <blockquote id="revision-note" class="revision-note" hidden></blockquote>
-        </details>
-
-        <details id="evidence-card" class="detail-card evidence-card" aria-labelledby="evidence-heading" open hidden>
-          <summary class="section-heading">
-            <div>
-              <p class="label">EVIDENCE & VERIFICATION</p>
-              <h2 id="evidence-heading">Candidate <span id="candidate-version"></span></h2>
-            </div>
-            <span id="verdict-status" class="verdict-status">WAITING</span>
-          </summary>
-          <div class="evidence-grid">
-            <div>
-              <p class="label">SHA-256 CANDIDATE DIGEST</p>
-              <code id="candidate-digest" class="candidate-digest"></code>
-            </div>
-            <div>
-              <p class="label">RULE SET</p>
-              <code id="rule-set" class="rule-set">Not yet run</code>
-            </div>
-          </div>
-          <div class="checks-block">
-            <p class="label">DETERMINISTIC CHECKS</p>
-            <ul id="finding-list" class="finding-list"></ul>
-            <p id="pass-boundary" class="pass-boundary" hidden>
-              PASS means the explicit checks succeeded. PASS does not accept the Goal.
-            </p>
-          </div>
-        </details>
-      </section>
-
-      <section class="governance-grid" aria-label="Authority boundaries">
-        <article class="boundary-card">
-          <p class="label">AGENT CAN</p>
-          <ul>
-            <li>Read state and the legal frontier</li>
-            <li>Propose, claim, and submit evidence</li>
-            <li>Request completion after exact PASS</li>
-          </ul>
-        </article>
-        <article class="boundary-card cannot">
-          <p class="label">AGENT CANNOT</p>
-          <ul>
-            <li>Write its own verification verdict</li>
-            <li>Reuse PASS for changed bytes</li>
-            <li>Accept the final Goal</li>
-          </ul>
-        </article>
-      </section>
-
-      <details class="receipt-card" open>
-        <summary class="receipt-heading">
-          <div>
-            <p class="label">ACTIVITY & RECEIPTS</p>
-            <p><strong id="receipt-count">0</strong> recorded attempts</p>
-          </div>
-          <span class="summary-hint">Details</span>
-        </summary>
-        <div class="receipt-toolbar">
-          <p>Accepted and refused attempts remain visible and ordered.</p>
-          <button id="reset-demo" class="text-button" type="button">Reset demo</button>
-        </div>
-        <ol id="receipt-list" class="receipt-list"></ol>
-      </details>
-
-      <footer>
-        <span id="webmcp-status" data-status="checking" aria-live="polite">Checking WebMCP…</span>
-        <span>Standalone public competition edition</span>
-      </footer>
-    </main>
+      <main id="desktop-room" class="desktop-room" aria-label="WorkHub Goal Room desktop Mission Room"></main>
     </div>
 
     <dialog id="revision-dialog" class="revision-dialog" aria-labelledby="revision-dialog-title">
@@ -198,19 +17,10 @@
         <div>
           <p class="label">REQUEST REVISION</p>
           <h2 id="revision-dialog-title">What should change?</h2>
-          <p id="revision-dialog-copy">
-          </p>
+          <p id="revision-dialog-copy"></p>
         </div>
         <label for="revision-input">Revision note</label>
-        <textarea
-          id="revision-input"
-          name="revision-note"
-          rows="5"
-          required
-          minlength="3"
-          maxlength="500"
-          placeholder="For example: separate final verification and add the three-minute demo limit."
-        ></textarea>
+        <textarea id="revision-input" name="revision-note" rows="5" required minlength="3" maxlength="500" placeholder="For example: separate final verification and add the three-minute demo limit."></textarea>
         <div class="dialog-actions">
           <button id="cancel-revision" class="button secondary" type="button">Cancel</button>
           <button class="button primary" type="submit">Send revision request</button>

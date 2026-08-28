@@ -1,16 +1,19 @@
 import { describe, expect, it } from "vitest";
 import html from "../index.html?raw";
 import main from "./main.ts?raw";
+import desktopUi from "./desktopUi.ts?raw";
+import mobileUi from "./mobileUi.ts?raw";
 
 describe("production Goal inception UI", () => {
   it("boots explicit empty V2 intent capture with semantic owner controls", () => {
     expect(main).toContain("createGoalRoom({ ownerIntent: null })");
     expect(main).not.toContain("Legacy pre-admitted Goal");
-    expect(html).toContain('id="owner-intent-form"');
-    expect(html).toContain('for="owner-intent-input"');
-    expect(html).toContain('maxlength="1000"');
-    expect(html).toContain('id="goal-history"');
-    expect(html).toContain('id="goal-contract-status"');
+    expect(html).toContain('id="desktop-room"');
+    expect(html).toContain('id="mobile-room"');
+    expect(desktopUi).toContain('label.htmlFor = input.id');
+    expect(desktopUi).toContain("input.maxLength = 1000");
+    expect(desktopUi).toContain("createDesktopSurface");
+    expect(mobileUi).toContain("createMobileSurface");
   });
 
   it("routes Goal and Plan owner decisions through the owner controller", () => {
@@ -31,7 +34,9 @@ describe("production Goal inception UI", () => {
 
   it("renders authority-adjacent prose as literal text without innerHTML", () => {
     expect(main).not.toMatch(/\.innerHTML\s*=/);
-    expect(main).toContain("goalHistory.replaceChildren");
-    expect(main).toContain("textContent = event.text");
+    expect(desktopUi).not.toMatch(/\.innerHTML\s*=/);
+    expect(mobileUi).not.toMatch(/\.innerHTML\s*=/);
+    expect(desktopUi).toContain("node.textContent = value");
+    expect(desktopUi).toContain("event.text");
   });
 });

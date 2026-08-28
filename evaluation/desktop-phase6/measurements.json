@@ -1,0 +1,901 @@
+{
+  "generatedBy": "npm run qa:desktop",
+  "measurements": [
+    {
+      "state": "goal",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 24,
+        "y": 116,
+        "width": 1032,
+        "height": 402.5,
+        "area": 415380,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 1074,
+        "y": 116,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "plan",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 24,
+        "y": 116,
+        "width": 1032,
+        "height": 402.5,
+        "area": 415380,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 1074,
+        "y": 116,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "fail",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 24,
+        "y": 116,
+        "width": 1032,
+        "height": 402.5,
+        "area": 415380,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 1074,
+        "y": 116,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "pass",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 24,
+        "y": 116,
+        "width": 1032,
+        "height": 402.5,
+        "area": 415380,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 1074,
+        "y": 116,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "completion",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 24,
+        "y": 116,
+        "width": 1032,
+        "height": 402.5,
+        "area": 415380,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 1074,
+        "y": 116,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "accepted",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 24,
+        "y": 116,
+        "width": 1032,
+        "height": 402.5,
+        "area": 415380,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 1074,
+        "y": 116,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "max",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 24,
+        "y": 246.40625,
+        "width": 1032,
+        "height": 402.5,
+        "area": 415380,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 1074,
+        "y": 246.40625,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "goal",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 24,
+        "y": 116,
+        "width": 872,
+        "height": 402.5,
+        "area": 350980,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 914,
+        "y": 116,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "plan",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 24,
+        "y": 116,
+        "width": 872,
+        "height": 402.5,
+        "area": 350980,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 914,
+        "y": 116,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "fail",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 24,
+        "y": 116,
+        "width": 872,
+        "height": 402.5,
+        "area": 350980,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 914,
+        "y": 116,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "pass",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 24,
+        "y": 116,
+        "width": 872,
+        "height": 402.5,
+        "area": 350980,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 914,
+        "y": 116,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "completion",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 24,
+        "y": 116,
+        "width": 872,
+        "height": 402.5,
+        "area": 350980,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 914,
+        "y": 116,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "accepted",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 24,
+        "y": 116,
+        "width": 872,
+        "height": 402.5,
+        "area": 350980,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 914,
+        "y": 116,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "max",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 24,
+        "y": 249.359375,
+        "width": 872,
+        "height": 402.5,
+        "area": 350980,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 914,
+        "y": 249.359375,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": false,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "goal",
+      "viewport": {
+        "width": 1728,
+        "height": 1117
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 138,
+        "y": 116,
+        "width": 1092,
+        "height": 402.5,
+        "area": 439530,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 1248,
+        "y": 116,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "plan",
+      "viewport": {
+        "width": 1728,
+        "height": 1117
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 138,
+        "y": 116,
+        "width": 1092,
+        "height": 402.5,
+        "area": 439530,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 1248,
+        "y": 116,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "fail",
+      "viewport": {
+        "width": 1728,
+        "height": 1117
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 138,
+        "y": 116,
+        "width": 1092,
+        "height": 402.5,
+        "area": 439530,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 1248,
+        "y": 116,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "pass",
+      "viewport": {
+        "width": 1728,
+        "height": 1117
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 138,
+        "y": 116,
+        "width": 1092,
+        "height": 402.5,
+        "area": 439530,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 1248,
+        "y": 116,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "completion",
+      "viewport": {
+        "width": 1728,
+        "height": 1117
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 138,
+        "y": 116,
+        "width": 1092,
+        "height": 402.5,
+        "area": 439530,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 1248,
+        "y": 116,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "accepted",
+      "viewport": {
+        "width": 1728,
+        "height": 1117
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 138,
+        "y": 116,
+        "width": 1092,
+        "height": 402.5,
+        "area": 439530,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 1248,
+        "y": 116,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "max",
+      "viewport": {
+        "width": 1728,
+        "height": 1117
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "controlsWithinHorizontalBounds": true,
+      "minControlHeight": 44,
+      "controlCollisions": 0,
+      "frontier": {
+        "x": 138,
+        "y": 220.734375,
+        "width": 1092,
+        "height": 402.5,
+        "area": 439530,
+        "aboveFold": true
+      },
+      "inspector": {
+        "x": 1248,
+        "y": 220.734375,
+        "width": 342,
+        "height": 556,
+        "area": 190152,
+        "visible": true
+      },
+      "lifecycleVisible": true,
+      "lifecycleAboveFold": true,
+      "frontierDominant": true,
+      "desktopVisible": true,
+      "mobileHidden": true,
+      "authoritativeWraps": true,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    }
+  ],
+  "keyboardSequence": [
+    {
+      "key": "initial",
+      "focusedTabId": "desktop-tab-goal",
+      "selectedTab": "goal",
+      "panelBinding": "desktop-tab-goal",
+      "authorityStable": true,
+      "ownerCalls": []
+    },
+    {
+      "key": "ArrowRight",
+      "focusedTabId": "desktop-tab-plan",
+      "selectedTab": "plan",
+      "panelBinding": "desktop-tab-plan",
+      "authorityStable": true,
+      "ownerCalls": []
+    },
+    {
+      "key": "End",
+      "focusedTabId": "desktop-tab-activity",
+      "selectedTab": "activity",
+      "panelBinding": "desktop-tab-activity",
+      "authorityStable": true,
+      "ownerCalls": []
+    },
+    {
+      "key": "ArrowRight",
+      "focusedTabId": "desktop-tab-goal",
+      "selectedTab": "goal",
+      "panelBinding": "desktop-tab-goal",
+      "authorityStable": true,
+      "ownerCalls": []
+    },
+    {
+      "key": "ArrowLeft",
+      "focusedTabId": "desktop-tab-activity",
+      "selectedTab": "activity",
+      "panelBinding": "desktop-tab-activity",
+      "authorityStable": true,
+      "ownerCalls": []
+    },
+    {
+      "key": "Home",
+      "focusedTabId": "desktop-tab-goal",
+      "selectedTab": "goal",
+      "panelBinding": "desktop-tab-goal",
+      "authorityStable": true,
+      "ownerCalls": []
+    },
+    {
+      "key": "Enter",
+      "focusedTabId": "desktop-tab-goal",
+      "selectedTab": "goal",
+      "panelBinding": "desktop-tab-goal",
+      "authorityStable": true,
+      "ownerCalls": []
+    },
+    {
+      "key": "Space",
+      "focusedTabId": "desktop-tab-goal",
+      "selectedTab": "goal",
+      "panelBinding": "desktop-tab-goal",
+      "authorityStable": true,
+      "ownerCalls": []
+    }
+  ],
+  "keyboardEvents": [
+    {
+      "key": "ArrowRight",
+      "trusted": true,
+      "defaultPrevented": true,
+      "targetId": "desktop-tab-goal"
+    },
+    {
+      "key": "End",
+      "trusted": true,
+      "defaultPrevented": true,
+      "targetId": "desktop-tab-plan"
+    },
+    {
+      "key": "ArrowRight",
+      "trusted": true,
+      "defaultPrevented": true,
+      "targetId": "desktop-tab-activity"
+    },
+    {
+      "key": "ArrowLeft",
+      "trusted": true,
+      "defaultPrevented": true,
+      "targetId": "desktop-tab-goal"
+    },
+    {
+      "key": "Home",
+      "trusted": true,
+      "defaultPrevented": true,
+      "targetId": "desktop-tab-activity"
+    },
+    {
+      "key": "Enter",
+      "trusted": true,
+      "defaultPrevented": false,
+      "targetId": "desktop-tab-goal"
+    },
+    {
+      "key": " ",
+      "trusted": true,
+      "defaultPrevented": false,
+      "targetId": "desktop-tab-goal"
+    }
+  ],
+  "productionSmoke": {
+    "desktopVisible": true,
+    "mobileHidden": true,
+    "goalTitle": "Goal not yet admitted",
+    "ownerIntent": true,
+    "tabCount": 4,
+    "overflow": 0
+  },
+  "failures": []
+}
