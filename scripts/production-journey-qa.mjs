@@ -270,7 +270,7 @@ try {
     kind: "goal-room-real-production-journey",
     testedSource: { commit: "e3e13db45ac8c54959cad3ec702298ffb6a2883b", tree: "e578012de3dd82f7f08c037aaf902dfaec947952", note: "Reviewed production parent; Phase 3 harness/evidence is externally bound after commit." },
     route: { url: `${origin}/index.html`, entry: "/index.html", sourceEntry: "src/main.ts", localHttp: true, fixtureImports: [], bundleLeaks },
-    browser: { executable: chromePath, version: browserVersion, isolatedDisposableProfile: true, headless: true },
+    browser: { executable: "redacted resolved task browser", version: browserVersion, isolatedDisposableProfile: true, headless: true },
     invocation: { class: "captured-registered-webmcp-descriptor-callbacks", browserNativeTestingApi: false, autonomousModelSelection: false, claim: "Production callback integration proof only; Phase 4 alone proves native browser getTools/executeTool." },
     tools: registration,
     checkpoints,

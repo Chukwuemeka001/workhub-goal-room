@@ -12,6 +12,7 @@ import { createMobileSurface } from "./mobileUi";
 import { createDesktopView } from "./desktopView";
 import { createDesktopSurface } from "./desktopUi";
 import { createAcceptanceDialog, type AcceptanceDialogNodes } from "./acceptanceDialog";
+import { containRevisionDialogFocus, createRevisionDialogFocusReturn } from "./revisionDialog";
 
 function requiredElement<T extends HTMLElement>(id: string): T {
   const element = document.getElementById(id);
@@ -25,6 +26,9 @@ const revisionDialogCopy = requiredElement("revision-dialog-copy");
 const revisionForm = requiredElement<HTMLFormElement>("revision-form");
 const revisionInput = requiredElement<HTMLTextAreaElement>("revision-input");
 const cancelRevision = requiredElement<HTMLButtonElement>("cancel-revision");
+const submitRevision = requiredElement<HTMLButtonElement>("submit-revision");
+containRevisionDialogFocus(dialog, revisionInput, submitRevision);
+const revisionFocusReturn = createRevisionDialogFocusReturn(dialog);
 const acceptanceDialog = createAcceptanceDialog({
   dialog: requiredElement<HTMLDialogElement>("acceptance-dialog"),
   form: requiredElement<HTMLFormElement>("acceptance-form"),
@@ -40,7 +44,8 @@ const room = createGoalRoom({ ownerIntent: null });
 let controller: ReturnType<typeof createOwnerDecisionController>;
 let revisionBinding: { kind: "goal" | "plan"; version: number } | null = null;
 
-function openRevision(kind: "goal" | "plan", version: number) {
+function openRevision(kind: "goal" | "plan", version: number, trigger: HTMLElement) {
+  revisionFocusReturn.capture(trigger);
   revisionBinding = { kind, version };
   const subject = kind === "goal" ? "Goal Contract" : "Plan";
   revisionDialogTitle.textContent = `Request changes to ${subject} v${version}`;
@@ -97,7 +102,15 @@ const systemVerifier = createSystemVerifierAdapter({
   },
 });
 
-cancelRevision.addEventListener("click", () => dialog.close());
+function closeRevisionWithoutMutation(event?: Event) {
+  event?.preventDefault();
+  dialog.close();
+  resetRevisionDialog();
+  setTimeout(() => revisionFocusReturn.restore(), 0);
+}
+
+cancelRevision.addEventListener("click", closeRevisionWithoutMutation);
+dialog.addEventListener("cancel", closeRevisionWithoutMutation);
 dialog.addEventListener("close", resetRevisionDialog);
 revisionInput.addEventListener("input", () => revisionInput.setCustomValidity(""));
 revisionForm.addEventListener("submit", async (event) => {

@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "kind": "workhub-v3-native-webmcp-governed-journey",
   "testedProductionIdentity": {
-    "commit": "0c8053336183e099b219cb5738fec310121e1a8a",
-    "tree": "692397640a9bdafb8e8984725822312d945b8483"
+    "baseCommit": "a7d56201d9d1d6697108e1cfb74ee07f1d576443",
+    "exactSourceBinding": "validated sourceHashes from the fresh native run"
   },
   "binding": {
-    "pattern": "tested immutable production parent plus later evidence commit",
+    "pattern": "fresh native runtime bound to exact committed source hashes",
     "evidenceCommit": "recorded_after_commit_in_git",
     "evidenceTree": "recorded_after_commit_in_git"
   },
@@ -25,8 +25,8 @@
     "signatureVerified": true,
     "notarized": true,
     "isolatedUnsignedInProfile": true,
-    "profilePathRecordedBeforeAuthorizedCleanup": "/Users/emeka/EmekaPA/browser/native-webmcp-v3-canary-profile",
-    "localStateSha256": "85a4011f5a9cc2801d662190000025f8cc54d097cf39f9e68c1390988f4e7c9c",
+    "profilePathRecordedBeforeAuthorizedCleanup": "redacted disposable task profile",
+    "localStateSha256": "ca41a5cf1ead54b2f5722feb9cbc74aab6f5e1bef6e2e10b43f92db252892c26",
     "experiments": [
       "enable-webmcp-testing@1",
       "devtools-webmcp-support@1"
@@ -6614,13 +6614,28 @@
   "sourceHashes": [
     {
       "path": "index.html",
-      "sha256": "af61f3cb96672a9cad8413609d995d1caac147d1312afb773ff354b4a855c067",
-      "bytes": 2519
+      "sha256": "524cfa260aa294a007bd928212702b2898144aed73a5120bd5acb003737c2a2a",
+      "bytes": 3259
     },
     {
       "path": "src/main.ts",
-      "sha256": "980de99ebdcbdc3851be2e709bfc4b65687390821f92a4bad2cc7cf37e7e9e30",
-      "bytes": 6155
+      "sha256": "9299e014281ffa6b37f13b7399250c06edbb28d0fa5b8b5fc80878d2a804f1d7",
+      "bytes": 6782
+    },
+    {
+      "path": "src/revisionDialog.ts",
+      "sha256": "2b29bde3a80c9a03923967b979fabc9ee74131141a86d1d122fe540c20de412f",
+      "bytes": 1510
+    },
+    {
+      "path": "src/desktopUi.ts",
+      "sha256": "75e31824158ed5d4caf67fea23530a552f2f879238bb327dfa45e4e89c935a15",
+      "bytes": 15561
+    },
+    {
+      "path": "src/mobileUi.ts",
+      "sha256": "711d2ee56258f5d3d3834d116f316ac35b2f8c5050764365206a069ae5bd84b1",
+      "bytes": 12199
     },
     {
       "path": "src/systemVerifierAdapter.ts",
@@ -6634,8 +6649,8 @@
     },
     {
       "path": "submission/scripts/v3-native-webmcp-proof.mjs",
-      "sha256": "3dda6221b019ac0b627d019fce1fe9a079fab16019bfb922fd4c894696df299f",
-      "bytes": 31543
+      "sha256": "18380b133dadc3753ed3b392733ba7521822fd95f8ee4b7f161e79bd50aeb174",
+      "bytes": 31854
     },
     {
       "path": "scripts/v3-native-webmcp-proof.node-test.mjs",

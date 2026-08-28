@@ -21,14 +21,14 @@
       "bytes": 22523
     },
     {
-      "path": "assets/index-Ducuh-ql.js",
-      "sha256": "1d6fc1af63676bc82740404274fb221d5c57cd8bd8456033f2121fd2c6e040fb",
-      "bytes": 79392
+      "path": "assets/index-C7BT7zdp.js",
+      "sha256": "0d01b9ee3685158e37ff6d0fc457b9efe5ae28ca47744251c05c18f682d73c40",
+      "bytes": 80006
     },
     {
       "path": "index.html",
-      "sha256": "afb48513f75304feb9c4403398dc28ce4f999b76bfb3a864de3efb3392caeb99",
-      "bytes": 3337
+      "sha256": "f6f4e024a3fa643acafec8c6408b960fa8a4f68dc608b0d40cf2d8d6fa5353c5",
+      "bytes": 3358
     }
   ],
   "passed": true

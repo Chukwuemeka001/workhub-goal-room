@@ -5,7 +5,7 @@ export type DesktopSurfaceActions = {
   onSetIntent(intent: string): Promise<void>;
   onPrimary(kind: DesktopView["ownerAction"]["kind"]): Promise<void>;
   onOpenAcceptance(binding: AcceptanceBinding): void;
-  onOpenRevision(kind: "goal" | "plan", version: number): void;
+  onOpenRevision(kind: "goal" | "plan", version: number, trigger: HTMLElement): void;
 };
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, className?: string) {
@@ -134,7 +134,7 @@ export function createDesktopSurface(root: HTMLElement, actions: DesktopSurfaceA
     } else if (view.ownerAction.visible && view.ownerAction.label) {
       if (view.ownerAction.secondaryKind) {
         const secondary = text("button", view.ownerAction.secondaryLabel ?? "Request revision", "desktop-action secondary"); secondary.type = "button";
-        secondary.addEventListener("click", () => actions.onOpenRevision(view.ownerAction.secondaryKind === "request-goal-revision" ? "goal" : "plan", view.ownerAction.secondaryKind === "request-goal-revision" ? (view.goal.version ?? 0) : (view.inspectors.plan.title.match(/\d+$/)?.[0] ? Number(view.inspectors.plan.title.match(/\d+$/)![0]) : 0)));
+        secondary.addEventListener("click", () => actions.onOpenRevision(view.ownerAction.secondaryKind === "request-goal-revision" ? "goal" : "plan", view.ownerAction.secondaryKind === "request-goal-revision" ? (view.goal.version ?? 0) : (view.inspectors.plan.title.match(/\d+$/)?.[0] ? Number(view.inspectors.plan.title.match(/\d+$/)![0]) : 0), secondary));
         owner.append(secondary);
       }
       const primary = text("button", view.ownerAction.label, "desktop-action primary"); primary.type = "button";

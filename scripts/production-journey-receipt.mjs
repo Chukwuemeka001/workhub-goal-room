@@ -41,7 +41,7 @@ for (const [path, expectedSha256] of Object.entries(protectedExpected)) {
   protectedParity.push({ path, expectedSha256, actualSha256, unchanged: actualSha256 === expectedSha256 });
 }
 if (protectedParity.some(({ unchanged }) => !unchanged)) throw new Error("Protected production authority changed");
-const boundSources = ["index.html", "src/main.ts", "src/systemVerifierAdapter.ts", "scripts/production-journey-qa.mjs", "scripts/production-journey-receipt.mjs", "src/phase8Journey.test.ts", "package.json", "evaluation/production-journey/README.md"];
+const boundSources = ["index.html", "src/main.ts", "src/revisionDialog.ts", "src/desktopUi.ts", "src/mobileUi.ts", "src/systemVerifierAdapter.ts", "scripts/production-journey-qa.mjs", "scripts/production-journey-receipt.mjs", "src/phase8Journey.test.ts", "package.json", "evaluation/production-journey/README.md"];
 const sourceHashes = [];
 for (const path of boundSources) {
   const bytes = await readFile(join(root, path));

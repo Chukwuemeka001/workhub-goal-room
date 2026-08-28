@@ -5,7 +5,7 @@ export type MobileSurfaceActions = {
   onSetIntent(intent: string): Promise<void>;
   onPrimary(kind: MobileView["actionDock"]["kind"]): Promise<void>;
   onOpenAcceptance(binding: AcceptanceBinding): void;
-  onOpenRevision(kind: "goal" | "plan", version: number): void;
+  onOpenRevision(kind: "goal" | "plan", version: number, trigger: HTMLElement): void;
 };
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, className?: string) {
@@ -163,7 +163,7 @@ export function createMobileSurface(
       if (view.actionDock.secondaryKind) {
         const secondary = text("button", view.actionDock.secondaryLabel ?? "Request revision", "mobile-button secondary");
         secondary.type = "button";
-        secondary.addEventListener("click", () => actions.onOpenRevision(view.actionDock.secondaryKind === "request-goal-revision" ? "goal" : "plan", view.actionDock.secondaryKind === "request-goal-revision" ? (view.goal.version ?? 0) : (view.plan.version ?? 0)));
+        secondary.addEventListener("click", () => actions.onOpenRevision(view.actionDock.secondaryKind === "request-goal-revision" ? "goal" : "plan", view.actionDock.secondaryKind === "request-goal-revision" ? (view.goal.version ?? 0) : (view.plan.version ?? 0), secondary));
         actionDock.append(secondary);
       }
       const primary = text("button", view.actionDock.primaryLabel, "mobile-button primary");

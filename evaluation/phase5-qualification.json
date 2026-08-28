@@ -8,15 +8,31 @@
     "judgeHelpReferrerRed": "npx vitest run src/mainProduction.test.ts: 2 failed, 8 passed; missing semantic help and referrer metadata",
     "judgeHelpReferrerGreen": "npx vitest run src/mainProduction.test.ts: 10 passed",
     "artifactsRed": "npx vitest run qualification/v3Infrastructure.test.ts: 1 failed, 4 passed; SECURITY.md absent",
-    "artifactsGreen": "npx vitest run qualification/v3Infrastructure.test.ts: 5 passed"
+    "artifactsGreen": "npx vitest run qualification/v3Infrastructure.test.ts: 5 passed",
+    "revisionContainmentRed": "npx vitest run src/revisionDialog.test.ts: 2 failed; physical Shift+Tab from revision-input was not contained for Goal or Plan",
+    "revisionContainmentGreen": "npx vitest run src/revisionDialog.test.ts: 2 passed",
+    "revisionReturnRed": "npx vitest run src/revisionDialog.test.ts: 2 failed, 2 passed; Cancel/Escape did not restore the exact revision trigger",
+    "revisionFinalGreen": "npx vitest run src/revisionDialog.test.ts: 4 passed"
   },
   "voiceOver": {
     "actuallyRunning": true,
     "captionPanelOpened": true,
-    "observedStrings": ["Chrome Canary is launched in the background", "Login failed"],
-    "pageCheckpointGate": "inconclusive",
-    "claimLimit": "No page-level VoiceOver speech/navigation checkpoint is claimed; see evaluation/manual-accessibility-v3.md",
-    "offBeforeRepositoryEdits": true
+    "pageCheckpointGate": "passed",
+    "observedCheckpoints": [
+      "web content/main landmarks",
+      "heading level 1 Goal not yet admitted",
+      "heading level 2 Owner",
+      "Goal revision textarea",
+      "Plan revision textarea",
+      "heading level 2 Candidate v1 did not pass",
+      "heading level 2 Candidate v2 passed deterministic verification",
+      "S13 exact Candidate v2 dialog",
+      "S14 Goal complete sealed state"
+    ],
+    "manifest": "evaluation/voiceover-v3/manifest.json",
+    "positioning": "captured production descriptor callbacks plus production Owner controls/System verifier; not native WebMCP proof",
+    "claimLimit": "Checkpoint Caption Panel evidence only; not uninterrupted speech/order proof and not full WCAG conformance",
+    "offAfterRun": true
   },
   "security": {
     "referrerPolicy": "HTML meta no-referrer",
@@ -27,6 +43,8 @@
     "staticScan": "validated by scripts/phase5-validate.mjs"
   },
   "evidenceReferences": [
+    "evaluation/physical-keyboard-v3.json",
+    "evaluation/voiceover-v3/manifest.json",
     "evaluation/production-journey/journey.json",
     "evaluation/v3/a11y.json",
     "evaluation/v3/hostile.json",
@@ -45,5 +63,15 @@
     "newP2": 0,
     "deferredBaselineP2": 9,
     "independentReview": "pending"
+  },
+  "keyboard": {
+    "gate": "passed",
+    "evidence": "evaluation/physical-keyboard-v3.json",
+    "input": "macOS System Events physical Tab/Shift+Tab/Return/Escape/text; no pointer after initial activation",
+    "finalPhase": "GOAL_ACCEPTED",
+    "revisionContainment": "Goal and Plan passed",
+    "cancelEscapeExactReturnZeroMutation": true,
+    "s13ConfirmSoleMutation": true,
+    "s14NoControls": true
   }
 }

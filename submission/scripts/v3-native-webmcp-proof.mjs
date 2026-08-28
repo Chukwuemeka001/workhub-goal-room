@@ -14,7 +14,7 @@ const receiptPath = join(output, "native-webmcp-receipt.json");
 const manifestPath = join(output, "manifest.json");
 const canary = "/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary";
 const canaryApp = "/Applications/Google Chrome Canary.app";
-const canaryProfile = "/Users/emeka/EmekaPA/browser/native-webmcp-v3-canary-profile";
+
 const browserOs = join(process.env.HOME ?? "", "Applications/BrowserOS.app/Contents/MacOS/BrowserOS");
 const expectedTools = ["get_goal_room_state", "propose_goal_contract", "propose_plan", "claim_step", "submit_artifact", "request_completion"];
 const expectedProtected = {
@@ -88,7 +88,8 @@ async function validate() {
   const receipt = JSON.parse(receiptBytes);
   assert.equal(receipt.schemaVersion, 1);
   assert.equal(receipt.kind, "workhub-v3-native-webmcp-governed-journey");
-  assert.deepEqual(receipt.testedProductionIdentity, { commit: "0c8053336183e099b219cb5738fec310121e1a8a", tree: "692397640a9bdafb8e8984725822312d945b8483" });
+  assert.match(receipt.testedProductionIdentity.baseCommit, /^[0-9a-f]{40}$/);
+  assert.equal(receipt.testedProductionIdentity.exactSourceBinding, "validated sourceHashes from the fresh native run");
   assert.equal(receipt.binding.evidenceCommit, "recorded_after_commit_in_git");
   assert.equal(receipt.browser.version, "Google Chrome 154.0.8028.0 canary");
   assert.deepEqual(receipt.browser.experiments, ["enable-webmcp-testing@1", "devtools-webmcp-support@1"]);
@@ -146,7 +147,9 @@ async function validate() {
 }
 
 async function record() {
-  assert.ok(existsSync(canary) && existsSync(canaryProfile) && existsSync(browserOs), "Approved browsers/profile must exist");
+  assert.ok(existsSync(canary) && existsSync(browserOs), "Approved browsers must exist");
+  const canaryProfile = await mkdtemp(join(tmpdir(), "workhub-native-canary-"));
+  await writeFile(join(canaryProfile, "Local State"), JSON.stringify({ browser: { enabled_labs_experiments: ["enable-webmcp-testing@1", "devtools-webmcp-support@1"] } }));
   const disk = Number(command("df", ["-k", root]).trim().split(/\s+/).at(-3));
   assert.ok(disk > 500 * 1024, `Disk floor breached: ${disk} KiB`);
   command("npm", ["run", "build"]);
@@ -264,14 +267,14 @@ async function record() {
       const signature = command("codesign", ["-dv", "--verbose=4", canaryApp]);
       const gatekeeper = command("spctl", ["--assess", "--type", "execute", "-vv", canaryApp]);
       const protectedParity = await Promise.all(Object.entries(expectedProtected).map(async ([path, expected]) => { const actual = sha256(await readFile(join(root, path))); assert.equal(actual, expected); return { path, sha256: actual, unchanged: true }; }));
-      const boundSources = ["index.html", "src/main.ts", "src/systemVerifierAdapter.ts", "src/webmcp.ts", "submission/scripts/v3-native-webmcp-proof.mjs", "scripts/v3-native-webmcp-proof.node-test.mjs"];
+      const boundSources = ["index.html", "src/main.ts", "src/revisionDialog.ts", "src/desktopUi.ts", "src/mobileUi.ts", "src/systemVerifierAdapter.ts", "src/webmcp.ts", "submission/scripts/v3-native-webmcp-proof.mjs", "scripts/v3-native-webmcp-proof.node-test.mjs"];
       const sourceHashes = await Promise.all(boundSources.map(async (path) => { const bytes = await readFile(join(root, path)); return { path, sha256: sha256(bytes), bytes: bytes.length }; }));
       const receipt = {
         schemaVersion: 1, kind: "workhub-v3-native-webmcp-governed-journey",
-        testedProductionIdentity: { commit: "0c8053336183e099b219cb5738fec310121e1a8a", tree: "692397640a9bdafb8e8984725822312d945b8483" },
-        binding: { pattern: "tested immutable production parent plus later evidence commit", evidenceCommit: "recorded_after_commit_in_git", evidenceTree: "recorded_after_commit_in_git" },
+        testedProductionIdentity: { baseCommit: command("git", ["rev-parse", "HEAD"]), exactSourceBinding: "validated sourceHashes from the fresh native run" },
+        binding: { pattern: "fresh native runtime bound to exact committed source hashes", evidenceCommit: "recorded_after_commit_in_git", evidenceTree: "recorded_after_commit_in_git" },
         route: { url: origin, entry: "index.html", sourceEntry: "src/main.ts", localLoopback: true, bundleLeaks: leaks },
-        browser: { application: "Google Chrome Canary", version: command(canary, ["--version"]), identifier: "com.google.Chrome.canary", teamIdentifier: "EQHXZ8M8AV", signatureVerified: /Identifier=com\.google\.Chrome\.canary/.test(signature) && /TeamIdentifier=EQHXZ8M8AV/.test(signature), notarized: /accepted/.test(gatekeeper) && /Notarized Developer ID/.test(gatekeeper), isolatedUnsignedInProfile: true, profilePathRecordedBeforeAuthorizedCleanup: canaryProfile, localStateSha256: sha256(localStateBytes), experiments: localState.browser.enabled_labs_experiments },
+        browser: { application: "Google Chrome Canary", version: command(canary, ["--version"]), identifier: "com.google.Chrome.canary", teamIdentifier: "EQHXZ8M8AV", signatureVerified: /Identifier=com\.google\.Chrome\.canary/.test(signature) && /TeamIdentifier=EQHXZ8M8AV/.test(signature), notarized: /accepted/.test(gatekeeper) && /Notarized Developer ID/.test(gatekeeper), isolatedUnsignedInProfile: true, profilePathRecordedBeforeAuthorizedCleanup: "redacted disposable task profile", localStateSha256: sha256(localStateBytes), experiments: localState.browser.enabled_labs_experiments },
         api, registrationOrder, browserEnumerationOrder, descriptors,
         typedApiNegatives, invocations,
         journey: { initial, goal1, failState, passState, final, receiptCount, actorReceiptCounts: { owner: 6, agent: 14, system: 2 }, finalDom: terminal, systemVerifier: "automatic production src/systemVerifierAdapter.ts" },
@@ -287,7 +290,7 @@ async function record() {
       const files = await Promise.all(manifestFiles.map(async (path) => { const bytes = await readFile(join(root, path)); return { path, sha256: sha256(bytes), bytes: bytes.length }; }));
       await writeFile(manifestPath, `${JSON.stringify({ schemaVersion: 1, kind: "workhub-v3-native-webmcp-manifest", nonRecursive: true, receipt: { path: "evaluation/native-webmcp-v3/native-webmcp-receipt.json", sha256: sha256(receiptBytes), bytes: receiptBytes.length }, files }, null, 2)}\n`);
     } finally { await control?.close(); await removeProfile(negativeProfile); }
-  } finally { await browser?.close(); await new Promise((resolveClose) => server.close(resolveClose)); }
+  } finally { await browser?.close(); await new Promise((resolveClose) => server.close(resolveClose)); await removeProfile(canaryProfile); }
   return validate();
 }
 

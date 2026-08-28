@@ -1,0 +1,261 @@
+{
+  "schemaVersion": 1,
+  "kind": "trusted-physical-keyboard-production-journey",
+  "date": "2026-08-28",
+  "platform": "macOS 26.3 (25D125)",
+  "browser": "Google Chrome 154.0.8028.0 canary",
+  "route": "real built production index.html",
+  "input": "macOS System Events physical key synthesis; no pointer after initial window activation",
+  "positioning": "Agent states use captured production descriptor callbacks; Owner actions use only physical Tab/Shift+Tab/Return/Escape and text keystrokes; System verifier is production automatic adapter. This is not native WebMCP proof.",
+  "rows": [
+    {
+      "label": "S01 owner intent",
+      "phase": "INTENT_DRAFT",
+      "stateVersion": 1,
+      "currentActor": "agent",
+      "nextLegalAction": "AGENT_PROPOSE_GOAL_CONTRACT",
+      "focus": {
+        "id": null,
+        "text": "WORKHUB · GOAL ROOMQualify the complete physical keyboard journeyPending intent · NOT ADMITTEDChapter · IntentOwner intent captured. Goal not admittedAuthority now · AGENTAgent must propose Goal Contract v1agent: Agent must propose Goal Contract v1Intent is context only. Planning remains blocked until you confirm an exact Goal Contract.Owner intentRevise owner intentGoalPlanProofActivityGoal ContractOwner intent · context onlyGoal Contract not admitted · NOT ADMITTEDDone looks likeNone recordedConstraintsNone recordedNon-goalsNone recorded\n    \n      WWORKHUB · GOAL ROOMGOAL CONTRACTQualify the complete physical keyboard journeynot admitted · NOT ADMITTED · Owner intent · context onlyWebMCP accepted get_goal_room_state · S1Owner intent captured. Goal not admittedSTATE v1 · INTENT DRAFTCHAPTER · DefineDefinePlanWorkVerifyAcceptAgentbounded static-six toolsActs nowSystem Verifierdeterministic rules onlyidleOwnersole decision authorityidleNOWAGENT ACTS NOWAgent must propose a Goal ContractAgent must propose Goal Contract v1Intent is context only. Planning remains blocked until you confirm an exact Goal Contract.Owner intentRevise owner intentGoalPlanProofActivityGoal not admittedOwner intent · context only · context onlyWhyQualify the complete physical keyboard journeyDone looks likeNone recordedConstraintsNone recordedNon-goalsNone recordedEvidence requiredNone recordedOpen questionsNone recordedLifecycle · exact governed progressPlanClaimEvidenceVerifyCompleteAcceptAgent tools · static sixget_goal_room_stateAvailable at this frontierpropose_goal_contractAvailable at this frontierpropose_planUnavailable in this canonical phaseclaim_stepUnavailable in this canonical phasesubmit_artifactUnavailable in this canonical phaserequest_completionUnavailable in this canonical phaseReceipts · 1 recorded attemptsOwner captured intentOwner · R1\n    \n\n    \n      \n        Judge help and room limits\n        \n          Use a qualifying ChatGPT in-app browser or Chrome/Canary with WebMCP support. State stays in this browser lifecycle. Reload starts a fresh room.\n          No login or credentials are required. The room has no external effects and demonstrates one synthetic Goal only. PASS is not owner acceptance.\n          Security scope Privacy boundary\n        \n      \n    \n\n    \n      \n        \n          REQUEST REVISION\n          What should change?\n          \n        \n        Revision note\n        \n        \n          Cancel\n          Send revision request\n        \n      \n    \n\n    \n      \n        OWNER CONFIRMATION\n        Accept this candidate?\n        \n        \n          Candidate\n          SHA-256\n          PASS rule set\n        \n        \n          Cancel\n          Confirm acceptance",
+        "role": "BODY",
+        "insideRevision": false,
+        "insideAcceptance": false
+      },
+      "keys": [
+        "Tab",
+        "text",
+        "Tab",
+        "Return"
+      ]
+    },
+    {
+      "label": "S02 Goal v1 proposed",
+      "phase": "GOAL_CONTRACT_PROPOSED",
+      "stateVersion": 2,
+      "currentActor": "owner",
+      "nextLegalAction": "OWNER_CONFIRM_OR_REVISE_GOAL",
+      "focus": {
+        "id": null,
+        "text": "WORKHUB · GOAL ROOMQualify keyboard and VoiceOver evidenceGoal v1 · PROPOSEDChapter · GoalWaiting for your Goal decisionAuthority now · OWNEROwner must confirm or request Goal revisionowner: Owner must confirm or request Goal revisionPlanning remains blocked until you confirm this exact Goal or request a revision.Request Goal revisionConfirm Goal v1GoalPlanProofActivityGoal ContractAgent proposal awaiting OwnerGoal Contract v1 · PROPOSEDDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioning\n    \n      WWORKHUB · GOAL ROOMGOAL CONTRACTQualify keyboard and VoiceOver evidencev1 · PROPOSED · Agent proposal awaiting OwnerWebMCP accepted get_goal_room_state · S2Waiting for your Goal decisionSTATE v2 · GOAL CONTRACT PROPOSEDCHAPTER · DefineDefinePlanWorkVerifyAcceptAgentbounded static-six toolsidleSystem Verifierdeterministic rules onlyidleOwnersole decision authorityActs nowWHAT NEEDS YOUOWNER ACTS NOWReview Goal Contract v1Owner must confirm or request Goal revisionPlanning remains blocked until you confirm this exact Goal or request a revision.Request Goal revisionConfirm Goal v1GoalPlanProofActivityGoal Contract v1Agent proposal awaiting Owner · PROPOSEDWhyClose the final judge-operability gateDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioningEvidence requiredTrusted physical-key recordOpen questionsTighten exact focus containmentLifecycle · exact governed progressPlanClaimEvidenceVerifyCompleteAcceptAgent tools · static sixget_goal_room_stateAvailable at this frontierpropose_goal_contractUnavailable in this canonical phasepropose_planUnavailable in this canonical phaseclaim_stepUnavailable in this canonical phasesubmit_artifactUnavailable in this canonical phaserequest_completionUnavailable in this canonical phaseReceipts · 2 recorded attemptsAgent proposed Goal Contract v1WebMCP agent · R2Owner captured intentOwner · R1\n    \n\n    \n      \n        Judge help and room limits\n        \n          Use a qualifying ChatGPT in-app browser or Chrome/Canary with WebMCP support. State stays in this browser lifecycle. Reload starts a fresh room.\n          No login or credentials are required. The room has no external effects and demonstrates one synthetic Goal only. PASS is not owner acceptance.\n          Security scope Privacy boundary\n        \n      \n    \n\n    \n      \n        \n          REQUEST REVISION\n          What should change?\n          \n        \n        Revision note\n        \n        \n          Cancel\n          Send revision request\n        \n      \n    \n\n    \n      \n        OWNER CONFIRMATION\n        Accept this candidate?\n        \n        \n          Candidate\n          SHA-256\n          PASS rule set\n        \n        \n          Cancel\n          Confirm acceptance",
+        "role": "BODY",
+        "insideRevision": false,
+        "insideAcceptance": false
+      },
+      "positionedBy": "captured production descriptor callback"
+    },
+    {
+      "label": "S03 Goal v1 revision submitted",
+      "phase": "GOAL_CONTRACT_REVISION_REQUESTED",
+      "stateVersion": 3,
+      "currentActor": "agent",
+      "nextLegalAction": "AGENT_PROPOSE_REVISED_GOAL_CONTRACT",
+      "focus": {
+        "id": null,
+        "text": "WORKHUB · GOAL ROOMQualify keyboard and VoiceOver evidenceGoal v1 · REVISION REQUESTEDChapter · GoalWaiting for revised Goal ContractAuthority now · AGENTAgent must propose Goal Contract v2agent: Agent must propose Goal Contract v2The agent must respond with Goal Contract v2 before you decide again.The agent must respond with Goal Contract v2 before you decide again.GoalPlanProofActivityGoal ContractOwner revision request on immutable Agent proposalGoal Contract v1 · REVISION REQUESTEDDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioning\n    \n      WWORKHUB · GOAL ROOMGOAL CONTRACTQualify keyboard and VoiceOver evidencev1 · REVISION REQUESTED · Owner revision request on immutable Agent proposalWebMCP accepted get_goal_room_state · S3Waiting for revised Goal ContractSTATE v3 · GOAL CONTRACT REVISION REQUESTEDCHAPTER · DefineDefinePlanWorkVerifyAcceptAgentbounded static-six toolsActs nowSystem Verifierdeterministic rules onlyidleOwnersole decision authorityidleNOWAGENT ACTS NOWGoal revision requestedAgent must propose Goal Contract v2The agent must respond with Goal Contract v2 before you decide again.The agent must respond with Goal Contract v2 before you decide again.GoalPlanProofActivityGoal Contract v1Owner revision request on immutable Agent proposal · REVISION REQUESTEDLatest revision request: Bind Goal to corrected Candidate v2 and deterministic evidence.WhyClose the final judge-operability gateDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioningEvidence requiredTrusted physical-key recordOpen questionsTighten exact focus containmentLifecycle · exact governed progressPlanClaimEvidenceVerifyCompleteAcceptAgent tools · static sixget_goal_room_stateAvailable at this frontierpropose_goal_contractAvailable at this frontierpropose_planUnavailable in this canonical phaseclaim_stepUnavailable in this canonical phasesubmit_artifactUnavailable in this canonical phaserequest_completionUnavailable in this canonical phaseReceipts · 3 recorded attemptsOwner requested revision to Goal Contract v1Owner · R3Agent proposed Goal Contract v1WebMCP agent · R2Owner captured intentOwner · R1\n    \n\n    \n      \n        Judge help and room limits\n        \n          Use a qualifying ChatGPT in-app browser or Chrome/Canary with WebMCP support. State stays in this browser lifecycle. Reload starts a fresh room.\n          No login or credentials are required. The room has no external effects and demonstrates one synthetic Goal only. PASS is not owner acceptance.\n          Security scope Privacy boundary\n        \n      \n    \n\n    \n      \n        \n          REQUEST REVISION\n          Request changes to Goal Contract v1\n          This prose is a Goal Contract revision request bound to exact Goal Contract v1. The prior version remains immutable. This does not confirm the Goal Contract, admit a Plan, or authorize work. The agent must propose a new immutable version.\n        \n        Revision note\n        \n        \n          Cancel\n          Send revision request\n        \n      \n    \n\n    \n      \n        OWNER CONFIRMATION\n        Accept this candidate?\n        \n        \n          Candidate\n          SHA-256\n          PASS rule set\n        \n        \n          Cancel\n          Confirm acceptance",
+        "role": "BODY",
+        "insideRevision": false,
+        "insideAcceptance": false
+      },
+      "keys": [
+        "Return",
+        "Shift+Tab",
+        "Tab",
+        "Tab",
+        "Return(Cancel)",
+        "Return",
+        "Escape",
+        "Return",
+        "text",
+        "Tab",
+        "Tab",
+        "Return"
+      ],
+      "containment": "input ↔ submit",
+      "cancelReturn": "Request Goal revision",
+      "escapeReturn": "Request Goal revision",
+      "cancelEscapeZeroMutation": true
+    },
+    {
+      "label": "S05 Goal v2 confirmed",
+      "phase": "GOAL_CONTRACT_CONFIRMED",
+      "stateVersion": 5,
+      "currentActor": "agent",
+      "nextLegalAction": "AGENT_PROPOSE_PLAN",
+      "focus": {
+        "id": null,
+        "text": "WORKHUB · GOAL ROOMQualify the complete governed keyboard and VoiceOver journeyGoal v2 · CONFIRMEDChapter · PlanGoal confirmed. Plan requiredAuthority now · AGENTAgent must propose Plan v1agent: Agent must propose Plan v1No work is admitted until the agent proposes a Plan bound to this exact Goal version.No work is admitted until the agent proposes a Plan bound to this exact Goal version.GoalPlanProofActivityGoal ContractAgent proposal confirmed by OwnerGoal Contract v2 · CONFIRMEDDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioning\n    \n      WWORKHUB · GOAL ROOMGOAL CONTRACTQualify the complete governed keyboard and VoiceOver journeyv2 · CONFIRMED · Agent proposal confirmed by OwnerWebMCP accepted get_goal_room_state · S5Goal confirmed. Plan requiredSTATE v5 · GOAL CONTRACT CONFIRMEDCHAPTER · PlanDefinePlanWorkVerifyAcceptAgentbounded static-six toolsActs nowSystem Verifierdeterministic rules onlyidleOwnersole decision authorityidleNOWAGENT ACTS NOWGoal Contract v2 confirmedAgent must propose Plan v1No work is admitted until the agent proposes a Plan bound to this exact Goal version.No work is admitted until the agent proposes a Plan bound to this exact Goal version.GoalPlanProofActivityGoal Contract v2Agent proposal confirmed by Owner · CONFIRMEDLatest revision request: Bind Goal to corrected Candidate v2 and deterministic evidence.WhyClose the final judge-operability gateDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioningEvidence requiredTrusted physical-key recordOpen questionsNone recordedLifecycle · exact governed progressPlanClaimEvidenceVerifyCompleteAcceptAgent tools · static sixget_goal_room_stateAvailable at this frontierpropose_goal_contractUnavailable in this canonical phasepropose_planAvailable at this frontierclaim_stepUnavailable in this canonical phasesubmit_artifactUnavailable in this canonical phaserequest_completionUnavailable in this canonical phaseReceipts · 5 recorded attemptsOwner confirmed Goal Contract v2Owner · R5Agent proposed Goal Contract v2WebMCP agent · R4Owner requested revision to Goal Contract v1Owner · R3\n    \n\n    \n      \n        Judge help and room limits\n        \n          Use a qualifying ChatGPT in-app browser or Chrome/Canary with WebMCP support. State stays in this browser lifecycle. Reload starts a fresh room.\n          No login or credentials are required. The room has no external effects and demonstrates one synthetic Goal only. PASS is not owner acceptance.\n          Security scope Privacy boundary\n        \n      \n    \n\n    \n      \n        \n          REQUEST REVISION\n          Request changes to Goal Contract v1\n          This prose is a Goal Contract revision request bound to exact Goal Contract v1. The prior version remains immutable. This does not confirm the Goal Contract, admit a Plan, or authorize work. The agent must propose a new immutable version.\n        \n        Revision note\n        \n        \n          Cancel\n          Send revision request\n        \n      \n    \n\n    \n      \n        OWNER CONFIRMATION\n        Accept this candidate?\n        \n        \n          Candidate\n          SHA-256\n          PASS rule set\n        \n        \n          Cancel\n          Confirm acceptance",
+        "role": "BODY",
+        "insideRevision": false,
+        "insideAcceptance": false
+      },
+      "keys": [
+        "Tab…",
+        "Return"
+      ]
+    },
+    {
+      "label": "S06 Plan v1 proposed",
+      "phase": "PLAN_PROPOSED",
+      "stateVersion": 6,
+      "currentActor": "owner",
+      "nextLegalAction": "OWNER_CONFIRM_OR_REVISE_PLAN",
+      "focus": {
+        "id": null,
+        "text": "WORKHUB · GOAL ROOMQualify the complete governed keyboard and VoiceOver journeyGoal v2 · CONFIRMEDChapter · PlanWaiting for your Plan decisionAuthority now · OWNEROwner must confirm or request revisionowner: Owner must confirm or request revisionWork cannot begin until you confirm this Plan or request a revision.Request revisionConfirm Plan v1GoalPlanProofActivityGoal ContractAgent proposal confirmed by OwnerGoal Contract v2 · CONFIRMEDDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioning\n    \n      WWORKHUB · GOAL ROOMGOAL CONTRACTQualify the complete governed keyboard and VoiceOver journeyv2 · CONFIRMED · Agent proposal confirmed by OwnerWebMCP accepted get_goal_room_state · S6Waiting for your Plan decisionSTATE v6 · PLAN PROPOSEDCHAPTER · PlanDefinePlanWorkVerifyAcceptAgentbounded static-six toolsidleSystem Verifierdeterministic rules onlyidleOwnersole decision authorityActs nowWHAT NEEDS YOUOWNER ACTS NOWReview Plan v1Owner must confirm or request revisionWork cannot begin until you confirm this Plan or request a revision.Request revisionConfirm Plan v1GoalPlanProofActivityGoal Contract v2Agent proposal confirmed by Owner · CONFIRMEDLatest revision request: Bind Goal to corrected Candidate v2 and deterministic evidence.WhyClose the final judge-operability gateDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioningEvidence requiredTrusted physical-key recordOpen questionsNone recordedLifecycle · exact governed progressPlanClaimEvidenceVerifyCompleteAcceptAgent tools · static sixget_goal_room_stateAvailable at this frontierpropose_goal_contractUnavailable in this canonical phasepropose_planUnavailable in this canonical phaseclaim_stepUnavailable in this canonical phasesubmit_artifactUnavailable in this canonical phaserequest_completionUnavailable in this canonical phaseReceipts · 6 recorded attemptsAgent proposed Plan v1WebMCP agent · R6Owner confirmed Goal Contract v2Owner · R5Agent proposed Goal Contract v2WebMCP agent · R4\n    \n\n    \n      \n        Judge help and room limits\n        \n          Use a qualifying ChatGPT in-app browser or Chrome/Canary with WebMCP support. State stays in this browser lifecycle. Reload starts a fresh room.\n          No login or credentials are required. The room has no external effects and demonstrates one synthetic Goal only. PASS is not owner acceptance.\n          Security scope Privacy boundary\n        \n      \n    \n\n    \n      \n        \n          REQUEST REVISION\n          Request changes to Goal Contract v1\n          This prose is a Goal Contract revision request bound to exact Goal Contract v1. The prior version remains immutable. This does not confirm the Goal Contract, admit a Plan, or authorize work. The agent must propose a new immutable version.\n        \n        Revision note\n        \n        \n          Cancel\n          Send revision request\n        \n      \n    \n\n    \n      \n        OWNER CONFIRMATION\n        Accept this candidate?\n        \n        \n          Candidate\n          SHA-256\n          PASS rule set\n        \n        \n          Cancel\n          Confirm acceptance",
+        "role": "BODY",
+        "insideRevision": false,
+        "insideAcceptance": false
+      },
+      "positionedBy": "captured production descriptor callback"
+    },
+    {
+      "label": "S07 Plan v1 revision submitted",
+      "phase": "PLAN_REVISION_REQUESTED",
+      "stateVersion": 7,
+      "currentActor": "agent",
+      "nextLegalAction": "AGENT_PROPOSE_REVISED_PLAN",
+      "focus": {
+        "id": null,
+        "text": "WORKHUB · GOAL ROOMQualify the complete governed keyboard and VoiceOver journeyGoal v2 · CONFIRMEDChapter · PlanWaiting for revised PlanAuthority now · AGENTAgent must propose revised Plan v2agent: Agent must propose revised Plan v2The agent must respond with Plan v2 before you need to decide again.The agent must respond with Plan v2 before you need to decide again.GoalPlanProofActivityGoal ContractAgent proposal confirmed by OwnerGoal Contract v2 · CONFIRMEDDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioning\n    \n      WWORKHUB · GOAL ROOMGOAL CONTRACTQualify the complete governed keyboard and VoiceOver journeyv2 · CONFIRMED · Agent proposal confirmed by OwnerWebMCP accepted get_goal_room_state · S7Waiting for revised PlanSTATE v7 · PLAN REVISION REQUESTEDCHAPTER · PlanDefinePlanWorkVerifyAcceptAgentbounded static-six toolsActs nowSystem Verifierdeterministic rules onlyidleOwnersole decision authorityidleNOWAGENT ACTS NOWRevision requestedAgent must propose revised Plan v2The agent must respond with Plan v2 before you need to decide again.The agent must respond with Plan v2 before you need to decide again.GoalPlanProofActivityGoal Contract v2Agent proposal confirmed by Owner · CONFIRMEDLatest revision request: Bind Goal to corrected Candidate v2 and deterministic evidence.WhyClose the final judge-operability gateDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioningEvidence requiredTrusted physical-key recordOpen questionsNone recordedLifecycle · exact governed progressPlanClaimEvidenceVerifyCompleteAcceptAgent tools · static sixget_goal_room_stateAvailable at this frontierpropose_goal_contractUnavailable in this canonical phasepropose_planAvailable at this frontierclaim_stepUnavailable in this canonical phasesubmit_artifactUnavailable in this canonical phaserequest_completionUnavailable in this canonical phaseReceipts · 7 recorded attemptsOwner requested revision to Plan v1Owner · R7Agent proposed Plan v1WebMCP agent · R6Owner confirmed Goal Contract v2Owner · R5\n    \n\n    \n      \n        Judge help and room limits\n        \n          Use a qualifying ChatGPT in-app browser or Chrome/Canary with WebMCP support. State stays in this browser lifecycle. Reload starts a fresh room.\n          No login or credentials are required. The room has no external effects and demonstrates one synthetic Goal only. PASS is not owner acceptance.\n          Security scope Privacy boundary\n        \n      \n    \n\n    \n      \n        \n          REQUEST REVISION\n          Request changes to Plan v1\n          This prose is a Plan revision request bound to exact Plan v1. The prior version remains immutable. This does not confirm the Plan, admit a Plan, or authorize work. The agent must propose a new immutable version.\n        \n        Revision note\n        \n        \n          Cancel\n          Send revision request\n        \n      \n    \n\n    \n      \n        OWNER CONFIRMATION\n        Accept this candidate?\n        \n        \n          Candidate\n          SHA-256\n          PASS rule set\n        \n        \n          Cancel\n          Confirm acceptance",
+        "role": "BODY",
+        "insideRevision": false,
+        "insideAcceptance": false
+      },
+      "keys": [
+        "Return",
+        "Shift+Tab",
+        "Tab",
+        "Tab",
+        "Return(Cancel)",
+        "Return",
+        "Escape",
+        "Return",
+        "text",
+        "Tab",
+        "Tab",
+        "Return"
+      ],
+      "containment": "input ↔ submit",
+      "cancelReturn": "Request revision",
+      "escapeReturn": "Request revision",
+      "cancelEscapeZeroMutation": true
+    },
+    {
+      "label": "S09 Plan v2 confirmed",
+      "phase": "PLAN_CONFIRMED",
+      "stateVersion": 9,
+      "currentActor": "agent",
+      "nextLegalAction": "AGENT_CLAIM_OPEN_STEP",
+      "focus": {
+        "id": null,
+        "text": "WORKHUB · GOAL ROOMQualify the complete governed keyboard and VoiceOver journeyGoal v2 · CONFIRMEDChapter · WorkPlan confirmed. Work may beginAuthority now · AGENTAgent may claim the next admitted stepagent: Agent may claim the next admitted stepThe agent may claim an admitted step. The Goal is not yet accepted.The agent may claim an admitted step. The Goal is not yet accepted.GoalPlanProofActivityGoal ContractAgent proposal confirmed by OwnerGoal Contract v2 · CONFIRMEDDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioning\n    \n      WWORKHUB · GOAL ROOMGOAL CONTRACTQualify the complete governed keyboard and VoiceOver journeyv2 · CONFIRMED · Agent proposal confirmed by OwnerWebMCP accepted get_goal_room_state · S9Plan confirmed. Work may beginSTATE v9 · PLAN CONFIRMEDCHAPTER · WorkDefinePlanWorkVerifyAcceptAgentbounded static-six toolsActs nowSystem Verifierdeterministic rules onlyidleOwnersole decision authorityidleNOWAGENT ACTS NOWPlan v2 confirmedAgent may claim the next admitted stepThe agent may claim an admitted step. The Goal is not yet accepted.The agent may claim an admitted step. The Goal is not yet accepted.GoalPlanProofActivityGoal Contract v2Agent proposal confirmed by Owner · CONFIRMEDLatest revision request: Bind Goal to corrected Candidate v2 and deterministic evidence.WhyClose the final judge-operability gateDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioningEvidence requiredTrusted physical-key recordOpen questionsNone recordedLifecycle · exact governed progressPlanClaimEvidenceVerifyCompleteAcceptAgent tools · static sixget_goal_room_stateAvailable at this frontierpropose_goal_contractUnavailable in this canonical phasepropose_planUnavailable in this canonical phaseclaim_stepAvailable at this frontiersubmit_artifactUnavailable in this canonical phaserequest_completionUnavailable in this canonical phaseReceipts · 9 recorded attemptsOwner confirmed Plan v2Owner · R9Agent proposed Plan v2WebMCP agent · R8Owner requested revision to Plan v1Owner · R7\n    \n\n    \n      \n        Judge help and room limits\n        \n          Use a qualifying ChatGPT in-app browser or Chrome/Canary with WebMCP support. State stays in this browser lifecycle. Reload starts a fresh room.\n          No login or credentials are required. The room has no external effects and demonstrates one synthetic Goal only. PASS is not owner acceptance.\n          Security scope Privacy boundary\n        \n      \n    \n\n    \n      \n        \n          REQUEST REVISION\n          Request changes to Plan v1\n          This prose is a Plan revision request bound to exact Plan v1. The prior version remains immutable. This does not confirm the Plan, admit a Plan, or authorize work. The agent must propose a new immutable version.\n        \n        Revision note\n        \n        \n          Cancel\n          Send revision request\n        \n      \n    \n\n    \n      \n        OWNER CONFIRMATION\n        Accept this candidate?\n        \n        \n          Candidate\n          SHA-256\n          PASS rule set\n        \n        \n          Cancel\n          Confirm acceptance",
+        "role": "BODY",
+        "insideRevision": false,
+        "insideAcceptance": false
+      },
+      "keys": [
+        "Tab…",
+        "Return"
+      ]
+    },
+    {
+      "label": "S10 Agent claim",
+      "phase": "STEP_CLAIMED",
+      "stateVersion": 10,
+      "currentActor": "agent",
+      "nextLegalAction": "AGENT_SUBMIT_CANDIDATE",
+      "focus": {
+        "id": null,
+        "text": "WORKHUB · GOAL ROOMQualify the complete governed keyboard and VoiceOver journeyGoal v2 · CONFIRMEDChapter · WorkStep claimed. Evidence requiredAuthority now · AGENTAgent must submit exact candidate evidenceagent: Agent must submit exact candidate evidenceThe claim grants custody of this admitted step, not authority to verify or accept it.The claim grants custody of this admitted step, not authority to verify or accept it.GoalPlanProofActivityGoal ContractAgent proposal confirmed by OwnerGoal Contract v2 · CONFIRMEDDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioning\n    \n      WWORKHUB · GOAL ROOMGOAL CONTRACTQualify the complete governed keyboard and VoiceOver journeyv2 · CONFIRMED · Agent proposal confirmed by OwnerWebMCP accepted get_goal_room_state · S10Step claimed. Evidence requiredSTATE v10 · STEP CLAIMEDCHAPTER · WorkDefinePlanWorkVerifyAcceptAgentbounded static-six toolsActs nowSystem Verifierdeterministic rules onlyidleOwnersole decision authorityidleNOWAGENT ACTS NOWAgent holds step releaseAgent must submit exact candidate evidenceThe claim grants custody of this admitted step, not authority to verify or accept it.The claim grants custody of this admitted step, not authority to verify or accept it.GoalPlanProofActivityGoal Contract v2Agent proposal confirmed by Owner · CONFIRMEDLatest revision request: Bind Goal to corrected Candidate v2 and deterministic evidence.WhyClose the final judge-operability gateDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioningEvidence requiredTrusted physical-key recordOpen questionsNone recordedLifecycle · exact governed progressPlanClaimEvidenceVerifyCompleteAcceptAgent tools · static sixget_goal_room_stateAvailable at this frontierpropose_goal_contractUnavailable in this canonical phasepropose_planUnavailable in this canonical phaseclaim_stepUnavailable in this canonical phasesubmit_artifactAvailable at this frontierrequest_completionUnavailable in this canonical phaseReceipts · 10 recorded attemptsAgent claimed step releaseWebMCP agent · R10Owner confirmed Plan v2Owner · R9Agent proposed Plan v2WebMCP agent · R8\n    \n\n    \n      \n        Judge help and room limits\n        \n          Use a qualifying ChatGPT in-app browser or Chrome/Canary with WebMCP support. State stays in this browser lifecycle. Reload starts a fresh room.\n          No login or credentials are required. The room has no external effects and demonstrates one synthetic Goal only. PASS is not owner acceptance.\n          Security scope Privacy boundary\n        \n      \n    \n\n    \n      \n        \n          REQUEST REVISION\n          Request changes to Plan v1\n          This prose is a Plan revision request bound to exact Plan v1. The prior version remains immutable. This does not confirm the Plan, admit a Plan, or authorize work. The agent must propose a new immutable version.\n        \n        Revision note\n        \n        \n          Cancel\n          Send revision request\n        \n      \n    \n\n    \n      \n        OWNER CONFIRMATION\n        Accept this candidate?\n        \n        \n          Candidate\n          SHA-256\n          PASS rule set\n        \n        \n          Cancel\n          Confirm acceptance",
+        "role": "BODY",
+        "insideRevision": false,
+        "insideAcceptance": false
+      },
+      "positionedBy": "captured production descriptor callback"
+    },
+    {
+      "label": "S11 Candidate v1 automatic FAIL",
+      "phase": "VERIFICATION_FAILED",
+      "stateVersion": 12,
+      "currentActor": "agent",
+      "nextLegalAction": "AGENT_SUBMIT_CORRECTED_CANDIDATE",
+      "focus": {
+        "id": null,
+        "text": "WORKHUB · GOAL ROOMQualify the complete governed keyboard and VoiceOver journeyGoal v2 · CONFIRMEDChapter · ProofVerification failed. Correction requiredAuthority now · AGENTAgent must submit a corrected candidateagent: Agent must submit a corrected candidateThe failed candidate and verdict remain immutable. The agent may submit a corrected version.The failed candidate and verdict remain immutable. The agent may submit a corrected version.GoalPlanProofActivityGoal ContractAgent proposal confirmed by OwnerGoal Contract v2 · CONFIRMEDDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioning\n    \n      WWORKHUB · GOAL ROOMGOAL CONTRACTQualify the complete governed keyboard and VoiceOver journeyv2 · CONFIRMED · Agent proposal confirmed by OwnerWebMCP accepted get_goal_room_state · S12Verification failed. Correction requiredSTATE v12 · VERIFICATION FAILEDCHAPTER · VerifyDefinePlanWorkVerifyAcceptAgentbounded static-six toolsActs nowSystem Verifierdeterministic rules onlyfailedOwnersole decision authorityidleNOWAGENT ACTS NOWCandidate v1 did not passAgent must submit a corrected candidateThe failed candidate and verdict remain immutable. The agent may submit a corrected version.Candidate 515ba85fed…ca51bd9dThe failed candidate and verdict remain immutable. The agent may submit a corrected version.GoalPlanProofActivityGoal Contract v2Agent proposal confirmed by Owner · CONFIRMEDLatest revision request: Bind Goal to corrected Candidate v2 and deterministic evidence.WhyClose the final judge-operability gateDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioningEvidence requiredTrusted physical-key recordOpen questionsNone recordedLifecycle · exact governed progressPlanClaimEvidenceVerifyCompleteAcceptAgent tools · static sixget_goal_room_stateAvailable at this frontierpropose_goal_contractUnavailable in this canonical phasepropose_planUnavailable in this canonical phaseclaim_stepUnavailable in this canonical phasesubmit_artifactAvailable at this frontierrequest_completionUnavailable in this canonical phaseReceipts · 12 recorded attemptsSystem verification FAIL · 515ba85fInternal verifier · R12Agent submitted Candidate v1 · 515ba85fWebMCP agent · R11Agent claimed step releaseWebMCP agent · R10\n    \n\n    \n      \n        Judge help and room limits\n        \n          Use a qualifying ChatGPT in-app browser or Chrome/Canary with WebMCP support. State stays in this browser lifecycle. Reload starts a fresh room.\n          No login or credentials are required. The room has no external effects and demonstrates one synthetic Goal only. PASS is not owner acceptance.\n          Security scope Privacy boundary\n        \n      \n    \n\n    \n      \n        \n          REQUEST REVISION\n          Request changes to Plan v1\n          This prose is a Plan revision request bound to exact Plan v1. The prior version remains immutable. This does not confirm the Plan, admit a Plan, or authorize work. The agent must propose a new immutable version.\n        \n        Revision note\n        \n        \n          Cancel\n          Send revision request\n        \n      \n    \n\n    \n      \n        OWNER CONFIRMATION\n        Accept this candidate?\n        \n        \n          Candidate\n          SHA-256\n          PASS rule set\n        \n        \n          Cancel\n          Confirm acceptance",
+        "role": "BODY",
+        "insideRevision": false,
+        "insideAcceptance": false
+      },
+      "system": "production systemVerifierAdapter",
+      "meaning": "Agent correction required"
+    },
+    {
+      "label": "S12 Candidate v2 automatic PASS",
+      "phase": "VERIFICATION_PASSED",
+      "stateVersion": 14,
+      "currentActor": "agent",
+      "nextLegalAction": "AGENT_REQUEST_COMPLETION",
+      "focus": {
+        "id": null,
+        "text": "WORKHUB · GOAL ROOMQualify the complete governed keyboard and VoiceOver journeyGoal v2 · CONFIRMEDChapter · ProofVerification passed. Owner has not accepted the GoalAuthority now · AGENTAgent may request completion for this exact candidateagent: Agent may request completion for this exact candidatePASS proves the explicit checks succeeded. It does not grant final acceptance authority.PASS proves the explicit checks succeeded. It does not grant final acceptance authority.GoalPlanProofActivityGoal ContractAgent proposal confirmed by OwnerGoal Contract v2 · CONFIRMEDDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioning\n    \n      WWORKHUB · GOAL ROOMGOAL CONTRACTQualify the complete governed keyboard and VoiceOver journeyv2 · CONFIRMED · Agent proposal confirmed by OwnerWebMCP accepted get_goal_room_state · S14Verification passed. Owner has not accepted the GoalSTATE v14 · VERIFICATION PASSEDCHAPTER · VerifyDefinePlanWorkVerifyAcceptAgentbounded static-six toolsActs nowSystem Verifierdeterministic rules onlycompleteOwnersole decision authorityidleNOWAGENT ACTS NOWCandidate v2 passed deterministic verificationAgent may request completion for this exact candidatePASS proves the explicit checks succeeded. It does not grant final acceptance authority.Candidate f37141205e…23005eeePASS proves the explicit checks succeeded. It does not grant final acceptance authority.GoalPlanProofActivityGoal Contract v2Agent proposal confirmed by Owner · CONFIRMEDLatest revision request: Bind Goal to corrected Candidate v2 and deterministic evidence.WhyClose the final judge-operability gateDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioningEvidence requiredTrusted physical-key recordOpen questionsNone recordedLifecycle · exact governed progressPlanClaimEvidenceVerifyCompleteAcceptAgent tools · static sixget_goal_room_stateAvailable at this frontierpropose_goal_contractUnavailable in this canonical phasepropose_planUnavailable in this canonical phaseclaim_stepUnavailable in this canonical phasesubmit_artifactUnavailable in this canonical phaserequest_completionAvailable at this frontierReceipts · 14 recorded attemptsSystem verification PASS · f3714120Internal verifier · R14Agent submitted Candidate v2 · f3714120WebMCP agent · R13System verification FAIL · 515ba85fInternal verifier · R12\n    \n\n    \n      \n        Judge help and room limits\n        \n          Use a qualifying ChatGPT in-app browser or Chrome/Canary with WebMCP support. State stays in this browser lifecycle. Reload starts a fresh room.\n          No login or credentials are required. The room has no external effects and demonstrates one synthetic Goal only. PASS is not owner acceptance.\n          Security scope Privacy boundary\n        \n      \n    \n\n    \n      \n        \n          REQUEST REVISION\n          Request changes to Plan v1\n          This prose is a Plan revision request bound to exact Plan v1. The prior version remains immutable. This does not confirm the Plan, admit a Plan, or authorize work. The agent must propose a new immutable version.\n        \n        Revision note\n        \n        \n          Cancel\n          Send revision request\n        \n      \n    \n\n    \n      \n        OWNER CONFIRMATION\n        Accept this candidate?\n        \n        \n          Candidate\n          SHA-256\n          PASS rule set\n        \n        \n          Cancel\n          Confirm acceptance",
+        "role": "BODY",
+        "insideRevision": false,
+        "insideAcceptance": false
+      },
+      "system": "production systemVerifierAdapter",
+      "meaning": "PASS is not acceptance"
+    },
+    {
+      "label": "S13 completion requested",
+      "phase": "COMPLETION_REQUESTED",
+      "stateVersion": 15,
+      "currentActor": "owner",
+      "nextLegalAction": "OWNER_ACCEPT_OR_REQUEST_WORK",
+      "focus": {
+        "id": null,
+        "text": "WORKHUB · GOAL ROOMQualify the complete governed keyboard and VoiceOver journeyGoal v2 · CONFIRMEDChapter · AcceptanceVerified result. Awaiting owner acceptanceAuthority now · OWNEROwner may accept this exact verified candidateowner: Owner may accept this exact verified candidateThe candidate passed deterministic checks. Only you can accept the Goal.Accept GoalGoalPlanProofActivityGoal ContractAgent proposal confirmed by OwnerGoal Contract v2 · CONFIRMEDDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioning\n    \n      WWORKHUB · GOAL ROOMGOAL CONTRACTQualify the complete governed keyboard and VoiceOver journeyv2 · CONFIRMED · Agent proposal confirmed by OwnerWebMCP accepted get_goal_room_state · S15Verified result. Awaiting owner acceptanceSTATE v15 · COMPLETION REQUESTEDCHAPTER · AcceptDefinePlanWorkVerifyAcceptAgentbounded static-six toolsidleSystem Verifierdeterministic rules onlycompleteOwnersole decision authorityActs nowWHAT NEEDS YOUOWNER ACTS NOWAccept Candidate v2?Owner may accept this exact verified candidateThe candidate passed deterministic checks. Only you can accept the Goal.Candidate f37141205e…23005eeeAccept GoalGoalPlanProofActivityGoal Contract v2Agent proposal confirmed by Owner · CONFIRMEDLatest revision request: Bind Goal to corrected Candidate v2 and deterministic evidence.WhyClose the final judge-operability gateDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioningEvidence requiredTrusted physical-key recordOpen questionsNone recordedLifecycle · exact governed progressPlanClaimEvidenceVerifyCompleteAcceptAgent tools · static sixget_goal_room_stateAvailable at this frontierpropose_goal_contractUnavailable in this canonical phasepropose_planUnavailable in this canonical phaseclaim_stepUnavailable in this canonical phasesubmit_artifactUnavailable in this canonical phaserequest_completionUnavailable in this canonical phaseReceipts · 15 recorded attemptsAgent requested owner acceptance · f3714120WebMCP agent · R15System verification PASS · f3714120Internal verifier · R14Agent submitted Candidate v2 · f3714120WebMCP agent · R13\n    \n\n    \n      \n        Judge help and room limits\n        \n          Use a qualifying ChatGPT in-app browser or Chrome/Canary with WebMCP support. State stays in this browser lifecycle. Reload starts a fresh room.\n          No login or credentials are required. The room has no external effects and demonstrates one synthetic Goal only. PASS is not owner acceptance.\n          Security scope Privacy boundary\n        \n      \n    \n\n    \n      \n        \n          REQUEST REVISION\n          Request changes to Plan v1\n          This prose is a Plan revision request bound to exact Plan v1. The prior version remains immutable. This does not confirm the Plan, admit a Plan, or authorize work. The agent must propose a new immutable version.\n        \n        Revision note\n        \n        \n          Cancel\n          Send revision request\n        \n      \n    \n\n    \n      \n        OWNER CONFIRMATION\n        Accept this candidate?\n        \n        \n          Candidate\n          SHA-256\n          PASS rule set\n        \n        \n          Cancel\n          Confirm acceptance",
+        "role": "BODY",
+        "insideRevision": false,
+        "insideAcceptance": false
+      },
+      "positionedBy": "captured production descriptor callback"
+    },
+    {
+      "label": "S14 sealed",
+      "phase": "GOAL_ACCEPTED",
+      "stateVersion": 16,
+      "currentActor": "none",
+      "nextLegalAction": "GOAL_ACCEPTED_NO_FURTHER_ACTION",
+      "focus": {
+        "id": null,
+        "text": "WORKHUB · GOAL ROOMQualify the complete governed keyboard and VoiceOver journeyGoal v2 · CONFIRMEDChapter · AcceptedGoal accepted by ownerROOM SEALED · NO CURRENT AUTHORITYNo further governed actionRoom sealed: No further governed actionThe owner accepted the exact candidate that passed deterministic verification.Goal accepted. No further governed action.GoalPlanProofActivityGoal ContractAgent proposal confirmed by OwnerGoal Contract v2 · CONFIRMEDDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioning\n    \n      WWORKHUB · GOAL ROOMGOAL CONTRACTQualify the complete governed keyboard and VoiceOver journeyv2 · CONFIRMED · Agent proposal confirmed by OwnerWebMCP accepted get_goal_room_state · S16Goal accepted by ownerSTATE v16 · GOAL ACCEPTEDCHAPTER · AcceptDefinePlanWorkVerifyAcceptAgentbounded static-six toolssealedSystem Verifierdeterministic rules onlysealedOwnersole decision authoritysealedNOWTERMINAL · OWNER ACCEPTEDGoal completeNo further governed actionThe owner accepted the exact candidate that passed deterministic verification.Candidate f37141205e…23005eeeGoal accepted. No further governed action.GoalPlanProofActivityGoal Contract v2Agent proposal confirmed by Owner · CONFIRMEDLatest revision request: Bind Goal to corrected Candidate v2 and deterministic evidence.WhyClose the final judge-operability gateDone looks likeOwner accepts corrected Candidate v2 after PASSConstraintsNo external effectsNon-goalsNative WebMCP claim from callback positioningEvidence requiredTrusted physical-key recordOpen questionsNone recordedLifecycle · exact governed progressPlanClaimEvidenceVerifyCompleteAcceptAgent tools · static sixget_goal_room_stateAvailable at this frontierpropose_goal_contractUnavailable in this canonical phasepropose_planUnavailable in this canonical phaseclaim_stepUnavailable in this canonical phasesubmit_artifactUnavailable in this canonical phaserequest_completionUnavailable in this canonical phaseReceipts · 16 recorded attemptsOwner accepted Goal · f3714120Owner · R16Agent requested owner acceptance · f3714120WebMCP agent · R15System verification PASS · f3714120Internal verifier · R14\n    \n\n    \n      \n        Judge help and room limits\n        \n          Use a qualifying ChatGPT in-app browser or Chrome/Canary with WebMCP support. State stays in this browser lifecycle. Reload starts a fresh room.\n          No login or credentials are required. The room has no external effects and demonstrates one synthetic Goal only. PASS is not owner acceptance.\n          Security scope Privacy boundary\n        \n      \n    \n\n    \n      \n        \n          REQUEST REVISION\n          Request changes to Plan v1\n          This prose is a Plan revision request bound to exact Plan v1. The prior version remains immutable. This does not confirm the Plan, admit a Plan, or authorize work. The agent must propose a new immutable version.\n        \n        Revision note\n        \n        \n          Cancel\n          Send revision request\n        \n      \n    \n\n    \n      \n        OWNER CONFIRMATION\n        Accept Candidate v2?\n        This acceptance is irreversible. It seals the Goal Room for this exact PASS-bound candidate.\n        \n          CandidateCandidate v2 (f37141205e…23005eee)\n          SHA-256f37141205e7a7f3a8bb046649f9697d3c1698fa420333246d0bf3fae23005eee\n          PASS rule setworkhub_goal_room_release/v1\n        \n        \n          Cancel\n          Confirm acceptance",
+        "role": "BODY",
+        "insideRevision": false,
+        "insideAcceptance": false
+      },
+      "keys": [
+        "Tab…",
+        "Return",
+        "Shift+Tab",
+        "Tab",
+        "Return(Cancel)",
+        "Return",
+        "Escape",
+        "Return",
+        "Tab",
+        "Return(Confirm)"
+      ],
+      "containment": "Cancel ↔ Confirm",
+      "cancelReturn": "Accept Goal",
+      "escapeReturn": "Accept Goal",
+      "cancelEscapeZeroMutation": true,
+      "confirmSoleMutation": true
+    }
+  ],
+  "terminal": {
+    "visibleControls": [],
+    "copy": "Goal accepted. No further governed action.",
+    "actor": "none"
+  },
+  "passed": true
+}

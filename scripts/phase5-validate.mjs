@@ -1,4 +1,5 @@
 import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { extname, join, resolve } from "node:path";
 
@@ -23,10 +24,10 @@ for (const path of ["SECURITY.md", "PRIVACY.md", "evaluation/manual-accessibilit
 }
 check(read("SECURITY.md").includes("not an enterprise or production-security claim"), "security claim boundary absent");
 check(read("PRIVACY.md").includes("Reloading the page starts a fresh room"), "privacy lifecycle absent");
-check(read("evaluation/manual-accessibility-v3.md").includes("inconclusive rather than passed"), "VoiceOver limit must remain explicit");
+check(read("evaluation/manual-accessibility-v3.md").includes("does not claim full WCAG conformance"), "accessibility claim limit must remain explicit");
 
 const productionSources = [
-  "index.html", "src/main.ts", "src/desktopUi.ts", "src/mobileUi.ts", "src/acceptanceDialog.ts",
+  "index.html", "src/main.ts", "src/desktopUi.ts", "src/mobileUi.ts", "src/acceptanceDialog.ts", "src/revisionDialog.ts",
   "src/style.css", "src/desktop.css", "SECURITY.md", "PRIVACY.md",
 ];
 const source = productionSources.map((path) => read(path)).join("\n");
@@ -55,7 +56,14 @@ for (const [path, expected] of Object.entries(receipt.protectedStartGitObjects))
   const actual = execFileSync("git", ["hash-object", path], { cwd: root, encoding: "utf8" }).trim();
   check(actual === expected, `protected parity failed: ${path}`);
 }
-check(receipt.voiceOver.pageCheckpointGate === "inconclusive", "receipt overclaims VoiceOver gate");
+check(receipt.voiceOver.pageCheckpointGate === "passed", "actual VoiceOver page checkpoint gate is not integrated");
+check(receipt.keyboard?.gate === "passed", "complete physical-keyboard gate is not integrated");
+const voiceOverManifest = JSON.parse(read("evaluation/voiceover-v3/manifest.json"));
+check(voiceOverManifest.files.length === 10, "VoiceOver evidence manifest is incomplete");
+for (const row of voiceOverManifest.files) {
+  const actual = createHash("sha256").update(readFileSync(join(root, row.path))).digest("hex");
+  check(actual === row.sha256, `VoiceOver evidence hash mismatch: ${row.path}`);
+}
 check(receipt.security.csp.startsWith("omitted"), "CSP omission is not documented");
 
 if (failures.length) {
@@ -73,4 +81,6 @@ console.log(JSON.stringify({
   referrerPolicy: "no-referrer",
   csp: "intentionally omitted with documented proof limit",
   voiceOverPageGate: receipt.voiceOver.pageCheckpointGate,
+  keyboardGate: receipt.keyboard.gate,
+  voiceOverScreenshots: voiceOverManifest.files.length,
 }, null, 2));

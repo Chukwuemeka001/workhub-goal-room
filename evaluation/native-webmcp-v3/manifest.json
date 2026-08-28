@@ -4,14 +4,14 @@
   "nonRecursive": true,
   "receipt": {
     "path": "evaluation/native-webmcp-v3/native-webmcp-receipt.json",
-    "sha256": "85ae2183e0b617ba1837dafd4490483fb017adb9a1d57ba36a844b2033e1e695",
-    "bytes": 317615
+    "sha256": "4f9b77e158c69d2d817e30d4b66f2451b4bab7daed4b71b3d65ee8b5b9750e77",
+    "bytes": 318070
   },
   "files": [
     {
       "path": "evaluation/native-webmcp-v3/native-webmcp-receipt.json",
-      "sha256": "85ae2183e0b617ba1837dafd4490483fb017adb9a1d57ba36a844b2033e1e695",
-      "bytes": 317615
+      "sha256": "4f9b77e158c69d2d817e30d4b66f2451b4bab7daed4b71b3d65ee8b5b9750e77",
+      "bytes": 318070
     },
     {
       "path": "evaluation/native-webmcp-v3/01-goal-revision-native-1440x900.png",

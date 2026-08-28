@@ -15,7 +15,7 @@
     "bundleLeaks": []
   },
   "browser": {
-    "executable": "/Users/emeka/Applications/BrowserOS.app/Contents/MacOS/BrowserOS",
+    "executable": "redacted resolved task browser",
     "version": "BrowserOS 148.0.7948.97",
     "isolatedDisposableProfile": true,
     "headless": true

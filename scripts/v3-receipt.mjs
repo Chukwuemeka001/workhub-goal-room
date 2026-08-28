@@ -29,6 +29,7 @@ const boundSources = [
   "src/custodyView.ts",
   "src/toolSurfaceView.ts",
   "src/acceptanceDialog.ts",
+  "src/revisionDialog.ts",
   "src/main.ts",
   "src/desktopUi.ts",
   "src/desktopView.ts",
