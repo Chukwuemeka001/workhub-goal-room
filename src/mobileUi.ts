@@ -92,6 +92,7 @@ export function createMobileSurface(
   const onSelectTab = (id: MobileTabId) => {
     activeTab = id;
     if (currentView) render(currentView);
+    root.querySelector<HTMLElement>(`#mobile-tab-${id}`)?.focus();
   };
 
   function render(view: MobileView) {
@@ -174,6 +175,15 @@ export function createMobileSurface(
       button.setAttribute("aria-controls", `mobile-panel-${tab.id}`);
       button.tabIndex = activeTab === tab.id ? 0 : -1;
       button.addEventListener("click", () => onSelectTab(tab.id));
+      button.addEventListener("keydown", (event) => {
+        if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) return;
+        event.preventDefault();
+        const index = view.tabs.findIndex((entry) => entry.id === tab.id);
+        const nextIndex = event.key === "Home" ? 0
+          : event.key === "End" ? view.tabs.length - 1
+          : (index + (event.key === "ArrowRight" ? 1 : -1) + view.tabs.length) % view.tabs.length;
+        onSelectTab(view.tabs[nextIndex].id);
+      });
       tablist.append(button);
     }
     const panel = el("section", "mobile-tab-panel");

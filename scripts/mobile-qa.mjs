@@ -73,6 +73,11 @@ try {
     const result = await call("Page.captureScreenshot", { format: "png", fromSurface: true, captureBeyondViewport: false });
     await writeFile(path, Buffer.from(result.data, "base64"));
   }
+  async function pressKey(key, code) {
+    const windowsVirtualKeyCode = key === "Home" ? 36 : key === "End" ? 35 : key === "ArrowLeft" ? 37 : key === "Enter" ? 13 : key === " " ? 32 : 39;
+    await call("Input.dispatchKeyEvent", { type: "keyDown", key, code, windowsVirtualKeyCode });
+    await call("Input.dispatchKeyEvent", { type: "keyUp", key, code, windowsVirtualKeyCode });
+  }
 
   const matrix = [
     [375, 667], [393, 852], [430, 932], [852, 393],
@@ -100,11 +105,30 @@ try {
       selectedTab: window.__mobileQa.selectedTab(),
       authorityStable: before === JSON.stringify(window.__mobileQa.view),
       selectedSemantics: document.querySelector('#mobile-tab-proof').getAttribute('aria-selected') === 'true',
+      focusedTabId: document.activeElement?.id ?? null,
       panelSemantics: document.querySelector('[role=tabpanel]')?.getAttribute('aria-labelledby') === 'mobile-tab-proof',
       tabCount: document.querySelectorAll('[role=tab]').length,
       conciseLiveRegions: document.querySelectorAll('[aria-live]').length === 1,
     };
   })()`);
+  await navigate(`${origin}/qa/mobile-fixture.html?state=goal`, 393, 852);
+  const keyboardAuthorityBefore = await evaluate("JSON.stringify(window.__mobileQa.view)");
+  await evaluate("document.querySelector('#mobile-tab-now').focus()");
+  const keyboardSequence = [];
+  const readKeyboardState = async (key) => keyboardSequence.push(await evaluate(`({
+    key: ${JSON.stringify(key)},
+    focusedTabId: document.activeElement?.id ?? null,
+    selectedTab: window.__mobileQa.selectedTab(),
+    panelBinding: document.querySelector('[role=tabpanel]')?.getAttribute('aria-labelledby') ?? null,
+    authorityStable: JSON.stringify(window.__mobileQa.view) === ${JSON.stringify(keyboardAuthorityBefore)},
+    ownerCalls: window.__mobileQa.ownerCalls(),
+  })`));
+  await readKeyboardState("initial");
+  for (const [key, code, label] of [["ArrowRight", "ArrowRight", "ArrowRight"], ["End", "End", "End"], ["ArrowRight", "ArrowRight", "ArrowRight"], ["ArrowLeft", "ArrowLeft", "ArrowLeft"], ["Home", "Home", "Home"], ["Enter", "Enter", "Enter"], [" ", "Space", "Space"]]) {
+    await pressKey(key, code);
+    await readKeyboardState(label);
+  }
+  const keyboardEvents = await evaluate("window.__mobileQa.keyboardEvents()");
   await navigate(`${origin}/qa/mobile-fixture.html?state=empty`, 393, 852);
   const intentRecovery = await evaluate(`(async () => {
     const form = document.querySelector('.mobile-intent-form');
@@ -138,17 +162,33 @@ try {
     !entry.tabInsideViewport || (!["empty", "max"].includes(entry.state) && !entry.hostileLiteral) || entry.injectedElements !== 0 ||
     (entry.dialog && (!entry.dialog.inside || !entry.dialog.focused))
   );
-  if (!semantic.authorityStable || !semantic.selectedSemantics || !semantic.panelSemantics || semantic.tabCount !== 4 || !semantic.conciseLiveRegions) failures.push({ semantic });
+  if (!semantic.authorityStable || !semantic.selectedSemantics || semantic.focusedTabId !== "mobile-tab-proof" || !semantic.panelSemantics || semantic.tabCount !== 4 || !semantic.conciseLiveRegions) failures.push({ semantic });
+  const expectedKeyboardSequence = [
+    ["mobile-tab-now", "now", "mobile-tab-now"],
+    ["mobile-tab-plan", "plan", "mobile-tab-plan"],
+    ["mobile-tab-activity", "activity", "mobile-tab-activity"],
+    ["mobile-tab-now", "now", "mobile-tab-now"],
+    ["mobile-tab-activity", "activity", "mobile-tab-activity"],
+    ["mobile-tab-now", "now", "mobile-tab-now"],
+    ["mobile-tab-now", "now", "mobile-tab-now"],
+    ["mobile-tab-now", "now", "mobile-tab-now"],
+  ];
+  if (keyboardSequence.some((entry, index) =>
+    entry.focusedTabId !== expectedKeyboardSequence[index][0] ||
+    entry.selectedTab !== expectedKeyboardSequence[index][1] ||
+    entry.panelBinding !== expectedKeyboardSequence[index][2] ||
+    !entry.authorityStable || entry.ownerCalls.length !== 0
+  ) || keyboardEvents.length !== 7 || keyboardEvents.some((entry, index) => !entry.trusted || (index < 5 ? !entry.defaultPrevented : entry.defaultPrevented))) failures.push({ keyboardSequence, keyboardEvents });
   if (intentRecovery.invalid.valid || intentRecovery.invalid.message !== "Enter between 1 and 1000 non-whitespace characters." || !intentRecovery.validAfterEdit || intentRecovery.callCount !== 1 || intentRecovery.intents[0] !== "Build a governed iPhone Goal Room.") failures.push({ intentRecovery });
   if (!desktop.desktopVisible || !desktop.mobileHidden || desktop.documentOverflow !== 0) failures.push({ desktop });
-  await writeFile(join(evidence, "measurements.json"), `${JSON.stringify({ generatedBy: "npm run qa:mobile", semantic, intentRecovery, desktop, measurements, failures }, null, 2)}\n`);
+  await writeFile(join(evidence, "measurements.json"), `${JSON.stringify({ generatedBy: "npm run qa:mobile", semantic, keyboardSequence, keyboardEvents, intentRecovery, desktop, measurements, failures }, null, 2)}\n`);
   const contactHtml = `<!doctype html><style>body{margin:0;background:#050607;color:white;font:14px system-ui}main{display:grid;grid-template-columns:repeat(2,180px);gap:14px;padding:14px}figure{margin:0}img{display:block;width:180px;height:auto}figcaption{padding:5px 0 0}</style><main>${["captured","goal","fail","completion"].map((state) => `<figure><img src="/${`evaluation/mobile-phase5/${state}-393x852.png`}"><figcaption>${state}</figcaption></figure>`).join("")}</main>`;
   await writeFile(join(evidence, "contact-sheet.html"), contactHtml);
   await navigate(`${origin}/evaluation/mobile-phase5/contact-sheet.html`, 402, 850, false);
   await screenshot(join(evidence, "contact-sheet.png"));
   socket.close();
   if (failures.length) throw new Error(`Mobile QA failed ${failures.length} measurement rows`);
-  console.log(JSON.stringify({ states: states.length, viewportRows: matrix.length * states.length, totalMeasurements: measurements.length, interactionAssertions: 1, screenshots: 5, failures: 0, evidence }, null, 2));
+  console.log(JSON.stringify({ states: states.length, viewportRows: matrix.length * states.length, totalMeasurements: measurements.length, interactionAssertions: 3, keyboardSteps: keyboardSequence.length, screenshots: 5, failures: 0, evidence }, null, 2));
 } finally {
   server?.kill("SIGTERM");
   chrome?.kill("SIGTERM");

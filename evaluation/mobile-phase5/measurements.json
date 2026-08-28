@@ -4,10 +4,121 @@
     "selectedTab": "proof",
     "authorityStable": true,
     "selectedSemantics": true,
+    "focusedTabId": "mobile-tab-proof",
     "panelSemantics": true,
     "tabCount": 4,
     "conciseLiveRegions": true
   },
+  "keyboardSequence": [
+    {
+      "key": "initial",
+      "focusedTabId": "mobile-tab-now",
+      "selectedTab": "now",
+      "panelBinding": "mobile-tab-now",
+      "authorityStable": true,
+      "ownerCalls": []
+    },
+    {
+      "key": "ArrowRight",
+      "focusedTabId": "mobile-tab-plan",
+      "selectedTab": "plan",
+      "panelBinding": "mobile-tab-plan",
+      "authorityStable": true,
+      "ownerCalls": []
+    },
+    {
+      "key": "End",
+      "focusedTabId": "mobile-tab-activity",
+      "selectedTab": "activity",
+      "panelBinding": "mobile-tab-activity",
+      "authorityStable": true,
+      "ownerCalls": []
+    },
+    {
+      "key": "ArrowRight",
+      "focusedTabId": "mobile-tab-now",
+      "selectedTab": "now",
+      "panelBinding": "mobile-tab-now",
+      "authorityStable": true,
+      "ownerCalls": []
+    },
+    {
+      "key": "ArrowLeft",
+      "focusedTabId": "mobile-tab-activity",
+      "selectedTab": "activity",
+      "panelBinding": "mobile-tab-activity",
+      "authorityStable": true,
+      "ownerCalls": []
+    },
+    {
+      "key": "Home",
+      "focusedTabId": "mobile-tab-now",
+      "selectedTab": "now",
+      "panelBinding": "mobile-tab-now",
+      "authorityStable": true,
+      "ownerCalls": []
+    },
+    {
+      "key": "Enter",
+      "focusedTabId": "mobile-tab-now",
+      "selectedTab": "now",
+      "panelBinding": "mobile-tab-now",
+      "authorityStable": true,
+      "ownerCalls": []
+    },
+    {
+      "key": "Space",
+      "focusedTabId": "mobile-tab-now",
+      "selectedTab": "now",
+      "panelBinding": "mobile-tab-now",
+      "authorityStable": true,
+      "ownerCalls": []
+    }
+  ],
+  "keyboardEvents": [
+    {
+      "key": "ArrowRight",
+      "trusted": true,
+      "defaultPrevented": true,
+      "targetId": "mobile-tab-now"
+    },
+    {
+      "key": "End",
+      "trusted": true,
+      "defaultPrevented": true,
+      "targetId": "mobile-tab-plan"
+    },
+    {
+      "key": "ArrowRight",
+      "trusted": true,
+      "defaultPrevented": true,
+      "targetId": "mobile-tab-activity"
+    },
+    {
+      "key": "ArrowLeft",
+      "trusted": true,
+      "defaultPrevented": true,
+      "targetId": "mobile-tab-now"
+    },
+    {
+      "key": "Home",
+      "trusted": true,
+      "defaultPrevented": true,
+      "targetId": "mobile-tab-activity"
+    },
+    {
+      "key": "Enter",
+      "trusted": true,
+      "defaultPrevented": false,
+      "targetId": "mobile-tab-now"
+    },
+    {
+      "key": " ",
+      "trusted": true,
+      "defaultPrevented": false,
+      "targetId": "mobile-tab-now"
+    }
+  ],
   "intentRecovery": {
     "invalid": {
       "valid": false,

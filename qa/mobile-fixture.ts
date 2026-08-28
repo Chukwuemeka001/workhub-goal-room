@@ -83,9 +83,13 @@ const dialogTitle = document.querySelector<HTMLElement>("#revision-dialog-title"
 const dialogCopy = document.querySelector<HTMLElement>("#revision-dialog-copy")!;
 const input = document.querySelector<HTMLTextAreaElement>("#revision-input")!;
 const intentCalls: string[] = [];
+const ownerCalls: string[] = [];
+const keyboardEvents: Array<{ key: string; trusted: boolean; defaultPrevented: boolean; targetId: string }> = [];
 const surface = createMobileSurface(root, {
-  onSetIntent: async (intent) => { intentCalls.push(intent); }, onPrimary: async () => {},
+  onSetIntent: async (intent) => { ownerCalls.push("set-intent"); intentCalls.push(intent); },
+  onPrimary: async (kind) => { ownerCalls.push(`primary:${kind}`); },
   onOpenRevision: (kind, version) => {
+    ownerCalls.push(`revision:${kind}:${version}`);
     const subject = kind === "goal" ? "Goal Contract" : "Plan";
     dialogTitle.textContent = `Request changes to ${subject} v${version}`;
     dialogCopy.textContent = `This prose is a ${subject} revision request bound to exact ${subject} v${version}. The prior version remains immutable. This does not confirm the ${subject}, admit a Plan, or authorize work. The agent must propose a new immutable version.`;
@@ -93,6 +97,10 @@ const surface = createMobileSurface(root, {
   },
 });
 surface.render(view);
+window.addEventListener("keydown", (event) => {
+  if (!(event.target instanceof HTMLElement) || event.target.getAttribute("role") !== "tab") return;
+  keyboardEvents.push({ key: event.key, trusted: event.isTrusted, defaultPrevented: event.defaultPrevented, targetId: event.target.id });
+});
 document.querySelector("#cancel-revision")?.addEventListener("click", () => dialog.close());
 if (new URLSearchParams(location.search).get("sheet") === "1") {
   (document.querySelector<HTMLButtonElement>(".mobile-button.secondary"))?.click();
@@ -121,4 +129,11 @@ function measurements() {
     injectedElements: document.querySelectorAll("img, script:not([type=module])").length,
   };
 }
-(Object.assign(window, { __mobileQa: { measurements, view, selectedTab: () => surface.selectedTab(), intentCalls: () => [...intentCalls] } }));
+(Object.assign(window, { __mobileQa: {
+  measurements,
+  view,
+  selectedTab: () => surface.selectedTab(),
+  intentCalls: () => [...intentCalls],
+  ownerCalls: () => [...ownerCalls],
+  keyboardEvents: () => [...keyboardEvents],
+} }));
