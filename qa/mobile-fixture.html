@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phase 5 mobile QA fixture</title>
+</head>
+<body>
+  <main id="mobile-room" class="mobile-room" aria-label="WorkHub Goal Room mobile"></main>
+  <dialog id="revision-dialog" class="revision-dialog" aria-labelledby="revision-dialog-title">
+    <form id="revision-form" method="dialog">
+      <div><p class="label">REQUEST REVISION</p><h2 id="revision-dialog-title"></h2><p id="revision-dialog-copy"></p></div>
+      <label for="revision-input">Revision note</label>
+      <textarea id="revision-input" required minlength="3" maxlength="500"></textarea>
+      <div class="dialog-actions"><button id="cancel-revision" class="button secondary" type="button">Cancel</button><button class="button primary" type="submit">Send revision request</button></div>
+    </form>
+  </dialog>
+  <script type="module" src="/qa/mobile-fixture.ts"></script>
+</body>
+</html>

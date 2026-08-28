@@ -11,6 +11,7 @@
     "test:watch": "vitest",
     "eval:phase6": "node --experimental-strip-types scripts/phase6-evaluate.ts",
     "eval:phase6:conformance": "npm run eval:phase6 -- conformance --out evaluation/phase6-conformance.json",
+    "qa:mobile": "node scripts/mobile-qa.mjs",
     "preview": "vite preview"
   },
   "devDependencies": {

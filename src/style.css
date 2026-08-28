@@ -554,3 +554,136 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
 }
+
+/* Phase 5: separate owner-first iPhone composition. */
+.mobile-room { display: none; }
+
+@media (min-width: 621px) {
+  .mobile-room { display: none; }
+}
+
+@media (max-width: 620px), (max-height: 620px) and (max-width: 932px) {
+  html, body { max-width: 100%; overflow-x: clip; }
+  body { background: #090a0b; }
+  .desktop-surface { display: none; }
+  .mobile-room {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 100dvh;
+    padding: max(14px, env(safe-area-inset-top)) 16px calc(164px + env(safe-area-inset-bottom));
+    color: #f5f3ee;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+    overflow-x: clip;
+  }
+  .mobile-room *, .revision-dialog * { min-width: 0; }
+  .mobile-room p, .mobile-room h1, .mobile-room h2, .mobile-room h3,
+  .mobile-room li, .mobile-room code, .mobile-room blockquote,
+  .revision-dialog p, .revision-dialog h2, .revision-dialog label {
+    overflow-wrap: anywhere;
+  }
+  .mobile-goal-header { padding: 2px 0 15px; border-bottom: 1px solid var(--line); }
+  .mobile-brand { color: #a6a9af; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.13em; }
+  .mobile-goal-title {
+    margin-top: 9px;
+    color: #fbfaf6;
+    font-size: clamp(1.55rem, 7.2vw, 2rem);
+    font-weight: 620;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+  }
+  .mobile-goal-meta, .mobile-status { margin-top: 7px; color: #a6a9af; font-size: 0.76rem; line-height: 1.45; }
+  .mobile-chapter { padding: 14px 0 10px; }
+  .mobile-chapter-title { color: #d3d5db; font-size: 0.72rem; font-weight: 680; letter-spacing: 0.08em; text-transform: uppercase; }
+  .mobile-frontier {
+    padding: 18px;
+    border: 1px solid rgba(75, 194, 179, 0.28);
+    border-radius: 16px;
+    background: #101314;
+  }
+  .mobile-frontier[data-actor="owner"] { border-color: rgba(222, 166, 83, 0.58); background: #16130f; }
+  .mobile-frontier[data-actor="system"] { border-color: rgba(147, 154, 226, 0.48); }
+  .mobile-actor { color: #76cfc4; font-size: 0.68rem; font-weight: 720; letter-spacing: 0.1em; }
+  .mobile-frontier[data-actor="owner"] .mobile-actor { color: #efc27f; }
+  .mobile-frontier[data-actor="system"] .mobile-actor { color: #b8bdf4; }
+  .mobile-frontier-title { margin-top: 10px; font-size: 1.34rem; font-weight: 590; line-height: 1.16; letter-spacing: -0.025em; }
+  .mobile-frontier-live { margin-top: 13px; color: #d7d8da; font-size: 0.82rem; font-weight: 620; line-height: 1.45; }
+  .mobile-boundary { margin-top: 9px; color: #9b9fa5; font-size: 0.78rem; line-height: 1.5; }
+  .mobile-details { padding-top: 12px; }
+  .mobile-tab-panel { padding: 12px 2px 24px; outline: 0; }
+  .mobile-panel-heading { margin-bottom: 12px; font-size: 1rem; font-weight: 650; }
+  .mobile-tab-panel p, .mobile-tab-panel li { color: #c9cbcf; font-size: 0.79rem; line-height: 1.52; }
+  .mobile-detail-group { padding: 13px 0; border-top: 1px solid var(--line); }
+  .mobile-detail-group h3, .mobile-tab-panel > h3 { margin: 0 0 8px; color: #f1f0ec; font-size: 0.8rem; font-weight: 680; }
+  .mobile-detail-group ul, .mobile-detail-group ol { margin: 8px 0 0; padding-left: 20px; }
+  .mobile-revision-delta, .mobile-proof-boundary { margin: 10px 0 0; padding: 11px 12px; border-left: 2px solid #dea653; background: #17130e; }
+  .mobile-proof-boundary.pass { border-color: #4bc2b3; background: #0e1715; }
+  .mobile-digest { display: block; margin: 9px 0 14px; color: #c9cbcf; font-size: 0.69rem; line-height: 1.45; overflow-wrap: anywhere; }
+  .mobile-activity-list { margin: 0 0 16px; padding: 0; list-style: none; }
+  .mobile-activity-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 9px; padding: 10px 0; border-top: 1px solid var(--line); }
+  .mobile-activity-list li > p { grid-column: 1 / -1; }
+  .mobile-activity-list li[data-accepted="false"] strong { color: #efc27f; }
+  .mobile-source { color: #92969d; font-size: 0.66rem; }
+  .mobile-action-dock {
+    position: fixed;
+    z-index: 20;
+    right: 0;
+    bottom: calc(64px + env(safe-area-inset-bottom));
+    left: 0;
+    display: flex;
+    gap: 9px;
+    padding: 10px 16px;
+    border-top: 1px solid var(--line-strong);
+    background: #0e0f10;
+  }
+  .mobile-button, .mobile-tab, .mobile-intent-form textarea {
+    min-height: 44px;
+  }
+  .mobile-button {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    color: #f8f7f2;
+    background: #171819;
+    font-size: 0.82rem;
+    font-weight: 680;
+  }
+  .mobile-button.primary { border-color: #bd833a; background: #a86e2d; }
+  .mobile-intent-form { display: grid; width: 100%; grid-template-columns: minmax(0, 1fr) auto; gap: 7px 9px; }
+  .mobile-intent-form label { grid-column: 1 / -1; color: #c9cbcf; font-size: 0.7rem; }
+  .mobile-intent-form textarea { width: 100%; max-height: 88px; resize: none; padding: 10px; border: 1px solid var(--line-strong); border-radius: 9px; color: #f8f7f2; background: #171819; }
+  .mobile-intent-form .mobile-button { flex: none; }
+  .mobile-waiting { width: 100%; min-height: 44px; display: flex; align-items: center; color: #a6a9af; font-size: 0.76rem; line-height: 1.4; }
+  .mobile-tab-bar {
+    position: fixed;
+    z-index: 21;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    min-height: calc(64px + env(safe-area-inset-bottom));
+    padding: 7px 8px env(safe-area-inset-bottom);
+    border-top: 1px solid var(--line-strong);
+    background: #0a0b0c;
+  }
+  .mobile-tab { border: 0; color: #8f939a; background: transparent; font-size: 0.72rem; font-weight: 650; }
+  .mobile-tab[aria-selected="true"] { color: #f3c482; }
+  .mobile-button:focus-visible, .mobile-tab:focus-visible, .mobile-intent-form textarea:focus-visible {
+    outline: 3px solid #f0bd72;
+    outline-offset: 2px;
+  }
+  .revision-dialog { max-height: calc(100dvh - 16px); overflow: auto; }
+  .revision-dialog form { gap: 12px; padding: 18px; }
+  .revision-dialog textarea { min-height: 88px; max-height: 128px; margin-top: -4px; }
+  .revision-dialog .button { min-height: 44px; }
+}
+
+@media (max-height: 620px) and (max-width: 932px) and (orientation: landscape) {
+  .mobile-room { padding-top: 10px; }
+  .mobile-goal-header { padding-bottom: 9px; }
+  .mobile-goal-title { font-size: 1.35rem; }
+  .mobile-chapter { padding: 8px 0; }
+  .mobile-frontier { padding: 13px 15px; }
+}

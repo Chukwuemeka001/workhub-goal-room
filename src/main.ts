@@ -11,6 +11,8 @@ import {
 } from "./ownerUi";
 import { installGoalRoomTools } from "./webmcp";
 import { formatWebMcpInvocation } from "./webmcpUi";
+import { createMobileView } from "./mobileView";
+import { createMobileSurface } from "./mobileUi";
 
 function requiredElement<T extends HTMLElement>(id: string): T {
   const element = document.getElementById(id);
@@ -64,6 +66,27 @@ const elements = {
 };
 
 const room = createGoalRoom({ ownerIntent: null });
+let controller: ReturnType<typeof createOwnerDecisionController>;
+let revisionBinding: { kind: "goal" | "plan"; version: number } | null = null;
+
+function openRevision(kind: "goal" | "plan", version: number) {
+  revisionBinding = { kind, version };
+  const subject = kind === "goal" ? "Goal Contract" : "Plan";
+  elements.revisionDialogTitle.textContent = `Request changes to ${subject} v${version}`;
+  elements.revisionDialogCopy.textContent = `This prose is a ${subject} revision request bound to exact ${subject} v${version}. The prior version remains immutable. This does not confirm the ${subject}, admit a Plan, or authorize work. The agent must propose a new immutable version.`;
+  elements.dialog.showModal();
+  elements.input.focus();
+}
+
+const mobileSurface = createMobileSurface(requiredElement("mobile-room"), {
+  onSetIntent: (intent) => controller.setOwnerIntent(intent),
+  onPrimary: async (kind) => {
+    if (kind === "confirm-goal") await controller.confirmGoalContract();
+    else if (kind === "confirm-plan") await controller.confirmPlan();
+    else if (kind === "accept-goal") await controller.acceptGoal();
+  },
+  onOpenRevision: openRevision,
+});
 
 function renderReceipts(receipts: Receipt[]) {
   const labels = createReceiptLabels(receipts);
@@ -128,6 +151,7 @@ function renderEvidence(view: OwnerViewModel) {
 }
 
 function render(view: OwnerViewModel) {
+  mobileSurface.render(createMobileView(room.getState(), view, room.getReceipts()));
   elements.status.textContent = view.statusLabel;
   elements.ownerIntentPanel.hidden = !view.actions.setIntent.visible;
   elements.ownerIntentForm.hidden = !view.actions.setIntent.visible;
@@ -223,7 +247,7 @@ function render(view: OwnerViewModel) {
   renderReceipts(room.getReceipts());
 }
 
-const controller = createOwnerDecisionController({ room, render });
+controller = createOwnerDecisionController({ room, render });
 controller.render();
 
 elements.ownerIntentInput.addEventListener("input", () =>
@@ -266,28 +290,14 @@ elements.confirm.addEventListener("click", async () => {
 
 elements.revise.addEventListener("click", () => {
   const goalDecision = room.getState().phase === "GOAL_CONTRACT_PROPOSED";
-  elements.revisionDialogTitle.textContent = goalDecision
-    ? "What should change in this Goal?"
-    : "What should change in this Plan?";
-  elements.revisionDialogCopy.textContent = goalDecision
-    ? "Your note is an owner decision on this exact Goal version. The agent must propose a new immutable version."
-    : "Your note is an owner decision on this exact Plan version. The agent must propose a new immutable version.";
-  elements.dialog.showModal();
-  elements.input.focus();
+  const state = room.getState();
+  openRevision(goalDecision ? "goal" : "plan", goalDecision ? (state.activeGoalContract?.version ?? 0) : (state.activePlan?.version ?? 0));
 });
 
 elements.acceptGoal.addEventListener("click", async () => {
   setActionButtonsDisabled(true);
   try {
-    const state = room.getState();
-    await room.dispatch({
-      type: "ACCEPT_GOAL",
-      actor: "owner",
-      expectedStateVersion: state.stateVersion,
-      idempotencyKey: "demo-owner-acceptance",
-      candidateSha256: state.activeCandidate?.sha256 ?? "",
-    });
-    render(createOwnerViewModel(room.getState(), room.getReceipts()));
+    await controller.acceptGoal();
   } finally {
     setActionButtonsDisabled(false);
   }
@@ -306,12 +316,16 @@ elements.form.addEventListener("submit", async (event) => {
     elements.input.reportValidity();
     return;
   }
-  elements.dialog.close();
-  if (room.getState().phase === "GOAL_CONTRACT_PROPOSED") {
+  if (revisionBinding?.kind === "goal") {
     await controller.requestGoalRevision(prepared.note);
-  } else {
+  } else if (revisionBinding?.kind === "plan") {
     await controller.requestRevision(prepared.note);
+  } else {
+    throw new Error("OWNER_DECISION_NOT_AVAILABLE");
   }
+  elements.dialog.close();
+  elements.input.value = "";
+  revisionBinding = null;
 });
 
 elements.reset.addEventListener("click", () => window.location.reload());

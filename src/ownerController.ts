@@ -76,6 +76,20 @@ export function createOwnerDecisionController({
       });
       render();
     },
+    async acceptGoal() {
+      const state = room.getState();
+      if (state.phase !== "COMPLETION_REQUESTED" || !state.activeCandidate) {
+        throw new Error("OWNER_DECISION_NOT_AVAILABLE");
+      }
+      await room.dispatch({
+        type: "ACCEPT_GOAL",
+        actor: "owner",
+        expectedStateVersion: state.stateVersion,
+        idempotencyKey: `owner-accept-${state.activeCandidate.sha256}-s${state.stateVersion}`,
+        candidateSha256: state.activeCandidate.sha256,
+      });
+      render();
+    },
     async confirmPlan() {
       const state = room.getState();
       if (state.phase !== "PLAN_PROPOSED" || !state.activePlan) {

@@ -1,0 +1,692 @@
+{
+  "generatedBy": "npm run qa:mobile",
+  "semantic": {
+    "selectedTab": "proof",
+    "authorityStable": true,
+    "selectedSemantics": true,
+    "panelSemantics": true,
+    "tabCount": 4,
+    "conciseLiveRegions": true
+  },
+  "desktop": {
+    "width": 1440,
+    "height": 900,
+    "desktopVisible": true,
+    "mobileHidden": true,
+    "documentOverflow": 0
+  },
+  "measurements": [
+    {
+      "state": "empty",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": false,
+      "injectedElements": 0
+    },
+    {
+      "state": "captured",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "goal",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 44,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "plan",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 44,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "fail",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "pass",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "completion",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 44,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "terminal",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "max",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 44,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": false,
+      "injectedElements": 0
+    },
+    {
+      "state": "empty",
+      "viewport": {
+        "width": 393,
+        "height": 852
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": false,
+      "injectedElements": 0
+    },
+    {
+      "state": "captured",
+      "viewport": {
+        "width": 393,
+        "height": 852
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "goal",
+      "viewport": {
+        "width": 393,
+        "height": 852
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 44,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "plan",
+      "viewport": {
+        "width": 393,
+        "height": 852
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 44,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "fail",
+      "viewport": {
+        "width": 393,
+        "height": 852
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "pass",
+      "viewport": {
+        "width": 393,
+        "height": 852
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "completion",
+      "viewport": {
+        "width": 393,
+        "height": 852
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 44,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "terminal",
+      "viewport": {
+        "width": 393,
+        "height": 852
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "max",
+      "viewport": {
+        "width": 393,
+        "height": 852
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 44,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": false,
+      "injectedElements": 0
+    },
+    {
+      "state": "empty",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": false,
+      "injectedElements": 0
+    },
+    {
+      "state": "captured",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "goal",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 44,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "plan",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 44,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "fail",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "pass",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "completion",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 44,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "terminal",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "max",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 44,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": false,
+      "injectedElements": 0
+    },
+    {
+      "state": "empty",
+      "viewport": {
+        "width": 852,
+        "height": 393
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": false,
+      "injectedElements": 0
+    },
+    {
+      "state": "captured",
+      "viewport": {
+        "width": 852,
+        "height": 393
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "goal",
+      "viewport": {
+        "width": 852,
+        "height": 393
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 44,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "plan",
+      "viewport": {
+        "width": 852,
+        "height": 393
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 44,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "fail",
+      "viewport": {
+        "width": 852,
+        "height": 393
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "pass",
+      "viewport": {
+        "width": 852,
+        "height": 393
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "completion",
+      "viewport": {
+        "width": 852,
+        "height": 393
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 44,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "terminal",
+      "viewport": {
+        "width": 852,
+        "height": 393
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 56,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": true,
+      "injectedElements": 0
+    },
+    {
+      "state": "max",
+      "viewport": {
+        "width": 852,
+        "height": 393
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 44,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": null,
+      "hostileLiteral": false,
+      "injectedElements": 0
+    },
+    {
+      "state": "goal",
+      "viewport": {
+        "width": 393,
+        "height": 552
+      },
+      "documentOverflow": 0,
+      "bodyOverflow": 0,
+      "rootOverflow": 0,
+      "minControlHeight": 44,
+      "controlsWithinViewport": true,
+      "dockTabCollision": 0,
+      "dockInsideViewport": true,
+      "tabInsideViewport": true,
+      "dialog": {
+        "top": 40.09375,
+        "bottom": 511.90625,
+        "inside": true,
+        "focused": true
+      },
+      "hostileLiteral": true,
+      "injectedElements": 0
+    }
+  ],
+  "failures": []
+}
