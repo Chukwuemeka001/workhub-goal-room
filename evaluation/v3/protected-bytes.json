@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "kind": "goal-room-v3-protected-authority-bytes",
+  "rows": [
+    {
+      "path": "src/core/goalRoom.ts",
+      "expectedSha256": "04d8e89e49ea2b14e8d22ddb404c54e923b01743390a61745bc6d2f21556ff29",
+      "actualSha256": "04d8e89e49ea2b14e8d22ddb404c54e923b01743390a61745bc6d2f21556ff29",
+      "unchanged": true
+    },
+    {
+      "path": "src/ownerController.ts",
+      "expectedSha256": "c20507f4dfa034c5398bd6c77e4fc85b23c32587b7088b383cfdd59bf9f93adb",
+      "actualSha256": "c20507f4dfa034c5398bd6c77e4fc85b23c32587b7088b383cfdd59bf9f93adb",
+      "unchanged": true
+    },
+    {
+      "path": "src/verifier/releaseRules.ts",
+      "expectedSha256": "ed94538ab54029f9b1159ad597629336fcea771ff77f1f709dc4085bac5512aa",
+      "actualSha256": "ed94538ab54029f9b1159ad597629336fcea771ff77f1f709dc4085bac5512aa",
+      "unchanged": true
+    },
+    {
+      "path": "src/webmcp.ts",
+      "expectedSha256": "021cf979a63bfe39706e9a8247fcac7f75afbc65b59aa9f0d936334bb29574e2",
+      "actualSha256": "021cf979a63bfe39706e9a8247fcac7f75afbc65b59aa9f0d936334bb29574e2",
+      "unchanged": true
+    },
+    {
+      "path": "src/webmcp-globals.d.ts",
+      "expectedSha256": "b44e37fd6c39bed156486f84a56426e4091cb26ef1fd50bff70c5bdd048ac5cc",
+      "actualSha256": "b44e37fd6c39bed156486f84a56426e4091cb26ef1fd50bff70c5bdd048ac5cc",
+      "unchanged": true
+    }
+  ],
+  "passed": true
+}

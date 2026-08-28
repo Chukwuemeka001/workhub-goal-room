@@ -52,7 +52,7 @@ describe("production desktop Mission Room", () => {
     expect(css).toContain(".mobile-room { display: none;");
     expect(desktopCss).toMatch(/desktop-action[\s\S]*min-height:\s*44px/);
     expect(css).toContain("overflow-wrap: anywhere");
-    expect(desktopCss).toContain("prefers-reduced-motion:reduce");
+    expect(desktopCss).toMatch(/prefers-reduced-motion:\s*reduce/);
   });
 
   it("keeps the deterministic desktop fixture outside production inputs", () => {

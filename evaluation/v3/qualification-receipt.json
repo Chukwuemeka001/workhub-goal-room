@@ -1,0 +1,585 @@
+{
+  "schemaVersion": 1,
+  "kind": "goal-room-v3-deterministic-qualification-receipt",
+  "boundary": "Local production-excluded qualification evidence. No deployment, publishing, payment, messaging, authentication, or manual screen-reader claim.",
+  "witnessedRed": {
+    "command": "npx vitest run qualification/v3Contract.test.ts",
+    "result": "FAIL",
+    "testFiles": {
+      "failed": 1,
+      "passed": 0
+    },
+    "tests": {
+      "failed": 2,
+      "passed": 2
+    },
+    "failures": [
+      "switches to the distinct mobile composition below 1200px",
+      "styles the desktop custody lane, editorial workspace, and collapsed static-six disclosure"
+    ],
+    "witnessedBeforeImplementation": true
+  },
+  "qualification": {
+    "replaySource": "real-kernel-replay",
+    "storyCount": 14,
+    "stories": [
+      {
+        "id": "S01",
+        "label": "Owner intent recorded",
+        "kernelPhase": "INTENT_DRAFT",
+        "presentation": "canonical",
+        "stateVersion": 1,
+        "stateDigest": "a6eececf04a6e890e5fb1a8ea50455e8f947422944df25cd77975c76ff4e8f64",
+        "receiptCount": 1,
+        "receiptHash": "ea2ec727515ed52f4a1e6e8185d12f9db6aff31608dfcdce9baa48276ff59326",
+        "passBoundary": {
+          "verdict": null,
+          "completionRequested": false,
+          "accepted": false,
+          "failedHistoryRetained": false
+        }
+      },
+      {
+        "id": "S02",
+        "label": "Goal Contract proposed",
+        "kernelPhase": "GOAL_CONTRACT_PROPOSED",
+        "presentation": "canonical",
+        "stateVersion": 2,
+        "stateDigest": "35f6a7df88928578058abee178e07bc7d570866ec51da95fd74d53c9fa6a0cec",
+        "receiptCount": 2,
+        "receiptHash": "90a67e34cc5c4dcb5d3e469f295d5d24cee46c9a4f2ba9c0b12fc0f4c33839f2",
+        "passBoundary": {
+          "verdict": null,
+          "completionRequested": false,
+          "accepted": false,
+          "failedHistoryRetained": false
+        }
+      },
+      {
+        "id": "S03",
+        "label": "Goal revision requested",
+        "kernelPhase": "GOAL_CONTRACT_REVISION_REQUESTED",
+        "presentation": "canonical",
+        "stateVersion": 3,
+        "stateDigest": "7022bf75ed912aecb234c1080e750b01744da3878c95e173cf361dab4861012f",
+        "receiptCount": 3,
+        "receiptHash": "bc93adf056df1c0323d7532b99981821d27d9eb49ec61181d37b1e64ffdeebcf",
+        "passBoundary": {
+          "verdict": null,
+          "completionRequested": false,
+          "accepted": false,
+          "failedHistoryRetained": false
+        }
+      },
+      {
+        "id": "S04",
+        "label": "Goal Contract confirmed",
+        "kernelPhase": "GOAL_CONTRACT_CONFIRMED",
+        "presentation": "canonical",
+        "stateVersion": 5,
+        "stateDigest": "5b387b3bad4c4301c1faca42bde4dd6e099bf1623f4afdd897b366822d9e5d3e",
+        "receiptCount": 5,
+        "receiptHash": "a48681f8ac55668be98d3c404090c48946c1b9b4f00c4213e743508d89b6dbf3",
+        "passBoundary": {
+          "verdict": null,
+          "completionRequested": false,
+          "accepted": false,
+          "failedHistoryRetained": false
+        }
+      },
+      {
+        "id": "S05",
+        "label": "Plan proposed",
+        "kernelPhase": "PLAN_PROPOSED",
+        "presentation": "canonical",
+        "stateVersion": 6,
+        "stateDigest": "97ac35a4c8de260e7cb68f2991bfbab64a20f0ad2eeda0b26ed4f7ccc5075f75",
+        "receiptCount": 6,
+        "receiptHash": "4101f21623b7f412643a94d3b06779bd64a0cb4160e2c32f249f2ab9993944a6",
+        "passBoundary": {
+          "verdict": null,
+          "completionRequested": false,
+          "accepted": false,
+          "failedHistoryRetained": false
+        }
+      },
+      {
+        "id": "S06",
+        "label": "Plan revision requested",
+        "kernelPhase": "PLAN_REVISION_REQUESTED",
+        "presentation": "canonical",
+        "stateVersion": 7,
+        "stateDigest": "7fc09fd5f8d9e6460b72d96212dbae3c83ef8784a951fc40c65fd3ac4255050e",
+        "receiptCount": 7,
+        "receiptHash": "b88d14e997b0f75a97bdbd729d1cc6abc018d14a9d90c3b54c505c7ef094cf19",
+        "passBoundary": {
+          "verdict": null,
+          "completionRequested": false,
+          "accepted": false,
+          "failedHistoryRetained": false
+        }
+      },
+      {
+        "id": "S07",
+        "label": "Plan confirmed",
+        "kernelPhase": "PLAN_CONFIRMED",
+        "presentation": "canonical",
+        "stateVersion": 9,
+        "stateDigest": "4faa5b576a16a6e1184188621a26d2ad003e6ce47e31dc57c12beac2caf3cfa0",
+        "receiptCount": 9,
+        "receiptHash": "aa650132daede3f899eb0bcc2cabaf66e4316e02e81591273576bad0b0e1f127",
+        "passBoundary": {
+          "verdict": null,
+          "completionRequested": false,
+          "accepted": false,
+          "failedHistoryRetained": false
+        }
+      },
+      {
+        "id": "S08",
+        "label": "Step claimed",
+        "kernelPhase": "STEP_CLAIMED",
+        "presentation": "canonical",
+        "stateVersion": 10,
+        "stateDigest": "a33186b3464f02a9d8f7e1ee58eeef1041574890cfa3ec6665565df4678e1468",
+        "receiptCount": 10,
+        "receiptHash": "17368784771c389ae5e4ff0931b4da77babef7f404caa02c2a539814d8f9ac1a",
+        "passBoundary": {
+          "verdict": null,
+          "completionRequested": false,
+          "accepted": false,
+          "failedHistoryRetained": false
+        }
+      },
+      {
+        "id": "S09",
+        "label": "Verification in progress",
+        "kernelPhase": "CANDIDATE_SUBMITTED",
+        "presentation": "synthetic-test-only-transient",
+        "stateVersion": 11,
+        "stateDigest": "9257bf5f0160b9a3e71e0e5e54d9d33adb14fcd3f99377c81616f3eb43ed9932",
+        "receiptCount": 11,
+        "receiptHash": "c38ce4222a1a46b4ff4715006bdd586c9a504d9e7c4989a165a286109fb7f056",
+        "passBoundary": {
+          "verdict": null,
+          "completionRequested": false,
+          "accepted": false,
+          "failedHistoryRetained": false
+        }
+      },
+      {
+        "id": "S10",
+        "label": "Verification failed",
+        "kernelPhase": "VERIFICATION_FAILED",
+        "presentation": "canonical",
+        "stateVersion": 12,
+        "stateDigest": "f31c49dde393ecf3f0b7efabf8e71de0d2428eb5731155ce6619eee2de2a072d",
+        "receiptCount": 12,
+        "receiptHash": "02d2459b20a0ad15093baa2cd0f7ae7c5e9538a1977dd9e4414f27febc2fbb87",
+        "passBoundary": {
+          "verdict": "FAIL",
+          "completionRequested": false,
+          "accepted": false,
+          "failedHistoryRetained": true
+        }
+      },
+      {
+        "id": "S11",
+        "label": "Corrected candidate submitted",
+        "kernelPhase": "CANDIDATE_SUBMITTED",
+        "presentation": "canonical",
+        "stateVersion": 13,
+        "stateDigest": "fb1ef2cecd340feb6146bff22004b15d1bb908369e11e7754425a1129931995a",
+        "receiptCount": 13,
+        "receiptHash": "86d3fd631faeadbb860eca03360441995c330787d5972803134f75de0f583af2",
+        "passBoundary": {
+          "verdict": null,
+          "completionRequested": false,
+          "accepted": false,
+          "failedHistoryRetained": true
+        }
+      },
+      {
+        "id": "S12",
+        "label": "Verification passed, not accepted",
+        "kernelPhase": "VERIFICATION_PASSED",
+        "presentation": "canonical",
+        "stateVersion": 14,
+        "stateDigest": "0cdb56a0bad78f0bcd9b34bc9e244588575cdf0ff5fe05667a11e574ffca9685",
+        "receiptCount": 14,
+        "receiptHash": "2796307d327914131905f8edff433284654eace009b64ba8e916fe051989723b",
+        "passBoundary": {
+          "verdict": "PASS",
+          "completionRequested": false,
+          "accepted": false,
+          "failedHistoryRetained": true
+        }
+      },
+      {
+        "id": "S13",
+        "label": "Completion requested",
+        "kernelPhase": "COMPLETION_REQUESTED",
+        "presentation": "canonical",
+        "stateVersion": 15,
+        "stateDigest": "013f422363277754de9c3cdef5f66b3632415cd63d9822348c386ebbf2fe9c87",
+        "receiptCount": 15,
+        "receiptHash": "eea084cb5f52fcc48c4fa9cbf7b52cb58afe82724f0d9a5271c53d0947f3aec3",
+        "passBoundary": {
+          "verdict": "PASS",
+          "completionRequested": true,
+          "accepted": false,
+          "failedHistoryRetained": true
+        }
+      },
+      {
+        "id": "S14",
+        "label": "Goal accepted",
+        "kernelPhase": "GOAL_ACCEPTED",
+        "presentation": "canonical",
+        "stateVersion": 16,
+        "stateDigest": "142f017ef07f2829a61206418ae4d3cc3dc266b42e704d3b03fe6f17ce2b5132",
+        "receiptCount": 16,
+        "receiptHash": "d256da0eec598df6c0c241bf99461174a3c8ea6967cfb8ef3b6f6bc0e08c6199",
+        "passBoundary": {
+          "verdict": "PASS",
+          "completionRequested": true,
+          "accepted": true,
+          "failedHistoryRetained": true
+        }
+      }
+    ],
+    "syntheticStories": [
+      "S09"
+    ],
+    "finalReceiptHash": "d256da0eec598df6c0c241bf99461174a3c8ea6967cfb8ef3b6f6bc0e08c6199",
+    "passIsNotAcceptance": true
+  },
+  "checks": {
+    "visual": {
+      "rowCount": 16,
+      "failureCount": 0,
+      "maximumHorizontalOverflow": 0,
+      "minimumControlHeight": 44,
+      "syntheticStories": [
+        "S09"
+      ],
+      "finalReceiptHashes": [
+        "ea2ec727515ed52f4a1e6e8185d12f9db6aff31608dfcdce9baa48276ff59326",
+        "bc93adf056df1c0323d7532b99981821d27d9eb49ec61181d37b1e64ffdeebcf",
+        "b88d14e997b0f75a97bdbd729d1cc6abc018d14a9d90c3b54c505c7ef094cf19",
+        "c38ce4222a1a46b4ff4715006bdd586c9a504d9e7c4989a165a286109fb7f056",
+        "02d2459b20a0ad15093baa2cd0f7ae7c5e9538a1977dd9e4414f27febc2fbb87",
+        "2796307d327914131905f8edff433284654eace009b64ba8e916fe051989723b",
+        "eea084cb5f52fcc48c4fa9cbf7b52cb58afe82724f0d9a5271c53d0947f3aec3",
+        "d256da0eec598df6c0c241bf99461174a3c8ea6967cfb8ef3b6f6bc0e08c6199"
+      ]
+    },
+    "responsive": {
+      "rowCount": 112,
+      "failureCount": 0,
+      "maximumHorizontalOverflow": 0,
+      "minimumControlHeight": 44,
+      "syntheticStories": [
+        "S09"
+      ],
+      "finalReceiptHashes": [
+        "ea2ec727515ed52f4a1e6e8185d12f9db6aff31608dfcdce9baa48276ff59326",
+        "90a67e34cc5c4dcb5d3e469f295d5d24cee46c9a4f2ba9c0b12fc0f4c33839f2",
+        "bc93adf056df1c0323d7532b99981821d27d9eb49ec61181d37b1e64ffdeebcf",
+        "a48681f8ac55668be98d3c404090c48946c1b9b4f00c4213e743508d89b6dbf3",
+        "4101f21623b7f412643a94d3b06779bd64a0cb4160e2c32f249f2ab9993944a6",
+        "b88d14e997b0f75a97bdbd729d1cc6abc018d14a9d90c3b54c505c7ef094cf19",
+        "aa650132daede3f899eb0bcc2cabaf66e4316e02e81591273576bad0b0e1f127",
+        "17368784771c389ae5e4ff0931b4da77babef7f404caa02c2a539814d8f9ac1a",
+        "c38ce4222a1a46b4ff4715006bdd586c9a504d9e7c4989a165a286109fb7f056",
+        "02d2459b20a0ad15093baa2cd0f7ae7c5e9538a1977dd9e4414f27febc2fbb87",
+        "86d3fd631faeadbb860eca03360441995c330787d5972803134f75de0f583af2",
+        "2796307d327914131905f8edff433284654eace009b64ba8e916fe051989723b",
+        "eea084cb5f52fcc48c4fa9cbf7b52cb58afe82724f0d9a5271c53d0947f3aec3",
+        "d256da0eec598df6c0c241bf99461174a3c8ea6967cfb8ef3b6f6bc0e08c6199"
+      ]
+    },
+    "accessibility": {
+      "rowCount": 24,
+      "failureCount": 0,
+      "maximumHorizontalOverflow": 0,
+      "minimumControlHeight": 44,
+      "syntheticStories": [
+        "S09"
+      ],
+      "finalReceiptHashes": [
+        "ea2ec727515ed52f4a1e6e8185d12f9db6aff31608dfcdce9baa48276ff59326",
+        "90a67e34cc5c4dcb5d3e469f295d5d24cee46c9a4f2ba9c0b12fc0f4c33839f2",
+        "4101f21623b7f412643a94d3b06779bd64a0cb4160e2c32f249f2ab9993944a6",
+        "c38ce4222a1a46b4ff4715006bdd586c9a504d9e7c4989a165a286109fb7f056",
+        "02d2459b20a0ad15093baa2cd0f7ae7c5e9538a1977dd9e4414f27febc2fbb87",
+        "2796307d327914131905f8edff433284654eace009b64ba8e916fe051989723b",
+        "eea084cb5f52fcc48c4fa9cbf7b52cb58afe82724f0d9a5271c53d0947f3aec3",
+        "d256da0eec598df6c0c241bf99461174a3c8ea6967cfb8ef3b6f6bc0e08c6199"
+      ]
+    },
+    "hostile": {
+      "rowCount": 27,
+      "failureCount": 0,
+      "maximumHorizontalOverflow": 0,
+      "minimumControlHeight": 44,
+      "syntheticStories": [
+        "S09"
+      ],
+      "finalReceiptHashes": [
+        "7a05ff58859695cf07c0bbb6164606565eae8c71e103db84d04b4db67fa7e830",
+        "253b044ab73028712d703ec10b1f5b72071258fe06384a583c748dbaeabbfacc",
+        "ff26c88890fdc75c33f0fadc63972b83bd171890f5688b771005195c4e99f6ae",
+        "76810b96683623ae11444194cac0c1fdcc7c3bbcc773887d9877afcaa4874906",
+        "dd8c2fb507e646f84683cb7f53c535b08d2d3084c3f7bb0149f9db361f2d582d",
+        "b2455a915dc174b153ae05972d4f1853eca7035c78470651b48abccf8f2a491a",
+        "19555528a1859428e188ff3bc1e3b2d339421c2b79c6e5a1495d1f612c594359",
+        "03d9da228b9d243b7173cf89e6652e0b8ca4851f2e2ceb9bbe3042ece1f961e9",
+        "0b491a8ab7997b0f693112ea09c0f666d8af3fd981c6bbc9810e2042560eb695"
+      ]
+    },
+    "fixtureExclusion": {
+      "passed": true,
+      "entryReferences": [],
+      "leaks": []
+    },
+    "protectedBytes": {
+      "passed": true,
+      "rows": [
+        {
+          "path": "src/core/goalRoom.ts",
+          "expectedSha256": "04d8e89e49ea2b14e8d22ddb404c54e923b01743390a61745bc6d2f21556ff29",
+          "actualSha256": "04d8e89e49ea2b14e8d22ddb404c54e923b01743390a61745bc6d2f21556ff29",
+          "unchanged": true
+        },
+        {
+          "path": "src/ownerController.ts",
+          "expectedSha256": "c20507f4dfa034c5398bd6c77e4fc85b23c32587b7088b383cfdd59bf9f93adb",
+          "actualSha256": "c20507f4dfa034c5398bd6c77e4fc85b23c32587b7088b383cfdd59bf9f93adb",
+          "unchanged": true
+        },
+        {
+          "path": "src/verifier/releaseRules.ts",
+          "expectedSha256": "ed94538ab54029f9b1159ad597629336fcea771ff77f1f709dc4085bac5512aa",
+          "actualSha256": "ed94538ab54029f9b1159ad597629336fcea771ff77f1f709dc4085bac5512aa",
+          "unchanged": true
+        },
+        {
+          "path": "src/webmcp.ts",
+          "expectedSha256": "021cf979a63bfe39706e9a8247fcac7f75afbc65b59aa9f0d936334bb29574e2",
+          "actualSha256": "021cf979a63bfe39706e9a8247fcac7f75afbc65b59aa9f0d936334bb29574e2",
+          "unchanged": true
+        },
+        {
+          "path": "src/webmcp-globals.d.ts",
+          "expectedSha256": "b44e37fd6c39bed156486f84a56426e4091cb26ef1fd50bff70c5bdd048ac5cc",
+          "actualSha256": "b44e37fd6c39bed156486f84a56426e4091cb26ef1fd50bff70c5bdd048ac5cc",
+          "unchanged": true
+        }
+      ]
+    }
+  },
+  "sourceHashes": [
+    {
+      "path": "index.html",
+      "sha256": "af61f3cb96672a9cad8413609d995d1caac147d1312afb773ff354b4a855c067",
+      "bytes": 2519
+    },
+    {
+      "path": "design/GOAL_ROOM_V3_VISUAL_CONTRACT.md",
+      "sha256": "3c04b7c8c5b5ef2e9b6fd4ed26ce581aaf8bb903259a667d53a5c94336c066ef",
+      "bytes": 5898
+    },
+    {
+      "path": "design/TRANSLATION_LEDGER.md",
+      "sha256": "a078c1c1155cc656ff157ecbf4a4b5f18982060e827401941cf763856838315a",
+      "bytes": 4917
+    },
+    {
+      "path": "qualification/v3-replay.ts",
+      "sha256": "248b21e857fb112fd22adc51c8bd6b1a43c9a1e0aac4703c9c5e28db1d290736",
+      "bytes": 9588
+    },
+    {
+      "path": "qualification/v3-fixture.ts",
+      "sha256": "2f1ec6f5a45567d363bd522a51abf98830b7dd991bbca686aa95f6e2d621e0de",
+      "bytes": 8491
+    },
+    {
+      "path": "qualification/v3-fixture.html",
+      "sha256": "4dee59e00e72ee2c1d409b48a7b8955a4cc818d720548b3a33ccf32daa31c6c2",
+      "bytes": 864
+    },
+    {
+      "path": "qualification/v3Contract.test.ts",
+      "sha256": "909acfa536826a48caa141923abc007040cfcde91188577b327b2132a634253f",
+      "bytes": 2137
+    },
+    {
+      "path": "qualification/v3Replay.test.ts",
+      "sha256": "d84f28ddd4210912d8f7cf7e527cbcdc642863f7f6f275dff823d83a7c2c3e74",
+      "bytes": 3837
+    },
+    {
+      "path": "qualification/v3Infrastructure.test.ts",
+      "sha256": "46de205192b55117274d37eb657188e2c31e351f62f1f3a611e590cb4d673b29",
+      "bytes": 2771
+    },
+    {
+      "path": "src/custodyView.ts",
+      "sha256": "05942752a081c13a2472f87145d233ad1657447c3e1f6dde7517917bcd57498d",
+      "bytes": 3833
+    },
+    {
+      "path": "src/toolSurfaceView.ts",
+      "sha256": "e3fe29deeb5f8e29cad93a73ab8997c14b5f7e55da1b75f2ef5920544a1d7cb5",
+      "bytes": 1661
+    },
+    {
+      "path": "src/acceptanceDialog.ts",
+      "sha256": "e1a55405df9cbc349cba4f5819694913c875d28236cb1485b9e49f72acee0279",
+      "bytes": 2214
+    },
+    {
+      "path": "src/main.ts",
+      "sha256": "f4adf752c92350d584dab6ddb338bacebbca7ca022150092234a54a4869738c9",
+      "bytes": 5570
+    },
+    {
+      "path": "src/desktopUi.ts",
+      "sha256": "c54e09b82b2f4e58d9cd107d5f058d8eb024313e96e24b39426067a12d50493c",
+      "bytes": 15528
+    },
+    {
+      "path": "src/desktopView.ts",
+      "sha256": "45906682bb7215a29bd44e84973068b18d91a5e5a009fc2f2201093ff8d00775",
+      "bytes": 10516
+    },
+    {
+      "path": "src/mobileUi.ts",
+      "sha256": "93ff4d3034770732bbef84d343038bb6a78bc45dd157f5ab900c4a9f382609c7",
+      "bytes": 12038
+    },
+    {
+      "path": "src/mobileView.ts",
+      "sha256": "651c582bcd2526b66b5204b9ae6a94036e2fdc4be220e77a8c0e8f1d177f1b52",
+      "bytes": 7854
+    },
+    {
+      "path": "src/ownerUi.ts",
+      "sha256": "d83cb0f015bc9e13fce6ffe2a9b86ac09d9214b16e8faaa44ee98f66579290c7",
+      "bytes": 4606
+    },
+    {
+      "path": "src/ownerView.ts",
+      "sha256": "3af435ae61bb2306ff5a63dc5dafe5efbf6fbf8f7eb16ae74d30c5fc63b5513e",
+      "bytes": 13088
+    },
+    {
+      "path": "src/phase0View.ts",
+      "sha256": "1de94bd2a582b57a524602d79ae7ba2303d99018f91a472a98f01325d6bf9ec1",
+      "bytes": 883
+    },
+    {
+      "path": "src/desktop.css",
+      "sha256": "7f3d189e03a9d31639ce681e68ef1c44ba80339bd9e70592965c0348a0932e6a",
+      "bytes": 13823
+    },
+    {
+      "path": "src/style.css",
+      "sha256": "5f08e120db1739cb164ba0823f7bd897fd4ee4d777e72f99942b42b72978c212",
+      "bytes": 12170
+    },
+    {
+      "path": "scripts/composition-production-qa.mjs",
+      "sha256": "867b673fcd80b0a5794e44e9a5dc5685579d19f0073a23cc830d6576f095b6d1",
+      "bytes": 10853
+    },
+    {
+      "path": "scripts/v3-browser-qa.mjs",
+      "sha256": "30f7e4c75d84dcefe9c57331e92a3c387e40f217ab0624f47f522e8c93edb02a",
+      "bytes": 15266
+    },
+    {
+      "path": "scripts/v3-fixture-exclusion.mjs",
+      "sha256": "35282aeaf9e8f4b41e9c7c6d7a7b765f8b4e1ac9e2e208c4d15d10e3260e1a0f",
+      "bytes": 2648
+    },
+    {
+      "path": "scripts/v3-protected-bytes.mjs",
+      "sha256": "33665d10b1dc4ffbc0f5971ccf92aa55f1bf22682582f60e5bbf79e3085e9d20",
+      "bytes": 1539
+    },
+    {
+      "path": "scripts/v3-receipt.mjs",
+      "sha256": "6c7e726e17080b2d6ce4547926584628af913f2b4c7bd7e12898cd2a8a9b4046",
+      "bytes": 4728
+    },
+    {
+      "path": "package.json",
+      "sha256": "117f44d7c3d9693c079aec325e143e0a3cc1c2954d589abcea050fa2480ccb8c",
+      "bytes": 1937
+    },
+    {
+      "path": "README.md",
+      "sha256": "0d611a170a3899d17598c030322045d3229278214c3ca86ae40c5e2b86f53ecc",
+      "bytes": 12010
+    }
+  ],
+  "screenshotHashes": [
+    {
+      "path": "evaluation/v3/v3-s01-1440x900.png",
+      "story": "S01",
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "expected": "desktop",
+      "sha256": "6d91c6ea30c21a0a4646b99d1b24785404554b758b9c149320b56fc65958150a"
+    },
+    {
+      "path": "evaluation/v3/v3-s09-1440x900.png",
+      "story": "S09",
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "expected": "desktop",
+      "sha256": "7002f19ba9bb00bdb44e79a0f18b39041506c5a58f6a71b15b354aadbeb0032c"
+    },
+    {
+      "path": "evaluation/v3/v3-s10-1440x900.png",
+      "story": "S10",
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "expected": "desktop",
+      "sha256": "64709b79afa4af41433c5a8ee13808b7ea2a6a82ed0d6c7d67a651bcf74fdfe4"
+    },
+    {
+      "path": "evaluation/v3/v3-s12-393x852.png",
+      "story": "S12",
+      "name": "phone",
+      "width": 393,
+      "height": 852,
+      "expected": "mobile",
+      "sha256": "0e99cc17c21323c14fbf89d7b695a7c2484a0cca4d55d7cf0de6264ad4372de4"
+    },
+    {
+      "path": "evaluation/v3/v3-s14-1440x900.png",
+      "story": "S14",
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "expected": "desktop",
+      "sha256": "f30415657f11e28cd8ffb5906c2f6eac9fc41f381e7c8618156b1e4acf92dd7b"
+    },
+    {
+      "path": "evaluation/v3/v3-s14-393x852.png",
+      "story": "S14",
+      "name": "phone",
+      "width": 393,
+      "height": 852,
+      "expected": "mobile",
+      "sha256": "1e584369b3ce4b82284a1068a5aa6a474195b9cfb3ea37d3ddb72c31960d01eb"
+    }
+  ]
+}

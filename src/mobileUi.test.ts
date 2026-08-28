@@ -15,9 +15,9 @@ describe("dedicated production iPhone composition", () => {
     expect(html).toContain('class="desktop-surface"');
     expect(html).toContain('</main>\n    </div>\n\n    <dialog id="revision-dialog"');
     expect(main).toContain("createMobileSurface");
-    expect(css).toContain("@media (max-width: 620px), (max-height: 620px) and (max-width: 932px)");
+    expect(css).toContain("@media (max-width: 1199px)");
     expect(css).toContain(".desktop-surface { display: none;")
-    expect(css).toContain("@media (min-width: 621px)");
+    expect(css).toContain("@media (min-width: 1200px)");
     expect(css).toContain(".mobile-room { display: none;")
   });
 

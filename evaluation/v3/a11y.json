@@ -1,0 +1,4806 @@
+{
+  "schemaVersion": 1,
+  "kind": "goal-room-v3-a11y-qualification",
+  "boundary": "Production-excluded qualification fixture using production projections over a real-kernel replay. S09 presentation metadata is synthetic/test-only; its kernel state is not mutated.",
+  "mode": "a11y",
+  "stories": [
+    "S01",
+    "S02",
+    "S05",
+    "S09",
+    "S10",
+    "S12",
+    "S13",
+    "S14"
+  ],
+  "viewports": [
+    {
+      "name": "phone",
+      "width": 393,
+      "height": 852,
+      "expected": "mobile"
+    },
+    {
+      "name": "desktop-boundary",
+      "width": 1200,
+      "height": 900,
+      "expected": "desktop"
+    },
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "expected": "desktop"
+    }
+  ],
+  "summary": {
+    "rowCount": 24,
+    "failureCount": 0,
+    "maximumHorizontalOverflow": 0,
+    "minimumControlHeight": 44,
+    "syntheticStories": [
+      "S09"
+    ],
+    "finalReceiptHashes": [
+      "ea2ec727515ed52f4a1e6e8185d12f9db6aff31608dfcdce9baa48276ff59326",
+      "90a67e34cc5c4dcb5d3e469f295d5d24cee46c9a4f2ba9c0b12fc0f4c33839f2",
+      "4101f21623b7f412643a94d3b06779bd64a0cb4160e2c32f249f2ab9993944a6",
+      "c38ce4222a1a46b4ff4715006bdd586c9a504d9e7c4989a165a286109fb7f056",
+      "02d2459b20a0ad15093baa2cd0f7ae7c5e9538a1977dd9e4414f27febc2fbb87",
+      "2796307d327914131905f8edff433284654eace009b64ba8e916fe051989723b",
+      "eea084cb5f52fcc48c4fa9cbf7b52cb58afe82724f0d9a5271c53d0947f3aec3",
+      "d256da0eec598df6c0c241bf99461174a3c8ea6967cfb8ef3b6f6bc0e08c6199"
+    ]
+  },
+  "rows": [
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S01",
+        "label": "Owner intent recorded",
+        "kernelPhase": "INTENT_DRAFT",
+        "presentation": "canonical",
+        "stateVersion": 1,
+        "stateDigest": "a6eececf04a6e890e5fb1a8ea50455e8f947422944df25cd77975c76ff4e8f64",
+        "receiptCount": 1,
+        "receiptHash": "ea2ec727515ed52f4a1e6e8185d12f9db6aff31608dfcdce9baa48276ff59326"
+      },
+      "viewport": {
+        "name": "phone",
+        "width": 393,
+        "height": 852,
+        "expected": "mobile",
+        "actual": {
+          "width": 393,
+          "height": 852,
+          "visualWidth": 393,
+          "visualHeight": 852,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "mobile-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "block",
+        "desktopDisplay": "none"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "mobile-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "mobile-tab-goal"
+      },
+      "controls": {
+        "count": 6,
+        "minimumHeight": 56,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "mobile-owner-intent",
+            "x": 12,
+            "y": 720,
+            "top": 720,
+            "right": 222.046875,
+            "bottom": 778,
+            "left": 12,
+            "width": 210.046875,
+            "height": 58
+          },
+          {
+            "id": null,
+            "x": 231.046875,
+            "y": 720,
+            "top": 720,
+            "right": 381,
+            "bottom": 778,
+            "left": 231.046875,
+            "width": 149.953125,
+            "height": 58
+          },
+          {
+            "id": "mobile-tab-goal",
+            "x": 8,
+            "y": 796,
+            "top": 796,
+            "right": 102.25,
+            "bottom": 852,
+            "left": 8,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-plan",
+            "x": 102.25,
+            "y": 796,
+            "top": 796,
+            "right": 196.5,
+            "bottom": 852,
+            "left": 102.25,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-proof",
+            "x": 196.5,
+            "y": 796,
+            "top": 796,
+            "right": 290.75,
+            "bottom": 852,
+            "left": 196.5,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-activity",
+            "x": 290.75,
+            "y": 796,
+            "top": 796,
+            "right": 385,
+            "bottom": 852,
+            "left": 290.75,
+            "width": 94.25,
+            "height": 56
+          }
+        ]
+      },
+      "safeDock": {
+        "dock": {
+          "id": null,
+          "x": 0,
+          "y": 690,
+          "top": 690,
+          "right": 393,
+          "bottom": 788,
+          "left": 0,
+          "width": 393,
+          "height": 98
+        },
+        "tabs": {
+          "id": null,
+          "x": 0,
+          "y": 788,
+          "top": 788,
+          "right": 393,
+          "bottom": 852,
+          "left": 0,
+          "width": 393,
+          "height": 64
+        },
+        "overlap": 0,
+        "dockInside": true,
+        "tabsInside": true
+      },
+      "staticTools": null,
+      "focus": {
+        "activeId": "mobile-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(228, 170, 85) 0px 2px 0px 0px inset, rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S02",
+        "label": "Goal Contract proposed",
+        "kernelPhase": "GOAL_CONTRACT_PROPOSED",
+        "presentation": "canonical",
+        "stateVersion": 2,
+        "stateDigest": "35f6a7df88928578058abee178e07bc7d570866ec51da95fd74d53c9fa6a0cec",
+        "receiptCount": 2,
+        "receiptHash": "90a67e34cc5c4dcb5d3e469f295d5d24cee46c9a4f2ba9c0b12fc0f4c33839f2"
+      },
+      "viewport": {
+        "name": "phone",
+        "width": 393,
+        "height": 852,
+        "expected": "mobile",
+        "actual": {
+          "width": 393,
+          "height": 852,
+          "visualWidth": 393,
+          "visualHeight": 852,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "mobile-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "block",
+        "desktopDisplay": "none"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "mobile-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "mobile-tab-goal"
+      },
+      "controls": {
+        "count": 6,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": null,
+            "x": 12,
+            "y": 734,
+            "top": 734,
+            "right": 192,
+            "bottom": 778,
+            "left": 12,
+            "width": 180,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 201,
+            "y": 734,
+            "top": 734,
+            "right": 381,
+            "bottom": 778,
+            "left": 201,
+            "width": 180,
+            "height": 44
+          },
+          {
+            "id": "mobile-tab-goal",
+            "x": 8,
+            "y": 796,
+            "top": 796,
+            "right": 102.25,
+            "bottom": 852,
+            "left": 8,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-plan",
+            "x": 102.25,
+            "y": 796,
+            "top": 796,
+            "right": 196.5,
+            "bottom": 852,
+            "left": 102.25,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-proof",
+            "x": 196.5,
+            "y": 796,
+            "top": 796,
+            "right": 290.75,
+            "bottom": 852,
+            "left": 196.5,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-activity",
+            "x": 290.75,
+            "y": 796,
+            "top": 796,
+            "right": 385,
+            "bottom": 852,
+            "left": 290.75,
+            "width": 94.25,
+            "height": 56
+          }
+        ]
+      },
+      "safeDock": {
+        "dock": {
+          "id": null,
+          "x": 0,
+          "y": 723,
+          "top": 723,
+          "right": 393,
+          "bottom": 788,
+          "left": 0,
+          "width": 393,
+          "height": 65
+        },
+        "tabs": {
+          "id": null,
+          "x": 0,
+          "y": 788,
+          "top": 788,
+          "right": 393,
+          "bottom": 852,
+          "left": 0,
+          "width": 393,
+          "height": 64
+        },
+        "overlap": 0,
+        "dockInside": true,
+        "tabsInside": true
+      },
+      "staticTools": null,
+      "focus": {
+        "activeId": "mobile-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(228, 170, 85) 0px 2px 0px 0px inset, rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S05",
+        "label": "Plan proposed",
+        "kernelPhase": "PLAN_PROPOSED",
+        "presentation": "canonical",
+        "stateVersion": 6,
+        "stateDigest": "97ac35a4c8de260e7cb68f2991bfbab64a20f0ad2eeda0b26ed4f7ccc5075f75",
+        "receiptCount": 6,
+        "receiptHash": "4101f21623b7f412643a94d3b06779bd64a0cb4160e2c32f249f2ab9993944a6"
+      },
+      "viewport": {
+        "name": "phone",
+        "width": 393,
+        "height": 852,
+        "expected": "mobile",
+        "actual": {
+          "width": 393,
+          "height": 852,
+          "visualWidth": 393,
+          "visualHeight": 852,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "mobile-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "block",
+        "desktopDisplay": "none"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "mobile-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "mobile-tab-goal"
+      },
+      "controls": {
+        "count": 6,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": null,
+            "x": 12,
+            "y": 734,
+            "top": 734,
+            "right": 192,
+            "bottom": 778,
+            "left": 12,
+            "width": 180,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 201,
+            "y": 734,
+            "top": 734,
+            "right": 381,
+            "bottom": 778,
+            "left": 201,
+            "width": 180,
+            "height": 44
+          },
+          {
+            "id": "mobile-tab-goal",
+            "x": 8,
+            "y": 796,
+            "top": 796,
+            "right": 102.25,
+            "bottom": 852,
+            "left": 8,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-plan",
+            "x": 102.25,
+            "y": 796,
+            "top": 796,
+            "right": 196.5,
+            "bottom": 852,
+            "left": 102.25,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-proof",
+            "x": 196.5,
+            "y": 796,
+            "top": 796,
+            "right": 290.75,
+            "bottom": 852,
+            "left": 196.5,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-activity",
+            "x": 290.75,
+            "y": 796,
+            "top": 796,
+            "right": 385,
+            "bottom": 852,
+            "left": 290.75,
+            "width": 94.25,
+            "height": 56
+          }
+        ]
+      },
+      "safeDock": {
+        "dock": {
+          "id": null,
+          "x": 0,
+          "y": 723,
+          "top": 723,
+          "right": 393,
+          "bottom": 788,
+          "left": 0,
+          "width": 393,
+          "height": 65
+        },
+        "tabs": {
+          "id": null,
+          "x": 0,
+          "y": 788,
+          "top": 788,
+          "right": 393,
+          "bottom": 852,
+          "left": 0,
+          "width": 393,
+          "height": 64
+        },
+        "overlap": 0,
+        "dockInside": true,
+        "tabsInside": true
+      },
+      "staticTools": null,
+      "focus": {
+        "activeId": "mobile-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(228, 170, 85) 0px 2px 0px 0px inset, rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S09",
+        "label": "Verification in progress",
+        "kernelPhase": "CANDIDATE_SUBMITTED",
+        "presentation": "synthetic-test-only-transient",
+        "stateVersion": 11,
+        "stateDigest": "9257bf5f0160b9a3e71e0e5e54d9d33adb14fcd3f99377c81616f3eb43ed9932",
+        "receiptCount": 11,
+        "receiptHash": "c38ce4222a1a46b4ff4715006bdd586c9a504d9e7c4989a165a286109fb7f056"
+      },
+      "viewport": {
+        "name": "phone",
+        "width": 393,
+        "height": 852,
+        "expected": "mobile",
+        "actual": {
+          "width": 393,
+          "height": 852,
+          "visualWidth": 393,
+          "visualHeight": 852,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "mobile-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "block",
+        "desktopDisplay": "none"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "mobile-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "mobile-tab-goal"
+      },
+      "controls": {
+        "count": 4,
+        "minimumHeight": 56,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "mobile-tab-goal",
+            "x": 8,
+            "y": 796,
+            "top": 796,
+            "right": 102.25,
+            "bottom": 852,
+            "left": 8,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-plan",
+            "x": 102.25,
+            "y": 796,
+            "top": 796,
+            "right": 196.5,
+            "bottom": 852,
+            "left": 102.25,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-proof",
+            "x": 196.5,
+            "y": 796,
+            "top": 796,
+            "right": 290.75,
+            "bottom": 852,
+            "left": 196.5,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-activity",
+            "x": 290.75,
+            "y": 796,
+            "top": 796,
+            "right": 385,
+            "bottom": 852,
+            "left": 290.75,
+            "width": 94.25,
+            "height": 56
+          }
+        ]
+      },
+      "safeDock": {
+        "dock": {
+          "id": null,
+          "x": 0,
+          "y": 723,
+          "top": 723,
+          "right": 393,
+          "bottom": 788,
+          "left": 0,
+          "width": 393,
+          "height": 65
+        },
+        "tabs": {
+          "id": null,
+          "x": 0,
+          "y": 788,
+          "top": 788,
+          "right": 393,
+          "bottom": 852,
+          "left": 0,
+          "width": 393,
+          "height": 64
+        },
+        "overlap": 0,
+        "dockInside": true,
+        "tabsInside": true
+      },
+      "staticTools": null,
+      "focus": {
+        "activeId": "mobile-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(228, 170, 85) 0px 2px 0px 0px inset, rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S10",
+        "label": "Verification failed",
+        "kernelPhase": "VERIFICATION_FAILED",
+        "presentation": "canonical",
+        "stateVersion": 12,
+        "stateDigest": "f31c49dde393ecf3f0b7efabf8e71de0d2428eb5731155ce6619eee2de2a072d",
+        "receiptCount": 12,
+        "receiptHash": "02d2459b20a0ad15093baa2cd0f7ae7c5e9538a1977dd9e4414f27febc2fbb87"
+      },
+      "viewport": {
+        "name": "phone",
+        "width": 393,
+        "height": 852,
+        "expected": "mobile",
+        "actual": {
+          "width": 393,
+          "height": 852,
+          "visualWidth": 393,
+          "visualHeight": 852,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "mobile-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "block",
+        "desktopDisplay": "none"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "mobile-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "mobile-tab-goal"
+      },
+      "controls": {
+        "count": 4,
+        "minimumHeight": 56,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "mobile-tab-goal",
+            "x": 8,
+            "y": 796,
+            "top": 796,
+            "right": 102.25,
+            "bottom": 852,
+            "left": 8,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-plan",
+            "x": 102.25,
+            "y": 796,
+            "top": 796,
+            "right": 196.5,
+            "bottom": 852,
+            "left": 102.25,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-proof",
+            "x": 196.5,
+            "y": 796,
+            "top": 796,
+            "right": 290.75,
+            "bottom": 852,
+            "left": 196.5,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-activity",
+            "x": 290.75,
+            "y": 796,
+            "top": 796,
+            "right": 385,
+            "bottom": 852,
+            "left": 290.75,
+            "width": 94.25,
+            "height": 56
+          }
+        ]
+      },
+      "safeDock": {
+        "dock": {
+          "id": null,
+          "x": 0,
+          "y": 723,
+          "top": 723,
+          "right": 393,
+          "bottom": 788,
+          "left": 0,
+          "width": 393,
+          "height": 65
+        },
+        "tabs": {
+          "id": null,
+          "x": 0,
+          "y": 788,
+          "top": 788,
+          "right": 393,
+          "bottom": 852,
+          "left": 0,
+          "width": 393,
+          "height": 64
+        },
+        "overlap": 0,
+        "dockInside": true,
+        "tabsInside": true
+      },
+      "staticTools": null,
+      "focus": {
+        "activeId": "mobile-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(228, 170, 85) 0px 2px 0px 0px inset, rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "FAIL",
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": true
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S12",
+        "label": "Verification passed, not accepted",
+        "kernelPhase": "VERIFICATION_PASSED",
+        "presentation": "canonical",
+        "stateVersion": 14,
+        "stateDigest": "0cdb56a0bad78f0bcd9b34bc9e244588575cdf0ff5fe05667a11e574ffca9685",
+        "receiptCount": 14,
+        "receiptHash": "2796307d327914131905f8edff433284654eace009b64ba8e916fe051989723b"
+      },
+      "viewport": {
+        "name": "phone",
+        "width": 393,
+        "height": 852,
+        "expected": "mobile",
+        "actual": {
+          "width": 393,
+          "height": 852,
+          "visualWidth": 393,
+          "visualHeight": 852,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "mobile-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "block",
+        "desktopDisplay": "none"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "mobile-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "mobile-tab-goal"
+      },
+      "controls": {
+        "count": 4,
+        "minimumHeight": 56,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "mobile-tab-goal",
+            "x": 8,
+            "y": 796,
+            "top": 796,
+            "right": 102.25,
+            "bottom": 852,
+            "left": 8,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-plan",
+            "x": 102.25,
+            "y": 796,
+            "top": 796,
+            "right": 196.5,
+            "bottom": 852,
+            "left": 102.25,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-proof",
+            "x": 196.5,
+            "y": 796,
+            "top": 796,
+            "right": 290.75,
+            "bottom": 852,
+            "left": 196.5,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-activity",
+            "x": 290.75,
+            "y": 796,
+            "top": 796,
+            "right": 385,
+            "bottom": 852,
+            "left": 290.75,
+            "width": 94.25,
+            "height": 56
+          }
+        ]
+      },
+      "safeDock": {
+        "dock": {
+          "id": null,
+          "x": 0,
+          "y": 723,
+          "top": 723,
+          "right": 393,
+          "bottom": 788,
+          "left": 0,
+          "width": 393,
+          "height": 65
+        },
+        "tabs": {
+          "id": null,
+          "x": 0,
+          "y": 788,
+          "top": 788,
+          "right": 393,
+          "bottom": 852,
+          "left": 0,
+          "width": 393,
+          "height": 64
+        },
+        "overlap": 0,
+        "dockInside": true,
+        "tabsInside": true
+      },
+      "staticTools": null,
+      "focus": {
+        "activeId": "mobile-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(228, 170, 85) 0px 2px 0px 0px inset, rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "PASS",
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": true
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S13",
+        "label": "Completion requested",
+        "kernelPhase": "COMPLETION_REQUESTED",
+        "presentation": "canonical",
+        "stateVersion": 15,
+        "stateDigest": "013f422363277754de9c3cdef5f66b3632415cd63d9822348c386ebbf2fe9c87",
+        "receiptCount": 15,
+        "receiptHash": "eea084cb5f52fcc48c4fa9cbf7b52cb58afe82724f0d9a5271c53d0947f3aec3"
+      },
+      "viewport": {
+        "name": "phone",
+        "width": 393,
+        "height": 852,
+        "expected": "mobile",
+        "actual": {
+          "width": 393,
+          "height": 852,
+          "visualWidth": 393,
+          "visualHeight": 852,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "mobile-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "block",
+        "desktopDisplay": "none"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "mobile-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "mobile-tab-goal"
+      },
+      "controls": {
+        "count": 5,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": null,
+            "x": 12,
+            "y": 734,
+            "top": 734,
+            "right": 381,
+            "bottom": 778,
+            "left": 12,
+            "width": 369,
+            "height": 44
+          },
+          {
+            "id": "mobile-tab-goal",
+            "x": 8,
+            "y": 796,
+            "top": 796,
+            "right": 102.25,
+            "bottom": 852,
+            "left": 8,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-plan",
+            "x": 102.25,
+            "y": 796,
+            "top": 796,
+            "right": 196.5,
+            "bottom": 852,
+            "left": 102.25,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-proof",
+            "x": 196.5,
+            "y": 796,
+            "top": 796,
+            "right": 290.75,
+            "bottom": 852,
+            "left": 196.5,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-activity",
+            "x": 290.75,
+            "y": 796,
+            "top": 796,
+            "right": 385,
+            "bottom": 852,
+            "left": 290.75,
+            "width": 94.25,
+            "height": 56
+          }
+        ]
+      },
+      "safeDock": {
+        "dock": {
+          "id": null,
+          "x": 0,
+          "y": 723,
+          "top": 723,
+          "right": 393,
+          "bottom": 788,
+          "left": 0,
+          "width": 393,
+          "height": 65
+        },
+        "tabs": {
+          "id": null,
+          "x": 0,
+          "y": 788,
+          "top": 788,
+          "right": 393,
+          "bottom": 852,
+          "left": 0,
+          "width": 393,
+          "height": 64
+        },
+        "overlap": 0,
+        "dockInside": true,
+        "tabsInside": true
+      },
+      "staticTools": null,
+      "focus": {
+        "activeId": "mobile-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(228, 170, 85) 0px 2px 0px 0px inset, rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "PASS",
+        "completionRequested": true,
+        "accepted": false,
+        "failedHistoryRetained": true
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S14",
+        "label": "Goal accepted",
+        "kernelPhase": "GOAL_ACCEPTED",
+        "presentation": "canonical",
+        "stateVersion": 16,
+        "stateDigest": "142f017ef07f2829a61206418ae4d3cc3dc266b42e704d3b03fe6f17ce2b5132",
+        "receiptCount": 16,
+        "receiptHash": "d256da0eec598df6c0c241bf99461174a3c8ea6967cfb8ef3b6f6bc0e08c6199"
+      },
+      "viewport": {
+        "name": "phone",
+        "width": 393,
+        "height": 852,
+        "expected": "mobile",
+        "actual": {
+          "width": 393,
+          "height": 852,
+          "visualWidth": 393,
+          "visualHeight": 852,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "mobile-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "block",
+        "desktopDisplay": "none"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "mobile-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "mobile-tab-goal"
+      },
+      "controls": {
+        "count": 4,
+        "minimumHeight": 56,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "mobile-tab-goal",
+            "x": 8,
+            "y": 796,
+            "top": 796,
+            "right": 102.25,
+            "bottom": 852,
+            "left": 8,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-plan",
+            "x": 102.25,
+            "y": 796,
+            "top": 796,
+            "right": 196.5,
+            "bottom": 852,
+            "left": 102.25,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-proof",
+            "x": 196.5,
+            "y": 796,
+            "top": 796,
+            "right": 290.75,
+            "bottom": 852,
+            "left": 196.5,
+            "width": 94.25,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-activity",
+            "x": 290.75,
+            "y": 796,
+            "top": 796,
+            "right": 385,
+            "bottom": 852,
+            "left": 290.75,
+            "width": 94.25,
+            "height": 56
+          }
+        ]
+      },
+      "safeDock": {
+        "dock": {
+          "id": null,
+          "x": 0,
+          "y": 723,
+          "top": 723,
+          "right": 393,
+          "bottom": 788,
+          "left": 0,
+          "width": 393,
+          "height": 65
+        },
+        "tabs": {
+          "id": null,
+          "x": 0,
+          "y": 788,
+          "top": 788,
+          "right": 393,
+          "bottom": 852,
+          "left": 0,
+          "width": 393,
+          "height": 64
+        },
+        "overlap": 0,
+        "dockInside": true,
+        "tabsInside": true
+      },
+      "staticTools": null,
+      "focus": {
+        "activeId": "mobile-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(228, 170, 85) 0px 2px 0px 0px inset, rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "PASS",
+        "completionRequested": true,
+        "accepted": true,
+        "failedHistoryRetained": true
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S01",
+        "label": "Owner intent recorded",
+        "kernelPhase": "INTENT_DRAFT",
+        "presentation": "canonical",
+        "stateVersion": 1,
+        "stateDigest": "a6eececf04a6e890e5fb1a8ea50455e8f947422944df25cd77975c76ff4e8f64",
+        "receiptCount": 1,
+        "receiptHash": "ea2ec727515ed52f4a1e6e8185d12f9db6aff31608dfcdce9baa48276ff59326"
+      },
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1200,
+          "height": 900,
+          "visualWidth": 1200,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-goal"
+      },
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-owner-intent",
+            "x": 551,
+            "y": 528,
+            "top": 528,
+            "right": 772,
+            "bottom": 640,
+            "left": 551,
+            "width": 221,
+            "height": 112
+          },
+          {
+            "id": null,
+            "x": 551,
+            "y": 649,
+            "top": 649,
+            "right": 772,
+            "bottom": 693,
+            "left": 551,
+            "width": 221,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-goal",
+            "x": 834,
+            "y": 303,
+            "top": 303,
+            "right": 919,
+            "bottom": 347,
+            "left": 834,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 919,
+            "y": 303,
+            "top": 303,
+            "right": 1004,
+            "bottom": 347,
+            "left": 919,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1004,
+            "y": 303,
+            "top": 303,
+            "right": 1089,
+            "bottom": 347,
+            "left": 1004,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1089,
+            "y": 303,
+            "top": 303,
+            "right": 1174,
+            "bottom": 347,
+            "left": 1089,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 26,
+            "y": 905,
+            "top": 905,
+            "right": 407.65625,
+            "bottom": 949,
+            "left": 26,
+            "width": 381.65625,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 408.65625,
+            "y": 905,
+            "top": 905,
+            "right": 790.328125,
+            "bottom": 949,
+            "left": 408.65625,
+            "width": 381.671875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 791.328125,
+            "y": 905,
+            "top": 905,
+            "right": 1173.984375,
+            "bottom": 949,
+            "left": 791.328125,
+            "width": 382.65625,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S02",
+        "label": "Goal Contract proposed",
+        "kernelPhase": "GOAL_CONTRACT_PROPOSED",
+        "presentation": "canonical",
+        "stateVersion": 2,
+        "stateDigest": "35f6a7df88928578058abee178e07bc7d570866ec51da95fd74d53c9fa6a0cec",
+        "receiptCount": 2,
+        "receiptHash": "90a67e34cc5c4dcb5d3e469f295d5d24cee46c9a4f2ba9c0b12fc0f4c33839f2"
+      },
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1200,
+          "height": 900,
+          "visualWidth": 1200,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-goal"
+      },
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": null,
+            "x": 551,
+            "y": 595,
+            "top": 595,
+            "right": 772,
+            "bottom": 639,
+            "left": 551,
+            "width": 221,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 551,
+            "y": 649,
+            "top": 649,
+            "right": 772,
+            "bottom": 693,
+            "left": 551,
+            "width": 221,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-goal",
+            "x": 834,
+            "y": 303,
+            "top": 303,
+            "right": 919,
+            "bottom": 347,
+            "left": 834,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 919,
+            "y": 303,
+            "top": 303,
+            "right": 1004,
+            "bottom": 347,
+            "left": 919,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1004,
+            "y": 303,
+            "top": 303,
+            "right": 1089,
+            "bottom": 347,
+            "left": 1004,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1089,
+            "y": 303,
+            "top": 303,
+            "right": 1174,
+            "bottom": 347,
+            "left": 1089,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 26,
+            "y": 905,
+            "top": 905,
+            "right": 407.65625,
+            "bottom": 949,
+            "left": 26,
+            "width": 381.65625,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 408.65625,
+            "y": 905,
+            "top": 905,
+            "right": 790.328125,
+            "bottom": 949,
+            "left": 408.65625,
+            "width": 381.671875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 791.328125,
+            "y": 905,
+            "top": 905,
+            "right": 1173.984375,
+            "bottom": 949,
+            "left": 791.328125,
+            "width": 382.65625,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S05",
+        "label": "Plan proposed",
+        "kernelPhase": "PLAN_PROPOSED",
+        "presentation": "canonical",
+        "stateVersion": 6,
+        "stateDigest": "97ac35a4c8de260e7cb68f2991bfbab64a20f0ad2eeda0b26ed4f7ccc5075f75",
+        "receiptCount": 6,
+        "receiptHash": "4101f21623b7f412643a94d3b06779bd64a0cb4160e2c32f249f2ab9993944a6"
+      },
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1200,
+          "height": 900,
+          "visualWidth": 1200,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-goal"
+      },
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": null,
+            "x": 551,
+            "y": 595,
+            "top": 595,
+            "right": 772,
+            "bottom": 639,
+            "left": 551,
+            "width": 221,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 551,
+            "y": 649,
+            "top": 649,
+            "right": 772,
+            "bottom": 693,
+            "left": 551,
+            "width": 221,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-goal",
+            "x": 834,
+            "y": 303,
+            "top": 303,
+            "right": 919,
+            "bottom": 347,
+            "left": 834,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 919,
+            "y": 303,
+            "top": 303,
+            "right": 1004,
+            "bottom": 347,
+            "left": 919,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1004,
+            "y": 303,
+            "top": 303,
+            "right": 1089,
+            "bottom": 347,
+            "left": 1004,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1089,
+            "y": 303,
+            "top": 303,
+            "right": 1174,
+            "bottom": 347,
+            "left": 1089,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 26,
+            "y": 905,
+            "top": 905,
+            "right": 407.65625,
+            "bottom": 949,
+            "left": 26,
+            "width": 381.65625,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 408.65625,
+            "y": 905,
+            "top": 905,
+            "right": 790.328125,
+            "bottom": 949,
+            "left": 408.65625,
+            "width": 381.671875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 791.328125,
+            "y": 905,
+            "top": 905,
+            "right": 1173.984375,
+            "bottom": 949,
+            "left": 791.328125,
+            "width": 382.65625,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S09",
+        "label": "Verification in progress",
+        "kernelPhase": "CANDIDATE_SUBMITTED",
+        "presentation": "synthetic-test-only-transient",
+        "stateVersion": 11,
+        "stateDigest": "9257bf5f0160b9a3e71e0e5e54d9d33adb14fcd3f99377c81616f3eb43ed9932",
+        "receiptCount": 11,
+        "receiptHash": "c38ce4222a1a46b4ff4715006bdd586c9a504d9e7c4989a165a286109fb7f056"
+      },
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1200,
+          "height": 900,
+          "visualWidth": 1200,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-goal"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 834,
+            "y": 340.796875,
+            "top": 340.796875,
+            "right": 919,
+            "bottom": 384.796875,
+            "left": 834,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 919,
+            "y": 340.796875,
+            "top": 340.796875,
+            "right": 1004,
+            "bottom": 384.796875,
+            "left": 919,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1004,
+            "y": 340.796875,
+            "top": 340.796875,
+            "right": 1089,
+            "bottom": 384.796875,
+            "left": 1004,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1089,
+            "y": 340.796875,
+            "top": 340.796875,
+            "right": 1174,
+            "bottom": 384.796875,
+            "left": 1089,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 26,
+            "y": 942.796875,
+            "top": 942.796875,
+            "right": 407.65625,
+            "bottom": 986.796875,
+            "left": 26,
+            "width": 381.65625,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 408.65625,
+            "y": 942.796875,
+            "top": 942.796875,
+            "right": 790.328125,
+            "bottom": 986.796875,
+            "left": 408.65625,
+            "width": 381.671875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 791.328125,
+            "y": 942.796875,
+            "top": 942.796875,
+            "right": 1173.984375,
+            "bottom": 986.796875,
+            "left": 791.328125,
+            "width": 382.65625,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S10",
+        "label": "Verification failed",
+        "kernelPhase": "VERIFICATION_FAILED",
+        "presentation": "canonical",
+        "stateVersion": 12,
+        "stateDigest": "f31c49dde393ecf3f0b7efabf8e71de0d2428eb5731155ce6619eee2de2a072d",
+        "receiptCount": 12,
+        "receiptHash": "02d2459b20a0ad15093baa2cd0f7ae7c5e9538a1977dd9e4414f27febc2fbb87"
+      },
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1200,
+          "height": 900,
+          "visualWidth": 1200,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-goal"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 834,
+            "y": 303,
+            "top": 303,
+            "right": 919,
+            "bottom": 347,
+            "left": 834,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 919,
+            "y": 303,
+            "top": 303,
+            "right": 1004,
+            "bottom": 347,
+            "left": 919,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1004,
+            "y": 303,
+            "top": 303,
+            "right": 1089,
+            "bottom": 347,
+            "left": 1004,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1089,
+            "y": 303,
+            "top": 303,
+            "right": 1174,
+            "bottom": 347,
+            "left": 1089,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 26,
+            "y": 905,
+            "top": 905,
+            "right": 407.65625,
+            "bottom": 949,
+            "left": 26,
+            "width": 381.65625,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 408.65625,
+            "y": 905,
+            "top": 905,
+            "right": 790.328125,
+            "bottom": 949,
+            "left": 408.65625,
+            "width": 381.671875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 791.328125,
+            "y": 905,
+            "top": 905,
+            "right": 1173.984375,
+            "bottom": 949,
+            "left": 791.328125,
+            "width": 382.65625,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "FAIL",
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": true
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S12",
+        "label": "Verification passed, not accepted",
+        "kernelPhase": "VERIFICATION_PASSED",
+        "presentation": "canonical",
+        "stateVersion": 14,
+        "stateDigest": "0cdb56a0bad78f0bcd9b34bc9e244588575cdf0ff5fe05667a11e574ffca9685",
+        "receiptCount": 14,
+        "receiptHash": "2796307d327914131905f8edff433284654eace009b64ba8e916fe051989723b"
+      },
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1200,
+          "height": 900,
+          "visualWidth": 1200,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-goal"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 834,
+            "y": 303,
+            "top": 303,
+            "right": 919,
+            "bottom": 347,
+            "left": 834,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 919,
+            "y": 303,
+            "top": 303,
+            "right": 1004,
+            "bottom": 347,
+            "left": 919,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1004,
+            "y": 303,
+            "top": 303,
+            "right": 1089,
+            "bottom": 347,
+            "left": 1004,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1089,
+            "y": 303,
+            "top": 303,
+            "right": 1174,
+            "bottom": 347,
+            "left": 1089,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 26,
+            "y": 905,
+            "top": 905,
+            "right": 407.65625,
+            "bottom": 949,
+            "left": 26,
+            "width": 381.65625,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 408.65625,
+            "y": 905,
+            "top": 905,
+            "right": 790.328125,
+            "bottom": 949,
+            "left": 408.65625,
+            "width": 381.671875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 791.328125,
+            "y": 905,
+            "top": 905,
+            "right": 1173.984375,
+            "bottom": 949,
+            "left": 791.328125,
+            "width": 382.65625,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "PASS",
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": true
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S13",
+        "label": "Completion requested",
+        "kernelPhase": "COMPLETION_REQUESTED",
+        "presentation": "canonical",
+        "stateVersion": 15,
+        "stateDigest": "013f422363277754de9c3cdef5f66b3632415cd63d9822348c386ebbf2fe9c87",
+        "receiptCount": 15,
+        "receiptHash": "eea084cb5f52fcc48c4fa9cbf7b52cb58afe82724f0d9a5271c53d0947f3aec3"
+      },
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1200,
+          "height": 900,
+          "visualWidth": 1200,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-goal"
+      },
+      "controls": {
+        "count": 8,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": null,
+            "x": 551,
+            "y": 649,
+            "top": 649,
+            "right": 772,
+            "bottom": 693,
+            "left": 551,
+            "width": 221,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-goal",
+            "x": 834,
+            "y": 303,
+            "top": 303,
+            "right": 919,
+            "bottom": 347,
+            "left": 834,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 919,
+            "y": 303,
+            "top": 303,
+            "right": 1004,
+            "bottom": 347,
+            "left": 919,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1004,
+            "y": 303,
+            "top": 303,
+            "right": 1089,
+            "bottom": 347,
+            "left": 1004,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1089,
+            "y": 303,
+            "top": 303,
+            "right": 1174,
+            "bottom": 347,
+            "left": 1089,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 26,
+            "y": 905,
+            "top": 905,
+            "right": 407.65625,
+            "bottom": 949,
+            "left": 26,
+            "width": 381.65625,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 408.65625,
+            "y": 905,
+            "top": 905,
+            "right": 790.328125,
+            "bottom": 949,
+            "left": 408.65625,
+            "width": 381.671875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 791.328125,
+            "y": 905,
+            "top": 905,
+            "right": 1173.984375,
+            "bottom": 949,
+            "left": 791.328125,
+            "width": 382.65625,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "PASS",
+        "completionRequested": true,
+        "accepted": false,
+        "failedHistoryRetained": true
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S14",
+        "label": "Goal accepted",
+        "kernelPhase": "GOAL_ACCEPTED",
+        "presentation": "canonical",
+        "stateVersion": 16,
+        "stateDigest": "142f017ef07f2829a61206418ae4d3cc3dc266b42e704d3b03fe6f17ce2b5132",
+        "receiptCount": 16,
+        "receiptHash": "d256da0eec598df6c0c241bf99461174a3c8ea6967cfb8ef3b6f6bc0e08c6199"
+      },
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1200,
+          "height": 900,
+          "visualWidth": 1200,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-goal"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 834,
+            "y": 303,
+            "top": 303,
+            "right": 919,
+            "bottom": 347,
+            "left": 834,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 919,
+            "y": 303,
+            "top": 303,
+            "right": 1004,
+            "bottom": 347,
+            "left": 919,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1004,
+            "y": 303,
+            "top": 303,
+            "right": 1089,
+            "bottom": 347,
+            "left": 1004,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1089,
+            "y": 303,
+            "top": 303,
+            "right": 1174,
+            "bottom": 347,
+            "left": 1089,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 26,
+            "y": 905,
+            "top": 905,
+            "right": 407.65625,
+            "bottom": 949,
+            "left": 26,
+            "width": 381.65625,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 408.65625,
+            "y": 905,
+            "top": 905,
+            "right": 790.328125,
+            "bottom": 949,
+            "left": 408.65625,
+            "width": 381.671875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 791.328125,
+            "y": 905,
+            "top": 905,
+            "right": 1173.984375,
+            "bottom": 949,
+            "left": 791.328125,
+            "width": 382.65625,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "PASS",
+        "completionRequested": true,
+        "accepted": true,
+        "failedHistoryRetained": true
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S01",
+        "label": "Owner intent recorded",
+        "kernelPhase": "INTENT_DRAFT",
+        "presentation": "canonical",
+        "stateVersion": 1,
+        "stateDigest": "a6eececf04a6e890e5fb1a8ea50455e8f947422944df25cd77975c76ff4e8f64",
+        "receiptCount": 1,
+        "receiptHash": "ea2ec727515ed52f4a1e6e8185d12f9db6aff31608dfcdce9baa48276ff59326"
+      },
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1440,
+          "height": 900,
+          "visualWidth": 1440,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-goal"
+      },
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-owner-intent",
+            "x": 622.140625,
+            "y": 529.3125,
+            "top": 529.3125,
+            "right": 903.140625,
+            "bottom": 641.3125,
+            "left": 622.140625,
+            "width": 281,
+            "height": 112
+          },
+          {
+            "id": null,
+            "x": 622.140625,
+            "y": 650.3125,
+            "top": 650.3125,
+            "right": 903.140625,
+            "bottom": 694.3125,
+            "left": 622.140625,
+            "width": 281,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-goal",
+            "x": 1003.921875,
+            "y": 303,
+            "top": 303,
+            "right": 1101.421875,
+            "bottom": 347,
+            "left": 1003.921875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 1101.421875,
+            "y": 303,
+            "top": 303,
+            "right": 1198.921875,
+            "bottom": 347,
+            "left": 1101.421875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1198.921875,
+            "y": 303,
+            "top": 303,
+            "right": 1296.421875,
+            "bottom": 347,
+            "left": 1198.921875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1296.421875,
+            "y": 303,
+            "top": 303,
+            "right": 1393.921875,
+            "bottom": 347,
+            "left": 1296.421875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 46.078125,
+            "y": 905,
+            "top": 905,
+            "right": 494.359375,
+            "bottom": 949,
+            "left": 46.078125,
+            "width": 448.28125,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 495.359375,
+            "y": 905,
+            "top": 905,
+            "right": 943.640625,
+            "bottom": 949,
+            "left": 495.359375,
+            "width": 448.28125,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 944.640625,
+            "y": 905,
+            "top": 905,
+            "right": 1393.921875,
+            "bottom": 949,
+            "left": 944.640625,
+            "width": 449.28125,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S02",
+        "label": "Goal Contract proposed",
+        "kernelPhase": "GOAL_CONTRACT_PROPOSED",
+        "presentation": "canonical",
+        "stateVersion": 2,
+        "stateDigest": "35f6a7df88928578058abee178e07bc7d570866ec51da95fd74d53c9fa6a0cec",
+        "receiptCount": 2,
+        "receiptHash": "90a67e34cc5c4dcb5d3e469f295d5d24cee46c9a4f2ba9c0b12fc0f4c33839f2"
+      },
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1440,
+          "height": 900,
+          "visualWidth": 1440,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-goal"
+      },
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": null,
+            "x": 622.140625,
+            "y": 575.40625,
+            "top": 575.40625,
+            "right": 903.140625,
+            "bottom": 619.40625,
+            "left": 622.140625,
+            "width": 281,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 622.140625,
+            "y": 629.40625,
+            "top": 629.40625,
+            "right": 903.140625,
+            "bottom": 673.40625,
+            "left": 622.140625,
+            "width": 281,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-goal",
+            "x": 1003.921875,
+            "y": 303,
+            "top": 303,
+            "right": 1101.421875,
+            "bottom": 347,
+            "left": 1003.921875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 1101.421875,
+            "y": 303,
+            "top": 303,
+            "right": 1198.921875,
+            "bottom": 347,
+            "left": 1101.421875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1198.921875,
+            "y": 303,
+            "top": 303,
+            "right": 1296.421875,
+            "bottom": 347,
+            "left": 1198.921875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1296.421875,
+            "y": 303,
+            "top": 303,
+            "right": 1393.921875,
+            "bottom": 347,
+            "left": 1296.421875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 46.078125,
+            "y": 905,
+            "top": 905,
+            "right": 494.359375,
+            "bottom": 949,
+            "left": 46.078125,
+            "width": 448.28125,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 495.359375,
+            "y": 905,
+            "top": 905,
+            "right": 943.640625,
+            "bottom": 949,
+            "left": 495.359375,
+            "width": 448.28125,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 944.640625,
+            "y": 905,
+            "top": 905,
+            "right": 1393.921875,
+            "bottom": 949,
+            "left": 944.640625,
+            "width": 449.28125,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S05",
+        "label": "Plan proposed",
+        "kernelPhase": "PLAN_PROPOSED",
+        "presentation": "canonical",
+        "stateVersion": 6,
+        "stateDigest": "97ac35a4c8de260e7cb68f2991bfbab64a20f0ad2eeda0b26ed4f7ccc5075f75",
+        "receiptCount": 6,
+        "receiptHash": "4101f21623b7f412643a94d3b06779bd64a0cb4160e2c32f249f2ab9993944a6"
+      },
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1440,
+          "height": 900,
+          "visualWidth": 1440,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-goal"
+      },
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": null,
+            "x": 622.140625,
+            "y": 578.703125,
+            "top": 578.703125,
+            "right": 903.140625,
+            "bottom": 622.703125,
+            "left": 622.140625,
+            "width": 281,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 622.140625,
+            "y": 632.703125,
+            "top": 632.703125,
+            "right": 903.140625,
+            "bottom": 676.703125,
+            "left": 622.140625,
+            "width": 281,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-goal",
+            "x": 1003.921875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1101.421875,
+            "bottom": 350.296875,
+            "left": 1003.921875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 1101.421875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1198.921875,
+            "bottom": 350.296875,
+            "left": 1101.421875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1198.921875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1296.421875,
+            "bottom": 350.296875,
+            "left": 1198.921875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1296.421875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1393.921875,
+            "bottom": 350.296875,
+            "left": 1296.421875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 46.078125,
+            "y": 908.296875,
+            "top": 908.296875,
+            "right": 494.359375,
+            "bottom": 952.296875,
+            "left": 46.078125,
+            "width": 448.28125,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 495.359375,
+            "y": 908.296875,
+            "top": 908.296875,
+            "right": 943.640625,
+            "bottom": 952.296875,
+            "left": 495.359375,
+            "width": 448.28125,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 944.640625,
+            "y": 908.296875,
+            "top": 908.296875,
+            "right": 1393.921875,
+            "bottom": 952.296875,
+            "left": 944.640625,
+            "width": 449.28125,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S09",
+        "label": "Verification in progress",
+        "kernelPhase": "CANDIDATE_SUBMITTED",
+        "presentation": "synthetic-test-only-transient",
+        "stateVersion": 11,
+        "stateDigest": "9257bf5f0160b9a3e71e0e5e54d9d33adb14fcd3f99377c81616f3eb43ed9932",
+        "receiptCount": 11,
+        "receiptHash": "c38ce4222a1a46b4ff4715006bdd586c9a504d9e7c4989a165a286109fb7f056"
+      },
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1440,
+          "height": 900,
+          "visualWidth": 1440,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-goal"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 1003.921875,
+            "y": 344.09375,
+            "top": 344.09375,
+            "right": 1101.421875,
+            "bottom": 388.09375,
+            "left": 1003.921875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 1101.421875,
+            "y": 344.09375,
+            "top": 344.09375,
+            "right": 1198.921875,
+            "bottom": 388.09375,
+            "left": 1101.421875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1198.921875,
+            "y": 344.09375,
+            "top": 344.09375,
+            "right": 1296.421875,
+            "bottom": 388.09375,
+            "left": 1198.921875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1296.421875,
+            "y": 344.09375,
+            "top": 344.09375,
+            "right": 1393.921875,
+            "bottom": 388.09375,
+            "left": 1296.421875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 46.078125,
+            "y": 946.09375,
+            "top": 946.09375,
+            "right": 494.359375,
+            "bottom": 990.09375,
+            "left": 46.078125,
+            "width": 448.28125,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 495.359375,
+            "y": 946.09375,
+            "top": 946.09375,
+            "right": 943.640625,
+            "bottom": 990.09375,
+            "left": 495.359375,
+            "width": 448.28125,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 944.640625,
+            "y": 946.09375,
+            "top": 946.09375,
+            "right": 1393.921875,
+            "bottom": 990.09375,
+            "left": 944.640625,
+            "width": 449.28125,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S10",
+        "label": "Verification failed",
+        "kernelPhase": "VERIFICATION_FAILED",
+        "presentation": "canonical",
+        "stateVersion": 12,
+        "stateDigest": "f31c49dde393ecf3f0b7efabf8e71de0d2428eb5731155ce6619eee2de2a072d",
+        "receiptCount": 12,
+        "receiptHash": "02d2459b20a0ad15093baa2cd0f7ae7c5e9538a1977dd9e4414f27febc2fbb87"
+      },
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1440,
+          "height": 900,
+          "visualWidth": 1440,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-goal"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 1003.921875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1101.421875,
+            "bottom": 350.296875,
+            "left": 1003.921875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 1101.421875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1198.921875,
+            "bottom": 350.296875,
+            "left": 1101.421875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1198.921875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1296.421875,
+            "bottom": 350.296875,
+            "left": 1198.921875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1296.421875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1393.921875,
+            "bottom": 350.296875,
+            "left": 1296.421875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 46.078125,
+            "y": 908.296875,
+            "top": 908.296875,
+            "right": 494.359375,
+            "bottom": 952.296875,
+            "left": 46.078125,
+            "width": 448.28125,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 495.359375,
+            "y": 908.296875,
+            "top": 908.296875,
+            "right": 943.640625,
+            "bottom": 952.296875,
+            "left": 495.359375,
+            "width": 448.28125,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 944.640625,
+            "y": 908.296875,
+            "top": 908.296875,
+            "right": 1393.921875,
+            "bottom": 952.296875,
+            "left": 944.640625,
+            "width": 449.28125,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "FAIL",
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": true
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S12",
+        "label": "Verification passed, not accepted",
+        "kernelPhase": "VERIFICATION_PASSED",
+        "presentation": "canonical",
+        "stateVersion": 14,
+        "stateDigest": "0cdb56a0bad78f0bcd9b34bc9e244588575cdf0ff5fe05667a11e574ffca9685",
+        "receiptCount": 14,
+        "receiptHash": "2796307d327914131905f8edff433284654eace009b64ba8e916fe051989723b"
+      },
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1440,
+          "height": 900,
+          "visualWidth": 1440,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-goal"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 1003.921875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1101.421875,
+            "bottom": 350.296875,
+            "left": 1003.921875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 1101.421875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1198.921875,
+            "bottom": 350.296875,
+            "left": 1101.421875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1198.921875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1296.421875,
+            "bottom": 350.296875,
+            "left": 1198.921875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1296.421875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1393.921875,
+            "bottom": 350.296875,
+            "left": 1296.421875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 46.078125,
+            "y": 908.296875,
+            "top": 908.296875,
+            "right": 494.359375,
+            "bottom": 952.296875,
+            "left": 46.078125,
+            "width": 448.28125,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 495.359375,
+            "y": 908.296875,
+            "top": 908.296875,
+            "right": 943.640625,
+            "bottom": 952.296875,
+            "left": 495.359375,
+            "width": 448.28125,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 944.640625,
+            "y": 908.296875,
+            "top": 908.296875,
+            "right": 1393.921875,
+            "bottom": 952.296875,
+            "left": 944.640625,
+            "width": 449.28125,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "PASS",
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": true
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S13",
+        "label": "Completion requested",
+        "kernelPhase": "COMPLETION_REQUESTED",
+        "presentation": "canonical",
+        "stateVersion": 15,
+        "stateDigest": "013f422363277754de9c3cdef5f66b3632415cd63d9822348c386ebbf2fe9c87",
+        "receiptCount": 15,
+        "receiptHash": "eea084cb5f52fcc48c4fa9cbf7b52cb58afe82724f0d9a5271c53d0947f3aec3"
+      },
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1440,
+          "height": 900,
+          "visualWidth": 1440,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-goal"
+      },
+      "controls": {
+        "count": 8,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": null,
+            "x": 622.140625,
+            "y": 632.703125,
+            "top": 632.703125,
+            "right": 903.140625,
+            "bottom": 676.703125,
+            "left": 622.140625,
+            "width": 281,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-goal",
+            "x": 1003.921875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1101.421875,
+            "bottom": 350.296875,
+            "left": 1003.921875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 1101.421875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1198.921875,
+            "bottom": 350.296875,
+            "left": 1101.421875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1198.921875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1296.421875,
+            "bottom": 350.296875,
+            "left": 1198.921875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1296.421875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1393.921875,
+            "bottom": 350.296875,
+            "left": 1296.421875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 46.078125,
+            "y": 908.296875,
+            "top": 908.296875,
+            "right": 494.359375,
+            "bottom": 952.296875,
+            "left": 46.078125,
+            "width": 448.28125,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 495.359375,
+            "y": 908.296875,
+            "top": 908.296875,
+            "right": 943.640625,
+            "bottom": 952.296875,
+            "left": 495.359375,
+            "width": 448.28125,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 944.640625,
+            "y": 908.296875,
+            "top": 908.296875,
+            "right": 1393.921875,
+            "bottom": 952.296875,
+            "left": 944.640625,
+            "width": 449.28125,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "PASS",
+        "completionRequested": true,
+        "accepted": false,
+        "failedHistoryRetained": true
+      }
+    },
+    {
+      "mode": "a11y",
+      "story": {
+        "id": "S14",
+        "label": "Goal accepted",
+        "kernelPhase": "GOAL_ACCEPTED",
+        "presentation": "canonical",
+        "stateVersion": 16,
+        "stateDigest": "142f017ef07f2829a61206418ae4d3cc3dc266b42e704d3b03fe6f17ce2b5132",
+        "receiptCount": 16,
+        "receiptHash": "d256da0eec598df6c0c241bf99461174a3c8ea6967cfb8ef3b6f6bc0e08c6199"
+      },
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1440,
+          "height": 900,
+          "visualWidth": 1440,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-goal",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-goal"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 1003.921875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1101.421875,
+            "bottom": 350.296875,
+            "left": 1003.921875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 1101.421875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1198.921875,
+            "bottom": 350.296875,
+            "left": 1101.421875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1198.921875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1296.421875,
+            "bottom": 350.296875,
+            "left": 1198.921875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1296.421875,
+            "y": 306.296875,
+            "top": 306.296875,
+            "right": 1393.921875,
+            "bottom": 350.296875,
+            "left": 1296.421875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 46.078125,
+            "y": 908.296875,
+            "top": 908.296875,
+            "right": 494.359375,
+            "bottom": 952.296875,
+            "left": 46.078125,
+            "width": 448.28125,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 495.359375,
+            "y": 908.296875,
+            "top": 908.296875,
+            "right": 943.640625,
+            "bottom": 952.296875,
+            "left": 495.359375,
+            "width": 448.28125,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 944.640625,
+            "y": 908.296875,
+            "top": 908.296875,
+            "right": 1393.921875,
+            "bottom": 952.296875,
+            "left": 944.640625,
+            "width": 449.28125,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-goal",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": false
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": false
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "PASS",
+        "completionRequested": true,
+        "accepted": true,
+        "failedHistoryRetained": true
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "story": "S01",
+      "viewport": {
+        "name": "phone",
+        "width": 393,
+        "height": 852,
+        "expected": "mobile"
+      },
+      "mainNames": [
+        "WorkHub Goal Room mobile"
+      ],
+      "tabNames": [
+        "Goal",
+        "Plan",
+        "Proof",
+        "Activity"
+      ],
+      "panelNames": [
+        "Goal"
+      ]
+    },
+    {
+      "story": "S09",
+      "viewport": {
+        "name": "phone",
+        "width": 393,
+        "height": 852,
+        "expected": "mobile"
+      },
+      "mainNames": [
+        "WorkHub Goal Room mobile"
+      ],
+      "tabNames": [
+        "Goal",
+        "Plan",
+        "Proof",
+        "Activity"
+      ],
+      "panelNames": [
+        "Goal"
+      ]
+    },
+    {
+      "story": "S10",
+      "viewport": {
+        "name": "phone",
+        "width": 393,
+        "height": 852,
+        "expected": "mobile"
+      },
+      "mainNames": [
+        "WorkHub Goal Room mobile"
+      ],
+      "tabNames": [
+        "Goal",
+        "Plan",
+        "Proof",
+        "Activity"
+      ],
+      "panelNames": [
+        "Goal"
+      ]
+    },
+    {
+      "story": "S12",
+      "viewport": {
+        "name": "phone",
+        "width": 393,
+        "height": 852,
+        "expected": "mobile"
+      },
+      "mainNames": [
+        "WorkHub Goal Room mobile"
+      ],
+      "tabNames": [
+        "Goal",
+        "Plan",
+        "Proof",
+        "Activity"
+      ],
+      "panelNames": [
+        "Goal"
+      ]
+    },
+    {
+      "story": "S13",
+      "viewport": {
+        "name": "phone",
+        "width": 393,
+        "height": 852,
+        "expected": "mobile"
+      },
+      "mainNames": [
+        "WorkHub Goal Room mobile"
+      ],
+      "tabNames": [
+        "Goal",
+        "Plan",
+        "Proof",
+        "Activity"
+      ],
+      "panelNames": [
+        "Goal"
+      ]
+    },
+    {
+      "story": "S14",
+      "viewport": {
+        "name": "phone",
+        "width": 393,
+        "height": 852,
+        "expected": "mobile"
+      },
+      "mainNames": [
+        "WorkHub Goal Room mobile"
+      ],
+      "tabNames": [
+        "Goal",
+        "Plan",
+        "Proof",
+        "Activity"
+      ],
+      "panelNames": [
+        "Goal"
+      ]
+    },
+    {
+      "story": "S01",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900,
+        "expected": "desktop"
+      },
+      "mainNames": [
+        "WorkHub Goal Room desktop Mission Room"
+      ],
+      "tabNames": [
+        "Goal",
+        "Plan",
+        "Proof",
+        "Activity"
+      ],
+      "panelNames": [
+        "Goal"
+      ]
+    },
+    {
+      "story": "S09",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900,
+        "expected": "desktop"
+      },
+      "mainNames": [
+        "WorkHub Goal Room desktop Mission Room"
+      ],
+      "tabNames": [
+        "Goal",
+        "Plan",
+        "Proof",
+        "Activity"
+      ],
+      "panelNames": [
+        "Goal"
+      ]
+    },
+    {
+      "story": "S10",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900,
+        "expected": "desktop"
+      },
+      "mainNames": [
+        "WorkHub Goal Room desktop Mission Room"
+      ],
+      "tabNames": [
+        "Goal",
+        "Plan",
+        "Proof",
+        "Activity"
+      ],
+      "panelNames": [
+        "Goal"
+      ]
+    },
+    {
+      "story": "S12",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900,
+        "expected": "desktop"
+      },
+      "mainNames": [
+        "WorkHub Goal Room desktop Mission Room"
+      ],
+      "tabNames": [
+        "Goal",
+        "Plan",
+        "Proof",
+        "Activity"
+      ],
+      "panelNames": [
+        "Goal"
+      ]
+    },
+    {
+      "story": "S13",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900,
+        "expected": "desktop"
+      },
+      "mainNames": [
+        "WorkHub Goal Room desktop Mission Room"
+      ],
+      "tabNames": [
+        "Goal",
+        "Plan",
+        "Proof",
+        "Activity"
+      ],
+      "panelNames": [
+        "Goal"
+      ]
+    },
+    {
+      "story": "S14",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900,
+        "expected": "desktop"
+      },
+      "mainNames": [
+        "WorkHub Goal Room desktop Mission Room"
+      ],
+      "tabNames": [
+        "Goal",
+        "Plan",
+        "Proof",
+        "Activity"
+      ],
+      "panelNames": [
+        "Goal"
+      ]
+    }
+  ],
+  "keyboard": [
+    {
+      "viewport": {
+        "name": "phone",
+        "width": 393,
+        "height": 852,
+        "expected": "mobile"
+      },
+      "initialOwnerCalls": [],
+      "sequence": [
+        {
+          "key": "ArrowRight",
+          "activeId": "mobile-tab-plan",
+          "selected": "mobile-tab-plan",
+          "ownerCalls": []
+        },
+        {
+          "key": "End",
+          "activeId": "mobile-tab-activity",
+          "selected": "mobile-tab-activity",
+          "ownerCalls": []
+        },
+        {
+          "key": "ArrowLeft",
+          "activeId": "mobile-tab-proof",
+          "selected": "mobile-tab-proof",
+          "ownerCalls": []
+        },
+        {
+          "key": "Home",
+          "activeId": "mobile-tab-goal",
+          "selected": "mobile-tab-goal",
+          "ownerCalls": []
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900,
+        "expected": "desktop"
+      },
+      "initialOwnerCalls": [],
+      "sequence": [
+        {
+          "key": "ArrowRight",
+          "activeId": "desktop-tab-plan",
+          "selected": "desktop-tab-plan",
+          "ownerCalls": []
+        },
+        {
+          "key": "End",
+          "activeId": "desktop-tab-activity",
+          "selected": "desktop-tab-activity",
+          "ownerCalls": []
+        },
+        {
+          "key": "ArrowLeft",
+          "activeId": "desktop-tab-proof",
+          "selected": "desktop-tab-proof",
+          "ownerCalls": []
+        },
+        {
+          "key": "Home",
+          "activeId": "desktop-tab-goal",
+          "selected": "desktop-tab-goal",
+          "ownerCalls": []
+        }
+      ]
+    }
+  ],
+  "reducedMotion": {
+    "matches": true,
+    "animations": 0,
+    "transitions": 0
+  },
+  "zoom": null,
+  "screenshots": [],
+  "failures": []
+}

@@ -143,7 +143,7 @@ export function createOwnerViewModel(
     if (state.ownerIntent === null) {
       return {
         ...common,
-        statusLabel: "Owner intent required — Goal not admitted",
+        statusLabel: "Owner intent required. Goal not admitted",
         ownerAttention: {
           required: true,
           title: "Describe the outcome you want",
@@ -161,7 +161,7 @@ export function createOwnerViewModel(
     }
     return {
       ...common,
-      statusLabel: "Owner intent captured — Goal not admitted",
+      statusLabel: "Owner intent captured. Goal not admitted",
       ownerAttention: {
         required: false,
         title: "Agent must propose a Goal Contract",
@@ -219,7 +219,7 @@ export function createOwnerViewModel(
     const goalVersion = state.activeGoalContract?.version ?? 0;
     return {
       ...common,
-      statusLabel: "Goal confirmed — Plan required",
+      statusLabel: "Goal confirmed. Plan required",
       ownerAttention: {
         required: false,
         title: `Goal Contract v${goalVersion} confirmed`,
@@ -275,7 +275,7 @@ export function createOwnerViewModel(
   if (state.phase === "PLAN_CONFIRMED") {
     return {
       ...common,
-      statusLabel: "Plan confirmed — work may begin",
+      statusLabel: "Plan confirmed. Work may begin",
       ownerAttention: {
         required: false,
         title: `Plan v${plan.version} confirmed`,
@@ -292,10 +292,10 @@ export function createOwnerViewModel(
   if (state.phase === "STEP_CLAIMED") {
     return {
       ...common,
-      statusLabel: "Step claimed — evidence required",
+      statusLabel: "Step claimed. Evidence required",
       ownerAttention: {
         required: false,
-        title: `Agent holds step ${state.activeClaim?.stepId ?? "—"}`,
+        title: `Agent holds step ${state.activeClaim?.stepId ?? "not recorded"}`,
         body: "The claim grants custody of this admitted step, not authority to verify or accept it.",
       },
       actions: hiddenActions(plan.version),
@@ -309,10 +309,10 @@ export function createOwnerViewModel(
   if (state.phase === "CANDIDATE_SUBMITTED") {
     return {
       ...common,
-      statusLabel: "Evidence submitted — verification required",
+      statusLabel: "Evidence submitted. Verification required",
       ownerAttention: {
         required: false,
-        title: `Candidate v${state.activeCandidate?.version ?? "—"} is awaiting verification`,
+        title: `Candidate v${state.activeCandidate?.version ?? "not recorded"} is awaiting verification`,
         body: "WorkHub recorded the exact bytes and SHA-256 digest. The agent cannot grade this candidate.",
       },
       actions: hiddenActions(plan.version),
@@ -326,10 +326,10 @@ export function createOwnerViewModel(
   if (state.phase === "VERIFICATION_FAILED") {
     return {
       ...common,
-      statusLabel: "Verification failed — correction required",
+      statusLabel: "Verification failed. Correction required",
       ownerAttention: {
         required: false,
-        title: `Candidate v${state.activeCandidate?.version ?? "—"} did not pass`,
+        title: `Candidate v${state.activeCandidate?.version ?? "not recorded"} did not pass`,
         body: "The failed candidate and verdict remain immutable. The agent may submit a corrected version.",
       },
       actions: hiddenActions(plan.version),
@@ -343,10 +343,10 @@ export function createOwnerViewModel(
   if (state.phase === "VERIFICATION_PASSED") {
     return {
       ...common,
-      statusLabel: "Verification passed — owner has not accepted the Goal",
+      statusLabel: "Verification passed. Owner has not accepted the Goal",
       ownerAttention: {
         required: false,
-        title: `Candidate v${state.activeCandidate?.version ?? "—"} passed deterministic verification`,
+        title: `Candidate v${state.activeCandidate?.version ?? "not recorded"} passed deterministic verification`,
         body: "PASS proves the explicit checks succeeded. It does not grant final acceptance authority.",
       },
       actions: hiddenActions(plan.version),
@@ -360,10 +360,10 @@ export function createOwnerViewModel(
   if (state.phase === "COMPLETION_REQUESTED") {
     return {
       ...common,
-      statusLabel: "Verified result — awaiting owner acceptance",
+      statusLabel: "Verified result. Awaiting owner acceptance",
       ownerAttention: {
         required: true,
-        title: `Accept Candidate v${state.activeCandidate?.version ?? "—"}?`,
+        title: `Accept Candidate v${state.activeCandidate?.version ?? "not recorded"}?`,
         body: "The candidate passed deterministic checks. Only you can accept the Goal.",
       },
       actions: {

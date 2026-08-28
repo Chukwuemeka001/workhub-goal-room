@@ -4,32 +4,36 @@ A clean-room, public competition edition demonstrating one idea:
 
 > WebMCP makes a website callable by agents. WorkHub Goal Room makes each call state-aware, authority-checked, evidence-bound, receipt-backed, and visible to the human sharing the page.
 
-## Current scope: Phase 6 reliability calibration
+## Current scope: V3 editorial custody room
 
-Phase 6 retains the Phase 5 owner-first visual Goal Room and adds a bounded fresh-model decision evaluation without expanding authority. The visual contract remains deliberately compact:
+V3 retains the governed kernel and rebuilds its production projection as an editorial custody room without expanding authority. The visual contract is deliberately explicit:
 
 - one Goal and its exact done conditions;
-- one six-stage lifecycle derived from authoritative room state;
+- one five-chapter lifecycle derived from authoritative room state;
 - one dominant current-frontier card;
-- one explicit actor holding authority now;
+- a desktop custody lane for Agent, System Verifier, and Owner;
+- a distinct owner-first mobile composition below 1200px;
 - progressive disclosure for Plan, evidence, deterministic findings, and receipts;
+- a collapsed, noninteractive view of the statically registered six agent tools;
 - visually distinct active, complete, failed, and pending stages;
-- PASS visibly stops before final owner acceptance.
+- exact-candidate confirmation before final owner acceptance;
+- PASS visibly stops before final owner acceptance while failed history remains append-only.
 
 The Goal lifecycle is:
 
 ```text
-Plan → Claim → Evidence → Verify → Complete → Accept
+Define -> Plan -> Work -> Verify -> Accept
 ```
 
 A failed verification returns the active frontier to Evidence while retaining Verify as failed. A passing verification completes Verify and activates Complete; Accept remains pending until the agent requests completion. Only the owner can complete Accept.
 
 ## Governed WebMCP surface
 
-The Goal Room exposes exactly five browser-native agent tools:
+The Goal Room exposes exactly six browser-native agent tools:
 
 ```text
 get_goal_room_state
+propose_goal_contract
 propose_plan
 claim_step
 submit_artifact
@@ -60,7 +64,7 @@ The page independently projects accepted/refused WebMCP outcomes and rerenders a
 
 ## Governed browser-native proof
 
-**Locally verified August 27, 2026 in Google Chrome Canary 154 with the exact `enable-webmcp-testing` and `devtools-webmcp-support` experiments enabled in an isolated profile.**
+**The browser-native Phase 4 evidence was locally verified August 27, 2026 in Google Chrome Canary 154 with the exact `enable-webmcp-testing` and `devtools-webmcp-support` experiments enabled in an isolated profile.** That evidence predates the V3 Goal-inception tool addition and is retained as historical evidence, not rewritten as a six-tool native-browser claim.
 
 Observed runtime:
 
@@ -71,13 +75,21 @@ getTools: function
 executeTool: function
 ```
 
-Canary discovered exactly the five tools above and returned their strict serialized JSON Schemas. Browser-native testing-API invocation proved:
+At that historical checkpoint, Canary discovered the then-current five-tool surface and returned its strict serialized JSON Schemas. Browser-native testing-API invocation proved:
 
 1. an unknown-field state request was refused as `INVALID_TOOL_INPUT` with no state or receipt mutation;
 2. a legally premature `claim_step` was refused as `STEP_NOT_ADMITTED`, preserved the owner gate, and created a visible refusal receipt;
 3. after the owner confirmed Plan v1 in the UI, the same native `claim_step` path was accepted, advanced the room to `STEP_CLAIMED`, and created a visible accepted receipt.
 
-This proves registration, discovery, browser-native invocation, shared-state mutation, and governed refusal. Phase 6 separately calibrates fresh-model decision selection against production-matched descriptors; it does not claim a direct autonomous browser journey.
+This proves registration, discovery, browser-native invocation, shared-state mutation, and governed refusal for that recorded checkpoint. V3 verifies its current static-six registration in deterministic local tests and does not upgrade the historical browser evidence into a new native-browser claim.
+
+## V3 production-excluded qualification
+
+The [`qualification/`](qualification/) package replays 14 states through the real Goal Room kernel, current static-six WebMCP callbacks, internal verifier, and owner controller. Production [`index.html`](index.html) and [`src/main.ts`](src/main.ts) contain no qualification entry reference, and the production bundle is scanned for fixture tokens.
+
+S09 is explicit test-only presentation metadata over a real `CANDIDATE_SUBMITTED` snapshot. It shows a verification-in-progress transient in the qualification fixture without changing kernel state or creating a production transition. S10 records immutable FAIL, S11 submits corrected bytes, S12 records PASS without acceptance, S13 binds completion, and only S14 records owner acceptance.
+
+The V3 contract and mapping are in [`design/GOAL_ROOM_V3_VISUAL_CONTRACT.md`](design/GOAL_ROOM_V3_VISUAL_CONTRACT.md) and [`design/TRANSLATION_LEDGER.md`](design/TRANSLATION_LEDGER.md). Deterministic visual, responsive, accessibility, hostile/zoom, bundle-exclusion, protected-byte, screenshot, and receipt evidence is written under [`evaluation/v3/`](evaluation/v3/).
 
 ## Phase 6 fresh-model calibration
 
@@ -184,7 +196,7 @@ This clean-room implementation adapts established WorkHub concepts—immutable c
 
 Coverage includes:
 
-- exact five-tool registration and strict schemas;
+- exact static-six registration and strict schemas;
 - document/navigator host selection and registration-signature fallback;
 - unsupported clients and disposal;
 - runtime exact-key and plain-object validation in addition to JSON Schema;
@@ -200,7 +212,8 @@ Coverage includes:
 - literal rendering of hostile revision text with no injected DOM nodes or script execution;
 - named lifecycle navigation and native focusable controls in the browser accessibility tree;
 - the complete FAIL → correction → PASS → completion → owner acceptance browser journey;
-- 1440×900 desktop and 390×844 mobile layouts with zero horizontal overflow and bounded digest presentation.
+- editorial desktop at 1200px and above plus the distinct mobile composition from 320px through 1199px;
+- 44px controls, safe-area docking, visible focus, reduced-motion handling, and zero horizontal overflow under hostile content and zoom qualification.
 
 ## What this demonstration does not prove
 
@@ -219,6 +232,7 @@ This phase does **not** implement or claim:
 ```bash
 npm ci
 npm test
+npm run qa:v3:all
 npm run dev
 ```
 

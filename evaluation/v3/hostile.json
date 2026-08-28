@@ -1,0 +1,5140 @@
+{
+  "schemaVersion": 1,
+  "kind": "goal-room-v3-hostile-qualification",
+  "boundary": "Production-excluded qualification fixture using production projections over a real-kernel replay. S09 presentation metadata is synthetic/test-only; its kernel state is not mutated.",
+  "mode": "hostile",
+  "stories": [
+    "S01",
+    "S02",
+    "S03",
+    "S05",
+    "S06",
+    "S09",
+    "S10",
+    "S12",
+    "S14"
+  ],
+  "viewports": [
+    {
+      "name": "minimum",
+      "width": 320,
+      "height": 568,
+      "expected": "mobile"
+    },
+    {
+      "name": "desktop-boundary",
+      "width": 1200,
+      "height": 900,
+      "expected": "desktop"
+    },
+    {
+      "name": "wide-desktop",
+      "width": 1728,
+      "height": 1117,
+      "expected": "desktop"
+    }
+  ],
+  "summary": {
+    "rowCount": 27,
+    "failureCount": 0,
+    "maximumHorizontalOverflow": 0,
+    "minimumControlHeight": 44,
+    "syntheticStories": [
+      "S09"
+    ],
+    "finalReceiptHashes": [
+      "7a05ff58859695cf07c0bbb6164606565eae8c71e103db84d04b4db67fa7e830",
+      "253b044ab73028712d703ec10b1f5b72071258fe06384a583c748dbaeabbfacc",
+      "ff26c88890fdc75c33f0fadc63972b83bd171890f5688b771005195c4e99f6ae",
+      "76810b96683623ae11444194cac0c1fdcc7c3bbcc773887d9877afcaa4874906",
+      "dd8c2fb507e646f84683cb7f53c535b08d2d3084c3f7bb0149f9db361f2d582d",
+      "b2455a915dc174b153ae05972d4f1853eca7035c78470651b48abccf8f2a491a",
+      "19555528a1859428e188ff3bc1e3b2d339421c2b79c6e5a1495d1f612c594359",
+      "03d9da228b9d243b7173cf89e6652e0b8ca4851f2e2ceb9bbe3042ece1f961e9",
+      "0b491a8ab7997b0f693112ea09c0f666d8af3fd981c6bbc9810e2042560eb695"
+    ]
+  },
+  "rows": [
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S01",
+        "label": "Owner intent recorded",
+        "kernelPhase": "INTENT_DRAFT",
+        "presentation": "canonical",
+        "stateVersion": 1,
+        "stateDigest": "35ce946021c7affe28fd7dc5f5e617e6cc93da6fc70853b3d778a9dcdf4db4de",
+        "receiptCount": 1,
+        "receiptHash": "7a05ff58859695cf07c0bbb6164606565eae8c71e103db84d04b4db67fa7e830"
+      },
+      "viewport": {
+        "name": "minimum",
+        "width": 320,
+        "height": 568,
+        "expected": "mobile",
+        "actual": {
+          "width": 320,
+          "height": 568,
+          "visualWidth": 320,
+          "visualHeight": 568,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "mobile-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "block",
+        "desktopDisplay": "none"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "mobile-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "mobile-tab-activity"
+      },
+      "controls": {
+        "count": 6,
+        "minimumHeight": 56,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "mobile-owner-intent",
+            "x": 12,
+            "y": 436,
+            "top": 436,
+            "right": 149.046875,
+            "bottom": 494,
+            "left": 12,
+            "width": 137.046875,
+            "height": 58
+          },
+          {
+            "id": null,
+            "x": 158.046875,
+            "y": 436,
+            "top": 436,
+            "right": 308,
+            "bottom": 494,
+            "left": 158.046875,
+            "width": 149.953125,
+            "height": 58
+          },
+          {
+            "id": "mobile-tab-goal",
+            "x": 8,
+            "y": 512,
+            "top": 512,
+            "right": 84,
+            "bottom": 568,
+            "left": 8,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-plan",
+            "x": 84,
+            "y": 512,
+            "top": 512,
+            "right": 160,
+            "bottom": 568,
+            "left": 84,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-proof",
+            "x": 160,
+            "y": 512,
+            "top": 512,
+            "right": 236,
+            "bottom": 568,
+            "left": 160,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-activity",
+            "x": 236,
+            "y": 512,
+            "top": 512,
+            "right": 312,
+            "bottom": 568,
+            "left": 236,
+            "width": 76,
+            "height": 56
+          }
+        ]
+      },
+      "safeDock": {
+        "dock": {
+          "id": null,
+          "x": 0,
+          "y": 406,
+          "top": 406,
+          "right": 320,
+          "bottom": 504,
+          "left": 0,
+          "width": 320,
+          "height": 98
+        },
+        "tabs": {
+          "id": null,
+          "x": 0,
+          "y": 504,
+          "top": 504,
+          "right": 320,
+          "bottom": 568,
+          "left": 0,
+          "width": 320,
+          "height": 64
+        },
+        "overlap": 0,
+        "dockInside": true,
+        "tabsInside": true
+      },
+      "staticTools": null,
+      "focus": {
+        "activeId": "mobile-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(228, 170, 85) 0px 2px 0px 0px inset, rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S02",
+        "label": "Goal Contract proposed",
+        "kernelPhase": "GOAL_CONTRACT_PROPOSED",
+        "presentation": "canonical",
+        "stateVersion": 2,
+        "stateDigest": "89a5e96a415ab0a031295540623e65508b15eee7550a4a96a63e6e4a55437566",
+        "receiptCount": 2,
+        "receiptHash": "253b044ab73028712d703ec10b1f5b72071258fe06384a583c748dbaeabbfacc"
+      },
+      "viewport": {
+        "name": "minimum",
+        "width": 320,
+        "height": 568,
+        "expected": "mobile",
+        "actual": {
+          "width": 320,
+          "height": 568,
+          "visualWidth": 320,
+          "visualHeight": 568,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "mobile-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "block",
+        "desktopDisplay": "none"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "mobile-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "mobile-tab-activity"
+      },
+      "controls": {
+        "count": 6,
+        "minimumHeight": 52,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": null,
+            "x": 12,
+            "y": 442,
+            "top": 442,
+            "right": 155.5,
+            "bottom": 494,
+            "left": 12,
+            "width": 143.5,
+            "height": 52
+          },
+          {
+            "id": null,
+            "x": 164.5,
+            "y": 442,
+            "top": 442,
+            "right": 308,
+            "bottom": 494,
+            "left": 164.5,
+            "width": 143.5,
+            "height": 52
+          },
+          {
+            "id": "mobile-tab-goal",
+            "x": 8,
+            "y": 512,
+            "top": 512,
+            "right": 84,
+            "bottom": 568,
+            "left": 8,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-plan",
+            "x": 84,
+            "y": 512,
+            "top": 512,
+            "right": 160,
+            "bottom": 568,
+            "left": 84,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-proof",
+            "x": 160,
+            "y": 512,
+            "top": 512,
+            "right": 236,
+            "bottom": 568,
+            "left": 160,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-activity",
+            "x": 236,
+            "y": 512,
+            "top": 512,
+            "right": 312,
+            "bottom": 568,
+            "left": 236,
+            "width": 76,
+            "height": 56
+          }
+        ]
+      },
+      "safeDock": {
+        "dock": {
+          "id": null,
+          "x": 0,
+          "y": 431,
+          "top": 431,
+          "right": 320,
+          "bottom": 504,
+          "left": 0,
+          "width": 320,
+          "height": 73
+        },
+        "tabs": {
+          "id": null,
+          "x": 0,
+          "y": 504,
+          "top": 504,
+          "right": 320,
+          "bottom": 568,
+          "left": 0,
+          "width": 320,
+          "height": 64
+        },
+        "overlap": 0,
+        "dockInside": true,
+        "tabsInside": true
+      },
+      "staticTools": null,
+      "focus": {
+        "activeId": "mobile-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(228, 170, 85) 0px 2px 0px 0px inset, rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S03",
+        "label": "Goal revision requested",
+        "kernelPhase": "GOAL_CONTRACT_REVISION_REQUESTED",
+        "presentation": "canonical",
+        "stateVersion": 3,
+        "stateDigest": "ff536c86d412a6966f610a7f5aaca6034523da5b68d4278b0ef543edf5dfbb50",
+        "receiptCount": 3,
+        "receiptHash": "ff26c88890fdc75c33f0fadc63972b83bd171890f5688b771005195c4e99f6ae"
+      },
+      "viewport": {
+        "name": "minimum",
+        "width": 320,
+        "height": 568,
+        "expected": "mobile",
+        "actual": {
+          "width": 320,
+          "height": 568,
+          "visualWidth": 320,
+          "visualHeight": 568,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "mobile-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "block",
+        "desktopDisplay": "none"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "mobile-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "mobile-tab-activity"
+      },
+      "controls": {
+        "count": 4,
+        "minimumHeight": 56,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "mobile-tab-goal",
+            "x": 8,
+            "y": 512,
+            "top": 512,
+            "right": 84,
+            "bottom": 568,
+            "left": 8,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-plan",
+            "x": 84,
+            "y": 512,
+            "top": 512,
+            "right": 160,
+            "bottom": 568,
+            "left": 84,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-proof",
+            "x": 160,
+            "y": 512,
+            "top": 512,
+            "right": 236,
+            "bottom": 568,
+            "left": 160,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-activity",
+            "x": 236,
+            "y": 512,
+            "top": 512,
+            "right": 312,
+            "bottom": 568,
+            "left": 236,
+            "width": 76,
+            "height": 56
+          }
+        ]
+      },
+      "safeDock": {
+        "dock": {
+          "id": null,
+          "x": 0,
+          "y": 439,
+          "top": 439,
+          "right": 320,
+          "bottom": 504,
+          "left": 0,
+          "width": 320,
+          "height": 65
+        },
+        "tabs": {
+          "id": null,
+          "x": 0,
+          "y": 504,
+          "top": 504,
+          "right": 320,
+          "bottom": 568,
+          "left": 0,
+          "width": 320,
+          "height": 64
+        },
+        "overlap": 0,
+        "dockInside": true,
+        "tabsInside": true
+      },
+      "staticTools": null,
+      "focus": {
+        "activeId": "mobile-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(228, 170, 85) 0px 2px 0px 0px inset, rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S05",
+        "label": "Plan proposed",
+        "kernelPhase": "PLAN_PROPOSED",
+        "presentation": "canonical",
+        "stateVersion": 6,
+        "stateDigest": "a437a2fa06093ac4f05855c81d1d106c66feda18c0f3eebaef318f17d76c4013",
+        "receiptCount": 6,
+        "receiptHash": "76810b96683623ae11444194cac0c1fdcc7c3bbcc773887d9877afcaa4874906"
+      },
+      "viewport": {
+        "name": "minimum",
+        "width": 320,
+        "height": 568,
+        "expected": "mobile",
+        "actual": {
+          "width": 320,
+          "height": 568,
+          "visualWidth": 320,
+          "visualHeight": 568,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "mobile-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "block",
+        "desktopDisplay": "none"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "mobile-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "mobile-tab-activity"
+      },
+      "controls": {
+        "count": 6,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": null,
+            "x": 12,
+            "y": 450,
+            "top": 450,
+            "right": 155.5,
+            "bottom": 494,
+            "left": 12,
+            "width": 143.5,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 164.5,
+            "y": 450,
+            "top": 450,
+            "right": 308,
+            "bottom": 494,
+            "left": 164.5,
+            "width": 143.5,
+            "height": 44
+          },
+          {
+            "id": "mobile-tab-goal",
+            "x": 8,
+            "y": 512,
+            "top": 512,
+            "right": 84,
+            "bottom": 568,
+            "left": 8,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-plan",
+            "x": 84,
+            "y": 512,
+            "top": 512,
+            "right": 160,
+            "bottom": 568,
+            "left": 84,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-proof",
+            "x": 160,
+            "y": 512,
+            "top": 512,
+            "right": 236,
+            "bottom": 568,
+            "left": 160,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-activity",
+            "x": 236,
+            "y": 512,
+            "top": 512,
+            "right": 312,
+            "bottom": 568,
+            "left": 236,
+            "width": 76,
+            "height": 56
+          }
+        ]
+      },
+      "safeDock": {
+        "dock": {
+          "id": null,
+          "x": 0,
+          "y": 439,
+          "top": 439,
+          "right": 320,
+          "bottom": 504,
+          "left": 0,
+          "width": 320,
+          "height": 65
+        },
+        "tabs": {
+          "id": null,
+          "x": 0,
+          "y": 504,
+          "top": 504,
+          "right": 320,
+          "bottom": 568,
+          "left": 0,
+          "width": 320,
+          "height": 64
+        },
+        "overlap": 0,
+        "dockInside": true,
+        "tabsInside": true
+      },
+      "staticTools": null,
+      "focus": {
+        "activeId": "mobile-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(228, 170, 85) 0px 2px 0px 0px inset, rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S06",
+        "label": "Plan revision requested",
+        "kernelPhase": "PLAN_REVISION_REQUESTED",
+        "presentation": "canonical",
+        "stateVersion": 7,
+        "stateDigest": "1823c7d6413c5645093d3b21131f9419e90fe6b7e069c4d3b92c7a7e5227101e",
+        "receiptCount": 7,
+        "receiptHash": "dd8c2fb507e646f84683cb7f53c535b08d2d3084c3f7bb0149f9db361f2d582d"
+      },
+      "viewport": {
+        "name": "minimum",
+        "width": 320,
+        "height": 568,
+        "expected": "mobile",
+        "actual": {
+          "width": 320,
+          "height": 568,
+          "visualWidth": 320,
+          "visualHeight": 568,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "mobile-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "block",
+        "desktopDisplay": "none"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "mobile-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "mobile-tab-activity"
+      },
+      "controls": {
+        "count": 4,
+        "minimumHeight": 56,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "mobile-tab-goal",
+            "x": 8,
+            "y": 512,
+            "top": 512,
+            "right": 84,
+            "bottom": 568,
+            "left": 8,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-plan",
+            "x": 84,
+            "y": 512,
+            "top": 512,
+            "right": 160,
+            "bottom": 568,
+            "left": 84,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-proof",
+            "x": 160,
+            "y": 512,
+            "top": 512,
+            "right": 236,
+            "bottom": 568,
+            "left": 160,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-activity",
+            "x": 236,
+            "y": 512,
+            "top": 512,
+            "right": 312,
+            "bottom": 568,
+            "left": 236,
+            "width": 76,
+            "height": 56
+          }
+        ]
+      },
+      "safeDock": {
+        "dock": {
+          "id": null,
+          "x": 0,
+          "y": 439,
+          "top": 439,
+          "right": 320,
+          "bottom": 504,
+          "left": 0,
+          "width": 320,
+          "height": 65
+        },
+        "tabs": {
+          "id": null,
+          "x": 0,
+          "y": 504,
+          "top": 504,
+          "right": 320,
+          "bottom": 568,
+          "left": 0,
+          "width": 320,
+          "height": 64
+        },
+        "overlap": 0,
+        "dockInside": true,
+        "tabsInside": true
+      },
+      "staticTools": null,
+      "focus": {
+        "activeId": "mobile-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(228, 170, 85) 0px 2px 0px 0px inset, rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S09",
+        "label": "Verification in progress",
+        "kernelPhase": "CANDIDATE_SUBMITTED",
+        "presentation": "synthetic-test-only-transient",
+        "stateVersion": 11,
+        "stateDigest": "30ce65ba0fc84a2e6f31257ecb331fce362327149df96ae90acacd67d5fe515a",
+        "receiptCount": 11,
+        "receiptHash": "b2455a915dc174b153ae05972d4f1853eca7035c78470651b48abccf8f2a491a"
+      },
+      "viewport": {
+        "name": "minimum",
+        "width": 320,
+        "height": 568,
+        "expected": "mobile",
+        "actual": {
+          "width": 320,
+          "height": 568,
+          "visualWidth": 320,
+          "visualHeight": 568,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "mobile-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "block",
+        "desktopDisplay": "none"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "mobile-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "mobile-tab-activity"
+      },
+      "controls": {
+        "count": 4,
+        "minimumHeight": 56,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "mobile-tab-goal",
+            "x": 8,
+            "y": 512,
+            "top": 512,
+            "right": 84,
+            "bottom": 568,
+            "left": 8,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-plan",
+            "x": 84,
+            "y": 512,
+            "top": 512,
+            "right": 160,
+            "bottom": 568,
+            "left": 84,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-proof",
+            "x": 160,
+            "y": 512,
+            "top": 512,
+            "right": 236,
+            "bottom": 568,
+            "left": 160,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-activity",
+            "x": 236,
+            "y": 512,
+            "top": 512,
+            "right": 312,
+            "bottom": 568,
+            "left": 236,
+            "width": 76,
+            "height": 56
+          }
+        ]
+      },
+      "safeDock": {
+        "dock": {
+          "id": null,
+          "x": 0,
+          "y": 439,
+          "top": 439,
+          "right": 320,
+          "bottom": 504,
+          "left": 0,
+          "width": 320,
+          "height": 65
+        },
+        "tabs": {
+          "id": null,
+          "x": 0,
+          "y": 504,
+          "top": 504,
+          "right": 320,
+          "bottom": 568,
+          "left": 0,
+          "width": 320,
+          "height": 64
+        },
+        "overlap": 0,
+        "dockInside": true,
+        "tabsInside": true
+      },
+      "staticTools": null,
+      "focus": {
+        "activeId": "mobile-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(228, 170, 85) 0px 2px 0px 0px inset, rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S10",
+        "label": "Verification failed",
+        "kernelPhase": "VERIFICATION_FAILED",
+        "presentation": "canonical",
+        "stateVersion": 12,
+        "stateDigest": "a110a89cb8f6489efac9cba915111fb2bac4e290a320511f2bd5919a7338b011",
+        "receiptCount": 12,
+        "receiptHash": "19555528a1859428e188ff3bc1e3b2d339421c2b79c6e5a1495d1f612c594359"
+      },
+      "viewport": {
+        "name": "minimum",
+        "width": 320,
+        "height": 568,
+        "expected": "mobile",
+        "actual": {
+          "width": 320,
+          "height": 568,
+          "visualWidth": 320,
+          "visualHeight": 568,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "mobile-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "block",
+        "desktopDisplay": "none"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "mobile-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "mobile-tab-activity"
+      },
+      "controls": {
+        "count": 4,
+        "minimumHeight": 56,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "mobile-tab-goal",
+            "x": 8,
+            "y": 512,
+            "top": 512,
+            "right": 84,
+            "bottom": 568,
+            "left": 8,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-plan",
+            "x": 84,
+            "y": 512,
+            "top": 512,
+            "right": 160,
+            "bottom": 568,
+            "left": 84,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-proof",
+            "x": 160,
+            "y": 512,
+            "top": 512,
+            "right": 236,
+            "bottom": 568,
+            "left": 160,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-activity",
+            "x": 236,
+            "y": 512,
+            "top": 512,
+            "right": 312,
+            "bottom": 568,
+            "left": 236,
+            "width": 76,
+            "height": 56
+          }
+        ]
+      },
+      "safeDock": {
+        "dock": {
+          "id": null,
+          "x": 0,
+          "y": 439,
+          "top": 439,
+          "right": 320,
+          "bottom": 504,
+          "left": 0,
+          "width": 320,
+          "height": 65
+        },
+        "tabs": {
+          "id": null,
+          "x": 0,
+          "y": 504,
+          "top": 504,
+          "right": 320,
+          "bottom": 568,
+          "left": 0,
+          "width": 320,
+          "height": 64
+        },
+        "overlap": 0,
+        "dockInside": true,
+        "tabsInside": true
+      },
+      "staticTools": null,
+      "focus": {
+        "activeId": "mobile-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(228, 170, 85) 0px 2px 0px 0px inset, rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "FAIL",
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": true
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S12",
+        "label": "Verification passed, not accepted",
+        "kernelPhase": "VERIFICATION_PASSED",
+        "presentation": "canonical",
+        "stateVersion": 14,
+        "stateDigest": "4b36b4c8ecb0de358744b1d1fed3fdd380227f6aa62f9973619b33a64146d62c",
+        "receiptCount": 14,
+        "receiptHash": "03d9da228b9d243b7173cf89e6652e0b8ca4851f2e2ceb9bbe3042ece1f961e9"
+      },
+      "viewport": {
+        "name": "minimum",
+        "width": 320,
+        "height": 568,
+        "expected": "mobile",
+        "actual": {
+          "width": 320,
+          "height": 568,
+          "visualWidth": 320,
+          "visualHeight": 568,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "mobile-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "block",
+        "desktopDisplay": "none"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "mobile-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "mobile-tab-activity"
+      },
+      "controls": {
+        "count": 4,
+        "minimumHeight": 56,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "mobile-tab-goal",
+            "x": 8,
+            "y": 512,
+            "top": 512,
+            "right": 84,
+            "bottom": 568,
+            "left": 8,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-plan",
+            "x": 84,
+            "y": 512,
+            "top": 512,
+            "right": 160,
+            "bottom": 568,
+            "left": 84,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-proof",
+            "x": 160,
+            "y": 512,
+            "top": 512,
+            "right": 236,
+            "bottom": 568,
+            "left": 160,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-activity",
+            "x": 236,
+            "y": 512,
+            "top": 512,
+            "right": 312,
+            "bottom": 568,
+            "left": 236,
+            "width": 76,
+            "height": 56
+          }
+        ]
+      },
+      "safeDock": {
+        "dock": {
+          "id": null,
+          "x": 0,
+          "y": 439,
+          "top": 439,
+          "right": 320,
+          "bottom": 504,
+          "left": 0,
+          "width": 320,
+          "height": 65
+        },
+        "tabs": {
+          "id": null,
+          "x": 0,
+          "y": 504,
+          "top": 504,
+          "right": 320,
+          "bottom": 568,
+          "left": 0,
+          "width": 320,
+          "height": 64
+        },
+        "overlap": 0,
+        "dockInside": true,
+        "tabsInside": true
+      },
+      "staticTools": null,
+      "focus": {
+        "activeId": "mobile-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(228, 170, 85) 0px 2px 0px 0px inset, rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "PASS",
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": true
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S14",
+        "label": "Goal accepted",
+        "kernelPhase": "GOAL_ACCEPTED",
+        "presentation": "canonical",
+        "stateVersion": 16,
+        "stateDigest": "cdf421b333727952c08f3159498e53e70645f18f22e9536509baa498ef4e0eb8",
+        "receiptCount": 16,
+        "receiptHash": "0b491a8ab7997b0f693112ea09c0f666d8af3fd981c6bbc9810e2042560eb695"
+      },
+      "viewport": {
+        "name": "minimum",
+        "width": 320,
+        "height": 568,
+        "expected": "mobile",
+        "actual": {
+          "width": 320,
+          "height": 568,
+          "visualWidth": 320,
+          "visualHeight": 568,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "mobile-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "block",
+        "desktopDisplay": "none"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "mobile-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "mobile-tab-activity"
+      },
+      "controls": {
+        "count": 4,
+        "minimumHeight": 56,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "mobile-tab-goal",
+            "x": 8,
+            "y": 512,
+            "top": 512,
+            "right": 84,
+            "bottom": 568,
+            "left": 8,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-plan",
+            "x": 84,
+            "y": 512,
+            "top": 512,
+            "right": 160,
+            "bottom": 568,
+            "left": 84,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-proof",
+            "x": 160,
+            "y": 512,
+            "top": 512,
+            "right": 236,
+            "bottom": 568,
+            "left": 160,
+            "width": 76,
+            "height": 56
+          },
+          {
+            "id": "mobile-tab-activity",
+            "x": 236,
+            "y": 512,
+            "top": 512,
+            "right": 312,
+            "bottom": 568,
+            "left": 236,
+            "width": 76,
+            "height": 56
+          }
+        ]
+      },
+      "safeDock": {
+        "dock": {
+          "id": null,
+          "x": 0,
+          "y": 439,
+          "top": 439,
+          "right": 320,
+          "bottom": 504,
+          "left": 0,
+          "width": 320,
+          "height": 65
+        },
+        "tabs": {
+          "id": null,
+          "x": 0,
+          "y": 504,
+          "top": 504,
+          "right": 320,
+          "bottom": 568,
+          "left": 0,
+          "width": 320,
+          "height": 64
+        },
+        "overlap": 0,
+        "dockInside": true,
+        "tabsInside": true
+      },
+      "staticTools": null,
+      "focus": {
+        "activeId": "mobile-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(228, 170, 85) 0px 2px 0px 0px inset, rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "PASS",
+        "completionRequested": true,
+        "accepted": true,
+        "failedHistoryRetained": true
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S01",
+        "label": "Owner intent recorded",
+        "kernelPhase": "INTENT_DRAFT",
+        "presentation": "canonical",
+        "stateVersion": 1,
+        "stateDigest": "35ce946021c7affe28fd7dc5f5e617e6cc93da6fc70853b3d778a9dcdf4db4de",
+        "receiptCount": 1,
+        "receiptHash": "7a05ff58859695cf07c0bbb6164606565eae8c71e103db84d04b4db67fa7e830"
+      },
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1200,
+          "height": 900,
+          "visualWidth": 1200,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-activity"
+      },
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-owner-intent",
+            "x": 551,
+            "y": 754.078125,
+            "top": 754.078125,
+            "right": 772,
+            "bottom": 866.078125,
+            "left": 551,
+            "width": 221,
+            "height": 112
+          },
+          {
+            "id": null,
+            "x": 551,
+            "y": 875.078125,
+            "top": 875.078125,
+            "right": 772,
+            "bottom": 919.078125,
+            "left": 551,
+            "width": 221,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-goal",
+            "x": 834,
+            "y": 529.078125,
+            "top": 529.078125,
+            "right": 919,
+            "bottom": 573.078125,
+            "left": 834,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 919,
+            "y": 529.078125,
+            "top": 529.078125,
+            "right": 1004,
+            "bottom": 573.078125,
+            "left": 919,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1004,
+            "y": 529.078125,
+            "top": 529.078125,
+            "right": 1089,
+            "bottom": 573.078125,
+            "left": 1004,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1089,
+            "y": 529.078125,
+            "top": 529.078125,
+            "right": 1174,
+            "bottom": 573.078125,
+            "left": 1089,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 26,
+            "y": 1022.1875,
+            "top": 1022.1875,
+            "right": 407.65625,
+            "bottom": 1066.1875,
+            "left": 26,
+            "width": 381.65625,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 408.65625,
+            "y": 1022.1875,
+            "top": 1022.1875,
+            "right": 790.328125,
+            "bottom": 1066.1875,
+            "left": 408.65625,
+            "width": 381.671875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 791.328125,
+            "y": 1022.1875,
+            "top": 1022.1875,
+            "right": 1173.984375,
+            "bottom": 1066.1875,
+            "left": 791.328125,
+            "width": 382.65625,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S02",
+        "label": "Goal Contract proposed",
+        "kernelPhase": "GOAL_CONTRACT_PROPOSED",
+        "presentation": "canonical",
+        "stateVersion": 2,
+        "stateDigest": "89a5e96a415ab0a031295540623e65508b15eee7550a4a96a63e6e4a55437566",
+        "receiptCount": 2,
+        "receiptHash": "253b044ab73028712d703ec10b1f5b72071258fe06384a583c748dbaeabbfacc"
+      },
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1200,
+          "height": 900,
+          "visualWidth": 1200,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-activity"
+      },
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": null,
+            "x": 551,
+            "y": 595,
+            "top": 595,
+            "right": 772,
+            "bottom": 639,
+            "left": 551,
+            "width": 221,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 551,
+            "y": 649,
+            "top": 649,
+            "right": 772,
+            "bottom": 693,
+            "left": 551,
+            "width": 221,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-goal",
+            "x": 834,
+            "y": 303,
+            "top": 303,
+            "right": 919,
+            "bottom": 347,
+            "left": 834,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 919,
+            "y": 303,
+            "top": 303,
+            "right": 1004,
+            "bottom": 347,
+            "left": 919,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1004,
+            "y": 303,
+            "top": 303,
+            "right": 1089,
+            "bottom": 347,
+            "left": 1004,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1089,
+            "y": 303,
+            "top": 303,
+            "right": 1174,
+            "bottom": 347,
+            "left": 1089,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 26,
+            "y": 890.78125,
+            "top": 890.78125,
+            "right": 407.65625,
+            "bottom": 934.78125,
+            "left": 26,
+            "width": 381.65625,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 408.65625,
+            "y": 890.78125,
+            "top": 890.78125,
+            "right": 790.328125,
+            "bottom": 934.78125,
+            "left": 408.65625,
+            "width": 381.671875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 791.328125,
+            "y": 890.78125,
+            "top": 890.78125,
+            "right": 1173.984375,
+            "bottom": 934.78125,
+            "left": 791.328125,
+            "width": 382.65625,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S03",
+        "label": "Goal revision requested",
+        "kernelPhase": "GOAL_CONTRACT_REVISION_REQUESTED",
+        "presentation": "canonical",
+        "stateVersion": 3,
+        "stateDigest": "ff536c86d412a6966f610a7f5aaca6034523da5b68d4278b0ef543edf5dfbb50",
+        "receiptCount": 3,
+        "receiptHash": "ff26c88890fdc75c33f0fadc63972b83bd171890f5688b771005195c4e99f6ae"
+      },
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1200,
+          "height": 900,
+          "visualWidth": 1200,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-activity"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 834,
+            "y": 305,
+            "top": 305,
+            "right": 919,
+            "bottom": 349,
+            "left": 834,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 919,
+            "y": 305,
+            "top": 305,
+            "right": 1004,
+            "bottom": 349,
+            "left": 919,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1004,
+            "y": 305,
+            "top": 305,
+            "right": 1089,
+            "bottom": 349,
+            "left": 1004,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1089,
+            "y": 305,
+            "top": 305,
+            "right": 1174,
+            "bottom": 349,
+            "left": 1089,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 26,
+            "y": 907,
+            "top": 907,
+            "right": 407.65625,
+            "bottom": 951,
+            "left": 26,
+            "width": 381.65625,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 408.65625,
+            "y": 907,
+            "top": 907,
+            "right": 790.328125,
+            "bottom": 951,
+            "left": 408.65625,
+            "width": 381.671875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 791.328125,
+            "y": 907,
+            "top": 907,
+            "right": 1173.984375,
+            "bottom": 951,
+            "left": 791.328125,
+            "width": 382.65625,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S05",
+        "label": "Plan proposed",
+        "kernelPhase": "PLAN_PROPOSED",
+        "presentation": "canonical",
+        "stateVersion": 6,
+        "stateDigest": "a437a2fa06093ac4f05855c81d1d106c66feda18c0f3eebaef318f17d76c4013",
+        "receiptCount": 6,
+        "receiptHash": "76810b96683623ae11444194cac0c1fdcc7c3bbcc773887d9877afcaa4874906"
+      },
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1200,
+          "height": 900,
+          "visualWidth": 1200,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-activity"
+      },
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": null,
+            "x": 551,
+            "y": 595,
+            "top": 595,
+            "right": 772,
+            "bottom": 639,
+            "left": 551,
+            "width": 221,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 551,
+            "y": 649,
+            "top": 649,
+            "right": 772,
+            "bottom": 693,
+            "left": 551,
+            "width": 221,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-goal",
+            "x": 834,
+            "y": 303,
+            "top": 303,
+            "right": 919,
+            "bottom": 347,
+            "left": 834,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 919,
+            "y": 303,
+            "top": 303,
+            "right": 1004,
+            "bottom": 347,
+            "left": 919,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1004,
+            "y": 303,
+            "top": 303,
+            "right": 1089,
+            "bottom": 347,
+            "left": 1004,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1089,
+            "y": 303,
+            "top": 303,
+            "right": 1174,
+            "bottom": 347,
+            "left": 1089,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 26,
+            "y": 905,
+            "top": 905,
+            "right": 407.65625,
+            "bottom": 949,
+            "left": 26,
+            "width": 381.65625,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 408.65625,
+            "y": 905,
+            "top": 905,
+            "right": 790.328125,
+            "bottom": 949,
+            "left": 408.65625,
+            "width": 381.671875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 791.328125,
+            "y": 905,
+            "top": 905,
+            "right": 1173.984375,
+            "bottom": 949,
+            "left": 791.328125,
+            "width": 382.65625,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S06",
+        "label": "Plan revision requested",
+        "kernelPhase": "PLAN_REVISION_REQUESTED",
+        "presentation": "canonical",
+        "stateVersion": 7,
+        "stateDigest": "1823c7d6413c5645093d3b21131f9419e90fe6b7e069c4d3b92c7a7e5227101e",
+        "receiptCount": 7,
+        "receiptHash": "dd8c2fb507e646f84683cb7f53c535b08d2d3084c3f7bb0149f9db361f2d582d"
+      },
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1200,
+          "height": 900,
+          "visualWidth": 1200,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-activity"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 834,
+            "y": 305,
+            "top": 305,
+            "right": 919,
+            "bottom": 349,
+            "left": 834,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 919,
+            "y": 305,
+            "top": 305,
+            "right": 1004,
+            "bottom": 349,
+            "left": 919,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1004,
+            "y": 305,
+            "top": 305,
+            "right": 1089,
+            "bottom": 349,
+            "left": 1004,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1089,
+            "y": 305,
+            "top": 305,
+            "right": 1174,
+            "bottom": 349,
+            "left": 1089,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 26,
+            "y": 907,
+            "top": 907,
+            "right": 407.65625,
+            "bottom": 951,
+            "left": 26,
+            "width": 381.65625,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 408.65625,
+            "y": 907,
+            "top": 907,
+            "right": 790.328125,
+            "bottom": 951,
+            "left": 408.65625,
+            "width": 381.671875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 791.328125,
+            "y": 907,
+            "top": 907,
+            "right": 1173.984375,
+            "bottom": 951,
+            "left": 791.328125,
+            "width": 382.65625,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S09",
+        "label": "Verification in progress",
+        "kernelPhase": "CANDIDATE_SUBMITTED",
+        "presentation": "synthetic-test-only-transient",
+        "stateVersion": 11,
+        "stateDigest": "30ce65ba0fc84a2e6f31257ecb331fce362327149df96ae90acacd67d5fe515a",
+        "receiptCount": 11,
+        "receiptHash": "b2455a915dc174b153ae05972d4f1853eca7035c78470651b48abccf8f2a491a"
+      },
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1200,
+          "height": 900,
+          "visualWidth": 1200,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-activity"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 834,
+            "y": 340.796875,
+            "top": 340.796875,
+            "right": 919,
+            "bottom": 384.796875,
+            "left": 834,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 919,
+            "y": 340.796875,
+            "top": 340.796875,
+            "right": 1004,
+            "bottom": 384.796875,
+            "left": 919,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1004,
+            "y": 340.796875,
+            "top": 340.796875,
+            "right": 1089,
+            "bottom": 384.796875,
+            "left": 1004,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1089,
+            "y": 340.796875,
+            "top": 340.796875,
+            "right": 1174,
+            "bottom": 384.796875,
+            "left": 1089,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 26,
+            "y": 942.796875,
+            "top": 942.796875,
+            "right": 407.65625,
+            "bottom": 986.796875,
+            "left": 26,
+            "width": 381.65625,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 408.65625,
+            "y": 942.796875,
+            "top": 942.796875,
+            "right": 790.328125,
+            "bottom": 986.796875,
+            "left": 408.65625,
+            "width": 381.671875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 791.328125,
+            "y": 942.796875,
+            "top": 942.796875,
+            "right": 1173.984375,
+            "bottom": 986.796875,
+            "left": 791.328125,
+            "width": 382.65625,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S10",
+        "label": "Verification failed",
+        "kernelPhase": "VERIFICATION_FAILED",
+        "presentation": "canonical",
+        "stateVersion": 12,
+        "stateDigest": "a110a89cb8f6489efac9cba915111fb2bac4e290a320511f2bd5919a7338b011",
+        "receiptCount": 12,
+        "receiptHash": "19555528a1859428e188ff3bc1e3b2d339421c2b79c6e5a1495d1f612c594359"
+      },
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1200,
+          "height": 900,
+          "visualWidth": 1200,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-activity"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 834,
+            "y": 303,
+            "top": 303,
+            "right": 919,
+            "bottom": 347,
+            "left": 834,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 919,
+            "y": 303,
+            "top": 303,
+            "right": 1004,
+            "bottom": 347,
+            "left": 919,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1004,
+            "y": 303,
+            "top": 303,
+            "right": 1089,
+            "bottom": 347,
+            "left": 1004,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1089,
+            "y": 303,
+            "top": 303,
+            "right": 1174,
+            "bottom": 347,
+            "left": 1089,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 26,
+            "y": 905,
+            "top": 905,
+            "right": 407.65625,
+            "bottom": 949,
+            "left": 26,
+            "width": 381.65625,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 408.65625,
+            "y": 905,
+            "top": 905,
+            "right": 790.328125,
+            "bottom": 949,
+            "left": 408.65625,
+            "width": 381.671875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 791.328125,
+            "y": 905,
+            "top": 905,
+            "right": 1173.984375,
+            "bottom": 949,
+            "left": 791.328125,
+            "width": 382.65625,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "FAIL",
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": true
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S12",
+        "label": "Verification passed, not accepted",
+        "kernelPhase": "VERIFICATION_PASSED",
+        "presentation": "canonical",
+        "stateVersion": 14,
+        "stateDigest": "4b36b4c8ecb0de358744b1d1fed3fdd380227f6aa62f9973619b33a64146d62c",
+        "receiptCount": 14,
+        "receiptHash": "03d9da228b9d243b7173cf89e6652e0b8ca4851f2e2ceb9bbe3042ece1f961e9"
+      },
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1200,
+          "height": 900,
+          "visualWidth": 1200,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-activity"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 834,
+            "y": 303,
+            "top": 303,
+            "right": 919,
+            "bottom": 347,
+            "left": 834,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 919,
+            "y": 303,
+            "top": 303,
+            "right": 1004,
+            "bottom": 347,
+            "left": 919,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1004,
+            "y": 303,
+            "top": 303,
+            "right": 1089,
+            "bottom": 347,
+            "left": 1004,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1089,
+            "y": 303,
+            "top": 303,
+            "right": 1174,
+            "bottom": 347,
+            "left": 1089,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 26,
+            "y": 905,
+            "top": 905,
+            "right": 407.65625,
+            "bottom": 949,
+            "left": 26,
+            "width": 381.65625,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 408.65625,
+            "y": 905,
+            "top": 905,
+            "right": 790.328125,
+            "bottom": 949,
+            "left": 408.65625,
+            "width": 381.671875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 791.328125,
+            "y": 905,
+            "top": 905,
+            "right": 1173.984375,
+            "bottom": 949,
+            "left": 791.328125,
+            "width": 382.65625,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "PASS",
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": true
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S14",
+        "label": "Goal accepted",
+        "kernelPhase": "GOAL_ACCEPTED",
+        "presentation": "canonical",
+        "stateVersion": 16,
+        "stateDigest": "cdf421b333727952c08f3159498e53e70645f18f22e9536509baa498ef4e0eb8",
+        "receiptCount": 16,
+        "receiptHash": "0b491a8ab7997b0f693112ea09c0f666d8af3fd981c6bbc9810e2042560eb695"
+      },
+      "viewport": {
+        "name": "desktop-boundary",
+        "width": 1200,
+        "height": 900,
+        "expected": "desktop",
+        "actual": {
+          "width": 1200,
+          "height": 900,
+          "visualWidth": 1200,
+          "visualHeight": 900,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-activity"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 834,
+            "y": 303,
+            "top": 303,
+            "right": 919,
+            "bottom": 347,
+            "left": 834,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 919,
+            "y": 303,
+            "top": 303,
+            "right": 1004,
+            "bottom": 347,
+            "left": 919,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1004,
+            "y": 303,
+            "top": 303,
+            "right": 1089,
+            "bottom": 347,
+            "left": 1004,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1089,
+            "y": 303,
+            "top": 303,
+            "right": 1174,
+            "bottom": 347,
+            "left": 1089,
+            "width": 85,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 26,
+            "y": 905,
+            "top": 905,
+            "right": 407.65625,
+            "bottom": 949,
+            "left": 26,
+            "width": 381.65625,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 408.65625,
+            "y": 905,
+            "top": 905,
+            "right": 790.328125,
+            "bottom": 949,
+            "left": 408.65625,
+            "width": 381.671875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 791.328125,
+            "y": 905,
+            "top": 905,
+            "right": 1173.984375,
+            "bottom": 949,
+            "left": 791.328125,
+            "width": 382.65625,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "PASS",
+        "completionRequested": true,
+        "accepted": true,
+        "failedHistoryRetained": true
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S01",
+        "label": "Owner intent recorded",
+        "kernelPhase": "INTENT_DRAFT",
+        "presentation": "canonical",
+        "stateVersion": 1,
+        "stateDigest": "35ce946021c7affe28fd7dc5f5e617e6cc93da6fc70853b3d778a9dcdf4db4de",
+        "receiptCount": 1,
+        "receiptHash": "7a05ff58859695cf07c0bbb6164606565eae8c71e103db84d04b4db67fa7e830"
+      },
+      "viewport": {
+        "name": "wide-desktop",
+        "width": 1728,
+        "height": 1117,
+        "expected": "desktop",
+        "actual": {
+          "width": 1728,
+          "height": 1117,
+          "visualWidth": 1728,
+          "visualHeight": 1117,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-activity"
+      },
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-owner-intent",
+            "x": 827.71875,
+            "y": 868.796875,
+            "top": 868.796875,
+            "right": 1108.71875,
+            "bottom": 980.796875,
+            "left": 827.71875,
+            "width": 281,
+            "height": 112
+          },
+          {
+            "id": null,
+            "x": 827.71875,
+            "y": 989.796875,
+            "top": 989.796875,
+            "right": 1108.71875,
+            "bottom": 1033.796875,
+            "left": 827.71875,
+            "width": 281,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-goal",
+            "x": 1218.71875,
+            "y": 624.125,
+            "top": 624.125,
+            "right": 1316.21875,
+            "bottom": 668.125,
+            "left": 1218.71875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 1316.21875,
+            "y": 624.125,
+            "top": 624.125,
+            "right": 1413.71875,
+            "bottom": 668.125,
+            "left": 1316.21875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1413.71875,
+            "y": 624.125,
+            "top": 624.125,
+            "right": 1511.21875,
+            "bottom": 668.125,
+            "left": 1413.71875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1511.21875,
+            "y": 624.125,
+            "top": 624.125,
+            "right": 1608.71875,
+            "bottom": 668.125,
+            "left": 1511.21875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 119.28125,
+            "y": 1127.796875,
+            "top": 1127.796875,
+            "right": 614.75,
+            "bottom": 1171.796875,
+            "left": 119.28125,
+            "width": 495.46875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 615.75,
+            "y": 1127.796875,
+            "top": 1127.796875,
+            "right": 1111.234375,
+            "bottom": 1171.796875,
+            "left": 615.75,
+            "width": 495.484375,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 1112.234375,
+            "y": 1127.796875,
+            "top": 1127.796875,
+            "right": 1608.703125,
+            "bottom": 1171.796875,
+            "left": 1112.234375,
+            "width": 496.46875,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S02",
+        "label": "Goal Contract proposed",
+        "kernelPhase": "GOAL_CONTRACT_PROPOSED",
+        "presentation": "canonical",
+        "stateVersion": 2,
+        "stateDigest": "89a5e96a415ab0a031295540623e65508b15eee7550a4a96a63e6e4a55437566",
+        "receiptCount": 2,
+        "receiptHash": "253b044ab73028712d703ec10b1f5b72071258fe06384a583c748dbaeabbfacc"
+      },
+      "viewport": {
+        "name": "wide-desktop",
+        "width": 1728,
+        "height": 1117,
+        "expected": "desktop",
+        "actual": {
+          "width": 1728,
+          "height": 1117,
+          "visualWidth": 1728,
+          "visualHeight": 1117,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-activity"
+      },
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": null,
+            "x": 827.71875,
+            "y": 581.203125,
+            "top": 581.203125,
+            "right": 1108.71875,
+            "bottom": 625.203125,
+            "left": 827.71875,
+            "width": 281,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 827.71875,
+            "y": 635.203125,
+            "top": 635.203125,
+            "right": 1108.71875,
+            "bottom": 679.203125,
+            "left": 827.71875,
+            "width": 281,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-goal",
+            "x": 1218.71875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1316.21875,
+            "bottom": 357.203125,
+            "left": 1218.71875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 1316.21875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1413.71875,
+            "bottom": 357.203125,
+            "left": 1316.21875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1413.71875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1511.21875,
+            "bottom": 357.203125,
+            "left": 1413.71875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1511.21875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1608.71875,
+            "bottom": 357.203125,
+            "left": 1511.21875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 119.28125,
+            "y": 884.640625,
+            "top": 884.640625,
+            "right": 614.75,
+            "bottom": 928.640625,
+            "left": 119.28125,
+            "width": 495.46875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 615.75,
+            "y": 884.640625,
+            "top": 884.640625,
+            "right": 1111.234375,
+            "bottom": 928.640625,
+            "left": 615.75,
+            "width": 495.484375,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 1112.234375,
+            "y": 884.640625,
+            "top": 884.640625,
+            "right": 1608.703125,
+            "bottom": 928.640625,
+            "left": 1112.234375,
+            "width": 496.46875,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S03",
+        "label": "Goal revision requested",
+        "kernelPhase": "GOAL_CONTRACT_REVISION_REQUESTED",
+        "presentation": "canonical",
+        "stateVersion": 3,
+        "stateDigest": "ff536c86d412a6966f610a7f5aaca6034523da5b68d4278b0ef543edf5dfbb50",
+        "receiptCount": 3,
+        "receiptHash": "ff26c88890fdc75c33f0fadc63972b83bd171890f5688b771005195c4e99f6ae"
+      },
+      "viewport": {
+        "name": "wide-desktop",
+        "width": 1728,
+        "height": 1117,
+        "expected": "desktop",
+        "actual": {
+          "width": 1728,
+          "height": 1117,
+          "visualWidth": 1728,
+          "visualHeight": 1117,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-activity"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 1218.71875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1316.21875,
+            "bottom": 357.203125,
+            "left": 1218.71875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 1316.21875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1413.71875,
+            "bottom": 357.203125,
+            "left": 1316.21875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1413.71875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1511.21875,
+            "bottom": 357.203125,
+            "left": 1413.71875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1511.21875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1608.71875,
+            "bottom": 357.203125,
+            "left": 1511.21875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 119.28125,
+            "y": 915.203125,
+            "top": 915.203125,
+            "right": 614.75,
+            "bottom": 959.203125,
+            "left": 119.28125,
+            "width": 495.46875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 615.75,
+            "y": 915.203125,
+            "top": 915.203125,
+            "right": 1111.234375,
+            "bottom": 959.203125,
+            "left": 615.75,
+            "width": 495.484375,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 1112.234375,
+            "y": 915.203125,
+            "top": 915.203125,
+            "right": 1608.703125,
+            "bottom": 959.203125,
+            "left": 1112.234375,
+            "width": 496.46875,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S05",
+        "label": "Plan proposed",
+        "kernelPhase": "PLAN_PROPOSED",
+        "presentation": "canonical",
+        "stateVersion": 6,
+        "stateDigest": "a437a2fa06093ac4f05855c81d1d106c66feda18c0f3eebaef318f17d76c4013",
+        "receiptCount": 6,
+        "receiptHash": "76810b96683623ae11444194cac0c1fdcc7c3bbcc773887d9877afcaa4874906"
+      },
+      "viewport": {
+        "name": "wide-desktop",
+        "width": 1728,
+        "height": 1117,
+        "expected": "desktop",
+        "actual": {
+          "width": 1728,
+          "height": 1117,
+          "visualWidth": 1728,
+          "visualHeight": 1117,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-activity"
+      },
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": null,
+            "x": 827.71875,
+            "y": 581.203125,
+            "top": 581.203125,
+            "right": 1108.71875,
+            "bottom": 625.203125,
+            "left": 827.71875,
+            "width": 281,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 827.71875,
+            "y": 635.203125,
+            "top": 635.203125,
+            "right": 1108.71875,
+            "bottom": 679.203125,
+            "left": 827.71875,
+            "width": 281,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-goal",
+            "x": 1218.71875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1316.21875,
+            "bottom": 357.203125,
+            "left": 1218.71875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 1316.21875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1413.71875,
+            "bottom": 357.203125,
+            "left": 1316.21875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1413.71875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1511.21875,
+            "bottom": 357.203125,
+            "left": 1413.71875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1511.21875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1608.71875,
+            "bottom": 357.203125,
+            "left": 1511.21875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 119.28125,
+            "y": 915.203125,
+            "top": 915.203125,
+            "right": 614.75,
+            "bottom": 959.203125,
+            "left": 119.28125,
+            "width": 495.46875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 615.75,
+            "y": 915.203125,
+            "top": 915.203125,
+            "right": 1111.234375,
+            "bottom": 959.203125,
+            "left": 615.75,
+            "width": 495.484375,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 1112.234375,
+            "y": 915.203125,
+            "top": 915.203125,
+            "right": 1608.703125,
+            "bottom": 959.203125,
+            "left": 1112.234375,
+            "width": 496.46875,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S06",
+        "label": "Plan revision requested",
+        "kernelPhase": "PLAN_REVISION_REQUESTED",
+        "presentation": "canonical",
+        "stateVersion": 7,
+        "stateDigest": "1823c7d6413c5645093d3b21131f9419e90fe6b7e069c4d3b92c7a7e5227101e",
+        "receiptCount": 7,
+        "receiptHash": "dd8c2fb507e646f84683cb7f53c535b08d2d3084c3f7bb0149f9db361f2d582d"
+      },
+      "viewport": {
+        "name": "wide-desktop",
+        "width": 1728,
+        "height": 1117,
+        "expected": "desktop",
+        "actual": {
+          "width": 1728,
+          "height": 1117,
+          "visualWidth": 1728,
+          "visualHeight": 1117,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-activity"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 1218.71875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1316.21875,
+            "bottom": 357.203125,
+            "left": 1218.71875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 1316.21875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1413.71875,
+            "bottom": 357.203125,
+            "left": 1316.21875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1413.71875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1511.21875,
+            "bottom": 357.203125,
+            "left": 1413.71875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1511.21875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1608.71875,
+            "bottom": 357.203125,
+            "left": 1511.21875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 119.28125,
+            "y": 915.203125,
+            "top": 915.203125,
+            "right": 614.75,
+            "bottom": 959.203125,
+            "left": 119.28125,
+            "width": 495.46875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 615.75,
+            "y": 915.203125,
+            "top": 915.203125,
+            "right": 1111.234375,
+            "bottom": 959.203125,
+            "left": 615.75,
+            "width": 495.484375,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 1112.234375,
+            "y": 915.203125,
+            "top": 915.203125,
+            "right": 1608.703125,
+            "bottom": 959.203125,
+            "left": 1112.234375,
+            "width": 496.46875,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S09",
+        "label": "Verification in progress",
+        "kernelPhase": "CANDIDATE_SUBMITTED",
+        "presentation": "synthetic-test-only-transient",
+        "stateVersion": 11,
+        "stateDigest": "30ce65ba0fc84a2e6f31257ecb331fce362327149df96ae90acacd67d5fe515a",
+        "receiptCount": 11,
+        "receiptHash": "b2455a915dc174b153ae05972d4f1853eca7035c78470651b48abccf8f2a491a"
+      },
+      "viewport": {
+        "name": "wide-desktop",
+        "width": 1728,
+        "height": 1117,
+        "expected": "desktop",
+        "actual": {
+          "width": 1728,
+          "height": 1117,
+          "visualWidth": 1728,
+          "visualHeight": 1117,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-activity"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 1218.71875,
+            "y": 351,
+            "top": 351,
+            "right": 1316.21875,
+            "bottom": 395,
+            "left": 1218.71875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 1316.21875,
+            "y": 351,
+            "top": 351,
+            "right": 1413.71875,
+            "bottom": 395,
+            "left": 1316.21875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1413.71875,
+            "y": 351,
+            "top": 351,
+            "right": 1511.21875,
+            "bottom": 395,
+            "left": 1413.71875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1511.21875,
+            "y": 351,
+            "top": 351,
+            "right": 1608.71875,
+            "bottom": 395,
+            "left": 1511.21875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 119.28125,
+            "y": 953,
+            "top": 953,
+            "right": 614.75,
+            "bottom": 997,
+            "left": 119.28125,
+            "width": 495.46875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 615.75,
+            "y": 953,
+            "top": 953,
+            "right": 1111.234375,
+            "bottom": 997,
+            "left": 615.75,
+            "width": 495.484375,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 1112.234375,
+            "y": 953,
+            "top": 953,
+            "right": 1608.703125,
+            "bottom": 997,
+            "left": 1112.234375,
+            "width": 496.46875,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": null,
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": false
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S10",
+        "label": "Verification failed",
+        "kernelPhase": "VERIFICATION_FAILED",
+        "presentation": "canonical",
+        "stateVersion": 12,
+        "stateDigest": "a110a89cb8f6489efac9cba915111fb2bac4e290a320511f2bd5919a7338b011",
+        "receiptCount": 12,
+        "receiptHash": "19555528a1859428e188ff3bc1e3b2d339421c2b79c6e5a1495d1f612c594359"
+      },
+      "viewport": {
+        "name": "wide-desktop",
+        "width": 1728,
+        "height": 1117,
+        "expected": "desktop",
+        "actual": {
+          "width": 1728,
+          "height": 1117,
+          "visualWidth": 1728,
+          "visualHeight": 1117,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-activity"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 1218.71875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1316.21875,
+            "bottom": 357.203125,
+            "left": 1218.71875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 1316.21875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1413.71875,
+            "bottom": 357.203125,
+            "left": 1316.21875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1413.71875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1511.21875,
+            "bottom": 357.203125,
+            "left": 1413.71875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1511.21875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1608.71875,
+            "bottom": 357.203125,
+            "left": 1511.21875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 119.28125,
+            "y": 915.203125,
+            "top": 915.203125,
+            "right": 614.75,
+            "bottom": 959.203125,
+            "left": 119.28125,
+            "width": 495.46875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 615.75,
+            "y": 915.203125,
+            "top": 915.203125,
+            "right": 1111.234375,
+            "bottom": 959.203125,
+            "left": 615.75,
+            "width": 495.484375,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 1112.234375,
+            "y": 915.203125,
+            "top": 915.203125,
+            "right": 1608.703125,
+            "bottom": 959.203125,
+            "left": 1112.234375,
+            "width": 496.46875,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "FAIL",
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": true
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S12",
+        "label": "Verification passed, not accepted",
+        "kernelPhase": "VERIFICATION_PASSED",
+        "presentation": "canonical",
+        "stateVersion": 14,
+        "stateDigest": "4b36b4c8ecb0de358744b1d1fed3fdd380227f6aa62f9973619b33a64146d62c",
+        "receiptCount": 14,
+        "receiptHash": "03d9da228b9d243b7173cf89e6652e0b8ca4851f2e2ceb9bbe3042ece1f961e9"
+      },
+      "viewport": {
+        "name": "wide-desktop",
+        "width": 1728,
+        "height": 1117,
+        "expected": "desktop",
+        "actual": {
+          "width": 1728,
+          "height": 1117,
+          "visualWidth": 1728,
+          "visualHeight": 1117,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-activity"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 1218.71875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1316.21875,
+            "bottom": 357.203125,
+            "left": 1218.71875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 1316.21875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1413.71875,
+            "bottom": 357.203125,
+            "left": 1316.21875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1413.71875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1511.21875,
+            "bottom": 357.203125,
+            "left": 1413.71875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1511.21875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1608.71875,
+            "bottom": 357.203125,
+            "left": 1511.21875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 119.28125,
+            "y": 916.296875,
+            "top": 916.296875,
+            "right": 614.75,
+            "bottom": 960.296875,
+            "left": 119.28125,
+            "width": 495.46875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 615.75,
+            "y": 916.296875,
+            "top": 916.296875,
+            "right": 1111.234375,
+            "bottom": 960.296875,
+            "left": 615.75,
+            "width": 495.484375,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 1112.234375,
+            "y": 916.296875,
+            "top": 916.296875,
+            "right": 1608.703125,
+            "bottom": 960.296875,
+            "left": 1112.234375,
+            "width": 496.46875,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "PASS",
+        "completionRequested": false,
+        "accepted": false,
+        "failedHistoryRetained": true
+      }
+    },
+    {
+      "mode": "hostile",
+      "story": {
+        "id": "S14",
+        "label": "Goal accepted",
+        "kernelPhase": "GOAL_ACCEPTED",
+        "presentation": "canonical",
+        "stateVersion": 16,
+        "stateDigest": "cdf421b333727952c08f3159498e53e70645f18f22e9536509baa498ef4e0eb8",
+        "receiptCount": 16,
+        "receiptHash": "0b491a8ab7997b0f693112ea09c0f666d8af3fd981c6bbc9810e2042560eb695"
+      },
+      "viewport": {
+        "name": "wide-desktop",
+        "width": 1728,
+        "height": 1117,
+        "expected": "desktop",
+        "actual": {
+          "width": 1728,
+          "height": 1117,
+          "visualWidth": 1728,
+          "visualHeight": 1117,
+          "scale": 1
+        }
+      },
+      "roots": {
+        "active": "desktop-room",
+        "activeDisplay": "block",
+        "activeRects": 1,
+        "oppositeDisplay": "none",
+        "oppositeRects": 0,
+        "mobileDisplay": "none",
+        "desktopDisplay": "block"
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0,
+        "activeX": 0
+      },
+      "semantics": {
+        "mainCount": 1,
+        "tablistCount": 1,
+        "tabCount": 4,
+        "selectedTabCount": 1,
+        "selectedTabId": "desktop-tab-activity",
+        "panelCount": 1,
+        "panelLabelledBy": "desktop-tab-activity"
+      },
+      "controls": {
+        "count": 7,
+        "minimumHeight": 44,
+        "allHorizontallyReachable": true,
+        "boxes": [
+          {
+            "id": "desktop-tab-goal",
+            "x": 1218.71875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1316.21875,
+            "bottom": 357.203125,
+            "left": 1218.71875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-plan",
+            "x": 1316.21875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1413.71875,
+            "bottom": 357.203125,
+            "left": 1316.21875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-proof",
+            "x": 1413.71875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1511.21875,
+            "bottom": 357.203125,
+            "left": 1413.71875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": "desktop-tab-activity",
+            "x": 1511.21875,
+            "y": 313.203125,
+            "top": 313.203125,
+            "right": 1608.71875,
+            "bottom": 357.203125,
+            "left": 1511.21875,
+            "width": 97.5,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 119.28125,
+            "y": 915.203125,
+            "top": 915.203125,
+            "right": 614.75,
+            "bottom": 959.203125,
+            "left": 119.28125,
+            "width": 495.46875,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 615.75,
+            "y": 915.203125,
+            "top": 915.203125,
+            "right": 1111.234375,
+            "bottom": 959.203125,
+            "left": 615.75,
+            "width": 495.484375,
+            "height": 44
+          },
+          {
+            "id": null,
+            "x": 1112.234375,
+            "y": 915.203125,
+            "top": 915.203125,
+            "right": 1608.703125,
+            "bottom": 959.203125,
+            "left": 1112.234375,
+            "width": 496.46875,
+            "height": 44
+          }
+        ]
+      },
+      "safeDock": null,
+      "staticTools": {
+        "open": false,
+        "toolCount": 6,
+        "interactiveDescendants": 0
+      },
+      "focus": {
+        "activeId": "desktop-tab-activity",
+        "activeElementMatches": true,
+        "documentHasFocus": true,
+        "focusMatches": true,
+        "focusVisibleMatches": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(240, 189, 114)",
+        "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+      },
+      "hostile": {
+        "markers": [
+          {
+            "marker": "<script>v3Qualification()</script>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<img src=x onerror=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "<svg onload=v3Qualification()>",
+            "renderedLiterally": true
+          },
+          {
+            "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+            "renderedLiterally": true
+          }
+        ],
+        "injectedNodeCount": 0,
+        "longestTextWidth": 0
+      },
+      "passBoundary": {
+        "verdict": "PASS",
+        "completionRequested": true,
+        "accepted": true,
+        "failedHistoryRetained": true
+      }
+    }
+  ],
+  "accessibility": [],
+  "keyboard": [],
+  "reducedMotion": null,
+  "zoom": {
+    "story": {
+      "id": "S03",
+      "label": "Goal revision requested",
+      "kernelPhase": "GOAL_CONTRACT_REVISION_REQUESTED",
+      "presentation": "canonical",
+      "stateVersion": 3,
+      "stateDigest": "ff536c86d412a6966f610a7f5aaca6034523da5b68d4278b0ef543edf5dfbb50",
+      "receiptCount": 3,
+      "receiptHash": "ff26c88890fdc75c33f0fadc63972b83bd171890f5688b771005195c4e99f6ae"
+    },
+    "viewport": {
+      "width": 1440,
+      "height": 900,
+      "visualWidth": 1440,
+      "visualHeight": 900,
+      "scale": 1
+    },
+    "roots": {
+      "active": "desktop-room",
+      "activeDisplay": "block",
+      "activeRects": 1,
+      "oppositeDisplay": "none",
+      "oppositeRects": 0,
+      "mobileDisplay": "none",
+      "desktopDisplay": "block"
+    },
+    "overflow": {
+      "documentX": 0,
+      "bodyX": 0,
+      "activeX": 0
+    },
+    "semantics": {
+      "mainCount": 1,
+      "tablistCount": 1,
+      "tabCount": 4,
+      "selectedTabCount": 1,
+      "selectedTabId": "desktop-tab-activity",
+      "panelCount": 1,
+      "panelLabelledBy": "desktop-tab-activity"
+    },
+    "controls": {
+      "count": 7,
+      "minimumHeight": 44,
+      "allHorizontallyReachable": true,
+      "boxes": [
+        {
+          "id": "desktop-tab-goal",
+          "x": 1003.921875,
+          "y": 308.296875,
+          "top": 308.296875,
+          "right": 1101.421875,
+          "bottom": 352.296875,
+          "left": 1003.921875,
+          "width": 97.5,
+          "height": 44
+        },
+        {
+          "id": "desktop-tab-plan",
+          "x": 1101.421875,
+          "y": 308.296875,
+          "top": 308.296875,
+          "right": 1198.921875,
+          "bottom": 352.296875,
+          "left": 1101.421875,
+          "width": 97.5,
+          "height": 44
+        },
+        {
+          "id": "desktop-tab-proof",
+          "x": 1198.921875,
+          "y": 308.296875,
+          "top": 308.296875,
+          "right": 1296.421875,
+          "bottom": 352.296875,
+          "left": 1198.921875,
+          "width": 97.5,
+          "height": 44
+        },
+        {
+          "id": "desktop-tab-activity",
+          "x": 1296.421875,
+          "y": 308.296875,
+          "top": 308.296875,
+          "right": 1393.921875,
+          "bottom": 352.296875,
+          "left": 1296.421875,
+          "width": 97.5,
+          "height": 44
+        },
+        {
+          "id": null,
+          "x": 46.078125,
+          "y": 910.296875,
+          "top": 910.296875,
+          "right": 494.359375,
+          "bottom": 954.296875,
+          "left": 46.078125,
+          "width": 448.28125,
+          "height": 44
+        },
+        {
+          "id": null,
+          "x": 495.359375,
+          "y": 910.296875,
+          "top": 910.296875,
+          "right": 943.640625,
+          "bottom": 954.296875,
+          "left": 495.359375,
+          "width": 448.28125,
+          "height": 44
+        },
+        {
+          "id": null,
+          "x": 944.640625,
+          "y": 910.296875,
+          "top": 910.296875,
+          "right": 1393.921875,
+          "bottom": 954.296875,
+          "left": 944.640625,
+          "width": 449.28125,
+          "height": 44
+        }
+      ]
+    },
+    "safeDock": null,
+    "staticTools": {
+      "open": false,
+      "toolCount": 6,
+      "interactiveDescendants": 0
+    },
+    "focus": {
+      "activeId": "desktop-tab-activity",
+      "activeElementMatches": true,
+      "documentHasFocus": true,
+      "focusMatches": true,
+      "focusVisibleMatches": true,
+      "outlineStyle": "solid",
+      "outlineWidth": "3px",
+      "outlineColor": "rgb(240, 189, 114)",
+      "boxShadow": "rgb(9, 10, 11) 0px 0px 0px 3px, rgb(240, 189, 114) 0px 0px 0px 6px"
+    },
+    "hostile": {
+      "markers": [
+        {
+          "marker": "<script>v3Qualification()</script>",
+          "renderedLiterally": true
+        },
+        {
+          "marker": "<img src=x onerror=v3Qualification()>",
+          "renderedLiterally": true
+        },
+        {
+          "marker": "<svg onload=v3Qualification()>",
+          "renderedLiterally": true
+        },
+        {
+          "marker": "</textarea><input autofocus onfocus=v3Qualification()>",
+          "renderedLiterally": true
+        }
+      ],
+      "injectedNodeCount": 0,
+      "longestTextWidth": 0
+    },
+    "passBoundary": {
+      "verdict": null,
+      "completionRequested": false,
+      "accepted": false,
+      "failedHistoryRetained": false
+    }
+  },
+  "screenshots": [],
+  "failures": []
+}

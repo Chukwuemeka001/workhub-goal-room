@@ -12,16 +12,16 @@ import {
 describe("owner UI policies", () => {
   it("announces every lifecycle status without relying on color", () => {
     expect(createLifecycleAccessibleLabel({ label: "Plan", status: "complete" })).toBe(
-      "Plan — complete",
+      "Plan: complete",
     );
     expect(createLifecycleAccessibleLabel({ label: "Evidence", status: "active" })).toBe(
-      "Evidence — active",
+      "Evidence: active",
     );
     expect(createLifecycleAccessibleLabel({ label: "Verify", status: "failed" })).toBe(
-      "Verify — failed",
+      "Verify: failed",
     );
     expect(createLifecycleAccessibleLabel({ label: "Accept", status: "pending" })).toBe(
-      "Accept — pending",
+      "Accept: pending",
     );
   });
 

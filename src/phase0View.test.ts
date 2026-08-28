@@ -37,7 +37,7 @@ describe("createPhase0View", () => {
     view.showRegistration("unsupported");
 
     expect(support.textContent).toBe(
-      "WebMCP unavailable in this browser — use a qualifying ChatGPT or Chrome client",
+      "WebMCP unavailable in this browser. Use a qualifying ChatGPT or Chrome client",
     );
     expect(support.dataset.status).toBe("unsupported");
   });

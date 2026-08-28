@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "goal-room-v3-production-exclusion",
+  "productionEntries": [
+    "index.html",
+    "src/main.ts"
+  ],
+  "entryReferences": [],
+  "forbiddenTokens": [
+    "qualification/v3-fixture",
+    "__v3Qualification",
+    "V3_STORY_CATALOG",
+    "synthetic-test-only-transient",
+    "v3Qualification()"
+  ],
+  "leaks": [],
+  "builtFiles": [
+    {
+      "path": "assets/index-7EloIADQ.js",
+      "sha256": "13cf47dc8cfb6b548b53b8706d06b27c723977405b0dddf4573de4eead73284f",
+      "bytes": 77640
+    },
+    {
+      "path": "assets/index-FqWWkrkR.css",
+      "sha256": "b468e12eff552514ea39411c0ce2f1704d4ae062d0df898913560638c7e4bb92",
+      "bytes": 21797
+    },
+    {
+      "path": "index.html",
+      "sha256": "fec49287b228f9aab8184d08d70bd5074056bdc9942ef988ce4f4f4adfbe4815",
+      "bytes": 2618
+    }
+  ],
+  "passed": true
+}

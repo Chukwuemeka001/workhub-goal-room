@@ -40,7 +40,7 @@ function renderPlan(view: MobileView) {
   );
   const plan = el("section", "mobile-detail-group");
   plan.append(text("h3", `Plan ${view.plan.version ? `v${view.plan.version}` : "not proposed"}`));
-  plan.append(text("p", `Bound to Goal Contract ${view.plan.goalContractVersion ? `v${view.plan.goalContractVersion}` : "—"} · ${view.plan.status.replaceAll("_", " ")}`));
+  plan.append(text("p", `Bound to Goal Contract ${view.plan.goalContractVersion ? `v${view.plan.goalContractVersion}` : "not bound"} · ${view.plan.status.replaceAll("_", " ")}`));
   const steps = el("ol");
   for (const step of view.plan.steps) steps.append(text("li", step.title));
   if (view.plan.steps.length === 0) steps.append(text("li", "No Plan steps admitted"));

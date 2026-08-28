@@ -4,7 +4,7 @@ import type { LifecycleStage, OwnerViewModel } from "./ownerView";
 export function createLifecycleAccessibleLabel(
   stage: Pick<LifecycleStage, "label" | "status">,
 ): string {
-  return `${stage.label} — ${stage.status}`;
+  return `${stage.label}: ${stage.status}`;
 }
 
 export function createBoundaryMessage(view: OwnerViewModel): string {

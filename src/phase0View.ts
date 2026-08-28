@@ -24,7 +24,7 @@ export function createPhase0View({
       support.textContent =
         status === "registered"
           ? "WebMCP tool registered"
-          : "WebMCP unavailable in this browser — use a qualifying ChatGPT or Chrome client";
+          : "WebMCP unavailable in this browser. Use a qualifying ChatGPT or Chrome client";
     },
     recordPing(nextMessage: string) {
       invocationCount += 1;

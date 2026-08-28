@@ -15,11 +15,11 @@ const matrix = [
   { width: 430, height: 932, expected: "mobile" },
   { width: 852, height: 393, expected: "mobile" },
   { width: 620, height: 900, expected: "mobile" },
-  { width: 621, height: 900, expected: "desktop" },
+  { width: 621, height: 900, expected: "mobile" },
   { width: 932, height: 620, expected: "mobile" },
-  { width: 933, height: 620, expected: "desktop" },
-  { width: 932, height: 621, expected: "desktop" },
-  { width: 933, height: 621, expected: "desktop" },
+  { width: 933, height: 620, expected: "mobile" },
+  { width: 1199, height: 900, expected: "mobile" },
+  { width: 1200, height: 900, expected: "desktop" },
   { width: 1280, height: 800, expected: "desktop" },
   { width: 1440, height: 900, expected: "desktop" },
   { width: 1728, height: 1117, expected: "desktop" },
@@ -166,10 +166,7 @@ try {
     const axDialogs = axTree.nodes.filter((node) => !node.ignored && node.role?.value === "dialog").map((node) => node.name?.value ?? "");
     const row = { ...viewport, ...dom, axMainCount: axMains.length, axMainNames: axMains, axDialogCount: axDialogs.length };
     const expectedMobile = viewport.expected === "mobile";
-    const zeroOverflowExpected = expectedMobile || viewport.width >= 932;
-    const overflowFailed = zeroOverflowExpected
-      ? row.bodyOverflow !== 0 || row.documentOverflow !== 0
-      : row.bodyOverflow !== row.documentOverflow || row.bodyOverflow < 0;
+    const overflowFailed = row.bodyOverflow !== 0 || row.documentOverflow !== 0;
     const failed =
       row.mobileDisplay !== (expectedMobile ? "block" : "none") ||
       row.desktopDisplay !== (expectedMobile ? "none" : "block") ||

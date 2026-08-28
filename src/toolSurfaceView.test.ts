@@ -11,6 +11,7 @@ describe("static-six informational Agent tool projection", () => {
       documentLike: { modelContext: { registerTool: (tool) => registered.push(tool.name) } },
       navigatorLike: {},
       room,
+      onInvocation: () => undefined,
     });
     const projected = createToolSurfaceView(room.getState());
     expect(projected.registration).toBe("static-six");

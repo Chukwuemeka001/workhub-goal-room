@@ -75,7 +75,7 @@ describe("Goal Room owner view model", () => {
     expect(createOwnerViewModel(room.getState(), room.getReceipts())).toMatchObject({
       ownerIntent: null,
       goal: "",
-      statusLabel: "Owner intent required — Goal not admitted",
+      statusLabel: "Owner intent required. Goal not admitted",
       ownerAttention: {
         required: true,
         title: "Describe the outcome you want",
@@ -106,7 +106,7 @@ describe("Goal Room owner view model", () => {
       ownerIntent: "Build a governed challenge entry.",
       goal: "",
       doneLooksLike: [],
-      statusLabel: "Owner intent captured — Goal not admitted",
+      statusLabel: "Owner intent captured. Goal not admitted",
       ownerAttention: {
         required: false,
         title: "Agent must propose a Goal Contract",
@@ -193,7 +193,7 @@ describe("Goal Room owner view model", () => {
     });
 
     expect(createOwnerViewModel(room.getState(), room.getReceipts())).toMatchObject({
-      statusLabel: "Goal confirmed — Plan required",
+      statusLabel: "Goal confirmed. Plan required",
       ownerAttention: {
         required: false,
         title: "Goal Contract v1 confirmed",
@@ -298,7 +298,7 @@ describe("Goal Room owner view model", () => {
     await room.verifyActiveCandidate("verify-v1");
 
     expect(createOwnerViewModel(room.getState(), room.getReceipts())).toMatchObject({
-      statusLabel: "Verification failed — correction required",
+      statusLabel: "Verification failed. Correction required",
       ownerAttention: {
         required: false,
         title: "Candidate v1 did not pass",
@@ -351,7 +351,7 @@ describe("Goal Room owner view model", () => {
     await room.verifyActiveCandidate("verify-v2");
 
     expect(createOwnerViewModel(room.getState(), room.getReceipts())).toMatchObject({
-      statusLabel: "Verification passed — owner has not accepted the Goal",
+      statusLabel: "Verification passed. Owner has not accepted the Goal",
       ownerAttention: {
         required: false,
         title: "Candidate v2 passed deterministic verification",
@@ -476,7 +476,7 @@ describe("Goal Room owner view model", () => {
     });
 
     expect(createOwnerViewModel(room.getState(), room.getReceipts())).toMatchObject({
-      statusLabel: "Plan confirmed — work may begin",
+      statusLabel: "Plan confirmed. Work may begin",
       ownerAttention: {
         required: false,
         title: "Plan v1 confirmed",

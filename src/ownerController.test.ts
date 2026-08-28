@@ -33,7 +33,7 @@ describe("owner decision controller", () => {
     });
     expect(renders.at(-1)).toMatchObject({
       ownerIntent: "Build <b>literal</b> governed work.",
-      statusLabel: "Owner intent captured — Goal not admitted",
+      statusLabel: "Owner intent captured. Goal not admitted",
       receiptCount: 1,
     });
   });
@@ -59,7 +59,7 @@ describe("owner decision controller", () => {
       activePlan: null,
     });
     expect(renders.at(-1)).toMatchObject({
-      statusLabel: "Goal confirmed — Plan required",
+      statusLabel: "Goal confirmed. Plan required",
       receiptCount: 2,
     });
   });
@@ -120,7 +120,7 @@ describe("owner decision controller", () => {
       activePlan: { version: 1, status: "CONFIRMED" },
     });
     expect(renders.at(-1)).toMatchObject({
-      statusLabel: "Plan confirmed — work may begin",
+      statusLabel: "Plan confirmed. Work may begin",
       receiptCount: 2,
     });
   });
