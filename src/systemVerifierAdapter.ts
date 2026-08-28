@@ -38,13 +38,15 @@ export function createSystemVerifierAdapter({
       scheduledCandidates.add(key);
 
       queue = queue.then(async () => {
-        const current = room.getState();
-        if (
-          current.phase !== "CANDIDATE_SUBMITTED" ||
-          current.activeCandidate?.version !== candidate.version ||
-          current.activeCandidate.sha256 !== candidate.sha256
-        ) return;
+        let verificationAttempted = false;
         try {
+          const current = room.getState();
+          if (
+            current.phase !== "CANDIDATE_SUBMITTED" ||
+            current.activeCandidate?.version !== candidate.version ||
+            current.activeCandidate.sha256 !== candidate.sha256
+          ) return;
+          verificationAttempted = true;
           await room.verifyActiveCandidate(key);
           try {
             onSettled();
@@ -52,6 +54,18 @@ export function createSystemVerifierAdapter({
             // Presentation reporting cannot alter or repeat verification.
           }
         } catch (error) {
+          if (!verificationAttempted) {
+            scheduledCandidates.delete(key);
+          } else try {
+            const current = room.getState();
+            if (
+              current.phase === "CANDIDATE_SUBMITTED" &&
+              current.activeCandidate?.version === candidate.version &&
+              current.activeCandidate.sha256 === candidate.sha256
+            ) scheduledCandidates.delete(key);
+          } catch {
+            // Retain suppression when authoritative settlement cannot be ruled out.
+          }
           try {
             onError(error);
           } catch {

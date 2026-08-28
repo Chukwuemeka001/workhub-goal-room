@@ -232,6 +232,80 @@ describe("production System verifier adapter", () => {
     ]);
   });
 
+  it("recovers the queue after a canonical candidate re-read fails", async () => {
+    const state = submittedState();
+    const failure = new Error("CANONICAL_REREAD_FAILED");
+    let reads = 0;
+    const getState = vi.fn(() => {
+      reads += 1;
+      if (reads === 2) throw failure;
+      return state;
+    });
+    const verifyActiveCandidate = vi.fn(async (): Promise<DispatchResult> => ({
+      accepted: true,
+      stateVersion: 5,
+      nextLegalAction: "AGENT_REQUEST_COMPLETION",
+      ownerRequired: false,
+    }));
+    const onError = vi.fn();
+    const onSettled = vi.fn();
+    const adapter = createSystemVerifierAdapter({
+      room: { getState, verifyActiveCandidate },
+      onError,
+      onSettled,
+    });
+    const record = { toolName: "submit_artifact", result: { accepted: true } };
+
+    adapter.observe(record);
+    await vi.waitFor(() => expect(onError).toHaveBeenCalledWith(failure));
+    expect(verifyActiveCandidate).not.toHaveBeenCalled();
+
+    adapter.observe(record);
+    await vi.waitFor(() => expect(onSettled).toHaveBeenCalledOnce());
+    expect(verifyActiveCandidate).toHaveBeenCalledOnce();
+    expect(onError).toHaveBeenCalledOnce();
+  });
+
+  it("retries an exact candidate after verification rejects before an authoritative verdict", async () => {
+    const state = submittedState();
+    const before = structuredClone(state);
+    const failure = new Error("VERIFIER_UNAVAILABLE");
+    let attempts = 0;
+    const verifyActiveCandidate = vi.fn(async (): Promise<DispatchResult> => {
+      attempts += 1;
+      if (attempts === 1) throw failure;
+      return {
+        accepted: true,
+        stateVersion: 5,
+        nextLegalAction: "AGENT_REQUEST_COMPLETION",
+        ownerRequired: false,
+      };
+    });
+    const onError = vi.fn();
+    const onSettled = vi.fn();
+    const adapter = createSystemVerifierAdapter({
+      room: { getState: () => state, verifyActiveCandidate },
+      onError,
+      onSettled,
+    });
+    const record = { toolName: "submit_artifact", result: { accepted: true } };
+
+    adapter.observe(record);
+    await vi.waitFor(() => expect(onError).toHaveBeenCalledWith(failure));
+    expect(state).toEqual(before);
+    expect(state.phase).toBe("CANDIDATE_SUBMITTED");
+    expect(state.verificationHistory).toEqual([]);
+    expect(onSettled).not.toHaveBeenCalled();
+
+    adapter.observe(record);
+    await vi.waitFor(() => expect(onSettled).toHaveBeenCalledOnce());
+    adapter.observe(record);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(verifyActiveCandidate).toHaveBeenCalledTimes(2);
+    expect(onSettled).toHaveBeenCalledOnce();
+    expect(onError).toHaveBeenCalledOnce();
+  });
+
   it("fails closed and swallows a throwing error reporter without retrying authority", async () => {
     const state = submittedState();
     const before = structuredClone(state);
