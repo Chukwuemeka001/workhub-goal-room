@@ -11,23 +11,47 @@ const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
 
 const zoom = productionJourney.accessibility?.zoom200;
+const requiredZoomSelectors = [
+  ".mobile-goal-title", ".mobile-actor", ".mobile-frontier-title", ".mobile-frontier-live", ".mobile-boundary",
+  "#mobile-owner-intent", ".mobile-intent-form button[type='submit']", "#mobile-tab-goal", "#mobile-tab-plan", "#mobile-tab-proof", "#mobile-tab-activity", ".judge-help summary",
+];
 check(zoom?.route === "/index.html", "production effective 200% record is absent or not bound to /index.html");
 check(zoom?.method === "halved-css-viewport-equivalent", "production zoom method is not a defensible effective 200% equivalent");
 check(zoom?.referenceViewport?.width === 1440 && zoom?.referenceViewport?.height === 900, "production zoom reference viewport must be 1440x900");
 check(zoom?.cssViewport?.innerWidth === 720 && zoom?.cssViewport?.innerHeight === 450, "production zoom CSS viewport must be effectively halved to 720x450");
 check(zoom?.effectiveScale === 2 && zoom?.visualViewport?.width === 720 && zoom?.visualViewport?.height === 450, "production zoom effective scale/visual viewport measurement is invalid");
 check(zoom?.overflow?.documentX === 0 && zoom?.overflow?.bodyX === 0, "production zoom has unintended horizontal overflow");
-check(zoom?.composition?.active?.length === 1 && zoom?.composition?.active?.[0] === "mobile-room" && zoom?.composition?.axMainNames?.length === 1, "production zoom distinct composition/AX XOR is invalid");
-check(Array.isArray(zoom?.requiredContent) && zoom.requiredContent.length >= 8 && zoom.requiredContent.every((row) => row.rendered && row.reachable), "production zoom required content/controls are not all rendered and reachable");
+check(zoom?.composition?.active?.length === 1 && zoom?.composition?.active?.[0] === "mobile-room" && zoom?.composition?.axMainNames?.length === 1 && zoom.composition.axMainNames[0] === "WorkHub Goal Room mobile", "production zoom distinct composition/named AX main is invalid");
+check(Array.isArray(zoom?.requiredContent) && zoom.requiredContent.length === requiredZoomSelectors.length && requiredZoomSelectors.every((selector) => zoom.requiredContent.some((row) => row.selector === selector && row.rendered === true && row.reachable === true)), "production zoom required content/controls are not all rendered and reachable");
 
 const contrast = productionJourney.accessibility?.contrast;
 const contrastRows = Array.isArray(contrast?.inventory) ? contrast.inventory : [];
-const requiredContrastCategories = ["normal-text", "large-text", "status-success", "status-fail", "status-warning", "actionable-control", "focus-indicator"];
+const requiredContrastThresholds = new Map([
+  ["normal-text", 4.5], ["large-text", 3], ["status-success", 4.5], ["status-fail", 4.5],
+  ["status-warning", 4.5], ["actionable-control", 3], ["focus-indicator", 3],
+]);
+const contrastRatio = (foreground, background) => {
+  const luminance = (hex) => {
+    const channels = hex.slice(1).match(/.{2}/g).map((value) => Number.parseInt(value, 16) / 255);
+    const [r, g, b] = channels.map((value) => value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4);
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  };
+  const [lighter, darker] = [luminance(foreground), luminance(background)].sort((a, b) => b - a);
+  return Number(((lighter + 0.05) / (darker + 0.05)).toFixed(2));
+};
+const nonEmpty = (value) => typeof value === "string" && value.trim().length > 0;
 check(contrast?.source === "computed production rendered styles", "production-derived contrast inventory is absent");
-check(["desktop", "mobile"].every((composition) => contrastRows.some((row) => row.composition === composition)), "contrast inventory must cover desktop and mobile compositions");
-check(requiredContrastCategories.every((category) => contrastRows.some((row) => row.category === category)), "contrast inventory is missing a required category");
+check(["desktop", "mobile"].every((composition) => [...requiredContrastThresholds.keys()].every((category) => contrastRows.some((row) => row.composition === composition && row.category === category))), "each contrast composition must cover every required category");
 check(contrastRows.length >= 14, "contrast inventory is not representative");
-check(contrastRows.every((row) => row.selector && row.state && row.token && /^#[0-9a-f]{6}$/i.test(row.foreground) && /^#[0-9a-f]{6}$/i.test(row.background) && Number.isFinite(row.ratio) && [3, 4.5].includes(row.threshold) && row.pass === (row.ratio >= row.threshold) && row.pass), "contrast inventory contains invalid measurements or failures");
+check(contrastRows.every((row) => {
+  const colorsValid = /^#[0-9a-f]{6}$/i.test(row.foreground) && /^#[0-9a-f]{6}$/i.test(row.background);
+  const threshold = requiredContrastThresholds.get(row.category);
+  const focusValid = row.category !== "focus-indicator" || (row.focused === true && row.outlineStyle === "solid" && /^\d+(?:\.\d+)?px$/.test(row.outlineWidth) && Number.parseFloat(row.outlineWidth) >= 3);
+  return [row.selector, row.state, row.token, row.composition].every(nonEmpty)
+    && ["desktop", "mobile"].includes(row.composition) && threshold !== undefined && row.threshold === threshold
+    && colorsValid && Number.isFinite(row.ratio) && row.ratio === contrastRatio(row.foreground, row.background)
+    && row.ratio >= row.threshold && row.pass === true && focusValid;
+}), "contrast inventory contains invalid measurements, metadata, thresholds, focus evidence, or failures");
 check(contrast?.failureCount === 0 && contrast?.counts?.total === contrastRows.length, "contrast inventory summary is invalid or has failures");
 
 const html = read("index.html");
