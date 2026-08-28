@@ -64,6 +64,20 @@ The page independently projects accepted/refused WebMCP outcomes and rerenders a
 
 ## Governed browser-native proof
 
+**Fresh V3 native proof (August 28, 2026):** Google Chrome Canary `154.0.8028.0`, using only `enable-webmcp-testing` and `devtools-webmcp-support` in an isolated unsigned-in disposable profile, natively enumerated the exact current six-tool surface. Every Agent call used the browser-returned `RegisteredTool` and the testing API shape `getTools()` → `executeTool(tool, JSON.stringify(input))`; no descriptor callback was called directly.
+
+The recorded production journey starts at `INTENT_DRAFT`, includes Owner UI Goal v1 revision → Goal v2 confirmation and Plan v1 revision → Plan v2 confirmation, claims the exact admitted step, records automatic production System FAIL for Candidate v1 and PASS for corrected Candidate v2, requests completion natively, and ends only after exact-candidate Owner UI acceptance at sealed S14. The receipt also preserves typed testing-API failures, malformed/premature/digest/idempotency/terminal negatives with mutation checks, independent DOM and native read-state observations, raw descriptor schemas/annotations, browser enumeration order separately from registration order, and a fresh BrowserOS 148 unavailable-client control whose Owner UI remains usable.
+
+Deterministic evidence and five bounded screenshots are under [`evaluation/native-webmcp-v3/`](evaluation/native-webmcp-v3/). Revalidate them with:
+
+```bash
+npm run qa:v3:native
+```
+
+This proves native browser registration, discovery, testing-API invocation, shared-state reflection, and the recorded governance boundaries. It does **not** prove autonomous model selection or repeated model reliability.
+
+### Historical five-tool checkpoint
+
 **The browser-native Phase 4 evidence was locally verified August 27, 2026 in Google Chrome Canary 154 with the exact `enable-webmcp-testing` and `devtools-webmcp-support` experiments enabled in an isolated profile.** That evidence predates the V3 Goal-inception tool addition and is retained as historical evidence, not rewritten as a six-tool native-browser claim.
 
 Observed runtime:

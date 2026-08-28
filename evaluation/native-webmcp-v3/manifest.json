@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "kind": "workhub-v3-native-webmcp-manifest",
+  "nonRecursive": true,
+  "receipt": {
+    "path": "evaluation/native-webmcp-v3/native-webmcp-receipt.json",
+    "sha256": "85ae2183e0b617ba1837dafd4490483fb017adb9a1d57ba36a844b2033e1e695",
+    "bytes": 317615
+  },
+  "files": [
+    {
+      "path": "evaluation/native-webmcp-v3/native-webmcp-receipt.json",
+      "sha256": "85ae2183e0b617ba1837dafd4490483fb017adb9a1d57ba36a844b2033e1e695",
+      "bytes": 317615
+    },
+    {
+      "path": "evaluation/native-webmcp-v3/01-goal-revision-native-1440x900.png",
+      "sha256": "53cab6d38ca7412679904c99927f14c6b1a3ca409fb1eb91d496f45becf433f9",
+      "bytes": 201163
+    },
+    {
+      "path": "evaluation/native-webmcp-v3/02-candidate-v1-native-fail-1440x900.png",
+      "sha256": "71f197bbbd31ef1967f3df30ce2ef59fad01e37d17e2ff66d94c1b8ee589abca",
+      "bytes": 205618
+    },
+    {
+      "path": "evaluation/native-webmcp-v3/03-candidate-v2-native-pass-1440x900.png",
+      "sha256": "20848cb7e99e0a32bcae2005fede4b97418a7fb0dd7c2c47cff5c7d119d5c42c",
+      "bytes": 240104
+    },
+    {
+      "path": "evaluation/native-webmcp-v3/04-s14-native-sealed-1440x900.png",
+      "sha256": "b8f58b9d9087e35a00a516b4bb3795a72611ac1aef52661ce81e717bbf31e374",
+      "bytes": 185427
+    },
+    {
+      "path": "evaluation/native-webmcp-v3/05-browseros-negative-control-1440x900.png",
+      "sha256": "e75f3c2ebf5fa88e380d38e520f66119ab209ce7a07b05b609f443d70c7b4d22",
+      "bytes": 196969
+    }
+  ]
+}
