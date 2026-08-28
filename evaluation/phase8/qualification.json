@@ -1,97 +1,126 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "kind": "phase8-deterministic-qualification",
-  "qualificationCommit": "recorded_after_commit_in_git",
-  "testedProductionCommit": "666217f75f0d1ea978f6f951e77db6262d54f2fe",
-  "testedProductionTree": "57e8be75d110e6dec3350dd93310d71af653f080",
-  "scope": "test-only full journey, qualification harness stability, and public-safe native/visual evidence; no product feature redesign",
+  "evidenceCommit": "717650ee828e30bc39aacfda798e5592a725567a",
+  "evidenceTree": "69e1c3a614c27bab432047f938495475c31180df",
+  "testedProductionCommit": "c4602a9d5d1fde8451e76fcc1e6e0797f693d70c",
+  "testedProductionTree": "c4c9b4105175df6284b49ebfca30b7b8f411f8b6",
+  "metadataBinding": "This metadata-only child binds exact evidence commit E. The final metadata commit is reported from Git rather than recursively embedded here.",
+  "manifest": {
+    "path": "evaluation/phase8/manifest.json",
+    "sha256": "cd17f429e3c917aaac12a891dc70dd9ddde2de52145b06949df92def52565b41",
+    "selfReferenceExcluded": true
+  },
+  "scope": "qualification-only tests and evidence; no production authority, UI, or CSS changes",
   "tdd": {
-    "journeyRed": {
-      "command": "npm test -- --run src/phase8Journey.test.ts",
-      "result": "1 test failed: PHASE8_JOURNEY_NOT_IMPLEMENTED"
+    "authoritySetupRed": {
+      "command": "./node_modules/.bin/vitest run src/phase8VisualHarness.test.ts",
+      "result": "suite failed to import missing ../qa/phase8-authoritative"
     },
-    "journeyGreen": {
-      "command": "./node_modules/.bin/vitest run src/phase8Journey.test.ts --update",
-      "result": "1 test passed; 1 mutation snapshot written"
+    "authorityBehaviorRed": {
+      "command": "./node_modules/.bin/vitest run src/phase8VisualHarness.test.ts",
+      "result": "2/2 failed with PHASE8_VISUAL_AUTHORITY_NOT_IMPLEMENTED"
     },
-    "mobileHarnessRed": {
-      "command": "CHROME_BIN='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' npm run qa:mobile",
-      "result": "Page.captureScreenshot exceeded the inherited 15 second CDP timeout"
+    "projectionRed": {
+      "command": "./node_modules/.bin/vitest run src/phase8VisualHarness.test.ts",
+      "result": "1/3 failed: QA entry did not use createDesktopView/createMobileView and production surfaces"
     },
-    "mobileHarnessGreen": {
-      "command": "CHROME_BIN='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' npm run qa:mobile",
-      "result": "9 states; 37 measurements; 8 trusted-keyboard checkpoints; 5 screenshots; 0 failures after timeout bound increased to 60 seconds"
+    "runnerRed": {
+      "command": "./node_modules/.bin/vitest run src/phase8VisualHarness.test.ts",
+      "result": "1/4 failed: dedicated qa:phase8-visual runner absent"
+    },
+    "green": {
+      "command": "npm run test:phase8-visual",
+      "result": "1 file; 4/4 passed"
     }
   },
   "deterministicJourney": {
+    "command": "./node_modules/.bin/vitest run src/phase8Journey.test.ts",
+    "result": "1/1 passed",
     "providerFree": true,
-    "agentActions": "all six installed production WebMCP definitions execute their real callbacks",
-    "ownerActions": "createOwnerDecisionController dispatches exact owner kernel commands",
-    "verification": "room.verifyActiveCandidate only",
-    "stateVersions": "S0 initial through S16 GOAL_ACCEPTED",
+    "agentAuthority": "all six production WebMCP callbacks",
+    "ownerAuthority": "createOwnerDecisionController",
+    "systemAuthority": "room.verifyActiveCandidate",
+    "stateVersions": "S0 through S16 GOAL_ACCEPTED",
     "receipts": 18,
-    "exactRetryDuplicateReceipts": 0,
-    "malformedMutationOrReceipt": false,
-    "staleStateMutation": false,
     "candidateVerdicts": ["v1 FAIL", "v2 PASS"],
     "passIsAcceptance": false,
-    "replayEqualsLiveFinalState": true,
-    "receiptChainValidatedByReplay": true,
-    "mutationSnapshot": "src/__snapshots__/phase8Journey.test.ts.snap"
+    "replayEqualsLiveFinalState": true
+  },
+  "freshVisualEvidence": {
+    "ledger": "evaluation/phase8/visual-max-hostile.json",
+    "sha256": "acbe38be924e0595390724309d67791fb8415914e3589fab21d5a3ac3f929c04",
+    "claimBoundary": "QA-only entry rendering production projections/components, distinct from native production",
+    "rows": 64,
+    "desktop": [[1280,800],[1440,900],[1728,1117]],
+    "mobile": [[375,667],[393,852],[430,932]],
+    "landscape": [852,393],
+    "keyboardOpen": [393,552],
+    "states": ["Goal revision","Plan revision","FAIL","PASS","completion","accepted","max/hostile tabs"],
+    "stateVersions": {"goal":2,"goalRevision":3,"plan":6,"planRevision":7,"fail":12,"pass":14,"completion":15,"accepted":16},
+    "producerBoundaries": {
+      "goalRawCodePoints": 1000,
+      "whyRawCodePoints": 1000,
+      "fiveGoalLists": "each 16 items; every item exactly 500 raw Unicode code points",
+      "plan": "8 steps; every ID exactly 80 and title exactly 160 code points; goalContractVersion 2",
+      "revisionNotes": "declared finite 2000-code-point hostile probes; source admits nonblank notes without a maximum, so no maximum claim"
+    },
+    "maximumDocumentHorizontalOverflow": 0,
+    "maximumBodyHorizontalOverflow": 0,
+    "maximumDocumentScrollY": 2450,
+    "maximumContainerScrollY": 40651,
+    "minimumControlHeight": 44,
+    "controlCollisions": 0,
+    "injectedNodes": 0,
+    "hostileMarkupRenderedLiterally": true,
+    "oneAxMainPerViewport": true,
+    "tabs": "one active tablist, four tabs, one labelled panel; trusted ArrowLeft/ArrowRight/Home/End retained focus/selection/panel binding and byte-stable authority",
+    "safeDock": "recorded per mobile row with zero control collisions and viewport-contained dock/tab bars",
+    "reducedMotion": "media matched; zero nonzero computed animations or transitions",
+    "determinism": "two consecutive exact-archive replays produced byte-identical JSON and PNG hashes"
+  },
+  "nativeProductionEvidence": {
+    "ledger": "evaluation/phase8/native-canary.json",
+    "sha256": "6e6e154628a9eac72666b38d5c3cd1e053a877ab7413301be1f1e4251e8a3498",
+    "transcript": "evaluation/phase8/cdp-transcript.redacted.json",
+    "transcriptSha256": "a62d0c97a1b38366cea9ec5d83be004a5088ef55a8d3b45f774ad2f6f6af3576",
+    "screenshot": "evaluation/phase8/native-goal-1440x900.png",
+    "screenshotSha256": "b62d9c3f8223408094d0f6a818b6d49dd4e5adebb842ddf09e88cc6070f8afa4",
+    "result": "six native discoveries; malformed call caused no state/receipt mutation; accepted Goal visible at 1440x900; one correct desktop composition; one AX main; reduced motion zero",
+    "claimLimit": "Chrome Canary native registration/discovery/testing-API invocation only; no autonomous model selection and no automated VoiceOver speech/navigation claim"
   },
   "gates": {
-    "focused": "1/1 passed",
-    "full": "23 files; 166/166 passed",
-    "typescriptAndProductionBuild": "passed; 18 modules; JS 71.09 kB; CSS 26.98 kB",
+    "fullJourney": "1/1 passed",
+    "npmTest": "browser resolver 12/12; Vitest 23 files 166/166; built production composition 13/13",
+    "typescriptAndProductionBuild": "passed; 18 modules; JS 71.09 kB; CSS 27.07 kB",
+    "exactArchiveDiff": "dist from evidence workspace was byte-identical to dist built from git archive c4602a9 with shared installed dependencies",
     "npmAudit": "0 vulnerabilities",
     "providerFreeConformance": "17/17 oracle; 7/7 negative detections",
-    "desktopQa": "21 viewport/state rows; 8 trusted-keyboard checkpoints; 0 failures",
-    "mobileQa": "37 viewport/state rows including landscape and keyboard-open; 8 trusted-keyboard checkpoints; invalid-to-corrected intent form; 0 failures",
-    "nativeCanary": "six discovered; malformed callback no state/receipt mutation; accepted Goal proposal visible with two receipts",
-    "ax": "Chrome AX-tree inspection only, not automated VoiceOver; one visible main, one tabpanel, four named tabs, named owner buttons; hidden mobile composition excluded",
-    "reducedMotion": "media matched; zero nonzero computed animations or transitions",
+    "desktopRegressionQa": "21 rows; 8 trusted-keyboard checkpoints; 0 failures",
+    "mobileRegressionQa": "37 measurements; 8 trusted-keyboard checkpoints; 0 failures",
+    "dedicatedPhase8Qa": "64 rows; 8 AX rows; 2 trusted-keyboard groups; 5 representative screenshots; 0 failures",
+    "bundleFixtureExclusion": "no Phase8 fixture tokens in production HTML/JS/CSS",
     "privacyScan": "no private home paths or secret-like fields in evaluation/phase8",
+    "productSourceDiff": "zero changes under src, index.html, or vite.config.ts from c4602a9",
     "independentExactCommitReview": "pending; builder did not self-claim independent review"
   },
-  "visualMatrix": {
-    "desktop": [[1280, 800], [1440, 900], [1728, 1117]],
-    "mobile": [[375, 667], [393, 852], [430, 932]],
-    "landscape": [852, 393],
-    "keyboardOpen": [393, 552],
-    "states": ["intent", "Goal v1/v2 revision", "Plan v1/v2 revision", "FAIL", "PASS", "completion", "accepted", "max producer-valid content"],
-    "documentHorizontalOverflowMax": 0,
-    "bodyHorizontalOverflowMax": 0,
-    "controlCollisions": 0,
-    "injectedElements": 0,
-    "hostileMarkupRenderedLiterally": true,
-    "sourceEvidence": ["evaluation/desktop-phase6/measurements.json", "evaluation/mobile-phase5/measurements.json"]
-  },
-  "nativeReplay": {
-    "commands": [
-      "npm ci",
-      "npm run build",
-      "npm run preview -- --host 127.0.0.1 --port 4188 --strictPort",
-      "node evaluation/phase8/replay-native.mjs"
-    ],
-    "evidence": [
-      "evaluation/phase8/native-canary.json",
-      "evaluation/phase8/cdp-transcript.redacted.json",
-      "evaluation/phase8/native-goal-1440x900.png"
-    ]
-  },
-  "claimLayers": {
-    "providerFreeInProcessGovernance": "demonstrated",
-    "browserNativeRegistrationDiscoveryInvocation": "demonstrated with Canary testing API",
-    "sharedDesktopStateMutation": "demonstrated",
-    "autonomousModelSelectionOrJourney": "not tested and not claimed",
-    "actualVoiceOverSpeechNavigation": "not tested and not claimed",
-    "externalEffects": "none"
-  },
+  "regressionReferencesOnly": [
+    "evaluation/desktop-phase6/measurements.json",
+    "evaluation/mobile-phase5/measurements.json"
+  ],
   "findings": {
     "P0": 0,
     "P1": 0,
     "newP2": 0,
-    "deferredBaselineP2": 7,
-    "qualificationHarnessRepair": "mobile screenshot timeout bound increased from 15 to 60 seconds after reproducible timeout; no product behavior changed"
+    "deferredBaselineP2": 9,
+    "deferredNotes": "prior seven P2 plus workflow shadow P2 and known 621px desktop overflow P2; no product repair attempted"
+  },
+  "claimLayers": {
+    "providerFreeInProcessGovernance": "demonstrated",
+    "qaOnlyProductionProjection": "demonstrated and explicitly not native production",
+    "browserNativeRegistrationDiscoveryInvocation": "demonstrated with Canary testing API",
+    "autonomousModelSelectionOrJourney": "not tested and not claimed",
+    "actualVoiceOverSpeechNavigation": "not tested and not claimed",
+    "productionPromotionAuthority": "not claimed"
   }
 }
