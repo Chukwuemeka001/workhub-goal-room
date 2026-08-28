@@ -381,8 +381,7 @@ function hasAtMostCodePoints(value: string, maximum: number): boolean {
 
 function isBoundedGoalString(value: unknown, maximum: number): value is string {
   if (typeof value !== "string") return false;
-  const normalized = value.trim();
-  return normalized.length > 0 && hasAtMostCodePoints(normalized, maximum);
+  return value.trim().length > 0 && hasAtMostCodePoints(value, maximum);
 }
 
 function isGoalContractList(value: unknown, allowEmpty = false): value is string[] {

@@ -346,78 +346,187 @@ describe("Phase 7 repair round 1", () => {
     expect(room.getState()).toEqual(authoritative);
   });
 
-  it("uses trimmed Unicode code points for Goal Contract maxLength parity in callback and kernel", async () => {
-    const acceptedCases = [
-      ["ascii", "a".repeat(1000)],
-      ["accent", "é".repeat(1000)],
-      ["emoji", "🙂".repeat(1000)],
-      ["combining", "e\u0301".repeat(500)],
-      ["trimmed-emoji", `  ${"🙂".repeat(1000)}  `],
-    ] as const;
-    for (const [name, value] of acceptedCases) {
+  it("rejects schema-invalid raw-padded Goal fields before the WebMCP callback mutates authority", async () => {
+    const rawPadded1002 = ` ${"🙂".repeat(1000)} `;
+    expect(Array.from(rawPadded1002)).toHaveLength(1002);
+
+    for (const field of ["goal", "why"] as const) {
       const { room, tools, definitions } = installed();
-      const descriptor = definitions.find(({ name: toolName }) => toolName === "propose_goal_contract");
-      expect(descriptor.inputSchema.properties.goal).toEqual({ type: "string", minLength: 1, maxLength: 1000 });
-      const result = await tools.get("propose_goal_contract").execute({
-        expectedStateVersion: 0, idempotencyKey: `accepted-${name}`, ...contract,
-        goal: value, why: value, doneLooksLike: [value.slice(0, name === "emoji" || name === "trimmed-emoji" ? 1000 : 500)],
+      const descriptor = definitions.find(({ name }) => name === "propose_goal_contract");
+      expect(descriptor.inputSchema.properties[field]).toEqual({
+        type: "string", minLength: 1, maxLength: 1000,
       });
-      expect(result, name).toMatchObject({ accepted: true, currentStateVersion: 1 });
-      expect(room.getReceipts(), name).toHaveLength(1);
-    }
-
-    const rejectedCases = [
-      ["ascii", "a".repeat(1001)],
-      ["accent", "é".repeat(1001)],
-      ["emoji", "🙂".repeat(1001)],
-      ["combining", "e\u0301".repeat(501)],
-      ["trimmed-emoji", `  ${"🙂".repeat(1001)}  `],
-      ["whitespace", "   "],
-    ] as const;
-    for (const [name, value] of rejectedCases) {
-      for (const field of ["goal", "why"] as const) {
-        const { room, tools } = installed();
-        const before = room.getState();
-        const result = await tools.get("propose_goal_contract").execute({
-          expectedStateVersion: 0, idempotencyKey: `rejected-${field}-${name}`, ...contract,
-          [field]: value,
-        });
-        expect(result, `${field}-${name}`).toMatchObject({
-          accepted: false, reasonCode: "INVALID_TOOL_INPUT", currentStateVersion: 0,
-        });
-        expect(room.getState(), `${field}-${name}`).toEqual(before);
-        expect(room.getReceipts(), `${field}-${name}`).toEqual([]);
-      }
-    }
-
-    for (const [name, item] of [
-      ["ascii-list", "a".repeat(501)],
-      ["accent-list", "é".repeat(501)],
-      ["emoji-list", "🙂".repeat(501)],
-    ] as const) {
-      const { room, tools } = installed();
       const before = room.getState();
       expect(await tools.get("propose_goal_contract").execute({
-        expectedStateVersion: 0, idempotencyKey: name, ...contract, doneLooksLike: [item],
-      })).toMatchObject({ accepted: false, reasonCode: "INVALID_TOOL_INPUT" });
+        expectedStateVersion: 0, idempotencyKey: `raw-padded-${field}`, ...contract,
+        [field]: rawPadded1002,
+      })).toMatchObject({
+        accepted: false, reasonCode: "INVALID_TOOL_INPUT", currentStateVersion: 0,
+      });
       expect(room.getState()).toEqual(before);
       expect(room.getReceipts()).toEqual([]);
     }
+  });
 
-    const direct = createGoalRoom({ ownerIntent: "Direct kernel parity." });
-    await expect(direct.dispatch({
-      type: "PROPOSE_GOAL_CONTRACT", actor: "agent", expectedStateVersion: 0,
-      idempotencyKey: "direct-emoji-1000", ...contract,
-      goal: "🙂".repeat(1000), why: "é".repeat(1000), doneLooksLike: ["🙂".repeat(500)],
-    })).resolves.toMatchObject({ accepted: true });
+  it("rejects schema-invalid raw-padded items in every Goal list before WebMCP dispatch", async () => {
+    const rawPadded502 = ` ${"🙂".repeat(500)} `;
+    expect(Array.from(rawPadded502)).toHaveLength(502);
 
-    const over = createGoalRoom({ ownerIntent: "Direct kernel rejection." });
-    const before = over.getState();
-    await expect(over.dispatch({
-      type: "PROPOSE_GOAL_CONTRACT", actor: "agent", expectedStateVersion: 0,
-      idempotencyKey: "direct-emoji-1001", ...contract, goal: "🙂".repeat(1001),
-    })).rejects.toThrow("INVALID_COMMAND");
-    expect(over.getState()).toEqual(before);
-    expect(over.getReceipts()).toEqual([]);
+    for (const field of [
+      "doneLooksLike", "constraints", "nonGoals", "evidenceRequired", "openQuestions",
+    ] as const) {
+      const { room, tools, definitions } = installed();
+      const descriptor = definitions.find(({ name }) => name === "propose_goal_contract");
+      expect(descriptor.inputSchema.properties[field].items.maxLength).toBe(500);
+      const before = room.getState();
+      expect(await tools.get("propose_goal_contract").execute({
+        expectedStateVersion: 0, idempotencyKey: `raw-padded-${field}`, ...contract,
+        [field]: [rawPadded502],
+      })).toMatchObject({
+        accepted: false, reasonCode: "INVALID_TOOL_INPUT", currentStateVersion: 0,
+      });
+      expect(room.getState()).toEqual(before);
+      expect(room.getReceipts()).toEqual([]);
+    }
+  });
+
+  it("rejects raw-padded over-bound Goal fields in the direct kernel without mutation", async () => {
+    const rawPadded1002 = ` ${"🙂".repeat(1000)} `;
+    for (const field of ["goal", "why"] as const) {
+      const room = createGoalRoom({ ownerIntent: "Direct kernel parity." });
+      const before = room.getState();
+      await expect(room.dispatch({
+        type: "PROPOSE_GOAL_CONTRACT", actor: "agent", expectedStateVersion: 0,
+        idempotencyKey: `direct-raw-padded-${field}`, ...contract, [field]: rawPadded1002,
+      })).rejects.toThrow("INVALID_COMMAND");
+      expect(room.getState()).toEqual(before);
+      expect(room.getReceipts()).toEqual([]);
+    }
+  });
+
+  it("rejects raw-padded over-bound items in every direct-kernel Goal list", async () => {
+    const rawPadded502 = ` ${"🙂".repeat(500)} `;
+    for (const field of [
+      "doneLooksLike", "constraints", "nonGoals", "evidenceRequired", "openQuestions",
+    ] as const) {
+      const room = createGoalRoom({ ownerIntent: "Direct kernel list parity." });
+      const before = room.getState();
+      await expect(room.dispatch({
+        type: "PROPOSE_GOAL_CONTRACT", actor: "agent", expectedStateVersion: 0,
+        idempotencyKey: `direct-raw-padded-${field}`, ...contract, [field]: [rawPadded502],
+      })).rejects.toThrow("INVALID_COMMAND");
+      expect(room.getState()).toEqual(before);
+      expect(room.getReceipts()).toEqual([]);
+    }
+  });
+
+  it("counts raw Unicode code points at every Goal boundary, then stores canonical trimmed values", async () => {
+    const exactRaw1000 = ` ${"🙂".repeat(998)} `;
+    const exactRaw500 = ` ${"🙂".repeat(498)} `;
+    const acceptedPayload = {
+      goal: exactRaw1000,
+      why: "e\u0301".repeat(500),
+      doneLooksLike: [exactRaw500],
+      constraints: ["é".repeat(500)],
+      nonGoals: ["a".repeat(500)],
+      evidenceRequired: ["🙂".repeat(500)],
+      openQuestions: ["e\u0301".repeat(250)],
+    };
+    expect(Array.from(exactRaw1000)).toHaveLength(1000);
+    expect(Array.from(exactRaw500)).toHaveLength(500);
+    expect(Array.from(acceptedPayload.why)).toHaveLength(1000);
+    expect(Array.from(acceptedPayload.openQuestions[0])).toHaveLength(500);
+
+    for (const direct of [false, true]) {
+      const setup = installed();
+      const result = direct
+        ? await setup.room.dispatch({
+            type: "PROPOSE_GOAL_CONTRACT", actor: "agent", expectedStateVersion: 0,
+            idempotencyKey: "accepted-direct-boundaries", ...acceptedPayload,
+          })
+        : await setup.tools.get("propose_goal_contract").execute({
+            expectedStateVersion: 0, idempotencyKey: "accepted-webmcp-boundaries",
+            ...acceptedPayload,
+          });
+      expect(result).toMatchObject({ accepted: true });
+      expect(setup.room.getState().activeGoalContract).toMatchObject({
+        goal: "🙂".repeat(998),
+        why: acceptedPayload.why,
+        doneLooksLike: ["🙂".repeat(498)],
+        constraints: acceptedPayload.constraints,
+        nonGoals: acceptedPayload.nonGoals,
+        evidenceRequired: acceptedPayload.evidenceRequired,
+        openQuestions: acceptedPayload.openQuestions,
+      });
+      expect(setup.room.getReceipts()).toHaveLength(1);
+    }
+
+    for (const [name, value] of [
+      ["ascii", "a".repeat(1001)],
+      ["emoji", "🙂".repeat(1001)],
+      ["combining", `${"e\u0301".repeat(500)}e`],
+      ["raw-padded", ` ${"🙂".repeat(1000)} `],
+      ["whitespace", "   "],
+    ] as const) {
+      for (const field of ["goal", "why"] as const) {
+        for (const direct of [false, true]) {
+          const setup = installed();
+          const before = setup.room.getState();
+          const input = {
+            expectedStateVersion: 0, idempotencyKey: `${direct ? "direct" : "webmcp"}-${field}-${name}`,
+            ...contract, [field]: value,
+          };
+          if (direct) {
+            await expect(setup.room.dispatch({
+              type: "PROPOSE_GOAL_CONTRACT", actor: "agent", ...input,
+            })).rejects.toThrow("INVALID_COMMAND");
+          } else {
+            expect(await setup.tools.get("propose_goal_contract").execute(input))
+              .toMatchObject({ accepted: false, reasonCode: "INVALID_TOOL_INPUT" });
+          }
+          expect(setup.room.getState()).toEqual(before);
+          expect(setup.room.getReceipts()).toEqual([]);
+        }
+      }
+    }
+
+    const listOver501 = `${"e\u0301".repeat(250)}e`;
+    expect(Array.from(listOver501)).toHaveLength(501);
+    for (const field of [
+      "doneLooksLike", "constraints", "nonGoals", "evidenceRequired", "openQuestions",
+    ] as const) {
+      for (const direct of [false, true]) {
+        const setup = installed();
+        const before = setup.room.getState();
+        const input = {
+          expectedStateVersion: 0, idempotencyKey: `${direct ? "direct" : "webmcp"}-${field}-501`,
+          ...contract, [field]: [listOver501],
+        };
+        if (direct) {
+          await expect(setup.room.dispatch({
+            type: "PROPOSE_GOAL_CONTRACT", actor: "agent", ...input,
+          })).rejects.toThrow("INVALID_COMMAND");
+        } else {
+          expect(await setup.tools.get("propose_goal_contract").execute(input))
+            .toMatchObject({ accepted: false, reasonCode: "INVALID_TOOL_INPUT" });
+        }
+        expect(setup.room.getState()).toEqual(before);
+        expect(setup.room.getReceipts()).toEqual([]);
+      }
+    }
+
+    for (const direct of [false, true]) {
+      const emojiBoundary = installed();
+      const input = {
+        expectedStateVersion: 0, idempotencyKey: `${direct ? "direct" : "webmcp"}-emoji-1000`,
+        ...contract, goal: "🙂".repeat(1000),
+      };
+      const result = direct
+        ? await emojiBoundary.room.dispatch({
+            type: "PROPOSE_GOAL_CONTRACT", actor: "agent", ...input,
+          })
+        : await emojiBoundary.tools.get("propose_goal_contract").execute(input);
+      expect(result).toMatchObject({ accepted: true });
+    }
   });
 });

@@ -57,8 +57,7 @@ function isBoundedNonBlankString(value: unknown, maxLength: number): value is st
 
 function isBoundedUnicodeString(value: unknown, maxCodePoints: number): value is string {
   if (typeof value !== "string") return false;
-  const normalized = value.trim();
-  return normalized.length > 0 && Array.from(normalized).length <= maxCodePoints;
+  return value.trim().length > 0 && Array.from(value).length <= maxCodePoints;
 }
 
 function isGoalList(value: unknown, allowEmpty: boolean): value is string[] {
@@ -264,7 +263,7 @@ export function installGoalRoomTools({
     name: "propose_goal_contract",
     title: "Propose an immutable Goal Contract",
     description:
-      "Propose Goal Contract data as the agent after owner intent or an owner revision request. Bounds use trimmed Unicode code points, matching JSON Schema maxLength. This never confirms the Goal or authorizes Plan work; the owner must confirm or request revision.",
+      "Propose Goal Contract data as the agent after owner intent or an owner revision request. Nonblank checks trim whitespace, while maxLength counts raw Unicode code points exactly like JSON Schema; accepted values are then stored trimmed. This never confirms the Goal or authorizes Plan work; the owner must confirm or request revision.",
     inputSchema: {
       type: "object",
       additionalProperties: false,
