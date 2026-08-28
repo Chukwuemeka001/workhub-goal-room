@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "test": "vitest run && npm run test:composition",
+    "test": "npm run test:browser-resolver && vitest run && npm run test:composition",
+    "test:browser-resolver": "node --test scripts/browser-resolver.node-test.mjs",
     "test:unit": "vitest run",
     "test:composition": "node scripts/composition-production-qa.mjs",
     "test:watch": "vitest",

@@ -1,18 +1,13 @@
 import { spawn } from "node:child_process";
 import { createServer } from "node:http";
-import { existsSync } from "node:fs";
 import { mkdtemp, readFile, readdir, rm, stat } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { extname, join, resolve, sep } from "node:path";
+import { resolveBrowserExecutable } from "./browser-resolver.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
 const dist = join(root, "dist");
-const chromePath = [
-  process.env.CHROME_BIN,
-  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-  `${process.env.HOME}/Applications/BrowserOS.app/Contents/MacOS/BrowserOS`,
-].find((candidate) => candidate && existsSync(candidate));
-if (!chromePath) throw new Error("Set CHROME_BIN to a Chromium-compatible browser executable");
+const chromePath = resolveBrowserExecutable();
 
 const matrix = [
   { width: 375, height: 667, expected: "mobile" },

@@ -24,6 +24,20 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Resolve Chromium browser
+        shell: bash
+        run: |
+          browser=""
+          for candidate in google-chrome google-chrome-stable chromium chromium-browser; do
+            if browser="$(command -v "$candidate" 2>/dev/null)"; then
+              break
+            fi
+          done
+          if [[ -z "$browser" || ! -f "$browser" || ! -x "$browser" ]]; then
+            echo "No executable Chromium-compatible browser found on PATH" >&2
+            exit 1
+          fi
+          echo "CHROME_BIN=$browser" >> "$GITHUB_ENV"
       - run: npm test
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
