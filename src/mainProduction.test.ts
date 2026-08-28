@@ -3,6 +3,7 @@ import html from "../index.html?raw";
 import main from "./main.ts?raw";
 import desktopUi from "./desktopUi.ts?raw";
 import mobileUi from "./mobileUi.ts?raw";
+import acceptance from "./acceptanceDialog.ts?raw";
 
 describe("production Goal inception UI", () => {
   it("boots explicit empty V2 intent capture with semantic owner controls", () => {
@@ -22,6 +23,17 @@ describe("production Goal inception UI", () => {
     expect(main).toContain("controller.requestGoalRevision");
     expect(main).toContain("controller.confirmPlan");
     expect(main).toContain("controller.requestRevision");
+  });
+
+  it("requires exact-candidate modal confirmation before the controller acceptance path", () => {
+    expect(html).toContain('id="acceptance-dialog"');
+    expect(html).toContain('aria-labelledby="acceptance-dialog-title"');
+    expect(html).toContain('id="acceptance-candidate-digest"');
+    expect(main).toContain("acceptanceDialog.open");
+    expect(main).toContain("controller.acceptGoal()");
+    expect(acceptance).toContain('addEventListener("cancel"');
+    expect(acceptance).toContain('addEventListener("submit"');
+    expect(acceptance).not.toContain("room.dispatch");
   });
 
   it("does not expose an owner path that performs agent or system actions", () => {

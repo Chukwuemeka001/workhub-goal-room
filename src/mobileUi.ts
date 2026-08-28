@@ -1,8 +1,10 @@
 import type { MobileView, MobileTabId } from "./mobileView";
+import type { AcceptanceBinding } from "./acceptanceDialog";
 
 export type MobileSurfaceActions = {
   onSetIntent(intent: string): Promise<void>;
   onPrimary(kind: MobileView["actionDock"]["kind"]): Promise<void>;
+  onOpenAcceptance(binding: AcceptanceBinding): void;
   onOpenRevision(kind: "goal" | "plan", version: number): void;
 };
 
@@ -58,6 +60,15 @@ function renderProof(view: MobileView) {
   if (view.proof.passIsNotAcceptance) fragment.append(text("p", "PASS means the explicit checks succeeded. PASS does not accept the Goal.", "mobile-proof-boundary pass"));
   if (view.proof.completionCandidateDigest) fragment.append(text("p", `Completion request bound to ${view.proof.completionCandidateDigest}`));
   if (view.proof.acceptedCandidateDigest) fragment.append(text("p", `Owner acceptance bound to ${view.proof.acceptedCandidateDigest}`));
+  if (view.proof.history.length) {
+    const history = el("ol", "mobile-candidate-history");
+    for (const entry of view.proof.history) {
+      const item = el("li"); item.dataset.verdict = entry.verdict;
+      item.append(text("strong", `Candidate v${entry.version} ${entry.verdict}`), text("code", entry.digest));
+      history.append(item);
+    }
+    fragment.append(text("h3", "Candidate history"), history);
+  }
   return fragment;
 }
 
@@ -87,7 +98,7 @@ export function createMobileSurface(
   root: HTMLElement,
   actions: MobileSurfaceActions,
 ): { render(view: MobileView): void; selectedTab(): MobileTabId } {
-  let activeTab: MobileTabId = "now";
+  let activeTab: MobileTabId = "goal";
   let currentView: MobileView | null = null;
   const onSelectTab = (id: MobileTabId) => {
     activeTab = id;
@@ -154,7 +165,14 @@ export function createMobileSurface(
       }
       const primary = text("button", view.actionDock.primaryLabel, "mobile-button primary");
       primary.type = "button";
-      primary.addEventListener("click", async () => { primary.disabled = true; try { await actions.onPrimary(view.actionDock.kind); } finally { primary.disabled = false; } });
+      primary.addEventListener("click", async () => {
+        if (view.actionDock.kind === "accept-goal" && view.custody.candidate && view.custody.verification?.verdict === "PASS") {
+          actions.onOpenAcceptance({ candidateVersion: view.custody.candidate.version, digest: view.custody.candidate.digest, compactDigest: view.custody.candidate.compactDigest, ruleSet: view.custody.verification.ruleSet });
+          return;
+        }
+        primary.disabled = true;
+        try { await actions.onPrimary(view.actionDock.kind); } finally { primary.disabled = false; }
+      });
       actionDock.append(primary);
     } else {
       const waiting = text("p", view.actionDock.kind === "terminal" ? "Goal accepted. No further governed action." : view.actionDock.waitingText, "mobile-waiting");
@@ -193,7 +211,7 @@ export function createMobileSurface(
     panel.tabIndex = 0;
     const tab = view.tabs.find((entry) => entry.id === activeTab)!;
     panel.append(text("h2", tab.panelHeading, "mobile-panel-heading"));
-    if (activeTab === "now") panel.append(text("p", view.frontier.boundary), text("p", `Current status: ${view.status}`));
+    if (activeTab === "goal") panel.append(text("p", view.goal.origin, "mobile-origin"), text("p", `Goal Contract ${view.goal.version ? `v${view.goal.version}` : "not admitted"} · ${view.goal.status.replaceAll("_", " ")}`), list("Done looks like", view.goal.doneLooksLike), list("Constraints", view.goal.constraints), list("Non-goals", view.goal.nonGoals));
     if (activeTab === "plan") panel.append(renderPlan(view));
     if (activeTab === "proof") panel.append(renderProof(view));
     if (activeTab === "activity") panel.append(renderActivity(view));

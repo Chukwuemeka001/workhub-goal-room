@@ -114,11 +114,21 @@ describe("pure mobile authority projection", () => {
     for (const snapshot of all.values()) {
       const view = project(snapshot);
       expect(view.tabs).toEqual([
-        { id: "now", label: "Now", panelHeading: "Current frontier" },
-        { id: "plan", label: "Plan", panelHeading: "Goal and Plan" },
+        { id: "goal", label: "Goal", panelHeading: "Goal Contract" },
+        { id: "plan", label: "Plan", panelHeading: "Admitted Plan" },
         { id: "proof", label: "Proof", panelHeading: "Evidence and verification" },
         { id: "activity", label: "Activity", panelHeading: "Origin, decisions, and receipts" },
       ]);
     }
+  });
+
+  it("compresses canonical custody into the frontier and preserves failed candidate history", async () => {
+    const all = await checkpoints();
+    const passed = project(all.get("pass")!);
+    expect(passed.custody).toMatchObject({ phase: "VERIFICATION_PASSED", currentActor: "agent", ownerAttention: false });
+    expect(passed.proof.history).toEqual([
+      expect.objectContaining({ version: 1, verdict: "FAIL" }),
+      expect.objectContaining({ version: 2, verdict: "PASS" }),
+    ]);
   });
 });

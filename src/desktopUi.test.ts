@@ -13,12 +13,21 @@ const desktopCss = readFileSync(new URL("./desktop.css", import.meta.url), "utf8
 describe("production desktop Mission Room", () => {
   it("uses a separate desktop composition in required Goal-to-progressive-detail order", () => {
     expect(html).toContain('id="desktop-room"');
-    expect(desktopUi).toContain("root.replaceChildren(goalHeader, now, chapter, inspector, progressive)");
+    expect(desktopUi).toContain("root.replaceChildren(goalHeader, stateBar, custody, workspace, progressive)");
     expect(desktopUi).toContain('setAttribute("role", "tablist")');
     expect(desktopUi).toContain('setAttribute("role", "tab")');
     expect(desktopUi).toContain('setAttribute("role", "tabpanel")');
     expect(desktopCss).toContain(".desktop-now");
     expect(desktopCss).not.toContain("desktop-equal-card-grid");
+  });
+
+  it("renders canonical custody and a collapsed non-interactive static-six tool disclosure", () => {
+    expect(desktopUi).toContain('"desktop-custody"');
+    expect(desktopUi).toContain("view.custody.lanes");
+    expect(desktopUi).toContain('setAttribute("aria-current", "true")');
+    expect(desktopUi).toContain("view.toolSurface.tools");
+    expect(desktopUi).toContain('text("summary", "Agent tools · static six")');
+    expect(desktopUi).not.toMatch(/view\.toolSurface\.tools[\s\S]{0,500}text\("button"/);
   });
 
   it("exposes only shared controller-backed owner controls and literal rendering", () => {

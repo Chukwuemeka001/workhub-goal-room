@@ -49,5 +49,19 @@ describe("pure desktop Mission Room projection", () => {
     expect(completion.lifecycle.filter((node) => node.status === "complete")).toHaveLength(5);
     expect(completion.receipts).toMatchObject({ count: all.get("completion")!.receipts.length, latest: expect.arrayContaining([expect.objectContaining({ source: "WebMCP agent" })]) });
     expect(JSON.stringify(completion)).not.toContain('"conversation"');
+    expect(completion.custody).toMatchObject({ phase: "COMPLETION_REQUESTED", currentActor: "owner", ownerAttention: true });
+    expect(completion.toolSurface.tools.map((tool) => tool.name)).toEqual([
+      "get_goal_room_state", "propose_goal_contract", "propose_plan", "claim_step", "submit_artifact", "request_completion",
+    ]);
+    expect(completion.toolSurface).toMatchObject({ interactive: false, expandedByDefault: false });
+  });
+
+  it("keeps failed candidate history append-only after a later PASS", async () => {
+    const all = await createDesktopCheckpoints();
+    const passed = project(all.get("pass")!);
+    expect(passed.inspectors.proof.history).toEqual([
+      expect.objectContaining({ version: 1, verdict: "FAIL" }),
+      expect.objectContaining({ version: 2, verdict: "PASS" }),
+    ]);
   });
 });

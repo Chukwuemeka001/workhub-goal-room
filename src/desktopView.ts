@@ -1,6 +1,8 @@
 import type { GoalRoomState, Receipt } from "./core/goalRoom";
 import type { OwnerViewModel } from "./ownerView";
 import { createReceiptLabels } from "./ownerUi";
+import { createCustodyView, type CustodyView } from "./custodyView";
+import { createToolSurfaceView, type ToolSurfaceView } from "./toolSurfaceView";
 
 export type DesktopTabId = "goal" | "plan" | "proof" | "activity";
 export type DesktopOwnerActionKind = "set-intent" | "revise-intent" | "confirm-goal" | "confirm-plan" | "accept-goal" | "waiting" | "terminal";
@@ -17,12 +19,14 @@ export type DesktopView = {
     nodes: { id: "define" | "plan" | "work" | "verify" | "accept"; label: string; status: "complete" | "current" | "pending" | "failed" }[];
   };
   now: { actor: "agent" | "owner" | "system"; title: string; legalAction: string; boundary: string; ownerAttention: boolean; compactDigest: string | null };
+  custody: CustodyView;
+  toolSurface: ToolSurfaceView;
   ownerAction: { kind: DesktopOwnerActionKind; visible: boolean; label: string | null; secondaryKind: "request-goal-revision" | "request-plan-revision" | null; secondaryLabel: string | null; waitingText: string };
   tabs: { id: DesktopTabId; label: string; panelHeading: string }[];
   inspectors: {
     goal: { title: string; meta: string; groups: InspectorGroup[]; revisionDelta: string | null };
     plan: { title: string; status: string; binding: string; steps: { id: string; title: string }[]; revisionDelta: string | null };
-    proof: { title: string; verdict: "PASS" | "FAIL" | "WAITING"; digest: string | null; ruleSet: string | null; checks: string[]; findings: string[]; passIsNotAcceptance: boolean; completionBinding: string | null; acceptanceBinding: string | null };
+    proof: { title: string; verdict: "PASS" | "FAIL" | "WAITING"; digest: string | null; ruleSet: string | null; checks: string[]; findings: string[]; passIsNotAcceptance: boolean; completionBinding: string | null; acceptanceBinding: string | null; history: { version: number; digest: string; verdict: "PASS" | "FAIL" | "WAITING" }[] };
     activity: { title: string; origin: OwnerViewModel["goalContract"]["history"]; receipts: ReceiptSummary[] };
   };
   lifecycle: OwnerViewModel["lifecycle"];
@@ -96,6 +100,7 @@ export function createDesktopView(state: GoalRoomState, view: OwnerViewModel, re
   const priorPlanRevision = [...state.planHistory].reverse().find((entry) => entry.revisionRequest)?.revisionRequest?.note ?? null;
   const candidateDigest = state.activeCandidate?.sha256 ?? null;
   const passedChecks = verification?.verdict === "PASS" ? ["HTTPS public URL passed", "Demo duration is within 180 seconds", "Verification command is exactly npm test"] : [];
+  const verificationByDigest = new Map(state.verificationHistory.map((record) => [record.candidateSha256, record.verdict]));
   return {
     goal: { title: goal?.goal ?? state.ownerIntent ?? "Goal not yet admitted", version: goal?.version ?? null, status: goal?.status ?? "NOT_ADMITTED", origin: origin(state) },
     status: view.statusLabel,
@@ -105,6 +110,8 @@ export function createDesktopView(state: GoalRoomState, view: OwnerViewModel, re
       boundary: view.ownerAttention.body, ownerAttention: view.ownerAttention.required,
       compactDigest: candidateDigest ? `${candidateDigest.slice(0, 10)}…${candidateDigest.slice(-8)}` : null,
     },
+    custody: createCustodyView(state, receipts),
+    toolSurface: createToolSurfaceView(state),
     ownerAction: ownerAction(state, view), tabs: tabs.map((tab) => ({ ...tab })),
     inspectors: {
       goal: {
@@ -125,6 +132,7 @@ export function createDesktopView(state: GoalRoomState, view: OwnerViewModel, re
         checks: passedChecks, findings: verification ? [...verification.findingCodes] : [],
         passIsNotAcceptance: verification?.verdict === "PASS" && state.goalAcceptance === null,
         completionBinding: state.activeCompletionRequest?.candidateSha256 ?? null, acceptanceBinding: state.goalAcceptance?.candidateSha256 ?? null,
+        history: state.candidateHistory.map((candidate) => ({ version: candidate.version, digest: candidate.sha256, verdict: verificationByDigest.get(candidate.sha256) ?? "WAITING" })),
       },
       activity: { title: "Authority activity", origin: view.goalContract.history.map((entry) => ({ ...entry })), receipts: receiptSummaries },
     },

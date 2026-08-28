@@ -10,6 +10,7 @@ import { createMobileView } from "./mobileView";
 import { createMobileSurface } from "./mobileUi";
 import { createDesktopView } from "./desktopView";
 import { createDesktopSurface } from "./desktopUi";
+import { createAcceptanceDialog, type AcceptanceDialogNodes } from "./acceptanceDialog";
 
 function requiredElement<T extends HTMLElement>(id: string): T {
   const element = document.getElementById(id);
@@ -23,6 +24,17 @@ const revisionDialogCopy = requiredElement("revision-dialog-copy");
 const revisionForm = requiredElement<HTMLFormElement>("revision-form");
 const revisionInput = requiredElement<HTMLTextAreaElement>("revision-input");
 const cancelRevision = requiredElement<HTMLButtonElement>("cancel-revision");
+const acceptanceDialog = createAcceptanceDialog({
+  dialog: requiredElement<HTMLDialogElement>("acceptance-dialog"),
+  form: requiredElement<HTMLFormElement>("acceptance-form"),
+  cancel: requiredElement<HTMLButtonElement>("cancel-acceptance"),
+  confirm: requiredElement<HTMLButtonElement>("confirm-acceptance"),
+  title: requiredElement("acceptance-dialog-title"),
+  candidate: requiredElement("acceptance-candidate-version"),
+  digest: requiredElement("acceptance-candidate-digest"),
+  ruleSet: requiredElement("acceptance-rule-set"),
+  consequence: requiredElement("acceptance-dialog-consequence"),
+} as unknown as AcceptanceDialogNodes, async () => controller.acceptGoal());
 const room = createGoalRoom({ ownerIntent: null });
 let controller: ReturnType<typeof createOwnerDecisionController>;
 let revisionBinding: { kind: "goal" | "plan"; version: number } | null = null;
@@ -43,6 +55,7 @@ const mobileSurface = createMobileSurface(requiredElement("mobile-room"), {
     else if (kind === "confirm-plan") await controller.confirmPlan();
     else if (kind === "accept-goal") await controller.acceptGoal();
   },
+  onOpenAcceptance: (binding) => acceptanceDialog.open(binding),
   onOpenRevision: openRevision,
 });
 const desktopSurface = createDesktopSurface(requiredElement("desktop-room"), {
@@ -52,10 +65,12 @@ const desktopSurface = createDesktopSurface(requiredElement("desktop-room"), {
     else if (kind === "confirm-plan") await controller.confirmPlan();
     else if (kind === "accept-goal") await controller.acceptGoal();
   },
+  onOpenAcceptance: (binding) => acceptanceDialog.open(binding),
   onOpenRevision: openRevision,
 });
 
 function render(view: OwnerViewModel) {
+  acceptanceDialog.close();
   const state = room.getState();
   const receipts = room.getReceipts();
   mobileSurface.render(createMobileView(state, view, receipts));

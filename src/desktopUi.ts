@@ -1,8 +1,10 @@
 import type { DesktopTabId, DesktopView } from "./desktopView";
+import type { AcceptanceBinding } from "./acceptanceDialog";
 
 export type DesktopSurfaceActions = {
   onSetIntent(intent: string): Promise<void>;
   onPrimary(kind: DesktopView["ownerAction"]["kind"]): Promise<void>;
+  onOpenAcceptance(binding: AcceptanceBinding): void;
   onOpenRevision(kind: "goal" | "plan", version: number): void;
 };
 
@@ -64,6 +66,17 @@ export function createDesktopSurface(root: HTMLElement, actions: DesktopSurfaceA
     if (data.passIsNotAcceptance) fragment.append(text("p", "PASS means the explicit checks succeeded. PASS does not accept the Goal.", "desktop-pass-boundary"));
     if (data.completionBinding) fragment.append(text("p", `Completion request bound to ${data.completionBinding}`, "desktop-binding"));
     if (data.acceptanceBinding) fragment.append(text("p", `Owner acceptance bound to ${data.acceptanceBinding}`, "desktop-binding"));
+    if (data.history.length) {
+      fragment.append(text("h3", "Candidate history", "desktop-subheading"));
+      const history = el("ol", "desktop-candidate-history");
+      for (const candidate of data.history) {
+        const item = el("li");
+        item.dataset.verdict = candidate.verdict;
+        item.append(text("strong", `Candidate v${candidate.version} ${candidate.verdict}`), text("code", candidate.digest));
+        history.append(item);
+      }
+      fragment.append(history);
+    }
     return fragment;
   }
   function renderActivity(view: DesktopView) {
@@ -125,7 +138,19 @@ export function createDesktopSurface(root: HTMLElement, actions: DesktopSurfaceA
         owner.append(secondary);
       }
       const primary = text("button", view.ownerAction.label, "desktop-action primary"); primary.type = "button";
-      primary.addEventListener("click", async () => { primary.disabled = true; try { await actions.onPrimary(view.ownerAction.kind); } finally { primary.disabled = false; } }); owner.append(primary);
+      primary.addEventListener("click", async () => {
+        if (view.ownerAction.kind === "accept-goal" && view.custody.candidate && view.custody.verification?.verdict === "PASS") {
+          actions.onOpenAcceptance({
+            candidateVersion: view.custody.candidate.version,
+            digest: view.custody.candidate.digest,
+            compactDigest: view.custody.candidate.compactDigest,
+            ruleSet: view.custody.verification.ruleSet,
+          });
+          return;
+        }
+        primary.disabled = true;
+        try { await actions.onPrimary(view.ownerAction.kind); } finally { primary.disabled = false; }
+      }); owner.append(primary);
     } else {
       const waiting = text("p", view.ownerAction.kind === "terminal" ? "Goal accepted. No further governed action." : view.ownerAction.waitingText, "desktop-waiting"); waiting.setAttribute("role", "status"); owner.append(waiting);
     }
@@ -135,6 +160,23 @@ export function createDesktopSurface(root: HTMLElement, actions: DesktopSurfaceA
     chapter.append(text("p", `CHAPTER · ${view.chapter.label}`, "desktop-label")); const rail = el("ol");
     for (const node of view.chapter.nodes) { const item = text("li", node.label); item.dataset.status = node.status; if (node.status === "current" || node.status === "failed") item.setAttribute("aria-current", "step"); rail.append(item); }
     chapter.append(rail);
+
+    const stateBar = el("section", "desktop-state-bar");
+    stateBar.setAttribute("aria-label", "Canonical room state and chapter");
+    const phase = text("p", `STATE v${view.custody.stateVersion} · ${view.custody.phase.replaceAll("_", " ")}`, "desktop-state-phase");
+    phase.setAttribute("role", "status");
+    stateBar.append(phase, chapter);
+
+    const custody = el("section", "desktop-custody");
+    custody.setAttribute("aria-label", "Current authority custody");
+    for (const lane of view.custody.lanes) {
+      const laneNode = el("article", "desktop-custody-lane");
+      laneNode.dataset.actor = lane.actor;
+      laneNode.dataset.status = lane.status;
+      if (lane.current) laneNode.setAttribute("aria-current", "true");
+      laneNode.append(text("h2", lane.label), text("p", lane.qualifier, "desktop-lane-qualifier"), text("p", lane.current ? "Acts now" : lane.status, "desktop-lane-status"));
+      custody.append(laneNode);
+    }
 
     const inspector = el("aside", "desktop-inspector"); inspector.setAttribute("aria-label", "Selected context inspector");
     const tablist = el("div", "desktop-inspector-tabs"); tablist.setAttribute("role", "tablist"); tablist.setAttribute("aria-label", "Goal Room context");
@@ -152,14 +194,27 @@ export function createDesktopSurface(root: HTMLElement, actions: DesktopSurfaceA
     if (activeTab === "activity") panel.append(renderActivity(view));
     inspector.append(tablist, panel);
 
+    const workspace = el("section", "desktop-workspace");
+    workspace.append(now, inspector);
+
     const progressive = el("section", "desktop-progressive"); progressive.setAttribute("aria-label", "Lifecycle and receipt detail");
     const lifecycle = el("details", "desktop-detail"); const lifecycleSummary = text("summary", "Lifecycle · exact governed progress"); const lifecycleList = el("ol", "desktop-lifecycle-list");
     for (const stage of view.lifecycle) { const item = text("li", stage.label); item.dataset.status = stage.status; lifecycleList.append(item); } lifecycle.append(lifecycleSummary, lifecycleList);
     const receipts = el("details", "desktop-detail"); receipts.append(text("summary", `Receipts · ${view.receipts.count} recorded attempts`)); const receiptList = el("ol", "desktop-receipt-list");
     for (const receipt of view.receipts.latest) { const item = el("li"); item.dataset.accepted = String(receipt.accepted); item.append(text("strong", receipt.label), text("span", `${receipt.source} · R${receipt.sequence}`)); receiptList.append(item); } if (!view.receipts.latest.length) receiptList.append(text("li", "No command receipts recorded")); receipts.append(receiptList);
-    progressive.append(lifecycle, receipts);
+    const tools = el("details", "desktop-detail desktop-tools");
+    tools.append(text("summary", "Agent tools · static six"));
+    const toolList = el("ol", "desktop-tool-list");
+    for (const tool of view.toolSurface.tools) {
+      const toolRow = el("li");
+      toolRow.dataset.available = String(tool.available);
+      toolRow.append(text("code", tool.name), text("span", tool.guidance));
+      toolList.append(toolRow);
+    }
+    tools.append(toolList);
+    progressive.append(lifecycle, tools, receipts);
 
-    root.replaceChildren(goalHeader, now, chapter, inspector, progressive);
+    root.replaceChildren(goalHeader, stateBar, custody, workspace, progressive);
   }
 
   return {

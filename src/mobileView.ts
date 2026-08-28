@@ -1,8 +1,9 @@
 import type { GoalRoomState, Receipt } from "./core/goalRoom";
 import type { OwnerViewModel } from "./ownerView";
 import { createReceiptLabels } from "./ownerUi";
+import { createCustodyView, type CustodyView } from "./custodyView";
 
-export type MobileTabId = "now" | "plan" | "proof" | "activity";
+export type MobileTabId = "goal" | "plan" | "proof" | "activity";
 export type MobileActionKind =
   | "set-intent"
   | "revise-intent"
@@ -26,6 +27,7 @@ export type MobileView = {
   };
   frontier: { actor: "agent" | "owner" | "system"; text: string; liveText: string; boundary: string };
   ownerAttention: boolean;
+  custody: CustodyView;
   actionDock: {
     kind: MobileActionKind;
     primaryLabel: string | null;
@@ -50,6 +52,7 @@ export type MobileView = {
     passIsNotAcceptance: boolean;
     completionCandidateDigest: string | null;
     acceptedCandidateDigest: string | null;
+    history: { version: number; digest: string; verdict: "PASS" | "FAIL" | "WAITING" }[];
   };
   activity: {
     origin: OwnerViewModel["goalContract"]["history"];
@@ -75,8 +78,8 @@ const chapterByPhase: Record<GoalRoomState["phase"], MobileView["chapter"]> = {
 };
 
 const tabs: MobileView["tabs"] = [
-  { id: "now", label: "Now", panelHeading: "Current frontier" },
-  { id: "plan", label: "Plan", panelHeading: "Goal and Plan" },
+  { id: "goal", label: "Goal", panelHeading: "Goal Contract" },
+  { id: "plan", label: "Plan", panelHeading: "Admitted Plan" },
   { id: "proof", label: "Proof", panelHeading: "Evidence and verification" },
   { id: "activity", label: "Activity", panelHeading: "Origin, decisions, and receipts" },
 ];
@@ -145,6 +148,7 @@ export function createMobileView(
     .find((plan) => plan.revisionRequest)?.revisionRequest?.note;
   const labels = createReceiptLabels(receipts);
   const verification = state.activeVerification;
+  const verificationByDigest = new Map(state.verificationHistory.map((record) => [record.candidateSha256, record.verdict]));
   const checks = verification?.verdict === "PASS"
     ? ["HTTPS public URL passed", "Demo duration is within 180 seconds", "Verification command is exactly npm test"]
     : [];
@@ -168,6 +172,7 @@ export function createMobileView(
       boundary: view.ownerAttention.body,
     },
     ownerAttention: view.ownerAttention.required,
+    custody: createCustodyView(state, receipts),
     actionDock: actionDock(state, view),
     tabs: tabs.map((tab) => ({ ...tab })),
     plan: {
@@ -186,6 +191,7 @@ export function createMobileView(
       passIsNotAcceptance: verification?.verdict === "PASS" && state.goalAcceptance === null,
       completionCandidateDigest: state.activeCompletionRequest?.candidateSha256 ?? null,
       acceptedCandidateDigest: state.goalAcceptance?.candidateSha256 ?? null,
+      history: state.candidateHistory.map((candidate) => ({ version: candidate.version, digest: candidate.sha256, verdict: verificationByDigest.get(candidate.sha256) ?? "WAITING" })),
     },
     activity: {
       origin: view.goalContract.history.map((event) => ({ ...event })),
