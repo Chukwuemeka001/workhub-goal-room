@@ -8,6 +8,17 @@
     "tabCount": 4,
     "conciseLiveRegions": true
   },
+  "intentRecovery": {
+    "invalid": {
+      "valid": false,
+      "message": "Enter between 1 and 1000 non-whitespace characters."
+    },
+    "validAfterEdit": true,
+    "callCount": 1,
+    "intents": [
+      "Build a governed iPhone Goal Room."
+    ]
+  },
   "desktop": {
     "width": 1440,
     "height": 900,

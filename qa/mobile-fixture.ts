@@ -82,8 +82,9 @@ const dialog = document.querySelector<HTMLDialogElement>("#revision-dialog")!;
 const dialogTitle = document.querySelector<HTMLElement>("#revision-dialog-title")!;
 const dialogCopy = document.querySelector<HTMLElement>("#revision-dialog-copy")!;
 const input = document.querySelector<HTMLTextAreaElement>("#revision-input")!;
+const intentCalls: string[] = [];
 const surface = createMobileSurface(root, {
-  onSetIntent: async () => {}, onPrimary: async () => {},
+  onSetIntent: async (intent) => { intentCalls.push(intent); }, onPrimary: async () => {},
   onOpenRevision: (kind, version) => {
     const subject = kind === "goal" ? "Goal Contract" : "Plan";
     dialogTitle.textContent = `Request changes to ${subject} v${version}`;
@@ -120,4 +121,4 @@ function measurements() {
     injectedElements: document.querySelectorAll("img, script:not([type=module])").length,
   };
 }
-(Object.assign(window, { __mobileQa: { measurements, view, selectedTab: () => surface.selectedTab() } }));
+(Object.assign(window, { __mobileQa: { measurements, view, selectedTab: () => surface.selectedTab(), intentCalls: () => [...intentCalls] } }));

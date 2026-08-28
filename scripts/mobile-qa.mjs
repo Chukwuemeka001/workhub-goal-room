@@ -105,6 +105,25 @@ try {
       conciseLiveRegions: document.querySelectorAll('[aria-live]').length === 1,
     };
   })()`);
+  await navigate(`${origin}/qa/mobile-fixture.html?state=empty`, 393, 852);
+  const intentRecovery = await evaluate(`(async () => {
+    const form = document.querySelector('.mobile-intent-form');
+    const input = document.querySelector('#mobile-owner-intent');
+    input.value = '   ';
+    form.requestSubmit();
+    const invalid = { valid: input.validity.valid, message: input.validationMessage };
+    input.value = '  Build a governed iPhone Goal Room.  ';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    const validAfterEdit = input.validity.valid;
+    form.requestSubmit();
+    await Promise.resolve();
+    return {
+      invalid,
+      validAfterEdit,
+      callCount: window.__mobileQa.intentCalls().length,
+      intents: window.__mobileQa.intentCalls(),
+    };
+  })()`);
   await navigate(`${origin}/`, 1440, 900, false);
   const desktop = await evaluate(`({
     width: innerWidth, height: innerHeight,
@@ -120,15 +139,16 @@ try {
     (entry.dialog && (!entry.dialog.inside || !entry.dialog.focused))
   );
   if (!semantic.authorityStable || !semantic.selectedSemantics || !semantic.panelSemantics || semantic.tabCount !== 4 || !semantic.conciseLiveRegions) failures.push({ semantic });
+  if (intentRecovery.invalid.valid || intentRecovery.invalid.message !== "Enter between 1 and 1000 non-whitespace characters." || !intentRecovery.validAfterEdit || intentRecovery.callCount !== 1 || intentRecovery.intents[0] !== "Build a governed iPhone Goal Room.") failures.push({ intentRecovery });
   if (!desktop.desktopVisible || !desktop.mobileHidden || desktop.documentOverflow !== 0) failures.push({ desktop });
-  await writeFile(join(evidence, "measurements.json"), `${JSON.stringify({ generatedBy: "npm run qa:mobile", semantic, desktop, measurements, failures }, null, 2)}\n`);
+  await writeFile(join(evidence, "measurements.json"), `${JSON.stringify({ generatedBy: "npm run qa:mobile", semantic, intentRecovery, desktop, measurements, failures }, null, 2)}\n`);
   const contactHtml = `<!doctype html><style>body{margin:0;background:#050607;color:white;font:14px system-ui}main{display:grid;grid-template-columns:repeat(2,180px);gap:14px;padding:14px}figure{margin:0}img{display:block;width:180px;height:auto}figcaption{padding:5px 0 0}</style><main>${["captured","goal","fail","completion"].map((state) => `<figure><img src="/${`evaluation/mobile-phase5/${state}-393x852.png`}"><figcaption>${state}</figcaption></figure>`).join("")}</main>`;
   await writeFile(join(evidence, "contact-sheet.html"), contactHtml);
   await navigate(`${origin}/evaluation/mobile-phase5/contact-sheet.html`, 402, 850, false);
   await screenshot(join(evidence, "contact-sheet.png"));
   socket.close();
   if (failures.length) throw new Error(`Mobile QA failed ${failures.length} measurement rows`);
-  console.log(JSON.stringify({ states: states.length, viewportRows: matrix.length * states.length, totalMeasurements: measurements.length, screenshots: 5, failures: 0, evidence }, null, 2));
+  console.log(JSON.stringify({ states: states.length, viewportRows: matrix.length * states.length, totalMeasurements: measurements.length, interactionAssertions: 1, screenshots: 5, failures: 0, evidence }, null, 2));
 } finally {
   server?.kill("SIGTERM");
   chrome?.kill("SIGTERM");

@@ -133,8 +133,10 @@ export function createMobileSurface(
       if (view.actionDock.kind === "revise-intent") input.value = view.goal.title;
       const submit = text("button", view.actionDock.primaryLabel ?? "Save intent", "mobile-button primary");
       submit.type = "submit";
+      input.addEventListener("input", () => input.setCustomValidity(""));
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
+        input.setCustomValidity("");
         const intent = input.value.trim();
         if (!intent || intent.length > 1000) { input.setCustomValidity("Enter between 1 and 1000 non-whitespace characters."); input.reportValidity(); return; }
         submit.disabled = true;
