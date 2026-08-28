@@ -4,6 +4,7 @@ import main from "./main.ts?raw";
 import desktopUi from "./desktopUi.ts?raw";
 import mobileUi from "./mobileUi.ts?raw";
 import acceptance from "./acceptanceDialog.ts?raw";
+import systemVerifierAdapter from "./systemVerifierAdapter.ts?raw";
 
 describe("production Goal inception UI", () => {
   it("boots explicit empty V2 intent capture with semantic owner controls", () => {
@@ -50,6 +51,29 @@ describe("production Goal inception UI", () => {
     expect(main).not.toContain("runDemoAction");
     expect(main).not.toContain('actor: "agent"');
     expect(main).not.toContain("verifyActiveCandidate");
+  });
+
+  it("keeps System verification behind the dedicated production adapter", () => {
+    expect(main).toContain('import { createSystemVerifierAdapter } from "./systemVerifierAdapter"');
+    expect(main).toContain("systemVerifier.observe(record)");
+    expect(main).not.toContain("verifyActiveCandidate");
+    expect(systemVerifierAdapter).toContain("room.verifyActiveCandidate(key)");
+    expect(systemVerifierAdapter.match(/verifyActiveCandidate\(/g) ?? []).toHaveLength(2);
+    expect(systemVerifierAdapter).not.toContain("room.dispatch");
+    expect(main).not.toContain("RECORD_VERIFICATION");
+    expect(desktopUi).not.toContain("RECORD_VERIFICATION");
+    expect(mobileUi).not.toContain("RECORD_VERIFICATION");
+    expect(html).not.toMatch(/verify[-_ ]candidate/i);
+  });
+
+  it("renders the admitted Agent result before handing observation to System", () => {
+    const invocation = main.slice(main.indexOf("onInvocation: (record)"));
+    expect(invocation.indexOf("formatWebMcpInvocation(record)")).toBeLessThan(
+      invocation.indexOf("render(createOwnerViewModel"),
+    );
+    expect(invocation.indexOf("render(createOwnerViewModel")).toBeLessThan(
+      invocation.indexOf("systemVerifier.observe(record)"),
+    );
   });
 
   it("renders authority-adjacent prose as literal text without innerHTML", () => {

@@ -6,6 +6,7 @@ import { createOwnerViewModel, type OwnerViewModel } from "./ownerView";
 import { prepareRevisionNote } from "./ownerUi";
 import { installGoalRoomTools } from "./webmcp";
 import { formatWebMcpInvocation } from "./webmcpUi";
+import { createSystemVerifierAdapter } from "./systemVerifierAdapter";
 import { createMobileView } from "./mobileView";
 import { createMobileSurface } from "./mobileUi";
 import { createDesktopView } from "./desktopView";
@@ -84,6 +85,17 @@ function render(view: OwnerViewModel) {
 }
 controller = createOwnerDecisionController({ room, render });
 controller.render();
+const systemVerifier = createSystemVerifierAdapter({
+  room,
+  onSettled: () => render(createOwnerViewModel(room.getState(), room.getReceipts())),
+  onError: () => {
+    desktopSurface.setConnection(
+      "System verification failed; Candidate remains pending deterministic verification",
+      "refused",
+    );
+    render(createOwnerViewModel(room.getState(), room.getReceipts()));
+  },
+});
 
 cancelRevision.addEventListener("click", () => dialog.close());
 dialog.addEventListener("close", resetRevisionDialog);
@@ -112,6 +124,7 @@ const installation = installGoalRoomTools({
   onInvocation: (record) => {
     desktopSurface.setConnection(formatWebMcpInvocation(record), record.result.accepted === true ? "accepted" : "refused");
     render(createOwnerViewModel(room.getState(), room.getReceipts()));
+    systemVerifier.observe(record);
   },
 });
 desktopSurface.setConnection(
