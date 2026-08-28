@@ -12,7 +12,9 @@
     "revisionContainmentRed": "npx vitest run src/revisionDialog.test.ts: 2 failed; physical Shift+Tab from revision-input was not contained for Goal or Plan",
     "revisionContainmentGreen": "npx vitest run src/revisionDialog.test.ts: 2 passed",
     "revisionReturnRed": "npx vitest run src/revisionDialog.test.ts: 2 failed, 2 passed; Cancel/Escape did not restore the exact revision trigger",
-    "revisionFinalGreen": "npx vitest run src/revisionDialog.test.ts: 4 passed"
+    "revisionFinalGreen": "npx vitest run src/revisionDialog.test.ts: 4 passed",
+    "productionZoomContrastRed": "npm run qa:phase5: failed with 13 expected behavioral evidence failures; production effective 200% record and production-derived contrast inventory absent",
+    "productionZoomContrastGreen": "npm run qa:production-journey and npm run qa:phase5: passed; built /index.html effective 200% record and 14-row production contrast inventory validated"
   },
   "voiceOver": {
     "actuallyRunning": true,

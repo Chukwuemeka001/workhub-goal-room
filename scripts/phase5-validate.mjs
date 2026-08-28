@@ -6,8 +6,29 @@ import { extname, join, resolve } from "node:path";
 const root = resolve(new URL("..", import.meta.url).pathname);
 const read = (path) => readFileSync(join(root, path), "utf8");
 const receipt = JSON.parse(read("evaluation/phase5-qualification.json"));
+const productionJourney = JSON.parse(read("evaluation/production-journey/journey.json"));
 const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
+
+const zoom = productionJourney.accessibility?.zoom200;
+check(zoom?.route === "/index.html", "production effective 200% record is absent or not bound to /index.html");
+check(zoom?.method === "halved-css-viewport-equivalent", "production zoom method is not a defensible effective 200% equivalent");
+check(zoom?.referenceViewport?.width === 1440 && zoom?.referenceViewport?.height === 900, "production zoom reference viewport must be 1440x900");
+check(zoom?.cssViewport?.innerWidth === 720 && zoom?.cssViewport?.innerHeight === 450, "production zoom CSS viewport must be effectively halved to 720x450");
+check(zoom?.effectiveScale === 2 && zoom?.visualViewport?.width === 720 && zoom?.visualViewport?.height === 450, "production zoom effective scale/visual viewport measurement is invalid");
+check(zoom?.overflow?.documentX === 0 && zoom?.overflow?.bodyX === 0, "production zoom has unintended horizontal overflow");
+check(zoom?.composition?.active?.length === 1 && zoom?.composition?.active?.[0] === "mobile-room" && zoom?.composition?.axMainNames?.length === 1, "production zoom distinct composition/AX XOR is invalid");
+check(Array.isArray(zoom?.requiredContent) && zoom.requiredContent.length >= 8 && zoom.requiredContent.every((row) => row.rendered && row.reachable), "production zoom required content/controls are not all rendered and reachable");
+
+const contrast = productionJourney.accessibility?.contrast;
+const contrastRows = Array.isArray(contrast?.inventory) ? contrast.inventory : [];
+const requiredContrastCategories = ["normal-text", "large-text", "status-success", "status-fail", "status-warning", "actionable-control", "focus-indicator"];
+check(contrast?.source === "computed production rendered styles", "production-derived contrast inventory is absent");
+check(["desktop", "mobile"].every((composition) => contrastRows.some((row) => row.composition === composition)), "contrast inventory must cover desktop and mobile compositions");
+check(requiredContrastCategories.every((category) => contrastRows.some((row) => row.category === category)), "contrast inventory is missing a required category");
+check(contrastRows.length >= 14, "contrast inventory is not representative");
+check(contrastRows.every((row) => row.selector && row.state && row.token && /^#[0-9a-f]{6}$/i.test(row.foreground) && /^#[0-9a-f]{6}$/i.test(row.background) && Number.isFinite(row.ratio) && [3, 4.5].includes(row.threshold) && row.pass === (row.ratio >= row.threshold) && row.pass), "contrast inventory contains invalid measurements or failures");
+check(contrast?.failureCount === 0 && contrast?.counts?.total === contrastRows.length, "contrast inventory summary is invalid or has failures");
 
 const html = read("index.html");
 check(html.includes('<meta name="referrer" content="no-referrer" />'), "missing no-referrer metadata");

@@ -50,9 +50,13 @@ Selected public-safe screenshots and their SHA-256 hashes are in `evaluation/voi
 
 ## Automated production and qualification evidence
 
-The widening evidence records one named main in each active composition, distinct desktop/mobile compositions, named tabs and tabpanels, visible focus, dialog semantics, 200 percent zoom, reduced motion, minimum 44 CSS pixel controls, representative contrast, 320 pixel hostile content, safe-area docking, zero unintended horizontal overflow, literal hostile rendering, S13 exact binding, and sealed S14.
+The widening evidence records one named main in each active composition, distinct desktop/mobile compositions, named tabs and tabpanels, visible focus, dialog semantics, effective 200 percent zoom, reduced motion, minimum 44 CSS pixel controls, representative contrast, 320 pixel hostile content, safe-area docking, zero unintended horizontal overflow, literal hostile rendering, S13 exact binding, and sealed S14.
 
 Primary references: `evaluation/production-journey/journey.json`, `evaluation/v3/a11y.json`, `evaluation/v3/hostile.json`, and `evaluation/v3/responsive.json`.
+
+The production journey now contains the machine-readable fields `accessibility.zoom200` and `accessibility.contrast`. The zoom record exercises built `/index.html` at a measured `720×450` CSS/visual viewport, the defensible halved-viewport equivalent of the `1440×900` reference at effective scale 2. It verifies the active mobile composition and sole AX main, twelve rendered/scroll-reachable content/control targets, and zero body/document horizontal overflow; `effective-200pct-production-720x450.png` is the corresponding production screenshot. This is an effective-viewport equivalence claim, not a claim that `visualViewport.scale` itself becomes 2.
+
+The contrast inventory is derived from computed styles rendered by built production states. It covers desktop and mobile normal text, large text, warning/success/fail status colors, selected actionable-tab indicators, and actual focused 3px outlines. Every row records composition, selector, state, token, foreground/background colors, calculated ratio, threshold, and pass result; the Phase 5 validator requires both compositions, every category, correct thresholds, and zero failures.
 
 ## Deferred baseline P2 labels
 

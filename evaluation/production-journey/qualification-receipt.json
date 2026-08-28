@@ -8,7 +8,7 @@
   },
   "evidenceCommit": "recorded_after_commit_in_git",
   "evidenceTree": "recorded_after_commit_in_git",
-  "journeySha256": "5c657a7cebc91704cbad2185f59ac01dd3d5169ea6b2283079b0186b93d03659",
+  "journeySha256": "9375b41da40cc576424f64c727b218c3025d15335da7845fa2b987b838c5c7d9",
   "route": {
     "url": "http://127.0.0.1:4177/index.html",
     "entry": "/index.html",
@@ -33,7 +33,7 @@
     "checkpoints": 12,
     "receipts": 22,
     "finalReceiptHash": "27dd043bfbefc422de2d76214f3170f6717cb3f44618bf350dcc492849803c5f",
-    "screenshotCount": 9,
+    "screenshotCount": 10,
     "compositionCount": 5,
     "finalPhase": "GOAL_ACCEPTED",
     "replay": "validated by test:production-journey against replayGoalRoom",
@@ -124,8 +124,8 @@
     },
     {
       "path": "scripts/production-journey-qa.mjs",
-      "sha256": "ee4878cb090041836c479f96f12139942f6363adea25cb8142bf2d72f6c55c3f",
-      "bytes": 29175
+      "sha256": "8fb6fb1804075b6a4abaae539d5720853a726b2ef5e9e034cabd997063ce94e4",
+      "bytes": 39828
     },
     {
       "path": "scripts/production-journey-receipt.mjs",
@@ -149,6 +149,14 @@
     }
   ],
   "screenshotHashes": [
+    {
+      "path": "evaluation/production-journey/effective-200pct-production-720x450.png",
+      "sha256": "f6f48e22dd3a757e8e2a08945b89aa266c20b3dc44221575e8f61cb246e473a2",
+      "bytes": 10749,
+      "width": 720,
+      "height": 450,
+      "mode": "headless-cdp-production-entry"
+    },
     {
       "path": "evaluation/production-journey/goal-revision-1440x900.png",
       "sha256": "851b310b1c8f82396aa1bd8cb4b6834c7286744a5b8a98d510de40f6c0679d09",

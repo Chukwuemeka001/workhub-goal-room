@@ -113,7 +113,7 @@ try {
     await call("Emulation.setDeviceMetricsOverride", { width, height, deviceScaleFactor: 1, mobile: width < 1200, screenWidth: width, screenHeight: height });
   }
   async function click(selector) {
-    const box = await evaluate(`(() => { const e=document.querySelector(${JSON.stringify(selector)}); if(!e) throw new Error('missing ${selector}'); e.scrollIntoView({block:'center',inline:'center'}); e.focus(); const r=e.getBoundingClientRect(); return {x:r.left+r.width/2,y:r.top+r.height/2,visible:getComputedStyle(e).display!=='none'&&r.width>0&&r.height>0&&r.bottom>=0&&r.top<=innerHeight}; })()`);
+    const box = await evaluate(`(() => { const e=document.querySelector(${JSON.stringify(selector)}); if(!e) throw new Error(${JSON.stringify(`missing selector: ${selector}`)}); e.scrollIntoView({block:'center',inline:'center'}); e.focus(); const r=e.getBoundingClientRect(); return {x:r.left+r.width/2,y:r.top+r.height/2,visible:getComputedStyle(e).display!=='none'&&r.width>0&&r.height>0&&r.bottom>=0&&r.top<=innerHeight}; })()`);
     if (!box.visible) throw new Error(`Control not visible: ${selector}`);
     await call("Input.dispatchMouseEvent", { type: "mousePressed", x: box.x, y: box.y, button: "left", clickCount: 1 });
     await call("Input.dispatchMouseEvent", { type: "mouseReleased", x: box.x, y: box.y, button: "left", clickCount: 1 });
@@ -136,6 +136,84 @@ try {
     await writeFile(path, bytes);
     screenshots.push({ path: path.slice(root.length + 1), sha256: sha256(bytes), bytes: bytes.length, width: bytes.readUInt32BE(16), height: bytes.readUInt32BE(20), mode: "headless-cdp-production-entry" });
   }
+  const contrastInventory = [];
+  async function captureContrast(spec) {
+    if (spec.focus) { await click(spec.selector); await wait(20); }
+    const measured = await evaluate(`(() => {
+      const spec=${JSON.stringify(spec)};
+      const element=document.querySelector(spec.selector);
+      const backgroundElement=document.querySelector(spec.backgroundSelector);
+      if(!element||!backgroundElement) throw new Error('Missing contrast selector '+JSON.stringify(spec));
+
+      const parse=(value) => {
+        const match=value.match(/rgba?\\(([^)]+)\\)/i);
+        if(!match) throw new Error('Unsupported computed color '+value);
+        const parts=match[1].split(/[ ,/]+/).filter(Boolean).map(Number);
+        return {r:parts[0],g:parts[1],b:parts[2],a:parts.length>3?parts[3]:1};
+      };
+      const composite=(front,back) => ({r:front.r*front.a+back.r*(1-front.a),g:front.g*front.a+back.g*(1-front.a),b:front.b*front.a+back.b*(1-front.a),a:1});
+      const background=(node) => {
+        const layers=[];
+        for(let current=node;current;current=current.parentElement) layers.push(parse(getComputedStyle(current).backgroundColor));
+        let result={r:9,g:10,b:11,a:1};
+        for(const layer of layers.reverse()) result=composite(layer,result);
+        return result;
+      };
+      const elementStyle=getComputedStyle(element);
+      const bg=background(backgroundElement);
+      let raw;
+      if(spec.property==='boxShadow') {
+        const match=elementStyle.boxShadow.match(/rgba?\\([^)]+\\)/i);
+        if(!match) throw new Error('No computed box-shadow color for '+spec.selector);
+        raw=parse(match[0]);
+      } else raw=parse(elementStyle[spec.property]);
+      const fg=composite(raw,bg);
+      const channel=(value) => { const normalized=value/255; return normalized<=0.04045?normalized/12.92:((normalized+0.055)/1.055)**2.4; };
+      const luminance=(color) => 0.2126*channel(color.r)+0.7152*channel(color.g)+0.0722*channel(color.b);
+      const ratio=(Math.max(luminance(fg),luminance(bg))+0.05)/(Math.min(luminance(fg),luminance(bg))+0.05);
+      const hex=(color) => '#'+[color.r,color.g,color.b].map(value=>Math.round(value).toString(16).padStart(2,'0')).join('');
+      return {foreground:hex(fg),background:hex(bg),ratio:Number(ratio.toFixed(2)),computedProperty:spec.property,rendered:getComputedStyle(element).display!=='none'&&element.getClientRects().length>0,focused:document.activeElement===element,outlineStyle:elementStyle.outlineStyle,outlineWidth:elementStyle.outlineWidth};
+    })()`);
+    const focusValid = !spec.focus || (measured.focused && measured.outlineStyle === "solid" && Number.parseFloat(measured.outlineWidth) >= 3);
+    const row = { ...spec, ...measured, threshold: spec.threshold, pass: measured.rendered && focusValid && measured.ratio >= spec.threshold };
+    delete row.backgroundSelector; delete row.property; delete row.focus; delete row.rendered;
+    contrastInventory.push(row);
+    if (!row.pass) throw new Error(`Production contrast failure: ${JSON.stringify(row)}`);
+  }
+  async function captureInitialContrast(composition, width, height) {
+    await setViewport(width, height); await wait(50);
+    const desktop = composition === "desktop";
+    const rows = desktop ? [
+      { category:"normal-text", selector:".desktop-goal-meta", backgroundSelector:".desktop-surface", property:"color", token:"--d-muted", state:"initial-owner" ,threshold:4.5 },
+      { category:"large-text", selector:".desktop-goal-identity h1", backgroundSelector:".desktop-surface", property:"color", token:"desktop goal heading", state:"initial-owner", threshold:3 },
+      { category:"status-warning", selector:".desktop-state-phase", backgroundSelector:".desktop-surface", property:"color", token:"--d-owner", state:"initial-owner", threshold:4.5 },
+      { category:"actionable-control", selector:".desktop-tab[aria-selected='true']", backgroundSelector:".desktop-inspector", property:"boxShadow", token:"--d-owner selected-tab indicator", state:"initial-owner", threshold:3 },
+      { category:"focus-indicator", selector:".desktop-tab[aria-selected='true']", backgroundSelector:".desktop-surface", property:"outlineColor", token:"#f0bd72 focus ring", state:"initial-owner-focus", threshold:3, focus:true },
+    ] : [
+      { category:"normal-text", selector:".mobile-goal-meta", backgroundSelector:".mobile-room", property:"color", token:"--muted", state:"initial-owner", threshold:4.5 },
+      { category:"large-text", selector:".mobile-goal-title", backgroundSelector:".mobile-room", property:"color", token:"mobile goal heading", state:"initial-owner", threshold:3 },
+      { category:"status-warning", selector:".mobile-brand", backgroundSelector:".mobile-room", property:"color", token:"--owner", state:"initial-owner", threshold:4.5 },
+      { category:"actionable-control", selector:".mobile-tab[aria-selected='true']", backgroundSelector:".mobile-tab-bar", property:"boxShadow", token:"--owner selected-tab indicator", state:"initial-owner", threshold:3 },
+      { category:"focus-indicator", selector:".mobile-tab[aria-selected='true']", backgroundSelector:".mobile-tab-bar", property:"outlineColor", token:"#f0bd72 focus ring", state:"initial-owner-focus", threshold:3, focus:true },
+    ];
+    for (const row of rows) await captureContrast({ composition, ...row });
+  }
+  async function captureVerdictContrast(verdict, composition, width, height) {
+    await setViewport(width, height); await wait(50);
+    const desktop = composition === "desktop";
+    await click(desktop ? "#desktop-tab-proof" : "#mobile-tab-proof");
+    await captureContrast({
+      composition,
+      category: verdict === "PASS" ? "status-success" : "status-fail",
+      selector: desktop ? `.desktop-candidate-history li[data-verdict='${verdict}'] strong` : `.mobile-candidate-history li[data-verdict='${verdict}'] strong`,
+      backgroundSelector: desktop ? ".desktop-inspector" : ".mobile-room",
+      property: "color",
+      token: desktop ? (verdict === "PASS" ? "--d-pass" : "--d-fail") : (verdict === "PASS" ? "--pass" : "--fail"),
+      state: verdict === "PASS" ? "candidate-v2-pass" : "candidate-v1-fail",
+      threshold: 4.5,
+    });
+    await click(desktop ? "#desktop-tab-goal" : "#mobile-tab-goal");
+  }
   function checkpoint(label, actor, trigger, value) {
     return { label, actor, trigger, stateVersion: value.currentStateVersion, phase: value.phase, currentActor: value.currentActor, nextLegalAction: value.nextLegalAction, candidate: value.candidate, verification: value.verification };
   }
@@ -148,6 +226,32 @@ try {
   if (JSON.stringify(registration.map(({ name }) => name)) !== JSON.stringify(expectedTools)) throw new Error("Registered surface mismatch");
   let current = await expectState(0, "INTENT_DRAFT");
   checkpoints.push(checkpoint("fresh", "owner", "production load", current));
+
+  await captureInitialContrast("desktop", 1440, 900);
+  await captureInitialContrast("mobile", 393, 852);
+  await setViewport(720, 450); await wait(50);
+  const requiredZoomSelectors = [
+    ".mobile-goal-title", ".mobile-actor", ".mobile-frontier-title", ".mobile-frontier-live", ".mobile-boundary",
+    "#mobile-owner-intent", ".mobile-intent-form button[type='submit']", "#mobile-tab-goal", "#mobile-tab-plan", "#mobile-tab-proof", "#mobile-tab-activity", ".judge-help summary",
+  ];
+  const requiredContent = [];
+  for (const selector of requiredZoomSelectors) {
+    requiredContent.push(await evaluate(`(() => { const selector=${JSON.stringify(selector)},e=document.querySelector(selector); if(!e)return {selector,rendered:false,reachable:false}; const rendered=getComputedStyle(e).display!=='none'&&e.getClientRects().length>0; e.scrollIntoView({block:'center',inline:'nearest'}); const r=e.getBoundingClientRect(); return {selector,rendered,reachable:rendered&&r.right>0&&r.left<innerWidth&&r.bottom>0&&r.top<innerHeight}; })()`));
+  }
+  const zoomComposition = await evaluate(`(() => { const shown=e=>getComputedStyle(e).display!=='none'&&e.getClientRects().length>0; const active=[document.querySelector('#mobile-room'),document.querySelector('.desktop-surface')].filter(shown).map(e=>e.id||e.className); return {active}; })()`);
+  const zoomTree = await call("Accessibility.getFullAXTree");
+  zoomComposition.axMainNames = zoomTree.nodes.filter((node) => !node.ignored && node.role?.value === "main").map((node) => node.name?.value ?? "");
+  const zoomViewport = await evaluate(`({innerWidth,innerHeight,devicePixelRatio,visualViewport:{width:visualViewport.width,height:visualViewport.height,scale:visualViewport.scale},overflow:{documentX:document.documentElement.scrollWidth-document.documentElement.clientWidth,bodyX:document.body.scrollWidth-document.body.clientWidth}})`);
+  const zoom200 = {
+    route: "/index.html", method: "halved-css-viewport-equivalent", referenceViewport: { width: 1440, height: 900 },
+    cssViewport: { innerWidth: zoomViewport.innerWidth, innerHeight: zoomViewport.innerHeight }, effectiveScale: 1440 / zoomViewport.innerWidth,
+    devicePixelRatio: zoomViewport.devicePixelRatio, visualViewport: zoomViewport.visualViewport, overflow: zoomViewport.overflow,
+    composition: zoomComposition, requiredContent,
+    assertion: "A 720x450 measured CSS viewport is the effective 200% equivalent of the 1440x900 reference viewport; production /index.html remains scroll-reachable without horizontal overflow.",
+  };
+  if (zoom200.effectiveScale !== 2 || zoom200.cssViewport.innerWidth !== 720 || zoom200.cssViewport.innerHeight !== 450 || zoom200.visualViewport.width !== 720 || zoom200.visualViewport.height !== 450 || zoom200.overflow.documentX || zoom200.overflow.bodyX || zoomComposition.active.length !== 1 || zoomComposition.active[0] !== "mobile-room" || zoomComposition.axMainNames.length !== 1 || requiredContent.some((row) => !row.rendered || !row.reachable)) throw new Error(`Effective production 200% zoom failed: ${JSON.stringify(zoom200)}`);
+  await screenshot("effective-200pct-production", 720, 450);
+  await setViewport(1440, 900);
 
   const initialDigestCount = await evaluate("window.__productionJourney.digests.length");
   const unknown = await invoke("propose_goal_contract", { expectedStateVersion: 0, idempotencyKey: "pj-unknown", actor: "owner" });
@@ -193,6 +297,10 @@ try {
   const submit1Input = { expectedStateVersion: 10, idempotencyKey: "pj-candidate-v1", planVersion: 2, stepId: "release", content: failedContent, sha256: failedSha };
   const submit1 = await invoke("submit_artifact", submit1Input); if (!submit1.accepted) throw new Error("Candidate v1 refused");
   current = await expectState(12, "VERIFICATION_FAILED"); checkpoints.push(checkpoint("candidate-v1-fail", "system", "production systemVerifierAdapter automatic observation", current)); await screenshot("candidate-v1-fail");
+  const failScrollY = await evaluate("scrollY");
+  await captureVerdictContrast("FAIL", "desktop", 1440, 900);
+  await captureVerdictContrast("FAIL", "mobile", 393, 852);
+  await setViewport(1440, 900); await evaluate(`scrollTo(0,${failScrollY})`);
   const receiptsBeforeDuplicate = (await evaluate("window.__productionJourney.digests.length"));
   const duplicate = await invoke("submit_artifact", structuredClone(submit1Input));
   await wait(100);
@@ -205,6 +313,10 @@ try {
   const passedSha = sha256(passedContent);
   await invoke("submit_artifact", { expectedStateVersion: 12, idempotencyKey: "pj-candidate-v2", planVersion: 2, stepId: "release", content: passedContent, sha256: passedSha });
   current = await expectState(14, "VERIFICATION_PASSED");
+  const passScrollY = await evaluate("scrollY");
+  await captureVerdictContrast("PASS", "desktop", 1440, 900);
+  await captureVerdictContrast("PASS", "mobile", 393, 852);
+  await setViewport(1440, 900); await evaluate(`scrollTo(0,${passScrollY})`);
   if (JSON.stringify(current.state.candidateHistory[0]) !== JSON.stringify(v1) || JSON.stringify(current.state.verificationHistory[0]) !== JSON.stringify(failRecord)) throw new Error("Candidate v1/FAIL history mutated");
   const s12Controls = await evaluate(`([...document.querySelectorAll('.desktop-owner-action button')].filter(e=>getComputedStyle(e).display!=='none').map(e=>e.textContent.trim()))`);
   if (s12Controls.some((label) => /accept/i.test(label))) throw new Error("S12 exposed Owner acceptance");
@@ -259,6 +371,13 @@ try {
   if (actorCounts.owner !== 6 || actorCounts.agent !== 14 || actorCounts.system !== 2) throw new Error(`Actor custody mismatch: ${JSON.stringify(actorCounts)}`);
   const finalState = current.state;
 
+  const contrastCounts = {
+    total: contrastInventory.length,
+    byComposition: Object.fromEntries(["desktop", "mobile"].map((value) => [value, contrastInventory.filter((row) => row.composition === value).length])),
+    byCategory: Object.fromEntries([...new Set(contrastInventory.map((row) => row.category))].sort().map((value) => [value, contrastInventory.filter((row) => row.category === value).length])),
+  };
+  const contrast = { source: "computed production rendered styles", route: "/index.html", inventory: contrastInventory, counts: contrastCounts, failureCount: contrastInventory.filter((row) => !row.pass).length };
+
   await call("Page.reload", { ignoreCache: true });
   await wait(200);
   await waitFor(async () => evaluate("document.readyState === 'complete' && window.__productionJourney.registrations.length === 6 && window.__productionJourney.tools.has('get_goal_room_state')"), "fresh reload");
@@ -278,6 +397,7 @@ try {
     modal: { binding: modal, escape, cancel, mutationCount: modalMutationCount },
     terminal: { ...terminal, currentActor: current.currentActor, nextLegalAction: current.nextLegalAction },
     compositions,
+    accessibility: { zoom200, contrast },
     receipts,
     receiptSummary: { count: receipts.length, finalHash: receipts.at(-1).hash, actorCounts, ordered: true, hashLinked: true, appendOnly: true, replay: "validated by test:production-journey against replayGoalRoom" },
     finalState,

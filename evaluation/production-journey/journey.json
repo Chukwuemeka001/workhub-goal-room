@@ -611,6 +611,349 @@
       ]
     }
   ],
+  "accessibility": {
+    "zoom200": {
+      "route": "/index.html",
+      "method": "halved-css-viewport-equivalent",
+      "referenceViewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "cssViewport": {
+        "innerWidth": 720,
+        "innerHeight": 450
+      },
+      "effectiveScale": 2,
+      "devicePixelRatio": 1,
+      "visualViewport": {
+        "width": 720,
+        "height": 450,
+        "scale": 1
+      },
+      "overflow": {
+        "documentX": 0,
+        "bodyX": 0
+      },
+      "composition": {
+        "active": [
+          "mobile-room"
+        ],
+        "axMainNames": [
+          "WorkHub Goal Room mobile"
+        ]
+      },
+      "requiredContent": [
+        {
+          "selector": ".mobile-goal-title",
+          "rendered": true,
+          "reachable": true
+        },
+        {
+          "selector": ".mobile-actor",
+          "rendered": true,
+          "reachable": true
+        },
+        {
+          "selector": ".mobile-frontier-title",
+          "rendered": true,
+          "reachable": true
+        },
+        {
+          "selector": ".mobile-frontier-live",
+          "rendered": true,
+          "reachable": true
+        },
+        {
+          "selector": ".mobile-boundary",
+          "rendered": true,
+          "reachable": true
+        },
+        {
+          "selector": "#mobile-owner-intent",
+          "rendered": true,
+          "reachable": true
+        },
+        {
+          "selector": ".mobile-intent-form button[type='submit']",
+          "rendered": true,
+          "reachable": true
+        },
+        {
+          "selector": "#mobile-tab-goal",
+          "rendered": true,
+          "reachable": true
+        },
+        {
+          "selector": "#mobile-tab-plan",
+          "rendered": true,
+          "reachable": true
+        },
+        {
+          "selector": "#mobile-tab-proof",
+          "rendered": true,
+          "reachable": true
+        },
+        {
+          "selector": "#mobile-tab-activity",
+          "rendered": true,
+          "reachable": true
+        },
+        {
+          "selector": ".judge-help summary",
+          "rendered": true,
+          "reachable": true
+        }
+      ],
+      "assertion": "A 720x450 measured CSS viewport is the effective 200% equivalent of the 1440x900 reference viewport; production /index.html remains scroll-reachable without horizontal overflow."
+    },
+    "contrast": {
+      "source": "computed production rendered styles",
+      "route": "/index.html",
+      "inventory": [
+        {
+          "composition": "desktop",
+          "category": "normal-text",
+          "selector": ".desktop-goal-meta",
+          "token": "--d-muted",
+          "state": "initial-owner",
+          "threshold": 4.5,
+          "foreground": "#a1a3a5",
+          "background": "#090a0b",
+          "ratio": 7.83,
+          "computedProperty": "color",
+          "focused": false,
+          "outlineStyle": "none",
+          "outlineWidth": "3px",
+          "pass": true
+        },
+        {
+          "composition": "desktop",
+          "category": "large-text",
+          "selector": ".desktop-goal-identity h1",
+          "token": "desktop goal heading",
+          "state": "initial-owner",
+          "threshold": 3,
+          "foreground": "#f7f5ef",
+          "background": "#090a0b",
+          "ratio": 18.17,
+          "computedProperty": "color",
+          "focused": false,
+          "outlineStyle": "none",
+          "outlineWidth": "3px",
+          "pass": true
+        },
+        {
+          "composition": "desktop",
+          "category": "status-warning",
+          "selector": ".desktop-state-phase",
+          "token": "--d-owner",
+          "state": "initial-owner",
+          "threshold": 4.5,
+          "foreground": "#e4aa55",
+          "background": "#090a0b",
+          "ratio": 9.6,
+          "computedProperty": "color",
+          "focused": false,
+          "outlineStyle": "none",
+          "outlineWidth": "3px",
+          "pass": true
+        },
+        {
+          "composition": "desktop",
+          "category": "actionable-control",
+          "selector": ".desktop-tab[aria-selected='true']",
+          "token": "--d-owner selected-tab indicator",
+          "state": "initial-owner",
+          "threshold": 3,
+          "foreground": "#e4aa55",
+          "background": "#0d0f10",
+          "ratio": 9.31,
+          "computedProperty": "boxShadow",
+          "focused": false,
+          "outlineStyle": "none",
+          "outlineWidth": "3px",
+          "pass": true
+        },
+        {
+          "composition": "desktop",
+          "category": "focus-indicator",
+          "selector": ".desktop-tab[aria-selected='true']",
+          "token": "#f0bd72 focus ring",
+          "state": "initial-owner-focus",
+          "threshold": 3,
+          "foreground": "#f0bd72",
+          "background": "#090a0b",
+          "ratio": 11.54,
+          "computedProperty": "outlineColor",
+          "focused": true,
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "pass": true
+        },
+        {
+          "composition": "mobile",
+          "category": "normal-text",
+          "selector": ".mobile-goal-meta",
+          "token": "--muted",
+          "state": "initial-owner",
+          "threshold": 4.5,
+          "foreground": "#a8aaad",
+          "background": "#090a0b",
+          "ratio": 8.51,
+          "computedProperty": "color",
+          "focused": false,
+          "outlineStyle": "none",
+          "outlineWidth": "3px",
+          "pass": true
+        },
+        {
+          "composition": "mobile",
+          "category": "large-text",
+          "selector": ".mobile-goal-title",
+          "token": "mobile goal heading",
+          "state": "initial-owner",
+          "threshold": 3,
+          "foreground": "#f7f5ef",
+          "background": "#090a0b",
+          "ratio": 18.17,
+          "computedProperty": "color",
+          "focused": false,
+          "outlineStyle": "none",
+          "outlineWidth": "3px",
+          "pass": true
+        },
+        {
+          "composition": "mobile",
+          "category": "status-warning",
+          "selector": ".mobile-brand",
+          "token": "--owner",
+          "state": "initial-owner",
+          "threshold": 4.5,
+          "foreground": "#e4aa55",
+          "background": "#090a0b",
+          "ratio": 9.6,
+          "computedProperty": "color",
+          "focused": false,
+          "outlineStyle": "none",
+          "outlineWidth": "3px",
+          "pass": true
+        },
+        {
+          "composition": "mobile",
+          "category": "actionable-control",
+          "selector": ".mobile-tab[aria-selected='true']",
+          "token": "--owner selected-tab indicator",
+          "state": "initial-owner",
+          "threshold": 3,
+          "foreground": "#e4aa55",
+          "background": "#090a0b",
+          "ratio": 9.6,
+          "computedProperty": "boxShadow",
+          "focused": false,
+          "outlineStyle": "none",
+          "outlineWidth": "3px",
+          "pass": true
+        },
+        {
+          "composition": "mobile",
+          "category": "focus-indicator",
+          "selector": ".mobile-tab[aria-selected='true']",
+          "token": "#f0bd72 focus ring",
+          "state": "initial-owner-focus",
+          "threshold": 3,
+          "foreground": "#f0bd72",
+          "background": "#090a0b",
+          "ratio": 11.54,
+          "computedProperty": "outlineColor",
+          "focused": true,
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "pass": true
+        },
+        {
+          "composition": "desktop",
+          "category": "status-fail",
+          "selector": ".desktop-candidate-history li[data-verdict='FAIL'] strong",
+          "token": "--d-fail",
+          "state": "candidate-v1-fail",
+          "threshold": 4.5,
+          "foreground": "#e49a61",
+          "background": "#0d0f10",
+          "ratio": 8.32,
+          "computedProperty": "color",
+          "focused": false,
+          "outlineStyle": "none",
+          "outlineWidth": "3px",
+          "pass": true
+        },
+        {
+          "composition": "mobile",
+          "category": "status-fail",
+          "selector": ".mobile-candidate-history li[data-verdict='FAIL'] strong",
+          "token": "--fail",
+          "state": "candidate-v1-fail",
+          "threshold": 4.5,
+          "foreground": "#e49a61",
+          "background": "#090a0b",
+          "ratio": 8.58,
+          "computedProperty": "color",
+          "focused": false,
+          "outlineStyle": "none",
+          "outlineWidth": "3px",
+          "pass": true
+        },
+        {
+          "composition": "desktop",
+          "category": "status-success",
+          "selector": ".desktop-candidate-history li[data-verdict='PASS'] strong",
+          "token": "--d-pass",
+          "state": "candidate-v2-pass",
+          "threshold": 4.5,
+          "foreground": "#78cda0",
+          "background": "#0d0f10",
+          "ratio": 10.1,
+          "computedProperty": "color",
+          "focused": false,
+          "outlineStyle": "none",
+          "outlineWidth": "3px",
+          "pass": true
+        },
+        {
+          "composition": "mobile",
+          "category": "status-success",
+          "selector": ".mobile-candidate-history li[data-verdict='PASS'] strong",
+          "token": "--pass",
+          "state": "candidate-v2-pass",
+          "threshold": 4.5,
+          "foreground": "#78cda0",
+          "background": "#090a0b",
+          "ratio": 10.42,
+          "computedProperty": "color",
+          "focused": false,
+          "outlineStyle": "none",
+          "outlineWidth": "3px",
+          "pass": true
+        }
+      ],
+      "counts": {
+        "total": 14,
+        "byComposition": {
+          "desktop": 7,
+          "mobile": 7
+        },
+        "byCategory": {
+          "actionable-control": 2,
+          "focus-indicator": 2,
+          "large-text": 2,
+          "normal-text": 2,
+          "status-fail": 2,
+          "status-success": 2,
+          "status-warning": 2
+        }
+      },
+      "failureCount": 0
+    }
+  },
   "receipts": [
     {
       "accepted": false,
@@ -1224,6 +1567,14 @@
     "disclosedAsBrowserLocalReset": true
   },
   "screenshots": [
+    {
+      "path": "evaluation/production-journey/effective-200pct-production-720x450.png",
+      "sha256": "f6f48e22dd3a757e8e2a08945b89aa266c20b3dc44221575e8f61cb246e473a2",
+      "bytes": 10749,
+      "width": 720,
+      "height": 450,
+      "mode": "headless-cdp-production-entry"
+    },
     {
       "path": "evaluation/production-journey/goal-revision-1440x900.png",
       "sha256": "851b310b1c8f82396aa1bd8cb4b6834c7286744a5b8a98d510de40f6c0679d09",
