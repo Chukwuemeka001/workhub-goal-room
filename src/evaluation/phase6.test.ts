@@ -15,6 +15,7 @@ import { createGoalRoom } from "../core/goalRoom";
 
 const expectedTools = [
   "get_goal_room_state",
+  "propose_goal_contract",
   "propose_plan",
   "claim_step",
   "submit_artifact",
@@ -22,10 +23,10 @@ const expectedTools = [
 ];
 
 describe("Phase 6 reliability contract", () => {
-  it("freezes thirteen distinct scenarios over exactly five tools", () => {
+  it("freezes the provider-free matched scenarios over exactly six tools", () => {
     expect(PHASE6_TOOL_NAMES).toEqual(expectedTools);
-    expect(PHASE6_SCENARIOS).toHaveLength(13);
-    expect(new Set(PHASE6_SCENARIOS.map((scenario) => scenario.id)).size).toBe(13);
+    expect(PHASE6_SCENARIOS).toHaveLength(17);
+    expect(new Set(PHASE6_SCENARIOS.map((scenario) => scenario.id)).size).toBe(17);
   });
 
   it("binds the model-visible definitions to production registration schemas", () => {
@@ -178,8 +179,8 @@ describe("Phase 6 reliability contract", () => {
 
   it("qualifies all positive and adversarial scorer fixtures provider-free", () => {
     expect(runPhase6Conformance()).toEqual({
-      oracleCases: 13,
-      oraclePasses: 13,
+      oracleCases: 17,
+      oraclePasses: 17,
       negativeCases: 7,
       negativeDetections: 7,
       passed: true,

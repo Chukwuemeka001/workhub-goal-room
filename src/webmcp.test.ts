@@ -47,11 +47,30 @@ describe("installGoalRoomTools compatibility", () => {
 
     expect(registerTool.mock.calls.map(([tool]) => tool.name)).toEqual([
       "get_goal_room_state",
+      "propose_goal_contract",
       "propose_plan",
       "claim_step",
       "claim_step",
     ]);
-    expect(acceptedSignals).toHaveLength(2);
+    expect(acceptedSignals).toHaveLength(3);
+    expect(acceptedSignals.every((signal) => signal.aborted)).toBe(true);
+  });
+
+  it.each([
+    ["get_goal_room_state", 0],
+    ["claim_step", 3],
+    ["request_completion", 5],
+  ])("aborts all accepted registrations when %s fails", (failedName, acceptedCount) => {
+    const acceptedSignals: AbortSignal[] = [];
+    const registerTool = vi.fn((tool, options) => {
+      if (tool.name === failedName) throw new Error("REGISTER_FAILED");
+      acceptedSignals.push(options.signal);
+    });
+    expect(() => installGoalRoomTools({
+      documentLike: { modelContext: { registerTool } }, navigatorLike: {},
+      room: roomFixture(), onInvocation: vi.fn(),
+    })).toThrow("REGISTER_FAILED");
+    expect(acceptedSignals).toHaveLength(acceptedCount);
     expect(acceptedSignals.every((signal) => signal.aborted)).toBe(true);
   });
 
@@ -67,7 +86,7 @@ describe("installGoalRoomTools compatibility", () => {
     });
 
     expect(installed.status).toBe("registered");
-    expect(documentRegister).toHaveBeenCalledTimes(5);
+    expect(documentRegister).toHaveBeenCalledTimes(6);
     expect(navigatorRegister).not.toHaveBeenCalled();
     const signals = documentRegister.mock.calls.map(([, options]) => options.signal);
     expect(signals.every((signal) => signal.aborted === false)).toBe(true);
@@ -90,10 +109,10 @@ describe("installGoalRoomTools compatibility", () => {
     });
 
     expect(installed.status).toBe("registered");
-    expect(registerTool).toHaveBeenCalledTimes(10);
+    expect(registerTool).toHaveBeenCalledTimes(12);
     expect(
       registerTool.mock.calls.filter(([, options]) => options instanceof AbortSignal),
-    ).toHaveLength(5);
+    ).toHaveLength(6);
   });
 
   it("reports unsupported clients without mutation", () => {

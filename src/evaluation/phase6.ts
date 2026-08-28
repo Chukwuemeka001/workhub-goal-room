@@ -2,6 +2,7 @@ import manifest from "./phase6-scenarios.json" with { type: "json" };
 
 export const PHASE6_TOOL_NAMES = [
   "get_goal_room_state",
+  "propose_goal_contract",
   "propose_plan",
   "claim_step",
   "submit_artifact",
@@ -10,6 +11,7 @@ export const PHASE6_TOOL_NAMES = [
 
 const PHASE6_CLAIMS = [
   "STATE_ONLY",
+  "GOAL_AWAITS_OWNER",
   "PLAN_AWAITS_OWNER",
   "AGENT_ACTION_REQUESTED",
   "OWNER_ACTION_REQUIRED",

@@ -688,6 +688,7 @@ describe("governed Goal Room WebMCP tools", () => {
     ).toEqual([
       "claim_step",
       "get_goal_room_state",
+      "propose_goal_contract",
       "propose_plan",
       "request_completion",
       "submit_artifact",

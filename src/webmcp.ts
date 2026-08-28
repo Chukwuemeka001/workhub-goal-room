@@ -3,6 +3,7 @@ import {
   type Command,
   type DispatchResult,
   type GoalRoomState,
+  type Receipt,
 } from "./core/goalRoom";
 
 type ToolDefinition = {
@@ -46,11 +47,33 @@ function hasExactToolKeys(input: unknown, keys: string[]): boolean {
   );
 }
 
-function isBoundedNonBlankString(value: unknown, maxLength: number): boolean {
+function isBoundedNonBlankString(value: unknown, maxLength: number): value is string {
   return (
     typeof value === "string" &&
     value.trim().length > 0 &&
     value.length <= maxLength
+  );
+}
+
+function isBoundedUtf8String(
+  value: unknown,
+  maxCharacters: number,
+  maxBytes = maxCharacters,
+): value is string {
+  if (!isBoundedNonBlankString(value, maxCharacters)) return false;
+  const normalized = value.trim();
+  return (
+    normalized.length <= maxCharacters &&
+    new TextEncoder().encode(normalized).byteLength <= maxBytes
+  );
+}
+
+function isGoalList(value: unknown, allowEmpty: boolean): value is string[] {
+  return (
+    Array.isArray(value) &&
+    value.length <= 16 &&
+    (allowEmpty || value.length >= 1) &&
+    value.every((item) => isBoundedUtf8String(item, 500))
   );
 }
 
@@ -78,6 +101,7 @@ export type RegistrationResult = {
 
 type GoalRoomPort = {
   getState: () => GoalRoomState;
+  getReceipts?: () => Receipt[];
   dispatch: (command: Command) => Promise<DispatchResult>;
 };
 
@@ -160,7 +184,7 @@ export function installGoalRoomTools({
     name: "get_goal_room_state",
     title: "Get governed Goal Room state",
     description:
-      "Read the current Goal Room state, state version, owner gate, and next legal action without changing the room.",
+      "Read a compact recovery-oriented projection of the current authority frontier without changing the room.",
     inputSchema: {
       type: "object",
       additionalProperties: false,
@@ -173,13 +197,137 @@ export function installGoalRoomTools({
         return invalidToolInput("get_goal_room_state");
       }
       const state = room.getState();
+      const frontier = getGoalRoomFrontier(state);
+      const currentActor = frontier.nextLegalAction.startsWith("OWNER_")
+        ? "owner"
+        : frontier.nextLegalAction.startsWith("SYSTEM_")
+          ? "system"
+          : frontier.nextLegalAction.startsWith("AGENT_")
+            ? "agent"
+            : "none";
+      const legalAgentActions = (() => {
+        if (state.phase === "INTENT_DRAFT" && state.ownerIntent !== null) return ["propose_goal_contract"];
+        if (state.phase === "GOAL_CONTRACT_REVISION_REQUESTED") return ["propose_goal_contract"];
+        if (["GOAL_CONTRACT_CONFIRMED", "DRAFT", "PLAN_REVISION_REQUESTED"].includes(state.phase)) return ["propose_plan"];
+        if (state.phase === "PLAN_CONFIRMED") return ["claim_step"];
+        if (["STEP_CLAIMED", "VERIFICATION_FAILED"].includes(state.phase)) return ["submit_artifact"];
+        if (state.phase === "VERIFICATION_PASSED") return ["request_completion"];
+        return [];
+      })();
+      const recentRefusalReceipt = room.getReceipts?.().filter((receipt) => !receipt.accepted).at(-1);
+      const goalContract = state.activeGoalContract === null ? null : {
+        version: state.activeGoalContract.version,
+        status: state.activeGoalContract.status,
+        openQuestions: [...state.activeGoalContract.openQuestions],
+      };
+      const plan = state.activePlan === null ? null : {
+        version: state.activePlan.version,
+        status: state.activePlan.status,
+      };
+      const claim = state.activeClaim === null ? null : { ...state.activeClaim };
+      const candidate = state.activeCandidate === null ? null : {
+        version: state.activeCandidate.version,
+        digest: state.activeCandidate.sha256,
+      };
+      const verification = state.activeVerification === null ? null : {
+        verdict: state.activeVerification.verdict,
+        ruleSet: { id: state.activeVerification.ruleSetId, version: state.activeVerification.ruleSetVersion },
+        findingCodes: [...state.activeVerification.findingCodes],
+      };
+      const completion = state.activeCompletionRequest === null ? null : { ...state.activeCompletionRequest };
+      const acceptance = state.goalAcceptance === null ? null : {
+        status: "ACCEPTED",
+        candidateDigest: state.goalAcceptance.candidateSha256,
+      };
       const result = {
         accepted: true,
+        readOnly: true,
         currentStateVersion: state.stateVersion,
-        ...getGoalRoomFrontier(state),
-        state,
+        phase: state.phase,
+        ownerIntent: state.phase === "INTENT_DRAFT" ? state.ownerIntent : null,
+        goalContract,
+        goalRevisionRequest: state.activeGoalContract?.revisionRequest
+          ? { ...state.activeGoalContract.revisionRequest }
+          : null,
+        plan,
+        currentActor,
+        legalAgentActions,
+        ...frontier,
+        claim,
+        candidate,
+        verification,
+        completion,
+        acceptance,
+        recentRefusal: recentRefusalReceipt === undefined ? null : {
+          reasonCode: recentRefusalReceipt.reasonCode,
+          missingConditions: [...(recentRefusalReceipt.missingConditions ?? [])],
+        },
+        state: {
+          goal: state.goal,
+          doneLooksLike: [...state.doneLooksLike],
+          phase: state.phase,
+          stateVersion: state.stateVersion,
+        },
       };
       return recordResult("get_goal_room_state", result);
+    },
+  };
+  const proposeGoalContractTool: ToolDefinition = {
+    name: "propose_goal_contract",
+    title: "Propose an immutable Goal Contract",
+    description:
+      "Propose Goal Contract data as the agent after owner intent or an owner revision request. UTF-8 bounds are enforced. This never confirms the Goal or authorizes Plan work; the owner must confirm or request revision.",
+    inputSchema: {
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        expectedStateVersion: { type: "integer", minimum: 0 },
+        idempotencyKey: { type: "string", minLength: 1, maxLength: 160 },
+        goal: { type: "string", minLength: 1, maxLength: 1000 },
+        why: { type: "string", minLength: 1, maxLength: 1000 },
+        doneLooksLike: { type: "array", minItems: 1, maxItems: 16, items: { type: "string", minLength: 1, maxLength: 500 } },
+        constraints: { type: "array", minItems: 0, maxItems: 16, items: { type: "string", minLength: 1, maxLength: 500 } },
+        nonGoals: { type: "array", minItems: 0, maxItems: 16, items: { type: "string", minLength: 1, maxLength: 500 } },
+        evidenceRequired: { type: "array", minItems: 1, maxItems: 16, items: { type: "string", minLength: 1, maxLength: 500 } },
+        openQuestions: { type: "array", minItems: 0, maxItems: 16, items: { type: "string", minLength: 1, maxLength: 500 } },
+      },
+      required: [
+        "expectedStateVersion", "idempotencyKey", "goal", "why", "doneLooksLike",
+        "constraints", "nonGoals", "evidenceRequired", "openQuestions",
+      ],
+    },
+    annotations: { readOnlyHint: false, consequentialHint: false, untrustedContentHint: true },
+    async execute(input) {
+      const keys = [
+        "expectedStateVersion", "idempotencyKey", "goal", "why", "doneLooksLike",
+        "constraints", "nonGoals", "evidenceRequired", "openQuestions",
+      ];
+      if (
+        !hasExactToolKeys(input, keys) ||
+        !hasValidMutationEnvelope(input) ||
+        !isBoundedUtf8String(input.goal, 1000) ||
+        !isBoundedUtf8String(input.why, 1000) ||
+        !isGoalList(input.doneLooksLike, false) ||
+        !isGoalList(input.constraints, true) ||
+        !isGoalList(input.nonGoals, true) ||
+        !isGoalList(input.evidenceRequired, false) ||
+        !isGoalList(input.openQuestions, true)
+      ) {
+        return invalidToolInput("propose_goal_contract");
+      }
+      return dispatchAgentCommand("propose_goal_contract", {
+        type: "PROPOSE_GOAL_CONTRACT",
+        actor: "agent",
+        expectedStateVersion: input.expectedStateVersion,
+        idempotencyKey: input.idempotencyKey,
+        goal: input.goal,
+        why: input.why,
+        doneLooksLike: input.doneLooksLike,
+        constraints: input.constraints,
+        nonGoals: input.nonGoals,
+        evidenceRequired: input.evidenceRequired,
+        openQuestions: input.openQuestions,
+      });
     },
   };
   const proposePlanTool: ToolDefinition = {
@@ -380,6 +528,7 @@ export function installGoalRoomTools({
 
   try {
     register(stateTool);
+    register(proposeGoalContractTool);
     register(proposePlanTool);
     register(claimStepTool);
     register(submitArtifactTool);
