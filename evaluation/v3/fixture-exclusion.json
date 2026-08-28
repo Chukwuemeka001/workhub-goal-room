@@ -16,18 +16,18 @@
   "leaks": [],
   "builtFiles": [
     {
-      "path": "assets/index-BJfpoDPF.css",
-      "sha256": "cbe53a274e0ee601b8bffaf6624a38427047f34163d9d9e148cfc05cd4b67608",
-      "bytes": 21797
+      "path": "assets/index-BwOJ3CsF.css",
+      "sha256": "c4cc31d03fe043b9f1a5ee5bc4aad6d8a0a2294c6e17f639c851d822b546e902",
+      "bytes": 21986
     },
     {
-      "path": "assets/index-lIR0yESS.js",
-      "sha256": "82ea2db726d281e76e41bd9e48cb99a8e22b817ca50b3b9438bb9a4b6386417f",
-      "bytes": 78311
+      "path": "assets/index-Pzy-mK0Q.js",
+      "sha256": "1d6fc1af63676bc82740404274fb221d5c57cd8bd8456033f2121fd2c6e040fb",
+      "bytes": 79392
     },
     {
       "path": "index.html",
-      "sha256": "52c30273d6c33e91a39310946776629201123db963697d8c440f1856df5a1ed9",
+      "sha256": "64219ef465dd4194f11866818e9d4d7f3031cdabd4e00a2ef81a0b00a8077fbc",
       "bytes": 2618
     }
   ],

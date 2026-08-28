@@ -529,7 +529,7 @@
   },
   "terminal": {
     "buttons": 0,
-    "actor": "owner",
+    "actor": "none",
     "copy": "Goal accepted. No further governed action.",
     "currentActor": "none",
     "nextLegalAction": "GOAL_ACCEPTED_NO_FURTHER_ACTION"
@@ -1266,8 +1266,8 @@
     },
     {
       "path": "evaluation/production-journey/s14-sealed-1440x900.png",
-      "sha256": "8001d8a431fa3dda9d1f8449888fe872b2f13474565898bf8ade35deeec43deb",
-      "bytes": 198485,
+      "sha256": "c4b95eb3d6e3eb0bc9cc921e9bdf5eb159b445db08cf00b14196f2777ce7028a",
+      "bytes": 170694,
       "width": 1440,
       "height": 900,
       "mode": "headless-cdp-production-entry"
@@ -1290,8 +1290,8 @@
     },
     {
       "path": "evaluation/production-journey/breakpoint-xor-1200x900.png",
-      "sha256": "c6c9f4679d934af7f11e6b47223691c077c5c1c8b0d9b55e0c2871614fb89b4e",
-      "bytes": 188588,
+      "sha256": "39c8c09bc7dc86481c5b3cd4164111aa4354b692bdf6a60541c73056ec1de3fc",
+      "bytes": 161896,
       "width": 1200,
       "height": 900,
       "mode": "headless-cdp-production-entry"

@@ -24,7 +24,7 @@ describe("pure desktop Mission Room projection", () => {
       fail: ["Verify", "work", "agent", "Agent must submit a corrected candidate", false, "waiting"],
       pass: ["Verify", "accept", "agent", "Agent may request completion for this exact candidate", false, "waiting"],
       completion: ["Accept", "accept", "owner", "Owner may accept this exact verified candidate", true, "accept-goal"],
-      accepted: ["Accept", "accepted", "owner", "No further governed action", false, "terminal"],
+      accepted: ["Accept", "accepted", "none", "No further governed action", false, "terminal"],
     } as const;
     for (const [name, tuple] of Object.entries(expected)) {
       const view = project(all.get(name)!);

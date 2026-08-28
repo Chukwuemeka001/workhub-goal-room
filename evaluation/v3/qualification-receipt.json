@@ -442,8 +442,8 @@
     },
     {
       "path": "src/main.ts",
-      "sha256": "77fb884187a9c5650f0900891595cbdfd05f82ba20321608c73b58f1f63caab6",
-      "bytes": 5654
+      "sha256": "980de99ebdcbdc3851be2e709bfc4b65687390821f92a4bad2cc7cf37e7e9e30",
+      "bytes": 6155
     },
     {
       "path": "src/desktopUi.ts",
@@ -452,8 +452,8 @@
     },
     {
       "path": "src/desktopView.ts",
-      "sha256": "45906682bb7215a29bd44e84973068b18d91a5e5a009fc2f2201093ff8d00775",
-      "bytes": 10516
+      "sha256": "d97e1f0dff98f9140fe3256e74b650e2c79700a0229f96ec4d30deab4ea02f7a",
+      "bytes": 10525
     },
     {
       "path": "src/mobileUi.ts",
@@ -472,8 +472,8 @@
     },
     {
       "path": "src/ownerView.ts",
-      "sha256": "3af435ae61bb2306ff5a63dc5dafe5efbf6fbf8f7eb16ae74d30c5fc63b5513e",
-      "bytes": 13088
+      "sha256": "3084627f74203143ccff4375b395d6c61794921f1741197a99999599ef1af3cb",
+      "bytes": 13096
     },
     {
       "path": "src/phase0View.ts",
@@ -482,8 +482,8 @@
     },
     {
       "path": "src/desktop.css",
-      "sha256": "e205b96ec1ce3a99216b385d2a4132bc0d2ab3e45ca4f07cb284435270d05e5d",
-      "bytes": 13823
+      "sha256": "e0204c740c6d2ea90d7544e005c2b9418c964b835063334a4ec4996f6409e6da",
+      "bytes": 14032
     },
     {
       "path": "src/style.css",
@@ -517,8 +517,8 @@
     },
     {
       "path": "package.json",
-      "sha256": "117f44d7c3d9693c079aec325e143e0a3cc1c2954d589abcea050fa2480ccb8c",
-      "bytes": 1937
+      "sha256": "5a0e2b9abece1a6a6dc656ad7552023e78f1554d65c3d702db89f28729746ec6",
+      "bytes": 2126
     },
     {
       "path": "README.md",

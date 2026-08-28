@@ -8,7 +8,7 @@
   },
   "evidenceCommit": "recorded_after_commit_in_git",
   "evidenceTree": "recorded_after_commit_in_git",
-  "journeySha256": "30240a871cab9e86c2c89bfcfffd72d8f452da09f5442b9a399d5aecd6d882b1",
+  "journeySha256": "9bcebdd13234bb81ab2f92260fad1793bffc6c654f0eeac7e4cb1d2a5837f7e2",
   "route": {
     "url": "http://127.0.0.1:4177/index.html",
     "entry": "/index.html",
@@ -109,18 +109,18 @@
     },
     {
       "path": "scripts/production-journey-qa.mjs",
-      "sha256": "9dc31dd8cf45740376fac35ca0a7182dc6b4da691a132d933dc583e64b2e2968",
-      "bytes": 28945
+      "sha256": "3bf8c6ba1a8a3af775764d28b795280d171acd1d5437426ee96a87858c3ae166",
+      "bytes": 29153
     },
     {
       "path": "scripts/production-journey-receipt.mjs",
-      "sha256": "c97525c4d513a0ae9165d606b9ac9242add365914915bd198e50aefe0b5c1d0a",
-      "bytes": 5153
+      "sha256": "73ce47d8286ef8f4425657ddd2212f11a759b7721aa80cdb539b7b8a5f2d5a24",
+      "bytes": 5190
     },
     {
       "path": "src/phase8Journey.test.ts",
-      "sha256": "4b21c55f721e3dd4221043b942c9575a3282f4507367d7257d788c82cd590319",
-      "bytes": 12035
+      "sha256": "df88aa0365b87adbca222b804080ff205642e6f438229c0b89404f4cac0cf943",
+      "bytes": 12133
     },
     {
       "path": "package.json",
@@ -176,8 +176,8 @@
     },
     {
       "path": "evaluation/production-journey/s14-sealed-1440x900.png",
-      "sha256": "8001d8a431fa3dda9d1f8449888fe872b2f13474565898bf8ade35deeec43deb",
-      "bytes": 198485,
+      "sha256": "c4b95eb3d6e3eb0bc9cc921e9bdf5eb159b445db08cf00b14196f2777ce7028a",
+      "bytes": 170694,
       "width": 1440,
       "height": 900,
       "mode": "headless-cdp-production-entry"
@@ -200,8 +200,8 @@
     },
     {
       "path": "evaluation/production-journey/breakpoint-xor-1200x900.png",
-      "sha256": "c6c9f4679d934af7f11e6b47223691c077c5c1c8b0d9b55e0c2871614fb89b4e",
-      "bytes": 188588,
+      "sha256": "39c8c09bc7dc86481c5b3cd4164111aa4354b692bdf6a60541c73056ec1de3fc",
+      "bytes": 161896,
       "width": 1200,
       "height": 900,
       "mode": "headless-cdp-production-entry"

@@ -238,5 +238,6 @@ describe("Phase 8 installed-surface full journey qualification", () => {
     expect(evidence.receipts).toHaveLength(22);
     expect(await replayGoalRoom({ ownerIntent: null }, evidence.receipts)).toEqual(evidence.finalState);
     expect(evidence.finalState).toMatchObject({ phase: "GOAL_ACCEPTED", stateVersion: 16 });
+    expect(evidence.terminal).toMatchObject({ actor: "none", currentActor: "none", buttons: 0 });
   });
 });

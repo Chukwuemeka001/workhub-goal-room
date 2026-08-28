@@ -117,10 +117,12 @@
 }
 .desktop-now[data-actor="owner"] { border-top-color: var(--d-owner); background: linear-gradient(110deg, #19150f, #10100e 72%); }
 .desktop-now[data-actor="system"] { border-top-color: var(--d-system); background: linear-gradient(110deg, #13151b, #0d0f13 72%); }
+.desktop-now[data-actor="none"] { border-top-color: var(--d-line-strong); background: linear-gradient(110deg, #121314, #0d0f10 72%); }
 .desktop-now-copy { display: flex; flex-direction: column; justify-content: center; }
 .desktop-actor { margin-top: 24px; color: var(--d-agent); font-size: 0.7rem; font-weight: 760; letter-spacing: 0.1em; }
 .desktop-now[data-actor="owner"] .desktop-actor { color: var(--d-owner); }
 .desktop-now[data-actor="system"] .desktop-actor { color: var(--d-system); }
+.desktop-now[data-actor="none"] .desktop-actor { color: var(--d-muted); }
 .desktop-now h2 {
   max-width: 19ch;
   margin-top: 16px;

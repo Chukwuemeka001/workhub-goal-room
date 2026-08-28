@@ -26,7 +26,7 @@ export type OwnerViewModel = {
   goalContract: GoalContractView;
   nextLegalAction: {
     label: string;
-    actor: "agent" | "owner" | "system";
+    actor: "agent" | "owner" | "system" | "none";
   };
   plan: {
     version: number;
@@ -389,7 +389,7 @@ export function createOwnerViewModel(
       actions: hiddenActions(plan.version),
       nextLegalAction: {
         label: "No further governed action",
-        actor: "owner",
+        actor: "none",
       },
     };
   }

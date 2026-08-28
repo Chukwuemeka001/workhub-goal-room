@@ -18,7 +18,7 @@ export type DesktopView = {
     currentNode: "intent" | "goal" | "plan" | "work" | "verify" | "accept" | "accepted";
     nodes: { id: "define" | "plan" | "work" | "verify" | "accept"; label: string; status: "complete" | "current" | "pending" | "failed" }[];
   };
-  now: { actor: "agent" | "owner" | "system"; title: string; legalAction: string; boundary: string; ownerAttention: boolean; compactDigest: string | null };
+  now: { actor: "agent" | "owner" | "system" | "none"; title: string; legalAction: string; boundary: string; ownerAttention: boolean; compactDigest: string | null };
   custody: CustodyView;
   toolSurface: ToolSurfaceView;
   ownerAction: { kind: DesktopOwnerActionKind; visible: boolean; label: string | null; secondaryKind: "request-goal-revision" | "request-plan-revision" | null; secondaryLabel: string | null; waitingText: string };

@@ -16,7 +16,7 @@ if (journey.kind !== "goal-room-real-production-journey") throw new Error("Wrong
 if (journey.route.entry !== "/index.html" || journey.route.sourceEntry !== "src/main.ts" || journey.route.fixtureImports.length || journey.route.bundleLeaks.length) throw new Error("Production route boundary failed");
 if (journey.invocation.class !== "captured-registered-webmcp-descriptor-callbacks" || journey.invocation.browserNativeTestingApi !== false || journey.invocation.autonomousModelSelection !== false) throw new Error("Invocation claim boundary failed");
 if (journey.tools.length !== 6 || journey.tools.some(({ name }) => /verify|accept/.test(name))) throw new Error("Privileged or incomplete tool surface");
-if (journey.finalState.phase !== "GOAL_ACCEPTED" || journey.finalState.stateVersion !== 16 || journey.terminal.currentActor !== "none" || journey.terminal.buttons !== 0) throw new Error("Terminal state failed");
+if (journey.finalState.phase !== "GOAL_ACCEPTED" || journey.finalState.stateVersion !== 16 || journey.terminal.currentActor !== "none" || journey.terminal.actor !== "none" || journey.terminal.buttons !== 0) throw new Error("Terminal state failed");
 if (journey.reloadReset.phase !== "INTENT_DRAFT" || journey.reloadReset.stateVersion !== 0 || journey.reloadReset.ownerIntent !== null) throw new Error("Reload reset failed");
 if (journey.receipts.length !== 22) throw new Error(`Receipt count mismatch: ${journey.receipts.length}`);
 journey.receipts.forEach((receipt, index) => {

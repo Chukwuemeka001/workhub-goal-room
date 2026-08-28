@@ -232,7 +232,8 @@ try {
   await click(triggerSelector); await click("#confirm-acceptance");
   current = await expectState(16, "GOAL_ACCEPTED"); checkpoints.push(checkpoint("sealed-s14", "owner", "visible exact-candidate confirmation dialog", current));
   const terminal = await evaluate(`({buttons:[...document.querySelectorAll('.desktop-owner-action button')].filter(e=>getComputedStyle(e).display!=='none').length,actor:document.querySelector('.desktop-now')?.dataset.actor,copy:document.querySelector('.desktop-owner-action')?.textContent})`);
-  if (current.currentActor !== "none" || current.nextLegalAction !== "GOAL_ACCEPTED_NO_FURTHER_ACTION" || terminal.buttons !== 0) throw new Error(`S14 is not sealed: ${JSON.stringify({currentActor:current.currentActor,nextLegalAction:current.nextLegalAction,terminal})}`);
+  const modalMutationCount = await evaluate("window.__productionJourney.digests.length") - digestCountBeforeModal;
+  if (current.currentActor !== "none" || current.nextLegalAction !== "GOAL_ACCEPTED_NO_FURTHER_ACTION" || terminal.actor !== "none" || terminal.buttons !== 0 || modalMutationCount !== 1) throw new Error(`S14 is not sealed: ${JSON.stringify({currentActor:current.currentActor,nextLegalAction:current.nextLegalAction,terminal,modalMutationCount})}`);
   await screenshot("s14-sealed", 1440, 900); await screenshot("s14-mobile", 393, 852);
 
   const compositions = [];
@@ -274,7 +275,7 @@ try {
     tools: registration,
     checkpoints,
     negatives: { unknownKeyActorInjection: "INVALID_TOOL_INPUT/zero mutation", staleVersion: staleGoal.reasonCode, prematureClaim: earlyClaim.reasonCode, wrongPlan: wrongPlan.reasonCode, wrongStep: wrongStep.reasonCode, digestMismatch: badDigest.reasonCode, prematureCompletion: prematureCompletion.reasonCode, privilegedToolDescriptorsAbsent: !registration.some(({ name }) => /verify|accept/.test(name)), changedIdempotencyReuse: changedReuse.reasonCode, duplicateCandidateCallback: "prior result/no new receipt/no duplicate verifier", reporterFailure: { productionBrowserInjected: false, proofClass: "focused unit/source check; production composition has no safe reporter injection seam" }, hostileMaximum: hostileDom },
-    modal: { binding: modal, escape, cancel, mutationCount: 1 },
+    modal: { binding: modal, escape, cancel, mutationCount: modalMutationCount },
     terminal: { ...terminal, currentActor: current.currentActor, nextLegalAction: current.nextLegalAction },
     compositions,
     receipts,
