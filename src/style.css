@@ -145,6 +145,20 @@ h3 {
   padding: 20px 22px;
   border-radius: 12px 12px 0 0;
 }
+#owner-intent-form { display: grid; gap: 10px; }
+#owner-intent-form label { color: var(--text-soft); font-size: 0.82rem; }
+#owner-intent-input {
+  width: 100%;
+  min-height: 7rem;
+  padding: 13px 14px;
+  resize: vertical;
+  border: 1px solid var(--line-strong);
+  border-radius: 7px;
+  color: var(--text);
+  background: #101112;
+}
+#goal-history li { display: block; }
+#goal-history p { margin-top: 5px; color: var(--muted); overflow-wrap: anywhere; }
 .goal-copy { display: flex; flex-direction: column; justify-content: center; }
 .done-block { padding-left: 26px; border-left: 1px solid var(--line); }
 .done-list, .boundary-card ul {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createGoalRoom, replayGoalRoom, type Command } from "./goalRoom";
+import { createGoalRoom, getGoalRoomFrontier, replayGoalRoom, type Command } from "./goalRoom";
 
 const proposedContract = {
   goal: "Publish a verified WebMCP Challenge entry",
@@ -12,6 +12,181 @@ const proposedContract = {
 };
 
 describe("Goal Room Goal Contract authority", () => {
+  it("initializes an explicit empty owner intent without admitting a Goal", () => {
+    const room = createGoalRoom({ ownerIntent: null });
+
+    expect(room.getState()).toMatchObject({
+      phase: "INTENT_DRAFT",
+      stateVersion: 0,
+      ownerIntent: null,
+      goal: "",
+      doneLooksLike: [],
+      activeGoalContract: null,
+      activePlan: null,
+    });
+    expect(room.getReceipts()).toEqual([]);
+    expect(getGoalRoomFrontier(room.getState())).toEqual({
+      nextLegalAction: "OWNER_SET_INTENT",
+      ownerRequired: true,
+    });
+  });
+
+  it("sets and revises normalized owner intent without admitting Goal, Plan, or work", async () => {
+    const room = createGoalRoom({ ownerIntent: null });
+
+    const first = await room.dispatch({
+      type: "SET_OWNER_INTENT",
+      actor: "owner",
+      expectedStateVersion: 0,
+      idempotencyKey: "owner-intent-v1",
+      intent: "  Build a governed challenge entry.  ",
+    });
+    const second = await room.dispatch({
+      type: "SET_OWNER_INTENT",
+      actor: "owner",
+      expectedStateVersion: 1,
+      idempotencyKey: "owner-intent-v2",
+      intent: "Make the authority boundary judge-observable.",
+    });
+
+    expect(first).toMatchObject({
+      accepted: true,
+      stateVersion: 1,
+      nextLegalAction: "AGENT_PROPOSE_GOAL_CONTRACT",
+      ownerRequired: false,
+    });
+    expect(second).toMatchObject({ accepted: true, stateVersion: 2 });
+    expect(room.getState()).toMatchObject({
+      phase: "INTENT_DRAFT",
+      stateVersion: 2,
+      ownerIntent: "Make the authority boundary judge-observable.",
+      goal: "",
+      doneLooksLike: [],
+      activeGoalContract: null,
+      activePlan: null,
+      activeClaim: null,
+      activeCandidate: null,
+    });
+    expect(room.getReceipts()).toHaveLength(2);
+  });
+
+  it("refuses owner intent changes after a Goal proposal and preserves state", async () => {
+    const room = createGoalRoom({ ownerIntent: "Build a governed challenge entry." });
+    await room.dispatch({
+      type: "PROPOSE_GOAL_CONTRACT",
+      actor: "agent",
+      expectedStateVersion: 0,
+      idempotencyKey: "goal-v1",
+      ...proposedContract,
+    });
+    const before = room.getState();
+
+    const result = await room.dispatch({
+      type: "SET_OWNER_INTENT",
+      actor: "owner",
+      expectedStateVersion: 1,
+      idempotencyKey: "late-owner-intent",
+      intent: "Silently change the admitted Goal.",
+    });
+
+    expect(result).toMatchObject({
+      accepted: false,
+      reasonCode: "OWNER_INTENT_NOT_ALLOWED",
+      stateVersion: 1,
+      nextLegalAction: "OWNER_CONFIRM_OR_REVISE_GOAL",
+      ownerRequired: true,
+    });
+    expect(room.getState()).toEqual(before);
+  });
+
+  it("refuses a Goal proposal until owner intent is captured", async () => {
+    const room = createGoalRoom({ ownerIntent: null });
+    const before = room.getState();
+
+    const result = await room.dispatch({
+      type: "PROPOSE_GOAL_CONTRACT",
+      actor: "agent",
+      expectedStateVersion: 0,
+      idempotencyKey: "goal-without-intent",
+      ...proposedContract,
+    });
+
+    expect(result).toMatchObject({
+      accepted: false,
+      reasonCode: "GOAL_PROPOSAL_NOT_ALLOWED",
+      stateVersion: 0,
+      nextLegalAction: "OWNER_SET_INTENT",
+      ownerRequired: true,
+    });
+    expect(room.getState()).toEqual(before);
+  });
+
+  it("applies owner-only authority and exact-shape bounds without mutation on malformed input", async () => {
+    const room = createGoalRoom({ ownerIntent: null });
+    const before = room.getState();
+
+    const wrongActor = await room.dispatch({
+      type: "SET_OWNER_INTENT",
+      actor: "agent",
+      expectedStateVersion: 0,
+      idempotencyKey: "agent-intent",
+      intent: "Agent-authored intent",
+    });
+    expect(wrongActor).toMatchObject({ accepted: false, reasonCode: "OWNER_ONLY" });
+    expect(room.getState()).toEqual(before);
+
+    const extraKey = {
+      type: "SET_OWNER_INTENT",
+      actor: "owner",
+      expectedStateVersion: 0,
+      idempotencyKey: "extra-key",
+      intent: "Owner intent",
+      authorityOverride: true,
+    } as unknown as Command;
+    await expect(room.dispatch(extraKey)).rejects.toThrow("INVALID_COMMAND");
+    await expect(room.dispatch({
+      type: "SET_OWNER_INTENT",
+      actor: "owner",
+      expectedStateVersion: 0,
+      idempotencyKey: "oversized-intent",
+      intent: "x".repeat(1_001),
+    })).rejects.toThrow("INVALID_COMMAND");
+    expect(room.getState()).toEqual(before);
+    expect(room.getReceipts()).toHaveLength(1);
+  });
+
+  it("uses existing retry, stale, key-reuse, and replay machinery for owner intent", async () => {
+    const input = { ownerIntent: null };
+    const room = createGoalRoom(input);
+    const command = {
+      type: "SET_OWNER_INTENT" as const,
+      actor: "owner" as const,
+      expectedStateVersion: 0,
+      idempotencyKey: "owner-intent-v1",
+      intent: "  Build a governed challenge entry.  ",
+    };
+
+    const accepted = await room.dispatch(command);
+    expect(await room.dispatch(structuredClone(command))).toEqual(accepted);
+    expect(room.getReceipts()).toHaveLength(1);
+    await expect(room.dispatch({ ...command, intent: "Changed key reuse" }))
+      .rejects.toThrow("IDEMPOTENCY_KEY_REUSE");
+
+    const stale = await room.dispatch({
+      ...command,
+      expectedStateVersion: 0,
+      idempotencyKey: "stale-owner-intent",
+      intent: "Stale revision",
+    });
+    expect(stale).toMatchObject({
+      accepted: false,
+      reasonCode: "STALE_STATE",
+      stateVersion: 1,
+    });
+    expect(room.getState().ownerIntent).toBe("Build a governed challenge entry.");
+    expect(await replayGoalRoom(input, room.getReceipts())).toEqual(room.getState());
+  });
+
   it("accepts an agent Goal Contract proposal without confirming it", async () => {
     const room = createGoalRoom({
       ownerIntent: "Build the clearest challenge entry without weakening owner authority.",

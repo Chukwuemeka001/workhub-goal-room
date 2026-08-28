@@ -42,7 +42,7 @@ export type GoalRoomInput = {
   goal: string;
   doneLooksLike: string[];
 } | {
-  ownerIntent: string;
+  ownerIntent: string | null;
 };
 
 export type StepClaim = {
@@ -110,6 +110,14 @@ export type GoalRoomState = {
   verificationHistory: VerificationRecord[];
   activeCompletionRequest: CompletionRequest | null;
   goalAcceptance: GoalAcceptance | null;
+};
+
+export type SetOwnerIntentCommand = {
+  type: "SET_OWNER_INTENT";
+  actor: Actor;
+  expectedStateVersion: number;
+  idempotencyKey: string;
+  intent: string;
 };
 
 export type ProposeGoalContractCommand = {
@@ -218,6 +226,7 @@ export type RecordVerificationCommand = {
 };
 
 export type Command =
+  | SetOwnerIntentCommand
   | ProposeGoalContractCommand
   | RequestGoalRevisionCommand
   | ConfirmGoalContractCommand
@@ -232,6 +241,7 @@ export type Command =
 export type ReasonCode =
   | "OWNER_ONLY"
   | "AGENT_ONLY"
+  | "OWNER_INTENT_NOT_ALLOWED"
   | "GOAL_VERSION_MISMATCH"
   | "GOAL_PROPOSAL_NOT_ALLOWED"
   | "PLAN_VERSION_MISMATCH"
@@ -340,6 +350,7 @@ function hasExactKeys(record: Record<string, unknown>, keys: string[]): boolean 
 
 const LOWER_HEX_64 = /^[0-9a-f]{64}$/;
 const MAX_CANDIDATE_CONTENT_BYTES = 4 * 1024;
+export const MAX_OWNER_INTENT_LENGTH = 1_000;
 
 function isNonEmptyStringArray(value: unknown, allowEmpty = false): value is string[] {
   return Array.isArray(value) &&
@@ -356,6 +367,20 @@ function validateCommand(value: unknown): asserts value is Command {
     value.idempotencyKey.trim().length > 0 &&
     (value.actor === "agent" || value.actor === "owner" || value.actor === "system");
   if (!commonValid) throw new Error("INVALID_COMMAND");
+
+  if (value.type === "SET_OWNER_INTENT") {
+    if (
+      !hasExactKeys(value, [
+        "type", "actor", "expectedStateVersion", "idempotencyKey", "intent",
+      ]) ||
+      typeof value.intent !== "string" ||
+      value.intent.trim().length === 0 ||
+      value.intent.length > MAX_OWNER_INTENT_LENGTH
+    ) {
+      throw new Error("INVALID_COMMAND");
+    }
+    return;
+  }
 
   if (value.type === "PROPOSE_GOAL_CONTRACT") {
     if (
@@ -592,6 +617,17 @@ function applyAcceptedCommand(
   state: GoalRoomState,
   command: Command,
 ): GoalRoomState {
+  if (command.type === "SET_OWNER_INTENT") {
+    if (command.actor !== "owner" || state.phase !== "INTENT_DRAFT") {
+      throw new Error("REPLAY_AUTHORITY_MISMATCH");
+    }
+    return {
+      ...state,
+      ownerIntent: command.intent.trim(),
+      stateVersion: state.stateVersion + 1,
+    };
+  }
+
   if (command.type === "PROPOSE_GOAL_CONTRACT") {
     const goalContract: GoalContractVersion = {
       version: state.goalContractHistory.length + 1,
@@ -852,7 +888,9 @@ function applyAcceptedCommand(
 }
 
 function nextLegalAction(state: GoalRoomState): string {
-  if (state.phase === "INTENT_DRAFT") return "AGENT_PROPOSE_GOAL_CONTRACT";
+  if (state.phase === "INTENT_DRAFT") {
+    return state.ownerIntent === null ? "OWNER_SET_INTENT" : "AGENT_PROPOSE_GOAL_CONTRACT";
+  }
   if (state.phase === "GOAL_CONTRACT_PROPOSED") return "OWNER_CONFIRM_OR_REVISE_GOAL";
   if (state.phase === "GOAL_CONTRACT_REVISION_REQUESTED") return "AGENT_PROPOSE_REVISED_GOAL_CONTRACT";
   if (state.phase === "GOAL_CONTRACT_CONFIRMED") return "AGENT_PROPOSE_PLAN";
@@ -872,6 +910,7 @@ export function getGoalRoomFrontier(state: GoalRoomState) {
   return {
     nextLegalAction: nextLegalAction(state),
     ownerRequired:
+      (state.phase === "INTENT_DRAFT" && state.ownerIntent === null) ||
       state.phase === "GOAL_CONTRACT_PROPOSED" ||
       state.phase === "PLAN_PROPOSED" || state.phase === "COMPLETION_REQUESTED",
   };
@@ -891,10 +930,36 @@ function evaluate(
     };
   }
 
+  if (command.type === "SET_OWNER_INTENT") {
+    if (command.actor !== "owner") {
+      return {
+        accepted: false,
+        reasonCode: "OWNER_ONLY",
+        stateVersion: state.stateVersion,
+        ...getGoalRoomFrontier(state),
+      };
+    }
+    if (state.phase !== "INTENT_DRAFT") {
+      return {
+        accepted: false,
+        reasonCode: "OWNER_INTENT_NOT_ALLOWED",
+        stateVersion: state.stateVersion,
+        ...getGoalRoomFrontier(state),
+      };
+    }
+    return {
+      accepted: true,
+      stateVersion: state.stateVersion + 1,
+      nextLegalAction: "AGENT_PROPOSE_GOAL_CONTRACT",
+      ownerRequired: false,
+    };
+  }
+
   if (command.type === "PROPOSE_GOAL_CONTRACT") {
     if (
-      state.phase !== "INTENT_DRAFT" &&
-      state.phase !== "GOAL_CONTRACT_REVISION_REQUESTED"
+      (state.phase === "INTENT_DRAFT" && state.ownerIntent === null) ||
+      (state.phase !== "INTENT_DRAFT" &&
+        state.phase !== "GOAL_CONTRACT_REVISION_REQUESTED")
     ) {
       return {
         accepted: false,

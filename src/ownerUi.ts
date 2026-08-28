@@ -1,4 +1,4 @@
-import type { Receipt } from "./core/goalRoom";
+import { MAX_OWNER_INTENT_LENGTH, type Receipt } from "./core/goalRoom";
 import type { LifecycleStage, OwnerViewModel } from "./ownerView";
 
 export function createLifecycleAccessibleLabel(
@@ -25,6 +25,10 @@ function commandLabel(
   candidateVersion?: number,
 ): string {
   switch (receipt.command.type) {
+    case "SET_OWNER_INTENT":
+      return receipt.accepted
+        ? "Owner captured intent"
+        : `Owner intent refused · ${receipt.reasonCode ?? "unknown"}`;
     case "PROPOSE_GOAL_CONTRACT":
       return receipt.accepted
         ? `Agent proposed Goal Contract v${proposedGoalVersion ?? "?"}`
@@ -91,6 +95,14 @@ export function createReceiptLabels(receipts: Receipt[]): string[] {
         : undefined;
     return commandLabel(receipt, goalVersion, planVersion, acceptedCandidateVersion);
   });
+}
+
+export function prepareOwnerIntent(rawValue: string) {
+  const intent = rawValue.trim();
+  return {
+    valid: intent.length > 0 && intent.length <= MAX_OWNER_INTENT_LENGTH,
+    intent,
+  };
 }
 
 export function prepareRevisionNote(rawValue: string) {

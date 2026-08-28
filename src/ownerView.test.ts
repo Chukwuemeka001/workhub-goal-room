@@ -3,6 +3,36 @@ import { createGoalRoom } from "./core/goalRoom";
 import { createOwnerViewModel } from "./ownerView";
 
 describe("Goal Room owner view model", () => {
+  it("asks the owner for initial intent before exposing the agent frontier", () => {
+    const room = createGoalRoom({ ownerIntent: null });
+
+    expect(createOwnerViewModel(room.getState(), room.getReceipts())).toMatchObject({
+      ownerIntent: null,
+      goal: "",
+      statusLabel: "Owner intent required — Goal not admitted",
+      ownerAttention: {
+        required: true,
+        title: "Describe the outcome you want",
+      },
+      actions: {
+        setIntent: { visible: true, label: "Set owner intent" },
+        confirm: { visible: false },
+        revise: { visible: false },
+      },
+      nextLegalAction: {
+        label: "Owner must set initial intent",
+        actor: "owner",
+      },
+      goalContract: {
+        pendingOwnerIntent: null,
+        activeGoal: null,
+        confirmedGoalVersion: null,
+        history: [],
+      },
+      plan: null,
+    });
+  });
+
   it("projects owner intent without implying an admitted Goal", () => {
     const room = createGoalRoom({ ownerIntent: "Build a governed challenge entry." });
 
@@ -16,6 +46,7 @@ describe("Goal Room owner view model", () => {
         title: "Agent must propose a Goal Contract",
       },
       actions: {
+        setIntent: { visible: true, label: "Revise owner intent" },
         confirm: { visible: false },
         revise: { visible: false },
       },

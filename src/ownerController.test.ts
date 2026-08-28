@@ -4,6 +4,95 @@ import { createOwnerDecisionController } from "./ownerController";
 import type { OwnerViewModel } from "./ownerView";
 
 describe("owner decision controller", () => {
+  const proposedGoal = {
+    goal: "Publish a verified entry",
+    why: "Prove governed work",
+    doneLooksLike: ["Owner accepts"],
+    constraints: [],
+    nonGoals: [],
+    evidenceRequired: ["PASS"],
+    openQuestions: [],
+  };
+
+  it("sets normalized owner intent from fresh authoritative state and rerenders", async () => {
+    const room = createGoalRoom({ ownerIntent: null });
+    const renders: OwnerViewModel[] = [];
+    const controller = createOwnerDecisionController({
+      room,
+      render: (view) => renders.push(view),
+    });
+
+    await controller.setOwnerIntent("  Build <b>literal</b> governed work.  ");
+
+    expect(room.getState()).toMatchObject({
+      phase: "INTENT_DRAFT",
+      stateVersion: 1,
+      ownerIntent: "Build <b>literal</b> governed work.",
+      activeGoalContract: null,
+      activePlan: null,
+    });
+    expect(renders.at(-1)).toMatchObject({
+      ownerIntent: "Build <b>literal</b> governed work.",
+      statusLabel: "Owner intent captured — Goal not admitted",
+      receiptCount: 1,
+    });
+  });
+
+  it("confirms the exact active Goal Contract from fresh state and rerenders", async () => {
+    const room = createGoalRoom({ ownerIntent: "Build governed work." });
+    await room.dispatch({
+      type: "PROPOSE_GOAL_CONTRACT", actor: "agent", expectedStateVersion: 0,
+      idempotencyKey: "goal-v1", ...proposedGoal,
+    });
+    const renders: OwnerViewModel[] = [];
+    const controller = createOwnerDecisionController({
+      room,
+      render: (view) => renders.push(view),
+    });
+
+    await controller.confirmGoalContract();
+
+    expect(room.getState()).toMatchObject({
+      phase: "GOAL_CONTRACT_CONFIRMED",
+      stateVersion: 2,
+      activeGoalContract: { version: 1, status: "CONFIRMED" },
+      activePlan: null,
+    });
+    expect(renders.at(-1)).toMatchObject({
+      statusLabel: "Goal confirmed — Plan required",
+      receiptCount: 2,
+    });
+  });
+
+  it("requests revision of the exact active Goal Contract and rerenders", async () => {
+    const room = createGoalRoom({ ownerIntent: "Build governed work." });
+    await room.dispatch({
+      type: "PROPOSE_GOAL_CONTRACT", actor: "agent", expectedStateVersion: 0,
+      idempotencyKey: "goal-v1", ...proposedGoal,
+    });
+    const renders: OwnerViewModel[] = [];
+    const controller = createOwnerDecisionController({
+      room,
+      render: (view) => renders.push(view),
+    });
+
+    await controller.requestGoalRevision("  Add literal <script>proof</script>.  ");
+
+    expect(room.getState()).toMatchObject({
+      phase: "GOAL_CONTRACT_REVISION_REQUESTED",
+      stateVersion: 2,
+      activeGoalContract: {
+        version: 1,
+        status: "REVISION_REQUESTED",
+        revisionRequest: { note: "Add literal <script>proof</script>." },
+      },
+    });
+    expect(renders.at(-1)).toMatchObject({
+      statusLabel: "Waiting for revised Goal Contract",
+      receiptCount: 2,
+    });
+  });
+
   it("confirms the exact proposed Plan and rerenders authoritative state", async () => {
     const room = createGoalRoom({
       goal: "Publish a verified WebMCP Challenge entry",

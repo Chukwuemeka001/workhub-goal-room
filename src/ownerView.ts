@@ -1,4 +1,5 @@
 import type { GoalRoomState, PlanStep, Receipt } from "./core/goalRoom";
+import { createGoalContractView, type GoalContractView } from "./goalContractView";
 
 export type LifecycleStage = {
   id: "plan" | "claim" | "evidence" | "verify" | "completion" | "acceptance";
@@ -17,11 +18,13 @@ export type OwnerViewModel = {
     body: string;
   };
   actions: {
+    setIntent: { visible: boolean; label: string };
     confirm: { visible: boolean; label: string };
     revise: { visible: boolean; label: string };
     demo: { visible: boolean; label: string };
     acceptGoal: { visible: boolean; label: string };
   };
+  goalContract: GoalContractView;
   nextLegalAction: {
     label: string;
     actor: "agent" | "owner" | "system";
@@ -87,6 +90,7 @@ function baseView(state: GoalRoomState, receipts: Receipt[]) {
   const plan = state.activePlan;
   return {
     ownerIntent: state.ownerIntent,
+    goalContract: createGoalContractView(state, receipts),
     goal: state.goal,
     doneLooksLike: [...state.doneLooksLike],
     plan: plan
@@ -123,6 +127,7 @@ function baseView(state: GoalRoomState, receipts: Receipt[]) {
 
 function hiddenActions(planVersion: number) {
   return {
+    setIntent: { visible: false, label: "Set owner intent" },
     confirm: { visible: false, label: `Confirm Plan v${planVersion}` },
     revise: { visible: false, label: "Request revision" },
     demo: { visible: false, label: "Run next governed action" },
@@ -137,6 +142,25 @@ export function createOwnerViewModel(
   const common = baseView(state, receipts);
   const plan = state.activePlan;
   if (state.phase === "INTENT_DRAFT") {
+    if (state.ownerIntent === null) {
+      return {
+        ...common,
+        statusLabel: "Owner intent required — Goal not admitted",
+        ownerAttention: {
+          required: true,
+          title: "Describe the outcome you want",
+          body: "Intent is context only. It cannot admit a Goal, Plan, or work.",
+        },
+        actions: {
+          ...hiddenActions(0),
+          setIntent: { visible: true, label: "Set owner intent" },
+        },
+        nextLegalAction: {
+          label: "Owner must set initial intent",
+          actor: "owner",
+        },
+      };
+    }
     return {
       ...common,
       statusLabel: "Owner intent captured — Goal not admitted",
@@ -145,7 +169,10 @@ export function createOwnerViewModel(
         title: "Agent must propose a Goal Contract",
         body: "Intent is context only. Planning remains blocked until you confirm an exact Goal Contract.",
       },
-      actions: hiddenActions(0),
+      actions: {
+        ...hiddenActions(0),
+        setIntent: { visible: true, label: "Revise owner intent" },
+      },
       nextLegalAction: {
         label: "Agent must propose Goal Contract v1",
         actor: "agent",

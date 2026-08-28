@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="header-state">
-          <span class="phase-badge">PHASE 5</span>
+          <span class="phase-badge">PHASE 4</span>
           <span id="room-status" class="status-pill" aria-live="polite"></span>
         </div>
       </header>
@@ -35,16 +35,48 @@
         </p>
       </section>
 
+      <section id="owner-intent-panel" class="goal-panel" aria-labelledby="owner-intent-heading">
+        <div class="goal-copy">
+          <p class="label">OWNER INTENT · CONTEXT ONLY</p>
+          <h2 id="owner-intent-heading">Describe the outcome you want</h2>
+          <p id="owner-intent-display" class="header-copy"></p>
+        </div>
+        <form id="owner-intent-form">
+          <label for="owner-intent-input">Owner intent</label>
+          <textarea
+            id="owner-intent-input"
+            name="owner-intent"
+            rows="4"
+            required
+            maxlength="1000"
+            placeholder="Describe the desired outcome. This does not admit a Goal, Plan, or work."
+          ></textarea>
+          <button id="owner-intent-submit" class="button primary" type="submit">Set owner intent</button>
+        </form>
+      </section>
+
       <section class="goal-panel" aria-labelledby="goal-heading">
         <div class="goal-copy">
-          <p class="label">GOAL</p>
+          <p class="label">GOAL CONTRACT</p>
           <h2 id="goal-heading"></h2>
+          <p id="goal-contract-status" class="plan-status"></p>
         </div>
         <div class="done-block">
           <p class="label">DONE LOOKS LIKE</p>
           <ul id="done-list" class="done-list"></ul>
         </div>
       </section>
+
+      <details class="receipt-card" open>
+        <summary class="receipt-heading">
+          <div>
+            <p class="label">ORIGIN & DECISIONS</p>
+            <p>Intent is context; typed proposals and owner decisions govern.</p>
+          </div>
+          <span class="summary-hint">History</span>
+        </summary>
+        <ol id="goal-history" class="receipt-list"></ol>
+      </details>
 
       <nav class="lifecycle-panel" aria-label="Goal lifecycle progress">
         <div class="lifecycle-heading">
@@ -164,8 +196,7 @@
         <div>
           <p class="label">REQUEST REVISION</p>
           <h2 id="revision-dialog-title">What should change?</h2>
-          <p>
-            Your note will be attached to this Plan version. The agent must respond with a new immutable proposal.
+          <p id="revision-dialog-copy">
           </p>
         </div>
         <label for="revision-input">Revision note</label>

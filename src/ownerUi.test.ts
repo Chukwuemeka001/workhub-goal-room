@@ -5,6 +5,7 @@ import {
   createBoundaryMessage,
   createLifecycleAccessibleLabel,
   createReceiptLabels,
+  prepareOwnerIntent,
   prepareRevisionNote,
 } from "./ownerUi";
 
@@ -170,6 +171,18 @@ describe("owner UI policies", () => {
       "Owner requested revision to Plan v1",
       "Agent proposed Plan v2",
     ]);
+  });
+
+  it("normalizes and bounds owner intent before authority dispatch", () => {
+    expect(prepareOwnerIntent("   ")).toEqual({ valid: false, intent: "" });
+    expect(prepareOwnerIntent("  Build <img src=x> safely.  ")).toEqual({
+      valid: true,
+      intent: "Build <img src=x> safely.",
+    });
+    expect(prepareOwnerIntent("x".repeat(1_001))).toEqual({
+      valid: false,
+      intent: "x".repeat(1_001),
+    });
   });
 
   it("rejects whitespace-only revision notes after normalization", () => {

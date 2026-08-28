@@ -6,6 +6,7 @@ import {
   createBoundaryMessage,
   createLifecycleAccessibleLabel,
   createReceiptLabels,
+  prepareOwnerIntent,
   prepareRevisionNote,
 } from "./ownerUi";
 import { installGoalRoomTools } from "./webmcp";
@@ -19,7 +20,14 @@ function requiredElement<T extends HTMLElement>(id: string): T {
 
 const elements = {
   status: requiredElement("room-status"),
+  ownerIntentPanel: requiredElement("owner-intent-panel"),
+  ownerIntentForm: requiredElement<HTMLFormElement>("owner-intent-form"),
+  ownerIntentInput: requiredElement<HTMLTextAreaElement>("owner-intent-input"),
+  ownerIntentSubmit: requiredElement<HTMLButtonElement>("owner-intent-submit"),
+  ownerIntentDisplay: requiredElement("owner-intent-display"),
   goal: requiredElement("goal-heading"),
+  goalContractStatus: requiredElement("goal-contract-status"),
+  goalHistory: requiredElement<HTMLOListElement>("goal-history"),
   doneList: requiredElement<HTMLUListElement>("done-list"),
   lifecycleRail: requiredElement<HTMLOListElement>("lifecycle-rail"),
   attention: requiredElement("owner-attention"),
@@ -49,32 +57,14 @@ const elements = {
   webmcpStatus: requiredElement("webmcp-status"),
   reset: requiredElement<HTMLButtonElement>("reset-demo"),
   dialog: requiredElement<HTMLDialogElement>("revision-dialog"),
+  revisionDialogTitle: requiredElement("revision-dialog-title"),
+  revisionDialogCopy: requiredElement("revision-dialog-copy"),
   form: requiredElement<HTMLFormElement>("revision-form"),
   input: requiredElement<HTMLTextAreaElement>("revision-input"),
   cancelRevision: requiredElement<HTMLButtonElement>("cancel-revision"),
 };
 
-const room = createGoalRoom({
-  goal: "Publish a verified WebMCP Challenge entry",
-  doneLooksLike: [
-    "The public Goal Room works",
-    "Deterministic verification passes",
-    "The owner explicitly accepts the final result",
-  ],
-});
-
-await room.dispatch({
-  type: "PROPOSE_PLAN",
-  actor: "agent",
-  expectedStateVersion: 0,
-  idempotencyKey: "demo-proposal-v1",
-  steps: [
-    { id: "metadata", title: "Prepare the release metadata" },
-    { id: "artifact", title: "Produce the deterministic demo artifact" },
-    { id: "verify", title: "Run the required verification checks" },
-    { id: "acceptance", title: "Present the verified result for owner acceptance" },
-  ],
-});
+const room = createGoalRoom({ ownerIntent: null });
 
 const failedCandidate = JSON.stringify({
   publicUrl: "http://example.test/workhub-goal-room",
@@ -159,7 +149,31 @@ function renderEvidence(view: OwnerViewModel) {
 
 function render(view: OwnerViewModel) {
   elements.status.textContent = view.statusLabel;
-  elements.goal.textContent = view.goal;
+  elements.ownerIntentPanel.hidden = !view.actions.setIntent.visible;
+  elements.ownerIntentForm.hidden = !view.actions.setIntent.visible;
+  elements.ownerIntentDisplay.textContent = view.ownerIntent ?? "No owner intent captured.";
+  elements.ownerIntentSubmit.textContent = view.actions.setIntent.label;
+  elements.goal.textContent = view.goal || "Goal not yet admitted";
+  const activeGoal = view.goalContract.activeGoal;
+  elements.goalContractStatus.textContent = activeGoal
+    ? `Goal Contract v${activeGoal.version} · ${activeGoal.status.replaceAll("_", " ")}`
+    : "No Goal Contract proposed";
+  elements.goalContractStatus.dataset.status = activeGoal?.status ?? "WAITING";
+  elements.goalHistory.replaceChildren(
+    ...view.goalContract.history.map((event) => {
+      const item = document.createElement("li");
+      const label = document.createElement("strong");
+      label.textContent = event.label;
+      item.append(label);
+      if (event.text) {
+        const text = document.createElement("p");
+        text.textContent = event.text;
+        item.append(text);
+      }
+      item.dataset.authority = event.authority;
+      return item;
+    }),
+  );
   elements.doneList.replaceChildren(
     ...view.doneLooksLike.map((item) => {
       const li = document.createElement("li");
@@ -235,6 +249,25 @@ function render(view: OwnerViewModel) {
 const controller = createOwnerDecisionController({ room, render });
 controller.render();
 
+elements.ownerIntentInput.addEventListener("input", () =>
+  elements.ownerIntentInput.setCustomValidity(""),
+);
+elements.ownerIntentForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  elements.ownerIntentInput.setCustomValidity("");
+  if (!elements.ownerIntentForm.reportValidity()) return;
+  const prepared = prepareOwnerIntent(elements.ownerIntentInput.value);
+  if (!prepared.valid) {
+    elements.ownerIntentInput.setCustomValidity(
+      "Enter between 1 and 1000 non-whitespace characters.",
+    );
+    elements.ownerIntentInput.reportValidity();
+    elements.ownerIntentInput.focus();
+    return;
+  }
+  await controller.setOwnerIntent(prepared.intent);
+});
+
 function setActionButtonsDisabled(disabled: boolean) {
   elements.confirm.disabled = disabled;
   elements.revise.disabled = disabled;
@@ -292,13 +325,24 @@ async function runDemoAction() {
 elements.confirm.addEventListener("click", async () => {
   setActionButtonsDisabled(true);
   try {
-    await controller.confirmPlan();
+    if (room.getState().phase === "GOAL_CONTRACT_PROPOSED") {
+      await controller.confirmGoalContract();
+    } else {
+      await controller.confirmPlan();
+    }
   } finally {
     setActionButtonsDisabled(false);
   }
 });
 
 elements.revise.addEventListener("click", () => {
+  const goalDecision = room.getState().phase === "GOAL_CONTRACT_PROPOSED";
+  elements.revisionDialogTitle.textContent = goalDecision
+    ? "What should change in this Goal?"
+    : "What should change in this Plan?";
+  elements.revisionDialogCopy.textContent = goalDecision
+    ? "Your note is an owner decision on this exact Goal version. The agent must propose a new immutable version."
+    : "Your note is an owner decision on this exact Plan version. The agent must propose a new immutable version.";
   elements.dialog.showModal();
   elements.input.focus();
 });
@@ -343,7 +387,11 @@ elements.form.addEventListener("submit", async (event) => {
     return;
   }
   elements.dialog.close();
-  await controller.requestRevision(prepared.note);
+  if (room.getState().phase === "GOAL_CONTRACT_PROPOSED") {
+    await controller.requestGoalRevision(prepared.note);
+  } else {
+    await controller.requestRevision(prepared.note);
+  }
 });
 
 elements.reset.addEventListener("click", () => window.location.reload());
