@@ -6,18 +6,19 @@ Qualified product tree: `b6b50068e8119d02d1d9213286f14adf3cbc0db1`
 
 ## Local verdict
 
-Package content is prepared for independent Phase 6 review. This audit is not that review and does not authorize publication.
+The repaired package is prepared for independent Phase 6 review. This audit is not that review and does not authorize publication.
 
-- Historical V2/five-tool package: namespaced byte-for-byte under `submission/historical/v2-five-tool/`.
-- Current tool surface: exactly six.
-- Production journey: 12 checkpoints, 22 receipts, sealed S14.
-- Native proof: Canary 154.0.8028.0; raw enumeration preserved; browser-returned RegisteredTool invocation.
-- Current screenshots: 10 public-safe images bound by manifest.
-- Architecture: semantic Owner/Agent/System lanes; PASS has no direct edge to acceptance.
-- Video: disclosed fresh-checkpoint reconstruction, not a continuous authority transaction; S14 remains at 118.719–126.751, labelled mobile/breakpoint evidence fills cue 12 at 126.871–138.707, and architecture/honest limits resume after 138.827.
-- Scene alignment: cue-12 source hashes and label tokens are committed; frames at 130 and 135 seconds meet deterministic `ffmpeg-ssim-all >= 0.995` validation against the 1440×900 cue visual.
-- Captions/narration: English, no music.
-- Scope: one synthetic browser-local Goal; no accounts, backend persistence, database, cloud service, external effects, autonomous-model reliability, or enterprise-security claim.
+- Historical V2/five-tool package: exact 25-entry inventory, namespaced byte-for-byte under `submission/historical/v2-five-tool/`.
+- Current tool surface: exactly six browser-returned tools.
+- Recorder: executable Canary launcher/driver/capture/encoder with disposable profile cleanup and fail-closed WebMCP detection.
+- Interactive video: continuous live native governed lineage from 0:00 through sealed S14 at 2:06.8. It visibly includes trusted Owner pointer/typing, native Agent calls, Goal/Plan revision and confirmation, automatic System FAIL then corrected PASS, exact-candidate acceptance, and actorless S14.
+- Reconstruction disclosure: 2:06.9–2:18.7 is the source-bound mobile/breakpoint scene; 2:18.85–2:33.84 is the source-bound architecture/honest-limits scene.
+- Interactivity receipt: 632 screencast frames, 582 unique frames, 581 recorded transitions, 39 authority/input/verdict/scene events, and per-interval video frame-change checks.
+- Architecture: exact machine-readable semantic edges; Agent cyan enters only browser tools→kernel; System violet runs kernel→production adapter→rules→kernel; Owner yellow enters trusted UI/acceptance→kernel. PASS has no direct edge to acceptance.
+- Scene alignment: all 13 cues bind caption text, semantic tokens, exact representative visual hashes, and frozen `ffmpeg-ssim-all >= 0.995` checks.
+- Media: H.264 High 1440×900 plus AAC-LC 48 kHz, 153.840 seconds, full decode, no black interval at the checked threshold, usable unclipped narration, no music.
+- Validator: exact 50-artifact inventory plus immutable package Git-object binding and ten isolated adversarial mutation tests.
+- Scope: one synthetic browser-local Goal; no accounts, backend persistence, database, cloud service, external effects, autonomous-model reliability, security certification, deployment, or publication claim.
 
 ## Pending Owner gates
 
@@ -28,7 +29,7 @@ Package content is prepared for independent Phase 6 review. This audit is not th
 
 ## Binding
 
-Package commit: `7e9b60cb473cb04572fb095c31b8423d333dcea8`
-Package tree: `d6a5734fbb34feded416595d6e27c7def7e933e2`
+Package commit: `PACKAGE_COMMIT_SENTINEL`
+Package tree: `PACKAGE_TREE_SENTINEL`
 
-The metadata-only child replaces only the binding sentinel file and records Git-object hashes of package artifacts. It does not rewrite bound media or copy. Independent review remains required for Phase 6 exit.
+The metadata-only child may change only this audit and `submission/package-manifest.json` to bind the exact package parent commit/tree and its 50 immutable artifact Git objects. Independent review remains required for Phase 6 exit.

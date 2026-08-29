@@ -1,78 +1,3928 @@
 {
-  "schemaVersion": 3,
-  "kind": "workhub-v3-local-demo-media-receipt",
-  "captureMode": "fresh-checkpoint reconstruction from qualified current production/native receipts",
-  "continuousAuthorityLineage": false,
-  "interactiveClaim": "The functioning production UI is visibly shown at qualified checkpoints; scenes are reconstructed and are not called one continuous transaction.",
-  "nativeClaim": "First scene is an explicitly labeled visualization of the exact native receipt; no autonomous model selection.",
+  "schemaVersion": 4,
+  "kind": "workhub-v3-interactive-native-demo-receipt",
+  "captureMode": "continuous live native governed journey followed by disclosed checkpoint reconstruction",
+  "continuousAuthorityLineage": {
+    "startSeconds": 0,
+    "endSeconds": 126.8,
+    "completeJourney": true
+  },
   "productCommit": "5ac95d4bdab5f54beda0f90776c3918fd36136d2",
   "productTree": "b6b50068e8119d02d1d9213286f14adf3cbc0db1",
-  "sources": [
-    "evaluation/native-webmcp-v3/native-webmcp-receipt.json",
-    "evaluation/production-journey/qualification-receipt.json",
-    "evaluation/phase5-qualification.json"
+  "browser": {
+    "application": "Google Chrome Canary",
+    "version": "Google Chrome 154.0.8028.0 canary",
+    "signatureVerified": true,
+    "notarized": true,
+    "isolatedUnsignedInProfile": true,
+    "experiments": [
+      "enable-webmcp-testing@1",
+      "devtools-webmcp-support@1"
+    ]
+  },
+  "nativeTools": [
+    {
+      "name": "claim_step",
+      "prototype": "Object"
+    },
+    {
+      "name": "get_goal_room_state",
+      "prototype": "Object"
+    },
+    {
+      "name": "propose_goal_contract",
+      "prototype": "Object"
+    },
+    {
+      "name": "propose_plan",
+      "prototype": "Object"
+    },
+    {
+      "name": "request_completion",
+      "prototype": "Object"
+    },
+    {
+      "name": "submit_artifact",
+      "prototype": "Object"
+    }
   ],
+  "events": [
+    {
+      "seconds": 1.131,
+      "class": "browser-native-agent-call",
+      "name": "get_goal_room_state",
+      "label": "initial native state",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {},
+      "result": {
+        "accepted": true,
+        "readOnly": true,
+        "currentStateVersion": 0,
+        "phase": "INTENT_DRAFT",
+        "ownerIntent": null,
+        "goalContract": null,
+        "goalRevisionRequest": null,
+        "plan": null,
+        "planRevisionRequest": null,
+        "currentActor": "owner",
+        "legalAgentActions": [],
+        "nextLegalAction": "OWNER_SET_INTENT",
+        "ownerRequired": true,
+        "claim": null,
+        "candidate": null,
+        "verification": null,
+        "completion": null,
+        "acceptance": null,
+        "recentRefusal": null,
+        "state": {
+          "goal": "",
+          "doneLooksLike": [],
+          "ownerIntent": null,
+          "seededOwnerIntent": null,
+          "activeGoalContract": null,
+          "goalContractHistory": [],
+          "phase": "INTENT_DRAFT",
+          "stateVersion": 0,
+          "activePlan": null,
+          "planHistory": [],
+          "activeClaim": null,
+          "activeCandidate": null,
+          "candidateHistory": [],
+          "activeVerification": null,
+          "verificationHistory": [],
+          "activeCompletionRequest": null,
+          "goalAcceptance": null
+        }
+      },
+      "before": {
+        "phaseText": "STATE v0 \u00b7 INTENT DRAFT",
+        "actor": "owner",
+        "frontier": "Describe the outcome you want",
+        "status": "Owner intent required. Goal not admitted"
+      },
+      "after": {
+        "phaseText": "STATE v0 \u00b7 INTENT DRAFT",
+        "actor": "owner",
+        "frontier": "Describe the outcome you want",
+        "status": "Owner intent required. Goal not admitted"
+      }
+    },
+    {
+      "seconds": 10.694,
+      "class": "trusted-owner-input",
+      "operation": "click",
+      "selector": "#desktop-owner-intent",
+      "label": "Owner intent field"
+    },
+    {
+      "seconds": 11.733,
+      "class": "trusted-owner-input",
+      "operation": "keyboard",
+      "selector": "#desktop-owner-intent",
+      "textSha256": "139ccf5ff8ba586dc4e2718dc9d944ed3238b8797e23e7f3664d9dde26427f72",
+      "characters": 49
+    },
+    {
+      "seconds": 12.399,
+      "class": "trusted-owner-input",
+      "operation": "click",
+      "selector": ".desktop-intent-form button[type=submit]",
+      "label": "Owner sets intent"
+    },
+    {
+      "seconds": 13.968,
+      "class": "browser-native-agent-call",
+      "name": "get_goal_room_state",
+      "label": "state after Owner intent",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {},
+      "result": {
+        "accepted": true,
+        "readOnly": true,
+        "currentStateVersion": 1,
+        "phase": "INTENT_DRAFT",
+        "ownerIntent": "Prove a complete native six-tool governed journey",
+        "goalContract": null,
+        "goalRevisionRequest": null,
+        "plan": null,
+        "planRevisionRequest": null,
+        "currentActor": "agent",
+        "legalAgentActions": [
+          "propose_goal_contract"
+        ],
+        "nextLegalAction": "AGENT_PROPOSE_GOAL_CONTRACT",
+        "ownerRequired": false,
+        "claim": null,
+        "candidate": null,
+        "verification": null,
+        "completion": null,
+        "acceptance": null,
+        "recentRefusal": null,
+        "state": {
+          "goal": "",
+          "doneLooksLike": [],
+          "ownerIntent": "Prove a complete native six-tool governed journey",
+          "seededOwnerIntent": null,
+          "activeGoalContract": null,
+          "goalContractHistory": [],
+          "phase": "INTENT_DRAFT",
+          "stateVersion": 1,
+          "activePlan": null,
+          "planHistory": [],
+          "activeClaim": null,
+          "activeCandidate": null,
+          "candidateHistory": [],
+          "activeVerification": null,
+          "verificationHistory": [],
+          "activeCompletionRequest": null,
+          "goalAcceptance": null
+        }
+      },
+      "before": {
+        "phaseText": "STATE v1 \u00b7 INTENT DRAFT",
+        "actor": "agent",
+        "frontier": "Agent must propose a Goal Contract",
+        "status": "Owner intent captured. Goal not admitted"
+      },
+      "after": {
+        "phaseText": "STATE v1 \u00b7 INTENT DRAFT",
+        "actor": "agent",
+        "frontier": "Agent must propose a Goal Contract",
+        "status": "Owner intent captured. Goal not admitted"
+      }
+    },
+    {
+      "seconds": 15.086,
+      "class": "browser-native-agent-call",
+      "name": "propose_goal_contract",
+      "label": "Goal v1",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {
+        "expectedStateVersion": 1,
+        "idempotencyKey": "demo-goal-v1",
+        "goal": "Ship a governed evidence package",
+        "why": "Make browser-native authority observable",
+        "doneLooksLike": [
+          "Owner accepts corrected Candidate v2 only after PASS"
+        ],
+        "constraints": [
+          "No external effects"
+        ],
+        "nonGoals": [
+          "Autonomous model selection"
+        ],
+        "evidenceRequired": [
+          "Native calls and shared state"
+        ],
+        "openQuestions": [
+          "Clarify exact candidate custody"
+        ]
+      },
+      "result": {
+        "accepted": true,
+        "nextLegalAction": "OWNER_CONFIRM_OR_REVISE_GOAL",
+        "ownerRequired": true,
+        "currentStateVersion": 2
+      },
+      "before": {
+        "phaseText": "STATE v1 \u00b7 INTENT DRAFT",
+        "actor": "agent",
+        "frontier": "Agent must propose a Goal Contract",
+        "status": "Owner intent captured. Goal not admitted"
+      },
+      "after": {
+        "phaseText": "STATE v2 \u00b7 GOAL CONTRACT PROPOSED",
+        "actor": "owner",
+        "frontier": "Review Goal Contract v1",
+        "status": "Waiting for your Goal decision"
+      }
+    },
+    {
+      "seconds": 35.823,
+      "class": "browser-native-agent-call",
+      "name": "propose_goal_contract",
+      "label": "malformed zero-mutation control",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {
+        "expectedStateVersion": 2,
+        "idempotencyKey": "demo-malformed",
+        "actor": "owner"
+      },
+      "result": {
+        "accepted": false,
+        "reasonCode": "INVALID_TOOL_INPUT",
+        "currentStateVersion": 2,
+        "nextLegalAction": "OWNER_CONFIRM_OR_REVISE_GOAL",
+        "ownerRequired": true
+      },
+      "before": {
+        "phaseText": "STATE v2 \u00b7 GOAL CONTRACT PROPOSED",
+        "actor": "owner",
+        "frontier": "Review Goal Contract v1",
+        "status": "Waiting for your Goal decision"
+      },
+      "after": {
+        "phaseText": "STATE v2 \u00b7 GOAL CONTRACT PROPOSED",
+        "actor": "owner",
+        "frontier": "Review Goal Contract v1",
+        "status": "Waiting for your Goal decision"
+      }
+    },
+    {
+      "seconds": 45.974,
+      "class": "trusted-owner-input",
+      "operation": "click",
+      "selector": ".desktop-owner-action .desktop-action.secondary",
+      "label": "Owner requests Goal revision"
+    },
+    {
+      "seconds": 47.084,
+      "class": "trusted-owner-input",
+      "operation": "click",
+      "selector": "#revision-input",
+      "label": "Goal revision note"
+    },
+    {
+      "seconds": 48.369,
+      "class": "trusted-owner-input",
+      "operation": "keyboard",
+      "selector": "#revision-input",
+      "textSha256": "6c606188911c1d0da4228599c13ae959e2c2f1eaad5842fd22c5dab87a380c05",
+      "characters": 67
+    },
+    {
+      "seconds": 49.03,
+      "class": "trusted-owner-input",
+      "operation": "click",
+      "selector": "#revision-form button[type=submit]",
+      "label": "Owner submits Goal revision"
+    },
+    {
+      "seconds": 50.595,
+      "class": "browser-native-agent-call",
+      "name": "get_goal_room_state",
+      "label": "state after Goal revision",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {},
+      "result": {
+        "accepted": true,
+        "readOnly": true,
+        "currentStateVersion": 3,
+        "phase": "GOAL_CONTRACT_REVISION_REQUESTED",
+        "ownerIntent": "Prove a complete native six-tool governed journey",
+        "goalContract": {
+          "version": 1,
+          "status": "REVISION_REQUESTED",
+          "proposedBy": "agent",
+          "goal": "Ship a governed evidence package",
+          "why": "Make browser-native authority observable",
+          "doneLooksLike": [
+            "Owner accepts corrected Candidate v2 only after PASS"
+          ],
+          "constraints": [
+            "No external effects"
+          ],
+          "nonGoals": [
+            "Autonomous model selection"
+          ],
+          "evidenceRequired": [
+            "Native calls and shared state"
+          ],
+          "openQuestions": [
+            "Clarify exact candidate custody"
+          ],
+          "revisionRequest": {
+            "requestedBy": "owner",
+            "note": "Bind the Goal to corrected Candidate v2 and deterministic evidence."
+          }
+        },
+        "goalRevisionRequest": {
+          "requestedBy": "owner",
+          "note": "Bind the Goal to corrected Candidate v2 and deterministic evidence."
+        },
+        "plan": null,
+        "planRevisionRequest": null,
+        "currentActor": "agent",
+        "legalAgentActions": [
+          "propose_goal_contract"
+        ],
+        "nextLegalAction": "AGENT_PROPOSE_REVISED_GOAL_CONTRACT",
+        "ownerRequired": false,
+        "claim": null,
+        "candidate": null,
+        "verification": null,
+        "completion": null,
+        "acceptance": null,
+        "recentRefusal": null,
+        "state": {
+          "goal": "Ship a governed evidence package",
+          "doneLooksLike": [
+            "Owner accepts corrected Candidate v2 only after PASS"
+          ],
+          "ownerIntent": "Prove a complete native six-tool governed journey",
+          "seededOwnerIntent": null,
+          "activeGoalContract": {
+            "version": 1,
+            "status": "REVISION_REQUESTED",
+            "proposedBy": "agent",
+            "goal": "Ship a governed evidence package",
+            "why": "Make browser-native authority observable",
+            "doneLooksLike": [
+              "Owner accepts corrected Candidate v2 only after PASS"
+            ],
+            "constraints": [
+              "No external effects"
+            ],
+            "nonGoals": [
+              "Autonomous model selection"
+            ],
+            "evidenceRequired": [
+              "Native calls and shared state"
+            ],
+            "openQuestions": [
+              "Clarify exact candidate custody"
+            ],
+            "revisionRequest": {
+              "requestedBy": "owner",
+              "note": "Bind the Goal to corrected Candidate v2 and deterministic evidence."
+            }
+          },
+          "goalContractHistory": [
+            {
+              "version": 1,
+              "status": "REVISION_REQUESTED",
+              "proposedBy": "agent",
+              "goal": "Ship a governed evidence package",
+              "why": "Make browser-native authority observable",
+              "doneLooksLike": [
+                "Owner accepts corrected Candidate v2 only after PASS"
+              ],
+              "constraints": [
+                "No external effects"
+              ],
+              "nonGoals": [
+                "Autonomous model selection"
+              ],
+              "evidenceRequired": [
+                "Native calls and shared state"
+              ],
+              "openQuestions": [
+                "Clarify exact candidate custody"
+              ],
+              "revisionRequest": {
+                "requestedBy": "owner",
+                "note": "Bind the Goal to corrected Candidate v2 and deterministic evidence."
+              }
+            }
+          ],
+          "phase": "GOAL_CONTRACT_REVISION_REQUESTED",
+          "stateVersion": 3,
+          "activePlan": null,
+          "planHistory": [],
+          "activeClaim": null,
+          "activeCandidate": null,
+          "candidateHistory": [],
+          "activeVerification": null,
+          "verificationHistory": [],
+          "activeCompletionRequest": null,
+          "goalAcceptance": null
+        }
+      },
+      "before": {
+        "phaseText": "STATE v3 \u00b7 GOAL CONTRACT REVISION REQUESTED",
+        "actor": "agent",
+        "frontier": "Goal revision requested",
+        "status": "Waiting for revised Goal Contract"
+      },
+      "after": {
+        "phaseText": "STATE v3 \u00b7 GOAL CONTRACT REVISION REQUESTED",
+        "actor": "agent",
+        "frontier": "Goal revision requested",
+        "status": "Waiting for revised Goal Contract"
+      }
+    },
+    {
+      "seconds": 51.713,
+      "class": "browser-native-agent-call",
+      "name": "propose_goal_contract",
+      "label": "Goal v2",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {
+        "expectedStateVersion": 3,
+        "idempotencyKey": "demo-goal-v2",
+        "goal": "Qualify the complete governed native journey",
+        "why": "Make browser-native authority observable",
+        "doneLooksLike": [
+          "Owner accepts corrected Candidate v2 only after PASS"
+        ],
+        "constraints": [
+          "No external effects"
+        ],
+        "nonGoals": [
+          "Autonomous model selection"
+        ],
+        "evidenceRequired": [
+          "Native calls and shared state"
+        ],
+        "openQuestions": []
+      },
+      "result": {
+        "accepted": true,
+        "nextLegalAction": "OWNER_CONFIRM_OR_REVISE_GOAL",
+        "ownerRequired": true,
+        "currentStateVersion": 4
+      },
+      "before": {
+        "phaseText": "STATE v3 \u00b7 GOAL CONTRACT REVISION REQUESTED",
+        "actor": "agent",
+        "frontier": "Goal revision requested",
+        "status": "Waiting for revised Goal Contract"
+      },
+      "after": {
+        "phaseText": "STATE v4 \u00b7 GOAL CONTRACT PROPOSED",
+        "actor": "owner",
+        "frontier": "Review Goal Contract v2",
+        "status": "Waiting for your Goal decision"
+      }
+    },
+    {
+      "seconds": 52.373,
+      "class": "trusted-owner-input",
+      "operation": "click",
+      "selector": ".desktop-owner-action .desktop-action.primary",
+      "label": "Owner confirms Goal v2"
+    },
+    {
+      "seconds": 59.222,
+      "class": "browser-native-agent-call",
+      "name": "get_goal_room_state",
+      "label": "state before Plan v1",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {},
+      "result": {
+        "accepted": true,
+        "readOnly": true,
+        "currentStateVersion": 5,
+        "phase": "GOAL_CONTRACT_CONFIRMED",
+        "ownerIntent": "Prove a complete native six-tool governed journey",
+        "goalContract": {
+          "version": 2,
+          "status": "CONFIRMED",
+          "proposedBy": "agent",
+          "goal": "Qualify the complete governed native journey",
+          "why": "Make browser-native authority observable",
+          "doneLooksLike": [
+            "Owner accepts corrected Candidate v2 only after PASS"
+          ],
+          "constraints": [
+            "No external effects"
+          ],
+          "nonGoals": [
+            "Autonomous model selection"
+          ],
+          "evidenceRequired": [
+            "Native calls and shared state"
+          ],
+          "openQuestions": []
+        },
+        "goalRevisionRequest": null,
+        "plan": null,
+        "planRevisionRequest": null,
+        "currentActor": "agent",
+        "legalAgentActions": [
+          "propose_plan"
+        ],
+        "nextLegalAction": "AGENT_PROPOSE_PLAN",
+        "ownerRequired": false,
+        "claim": null,
+        "candidate": null,
+        "verification": null,
+        "completion": null,
+        "acceptance": null,
+        "recentRefusal": null,
+        "state": {
+          "goal": "Qualify the complete governed native journey",
+          "doneLooksLike": [
+            "Owner accepts corrected Candidate v2 only after PASS"
+          ],
+          "ownerIntent": "Prove a complete native six-tool governed journey",
+          "seededOwnerIntent": null,
+          "activeGoalContract": {
+            "version": 2,
+            "status": "CONFIRMED",
+            "proposedBy": "agent",
+            "goal": "Qualify the complete governed native journey",
+            "why": "Make browser-native authority observable",
+            "doneLooksLike": [
+              "Owner accepts corrected Candidate v2 only after PASS"
+            ],
+            "constraints": [
+              "No external effects"
+            ],
+            "nonGoals": [
+              "Autonomous model selection"
+            ],
+            "evidenceRequired": [
+              "Native calls and shared state"
+            ],
+            "openQuestions": []
+          },
+          "goalContractHistory": [
+            {
+              "version": 1,
+              "status": "REVISION_REQUESTED",
+              "proposedBy": "agent",
+              "goal": "Ship a governed evidence package",
+              "why": "Make browser-native authority observable",
+              "doneLooksLike": [
+                "Owner accepts corrected Candidate v2 only after PASS"
+              ],
+              "constraints": [
+                "No external effects"
+              ],
+              "nonGoals": [
+                "Autonomous model selection"
+              ],
+              "evidenceRequired": [
+                "Native calls and shared state"
+              ],
+              "openQuestions": [
+                "Clarify exact candidate custody"
+              ],
+              "revisionRequest": {
+                "requestedBy": "owner",
+                "note": "Bind the Goal to corrected Candidate v2 and deterministic evidence."
+              }
+            },
+            {
+              "version": 2,
+              "status": "CONFIRMED",
+              "proposedBy": "agent",
+              "goal": "Qualify the complete governed native journey",
+              "why": "Make browser-native authority observable",
+              "doneLooksLike": [
+                "Owner accepts corrected Candidate v2 only after PASS"
+              ],
+              "constraints": [
+                "No external effects"
+              ],
+              "nonGoals": [
+                "Autonomous model selection"
+              ],
+              "evidenceRequired": [
+                "Native calls and shared state"
+              ],
+              "openQuestions": []
+            }
+          ],
+          "phase": "GOAL_CONTRACT_CONFIRMED",
+          "stateVersion": 5,
+          "activePlan": null,
+          "planHistory": [],
+          "activeClaim": null,
+          "activeCandidate": null,
+          "candidateHistory": [],
+          "activeVerification": null,
+          "verificationHistory": [],
+          "activeCompletionRequest": null,
+          "goalAcceptance": null
+        }
+      },
+      "before": {
+        "phaseText": "STATE v5 \u00b7 GOAL CONTRACT CONFIRMED",
+        "actor": "agent",
+        "frontier": "Goal Contract v2 confirmed",
+        "status": "Goal confirmed. Plan required"
+      },
+      "after": {
+        "phaseText": "STATE v5 \u00b7 GOAL CONTRACT CONFIRMED",
+        "actor": "agent",
+        "frontier": "Goal Contract v2 confirmed",
+        "status": "Goal confirmed. Plan required"
+      }
+    },
+    {
+      "seconds": 60.332,
+      "class": "browser-native-agent-call",
+      "name": "propose_plan",
+      "label": "Plan v1",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {
+        "expectedStateVersion": 5,
+        "idempotencyKey": "demo-plan-v1",
+        "goalContractVersion": 2,
+        "steps": [
+          {
+            "id": "release",
+            "title": "Produce governed native evidence"
+          }
+        ]
+      },
+      "result": {
+        "accepted": true,
+        "nextLegalAction": "OWNER_CONFIRM_OR_REVISE_PLAN",
+        "ownerRequired": true,
+        "currentStateVersion": 6
+      },
+      "before": {
+        "phaseText": "STATE v5 \u00b7 GOAL CONTRACT CONFIRMED",
+        "actor": "agent",
+        "frontier": "Goal Contract v2 confirmed",
+        "status": "Goal confirmed. Plan required"
+      },
+      "after": {
+        "phaseText": "STATE v6 \u00b7 PLAN PROPOSED",
+        "actor": "owner",
+        "frontier": "Review Plan v1",
+        "status": "Waiting for your Plan decision"
+      }
+    },
+    {
+      "seconds": 60.989,
+      "class": "trusted-owner-input",
+      "operation": "click",
+      "selector": ".desktop-owner-action .desktop-action.secondary",
+      "label": "Owner requests Plan revision"
+    },
+    {
+      "seconds": 62.098,
+      "class": "trusted-owner-input",
+      "operation": "click",
+      "selector": "#revision-input",
+      "label": "Plan revision note"
+    },
+    {
+      "seconds": 63.214,
+      "class": "trusted-owner-input",
+      "operation": "keyboard",
+      "selector": "#revision-input",
+      "textSha256": "6d4bafdb7f614eb097cbf13050a12d66d43baa63ed51849d65e78064b916d134",
+      "characters": 51
+    },
+    {
+      "seconds": 63.875,
+      "class": "trusted-owner-input",
+      "operation": "click",
+      "selector": "#revision-form button[type=submit]",
+      "label": "Owner submits Plan revision"
+    },
+    {
+      "seconds": 65.439,
+      "class": "browser-native-agent-call",
+      "name": "get_goal_room_state",
+      "label": "state after Plan revision",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {},
+      "result": {
+        "accepted": true,
+        "readOnly": true,
+        "currentStateVersion": 7,
+        "phase": "PLAN_REVISION_REQUESTED",
+        "ownerIntent": "Prove a complete native six-tool governed journey",
+        "goalContract": {
+          "version": 2,
+          "status": "CONFIRMED",
+          "proposedBy": "agent",
+          "goal": "Qualify the complete governed native journey",
+          "why": "Make browser-native authority observable",
+          "doneLooksLike": [
+            "Owner accepts corrected Candidate v2 only after PASS"
+          ],
+          "constraints": [
+            "No external effects"
+          ],
+          "nonGoals": [
+            "Autonomous model selection"
+          ],
+          "evidenceRequired": [
+            "Native calls and shared state"
+          ],
+          "openQuestions": []
+        },
+        "goalRevisionRequest": null,
+        "plan": {
+          "version": 1,
+          "goalContractVersion": 2,
+          "status": "REVISION_REQUESTED",
+          "proposedBy": "agent",
+          "steps": [
+            {
+              "id": "release",
+              "title": "Produce governed native evidence"
+            }
+          ],
+          "revisionRequest": {
+            "requestedBy": "owner",
+            "note": "Bind the step explicitly to corrected Candidate v2."
+          }
+        },
+        "planRevisionRequest": {
+          "requestedBy": "owner",
+          "note": "Bind the step explicitly to corrected Candidate v2."
+        },
+        "currentActor": "agent",
+        "legalAgentActions": [
+          "propose_plan"
+        ],
+        "nextLegalAction": "AGENT_PROPOSE_REVISED_PLAN",
+        "ownerRequired": false,
+        "claim": null,
+        "candidate": null,
+        "verification": null,
+        "completion": null,
+        "acceptance": null,
+        "recentRefusal": null,
+        "state": {
+          "goal": "Qualify the complete governed native journey",
+          "doneLooksLike": [
+            "Owner accepts corrected Candidate v2 only after PASS"
+          ],
+          "ownerIntent": "Prove a complete native six-tool governed journey",
+          "seededOwnerIntent": null,
+          "activeGoalContract": {
+            "version": 2,
+            "status": "CONFIRMED",
+            "proposedBy": "agent",
+            "goal": "Qualify the complete governed native journey",
+            "why": "Make browser-native authority observable",
+            "doneLooksLike": [
+              "Owner accepts corrected Candidate v2 only after PASS"
+            ],
+            "constraints": [
+              "No external effects"
+            ],
+            "nonGoals": [
+              "Autonomous model selection"
+            ],
+            "evidenceRequired": [
+              "Native calls and shared state"
+            ],
+            "openQuestions": []
+          },
+          "goalContractHistory": [
+            {
+              "version": 1,
+              "status": "REVISION_REQUESTED",
+              "proposedBy": "agent",
+              "goal": "Ship a governed evidence package",
+              "why": "Make browser-native authority observable",
+              "doneLooksLike": [
+                "Owner accepts corrected Candidate v2 only after PASS"
+              ],
+              "constraints": [
+                "No external effects"
+              ],
+              "nonGoals": [
+                "Autonomous model selection"
+              ],
+              "evidenceRequired": [
+                "Native calls and shared state"
+              ],
+              "openQuestions": [
+                "Clarify exact candidate custody"
+              ],
+              "revisionRequest": {
+                "requestedBy": "owner",
+                "note": "Bind the Goal to corrected Candidate v2 and deterministic evidence."
+              }
+            },
+            {
+              "version": 2,
+              "status": "CONFIRMED",
+              "proposedBy": "agent",
+              "goal": "Qualify the complete governed native journey",
+              "why": "Make browser-native authority observable",
+              "doneLooksLike": [
+                "Owner accepts corrected Candidate v2 only after PASS"
+              ],
+              "constraints": [
+                "No external effects"
+              ],
+              "nonGoals": [
+                "Autonomous model selection"
+              ],
+              "evidenceRequired": [
+                "Native calls and shared state"
+              ],
+              "openQuestions": []
+            }
+          ],
+          "phase": "PLAN_REVISION_REQUESTED",
+          "stateVersion": 7,
+          "activePlan": {
+            "version": 1,
+            "goalContractVersion": 2,
+            "status": "REVISION_REQUESTED",
+            "proposedBy": "agent",
+            "steps": [
+              {
+                "id": "release",
+                "title": "Produce governed native evidence"
+              }
+            ],
+            "revisionRequest": {
+              "requestedBy": "owner",
+              "note": "Bind the step explicitly to corrected Candidate v2."
+            }
+          },
+          "planHistory": [
+            {
+              "version": 1,
+              "goalContractVersion": 2,
+              "status": "REVISION_REQUESTED",
+              "proposedBy": "agent",
+              "steps": [
+                {
+                  "id": "release",
+                  "title": "Produce governed native evidence"
+                }
+              ],
+              "revisionRequest": {
+                "requestedBy": "owner",
+                "note": "Bind the step explicitly to corrected Candidate v2."
+              }
+            }
+          ],
+          "activeClaim": null,
+          "activeCandidate": null,
+          "candidateHistory": [],
+          "activeVerification": null,
+          "verificationHistory": [],
+          "activeCompletionRequest": null,
+          "goalAcceptance": null
+        }
+      },
+      "before": {
+        "phaseText": "STATE v7 \u00b7 PLAN REVISION REQUESTED",
+        "actor": "agent",
+        "frontier": "Revision requested",
+        "status": "Waiting for revised Plan"
+      },
+      "after": {
+        "phaseText": "STATE v7 \u00b7 PLAN REVISION REQUESTED",
+        "actor": "agent",
+        "frontier": "Revision requested",
+        "status": "Waiting for revised Plan"
+      }
+    },
+    {
+      "seconds": 66.562,
+      "class": "browser-native-agent-call",
+      "name": "propose_plan",
+      "label": "Plan v2",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {
+        "expectedStateVersion": 7,
+        "idempotencyKey": "demo-plan-v2",
+        "goalContractVersion": 2,
+        "steps": [
+          {
+            "id": "release",
+            "title": "Produce corrected Candidate v2 evidence"
+          }
+        ]
+      },
+      "result": {
+        "accepted": true,
+        "nextLegalAction": "OWNER_CONFIRM_OR_REVISE_PLAN",
+        "ownerRequired": true,
+        "currentStateVersion": 8
+      },
+      "before": {
+        "phaseText": "STATE v7 \u00b7 PLAN REVISION REQUESTED",
+        "actor": "agent",
+        "frontier": "Revision requested",
+        "status": "Waiting for revised Plan"
+      },
+      "after": {
+        "phaseText": "STATE v8 \u00b7 PLAN PROPOSED",
+        "actor": "owner",
+        "frontier": "Review Plan v2",
+        "status": "Waiting for your Plan decision"
+      }
+    },
+    {
+      "seconds": 67.226,
+      "class": "trusted-owner-input",
+      "operation": "click",
+      "selector": ".desktop-owner-action .desktop-action.primary",
+      "label": "Owner confirms Plan v2"
+    },
+    {
+      "seconds": 72.122,
+      "class": "browser-native-agent-call",
+      "name": "get_goal_room_state",
+      "label": "state before claim",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {},
+      "result": {
+        "accepted": true,
+        "readOnly": true,
+        "currentStateVersion": 9,
+        "phase": "PLAN_CONFIRMED",
+        "ownerIntent": "Prove a complete native six-tool governed journey",
+        "goalContract": {
+          "version": 2,
+          "status": "CONFIRMED",
+          "proposedBy": "agent",
+          "goal": "Qualify the complete governed native journey",
+          "why": "Make browser-native authority observable",
+          "doneLooksLike": [
+            "Owner accepts corrected Candidate v2 only after PASS"
+          ],
+          "constraints": [
+            "No external effects"
+          ],
+          "nonGoals": [
+            "Autonomous model selection"
+          ],
+          "evidenceRequired": [
+            "Native calls and shared state"
+          ],
+          "openQuestions": []
+        },
+        "goalRevisionRequest": null,
+        "plan": {
+          "version": 2,
+          "goalContractVersion": 2,
+          "status": "CONFIRMED",
+          "proposedBy": "agent",
+          "steps": [
+            {
+              "id": "release",
+              "title": "Produce corrected Candidate v2 evidence"
+            }
+          ]
+        },
+        "planRevisionRequest": null,
+        "currentActor": "agent",
+        "legalAgentActions": [
+          "claim_step"
+        ],
+        "nextLegalAction": "AGENT_CLAIM_OPEN_STEP",
+        "ownerRequired": false,
+        "claim": null,
+        "candidate": null,
+        "verification": null,
+        "completion": null,
+        "acceptance": null,
+        "recentRefusal": null,
+        "state": {
+          "goal": "Qualify the complete governed native journey",
+          "doneLooksLike": [
+            "Owner accepts corrected Candidate v2 only after PASS"
+          ],
+          "ownerIntent": "Prove a complete native six-tool governed journey",
+          "seededOwnerIntent": null,
+          "activeGoalContract": {
+            "version": 2,
+            "status": "CONFIRMED",
+            "proposedBy": "agent",
+            "goal": "Qualify the complete governed native journey",
+            "why": "Make browser-native authority observable",
+            "doneLooksLike": [
+              "Owner accepts corrected Candidate v2 only after PASS"
+            ],
+            "constraints": [
+              "No external effects"
+            ],
+            "nonGoals": [
+              "Autonomous model selection"
+            ],
+            "evidenceRequired": [
+              "Native calls and shared state"
+            ],
+            "openQuestions": []
+          },
+          "goalContractHistory": [
+            {
+              "version": 1,
+              "status": "REVISION_REQUESTED",
+              "proposedBy": "agent",
+              "goal": "Ship a governed evidence package",
+              "why": "Make browser-native authority observable",
+              "doneLooksLike": [
+                "Owner accepts corrected Candidate v2 only after PASS"
+              ],
+              "constraints": [
+                "No external effects"
+              ],
+              "nonGoals": [
+                "Autonomous model selection"
+              ],
+              "evidenceRequired": [
+                "Native calls and shared state"
+              ],
+              "openQuestions": [
+                "Clarify exact candidate custody"
+              ],
+              "revisionRequest": {
+                "requestedBy": "owner",
+                "note": "Bind the Goal to corrected Candidate v2 and deterministic evidence."
+              }
+            },
+            {
+              "version": 2,
+              "status": "CONFIRMED",
+              "proposedBy": "agent",
+              "goal": "Qualify the complete governed native journey",
+              "why": "Make browser-native authority observable",
+              "doneLooksLike": [
+                "Owner accepts corrected Candidate v2 only after PASS"
+              ],
+              "constraints": [
+                "No external effects"
+              ],
+              "nonGoals": [
+                "Autonomous model selection"
+              ],
+              "evidenceRequired": [
+                "Native calls and shared state"
+              ],
+              "openQuestions": []
+            }
+          ],
+          "phase": "PLAN_CONFIRMED",
+          "stateVersion": 9,
+          "activePlan": {
+            "version": 2,
+            "goalContractVersion": 2,
+            "status": "CONFIRMED",
+            "proposedBy": "agent",
+            "steps": [
+              {
+                "id": "release",
+                "title": "Produce corrected Candidate v2 evidence"
+              }
+            ]
+          },
+          "planHistory": [
+            {
+              "version": 1,
+              "goalContractVersion": 2,
+              "status": "REVISION_REQUESTED",
+              "proposedBy": "agent",
+              "steps": [
+                {
+                  "id": "release",
+                  "title": "Produce governed native evidence"
+                }
+              ],
+              "revisionRequest": {
+                "requestedBy": "owner",
+                "note": "Bind the step explicitly to corrected Candidate v2."
+              }
+            },
+            {
+              "version": 2,
+              "goalContractVersion": 2,
+              "status": "CONFIRMED",
+              "proposedBy": "agent",
+              "steps": [
+                {
+                  "id": "release",
+                  "title": "Produce corrected Candidate v2 evidence"
+                }
+              ]
+            }
+          ],
+          "activeClaim": null,
+          "activeCandidate": null,
+          "candidateHistory": [],
+          "activeVerification": null,
+          "verificationHistory": [],
+          "activeCompletionRequest": null,
+          "goalAcceptance": null
+        }
+      },
+      "before": {
+        "phaseText": "STATE v9 \u00b7 PLAN CONFIRMED",
+        "actor": "agent",
+        "frontier": "Plan v2 confirmed",
+        "status": "Plan confirmed. Work may begin"
+      },
+      "after": {
+        "phaseText": "STATE v9 \u00b7 PLAN CONFIRMED",
+        "actor": "agent",
+        "frontier": "Plan v2 confirmed",
+        "status": "Plan confirmed. Work may begin"
+      }
+    },
+    {
+      "seconds": 73.235,
+      "class": "browser-native-agent-call",
+      "name": "claim_step",
+      "label": "claim admitted step",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {
+        "expectedStateVersion": 9,
+        "idempotencyKey": "demo-claim",
+        "planVersion": 2,
+        "stepId": "release"
+      },
+      "result": {
+        "accepted": true,
+        "nextLegalAction": "AGENT_SUBMIT_CANDIDATE",
+        "ownerRequired": false,
+        "currentStateVersion": 10
+      },
+      "before": {
+        "phaseText": "STATE v9 \u00b7 PLAN CONFIRMED",
+        "actor": "agent",
+        "frontier": "Plan v2 confirmed",
+        "status": "Plan confirmed. Work may begin"
+      },
+      "after": {
+        "phaseText": "STATE v10 \u00b7 STEP CLAIMED",
+        "actor": "agent",
+        "frontier": "Agent holds step release",
+        "status": "Step claimed. Evidence required"
+      }
+    },
+    {
+      "seconds": 74.353,
+      "class": "browser-native-agent-call",
+      "name": "get_goal_room_state",
+      "label": "state before Candidate v1",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {},
+      "result": {
+        "accepted": true,
+        "readOnly": true,
+        "currentStateVersion": 10,
+        "phase": "STEP_CLAIMED",
+        "ownerIntent": "Prove a complete native six-tool governed journey",
+        "goalContract": {
+          "version": 2,
+          "status": "CONFIRMED",
+          "proposedBy": "agent",
+          "goal": "Qualify the complete governed native journey",
+          "why": "Make browser-native authority observable",
+          "doneLooksLike": [
+            "Owner accepts corrected Candidate v2 only after PASS"
+          ],
+          "constraints": [
+            "No external effects"
+          ],
+          "nonGoals": [
+            "Autonomous model selection"
+          ],
+          "evidenceRequired": [
+            "Native calls and shared state"
+          ],
+          "openQuestions": []
+        },
+        "goalRevisionRequest": null,
+        "plan": {
+          "version": 2,
+          "goalContractVersion": 2,
+          "status": "CONFIRMED",
+          "proposedBy": "agent",
+          "steps": [
+            {
+              "id": "release",
+              "title": "Produce corrected Candidate v2 evidence"
+            }
+          ]
+        },
+        "planRevisionRequest": null,
+        "currentActor": "agent",
+        "legalAgentActions": [
+          "submit_artifact"
+        ],
+        "nextLegalAction": "AGENT_SUBMIT_CANDIDATE",
+        "ownerRequired": false,
+        "claim": {
+          "planVersion": 2,
+          "stepId": "release",
+          "claimedBy": "agent"
+        },
+        "candidate": null,
+        "verification": null,
+        "completion": null,
+        "acceptance": null,
+        "recentRefusal": null,
+        "state": {
+          "goal": "Qualify the complete governed native journey",
+          "doneLooksLike": [
+            "Owner accepts corrected Candidate v2 only after PASS"
+          ],
+          "ownerIntent": "Prove a complete native six-tool governed journey",
+          "seededOwnerIntent": null,
+          "activeGoalContract": {
+            "version": 2,
+            "status": "CONFIRMED",
+            "proposedBy": "agent",
+            "goal": "Qualify the complete governed native journey",
+            "why": "Make browser-native authority observable",
+            "doneLooksLike": [
+              "Owner accepts corrected Candidate v2 only after PASS"
+            ],
+            "constraints": [
+              "No external effects"
+            ],
+            "nonGoals": [
+              "Autonomous model selection"
+            ],
+            "evidenceRequired": [
+              "Native calls and shared state"
+            ],
+            "openQuestions": []
+          },
+          "goalContractHistory": [
+            {
+              "version": 1,
+              "status": "REVISION_REQUESTED",
+              "proposedBy": "agent",
+              "goal": "Ship a governed evidence package",
+              "why": "Make browser-native authority observable",
+              "doneLooksLike": [
+                "Owner accepts corrected Candidate v2 only after PASS"
+              ],
+              "constraints": [
+                "No external effects"
+              ],
+              "nonGoals": [
+                "Autonomous model selection"
+              ],
+              "evidenceRequired": [
+                "Native calls and shared state"
+              ],
+              "openQuestions": [
+                "Clarify exact candidate custody"
+              ],
+              "revisionRequest": {
+                "requestedBy": "owner",
+                "note": "Bind the Goal to corrected Candidate v2 and deterministic evidence."
+              }
+            },
+            {
+              "version": 2,
+              "status": "CONFIRMED",
+              "proposedBy": "agent",
+              "goal": "Qualify the complete governed native journey",
+              "why": "Make browser-native authority observable",
+              "doneLooksLike": [
+                "Owner accepts corrected Candidate v2 only after PASS"
+              ],
+              "constraints": [
+                "No external effects"
+              ],
+              "nonGoals": [
+                "Autonomous model selection"
+              ],
+              "evidenceRequired": [
+                "Native calls and shared state"
+              ],
+              "openQuestions": []
+            }
+          ],
+          "phase": "STEP_CLAIMED",
+          "stateVersion": 10,
+          "activePlan": {
+            "version": 2,
+            "goalContractVersion": 2,
+            "status": "CONFIRMED",
+            "proposedBy": "agent",
+            "steps": [
+              {
+                "id": "release",
+                "title": "Produce corrected Candidate v2 evidence"
+              }
+            ]
+          },
+          "planHistory": [
+            {
+              "version": 1,
+              "goalContractVersion": 2,
+              "status": "REVISION_REQUESTED",
+              "proposedBy": "agent",
+              "steps": [
+                {
+                  "id": "release",
+                  "title": "Produce governed native evidence"
+                }
+              ],
+              "revisionRequest": {
+                "requestedBy": "owner",
+                "note": "Bind the step explicitly to corrected Candidate v2."
+              }
+            },
+            {
+              "version": 2,
+              "goalContractVersion": 2,
+              "status": "CONFIRMED",
+              "proposedBy": "agent",
+              "steps": [
+                {
+                  "id": "release",
+                  "title": "Produce corrected Candidate v2 evidence"
+                }
+              ]
+            }
+          ],
+          "activeClaim": {
+            "planVersion": 2,
+            "stepId": "release",
+            "claimedBy": "agent"
+          },
+          "activeCandidate": null,
+          "candidateHistory": [],
+          "activeVerification": null,
+          "verificationHistory": [],
+          "activeCompletionRequest": null,
+          "goalAcceptance": null
+        }
+      },
+      "before": {
+        "phaseText": "STATE v10 \u00b7 STEP CLAIMED",
+        "actor": "agent",
+        "frontier": "Agent holds step release",
+        "status": "Step claimed. Evidence required"
+      },
+      "after": {
+        "phaseText": "STATE v10 \u00b7 STEP CLAIMED",
+        "actor": "agent",
+        "frontier": "Agent holds step release",
+        "status": "Step claimed. Evidence required"
+      }
+    },
+    {
+      "seconds": 75.467,
+      "class": "browser-native-agent-call",
+      "name": "submit_artifact",
+      "label": "Candidate v1; automatic System FAIL",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {
+        "expectedStateVersion": 10,
+        "idempotencyKey": "demo-candidate-v1",
+        "planVersion": 2,
+        "stepId": "release",
+        "content": "{\"publicUrl\":\"http://example.test/native\",\"demoDurationSeconds\":181,\"verificationCommand\":\"npm run build\"}",
+        "sha256": "5026218ce538350df854ad38505b086f9f3dd3430e2e3e85a244b2025bda1a42"
+      },
+      "result": {
+        "accepted": true,
+        "nextLegalAction": "SYSTEM_VERIFY_CANDIDATE",
+        "ownerRequired": false,
+        "currentStateVersion": 11
+      },
+      "before": {
+        "phaseText": "STATE v10 \u00b7 STEP CLAIMED",
+        "actor": "agent",
+        "frontier": "Agent holds step release",
+        "status": "Step claimed. Evidence required"
+      },
+      "after": {
+        "phaseText": "STATE v12 \u00b7 VERIFICATION FAILED",
+        "actor": "agent",
+        "frontier": "Candidate v1 did not pass",
+        "status": "Verification failed. Correction required"
+      }
+    },
+    {
+      "seconds": 77.592,
+      "class": "browser-native-agent-call",
+      "name": "get_goal_room_state",
+      "label": "observe automatic FAIL",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {},
+      "result": {
+        "accepted": true,
+        "readOnly": true,
+        "currentStateVersion": 12,
+        "phase": "VERIFICATION_FAILED",
+        "ownerIntent": "Prove a complete native six-tool governed journey",
+        "goalContract": {
+          "version": 2,
+          "status": "CONFIRMED",
+          "proposedBy": "agent",
+          "goal": "Qualify the complete governed native journey",
+          "why": "Make browser-native authority observable",
+          "doneLooksLike": [
+            "Owner accepts corrected Candidate v2 only after PASS"
+          ],
+          "constraints": [
+            "No external effects"
+          ],
+          "nonGoals": [
+            "Autonomous model selection"
+          ],
+          "evidenceRequired": [
+            "Native calls and shared state"
+          ],
+          "openQuestions": []
+        },
+        "goalRevisionRequest": null,
+        "plan": {
+          "version": 2,
+          "goalContractVersion": 2,
+          "status": "CONFIRMED",
+          "proposedBy": "agent",
+          "steps": [
+            {
+              "id": "release",
+              "title": "Produce corrected Candidate v2 evidence"
+            }
+          ]
+        },
+        "planRevisionRequest": null,
+        "currentActor": "agent",
+        "legalAgentActions": [
+          "submit_artifact"
+        ],
+        "nextLegalAction": "AGENT_SUBMIT_CORRECTED_CANDIDATE",
+        "ownerRequired": false,
+        "claim": {
+          "planVersion": 2,
+          "stepId": "release",
+          "claimedBy": "agent"
+        },
+        "candidate": {
+          "version": 1,
+          "digest": "5026218ce538350df854ad38505b086f9f3dd3430e2e3e85a244b2025bda1a42"
+        },
+        "verification": {
+          "verdict": "FAIL",
+          "ruleSet": {
+            "id": "workhub_goal_room_release",
+            "version": 1
+          },
+          "findingCodes": [
+            "DEMO_DURATION_OUT_OF_RANGE",
+            "PUBLIC_URL_MUST_BE_HTTPS",
+            "VERIFICATION_COMMAND_MISMATCH"
+          ]
+        },
+        "completion": null,
+        "acceptance": null,
+        "recentRefusal": null,
+        "state": {
+          "goal": "Qualify the complete governed native journey",
+          "doneLooksLike": [
+            "Owner accepts corrected Candidate v2 only after PASS"
+          ],
+          "ownerIntent": "Prove a complete native six-tool governed journey",
+          "seededOwnerIntent": null,
+          "activeGoalContract": {
+            "version": 2,
+            "status": "CONFIRMED",
+            "proposedBy": "agent",
+            "goal": "Qualify the complete governed native journey",
+            "why": "Make browser-native authority observable",
+            "doneLooksLike": [
+              "Owner accepts corrected Candidate v2 only after PASS"
+            ],
+            "constraints": [
+              "No external effects"
+            ],
+            "nonGoals": [
+              "Autonomous model selection"
+            ],
+            "evidenceRequired": [
+              "Native calls and shared state"
+            ],
+            "openQuestions": []
+          },
+          "goalContractHistory": [
+            {
+              "version": 1,
+              "status": "REVISION_REQUESTED",
+              "proposedBy": "agent",
+              "goal": "Ship a governed evidence package",
+              "why": "Make browser-native authority observable",
+              "doneLooksLike": [
+                "Owner accepts corrected Candidate v2 only after PASS"
+              ],
+              "constraints": [
+                "No external effects"
+              ],
+              "nonGoals": [
+                "Autonomous model selection"
+              ],
+              "evidenceRequired": [
+                "Native calls and shared state"
+              ],
+              "openQuestions": [
+                "Clarify exact candidate custody"
+              ],
+              "revisionRequest": {
+                "requestedBy": "owner",
+                "note": "Bind the Goal to corrected Candidate v2 and deterministic evidence."
+              }
+            },
+            {
+              "version": 2,
+              "status": "CONFIRMED",
+              "proposedBy": "agent",
+              "goal": "Qualify the complete governed native journey",
+              "why": "Make browser-native authority observable",
+              "doneLooksLike": [
+                "Owner accepts corrected Candidate v2 only after PASS"
+              ],
+              "constraints": [
+                "No external effects"
+              ],
+              "nonGoals": [
+                "Autonomous model selection"
+              ],
+              "evidenceRequired": [
+                "Native calls and shared state"
+              ],
+              "openQuestions": []
+            }
+          ],
+          "phase": "VERIFICATION_FAILED",
+          "stateVersion": 12,
+          "activePlan": {
+            "version": 2,
+            "goalContractVersion": 2,
+            "status": "CONFIRMED",
+            "proposedBy": "agent",
+            "steps": [
+              {
+                "id": "release",
+                "title": "Produce corrected Candidate v2 evidence"
+              }
+            ]
+          },
+          "planHistory": [
+            {
+              "version": 1,
+              "goalContractVersion": 2,
+              "status": "REVISION_REQUESTED",
+              "proposedBy": "agent",
+              "steps": [
+                {
+                  "id": "release",
+                  "title": "Produce governed native evidence"
+                }
+              ],
+              "revisionRequest": {
+                "requestedBy": "owner",
+                "note": "Bind the step explicitly to corrected Candidate v2."
+              }
+            },
+            {
+              "version": 2,
+              "goalContractVersion": 2,
+              "status": "CONFIRMED",
+              "proposedBy": "agent",
+              "steps": [
+                {
+                  "id": "release",
+                  "title": "Produce corrected Candidate v2 evidence"
+                }
+              ]
+            }
+          ],
+          "activeClaim": {
+            "planVersion": 2,
+            "stepId": "release",
+            "claimedBy": "agent"
+          },
+          "activeCandidate": {
+            "version": 1,
+            "planVersion": 2,
+            "stepId": "release",
+            "content": "{\"publicUrl\":\"http://example.test/native\",\"demoDurationSeconds\":181,\"verificationCommand\":\"npm run build\"}",
+            "sha256": "5026218ce538350df854ad38505b086f9f3dd3430e2e3e85a244b2025bda1a42",
+            "submittedBy": "agent"
+          },
+          "candidateHistory": [
+            {
+              "version": 1,
+              "planVersion": 2,
+              "stepId": "release",
+              "content": "{\"publicUrl\":\"http://example.test/native\",\"demoDurationSeconds\":181,\"verificationCommand\":\"npm run build\"}",
+              "sha256": "5026218ce538350df854ad38505b086f9f3dd3430e2e3e85a244b2025bda1a42",
+              "submittedBy": "agent"
+            }
+          ],
+          "activeVerification": {
+            "candidateSha256": "5026218ce538350df854ad38505b086f9f3dd3430e2e3e85a244b2025bda1a42",
+            "ruleSetId": "workhub_goal_room_release",
+            "ruleSetVersion": 1,
+            "verdict": "FAIL",
+            "findingCodes": [
+              "DEMO_DURATION_OUT_OF_RANGE",
+              "PUBLIC_URL_MUST_BE_HTTPS",
+              "VERIFICATION_COMMAND_MISMATCH"
+            ],
+            "actor": "system"
+          },
+          "verificationHistory": [
+            {
+              "candidateSha256": "5026218ce538350df854ad38505b086f9f3dd3430e2e3e85a244b2025bda1a42",
+              "ruleSetId": "workhub_goal_room_release",
+              "ruleSetVersion": 1,
+              "verdict": "FAIL",
+              "findingCodes": [
+                "DEMO_DURATION_OUT_OF_RANGE",
+                "PUBLIC_URL_MUST_BE_HTTPS",
+                "VERIFICATION_COMMAND_MISMATCH"
+              ],
+              "actor": "system"
+            }
+          ],
+          "activeCompletionRequest": null,
+          "goalAcceptance": null
+        }
+      },
+      "before": {
+        "phaseText": "STATE v12 \u00b7 VERIFICATION FAILED",
+        "actor": "agent",
+        "frontier": "Candidate v1 did not pass",
+        "status": "Verification failed. Correction required"
+      },
+      "after": {
+        "phaseText": "STATE v12 \u00b7 VERIFICATION FAILED",
+        "actor": "agent",
+        "frontier": "Candidate v1 did not pass",
+        "status": "Verification failed. Correction required"
+      }
+    },
+    {
+      "seconds": 77.592,
+      "class": "automatic-system-verdict",
+      "verdict": "FAIL",
+      "phase": "VERIFICATION_FAILED",
+      "stateVersion": 12
+    },
+    {
+      "seconds": 87.424,
+      "class": "browser-native-agent-call",
+      "name": "get_goal_room_state",
+      "label": "state before corrected Candidate v2",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {},
+      "result": {
+        "accepted": true,
+        "readOnly": true,
+        "currentStateVersion": 12,
+        "phase": "VERIFICATION_FAILED",
+        "ownerIntent": "Prove a complete native six-tool governed journey",
+        "goalContract": {
+          "version": 2,
+          "status": "CONFIRMED",
+          "proposedBy": "agent",
+          "goal": "Qualify the complete governed native journey",
+          "why": "Make browser-native authority observable",
+          "doneLooksLike": [
+            "Owner accepts corrected Candidate v2 only after PASS"
+          ],
+          "constraints": [
+            "No external effects"
+          ],
+          "nonGoals": [
+            "Autonomous model selection"
+          ],
+          "evidenceRequired": [
+            "Native calls and shared state"
+          ],
+          "openQuestions": []
+        },
+        "goalRevisionRequest": null,
+        "plan": {
+          "version": 2,
+          "goalContractVersion": 2,
+          "status": "CONFIRMED",
+          "proposedBy": "agent",
+          "steps": [
+            {
+              "id": "release",
+              "title": "Produce corrected Candidate v2 evidence"
+            }
+          ]
+        },
+        "planRevisionRequest": null,
+        "currentActor": "agent",
+        "legalAgentActions": [
+          "submit_artifact"
+        ],
+        "nextLegalAction": "AGENT_SUBMIT_CORRECTED_CANDIDATE",
+        "ownerRequired": false,
+        "claim": {
+          "planVersion": 2,
+          "stepId": "release",
+          "claimedBy": "agent"
+        },
+        "candidate": {
+          "version": 1,
+          "digest": "5026218ce538350df854ad38505b086f9f3dd3430e2e3e85a244b2025bda1a42"
+        },
+        "verification": {
+          "verdict": "FAIL",
+          "ruleSet": {
+            "id": "workhub_goal_room_release",
+            "version": 1
+          },
+          "findingCodes": [
+            "DEMO_DURATION_OUT_OF_RANGE",
+            "PUBLIC_URL_MUST_BE_HTTPS",
+            "VERIFICATION_COMMAND_MISMATCH"
+          ]
+        },
+        "completion": null,
+        "acceptance": null,
+        "recentRefusal": null,
+        "state": {
+          "goal": "Qualify the complete governed native journey",
+          "doneLooksLike": [
+            "Owner accepts corrected Candidate v2 only after PASS"
+          ],
+          "ownerIntent": "Prove a complete native six-tool governed journey",
+          "seededOwnerIntent": null,
+          "activeGoalContract": {
+            "version": 2,
+            "status": "CONFIRMED",
+            "proposedBy": "agent",
+            "goal": "Qualify the complete governed native journey",
+            "why": "Make browser-native authority observable",
+            "doneLooksLike": [
+              "Owner accepts corrected Candidate v2 only after PASS"
+            ],
+            "constraints": [
+              "No external effects"
+            ],
+            "nonGoals": [
+              "Autonomous model selection"
+            ],
+            "evidenceRequired": [
+              "Native calls and shared state"
+            ],
+            "openQuestions": []
+          },
+          "goalContractHistory": [
+            {
+              "version": 1,
+              "status": "REVISION_REQUESTED",
+              "proposedBy": "agent",
+              "goal": "Ship a governed evidence package",
+              "why": "Make browser-native authority observable",
+              "doneLooksLike": [
+                "Owner accepts corrected Candidate v2 only after PASS"
+              ],
+              "constraints": [
+                "No external effects"
+              ],
+              "nonGoals": [
+                "Autonomous model selection"
+              ],
+              "evidenceRequired": [
+                "Native calls and shared state"
+              ],
+              "openQuestions": [
+                "Clarify exact candidate custody"
+              ],
+              "revisionRequest": {
+                "requestedBy": "owner",
+                "note": "Bind the Goal to corrected Candidate v2 and deterministic evidence."
+              }
+            },
+            {
+              "version": 2,
+              "status": "CONFIRMED",
+              "proposedBy": "agent",
+              "goal": "Qualify the complete governed native journey",
+              "why": "Make browser-native authority observable",
+              "doneLooksLike": [
+                "Owner accepts corrected Candidate v2 only after PASS"
+              ],
+              "constraints": [
+                "No external effects"
+              ],
+              "nonGoals": [
+                "Autonomous model selection"
+              ],
+              "evidenceRequired": [
+                "Native calls and shared state"
+              ],
+              "openQuestions": []
+            }
+          ],
+          "phase": "VERIFICATION_FAILED",
+          "stateVersion": 12,
+          "activePlan": {
+            "version": 2,
+            "goalContractVersion": 2,
+            "status": "CONFIRMED",
+            "proposedBy": "agent",
+            "steps": [
+              {
+                "id": "release",
+                "title": "Produce corrected Candidate v2 evidence"
+              }
+            ]
+          },
+          "planHistory": [
+            {
+              "version": 1,
+              "goalContractVersion": 2,
+              "status": "REVISION_REQUESTED",
+              "proposedBy": "agent",
+              "steps": [
+                {
+                  "id": "release",
+                  "title": "Produce governed native evidence"
+                }
+              ],
+              "revisionRequest": {
+                "requestedBy": "owner",
+                "note": "Bind the step explicitly to corrected Candidate v2."
+              }
+            },
+            {
+              "version": 2,
+              "goalContractVersion": 2,
+              "status": "CONFIRMED",
+              "proposedBy": "agent",
+              "steps": [
+                {
+                  "id": "release",
+                  "title": "Produce corrected Candidate v2 evidence"
+                }
+              ]
+            }
+          ],
+          "activeClaim": {
+            "planVersion": 2,
+            "stepId": "release",
+            "claimedBy": "agent"
+          },
+          "activeCandidate": {
+            "version": 1,
+            "planVersion": 2,
+            "stepId": "release",
+            "content": "{\"publicUrl\":\"http://example.test/native\",\"demoDurationSeconds\":181,\"verificationCommand\":\"npm run build\"}",
+            "sha256": "5026218ce538350df854ad38505b086f9f3dd3430e2e3e85a244b2025bda1a42",
+            "submittedBy": "agent"
+          },
+          "candidateHistory": [
+            {
+              "version": 1,
+              "planVersion": 2,
+              "stepId": "release",
+              "content": "{\"publicUrl\":\"http://example.test/native\",\"demoDurationSeconds\":181,\"verificationCommand\":\"npm run build\"}",
+              "sha256": "5026218ce538350df854ad38505b086f9f3dd3430e2e3e85a244b2025bda1a42",
+              "submittedBy": "agent"
+            }
+          ],
+          "activeVerification": {
+            "candidateSha256": "5026218ce538350df854ad38505b086f9f3dd3430e2e3e85a244b2025bda1a42",
+            "ruleSetId": "workhub_goal_room_release",
+            "ruleSetVersion": 1,
+            "verdict": "FAIL",
+            "findingCodes": [
+              "DEMO_DURATION_OUT_OF_RANGE",
+              "PUBLIC_URL_MUST_BE_HTTPS",
+              "VERIFICATION_COMMAND_MISMATCH"
+            ],
+            "actor": "system"
+          },
+          "verificationHistory": [
+            {
+              "candidateSha256": "5026218ce538350df854ad38505b086f9f3dd3430e2e3e85a244b2025bda1a42",
+              "ruleSetId": "workhub_goal_room_release",
+              "ruleSetVersion": 1,
+              "verdict": "FAIL",
+              "findingCodes": [
+                "DEMO_DURATION_OUT_OF_RANGE",
+                "PUBLIC_URL_MUST_BE_HTTPS",
+                "VERIFICATION_COMMAND_MISMATCH"
+              ],
+              "actor": "system"
+            }
+          ],
+          "activeCompletionRequest": null,
+          "goalAcceptance": null
+        }
+      },
+      "before": {
+        "phaseText": "STATE v12 \u00b7 VERIFICATION FAILED",
+        "actor": "agent",
+        "frontier": "Candidate v1 did not pass",
+        "status": "Verification failed. Correction required"
+      },
+      "after": {
+        "phaseText": "STATE v12 \u00b7 VERIFICATION FAILED",
+        "actor": "agent",
+        "frontier": "Candidate v1 did not pass",
+        "status": "Verification failed. Correction required"
+      }
+    },
+    {
+      "seconds": 88.546,
+      "class": "browser-native-agent-call",
+      "name": "submit_artifact",
+      "label": "Candidate v2; automatic System PASS",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {
+        "expectedStateVersion": 12,
+        "idempotencyKey": "demo-candidate-v2",
+        "planVersion": 2,
+        "stepId": "release",
+        "content": "{\"publicUrl\":\"https://example.test/native\",\"demoDurationSeconds\":180,\"verificationCommand\":\"npm test\"}",
+        "sha256": "e7c2c9e94c951cbd88355c8cf0cf96afd94ba107055f99c0fcdf579c17e0119d"
+      },
+      "result": {
+        "accepted": true,
+        "nextLegalAction": "SYSTEM_VERIFY_CANDIDATE",
+        "ownerRequired": false,
+        "currentStateVersion": 13
+      },
+      "before": {
+        "phaseText": "STATE v12 \u00b7 VERIFICATION FAILED",
+        "actor": "agent",
+        "frontier": "Candidate v1 did not pass",
+        "status": "Verification failed. Correction required"
+      },
+      "after": {
+        "phaseText": "STATE v14 \u00b7 VERIFICATION PASSED",
+        "actor": "agent",
+        "frontier": "Candidate v2 passed deterministic verification",
+        "status": "Verification passed. Owner has not accepted the Goal"
+      }
+    },
+    {
+      "seconds": 90.663,
+      "class": "browser-native-agent-call",
+      "name": "get_goal_room_state",
+      "label": "observe automatic PASS; Agent remains next",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {},
+      "result": {
+        "accepted": true,
+        "readOnly": true,
+        "currentStateVersion": 14,
+        "phase": "VERIFICATION_PASSED",
+        "ownerIntent": "Prove a complete native six-tool governed journey",
+        "goalContract": {
+          "version": 2,
+          "status": "CONFIRMED",
+          "proposedBy": "agent",
+          "goal": "Qualify the complete governed native journey",
+          "why": "Make browser-native authority observable",
+          "doneLooksLike": [
+            "Owner accepts corrected Candidate v2 only after PASS"
+          ],
+          "constraints": [
+            "No external effects"
+          ],
+          "nonGoals": [
+            "Autonomous model selection"
+          ],
+          "evidenceRequired": [
+            "Native calls and shared state"
+          ],
+          "openQuestions": []
+        },
+        "goalRevisionRequest": null,
+        "plan": {
+          "version": 2,
+          "goalContractVersion": 2,
+          "status": "CONFIRMED",
+          "proposedBy": "agent",
+          "steps": [
+            {
+              "id": "release",
+              "title": "Produce corrected Candidate v2 evidence"
+            }
+          ]
+        },
+        "planRevisionRequest": null,
+        "currentActor": "agent",
+        "legalAgentActions": [
+          "request_completion"
+        ],
+        "nextLegalAction": "AGENT_REQUEST_COMPLETION",
+        "ownerRequired": false,
+        "claim": {
+          "planVersion": 2,
+          "stepId": "release",
+          "claimedBy": "agent"
+        },
+        "candidate": {
+          "version": 2,
+          "digest": "e7c2c9e94c951cbd88355c8cf0cf96afd94ba107055f99c0fcdf579c17e0119d"
+        },
+        "verification": {
+          "verdict": "PASS",
+          "ruleSet": {
+            "id": "workhub_goal_room_release",
+            "version": 1
+          },
+          "findingCodes": []
+        },
+        "completion": null,
+        "acceptance": null,
+        "recentRefusal": null,
+        "state": {
+          "goal": "Qualify the complete governed native journey",
+          "doneLooksLike": [
+            "Owner accepts corrected Candidate v2 only after PASS"
+          ],
+          "ownerIntent": "Prove a complete native six-tool governed journey",
+          "seededOwnerIntent": null,
+          "activeGoalContract": {
+            "version": 2,
+            "status": "CONFIRMED",
+            "proposedBy": "agent",
+            "goal": "Qualify the complete governed native journey",
+            "why": "Make browser-native authority observable",
+            "doneLooksLike": [
+              "Owner accepts corrected Candidate v2 only after PASS"
+            ],
+            "constraints": [
+              "No external effects"
+            ],
+            "nonGoals": [
+              "Autonomous model selection"
+            ],
+            "evidenceRequired": [
+              "Native calls and shared state"
+            ],
+            "openQuestions": []
+          },
+          "goalContractHistory": [
+            {
+              "version": 1,
+              "status": "REVISION_REQUESTED",
+              "proposedBy": "agent",
+              "goal": "Ship a governed evidence package",
+              "why": "Make browser-native authority observable",
+              "doneLooksLike": [
+                "Owner accepts corrected Candidate v2 only after PASS"
+              ],
+              "constraints": [
+                "No external effects"
+              ],
+              "nonGoals": [
+                "Autonomous model selection"
+              ],
+              "evidenceRequired": [
+                "Native calls and shared state"
+              ],
+              "openQuestions": [
+                "Clarify exact candidate custody"
+              ],
+              "revisionRequest": {
+                "requestedBy": "owner",
+                "note": "Bind the Goal to corrected Candidate v2 and deterministic evidence."
+              }
+            },
+            {
+              "version": 2,
+              "status": "CONFIRMED",
+              "proposedBy": "agent",
+              "goal": "Qualify the complete governed native journey",
+              "why": "Make browser-native authority observable",
+              "doneLooksLike": [
+                "Owner accepts corrected Candidate v2 only after PASS"
+              ],
+              "constraints": [
+                "No external effects"
+              ],
+              "nonGoals": [
+                "Autonomous model selection"
+              ],
+              "evidenceRequired": [
+                "Native calls and shared state"
+              ],
+              "openQuestions": []
+            }
+          ],
+          "phase": "VERIFICATION_PASSED",
+          "stateVersion": 14,
+          "activePlan": {
+            "version": 2,
+            "goalContractVersion": 2,
+            "status": "CONFIRMED",
+            "proposedBy": "agent",
+            "steps": [
+              {
+                "id": "release",
+                "title": "Produce corrected Candidate v2 evidence"
+              }
+            ]
+          },
+          "planHistory": [
+            {
+              "version": 1,
+              "goalContractVersion": 2,
+              "status": "REVISION_REQUESTED",
+              "proposedBy": "agent",
+              "steps": [
+                {
+                  "id": "release",
+                  "title": "Produce governed native evidence"
+                }
+              ],
+              "revisionRequest": {
+                "requestedBy": "owner",
+                "note": "Bind the step explicitly to corrected Candidate v2."
+              }
+            },
+            {
+              "version": 2,
+              "goalContractVersion": 2,
+              "status": "CONFIRMED",
+              "proposedBy": "agent",
+              "steps": [
+                {
+                  "id": "release",
+                  "title": "Produce corrected Candidate v2 evidence"
+                }
+              ]
+            }
+          ],
+          "activeClaim": {
+            "planVersion": 2,
+            "stepId": "release",
+            "claimedBy": "agent"
+          },
+          "activeCandidate": {
+            "version": 2,
+            "planVersion": 2,
+            "stepId": "release",
+            "content": "{\"publicUrl\":\"https://example.test/native\",\"demoDurationSeconds\":180,\"verificationCommand\":\"npm test\"}",
+            "sha256": "e7c2c9e94c951cbd88355c8cf0cf96afd94ba107055f99c0fcdf579c17e0119d",
+            "submittedBy": "agent"
+          },
+          "candidateHistory": [
+            {
+              "version": 1,
+              "planVersion": 2,
+              "stepId": "release",
+              "content": "{\"publicUrl\":\"http://example.test/native\",\"demoDurationSeconds\":181,\"verificationCommand\":\"npm run build\"}",
+              "sha256": "5026218ce538350df854ad38505b086f9f3dd3430e2e3e85a244b2025bda1a42",
+              "submittedBy": "agent"
+            },
+            {
+              "version": 2,
+              "planVersion": 2,
+              "stepId": "release",
+              "content": "{\"publicUrl\":\"https://example.test/native\",\"demoDurationSeconds\":180,\"verificationCommand\":\"npm test\"}",
+              "sha256": "e7c2c9e94c951cbd88355c8cf0cf96afd94ba107055f99c0fcdf579c17e0119d",
+              "submittedBy": "agent"
+            }
+          ],
+          "activeVerification": {
+            "candidateSha256": "e7c2c9e94c951cbd88355c8cf0cf96afd94ba107055f99c0fcdf579c17e0119d",
+            "ruleSetId": "workhub_goal_room_release",
+            "ruleSetVersion": 1,
+            "verdict": "PASS",
+            "findingCodes": [],
+            "actor": "system"
+          },
+          "verificationHistory": [
+            {
+              "candidateSha256": "5026218ce538350df854ad38505b086f9f3dd3430e2e3e85a244b2025bda1a42",
+              "ruleSetId": "workhub_goal_room_release",
+              "ruleSetVersion": 1,
+              "verdict": "FAIL",
+              "findingCodes": [
+                "DEMO_DURATION_OUT_OF_RANGE",
+                "PUBLIC_URL_MUST_BE_HTTPS",
+                "VERIFICATION_COMMAND_MISMATCH"
+              ],
+              "actor": "system"
+            },
+            {
+              "candidateSha256": "e7c2c9e94c951cbd88355c8cf0cf96afd94ba107055f99c0fcdf579c17e0119d",
+              "ruleSetId": "workhub_goal_room_release",
+              "ruleSetVersion": 1,
+              "verdict": "PASS",
+              "findingCodes": [],
+              "actor": "system"
+            }
+          ],
+          "activeCompletionRequest": null,
+          "goalAcceptance": null
+        }
+      },
+      "before": {
+        "phaseText": "STATE v14 \u00b7 VERIFICATION PASSED",
+        "actor": "agent",
+        "frontier": "Candidate v2 passed deterministic verification",
+        "status": "Verification passed. Owner has not accepted the Goal"
+      },
+      "after": {
+        "phaseText": "STATE v14 \u00b7 VERIFICATION PASSED",
+        "actor": "agent",
+        "frontier": "Candidate v2 passed deterministic verification",
+        "status": "Verification passed. Owner has not accepted the Goal"
+      }
+    },
+    {
+      "seconds": 90.663,
+      "class": "automatic-system-verdict",
+      "verdict": "PASS",
+      "phase": "VERIFICATION_PASSED",
+      "stateVersion": 14,
+      "nextActor": "agent"
+    },
+    {
+      "seconds": 100.619,
+      "class": "browser-native-agent-call",
+      "name": "request_completion",
+      "label": "completion request for exact Candidate v2",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {
+        "expectedStateVersion": 14,
+        "idempotencyKey": "demo-completion",
+        "candidateSha256": "e7c2c9e94c951cbd88355c8cf0cf96afd94ba107055f99c0fcdf579c17e0119d"
+      },
+      "result": {
+        "accepted": true,
+        "nextLegalAction": "OWNER_ACCEPT_OR_REQUEST_WORK",
+        "ownerRequired": true,
+        "currentStateVersion": 15
+      },
+      "before": {
+        "phaseText": "STATE v14 \u00b7 VERIFICATION PASSED",
+        "actor": "agent",
+        "frontier": "Candidate v2 passed deterministic verification",
+        "status": "Verification passed. Owner has not accepted the Goal"
+      },
+      "after": {
+        "phaseText": "STATE v15 \u00b7 COMPLETION REQUESTED",
+        "actor": "owner",
+        "frontier": "Accept Candidate v2?",
+        "status": "Verified result. Awaiting owner acceptance"
+      }
+    },
+    {
+      "seconds": 107.462,
+      "class": "trusted-owner-input",
+      "operation": "click",
+      "selector": ".desktop-owner-action .desktop-action.primary",
+      "label": "Owner opens exact-candidate acceptance"
+    },
+    {
+      "seconds": 117.161,
+      "class": "trusted-owner-input",
+      "operation": "click",
+      "selector": "#confirm-acceptance",
+      "label": "Owner confirms irreversible acceptance"
+    },
+    {
+      "seconds": 118.742,
+      "class": "browser-native-agent-call",
+      "name": "get_goal_room_state",
+      "label": "read sealed S14",
+      "mechanism": "document.modelContext.getTools() -> browser-returned RegisteredTool -> document.modelContext.executeTool(tool, JSON.stringify(input))",
+      "input": {},
+      "result": {
+        "accepted": true,
+        "readOnly": true,
+        "currentStateVersion": 16,
+        "phase": "GOAL_ACCEPTED",
+        "ownerIntent": "Prove a complete native six-tool governed journey",
+        "goalContract": {
+          "version": 2,
+          "status": "CONFIRMED",
+          "proposedBy": "agent",
+          "goal": "Qualify the complete governed native journey",
+          "why": "Make browser-native authority observable",
+          "doneLooksLike": [
+            "Owner accepts corrected Candidate v2 only after PASS"
+          ],
+          "constraints": [
+            "No external effects"
+          ],
+          "nonGoals": [
+            "Autonomous model selection"
+          ],
+          "evidenceRequired": [
+            "Native calls and shared state"
+          ],
+          "openQuestions": []
+        },
+        "goalRevisionRequest": null,
+        "plan": {
+          "version": 2,
+          "goalContractVersion": 2,
+          "status": "CONFIRMED",
+          "proposedBy": "agent",
+          "steps": [
+            {
+              "id": "release",
+              "title": "Produce corrected Candidate v2 evidence"
+            }
+          ]
+        },
+        "planRevisionRequest": null,
+        "currentActor": "none",
+        "legalAgentActions": [],
+        "nextLegalAction": "GOAL_ACCEPTED_NO_FURTHER_ACTION",
+        "ownerRequired": false,
+        "claim": {
+          "planVersion": 2,
+          "stepId": "release",
+          "claimedBy": "agent"
+        },
+        "candidate": {
+          "version": 2,
+          "digest": "e7c2c9e94c951cbd88355c8cf0cf96afd94ba107055f99c0fcdf579c17e0119d"
+        },
+        "verification": {
+          "verdict": "PASS",
+          "ruleSet": {
+            "id": "workhub_goal_room_release",
+            "version": 1
+          },
+          "findingCodes": []
+        },
+        "completion": {
+          "candidateSha256": "e7c2c9e94c951cbd88355c8cf0cf96afd94ba107055f99c0fcdf579c17e0119d",
+          "requestedBy": "agent"
+        },
+        "acceptance": {
+          "status": "ACCEPTED",
+          "candidateDigest": "e7c2c9e94c951cbd88355c8cf0cf96afd94ba107055f99c0fcdf579c17e0119d"
+        },
+        "recentRefusal": null,
+        "state": {
+          "goal": "Qualify the complete governed native journey",
+          "doneLooksLike": [
+            "Owner accepts corrected Candidate v2 only after PASS"
+          ],
+          "ownerIntent": "Prove a complete native six-tool governed journey",
+          "seededOwnerIntent": null,
+          "activeGoalContract": {
+            "version": 2,
+            "status": "CONFIRMED",
+            "proposedBy": "agent",
+            "goal": "Qualify the complete governed native journey",
+            "why": "Make browser-native authority observable",
+            "doneLooksLike": [
+              "Owner accepts corrected Candidate v2 only after PASS"
+            ],
+            "constraints": [
+              "No external effects"
+            ],
+            "nonGoals": [
+              "Autonomous model selection"
+            ],
+            "evidenceRequired": [
+              "Native calls and shared state"
+            ],
+            "openQuestions": []
+          },
+          "goalContractHistory": [
+            {
+              "version": 1,
+              "status": "REVISION_REQUESTED",
+              "proposedBy": "agent",
+              "goal": "Ship a governed evidence package",
+              "why": "Make browser-native authority observable",
+              "doneLooksLike": [
+                "Owner accepts corrected Candidate v2 only after PASS"
+              ],
+              "constraints": [
+                "No external effects"
+              ],
+              "nonGoals": [
+                "Autonomous model selection"
+              ],
+              "evidenceRequired": [
+                "Native calls and shared state"
+              ],
+              "openQuestions": [
+                "Clarify exact candidate custody"
+              ],
+              "revisionRequest": {
+                "requestedBy": "owner",
+                "note": "Bind the Goal to corrected Candidate v2 and deterministic evidence."
+              }
+            },
+            {
+              "version": 2,
+              "status": "CONFIRMED",
+              "proposedBy": "agent",
+              "goal": "Qualify the complete governed native journey",
+              "why": "Make browser-native authority observable",
+              "doneLooksLike": [
+                "Owner accepts corrected Candidate v2 only after PASS"
+              ],
+              "constraints": [
+                "No external effects"
+              ],
+              "nonGoals": [
+                "Autonomous model selection"
+              ],
+              "evidenceRequired": [
+                "Native calls and shared state"
+              ],
+              "openQuestions": []
+            }
+          ],
+          "phase": "GOAL_ACCEPTED",
+          "stateVersion": 16,
+          "activePlan": {
+            "version": 2,
+            "goalContractVersion": 2,
+            "status": "CONFIRMED",
+            "proposedBy": "agent",
+            "steps": [
+              {
+                "id": "release",
+                "title": "Produce corrected Candidate v2 evidence"
+              }
+            ]
+          },
+          "planHistory": [
+            {
+              "version": 1,
+              "goalContractVersion": 2,
+              "status": "REVISION_REQUESTED",
+              "proposedBy": "agent",
+              "steps": [
+                {
+                  "id": "release",
+                  "title": "Produce governed native evidence"
+                }
+              ],
+              "revisionRequest": {
+                "requestedBy": "owner",
+                "note": "Bind the step explicitly to corrected Candidate v2."
+              }
+            },
+            {
+              "version": 2,
+              "goalContractVersion": 2,
+              "status": "CONFIRMED",
+              "proposedBy": "agent",
+              "steps": [
+                {
+                  "id": "release",
+                  "title": "Produce corrected Candidate v2 evidence"
+                }
+              ]
+            }
+          ],
+          "activeClaim": {
+            "planVersion": 2,
+            "stepId": "release",
+            "claimedBy": "agent"
+          },
+          "activeCandidate": {
+            "version": 2,
+            "planVersion": 2,
+            "stepId": "release",
+            "content": "{\"publicUrl\":\"https://example.test/native\",\"demoDurationSeconds\":180,\"verificationCommand\":\"npm test\"}",
+            "sha256": "e7c2c9e94c951cbd88355c8cf0cf96afd94ba107055f99c0fcdf579c17e0119d",
+            "submittedBy": "agent"
+          },
+          "candidateHistory": [
+            {
+              "version": 1,
+              "planVersion": 2,
+              "stepId": "release",
+              "content": "{\"publicUrl\":\"http://example.test/native\",\"demoDurationSeconds\":181,\"verificationCommand\":\"npm run build\"}",
+              "sha256": "5026218ce538350df854ad38505b086f9f3dd3430e2e3e85a244b2025bda1a42",
+              "submittedBy": "agent"
+            },
+            {
+              "version": 2,
+              "planVersion": 2,
+              "stepId": "release",
+              "content": "{\"publicUrl\":\"https://example.test/native\",\"demoDurationSeconds\":180,\"verificationCommand\":\"npm test\"}",
+              "sha256": "e7c2c9e94c951cbd88355c8cf0cf96afd94ba107055f99c0fcdf579c17e0119d",
+              "submittedBy": "agent"
+            }
+          ],
+          "activeVerification": {
+            "candidateSha256": "e7c2c9e94c951cbd88355c8cf0cf96afd94ba107055f99c0fcdf579c17e0119d",
+            "ruleSetId": "workhub_goal_room_release",
+            "ruleSetVersion": 1,
+            "verdict": "PASS",
+            "findingCodes": [],
+            "actor": "system"
+          },
+          "verificationHistory": [
+            {
+              "candidateSha256": "5026218ce538350df854ad38505b086f9f3dd3430e2e3e85a244b2025bda1a42",
+              "ruleSetId": "workhub_goal_room_release",
+              "ruleSetVersion": 1,
+              "verdict": "FAIL",
+              "findingCodes": [
+                "DEMO_DURATION_OUT_OF_RANGE",
+                "PUBLIC_URL_MUST_BE_HTTPS",
+                "VERIFICATION_COMMAND_MISMATCH"
+              ],
+              "actor": "system"
+            },
+            {
+              "candidateSha256": "e7c2c9e94c951cbd88355c8cf0cf96afd94ba107055f99c0fcdf579c17e0119d",
+              "ruleSetId": "workhub_goal_room_release",
+              "ruleSetVersion": 1,
+              "verdict": "PASS",
+              "findingCodes": [],
+              "actor": "system"
+            }
+          ],
+          "activeCompletionRequest": {
+            "candidateSha256": "e7c2c9e94c951cbd88355c8cf0cf96afd94ba107055f99c0fcdf579c17e0119d",
+            "requestedBy": "agent"
+          },
+          "goalAcceptance": {
+            "candidateSha256": "e7c2c9e94c951cbd88355c8cf0cf96afd94ba107055f99c0fcdf579c17e0119d",
+            "acceptedBy": "owner"
+          }
+        }
+      },
+      "before": {
+        "phaseText": "STATE v16 \u00b7 GOAL ACCEPTED",
+        "actor": "none",
+        "frontier": "Goal complete",
+        "status": "Goal accepted by owner"
+      },
+      "after": {
+        "phaseText": "STATE v16 \u00b7 GOAL ACCEPTED",
+        "actor": "none",
+        "frontier": "Goal complete",
+        "status": "Goal accepted by owner"
+      }
+    },
+    {
+      "seconds": 126.929,
+      "class": "checkpoint-reconstruction",
+      "scene": "mobile-breakpoint",
+      "source": "submission/assets/cue-12-mobile-breakpoint.png"
+    },
+    {
+      "seconds": 138.866,
+      "class": "checkpoint-reconstruction",
+      "scene": "architecture",
+      "source": "submission/assets/workhub-goal-room-architecture.html"
+    }
+  ],
+  "liveIntervals": [
+    {
+      "id": "native-six-and-owner-intent",
+      "start": 0,
+      "end": 34.6,
+      "required": [
+        "browser-native-agent-call",
+        "trusted-owner-input"
+      ]
+    },
+    {
+      "id": "goal-owner-decisions",
+      "start": 45.2,
+      "end": 58.0,
+      "required": [
+        "trusted-owner-input",
+        "browser-native-agent-call"
+      ]
+    },
+    {
+      "id": "plan-owner-decisions",
+      "start": 58.0,
+      "end": 70.8,
+      "required": [
+        "trusted-owner-input",
+        "browser-native-agent-call"
+      ]
+    },
+    {
+      "id": "automatic-fail-pass",
+      "start": 71,
+      "end": 99.4,
+      "required": [
+        "browser-native-agent-call",
+        "automatic-system-verdict"
+      ]
+    },
+    {
+      "id": "completion-acceptance-seal",
+      "start": 99.5,
+      "end": 126.8,
+      "required": [
+        "browser-native-agent-call",
+        "trusted-owner-input"
+      ]
+    }
+  ],
+  "reconstructedIntervals": [
+    {
+      "start": 126.9,
+      "end": 138.7,
+      "scene": "mobile/breakpoint"
+    },
+    {
+      "start": 138.85,
+      "end": 153.84,
+      "scene": "architecture/honest limits"
+    }
+  ],
+  "capture": {
+    "api": "Page.startScreencast",
+    "frameCount": 632,
+    "uniqueFrameCount": 582,
+    "transitionCount": 581,
+    "transitions": [
+      {
+        "from": 0.097,
+        "to": 0.135,
+        "fromHash": "d0701bc036f8a8bed308335e6615303211a82772721ebc70ab644eadb892f808",
+        "toHash": "87e3bfeda59fa093db429002daae53e5cb06e67401d9e9d9c436fe818b74a905"
+      },
+      {
+        "from": 0.135,
+        "to": 0.327,
+        "fromHash": "87e3bfeda59fa093db429002daae53e5cb06e67401d9e9d9c436fe818b74a905",
+        "toHash": "1b4961b8c4310fbc0b955602f9472b70adeaf82cce3560f73aee9c984dcda8cf"
+      },
+      {
+        "from": 0.327,
+        "to": 0.536,
+        "fromHash": "1b4961b8c4310fbc0b955602f9472b70adeaf82cce3560f73aee9c984dcda8cf",
+        "toHash": "0830935013a4d16da4363c8cefca287d2d6ab8985045c3e0c2ae20736f7289f4"
+      },
+      {
+        "from": 0.536,
+        "to": 0.651,
+        "fromHash": "0830935013a4d16da4363c8cefca287d2d6ab8985045c3e0c2ae20736f7289f4",
+        "toHash": "f3c43cdea21f789d1fe012b4b39309a0aca0da33b3c8bb30cb87654fbe26e8db"
+      },
+      {
+        "from": 0.651,
+        "to": 0.817,
+        "fromHash": "f3c43cdea21f789d1fe012b4b39309a0aca0da33b3c8bb30cb87654fbe26e8db",
+        "toHash": "5669b91a773a780d139393e3a10ed6e2484d8234b484a2d0b44846b976b4a25a"
+      },
+      {
+        "from": 0.817,
+        "to": 1.18,
+        "fromHash": "5669b91a773a780d139393e3a10ed6e2484d8234b484a2d0b44846b976b4a25a",
+        "toHash": "9f4ed3237542a8f890c19c726b317fcdde408d8b3c6e33819b0b3a170e4f6afa"
+      },
+      {
+        "from": 1.18,
+        "to": 1.432,
+        "fromHash": "9f4ed3237542a8f890c19c726b317fcdde408d8b3c6e33819b0b3a170e4f6afa",
+        "toHash": "cb684c21a447b78cc15fb16fee4544218e8d1d53497a51f46d109b7478ba857a"
+      },
+      {
+        "from": 1.432,
+        "to": 1.672,
+        "fromHash": "cb684c21a447b78cc15fb16fee4544218e8d1d53497a51f46d109b7478ba857a",
+        "toHash": "fe39a0461a19fa1aa2daa1f827c7fa7e4f631fb5f04e1d2d82d71a91f4ce678a"
+      },
+      {
+        "from": 1.672,
+        "to": 1.797,
+        "fromHash": "fe39a0461a19fa1aa2daa1f827c7fa7e4f631fb5f04e1d2d82d71a91f4ce678a",
+        "toHash": "06dd5fa6f632fb6619c124acfed6c75bd7fa13a4921db2c0bbd4ab4758e7f76d"
+      },
+      {
+        "from": 1.797,
+        "to": 2.152,
+        "fromHash": "06dd5fa6f632fb6619c124acfed6c75bd7fa13a4921db2c0bbd4ab4758e7f76d",
+        "toHash": "d391627dffb4aaa6d5b21f188433dd270d0a57087237c4fb30a87c5252ef1537"
+      },
+      {
+        "from": 2.152,
+        "to": 2.38,
+        "fromHash": "d391627dffb4aaa6d5b21f188433dd270d0a57087237c4fb30a87c5252ef1537",
+        "toHash": "ac914662ad4c81708b6cb26b9fb99d96bdff64c8c11a6a207c953350b0cb4dc1"
+      },
+      {
+        "from": 2.38,
+        "to": 2.594,
+        "fromHash": "ac914662ad4c81708b6cb26b9fb99d96bdff64c8c11a6a207c953350b0cb4dc1",
+        "toHash": "935ccc9953a375771f4d98b022a77f0e3b5efd9d9d5657687922b419a8c8bdbf"
+      },
+      {
+        "from": 2.594,
+        "to": 2.875,
+        "fromHash": "935ccc9953a375771f4d98b022a77f0e3b5efd9d9d5657687922b419a8c8bdbf",
+        "toHash": "78d5308e613627d1203ff314b57669ab64be1b34216c3c61d1cdcf956477de1c"
+      },
+      {
+        "from": 2.875,
+        "to": 3.059,
+        "fromHash": "78d5308e613627d1203ff314b57669ab64be1b34216c3c61d1cdcf956477de1c",
+        "toHash": "87181926d51a7db64c79f95a3d0642555054dfd1492180cec714f4cae8929d87"
+      },
+      {
+        "from": 3.059,
+        "to": 3.353,
+        "fromHash": "87181926d51a7db64c79f95a3d0642555054dfd1492180cec714f4cae8929d87",
+        "toHash": "ba1e2f49e35920718ec572811951f7ee1946306f5b3d7900ae92bbb85892e83f"
+      },
+      {
+        "from": 3.353,
+        "to": 3.658,
+        "fromHash": "ba1e2f49e35920718ec572811951f7ee1946306f5b3d7900ae92bbb85892e83f",
+        "toHash": "e6b37ec078c8a86969bc4344377e5a66df800ae4fe9b2a5c4eab392d753e884f"
+      },
+      {
+        "from": 3.658,
+        "to": 3.871,
+        "fromHash": "e6b37ec078c8a86969bc4344377e5a66df800ae4fe9b2a5c4eab392d753e884f",
+        "toHash": "4cdb154c86ceecbb7a5eb957303fd2251d046e06e0dd273f280d958107a1ff6a"
+      },
+      {
+        "from": 3.871,
+        "to": 4.174,
+        "fromHash": "4cdb154c86ceecbb7a5eb957303fd2251d046e06e0dd273f280d958107a1ff6a",
+        "toHash": "e1328bd5c15b25efc5481d1216638db4d280a5208a0b4af09f238e1503e69726"
+      },
+      {
+        "from": 4.174,
+        "to": 4.436,
+        "fromHash": "e1328bd5c15b25efc5481d1216638db4d280a5208a0b4af09f238e1503e69726",
+        "toHash": "8af9def4e02c6bcb25f8d8bf1dcd04463883a585f7489d51325d48a2812344af"
+      },
+      {
+        "from": 4.436,
+        "to": 4.654,
+        "fromHash": "8af9def4e02c6bcb25f8d8bf1dcd04463883a585f7489d51325d48a2812344af",
+        "toHash": "b35b273b940e035d6e3aaf7f0983ac557b2ea25d73013e63d028a66edfa252c7"
+      },
+      {
+        "from": 4.654,
+        "to": 4.931,
+        "fromHash": "b35b273b940e035d6e3aaf7f0983ac557b2ea25d73013e63d028a66edfa252c7",
+        "toHash": "8d65c0ad33c315b45ce05b9413f0e4fe49f0bd3bedeace28b296abceddde9a7f"
+      },
+      {
+        "from": 4.931,
+        "to": 5.119,
+        "fromHash": "8d65c0ad33c315b45ce05b9413f0e4fe49f0bd3bedeace28b296abceddde9a7f",
+        "toHash": "d6a93cd45f456499417420ac5fbca3468588bf76e323d3d519f77fdc30fa41d7"
+      },
+      {
+        "from": 5.119,
+        "to": 5.421,
+        "fromHash": "d6a93cd45f456499417420ac5fbca3468588bf76e323d3d519f77fdc30fa41d7",
+        "toHash": "19edb990a1e395ed7d660ad6643d6fd57b737b1fc4754fd71e4cd52d79b6489b"
+      },
+      {
+        "from": 5.421,
+        "to": 5.683,
+        "fromHash": "19edb990a1e395ed7d660ad6643d6fd57b737b1fc4754fd71e4cd52d79b6489b",
+        "toHash": "c49bca4a21dcad17986378a6559771be9f5ecdc03f9e2ea93eb92f901539f481"
+      },
+      {
+        "from": 5.683,
+        "to": 5.935,
+        "fromHash": "c49bca4a21dcad17986378a6559771be9f5ecdc03f9e2ea93eb92f901539f481",
+        "toHash": "352474b65732bef8346bbdae28abc9e7a6224041321714d90f546d705cecb7b0"
+      },
+      {
+        "from": 5.935,
+        "to": 6.186,
+        "fromHash": "352474b65732bef8346bbdae28abc9e7a6224041321714d90f546d705cecb7b0",
+        "toHash": "ad6533e99d2a335adef20580ac47c6e528f4c3b23b4b74689a7d469c4f707c9b"
+      },
+      {
+        "from": 6.186,
+        "to": 6.435,
+        "fromHash": "ad6533e99d2a335adef20580ac47c6e528f4c3b23b4b74689a7d469c4f707c9b",
+        "toHash": "32dd995ccbcba53729de2b87897db3fb50be4de98e6443a1a171038489678243"
+      },
+      {
+        "from": 6.435,
+        "to": 6.646,
+        "fromHash": "32dd995ccbcba53729de2b87897db3fb50be4de98e6443a1a171038489678243",
+        "toHash": "99a56c42d6bc5dd0f5bc50165978a283262b3bf426ac5f14151d00f1f1405cce"
+      },
+      {
+        "from": 6.646,
+        "to": 6.925,
+        "fromHash": "99a56c42d6bc5dd0f5bc50165978a283262b3bf426ac5f14151d00f1f1405cce",
+        "toHash": "179be9e43fd98de395e02f58f3e29e2e5a2ba89bb1c4eda267e5333c03e04739"
+      },
+      {
+        "from": 6.925,
+        "to": 7.176,
+        "fromHash": "179be9e43fd98de395e02f58f3e29e2e5a2ba89bb1c4eda267e5333c03e04739",
+        "toHash": "de1e49afa28d2886c2639110c6b8d5cc930f144bc9977801ca5129c816f5bd92"
+      },
+      {
+        "from": 7.176,
+        "to": 7.44,
+        "fromHash": "de1e49afa28d2886c2639110c6b8d5cc930f144bc9977801ca5129c816f5bd92",
+        "toHash": "92cb2095df7aeb2d43193d56b6a9e06435308264f7c2232b2ecc26eee2baed94"
+      },
+      {
+        "from": 7.44,
+        "to": 7.585,
+        "fromHash": "92cb2095df7aeb2d43193d56b6a9e06435308264f7c2232b2ecc26eee2baed94",
+        "toHash": "c0d2b454742406c9e32135f6881b0f89ba7591b9613d7f2d438be4c6d1296a7c"
+      },
+      {
+        "from": 7.585,
+        "to": 7.901,
+        "fromHash": "c0d2b454742406c9e32135f6881b0f89ba7591b9613d7f2d438be4c6d1296a7c",
+        "toHash": "00884c7dd66cb3506638ab9d9d5a2bf9b601bead8699a71d5080538edd3bca2a"
+      },
+      {
+        "from": 7.901,
+        "to": 8.109,
+        "fromHash": "00884c7dd66cb3506638ab9d9d5a2bf9b601bead8699a71d5080538edd3bca2a",
+        "toHash": "e285431d1d858c8cb27fb6e4414f4b2764e7d213a0b5b85f70b7d64aa616738c"
+      },
+      {
+        "from": 8.109,
+        "to": 8.353,
+        "fromHash": "e285431d1d858c8cb27fb6e4414f4b2764e7d213a0b5b85f70b7d64aa616738c",
+        "toHash": "568ec0a406b23a5a266378ccbbfd24113941b231c53dd78a196332e98ad77ca9"
+      },
+      {
+        "from": 8.353,
+        "to": 8.569,
+        "fromHash": "568ec0a406b23a5a266378ccbbfd24113941b231c53dd78a196332e98ad77ca9",
+        "toHash": "6058709c861c9b4c11616c2e5072d0ecc98cb4b97a6217ffef87d736c843b8c0"
+      },
+      {
+        "from": 8.569,
+        "to": 8.791,
+        "fromHash": "6058709c861c9b4c11616c2e5072d0ecc98cb4b97a6217ffef87d736c843b8c0",
+        "toHash": "bd87ad774b4a295a653f7b551f54a4f2a0a86a4b283853ab217e88eac2d79079"
+      },
+      {
+        "from": 8.791,
+        "to": 9.065,
+        "fromHash": "bd87ad774b4a295a653f7b551f54a4f2a0a86a4b283853ab217e88eac2d79079",
+        "toHash": "05d64501f9129a9e48865e56f0960133c3887f6e29c0826215abd1e0d3b61bd9"
+      },
+      {
+        "from": 9.065,
+        "to": 9.369,
+        "fromHash": "05d64501f9129a9e48865e56f0960133c3887f6e29c0826215abd1e0d3b61bd9",
+        "toHash": "54fef94932ba156e866090d9414971c4a19431741eff531cb41991c30f878d8a"
+      },
+      {
+        "from": 9.369,
+        "to": 9.562,
+        "fromHash": "54fef94932ba156e866090d9414971c4a19431741eff531cb41991c30f878d8a",
+        "toHash": "ed0cb18df197a76e6f93a5001405db2f5f6976fe9936cd33310ba253322ed0c1"
+      },
+      {
+        "from": 9.562,
+        "to": 9.856,
+        "fromHash": "ed0cb18df197a76e6f93a5001405db2f5f6976fe9936cd33310ba253322ed0c1",
+        "toHash": "f671226aa0cd57d0ad15f634360c4f1b988f10f8712f2a3c782c0e9f49c163c1"
+      },
+      {
+        "from": 9.856,
+        "to": 10.126,
+        "fromHash": "f671226aa0cd57d0ad15f634360c4f1b988f10f8712f2a3c782c0e9f49c163c1",
+        "toHash": "d69be8f6f58bd1d62c2b2e92580c35c743085360189f83fc72f4ac3d414eedf6"
+      },
+      {
+        "from": 10.126,
+        "to": 10.428,
+        "fromHash": "d69be8f6f58bd1d62c2b2e92580c35c743085360189f83fc72f4ac3d414eedf6",
+        "toHash": "9d157ef4547e0bae97bb3ddc461e7a113baeaa2687723a7db700370a03319c78"
+      },
+      {
+        "from": 10.428,
+        "to": 10.684,
+        "fromHash": "9d157ef4547e0bae97bb3ddc461e7a113baeaa2687723a7db700370a03319c78",
+        "toHash": "2047548ccac1b5473b488ffeb705fcc4210b86f2306b5133e60ee870a075fe08"
+      },
+      {
+        "from": 10.684,
+        "to": 10.714,
+        "fromHash": "2047548ccac1b5473b488ffeb705fcc4210b86f2306b5133e60ee870a075fe08",
+        "toHash": "8c12c8a9e3d7626e890682844f58263c30240c6ed96d75b740db471b794df4f9"
+      },
+      {
+        "from": 10.714,
+        "to": 10.844,
+        "fromHash": "8c12c8a9e3d7626e890682844f58263c30240c6ed96d75b740db471b794df4f9",
+        "toHash": "87981da48c95fe0bcb0d02f1de7a41da170570d113978c8bd96e517b16068df2"
+      },
+      {
+        "from": 10.844,
+        "to": 11.12,
+        "fromHash": "87981da48c95fe0bcb0d02f1de7a41da170570d113978c8bd96e517b16068df2",
+        "toHash": "fa09c2e537d68728192046cb9a37be7a88465373c01ff773e9d507917e2d7534"
+      },
+      {
+        "from": 11.12,
+        "to": 11.171,
+        "fromHash": "fa09c2e537d68728192046cb9a37be7a88465373c01ff773e9d507917e2d7534",
+        "toHash": "db6b8c04e7a981d363d39c372ebc5eb449ba9af8709b8c919a00c60d52a0b70e"
+      },
+      {
+        "from": 11.171,
+        "to": 11.282,
+        "fromHash": "db6b8c04e7a981d363d39c372ebc5eb449ba9af8709b8c919a00c60d52a0b70e",
+        "toHash": "0a4b61177fe7a829ebc06af1ccbfb9bef001ec99c28d6af8fd4f506c3e3c2a75"
+      },
+      {
+        "from": 11.282,
+        "to": 11.288,
+        "fromHash": "0a4b61177fe7a829ebc06af1ccbfb9bef001ec99c28d6af8fd4f506c3e3c2a75",
+        "toHash": "1ee9ccbe4e16bc6ac3fde1741bef411f5a3f98fce2190fb87f429451fb3fdbd9"
+      },
+      {
+        "from": 11.288,
+        "to": 11.382,
+        "fromHash": "1ee9ccbe4e16bc6ac3fde1741bef411f5a3f98fce2190fb87f429451fb3fdbd9",
+        "toHash": "9d6caa527b8319e3ad976c032da03714db4c4b18482dcafbf7a17f1ef5d95775"
+      },
+      {
+        "from": 11.382,
+        "to": 11.48,
+        "fromHash": "9d6caa527b8319e3ad976c032da03714db4c4b18482dcafbf7a17f1ef5d95775",
+        "toHash": "702763405db1da8d55b6160455669de165331836901d03305926ba7a87a281e4"
+      },
+      {
+        "from": 11.48,
+        "to": 11.6,
+        "fromHash": "702763405db1da8d55b6160455669de165331836901d03305926ba7a87a281e4",
+        "toHash": "249a987a1c0024af79b55115125eb555be54c95a2b45220478bb20d9a1eb228b"
+      },
+      {
+        "from": 11.6,
+        "to": 11.711,
+        "fromHash": "249a987a1c0024af79b55115125eb555be54c95a2b45220478bb20d9a1eb228b",
+        "toHash": "aead04ce8ba1d39e2a20728ff98602821f544a1d536da48dce71b8f76de10aa3"
+      },
+      {
+        "from": 11.711,
+        "to": 11.822,
+        "fromHash": "aead04ce8ba1d39e2a20728ff98602821f544a1d536da48dce71b8f76de10aa3",
+        "toHash": "575bec7172ec6629d5977fb5fcd9f8922cf32d20c5142d1eec27941c06893877"
+      },
+      {
+        "from": 11.822,
+        "to": 12.061,
+        "fromHash": "575bec7172ec6629d5977fb5fcd9f8922cf32d20c5142d1eec27941c06893877",
+        "toHash": "e1fd79472a77b9c176443e6c35ff9dbf0651663eb5c0201fe5ae74e01396a53b"
+      },
+      {
+        "from": 12.061,
+        "to": 12.31,
+        "fromHash": "e1fd79472a77b9c176443e6c35ff9dbf0651663eb5c0201fe5ae74e01396a53b",
+        "toHash": "54edeb37b55a174472eeb3e97665fca9747f4ea8890525f35eca7c9ea7039e62"
+      },
+      {
+        "from": 12.31,
+        "to": 12.453,
+        "fromHash": "54edeb37b55a174472eeb3e97665fca9747f4ea8890525f35eca7c9ea7039e62",
+        "toHash": "7a289cc291cd701de477f2674efb1c776663a22004bf33110046e6d873f1dda3"
+      },
+      {
+        "from": 12.453,
+        "to": 12.577,
+        "fromHash": "7a289cc291cd701de477f2674efb1c776663a22004bf33110046e6d873f1dda3",
+        "toHash": "52570f16825a7b1b6deedac9b02f37a8f028e2eb040b3bbd775d5e235d2bde33"
+      },
+      {
+        "from": 12.577,
+        "to": 12.817,
+        "fromHash": "52570f16825a7b1b6deedac9b02f37a8f028e2eb040b3bbd775d5e235d2bde33",
+        "toHash": "3c47ab4c80cc08a18cb74ad05c2fcede7bcacc8e7426dd0a4d38859cf973ac59"
+      },
+      {
+        "from": 12.817,
+        "to": 12.909,
+        "fromHash": "3c47ab4c80cc08a18cb74ad05c2fcede7bcacc8e7426dd0a4d38859cf973ac59",
+        "toHash": "b3c33d24ac1ab8ffdd2ada7ff34606332070ca57cd7ce658387dc2674f4831d4"
+      },
+      {
+        "from": 12.909,
+        "to": 13.067,
+        "fromHash": "b3c33d24ac1ab8ffdd2ada7ff34606332070ca57cd7ce658387dc2674f4831d4",
+        "toHash": "eaee27599275ed8476feed3a3eb8be0a3264e13dcd8e3328d60d3cac61378507"
+      },
+      {
+        "from": 13.067,
+        "to": 13.314,
+        "fromHash": "eaee27599275ed8476feed3a3eb8be0a3264e13dcd8e3328d60d3cac61378507",
+        "toHash": "599533c077ed903fa6f02985b3cbb5fc4a9333eaed6f1dd7e64d585b82f91b05"
+      },
+      {
+        "from": 13.545,
+        "to": 13.55,
+        "fromHash": "599533c077ed903fa6f02985b3cbb5fc4a9333eaed6f1dd7e64d585b82f91b05",
+        "toHash": "09bb1ea70b99f9c24d9de643560bf13b02dc7a14dbd1f79737b7ddcef3e50bb5"
+      },
+      {
+        "from": 13.55,
+        "to": 13.826,
+        "fromHash": "09bb1ea70b99f9c24d9de643560bf13b02dc7a14dbd1f79737b7ddcef3e50bb5",
+        "toHash": "90f0cb87a2d1e4e794571e138d59a72eb9ae6fbd3dee3186cb26d2779568d799"
+      },
+      {
+        "from": 13.826,
+        "to": 14.094,
+        "fromHash": "90f0cb87a2d1e4e794571e138d59a72eb9ae6fbd3dee3186cb26d2779568d799",
+        "toHash": "9090a4879f3cafe28749f2b8e76f7fcea9dabec45aab077d114f9651873697b4"
+      },
+      {
+        "from": 14.094,
+        "to": 14.099,
+        "fromHash": "9090a4879f3cafe28749f2b8e76f7fcea9dabec45aab077d114f9651873697b4",
+        "toHash": "fc888435d8f25d47bd40f0cbc4d758aea04ef93618735cd213b38963b3180c8d"
+      },
+      {
+        "from": 14.099,
+        "to": 14.421,
+        "fromHash": "fc888435d8f25d47bd40f0cbc4d758aea04ef93618735cd213b38963b3180c8d",
+        "toHash": "dfdf5e733c3bacf8e797d34405f0a516c6e2681e2434c20cb3ab2a4c8ade3427"
+      },
+      {
+        "from": 14.421,
+        "to": 14.601,
+        "fromHash": "dfdf5e733c3bacf8e797d34405f0a516c6e2681e2434c20cb3ab2a4c8ade3427",
+        "toHash": "2eb91e74979f04020d1f0d540f5bd296614d144caf4fbe1866338824ae330c26"
+      },
+      {
+        "from": 14.601,
+        "to": 14.613,
+        "fromHash": "2eb91e74979f04020d1f0d540f5bd296614d144caf4fbe1866338824ae330c26",
+        "toHash": "4b5f4e665fbf7d939b4019fb072b38af883b62e56fc18513a6db56d8aaab939d"
+      },
+      {
+        "from": 14.613,
+        "to": 14.807,
+        "fromHash": "4b5f4e665fbf7d939b4019fb072b38af883b62e56fc18513a6db56d8aaab939d",
+        "toHash": "7b8fff3087a6dbcd0ac32e006c66f5a3e959dd280f3b24495792f5a72e3c7caa"
+      },
+      {
+        "from": 14.807,
+        "to": 15.085,
+        "fromHash": "7b8fff3087a6dbcd0ac32e006c66f5a3e959dd280f3b24495792f5a72e3c7caa",
+        "toHash": "463ae99feeade1355be81e4802c113fc8929d5e10e32d2a2aeda2880c6e23627"
+      },
+      {
+        "from": 15.085,
+        "to": 15.386,
+        "fromHash": "463ae99feeade1355be81e4802c113fc8929d5e10e32d2a2aeda2880c6e23627",
+        "toHash": "69b94fc9b9c691991dde1b14846d7a931e3c62dc298f47633d7614156d5e060b"
+      },
+      {
+        "from": 15.386,
+        "to": 15.588,
+        "fromHash": "69b94fc9b9c691991dde1b14846d7a931e3c62dc298f47633d7614156d5e060b",
+        "toHash": "66ac15bc62319492913d9c391c74fa934773c46b78b28b70db5b21fd4e723a83"
+      },
+      {
+        "from": 15.588,
+        "to": 15.807,
+        "fromHash": "66ac15bc62319492913d9c391c74fa934773c46b78b28b70db5b21fd4e723a83",
+        "toHash": "a0e352be50c136528eb658d2bc0e68af945de95ed4c8333e59208b0c9d1847db"
+      },
+      {
+        "from": 15.807,
+        "to": 16.06,
+        "fromHash": "a0e352be50c136528eb658d2bc0e68af945de95ed4c8333e59208b0c9d1847db",
+        "toHash": "1a3c30f326b135acc20e478c30660a22af1ede8294f865562c19799c274a7fb0"
+      },
+      {
+        "from": 16.06,
+        "to": 16.31,
+        "fromHash": "1a3c30f326b135acc20e478c30660a22af1ede8294f865562c19799c274a7fb0",
+        "toHash": "2be9abda878164265e74732fbba3cbef767a29c3f760594d9813484b35065699"
+      },
+      {
+        "from": 16.31,
+        "to": 16.67,
+        "fromHash": "2be9abda878164265e74732fbba3cbef767a29c3f760594d9813484b35065699",
+        "toHash": "1a3ff58664a0a326e6e7b5f2afd1c0b57ee6bac194d4632b2fa0090c9186bd58"
+      },
+      {
+        "from": 16.67,
+        "to": 16.804,
+        "fromHash": "1a3ff58664a0a326e6e7b5f2afd1c0b57ee6bac194d4632b2fa0090c9186bd58",
+        "toHash": "985114e0d6db30fc17042fcde4946230e4b954275b2a6ebdfd3292339c329089"
+      },
+      {
+        "from": 16.804,
+        "to": 17.179,
+        "fromHash": "985114e0d6db30fc17042fcde4946230e4b954275b2a6ebdfd3292339c329089",
+        "toHash": "54f7c8a35a1cd3ddf2c2dadbad27d1952e556bb5234e38be19331770a1299a4f"
+      },
+      {
+        "from": 17.179,
+        "to": 17.432,
+        "fromHash": "54f7c8a35a1cd3ddf2c2dadbad27d1952e556bb5234e38be19331770a1299a4f",
+        "toHash": "b2962f343bf88538782f38442d497f400b484c73651fe1a2f1b84f90bc7a7980"
+      },
+      {
+        "from": 17.432,
+        "to": 17.651,
+        "fromHash": "b2962f343bf88538782f38442d497f400b484c73651fe1a2f1b84f90bc7a7980",
+        "toHash": "8fafa16cf3fdc8332ada49edf7a76c2911bf458dfeb7d4b72d76dd8e409e74b5"
+      },
+      {
+        "from": 17.651,
+        "to": 17.838,
+        "fromHash": "8fafa16cf3fdc8332ada49edf7a76c2911bf458dfeb7d4b72d76dd8e409e74b5",
+        "toHash": "ba5daeaf5f6cd9f7fcea7c7ca15eecc5fea3b6add4b9f4e9102c29d038393ec9"
+      },
+      {
+        "from": 17.838,
+        "to": 18.128,
+        "fromHash": "ba5daeaf5f6cd9f7fcea7c7ca15eecc5fea3b6add4b9f4e9102c29d038393ec9",
+        "toHash": "7bbf3c3fec0a54a9160835434f21402784457fb4b55b886c5ed99ab4f1bb80bd"
+      },
+      {
+        "from": 18.128,
+        "to": 18.363,
+        "fromHash": "7bbf3c3fec0a54a9160835434f21402784457fb4b55b886c5ed99ab4f1bb80bd",
+        "toHash": "e877651eaa29391762298e64a3d52f58c239a0b69cae86aedc5953f784d87c3d"
+      },
+      {
+        "from": 18.363,
+        "to": 18.546,
+        "fromHash": "e877651eaa29391762298e64a3d52f58c239a0b69cae86aedc5953f784d87c3d",
+        "toHash": "e7e9d1849a7228a9ce8f88b447436b850733aa53a47aebaf50fed8e68eb84fde"
+      },
+      {
+        "from": 18.546,
+        "to": 18.927,
+        "fromHash": "e7e9d1849a7228a9ce8f88b447436b850733aa53a47aebaf50fed8e68eb84fde",
+        "toHash": "061d4118bce64777323c0fefbf2fd84a8927a2c0b5f6267b74ca5f557185da0f"
+      },
+      {
+        "from": 18.927,
+        "to": 19.186,
+        "fromHash": "061d4118bce64777323c0fefbf2fd84a8927a2c0b5f6267b74ca5f557185da0f",
+        "toHash": "bc93f6ff2a0aa676a1fef4ad720ac3f6a62166153367758cf430e3693c82d32b"
+      },
+      {
+        "from": 19.186,
+        "to": 19.457,
+        "fromHash": "bc93f6ff2a0aa676a1fef4ad720ac3f6a62166153367758cf430e3693c82d32b",
+        "toHash": "bc94d0b58a871cbdb56a677e1427e5189c3df028d681c3c6d7bc2c89d6634e61"
+      },
+      {
+        "from": 19.457,
+        "to": 19.631,
+        "fromHash": "bc94d0b58a871cbdb56a677e1427e5189c3df028d681c3c6d7bc2c89d6634e61",
+        "toHash": "d649c6fe0a962cfa5b0897948e3ec9e268d2a7eec4304d65b0c795932b206458"
+      },
+      {
+        "from": 19.631,
+        "to": 19.928,
+        "fromHash": "d649c6fe0a962cfa5b0897948e3ec9e268d2a7eec4304d65b0c795932b206458",
+        "toHash": "4b0964de54620facf38ae081e68cfc44b7515eace3708c394eb5580f8ca04341"
+      },
+      {
+        "from": 19.928,
+        "to": 20.062,
+        "fromHash": "4b0964de54620facf38ae081e68cfc44b7515eace3708c394eb5580f8ca04341",
+        "toHash": "2d99a45910723de862b5ca8b7f04d13b58479812eff12e650dc1f673642bc25c"
+      },
+      {
+        "from": 20.062,
+        "to": 20.427,
+        "fromHash": "2d99a45910723de862b5ca8b7f04d13b58479812eff12e650dc1f673642bc25c",
+        "toHash": "76d7c1c6747cbc3c9d4a497fbae9434044577fa2515744ac2694bd48d0532004"
+      },
+      {
+        "from": 20.427,
+        "to": 20.662,
+        "fromHash": "76d7c1c6747cbc3c9d4a497fbae9434044577fa2515744ac2694bd48d0532004",
+        "toHash": "871b5dc0527b45159efed1ce2a6ed67722a4952d22b33b8d75c1209343b09dd5"
+      },
+      {
+        "from": 20.662,
+        "to": 20.912,
+        "fromHash": "871b5dc0527b45159efed1ce2a6ed67722a4952d22b33b8d75c1209343b09dd5",
+        "toHash": "848f4504c1637ecd59bfdd369bc9d596c21d7b380c22a5e8e21f31b00a717f94"
+      },
+      {
+        "from": 20.912,
+        "to": 21.114,
+        "fromHash": "848f4504c1637ecd59bfdd369bc9d596c21d7b380c22a5e8e21f31b00a717f94",
+        "toHash": "7e12f0115cbddce4c38adcbdd5c56956553e190ebbefd0572eddfb99190b36c2"
+      },
+      {
+        "from": 21.114,
+        "to": 21.313,
+        "fromHash": "7e12f0115cbddce4c38adcbdd5c56956553e190ebbefd0572eddfb99190b36c2",
+        "toHash": "4bfc3999172619d567e2b350e1623dfa63ebad18b8748d2698f2ce1bd38ac437"
+      },
+      {
+        "from": 21.313,
+        "to": 21.672,
+        "fromHash": "4bfc3999172619d567e2b350e1623dfa63ebad18b8748d2698f2ce1bd38ac437",
+        "toHash": "373ae327814ef567dafc661f9d98aa0128cb417401eeafd689680b60ca36e470"
+      },
+      {
+        "from": 21.672,
+        "to": 21.873,
+        "fromHash": "373ae327814ef567dafc661f9d98aa0128cb417401eeafd689680b60ca36e470",
+        "toHash": "4750921b7a314c7b45dd88d1fb8b823cdbd198d057ff61576def92d6ebb55b05"
+      },
+      {
+        "from": 21.873,
+        "to": 22.146,
+        "fromHash": "4750921b7a314c7b45dd88d1fb8b823cdbd198d057ff61576def92d6ebb55b05",
+        "toHash": "de5252e9d97c563f6b6daebe55d60e795ac8d3d93fcaf36783e21caee7743e47"
+      },
+      {
+        "from": 22.146,
+        "to": 22.348,
+        "fromHash": "de5252e9d97c563f6b6daebe55d60e795ac8d3d93fcaf36783e21caee7743e47",
+        "toHash": "59e590b4f914256e3aa822ae4737e4087b0584dd0ade2cc93c17132358342dc0"
+      },
+      {
+        "from": 22.348,
+        "to": 22.644,
+        "fromHash": "59e590b4f914256e3aa822ae4737e4087b0584dd0ade2cc93c17132358342dc0",
+        "toHash": "84a8ca71b8b272830ad481d935f46427ae2f6dea37aed5f76b9695864d2328ca"
+      },
+      {
+        "from": 22.644,
+        "to": 22.819,
+        "fromHash": "84a8ca71b8b272830ad481d935f46427ae2f6dea37aed5f76b9695864d2328ca",
+        "toHash": "48a142a62692d41f7b0e4c2d971ff8891c66dc6fa3b15be435335c949ffd6aa9"
+      },
+      {
+        "from": 22.819,
+        "to": 23.091,
+        "fromHash": "48a142a62692d41f7b0e4c2d971ff8891c66dc6fa3b15be435335c949ffd6aa9",
+        "toHash": "f8294c2e667571a8f1b35c940451535f2a6b3c1871241cfd64cb86643079d496"
+      },
+      {
+        "from": 23.091,
+        "to": 23.294,
+        "fromHash": "f8294c2e667571a8f1b35c940451535f2a6b3c1871241cfd64cb86643079d496",
+        "toHash": "41773f94e90a44db26e1d974f7b21ac66fb4325d2845e512df1b01ca08e5d8ac"
+      },
+      {
+        "from": 23.294,
+        "to": 23.671,
+        "fromHash": "41773f94e90a44db26e1d974f7b21ac66fb4325d2845e512df1b01ca08e5d8ac",
+        "toHash": "99ed0d3d70c3d8d64ad2c789e4e5b5f9d17c7ba0e73092fcd0d0b76bf06401b8"
+      },
+      {
+        "from": 23.671,
+        "to": 23.861,
+        "fromHash": "99ed0d3d70c3d8d64ad2c789e4e5b5f9d17c7ba0e73092fcd0d0b76bf06401b8",
+        "toHash": "6996d3a3a2709a44d2e3836e7caff5f373322ac00e8e1fe617e66fe6e1df35b9"
+      },
+      {
+        "from": 23.861,
+        "to": 24.06,
+        "fromHash": "6996d3a3a2709a44d2e3836e7caff5f373322ac00e8e1fe617e66fe6e1df35b9",
+        "toHash": "e5da8ea449dd1f3d1b376863bc4c85eb94967f5ff7f5088c64946f4479a8b0ee"
+      },
+      {
+        "from": 24.06,
+        "to": 24.431,
+        "fromHash": "e5da8ea449dd1f3d1b376863bc4c85eb94967f5ff7f5088c64946f4479a8b0ee",
+        "toHash": "cffc606059efb6b6eae12590c77efce40cc0063ef7e8b04926ec155e055ec185"
+      },
+      {
+        "from": 24.431,
+        "to": 24.619,
+        "fromHash": "cffc606059efb6b6eae12590c77efce40cc0063ef7e8b04926ec155e055ec185",
+        "toHash": "bf3f1b2c21137999c6dcf1164a3305a262bde10973a577c795c501715b7f521c"
+      },
+      {
+        "from": 24.619,
+        "to": 24.866,
+        "fromHash": "bf3f1b2c21137999c6dcf1164a3305a262bde10973a577c795c501715b7f521c",
+        "toHash": "a32acd4b82d46521d7fd6a84d38409ebf1974e09318017af90e9f3da43ce02ce"
+      },
+      {
+        "from": 24.866,
+        "to": 25.066,
+        "fromHash": "a32acd4b82d46521d7fd6a84d38409ebf1974e09318017af90e9f3da43ce02ce",
+        "toHash": "7322a84c1fddb27130466a52c8011b7499861ab745ff2a76c2852de8bb4d444f"
+      },
+      {
+        "from": 25.066,
+        "to": 25.426,
+        "fromHash": "7322a84c1fddb27130466a52c8011b7499861ab745ff2a76c2852de8bb4d444f",
+        "toHash": "3fc4b57fdb06268d0208a2d64ba80a7db7c73e45efd20d8c09288bfc6f1edcaa"
+      },
+      {
+        "from": 25.426,
+        "to": 25.664,
+        "fromHash": "3fc4b57fdb06268d0208a2d64ba80a7db7c73e45efd20d8c09288bfc6f1edcaa",
+        "toHash": "ea84a6c00faefc8af17c1d69f40ee4c84854907b7727100cd6d53735bf7e48cb"
+      },
+      {
+        "from": 25.664,
+        "to": 25.798,
+        "fromHash": "ea84a6c00faefc8af17c1d69f40ee4c84854907b7727100cd6d53735bf7e48cb",
+        "toHash": "1af0c02ae27e0ef7caae96ca4f3057d76075b217887647ff2a09ffc0c8e74642"
+      },
+      {
+        "from": 25.798,
+        "to": 26.101,
+        "fromHash": "1af0c02ae27e0ef7caae96ca4f3057d76075b217887647ff2a09ffc0c8e74642",
+        "toHash": "fe27a22c6d2d7b09537a54ebfe063fad5c6c35414ed7216be4a2e541eb92b8aa"
+      },
+      {
+        "from": 26.101,
+        "to": 26.303,
+        "fromHash": "fe27a22c6d2d7b09537a54ebfe063fad5c6c35414ed7216be4a2e541eb92b8aa",
+        "toHash": "c944a88d5390a703a754c1e40fe3f40001599152174f670d0cc7c447dffeda46"
+      },
+      {
+        "from": 26.303,
+        "to": 26.676,
+        "fromHash": "c944a88d5390a703a754c1e40fe3f40001599152174f670d0cc7c447dffeda46",
+        "toHash": "bdafcf02c3bc7318d7cbfa2b9f385d90f95a30c1ce3fc69b927d5663634cab9f"
+      },
+      {
+        "from": 26.676,
+        "to": 26.835,
+        "fromHash": "bdafcf02c3bc7318d7cbfa2b9f385d90f95a30c1ce3fc69b927d5663634cab9f",
+        "toHash": "d55c074ec8ffc1f173dff55f2e60651e9d910f52575faafe3dbb1bb1d67783ba"
+      },
+      {
+        "from": 26.835,
+        "to": 27.064,
+        "fromHash": "d55c074ec8ffc1f173dff55f2e60651e9d910f52575faafe3dbb1bb1d67783ba",
+        "toHash": "5dc3eac33527ca79c5a0b70bf2c92bd3627af3ff0bf190c0f2d5a49dffe8a9c5"
+      },
+      {
+        "from": 27.064,
+        "to": 27.425,
+        "fromHash": "5dc3eac33527ca79c5a0b70bf2c92bd3627af3ff0bf190c0f2d5a49dffe8a9c5",
+        "toHash": "517bdf86a58de7a6872347fb93cc01bbe5d7b58764be9b09d48a2ea351e45615"
+      },
+      {
+        "from": 27.425,
+        "to": 27.63,
+        "fromHash": "517bdf86a58de7a6872347fb93cc01bbe5d7b58764be9b09d48a2ea351e45615",
+        "toHash": "1b202cd91de207035bec61f3d4d420d63a40038d388ab542ad99bc1489d85605"
+      },
+      {
+        "from": 27.63,
+        "to": 27.821,
+        "fromHash": "1b202cd91de207035bec61f3d4d420d63a40038d388ab542ad99bc1489d85605",
+        "toHash": "c60f7e22aa82aa4697a80995207c241deb3a14bdff8754f469f1d90380d779d0"
+      },
+      {
+        "from": 27.821,
+        "to": 28.16,
+        "fromHash": "c60f7e22aa82aa4697a80995207c241deb3a14bdff8754f469f1d90380d779d0",
+        "toHash": "e63de25167969a01d8013b7e9d3950519e5c385c32f4ed2ac8a61952aae3b97e"
+      },
+      {
+        "from": 28.16,
+        "to": 28.363,
+        "fromHash": "e63de25167969a01d8013b7e9d3950519e5c385c32f4ed2ac8a61952aae3b97e",
+        "toHash": "337dc9508a31f2bba6d635c71d4a4f6c7e1e6b6275e8a46b4543617c5831940d"
+      },
+      {
+        "from": 28.363,
+        "to": 28.55,
+        "fromHash": "337dc9508a31f2bba6d635c71d4a4f6c7e1e6b6275e8a46b4543617c5831940d",
+        "toHash": "345fb41d79affc88ba71bbd2f1e1fc40939006edf4b837abb57c0cf17d4235fd"
+      },
+      {
+        "from": 28.55,
+        "to": 28.931,
+        "fromHash": "345fb41d79affc88ba71bbd2f1e1fc40939006edf4b837abb57c0cf17d4235fd",
+        "toHash": "f9e04395037f43fff5e7664375f676ffd2da3979a32b904fab3e3a6db3f4dad7"
+      },
+      {
+        "from": 28.931,
+        "to": 29.139,
+        "fromHash": "f9e04395037f43fff5e7664375f676ffd2da3979a32b904fab3e3a6db3f4dad7",
+        "toHash": "12a787e0c1575037f54dc31ab0e7af7c412df95a3f590135f6f82e965b44caac"
+      },
+      {
+        "from": 29.139,
+        "to": 29.294,
+        "fromHash": "12a787e0c1575037f54dc31ab0e7af7c412df95a3f590135f6f82e965b44caac",
+        "toHash": "6dd4e5c2d767290a1d71a3dc116f0cd6aae7b69c376c61ea892ab83fd6ebe879"
+      },
+      {
+        "from": 29.294,
+        "to": 29.572,
+        "fromHash": "6dd4e5c2d767290a1d71a3dc116f0cd6aae7b69c376c61ea892ab83fd6ebe879",
+        "toHash": "dcb5ff601d07245e102050087840baa5cd4e02478c193f5a561e73881144d656"
+      },
+      {
+        "from": 29.572,
+        "to": 29.892,
+        "fromHash": "dcb5ff601d07245e102050087840baa5cd4e02478c193f5a561e73881144d656",
+        "toHash": "9146009aad2248750e6debd2b1fa76c78d4d753d38cc06697e6381c520177fe3"
+      },
+      {
+        "from": 29.892,
+        "to": 30.167,
+        "fromHash": "9146009aad2248750e6debd2b1fa76c78d4d753d38cc06697e6381c520177fe3",
+        "toHash": "43661b2e911588ef8d84bb102f6cc2998d3f6c60df3c18d6f84ee0f5708b33b7"
+      },
+      {
+        "from": 30.167,
+        "to": 30.32,
+        "fromHash": "43661b2e911588ef8d84bb102f6cc2998d3f6c60df3c18d6f84ee0f5708b33b7",
+        "toHash": "09c1553bcfbb0ccf1f62a03dd58d419d158f1a105530319d60192f117e7f433d"
+      },
+      {
+        "from": 30.32,
+        "to": 30.622,
+        "fromHash": "09c1553bcfbb0ccf1f62a03dd58d419d158f1a105530319d60192f117e7f433d",
+        "toHash": "12b2fdfd8c7165857d4c1787e5b33c1a6d5ff524f117a21e54406c874417cf93"
+      },
+      {
+        "from": 30.622,
+        "to": 30.918,
+        "fromHash": "12b2fdfd8c7165857d4c1787e5b33c1a6d5ff524f117a21e54406c874417cf93",
+        "toHash": "f42e770ceaf77e4529f56aac2d4594dc6a1a8b4314c0189a416a9386cf8ca5bb"
+      },
+      {
+        "from": 30.918,
+        "to": 31.061,
+        "fromHash": "f42e770ceaf77e4529f56aac2d4594dc6a1a8b4314c0189a416a9386cf8ca5bb",
+        "toHash": "ecb3893a765c0241e0875de77d41567324f69f3c8ced1c0c3b954447956b49ce"
+      },
+      {
+        "from": 31.061,
+        "to": 31.296,
+        "fromHash": "ecb3893a765c0241e0875de77d41567324f69f3c8ced1c0c3b954447956b49ce",
+        "toHash": "b8faf5ea89d10d1b48db5cc5da178812a36b3276ad0ccdd42534dd087a0acd0c"
+      },
+      {
+        "from": 31.296,
+        "to": 31.678,
+        "fromHash": "b8faf5ea89d10d1b48db5cc5da178812a36b3276ad0ccdd42534dd087a0acd0c",
+        "toHash": "1816d79a8282f6a97fedb1985d2590fd82d65dc4a2ca4655897501bdfbb354ca"
+      },
+      {
+        "from": 31.678,
+        "to": 31.873,
+        "fromHash": "1816d79a8282f6a97fedb1985d2590fd82d65dc4a2ca4655897501bdfbb354ca",
+        "toHash": "bdab2cfaa6cedb43909f6aa94632dbbb91a81a9b27cfc6293fd4a67956f314e4"
+      },
+      {
+        "from": 31.873,
+        "to": 32.089,
+        "fromHash": "bdab2cfaa6cedb43909f6aa94632dbbb91a81a9b27cfc6293fd4a67956f314e4",
+        "toHash": "b06f35b0dd4e97a9d241735a62fe580f3cfaf0fcaecd5862e51e6c8f65efd2b8"
+      },
+      {
+        "from": 32.089,
+        "to": 32.377,
+        "fromHash": "b06f35b0dd4e97a9d241735a62fe580f3cfaf0fcaecd5862e51e6c8f65efd2b8",
+        "toHash": "7079ce15a57241698e8015d64ff4cdb043f121fc6be1b210708401c50470b780"
+      },
+      {
+        "from": 32.377,
+        "to": 32.582,
+        "fromHash": "7079ce15a57241698e8015d64ff4cdb043f121fc6be1b210708401c50470b780",
+        "toHash": "82b43470180a353b253ee00b00867669342554482b6af0b6fb7a1ee7e8de3d6b"
+      },
+      {
+        "from": 32.582,
+        "to": 32.843,
+        "fromHash": "82b43470180a353b253ee00b00867669342554482b6af0b6fb7a1ee7e8de3d6b",
+        "toHash": "5063ce11f3ea8786f08fa0800c5b00718a6575f6b52a1976c5f0759a7cbeeaa7"
+      },
+      {
+        "from": 32.843,
+        "to": 33.078,
+        "fromHash": "5063ce11f3ea8786f08fa0800c5b00718a6575f6b52a1976c5f0759a7cbeeaa7",
+        "toHash": "6c71162d855f4eabed549a74c876915855e1c80ba92307f5e023037634ecaaec"
+      },
+      {
+        "from": 33.078,
+        "to": 33.349,
+        "fromHash": "6c71162d855f4eabed549a74c876915855e1c80ba92307f5e023037634ecaaec",
+        "toHash": "eef009f79c778a737ccc3e085707eabb6cb03721a0f069dc585548a327303b71"
+      },
+      {
+        "from": 33.349,
+        "to": 33.634,
+        "fromHash": "eef009f79c778a737ccc3e085707eabb6cb03721a0f069dc585548a327303b71",
+        "toHash": "cbdb32b99604d2cf8b06fdf15d8f1d64e0c767a6c5d0cca01191fc8da46e38c3"
+      },
+      {
+        "from": 33.634,
+        "to": 33.934,
+        "fromHash": "cbdb32b99604d2cf8b06fdf15d8f1d64e0c767a6c5d0cca01191fc8da46e38c3",
+        "toHash": "7ed177d1d86c165826f1d45ca9b921f23e7a5a5c01a2dc6dc5b37b0cb2a4cf71"
+      },
+      {
+        "from": 33.934,
+        "to": 34.136,
+        "fromHash": "7ed177d1d86c165826f1d45ca9b921f23e7a5a5c01a2dc6dc5b37b0cb2a4cf71",
+        "toHash": "781945dd987f5f0ff97d59a49506a76116874efc2877caa839c007aa33eceb4b"
+      },
+      {
+        "from": 34.136,
+        "to": 34.331,
+        "fromHash": "781945dd987f5f0ff97d59a49506a76116874efc2877caa839c007aa33eceb4b",
+        "toHash": "be9955c0dbf9261fa6c45012b3d8283a2835526f8ff9e36a51b29394fd75315b"
+      },
+      {
+        "from": 34.331,
+        "to": 34.567,
+        "fromHash": "be9955c0dbf9261fa6c45012b3d8283a2835526f8ff9e36a51b29394fd75315b",
+        "toHash": "e88bc6b5a6abfaa4fcdc22b5a0008d34ecc4b0c73261847e1cb50a1a8900b362"
+      },
+      {
+        "from": 34.784,
+        "to": 34.789,
+        "fromHash": "e88bc6b5a6abfaa4fcdc22b5a0008d34ecc4b0c73261847e1cb50a1a8900b362",
+        "toHash": "2fde776b24d318f950524b710499d5dbebae8d7105aefbca538177a36bf5a6e2"
+      },
+      {
+        "from": 34.789,
+        "to": 35.148,
+        "fromHash": "2fde776b24d318f950524b710499d5dbebae8d7105aefbca538177a36bf5a6e2",
+        "toHash": "48b0935c1b0d78df115c526bf1f8ca0e52d49eaffd63b44fded710620c8cfb18"
+      },
+      {
+        "from": 35.148,
+        "to": 35.336,
+        "fromHash": "48b0935c1b0d78df115c526bf1f8ca0e52d49eaffd63b44fded710620c8cfb18",
+        "toHash": "25a2c7946fcac9170a2806a4466b551ab3a26d1238a1e41912d9025f706e93fa"
+      },
+      {
+        "from": 35.484,
+        "to": 35.622,
+        "fromHash": "25a2c7946fcac9170a2806a4466b551ab3a26d1238a1e41912d9025f706e93fa",
+        "toHash": "4a74cec3f5fc0e8d67055c28514663b5d41b5f2fedc2b8733ee22a928ecb2c5d"
+      },
+      {
+        "from": 35.622,
+        "to": 35.811,
+        "fromHash": "4a74cec3f5fc0e8d67055c28514663b5d41b5f2fedc2b8733ee22a928ecb2c5d",
+        "toHash": "43265f1440b3ca35602bb120b39a2039b02c3cd8566f4cf57dc3fb29c0ab7c3c"
+      },
+      {
+        "from": 35.811,
+        "to": 36.11,
+        "fromHash": "43265f1440b3ca35602bb120b39a2039b02c3cd8566f4cf57dc3fb29c0ab7c3c",
+        "toHash": "c53ad850e3c02178247883721fc741e72b0076b3c0592af64d41a2192cca00f7"
+      },
+      {
+        "from": 36.11,
+        "to": 36.334,
+        "fromHash": "c53ad850e3c02178247883721fc741e72b0076b3c0592af64d41a2192cca00f7",
+        "toHash": "1b0151dd978f42ac15bc9cfc0933e214d47774be258c99f7465bad2a8eed325e"
+      },
+      {
+        "from": 36.334,
+        "to": 36.634,
+        "fromHash": "1b0151dd978f42ac15bc9cfc0933e214d47774be258c99f7465bad2a8eed325e",
+        "toHash": "7eb8c91174daf777d7009c1011cf41bd25e6ebc56c8c619b73809472e50de04b"
+      },
+      {
+        "from": 36.634,
+        "to": 36.814,
+        "fromHash": "7eb8c91174daf777d7009c1011cf41bd25e6ebc56c8c619b73809472e50de04b",
+        "toHash": "49e66bee29131cded4d724cc85761683de6be35b978799d1636d2f2d52b4896c"
+      },
+      {
+        "from": 36.814,
+        "to": 37.165,
+        "fromHash": "49e66bee29131cded4d724cc85761683de6be35b978799d1636d2f2d52b4896c",
+        "toHash": "0ea87ebf6a8253d11ac19d8f9eb10455ab6b53f636485260cddaf49a329027eb"
+      },
+      {
+        "from": 37.165,
+        "to": 37.357,
+        "fromHash": "0ea87ebf6a8253d11ac19d8f9eb10455ab6b53f636485260cddaf49a329027eb",
+        "toHash": "666b6c670c25200d14ccafb3a00e6677f1b6ba4b566113d3f791eda16a3a976c"
+      },
+      {
+        "from": 37.357,
+        "to": 37.621,
+        "fromHash": "666b6c670c25200d14ccafb3a00e6677f1b6ba4b566113d3f791eda16a3a976c",
+        "toHash": "abd0ae0a8330d02669870d8d059ceed5db2c1eaec89fca45a7113da95840ebcc"
+      },
+      {
+        "from": 37.621,
+        "to": 37.909,
+        "fromHash": "abd0ae0a8330d02669870d8d059ceed5db2c1eaec89fca45a7113da95840ebcc",
+        "toHash": "9f90ed68e7157fca96be733bcc5dd354aeef2da65db1c35a876a60866ee88ea3"
+      },
+      {
+        "from": 37.909,
+        "to": 38.06,
+        "fromHash": "9f90ed68e7157fca96be733bcc5dd354aeef2da65db1c35a876a60866ee88ea3",
+        "toHash": "eea5b4dd0ba0018e07172e9faed39f9ac7810e03618e07f8309732ae2b2c40be"
+      },
+      {
+        "from": 38.06,
+        "to": 38.427,
+        "fromHash": "eea5b4dd0ba0018e07172e9faed39f9ac7810e03618e07f8309732ae2b2c40be",
+        "toHash": "01762580e26141549253dcfb2200abec32aacefc755e57f926323f870a92f58e"
+      },
+      {
+        "from": 38.427,
+        "to": 38.679,
+        "fromHash": "01762580e26141549253dcfb2200abec32aacefc755e57f926323f870a92f58e",
+        "toHash": "d77138028f8f219c790d355b4c8ee03e5a221ccdd4bccae09c96967ab3756afb"
+      },
+      {
+        "from": 38.679,
+        "to": 38.871,
+        "fromHash": "d77138028f8f219c790d355b4c8ee03e5a221ccdd4bccae09c96967ab3756afb",
+        "toHash": "ee34034a093d35a8fcd1d98aff22870137943a989e84636a95ac8a7e0ad2a07e"
+      },
+      {
+        "from": 38.871,
+        "to": 39.154,
+        "fromHash": "ee34034a093d35a8fcd1d98aff22870137943a989e84636a95ac8a7e0ad2a07e",
+        "toHash": "3c992bff062707afc092d181f40a51f73db7fbefdc6aed9d0cb23870168be466"
+      },
+      {
+        "from": 39.154,
+        "to": 39.298,
+        "fromHash": "3c992bff062707afc092d181f40a51f73db7fbefdc6aed9d0cb23870168be466",
+        "toHash": "b4ad7501a548e614a50ccfceebc06300cb5a52054c4ef8f71da55c8a1eb5d8f7"
+      },
+      {
+        "from": 39.298,
+        "to": 39.614,
+        "fromHash": "b4ad7501a548e614a50ccfceebc06300cb5a52054c4ef8f71da55c8a1eb5d8f7",
+        "toHash": "6e646121120da584f3039276fc895bb54a09e0e0dd458218d733bed0691ba24c"
+      },
+      {
+        "from": 39.614,
+        "to": 39.904,
+        "fromHash": "6e646121120da584f3039276fc895bb54a09e0e0dd458218d733bed0691ba24c",
+        "toHash": "36a06d1e0c3f9f21c5b184af6c0689478b1312168f5afaa1ee4306ee71b78b55"
+      },
+      {
+        "from": 39.904,
+        "to": 40.085,
+        "fromHash": "36a06d1e0c3f9f21c5b184af6c0689478b1312168f5afaa1ee4306ee71b78b55",
+        "toHash": "d24ff9bb35f8e26ff1d2723b5b69e6cbf0579984e3f0f94faf7aadccfd251d82"
+      },
+      {
+        "from": 40.085,
+        "to": 40.287,
+        "fromHash": "d24ff9bb35f8e26ff1d2723b5b69e6cbf0579984e3f0f94faf7aadccfd251d82",
+        "toHash": "a0d37329c542427646529d100422c27fdbd998bbbc923c3662b0242b77d3cd3b"
+      },
+      {
+        "from": 40.287,
+        "to": 40.565,
+        "fromHash": "a0d37329c542427646529d100422c27fdbd998bbbc923c3662b0242b77d3cd3b",
+        "toHash": "e844cb583125e1915e2b8a06567404b3af59ca097f75aa83cde2ff13a9b85005"
+      },
+      {
+        "from": 40.565,
+        "to": 40.917,
+        "fromHash": "e844cb583125e1915e2b8a06567404b3af59ca097f75aa83cde2ff13a9b85005",
+        "toHash": "b53aad11f75b759b65ba8be89d83bead02b96f3e29f7d46d5f1e804a65cdb06c"
+      },
+      {
+        "from": 40.917,
+        "to": 41.253,
+        "fromHash": "b53aad11f75b759b65ba8be89d83bead02b96f3e29f7d46d5f1e804a65cdb06c",
+        "toHash": "13b5c3f02f8131c6cfa0687872b6b1257d349067221911a663c85e6ff6e29bb8"
+      },
+      {
+        "from": 41.253,
+        "to": 41.41,
+        "fromHash": "13b5c3f02f8131c6cfa0687872b6b1257d349067221911a663c85e6ff6e29bb8",
+        "toHash": "b4813a9fae9d3f36f0773138224b7b5b5a2b5a314c59213a4e00ff16312e9863"
+      },
+      {
+        "from": 41.41,
+        "to": 41.566,
+        "fromHash": "b4813a9fae9d3f36f0773138224b7b5b5a2b5a314c59213a4e00ff16312e9863",
+        "toHash": "1cb356fa3f450955f2f24f8fff6b1d267b8145ba4b1370f43634c5606b16258a"
+      },
+      {
+        "from": 41.566,
+        "to": 41.868,
+        "fromHash": "1cb356fa3f450955f2f24f8fff6b1d267b8145ba4b1370f43634c5606b16258a",
+        "toHash": "06b3b9ae1d847659de117ebfd6a5fdd486ce481ef797984cb7e663b349189536"
+      },
+      {
+        "from": 41.868,
+        "to": 42.071,
+        "fromHash": "06b3b9ae1d847659de117ebfd6a5fdd486ce481ef797984cb7e663b349189536",
+        "toHash": "339c33a050bcab8e9a68406a1bfcb144662d3e27d6b6002ea3cfb2d31e586e34"
+      },
+      {
+        "from": 42.071,
+        "to": 42.43,
+        "fromHash": "339c33a050bcab8e9a68406a1bfcb144662d3e27d6b6002ea3cfb2d31e586e34",
+        "toHash": "82eb6652607ba6094292db7411a269a308ec8a9d170915fb99fef65c88198328"
+      },
+      {
+        "from": 42.43,
+        "to": 42.612,
+        "fromHash": "82eb6652607ba6094292db7411a269a308ec8a9d170915fb99fef65c88198328",
+        "toHash": "8f138b18fcc58f53d73eae4d8d82f99b2431f571e0cbf559db5ddf01ece4e63b"
+      },
+      {
+        "from": 42.612,
+        "to": 42.8,
+        "fromHash": "8f138b18fcc58f53d73eae4d8d82f99b2431f571e0cbf559db5ddf01ece4e63b",
+        "toHash": "b67f4d3735739cd1684a8defbdee4d4e767471a9c3a6811bee684fe9cf41302d"
+      },
+      {
+        "from": 42.8,
+        "to": 43.156,
+        "fromHash": "b67f4d3735739cd1684a8defbdee4d4e767471a9c3a6811bee684fe9cf41302d",
+        "toHash": "86a177fdbe9ba5ccba7d9f6eafa23c5ef553aaf6295ce3f3db626d1710c39e78"
+      },
+      {
+        "from": 43.156,
+        "to": 43.297,
+        "fromHash": "86a177fdbe9ba5ccba7d9f6eafa23c5ef553aaf6295ce3f3db626d1710c39e78",
+        "toHash": "1ce699347ec704c9ac63c0b5e4899dae31e3819b6aa20204d3de9bdbe650ba27"
+      },
+      {
+        "from": 43.297,
+        "to": 43.672,
+        "fromHash": "1ce699347ec704c9ac63c0b5e4899dae31e3819b6aa20204d3de9bdbe650ba27",
+        "toHash": "230dfe5e92c2fd3bec13331d150af01c73fb579eab35cf7c8c6d0b474734c090"
+      },
+      {
+        "from": 43.672,
+        "to": 43.81,
+        "fromHash": "230dfe5e92c2fd3bec13331d150af01c73fb579eab35cf7c8c6d0b474734c090",
+        "toHash": "e1c44dabb29ece88bb08af5f0d0d4bdbe86fbd5142d41fe05fdd95b2d21969e0"
+      },
+      {
+        "from": 43.81,
+        "to": 44.141,
+        "fromHash": "e1c44dabb29ece88bb08af5f0d0d4bdbe86fbd5142d41fe05fdd95b2d21969e0",
+        "toHash": "9e133bb2fd930075853187428b7a32d56f390949f47508aecdf0ca0451ba21ae"
+      },
+      {
+        "from": 44.141,
+        "to": 44.342,
+        "fromHash": "9e133bb2fd930075853187428b7a32d56f390949f47508aecdf0ca0451ba21ae",
+        "toHash": "90af3ac6537280744e552d99b249261e27ec48d8951acc6b3eeea2924daab10e"
+      },
+      {
+        "from": 44.342,
+        "to": 44.631,
+        "fromHash": "90af3ac6537280744e552d99b249261e27ec48d8951acc6b3eeea2924daab10e",
+        "toHash": "df2aef2dcc66a10f2277b384676167945c603d03fde8c567bf6b05f916cba701"
+      },
+      {
+        "from": 44.631,
+        "to": 44.815,
+        "fromHash": "df2aef2dcc66a10f2277b384676167945c603d03fde8c567bf6b05f916cba701",
+        "toHash": "a0b09ff9a96c4e3ce6e0df0664cce2a8274a5f5b13b6c9b3ef7bd5c3f08f279a"
+      },
+      {
+        "from": 44.815,
+        "to": 45.171,
+        "fromHash": "a0b09ff9a96c4e3ce6e0df0664cce2a8274a5f5b13b6c9b3ef7bd5c3f08f279a",
+        "toHash": "e28ca74967b533c65c1fe6ce989b48b41e8330c3d61de844bb2b8974d720a694"
+      },
+      {
+        "from": 45.171,
+        "to": 45.31,
+        "fromHash": "e28ca74967b533c65c1fe6ce989b48b41e8330c3d61de844bb2b8974d720a694",
+        "toHash": "4f5170caa0e6750c6c532a7389918627e9c6dd979f18de204a6b8904f5a9abd8"
+      },
+      {
+        "from": 45.31,
+        "to": 45.421,
+        "fromHash": "4f5170caa0e6750c6c532a7389918627e9c6dd979f18de204a6b8904f5a9abd8",
+        "toHash": "28dd569a3f28f5f40179cc5766a39e582ba6f5d464105356494c24cfa5d6d44f"
+      },
+      {
+        "from": 45.421,
+        "to": 45.54,
+        "fromHash": "28dd569a3f28f5f40179cc5766a39e582ba6f5d464105356494c24cfa5d6d44f",
+        "toHash": "860936cc3185bf4782e4904c4f040c5d0454b0f054e13882293cc6092616093f"
+      },
+      {
+        "from": 45.54,
+        "to": 45.843,
+        "fromHash": "860936cc3185bf4782e4904c4f040c5d0454b0f054e13882293cc6092616093f",
+        "toHash": "4eb0eb5618a89d26a37cff321e4cfd9749467b67827ed8e19d23ff5fc84f53b0"
+      },
+      {
+        "from": 45.843,
+        "to": 46.078,
+        "fromHash": "4eb0eb5618a89d26a37cff321e4cfd9749467b67827ed8e19d23ff5fc84f53b0",
+        "toHash": "a6bd801f7ce04a24c27c73a50b46bdea64b52cdb8ec2329c7db559dd64789d2b"
+      },
+      {
+        "from": 46.078,
+        "to": 46.087,
+        "fromHash": "a6bd801f7ce04a24c27c73a50b46bdea64b52cdb8ec2329c7db559dd64789d2b",
+        "toHash": "0acb4589a75fc7ea6c8c602e44b21bc83cc74a8fd06760c72d47ee68f3b75436"
+      },
+      {
+        "from": 46.087,
+        "to": 46.217,
+        "fromHash": "0acb4589a75fc7ea6c8c602e44b21bc83cc74a8fd06760c72d47ee68f3b75436",
+        "toHash": "31a4a632131f0b394f2372c598768b4f6709bff4624c96da729b021125f94bd8"
+      },
+      {
+        "from": 46.217,
+        "to": 46.354,
+        "fromHash": "31a4a632131f0b394f2372c598768b4f6709bff4624c96da729b021125f94bd8",
+        "toHash": "66a323eae03c5e6a79714783d754fb67104fae8cae9e5c69713d1251cb94e39b"
+      }
+    ]
+  },
   "media": {
-    "video": {
-      "path": "submission/assets/workhub-goal-room-demo.mp4",
-      "sha256": "b9742e77e93a0d500a9eb21f40c2db1ebce225bc310adff11776807856e46e48",
-      "bytes": 5213363
-    },
-    "narration": {
-      "path": "submission/assets/workhub-goal-room-demo-narration.ogg",
-      "sha256": "d75e5e00da328a431a1fc142daafa710c8dd17eb5b5c07a0e61a7390641af2c2",
-      "bytes": 853661
-    },
-    "captions": {
-      "path": "submission/assets/workhub-goal-room-demo.en.srt",
-      "sha256": "51ec26307a3a87403298cdbe6a78b734e1fdeb7c2687a3d5f8357f349f28aeda",
-      "bytes": 2850
-    },
+    "path": "submission/assets/workhub-goal-room-demo.mp4",
+    "sha256": "caed0e6792fd62c6561c7c12cb867cdd2b9bf776f24e2212d8b82bead0420a60",
+    "bytes": 5773055,
     "probe": {
       "programs": [],
       "stream_groups": [],
       "streams": [
         {
-          "index": 0,
           "codec_name": "h264",
+          "profile": "High",
           "codec_type": "video",
           "width": 1440,
           "height": 900
         },
         {
-          "index": 1,
           "codec_name": "aac",
+          "profile": "LC",
           "codec_type": "audio",
           "sample_rate": "48000",
           "channels": 1
         }
       ],
       "format": {
-        "duration": "157.766667",
-        "size": "5213363"
+        "duration": "153.840000",
+        "size": "5773055"
       }
     }
   },
+  "finalState": {
+    "phase": "GOAL_ACCEPTED",
+    "stateVersion": 16,
+    "currentActor": "none",
+    "nextLegalAction": "GOAL_ACCEPTED_NO_FURTHER_ACTION",
+    "candidate": {
+      "version": 2,
+      "digest": "e7c2c9e94c951cbd88355c8cf0cf96afd94ba107055f99c0fcdf579c17e0119d"
+    }
+  },
+  "controls": {
+    "owner": "trusted CDP Input mouse/keyboard against visible UI",
+    "agent": "document.modelContext.getTools() -> browser-returned RegisteredTool -> executeTool(serialized JSON)",
+    "system": "automatic production adapter only"
+  },
+  "claimBoundary": "No autonomous model selection, external effects, accounts, backend persistence, cloud, database, security certification, deployment, or publication claim.",
+  "date": "2026-08-28",
   "review": {
     "fullDecode": "passed",
+    "contactSheet": "16 frames at 10-second cadence; visually reviewed locally then removed",
     "sampledFrameCount": 16,
-    "sampledFrameSeconds": [120, 125, 130, 135, 140, 150],
-    "sampledFrameSequence": "S14, S14, mobile/breakpoint, mobile/breakpoint, architecture, architecture",
-    "contactSheet": "temporary public-safe 6-frame contact sheet reviewed locally and removed before commit",
-    "sceneAlignment": {
-      "manifest": "submission/assets/workhub-goal-room-demo-scenes.json",
-      "cue12RepresentativeSeconds": [130, 135],
-      "metric": "ffmpeg-ssim-all",
-      "minimum": 0.995,
-      "observed": [0.999312, 0.999312]
-    },
+    "visibleInteraction": "pointer approach/activation, typed input, native call labels, and in-place state transitions observed",
     "blackFramesObserved": 0,
-    "privateNotificationsObserved": 0,
-    "cursorLeaksObserved": 0,
-    "music": false,
-    "narrationLanguage": "en",
-    "semanticCaptionMatch": "same narration transcript; cue timing allocated by spoken-word weight",
-    "limitations": "Synthetic browser-local Goal; no accounts, backend persistence, external effects, autonomy reliability, or enterprise security."
-  },
-  "date": "2026-08-28"
+    "privateDataObserved": 0,
+    "audioMeanDb": -21.6,
+    "audioPeakDb": -2.3,
+    "captionCueCount": 13,
+    "sceneManifest": "submission/assets/workhub-goal-room-demo-scenes.json",
+    "architectureVisuallyInspected": true
+  }
 }

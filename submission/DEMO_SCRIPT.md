@@ -2,7 +2,7 @@
 
 **Target:** 2:30 (hard limit: under 3:00)
 
-**Evidence mode:** Disclosed fresh-checkpoint reconstruction from qualified production and native receipts. Scenes are independent authoritative checkpoints, not one continuous authority transaction. No autonomous model selects tools.
+**Evidence mode:** Continuous live native governed interaction from 0:00 through sealed S14 at 2:06.8. The mobile/breakpoint interval at 2:06.9–2:18.7 and architecture interval at 2:18.85–2:33.84 are disclosed source-bound reconstructions. No autonomous model selects tools.
 
 ## Narration
 
@@ -36,15 +36,15 @@ This competition edition is one synthetic browser-local Goal. It has no accounts
 
 | Time | Visual and evidence class |
 |---:|---|
-| 0:00–0:12 | Defining claim; native-receipt visualization |
-| 0:12–0:30 | Six descriptors, raw enumeration, RegisteredTool invocation |
-| 0:30–0:43 | Malformed-input atomicity; explicit S14 limitation |
-| 0:43–1:00 | Goal revision checkpoint |
-| 1:00–1:15 | Plan revision checkpoint |
-| 1:15–1:26.111 | Candidate v1 automatic System FAIL |
+| 0:00–0:12 | Live Canary page, native `get_goal_room_state`, visible native-call overlay |
+| 0:12–0:30 | Trusted Owner intent typing/click and browser-returned RegisteredTool invocation |
+| 0:30–0:43 | Live malformed-input atomicity with unchanged visible state |
+| 0:43–1:00 | Live Goal revision, typed Owner note, Agent v2 proposal, Owner confirmation |
+| 1:00–1:15 | Live Plan revision, typed Owner note, Agent v2 proposal, Owner confirmation |
+| 1:15–1:26.111 | Live Candidate v1 submission and automatic System FAIL |
 | 1:26.231–1:39.336 | Candidate v2 PASS, Agent next, non-acceptance |
 | 1:39.456–1:46.642 | Agent requests completion; PASS boundary |
 | 1:46.762–1:58.599 | S13 exact-candidate Owner modal |
 | 1:58.719–2:06.751 | S14 actorless sealed room |
-| 2:06.871–2:18.707 | Labelled mobile judge zoom plus 1199 mobile / 1200 desktop composition evidence |
-| 2:18.827–2:33.200 | Architecture and honest limits |
+| 2:06.871–2:18.707 | Disclosed reconstructed mobile judge zoom plus 1199 mobile / 1200 desktop evidence |
+| 2:18.827–2:33.840 | Disclosed reconstructed architecture and honest limits |

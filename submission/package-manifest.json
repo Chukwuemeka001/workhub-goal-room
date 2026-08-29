@@ -6,9 +6,9 @@
     "commit": "5ac95d4bdab5f54beda0f90776c3918fd36136d2",
     "tree": "b6b50068e8119d02d1d9213286f14adf3cbc0db1"
   },
-  "packageCommit": "7e9b60cb473cb04572fb095c31b8423d333dcea8",
-  "packageTree": "d6a5734fbb34feded416595d6e27c7def7e933e2",
-  "artifactCount": 35,
+  "packageCommit": "PACKAGE_COMMIT_SENTINEL",
+  "packageTree": "PACKAGE_TREE_SENTINEL",
+  "artifactCount": 50,
   "artifacts": [
     {
       "path": "README.md",
@@ -41,19 +41,24 @@
       "bytes": 2413
     },
     {
+      "path": "scripts/submission-v3-adversarial.node-test.mjs",
+      "sha256": "e0857d1fbf2a7ab1e968d5fe76237ce4674ce8080b4f96c365049a971c5b5ac2",
+      "bytes": 7375
+    },
+    {
       "path": "scripts/submission-v3-validate.mjs",
-      "sha256": "990ac5d1857f43f5f43e66cb5d679dc25c0c50d660628dd4d976eb3c34aa9b2b",
-      "bytes": 13681
+      "sha256": "55b5aff9bf27a9fefa9d0c8fda092bc62322c807b89d06ada01f081301b1a24b",
+      "bytes": 27655
     },
     {
       "path": "scripts/submission-v3-validator.node-test.mjs",
-      "sha256": "13f60ee75f11bd670d219eb9726ce99465bd20993692e49b95eb68afa95a6b8b",
-      "bytes": 5632
+      "sha256": "13f097dca56ad7e4895c25c7cf498d00fcab33a2b8929f917c01145351ed14a5",
+      "bytes": 5695
     },
     {
       "path": "submission/DEMO_SCRIPT.md",
-      "sha256": "b2854105a81d7d3797ab23c70be6aafde4fe3c3fdcc48622e00e0b5380267d8c",
-      "bytes": 3488
+      "sha256": "31e2b6b51e2b6b69f91a9d32828304da444ab953e251ca03ff69acdc3fd9ae95",
+      "bytes": 3742
     },
     {
       "path": "submission/DEVPOST_SUBMISSION.md",
@@ -62,8 +67,8 @@
     },
     {
       "path": "submission/V3_CLAIMS.md",
-      "sha256": "637f59d858d47f11143862970118423d8aaaa3654f9b1b446ead2945dbfbdc21",
-      "bytes": 2063
+      "sha256": "39580c0bc0aa35810d7608af033758a95bb4b6e9bfa584efa4bd3728ea542102",
+      "bytes": 2289
     },
     {
       "path": "submission/V3_REQUIREMENTS.md",
@@ -72,13 +77,78 @@
     },
     {
       "path": "submission/assets/cue-12-mobile-breakpoint.png",
-      "sha256": "33167f14d897f33619064470d8dc86900f8c681cb30a3e14af5717ff51a6d462",
-      "bytes": 226318
+      "sha256": "f37dd47c60a1e39c844ae7f016dd4d26beac5fddfae90062fd518d8caeae3227",
+      "bytes": 415192
+    },
+    {
+      "path": "submission/assets/cue-frames/cue-01.png",
+      "sha256": "7ce930790bbe77d8f5aa4f57ef4362ba46e044de92e07f4928db55bdc9d83ea6",
+      "bytes": 251531
+    },
+    {
+      "path": "submission/assets/cue-frames/cue-02.png",
+      "sha256": "7334244c4dba8ed7fd4e9903c6087599b10921959f615871c8c5de104c260de4",
+      "bytes": 238874
+    },
+    {
+      "path": "submission/assets/cue-frames/cue-03.png",
+      "sha256": "62e925f6e018429b2dcaf5edcbce6fdb611c64e02a6e30862d0cbc26ae851244",
+      "bytes": 237524
+    },
+    {
+      "path": "submission/assets/cue-frames/cue-04.png",
+      "sha256": "068892d02b397eb219255749070e7aca2ce1f8f2f9ea186e91539d6757f4fd4e",
+      "bytes": 237782
+    },
+    {
+      "path": "submission/assets/cue-frames/cue-05.png",
+      "sha256": "accd9896d2bb7887e8c0b4e5d50c51db3e346212d3344a5d3f8c099c3db87d2b",
+      "bytes": 240031
+    },
+    {
+      "path": "submission/assets/cue-frames/cue-06.png",
+      "sha256": "148dbf908daa702d896595af14efc49bd1e8b7bf7b99f1641632756158643006",
+      "bytes": 223751
+    },
+    {
+      "path": "submission/assets/cue-frames/cue-07.png",
+      "sha256": "9c4c8703cd6e8e7dd9714e6fe3a208023666c8a9faa622c3ed4e8f35fa471657",
+      "bytes": 255413
+    },
+    {
+      "path": "submission/assets/cue-frames/cue-08.png",
+      "sha256": "17dd7e5331802e1c7759bb2f74b3c75d145266218f422ae0483bea3f84486056",
+      "bytes": 293605
+    },
+    {
+      "path": "submission/assets/cue-frames/cue-09.png",
+      "sha256": "84919b22dde61a7a62670d6686bcc5fcec93b93045e44110675e99b6caab3783",
+      "bytes": 241751
+    },
+    {
+      "path": "submission/assets/cue-frames/cue-10.png",
+      "sha256": "81155287151c5ca104fa2554d7873911eec1dc10dd7ca18d52fa400339ccbdd8",
+      "bytes": 233865
+    },
+    {
+      "path": "submission/assets/cue-frames/cue-11.png",
+      "sha256": "895fc7e1d7d8c0ddb059c7dcd603cd6efb9d309a095c9079caaf22662025e6ad",
+      "bytes": 217481
+    },
+    {
+      "path": "submission/assets/cue-frames/cue-12.png",
+      "sha256": "f37dd47c60a1e39c844ae7f016dd4d26beac5fddfae90062fd518d8caeae3227",
+      "bytes": 415192
+    },
+    {
+      "path": "submission/assets/cue-frames/cue-13.png",
+      "sha256": "6c0a1b120ef7318c2b6e6f47a4f62d11fb87b1856a977615e0399292555c2263",
+      "bytes": 433427
     },
     {
       "path": "submission/assets/live-demo-capture.json",
-      "sha256": "818943dd7b9eacb64d9bb0bc902e2d7c1ee97b25e2cf6bcdb1e444b1b1aaf34e",
-      "bytes": 2967
+      "sha256": "ba6740442c2a415d9b02a247019c5b69182d051d25dd066a54b0324d082dbe0c",
+      "bytes": 138726
     },
     {
       "path": "submission/assets/screenshots/boundary-1199-mobile.png",
@@ -136,19 +206,24 @@
       "bytes": 161616
     },
     {
+      "path": "submission/assets/workhub-goal-room-architecture.edges.json",
+      "sha256": "a19402c617dfffca335ba84522592b466855cfeffe2fbccab2ea2d4bc4f94abd",
+      "bytes": 1666
+    },
+    {
       "path": "submission/assets/workhub-goal-room-architecture.html",
-      "sha256": "c6cf62175a2295de79b94f6add18acf5bdf05107f9d0d03015f51b779c26a0de",
-      "bytes": 6761
+      "sha256": "df56a42c28ba90b42c15a1d4209b105b0761485f9a3d39ef1cc01d0fb3dc5954",
+      "bytes": 7554
     },
     {
       "path": "submission/assets/workhub-goal-room-architecture.png",
-      "sha256": "be2516dfba160328577b9c8a99fb2e54d8b7cf4f33d29d247824348859c41d04",
-      "bytes": 189838
+      "sha256": "64f65ce10a2e7f0cab463fb077bb652d19ce039c0652c8bfb13a493a565fe096",
+      "bytes": 156930
     },
     {
       "path": "submission/assets/workhub-goal-room-architecture.svg",
-      "sha256": "2f303315dea6009b61ecdc843ba3a46d25d9b3dcab34ecc4155c933d84eddfe2",
-      "bytes": 6434
+      "sha256": "32c2bc0d20889511c062ad8934949cbdeed9e2fc8f0c99121438df2af275e9b1",
+      "bytes": 7227
     },
     {
       "path": "submission/assets/workhub-goal-room-demo-narration.ogg",
@@ -157,8 +232,8 @@
     },
     {
       "path": "submission/assets/workhub-goal-room-demo-scenes.json",
-      "sha256": "1c7fe61883cb208a8291e8cb3d44637e1cbbc30cac111696b4cc49e2cb53eed0",
-      "bytes": 2114
+      "sha256": "eade8e61c64914748332394481e33fc6d47bea16e6d8ff3de80e4b896614c94c",
+      "bytes": 13029
     },
     {
       "path": "submission/assets/workhub-goal-room-demo.en.srt",
@@ -167,8 +242,8 @@
     },
     {
       "path": "submission/assets/workhub-goal-room-demo.mp4",
-      "sha256": "b9742e77e93a0d500a9eb21f40c2db1ebce225bc310adff11776807856e46e48",
-      "bytes": 5213363
+      "sha256": "caed0e6792fd62c6561c7c12cb867cdd2b9bf776f24e2212d8b82bead0420a60",
+      "bytes": 5773055
     },
     {
       "path": "submission/historical/v2-five-tool/manifest.json",
@@ -177,8 +252,8 @@
     },
     {
       "path": "submission/scripts/record-live-demo.py",
-      "sha256": "e65044c178d69b3e8b78bd903d9c9a1f75ab7346aa8a1dc3ae60470ce828a5ad",
-      "bytes": 4864
+      "sha256": "ae3d7ed8b640d9515a00a4529d3e6fa7ba5a7dd6548ab738feabee2776ec1149",
+      "bytes": 27254
     },
     {
       "path": "submission/scripts/v3-native-webmcp-proof.mjs",
@@ -194,6 +269,6 @@
   },
   "claimBoundary": "Local package only. No push, deploy, upload, publication, or submission authority.",
   "date": "2026-08-28",
-  "artifactHashSource": "Git objects at packageCommit; package-manifest.json and V3_AUDIT.md excluded to avoid self-reference",
-  "verifiedArtifactCount": 35
+  "artifactHashSource": "Working package candidate bytes; metadata-only child will bind immutable package Git objects",
+  "verifiedArtifactCount": 50
 }

@@ -15,13 +15,13 @@
 <text x="70" y="96" class="sub">Qualified product 5ac95d4bdab5f54beda0f90776c3918fd36136d2 · tree b6b50068e8119d02d1d9213286f14adf3cbc0db1</text>
 
 <!-- arrows behind boxes -->
-<path d="M310 295H505" class="owner" fill="none" stroke-width="4" marker-end="url(#ownerArrow)"/>
-<path d="M310 500H505" class="agent" fill="none" stroke-width="4" marker-end="url(#agentArrow)"/>
-<path d="M810 405H930V315H1020" class="system" fill="none" stroke-width="4" marker-end="url(#systemArrow)"/>
-<path d="M1185 385V500H1020" class="system" fill="none" stroke-width="4" marker-end="url(#systemArrow)"/>
-<path d="M810 500H1020" class="agent" fill="none" stroke-width="4" marker-end="url(#agentArrow)"/>
-<path d="M1185 575V690H1370" class="agent" fill="none" stroke-width="4" marker-end="url(#agentArrow)"/>
-<path d="M310 295V755H1370" class="owner" fill="none" stroke-width="4" marker-end="url(#ownerArrow)"/>
+<path id="edge-owner-ui-kernel" data-from="owner-ui" data-to="authority-kernel" data-authority="owner" d="M310 295H505" class="owner" fill="none" stroke-width="4" marker-end="url(#ownerArrow)"/>
+<path id="edge-agent-tools-kernel" data-from="six-webmcp-tools" data-to="authority-kernel" data-authority="agent" d="M310 500H505" class="agent" fill="none" stroke-width="4" marker-end="url(#agentArrow)"/>
+<path id="edge-kernel-verifier" data-from="authority-kernel" data-to="production-verifier-adapter" data-authority="system" d="M810 405H930V315H1020" class="system" fill="none" stroke-width="4" marker-end="url(#systemArrow)"/>
+<path id="edge-verifier-rules" data-from="production-verifier-adapter" data-to="deterministic-rules" data-authority="system" d="M1185 385V430" class="system" fill="none" stroke-width="4" marker-end="url(#systemArrow)"/>
+<path id="edge-rules-kernel" data-from="deterministic-rules" data-to="authority-kernel" data-authority="system" d="M1020 535H930V565H810" class="system" fill="none" stroke-width="4" marker-end="url(#systemArrow)"/>
+<path id="edge-agent-completion-kernel" data-from="agent-completion-request" data-to="authority-kernel" data-authority="agent" d="M1020 690H900V610H810" class="agent" fill="none" stroke-width="4" marker-end="url(#agentArrow)"/>
+<path id="edge-owner-acceptance-kernel" data-from="owner-acceptance" data-to="authority-kernel" data-authority="owner" d="M1370 755H860V590H810" class="owner" fill="none" stroke-width="4" marker-end="url(#ownerArrow)"/>
 
 <rect x="70" y="170" width="240" height="195" class="box owner ownerFill"/><text x="95" y="205" class="lane" fill="#fbbf24">OWNER AUTHORITY</text><text x="95" y="242" class="label">Native UI</text><text x="95" y="275" class="small">Intent · revise · confirm</text><text x="95" y="300" class="small">Exact-candidate accept</text><text x="95" y="333" class="tiny">Trusted human controls only</text>
 

@@ -56,8 +56,9 @@ test('cue 12 architecture mismatch is rejected', async () => {
     const visualBytes = await readFile(visualPath);
     const scenesPath = join(dir, 'submission/assets/workhub-goal-room-demo-scenes.json');
     const scenes = JSON.parse(await readFile(scenesPath, 'utf8'));
-    scenes.validatedScene.expectedVisual.bytes = visualBytes.length;
-    scenes.validatedScene.expectedVisual.sha256 = createHash('sha256').update(visualBytes).digest('hex');
+    scenes.cues[11].expectedVisual.path = 'submission/assets/cue-12-mobile-breakpoint.png';
+    scenes.cues[11].expectedVisual.bytes = visualBytes.length;
+    scenes.cues[11].expectedVisual.sha256 = createHash('sha256').update(visualBytes).digest('hex');
     await writeFile(scenesPath, `${JSON.stringify(scenes, null, 2)}\n`);
     await syncPackageArtifacts(dir, [
       'scripts/submission-v3-validate.mjs',
@@ -68,7 +69,7 @@ test('cue 12 architecture mismatch is rejected', async () => {
     ]);
   });
   assert.notEqual(result.status, 0, 'validator accepted architecture during the mobile/breakpoint cue');
-  assert.match(`${result.stdout}\n${result.stderr}`, /cue 12 frame similarity/);
+  assert.match(`${result.stdout}\n${result.stderr}`, /cue 12/);
 });
 
 test('stale five-tool copy is rejected', async () => {

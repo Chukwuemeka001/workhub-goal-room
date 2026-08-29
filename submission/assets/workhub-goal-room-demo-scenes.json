@@ -1,66 +1,391 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "kind": "workhub-v3-demo-scene-alignment",
   "media": "submission/assets/workhub-goal-room-demo.mp4",
   "captions": "submission/assets/workhub-goal-room-demo.en.srt",
-  "timelineContext": [
+  "frozenSimilarityFloor": 0.995,
+  "cues": [
     {
-      "name": "sealed-s14",
+      "cue": 1,
+      "semanticId": "thesis",
+      "startSeconds": 0.0,
+      "endSeconds": 7.609,
+      "caption": "WebMCP makes a website callable by agents. WorkHub Goal Room makes each call state-aware, authority-checked, evidence-bound, and owner-controlled.",
+      "expectedSemanticTokens": [
+        "state-aware",
+        "owner-controlled"
+      ],
+      "representativeSeconds": [
+        3.804
+      ],
+      "expectedVisual": {
+        "path": "submission/assets/cue-frames/cue-01.png",
+        "sha256": "7ce930790bbe77d8f5aa4f57ef4362ba46e044de92e07f4928db55bdc9d83ea6",
+        "bytes": 251531,
+        "width": 1440,
+        "height": 900
+      },
+      "similarity": {
+        "metric": "ffmpeg-ssim-all",
+        "minimum": 0.995
+      }
+    },
+    {
+      "cue": 2,
+      "semanticId": "native-six-tools",
+      "startSeconds": 7.729,
+      "endSeconds": 24.216,
+      "caption": "Here is the native boundary first. Canary returned six browser-native RegisteredTool descriptors. The Agent path is getTools, select the browser-returned tool, then executeTool with serialized JSON. There is no tool for Owner decisions, System verdicts, acceptance, or external effects.",
+      "expectedSemanticTokens": [
+        "six browser-native RegisteredTool descriptors",
+        "executeTool"
+      ],
+      "representativeSeconds": [
+        15.973
+      ],
+      "expectedVisual": {
+        "path": "submission/assets/cue-frames/cue-02.png",
+        "sha256": "7334244c4dba8ed7fd4e9903c6087599b10921959f615871c8c5de104c260de4",
+        "bytes": 238874,
+        "width": 1440,
+        "height": 900
+      },
+      "similarity": {
+        "metric": "ffmpeg-ssim-all",
+        "minimum": 0.995
+      }
+    },
+    {
+      "cue": 3,
+      "semanticId": "enumeration-limit",
+      "startSeconds": 24.336,
+      "endSeconds": 34.481,
+      "caption": "The static registration list follows source order. This panel preserves the raw browser enumeration separately. No model autonomously selected a tool in this evidence.",
+      "expectedSemanticTokens": [
+        "No model autonomously selected",
+        "raw browser enumeration"
+      ],
+      "representativeSeconds": [
+        29.409
+      ],
+      "expectedVisual": {
+        "path": "submission/assets/cue-frames/cue-03.png",
+        "sha256": "62e925f6e018429b2dcaf5edcbce6fdb611c64e02a6e30862d0cbc26ae851244",
+        "bytes": 237524,
+        "width": 1440,
+        "height": 900
+      },
+      "similarity": {
+        "metric": "ffmpeg-ssim-all",
+        "minimum": 0.995
+      }
+    },
+    {
+      "cue": 4,
+      "semanticId": "malformed-atomicity",
+      "startSeconds": 34.601,
+      "endSeconds": 45.169,
+      "caption": "A malformed call can be rejected without changing state or receipts. The recorded S fourteen probe proves malformed-input atomicity, not a schema-valid terminal reducer refusal.",
+      "expectedSemanticTokens": [
+        "without changing state or receipts",
+        "malformed-input atomicity"
+      ],
+      "representativeSeconds": [
+        39.885
+      ],
+      "expectedVisual": {
+        "path": "submission/assets/cue-frames/cue-04.png",
+        "sha256": "068892d02b397eb219255749070e7aca2ce1f8f2f9ea186e91539d6757f4fd4e",
+        "bytes": 237782,
+        "width": 1440,
+        "height": 900
+      },
+      "similarity": {
+        "metric": "ffmpeg-ssim-all",
+        "minimum": 0.995
+      }
+    },
+    {
+      "cue": 5,
+      "semanticId": "goal-owner-decisions",
+      "startSeconds": 45.289,
+      "endSeconds": 57.971,
+      "caption": "The journey starts with owner intent. The Agent proposes Goal Contract version one. The Owner asks for a revision, the Agent proposes version two, and only the Owner confirms it.",
+      "expectedSemanticTokens": [
+        "owner intent",
+        "only the Owner confirms"
+      ],
+      "representativeSeconds": [
+        51.63
+      ],
+      "expectedVisual": {
+        "path": "submission/assets/cue-frames/cue-05.png",
+        "sha256": "accd9896d2bb7887e8c0b4e5d50c51db3e346212d3344a5d3f8c099c3db87d2b",
+        "bytes": 240031,
+        "width": 1440,
+        "height": 900
+      },
+      "similarity": {
+        "metric": "ffmpeg-ssim-all",
+        "minimum": 0.995
+      }
+    },
+    {
+      "cue": 6,
+      "semanticId": "plan-owner-decisions",
+      "startSeconds": 58.091,
+      "endSeconds": 70.773,
+      "caption": "The same boundary applies to planning. Plan version one is revised. Plan version two remains bound to confirmed Goal Contract version two, and the Owner confirms it before work begins.",
+      "expectedSemanticTokens": [
+        "Plan version one",
+        "Owner confirms"
+      ],
+      "representativeSeconds": [
+        64.432
+      ],
+      "expectedVisual": {
+        "path": "submission/assets/cue-frames/cue-06.png",
+        "sha256": "148dbf908daa702d896595af14efc49bd1e8b7bf7b99f1641632756158643006",
+        "bytes": 223751,
+        "width": 1440,
+        "height": 900
+      },
+      "similarity": {
+        "metric": "ffmpeg-ssim-all",
+        "minimum": 0.995
+      }
+    },
+    {
+      "cue": 7,
+      "semanticId": "automatic-system-fail",
+      "startSeconds": 70.893,
+      "endSeconds": 86.111,
+      "caption": "The Agent claims the admitted step and submits Candidate version one. The production System adapter runs the deterministic rule set automatically and records FAIL. System verdict authorship is neither an Agent tool nor an Owner control.",
+      "expectedSemanticTokens": [
+        "System adapter",
+        "records FAIL"
+      ],
+      "representativeSeconds": [
+        78.502
+      ],
+      "expectedVisual": {
+        "path": "submission/assets/cue-frames/cue-07.png",
+        "sha256": "9c4c8703cd6e8e7dd9714e6fe3a208023666c8a9faa622c3ed4e8f35fa471657",
+        "bytes": 255413,
+        "width": 1440,
+        "height": 900
+      },
+      "similarity": {
+        "metric": "ffmpeg-ssim-all",
+        "minimum": 0.995
+      }
+    },
+    {
+      "cue": 8,
+      "semanticId": "corrected-system-pass",
+      "startSeconds": 86.231,
+      "endSeconds": 99.336,
+      "caption": "The Agent corrects the evidence and submits Candidate version two. The same rules record PASS for the exact candidate version and SHA two fifty-six. The next actor is still the Agent.",
+      "expectedSemanticTokens": [
+        "Candidate version two",
+        "record PASS"
+      ],
+      "representativeSeconds": [
+        92.784
+      ],
+      "expectedVisual": {
+        "path": "submission/assets/cue-frames/cue-08.png",
+        "sha256": "17dd7e5331802e1c7759bb2f74b3c75d145266218f422ae0483bea3f84486056",
+        "bytes": 293605,
+        "width": 1440,
+        "height": 900
+      },
+      "similarity": {
+        "metric": "ffmpeg-ssim-all",
+        "minimum": 0.995
+      }
+    },
+    {
+      "cue": 9,
+      "semanticId": "pass-not-accepted",
+      "startSeconds": 99.456,
+      "endSeconds": 106.642,
+      "caption": "PASS does not mean accepted. PASS only permits the Agent to request completion for that exact candidate.",
+      "expectedSemanticTokens": [
+        "PASS does not mean accepted",
+        "request completion"
+      ],
+      "representativeSeconds": [
+        103.049
+      ],
+      "expectedVisual": {
+        "path": "submission/assets/cue-frames/cue-09.png",
+        "sha256": "84919b22dde61a7a62670d6686bcc5fcec93b93045e44110675e99b6caab3783",
+        "bytes": 241751,
+        "width": 1440,
+        "height": 900
+      },
+      "similarity": {
+        "metric": "ffmpeg-ssim-all",
+        "minimum": 0.995
+      }
+    },
+    {
+      "cue": 10,
+      "semanticId": "owner-exact-acceptance",
+      "startSeconds": 106.762,
+      "endSeconds": 118.599,
+      "caption": "After the request, the Owner sees Candidate version two, its full digest, the rule-set version, PASS, and the irreversible consequence. Only this trusted Owner interface can confirm acceptance.",
+      "expectedSemanticTokens": [
+        "full digest",
+        "trusted Owner interface"
+      ],
+      "representativeSeconds": [
+        112.68
+      ],
+      "expectedVisual": {
+        "path": "submission/assets/cue-frames/cue-10.png",
+        "sha256": "81155287151c5ca104fa2554d7873911eec1dc10dd7ca18d52fa400339ccbdd8",
+        "bytes": 233865,
+        "width": 1440,
+        "height": 900
+      },
+      "similarity": {
+        "metric": "ffmpeg-ssim-all",
+        "minimum": 0.995
+      }
+    },
+    {
+      "cue": 11,
+      "semanticId": "sealed-s14",
       "startSeconds": 118.719,
       "endSeconds": 126.751,
-      "expectedEvidence": "S14 actorless sealed room"
+      "caption": "S fourteen is sealed. The current actor is none, there are no controls, and there is no legal continuation.",
+      "expectedSemanticTokens": [
+        "S fourteen is sealed",
+        "current actor is none"
+      ],
+      "representativeSeconds": [
+        122.735
+      ],
+      "expectedVisual": {
+        "path": "submission/assets/cue-frames/cue-11.png",
+        "sha256": "895fc7e1d7d8c0ddb059c7dcd603cd6efb9d309a095c9079caaf22662025e6ad",
+        "bytes": 217481,
+        "width": 1440,
+        "height": 900
+      },
+      "similarity": {
+        "metric": "ffmpeg-ssim-all",
+        "minimum": 0.995
+      }
     },
     {
-      "name": "cue-12-mobile-breakpoint",
       "cue": 12,
+      "semanticId": "mobile-breakpoint",
       "startSeconds": 126.871,
       "endSeconds": 138.707,
-      "expectedEvidence": "mobile frontier plus 1199 mobile composition and 1200 desktop composition"
+      "caption": "The mobile projection keeps the same frontier, while the eleven ninety-nine and twelve hundred pixel captures prove which one of the two compositions is active at the boundary.",
+      "expectedSemanticTokens": [
+        "eleven ninety-nine",
+        "twelve hundred"
+      ],
+      "representativeSeconds": [
+        132.789
+      ],
+      "expectedVisual": {
+        "path": "submission/assets/cue-frames/cue-12.png",
+        "sha256": "f37dd47c60a1e39c844ae7f016dd4d26beac5fddfae90062fd518d8caeae3227",
+        "bytes": 415192,
+        "width": 1440,
+        "height": 900
+      },
+      "similarity": {
+        "metric": "ffmpeg-ssim-all",
+        "minimum": 0.995
+      }
     },
     {
-      "name": "architecture-honest-limits",
+      "cue": 13,
+      "semanticId": "architecture-honest-limits",
       "startSeconds": 138.827,
       "endSeconds": 153.2,
-      "expectedEvidence": "architecture and honest limitations"
+      "caption": "This competition edition is one synthetic browser-local Goal. It has no accounts, backend persistence, cloud service, database, external effects, or autonomous-model reliability claim. Public app, repository, YouTube, and Devpost actions remain pending Owner approval.",
+      "expectedSemanticTokens": [
+        "no accounts",
+        "backend persistence",
+        "pending Owner approval"
+      ],
+      "representativeSeconds": [
+        146.013
+      ],
+      "expectedVisual": {
+        "path": "submission/assets/cue-frames/cue-13.png",
+        "sha256": "6c0a1b120ef7318c2b6e6f47a4f62d11fb87b1856a977615e0399292555c2263",
+        "bytes": 433427,
+        "width": 1440,
+        "height": 900
+      },
+      "similarity": {
+        "metric": "ffmpeg-ssim-all",
+        "minimum": 0.995
+      }
     }
   ],
-  "validatedScene": {
-    "name": "cue-12-mobile-breakpoint",
-    "cue": 12,
-    "expectedVisual": {
-      "path": "submission/assets/cue-12-mobile-breakpoint.png",
-      "sha256": "33167f14d897f33619064470d8dc86900f8c681cb30a3e14af5717ff51a6d462",
-      "bytes": 226318,
-      "width": 1440,
-      "height": 900
+  "liveIntervals": [
+    {
+      "id": "native-six-and-owner-intent",
+      "startSeconds": 0,
+      "endSeconds": 34.6,
+      "source": "submission/assets/live-demo-capture.json"
     },
-    "requiredLabelTokens": [
-      "JUDGE ZOOM · MOBILE 393×852",
-      "1199 PX · MOBILE COMPOSITION",
-      "1200 PX · DESKTOP COMPOSITION"
-    ],
-    "sources": [
-      {
-        "path": "submission/assets/screenshots/mobile-s14-frontier.png",
-        "sha256": "e655f8cca051a6681acfa9b6b98123338d555b8e7aa180bce3b3d1b572018ccb"
-      },
-      {
-        "path": "submission/assets/screenshots/boundary-1199-mobile.png",
-        "sha256": "b2eaf0454940ea862fe973fe07a14db6bcf95119a69243f1b79c8903dc8ea503"
-      },
-      {
-        "path": "submission/assets/screenshots/boundary-1200-desktop.png",
-        "sha256": "16f99404504d3c5bff1d56385a63bad4a2c83fb4ddd33f620521e555dc547828"
-      }
-    ],
-    "representativeSeconds": [
-      130,
-      135
-    ],
-    "similarity": {
-      "metric": "ffmpeg-ssim-all",
-      "minimum": 0.995
+    {
+      "id": "goal-owner-decisions",
+      "startSeconds": 45.2,
+      "endSeconds": 58,
+      "source": "submission/assets/live-demo-capture.json"
+    },
+    {
+      "id": "plan-owner-decisions",
+      "startSeconds": 58,
+      "endSeconds": 70.8,
+      "source": "submission/assets/live-demo-capture.json"
+    },
+    {
+      "id": "automatic-fail-pass",
+      "startSeconds": 71,
+      "endSeconds": 99.4,
+      "source": "submission/assets/live-demo-capture.json"
+    },
+    {
+      "id": "completion-acceptance-seal",
+      "startSeconds": 99.5,
+      "endSeconds": 126.8,
+      "source": "submission/assets/live-demo-capture.json"
     }
-  },
-  "truthBoundary": "Checkpoint reconstruction and presentation continuity only; not continuous lineage, live execution, or autonomous model selection."
+  ],
+  "reconstructedIntervals": [
+    {
+      "startSeconds": 126.9,
+      "endSeconds": 138.7,
+      "semanticId": "mobile-breakpoint",
+      "sourceAssets": [
+        "submission/assets/screenshots/mobile-s14-frontier.png",
+        "submission/assets/screenshots/boundary-1199-mobile.png",
+        "submission/assets/screenshots/boundary-1200-desktop.png"
+      ]
+    },
+    {
+      "startSeconds": 138.85,
+      "endSeconds": 153.84,
+      "semanticId": "architecture-honest-limits",
+      "sourceAssets": [
+        "submission/assets/workhub-goal-room-architecture.html",
+        "submission/assets/workhub-goal-room-architecture.svg",
+        "submission/assets/workhub-goal-room-architecture.png",
+        "submission/assets/workhub-goal-room-architecture.edges.json"
+      ]
+    }
+  ],
+  "truthBoundary": "Continuous live native governed lineage is shown from 0 through 126.8 seconds. Mobile/breakpoint and architecture scenes are disclosed source-bound reconstruction. No autonomous model selection."
 }

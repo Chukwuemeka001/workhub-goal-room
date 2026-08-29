@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "kind": "workhub-goal-room-authority-edge-spec",
+  "colors": {
+    "agent": "#22d3ee",
+    "system": "#a78bfa",
+    "owner": "#fbbf24"
+  },
+  "edges": [
+    { "id": "edge-owner-ui-kernel", "from": "owner-ui", "to": "authority-kernel", "authority": "owner" },
+    { "id": "edge-agent-tools-kernel", "from": "six-webmcp-tools", "to": "authority-kernel", "authority": "agent" },
+    { "id": "edge-kernel-verifier", "from": "authority-kernel", "to": "production-verifier-adapter", "authority": "system" },
+    { "id": "edge-verifier-rules", "from": "production-verifier-adapter", "to": "deterministic-rules", "authority": "system" },
+    { "id": "edge-rules-kernel", "from": "deterministic-rules", "to": "authority-kernel", "authority": "system" },
+    { "id": "edge-agent-completion-kernel", "from": "agent-completion-request", "to": "authority-kernel", "authority": "agent" },
+    { "id": "edge-owner-acceptance-kernel", "from": "owner-acceptance", "to": "authority-kernel", "authority": "owner" }
+  ],
+  "forbiddenEdges": [
+    { "from": "authority-kernel", "to": "deterministic-rules", "authority": "agent" },
+    { "from": "deterministic-rules", "to": "owner-acceptance" },
+    { "from": "production-verifier-adapter", "to": "owner-acceptance" },
+    { "from": "agent-completion-request", "to": "owner-acceptance" }
+  ],
+  "semanticRoute": "Agent cyan enters only through the six browser tools. System violet runs kernel to production verifier adapter to deterministic rules and returns the bound verdict to the kernel. Owner yellow enters only through trusted UI and exact-candidate acceptance. PASS never directly reaches acceptance."
+}
