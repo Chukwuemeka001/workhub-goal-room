@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { readFile, stat } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { resolve, dirname } from 'node:path';
-import { SOURCE_COMMIT, SOURCE_TREE, CAPTURE_DATE, RECORDER_SHA256, SCREENSHOTS, CUES, REQUIRED_ARTIFACTS, RECONSTRUCTED_INTERVALS } from './submission-v3-contract.mjs';
+import { SOURCE_COMMIT, SOURCE_TREE, CAPTURE_DATE, RECORDER_SHA256, SCREENSHOTS, CUES, REQUIRED_ARTIFACTS, RECONSTRUCTED_INTERVALS, VIDEO_DISCLOSURE } from './submission-v3-contract.mjs';
 
 const root = process.cwd();
 const failures = [];
@@ -41,7 +41,15 @@ for (const entry of historical.entries ?? []) {
 const docs = (await Promise.all(currentDocs.map(text))).join('\n');
 const stale = [/exactly five/i,/five WebMCP/i,/Discovers 5/i,/\b90\/90\b/i,/ninety tests/i,/e5740dc/i,/8a174561/i,/nine immutable receipts/i,/six-stage lifecycle/i,/current.{0,20}Phase 7/i];
 for (const pattern of stale) ok(!pattern.test(docs), `stale current token ${pattern}`);
+const readme = await text('README.md');
 const devpost = await text('submission/DEVPOST_SUBMISSION.md');
+const claims = await text('submission/V3_CLAIMS.md');
+const demoScript = await text('submission/DEMO_SCRIPT.md');
+ok(readme.includes(VIDEO_DISCLOSURE.readme), 'README exact continuous-live/reconstructed-tail disclosure');
+ok(devpost.includes(VIDEO_DISCLOSURE.devpost), 'Devpost exact continuous-live/reconstructed-tail disclosure');
+ok(claims.includes(VIDEO_DISCLOSURE.claims), 'claims exact continuous-live/reconstructed-tail disclosure');
+ok(demoScript.includes(VIDEO_DISCLOSURE.demoScript), 'demo script exact continuous-live/reconstructed-tail disclosure');
+for (const pattern of [/does not (?:depict|claim) one continuous authority transaction/i, /video is (?:explicitly )?(?:a )?(?:disclosed )?fresh-checkpoint reconstruction/i, /narrated evidence reconstruction/i]) ok(!pattern.test(docs), `false whole-video reconstruction wording ${pattern}`);
 for (const tool of tools) ok(devpost.includes(`\`${tool}\``), `Devpost missing tool ${tool}`);
 ok(devpost.includes('exactly six') && devpost.includes('PASS does not mean accepted.'), 'six-tool/nonacceptance copy');
 
@@ -150,7 +158,7 @@ for(let i=0;i<13;i++){
 
 // 9. Genuine interactivity: receipt classes/state plus source-bound video changes in every live interval.
 const capture=await json('submission/assets/live-demo-capture.json');
-ok(capture?.schemaVersion===4 && capture?.kind==='workhub-v3-interactive-native-demo-receipt' && capture?.continuousAuthorityLineage?.completeJourney===true && capture.continuousAuthorityLineage.endSeconds===126.8, 'interactive receipt identity/lineage');
+ok(capture?.schemaVersion===4 && capture?.kind==='workhub-v3-interactive-native-demo-receipt' && capture?.captureMode===VIDEO_DISCLOSURE.captureMode && capture?.continuousAuthorityLineage?.startSeconds===0 && capture?.continuousAuthorityLineage?.completeJourney===true && capture.continuousAuthorityLineage.endSeconds===126.8, 'interactive receipt identity/mode/lineage');
 ok(capture?.productCommit===SOURCE_COMMIT && capture?.productTree===SOURCE_TREE && capture?.browser?.version==='Google Chrome 154.0.8028.0 canary' && capture?.browser?.signatureVerified===true && capture?.browser?.notarized===true && capture?.browser?.isolatedUnsignedInProfile===true, 'interactive receipt source/browser');
 ok(capture?.nativeTools?.length===6 && new Set(capture.nativeTools.map(({name})=>name)).size===6 && tools.every((name)=>capture.nativeTools.some((row)=>row.name===name)), 'interactive receipt six browser-returned tools');
 ok(capture?.capture?.api==='Page.startScreencast' && capture.capture.frameCount>=100 && capture.capture.uniqueFrameCount>=100 && capture.capture.transitionCount>=100, 'interactive screencast frame/transition evidence');

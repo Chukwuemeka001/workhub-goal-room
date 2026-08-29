@@ -35,7 +35,7 @@ Current native evidence is deliberately narrow. In Google Chrome Canary 154.0.80
 
 This is one synthetic browser-local Goal. Reloading starts a fresh room. It has no accounts, backend persistence, database, cloud service, external effects, deployment action, payment, or messaging action. The narrow deterministic verifier is not a claim of autonomous-model reliability, enterprise security, or general production readiness.
 
-The video is a disclosed fresh-checkpoint reconstruction from exact current production/native evidence. It does not depict one continuous authority transaction. The functioning production UI and its real checkpoints are visible; the reconstruction exists to keep claims tied to already qualified receipts rather than reenacting or fabricating a native run.
+The video records one continuous live native governed journey from 0:00 through sealed S14 at 2:06.8. Only the 2:06.9–2:18.7 mobile/breakpoint scene and 2:18.85–2:33.84 architecture scene are disclosed source-bound checkpoint reconstructions. No autonomous model selected tools in this evidence.
 
 ## Judge steps
 

@@ -6,14 +6,14 @@
     "commit": "5ac95d4bdab5f54beda0f90776c3918fd36136d2",
     "tree": "b6b50068e8119d02d1d9213286f14adf3cbc0db1"
   },
-  "packageCommit": "5905fa54c5877b96795456d89b037c4b10341ef4",
-  "packageTree": "123cd23083f4776dedb1d4dd8d063374e5016694",
+  "packageCommit": "PACKAGE_COMMIT_SENTINEL",
+  "packageTree": "PACKAGE_TREE_SENTINEL",
   "artifactCount": 51,
   "artifacts": [
     {
       "path": "README.md",
-      "sha256": "2d7e8ab471242e9c5a773b7b6e336ad58ea8a20bdb985eee1cbd3a203eec32b5",
-      "bytes": 12160
+      "sha256": "6e04cf1101186d83e98f8c0121b404282eff60b779828908c6c5b73e02fabe6a",
+      "bytes": 12346
     },
     {
       "path": "evaluation/native-webmcp-v3/native-webmcp-receipt.json",
@@ -42,18 +42,18 @@
     },
     {
       "path": "scripts/submission-v3-adversarial.node-test.mjs",
-      "sha256": "3d7db36cb0429c06d4ee650c3b5f35b46d27aa4ec7a24b282170b76efbaed29d",
-      "bytes": 12501
+      "sha256": "b5baae34fb58aa883eed497f3263e512afa6326f4d746bd2316b0edd35defabb",
+      "bytes": 14318
     },
     {
       "path": "scripts/submission-v3-contract.mjs",
-      "bytes": 17167,
-      "sha256": "d714b91e2b0c71f5d9eb550f782815d55678da35fe80ef91a34eff113206ff07"
+      "bytes": 18445,
+      "sha256": "0ccfaf469d0cd40661503a538ac8161c373bcef4b87a8ae84883923a4feb1dcb"
     },
     {
       "path": "scripts/submission-v3-validate.mjs",
-      "sha256": "eed5ae0527f5c65bcfdcb734f01e8f1fa4d21d6e7e2616fb1433e45041f9f1e5",
-      "bytes": 26185
+      "sha256": "632effb8fdfcc5db229cdad0795823f75b60edf0e98552e61a78c10f19c1a773",
+      "bytes": 27213
     },
     {
       "path": "scripts/submission-v3-validator.node-test.mjs",
@@ -67,8 +67,8 @@
     },
     {
       "path": "submission/DEVPOST_SUBMISSION.md",
-      "sha256": "5482fea40f5c3df6447d359eacb87ce23f2c54a4e83e866c09b84b7a6db7d545",
-      "bytes": 4038
+      "sha256": "58ff37f97b203d29a3c16531aa953c7fc16e624535c8f31bef4da91d12aae476",
+      "bytes": 3981
     },
     {
       "path": "submission/V3_CLAIMS.md",

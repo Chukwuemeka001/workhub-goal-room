@@ -118,6 +118,32 @@ test('rejects broad production security readiness overclaims', async () => {
   rejected(result, 'broad overclaim');
 });
 
+test('rejects README wording that classifies the whole video as reconstruction', async () => {
+  const result = await mutation('readme-whole-video-reconstruction', async (dir) => {
+    const relative = 'README.md';
+    const path = join(dir, relative);
+    const current = await readFile(path, 'utf8');
+    const stale = 'The video is explicitly a fresh-checkpoint reconstruction from qualified production and native receipts. It does not claim one continuous authority transaction or autonomous model execution. Public app, repository, YouTube, and Devpost actions remain Owner-gated and pending.';
+    await writeFile(path, current.replace(/^The video (?:is|records)[^\n]+/m, stale));
+    await setPrebindSentinels(dir);
+    await syncArtifacts(dir, [relative]);
+  }, ['--prebind']);
+  rejected(result, 'README whole-video reconstruction wording');
+});
+
+test('rejects Devpost wording that denies the continuous authority journey', async () => {
+  const result = await mutation('devpost-denies-continuous-journey', async (dir) => {
+    const relative = 'submission/DEVPOST_SUBMISSION.md';
+    const path = join(dir, relative);
+    const current = await readFile(path, 'utf8');
+    const stale = 'The video is a disclosed fresh-checkpoint reconstruction from exact current production/native evidence. It does not depict one continuous authority transaction. The functioning production UI and its real checkpoints are visible; the reconstruction exists to keep claims tied to already qualified receipts rather than reenacting or fabricating a native run.';
+    await writeFile(path, current.replace(/^The video (?:is|records)[^\n]+/m, stale));
+    await setPrebindSentinels(dir);
+    await syncArtifacts(dir, [relative]);
+  }, ['--prebind']);
+  rejected(result, 'Devpost denial of continuous authority journey');
+});
+
 test('rejects lowered SSIM floor and cue visual substitution', async () => {
   const result = await mutation('ssim-zero', async (dir) => {
     const scenePath = join(dir, 'submission/assets/workhub-goal-room-demo-scenes.json'); const value = await json(scenePath);

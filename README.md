@@ -99,10 +99,10 @@ The current local V3 package is under [`submission/`](submission/):
 - [`V3_REQUIREMENTS.md`](submission/V3_REQUIREMENTS.md), [`V3_CLAIMS.md`](submission/V3_CLAIMS.md), and [`V3_AUDIT.md`](submission/V3_AUDIT.md) — current requirements, claim boundaries, and local audit;
 - [`assets/workhub-goal-room-architecture.html`](submission/assets/workhub-goal-room-architecture.html), [SVG](submission/assets/workhub-goal-room-architecture.svg), and [PNG](submission/assets/workhub-goal-room-architecture.png) — authority architecture;
 - [`assets/screenshots/manifest.json`](submission/assets/screenshots/manifest.json) — ten hash-bound current V3 evidence images;
-- [`assets/workhub-goal-room-demo.mp4`](submission/assets/workhub-goal-room-demo.mp4) and [English captions](submission/assets/workhub-goal-room-demo.en.srt) — local narrated evidence reconstruction;
+- [`assets/workhub-goal-room-demo.mp4`](submission/assets/workhub-goal-room-demo.mp4) and [English captions](submission/assets/workhub-goal-room-demo.en.srt) — local narrated evidence: a continuous live native governed journey through sealed S14, followed by disclosed source-bound reconstruction tails;
 - [`historical/v2-five-tool/manifest.json`](submission/historical/v2-five-tool/manifest.json) — byte-verified custody of the superseded package, never presented as current.
 
-The video is explicitly a fresh-checkpoint reconstruction from qualified production and native receipts. It does not claim one continuous authority transaction or autonomous model execution. Public app, repository, YouTube, and Devpost actions remain Owner-gated and pending.
+The video records one continuous live native governed journey from 0:00 through sealed S14 at 2:06.8. Only the 2:06.9–2:18.7 mobile/breakpoint scene and 2:18.85–2:33.84 architecture scene are source-bound checkpoint reconstructions. No autonomous model selected tools. Public app, repository, YouTube, and Devpost actions remain Owner-gated and pending.
 
 ## Full governed Goal journey
 
