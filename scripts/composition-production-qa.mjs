@@ -3,11 +3,12 @@ import { createServer } from "node:http";
 import { mkdtemp, readFile, readdir, rm, stat } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { extname, join, resolve, sep } from "node:path";
+import { pathToFileURL } from "node:url";
+import { resolveConfig } from "vite";
 import { resolveBrowserExecutable } from "./browser-resolver.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
 const dist = join(root, "dist");
-const chromePath = resolveBrowserExecutable();
 
 const matrix = [
   { width: 375, height: 667, expected: "mobile" },
@@ -28,6 +29,16 @@ const expectedMainName = {
   mobile: "WorkHub Goal Room mobile",
   desktop: "WorkHub Goal Room desktop Mission Room",
 };
+export function resolveStaticRequestPath(distDirectory, pathname, base) {
+  const normalizedBase = `/${base.replace(/^\/+|\/+$/g, "")}/`.replace(/^\/\/$/, "/");
+  let relativePath;
+  if (normalizedBase === "/") relativePath = pathname.replace(/^\/+/, "");
+  else if (pathname.startsWith(normalizedBase)) relativePath = pathname.slice(normalizedBase.length);
+  else return null;
+  const requested = relativePath === "" ? "index.html" : relativePath;
+  const path = resolve(distDirectory, requested);
+  return path === distDirectory || path.startsWith(`${distDirectory}${sep}`) ? path : null;
+}
 const wait = (ms) => new Promise((resolveWait) => setTimeout(resolveWait, ms));
 async function waitFor(predicate, label, attempts = 160) {
   for (let index = 0; index < attempts; index += 1) {
@@ -53,6 +64,9 @@ async function filesUnder(directory) {
   return files;
 }
 
+async function runCompositionQa() {
+const chromePath = resolveBrowserExecutable();
+const { base } = await resolveConfig({}, "build");
 await run("npm", ["run", "build"]);
 const productionFiles = await filesUnder(dist);
 const forbiddenFixtureTokens = ["__mobileQa", "__desktopQa", "qa/mobile-fixture", "qa/desktop-fixture"];
@@ -67,9 +81,8 @@ const mime = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; cha
 const server = createServer(async (request, response) => {
   try {
     const pathname = decodeURIComponent(new URL(request.url ?? "/", "http://localhost").pathname);
-    const requested = pathname === "/" ? "index.html" : pathname.replace(/^\/+/, "");
-    const path = resolve(dist, requested);
-    if (path !== dist && !path.startsWith(`${dist}${sep}`)) throw new Error("invalid path");
+    const path = resolveStaticRequestPath(dist, pathname, base);
+    if (!path) throw new Error("invalid path");
     const body = await readFile(path);
     response.writeHead(200, { "content-type": mime[extname(path)] ?? "application/octet-stream", "cache-control": "no-store" });
     response.end(body);
@@ -121,7 +134,7 @@ try {
   const rows = [];
   for (const viewport of matrix) {
     await call("Emulation.setDeviceMetricsOverride", { width: viewport.width, height: viewport.height, deviceScaleFactor: 1, mobile: false, screenWidth: viewport.width, screenHeight: viewport.height });
-    await call("Page.navigate", { url: `${origin}/` });
+    await call("Page.navigate", { url: `${origin}${base}` });
     await waitFor(async () => {
       const result = await evaluate("({ready:document.readyState==='complete',mobile:Boolean(document.querySelector('#mobile-owner-intent')),desktop:Boolean(document.querySelector('#desktop-owner-intent'))})");
       return result.ready && result.mobile && result.desktop;
@@ -194,3 +207,6 @@ try {
     catch (error) { if (attempt === 4) throw error; await wait(100); }
   }
 }
+}
+
+if (process.argv[1] && pathToFileURL(resolve(process.argv[1])).href === import.meta.url) await runCompositionQa();

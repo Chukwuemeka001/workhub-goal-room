@@ -497,8 +497,8 @@
     },
     {
       "path": "scripts/composition-production-qa.mjs",
-      "sha256": "867b673fcd80b0a5794e44e9a5dc5685579d19f0073a23cc830d6576f095b6d1",
-      "bytes": 10853
+      "sha256": "81670bcdb83a0e88e15ab8bcc2be41b115e1a1a2ba2991b1a34264e0bfa0558a",
+      "bytes": 11628
     },
     {
       "path": "scripts/v3-browser-qa.mjs",
@@ -522,8 +522,8 @@
     },
     {
       "path": "package.json",
-      "sha256": "1d677ca1cd9e80d765efa94f8f74e2f9bd9f578e4f2c7aca3a9285cadbad9511",
-      "bytes": 2493
+      "sha256": "bb10f57a27c2c0467f38bcfed26d6af086992d3ce7ceaa8a97d5e183ae5320d3",
+      "bytes": 2549
     },
     {
       "path": "README.md",

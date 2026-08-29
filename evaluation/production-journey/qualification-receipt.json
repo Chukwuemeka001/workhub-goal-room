@@ -139,8 +139,8 @@
     },
     {
       "path": "package.json",
-      "sha256": "1d677ca1cd9e80d765efa94f8f74e2f9bd9f578e4f2c7aca3a9285cadbad9511",
-      "bytes": 2493
+      "sha256": "bb10f57a27c2c0467f38bcfed26d6af086992d3ce7ceaa8a97d5e183ae5320d3",
+      "bytes": 2549
     },
     {
       "path": "evaluation/production-journey/README.md",
