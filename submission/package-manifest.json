@@ -6,8 +6,8 @@
     "commit": "5ac95d4bdab5f54beda0f90776c3918fd36136d2",
     "tree": "b6b50068e8119d02d1d9213286f14adf3cbc0db1"
   },
-  "packageCommit": "540c8940ddb3c22e81e609de3d4d9751f0c4dde0",
-  "packageTree": "38f0c0fd9620e10b675f54f6d17ffbcc3f3adf19",
+  "packageCommit": "PACKAGE_COMMIT_SENTINEL",
+  "packageTree": "PACKAGE_TREE_SENTINEL",
   "artifactCount": 51,
   "artifacts": [
     {
@@ -27,18 +27,18 @@
     },
     {
       "path": "evaluation/production-journey/qualification-receipt.json",
-      "sha256": "43b4b043910cb8148799b736971c3de1c13f132f916e96a55f4a0ee270a41725",
+      "sha256": "6542de2fe769028397e81ecb44dd154ae785769ca4252a1d85c6ed4837df4d41",
       "bytes": 8180
     },
     {
       "path": "evaluation/v3/qualification-receipt.json",
-      "sha256": "d3129c654562a17e269653b7842e6b5cb969dae944100ba7569cec0b03300b2c",
+      "sha256": "49ac8f9727a8ced216c1fcf670de2c37a13807fee49aed506486551b1ca223b2",
       "bytes": 24405
     },
     {
       "path": "package.json",
-      "sha256": "1ae1b1a6466f6970d4a7ae3c06ad8cb48f947d455d87cade5703a51040eb49a6",
-      "bytes": 2413
+      "sha256": "1d677ca1cd9e80d765efa94f8f74e2f9bd9f578e4f2c7aca3a9285cadbad9511",
+      "bytes": 2493
     },
     {
       "path": "scripts/submission-v3-adversarial.node-test.mjs",

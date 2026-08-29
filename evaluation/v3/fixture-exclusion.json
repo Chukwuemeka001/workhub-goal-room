@@ -16,6 +16,16 @@
   "leaks": [],
   "builtFiles": [
     {
+      "path": "PRIVACY.md",
+      "sha256": "4f81e2d8438046bec66a737c13404d127b436dab8b1d86823d01ed78dd0aa07c",
+      "bytes": 1360
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "925b1cbab0e44a5ee9d11910a5111e35aaafcb56eca1b2a8ddc883a58059696f",
+      "bytes": 1707
+    },
+    {
       "path": "assets/index-BZJDHcqq.css",
       "sha256": "b80a9a6b7bdbbb5a21446746f263d6d86d43798c8de156fec9f1a99684ced0cf",
       "bytes": 22523

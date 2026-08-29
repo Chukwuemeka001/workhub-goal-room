@@ -88,6 +88,13 @@ const walk = (dir) => readdirSync(dir).flatMap((entry) => {
   return statSync(path).isDirectory() ? walk(path) : [path];
 });
 const dist = join(root, "dist");
+const distFiles = walk(dist).map((path) => path.slice(dist.length + 1).split("\\").join("/")).sort();
+check(distFiles.length === 5, `production build must contain exactly five files, found ${distFiles.length}`);
+check(distFiles.filter((path) => !path.startsWith("assets/")).join(",") === "PRIVACY.md,SECURITY.md,index.html", "production build top-level inventory is invalid");
+check(distFiles.filter((path) => /^assets\/index-[A-Za-z0-9_-]+\.(?:css|js)$/.test(path)).length === 2, "production build hashed asset inventory is invalid");
+for (const name of ["SECURITY.md", "PRIVACY.md"]) {
+  check(readFileSync(join(dist, name)).equals(readFileSync(join(root, name))), `${name} build copy differs from authoritative root document`);
+}
 for (const path of walk(dist)) {
   check(extname(path) !== ".map", `source map present: ${path.slice(root.length + 1)}`);
   if ([".html", ".js", ".css"].includes(extname(path))) {
