@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { readFile, stat } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { resolve, dirname } from 'node:path';
-import { SOURCE_COMMIT, SOURCE_TREE, CAPTURE_DATE, RECORDER_SHA256, SCREENSHOTS, CUES, REQUIRED_ARTIFACTS, RECONSTRUCTED_INTERVALS, VIDEO_DISCLOSURE } from './submission-v3-contract.mjs';
+import { SOURCE_COMMIT, SOURCE_TREE, CAPTURE_DATE, RECORDER_SHA256, SCREENSHOTS, CUES, RECEIPT_SOURCE_PATHS, REQUIRED_ARTIFACTS, RECONSTRUCTED_INTERVALS, VIDEO_DISCLOSURE } from './submission-v3-contract.mjs';
 
 const root = process.cwd();
 const failures = [];
@@ -58,6 +58,7 @@ const production = await json('evaluation/production-journey/qualification-recei
 const native = await json('evaluation/native-webmcp-v3/native-webmcp-receipt.json');
 const phase5 = await json('evaluation/phase5-qualification.json');
 const journey = await json('evaluation/production-journey/journey.json');
+const v3Receipt = await json('evaluation/v3/qualification-receipt.json');
 ok(production?.results?.checkpoints === 12 && production?.results?.receipts === 22 && production?.results?.finalPhase === 'GOAL_ACCEPTED', 'production summary');
 ok(native?.descriptors?.length === 6 && native?.browserEnumerationOrder?.length === 6 && native?.registrationOrder?.length === 6, 'native exact six');
 ok(new Set(native.descriptors?.map(({name}) => name)).size === 6 && tools.every((name) => native.descriptors.some((row) => row.name === name)), 'native tool names');
@@ -189,6 +190,14 @@ ok(JSON.stringify(packageManifest.artifacts?.map(({path})=>path))===JSON.stringi
 const sentinel=packageManifest.packageCommit==='PACKAGE_COMMIT_SENTINEL'&&packageManifest.packageTree==='PACKAGE_TREE_SENTINEL';
 const bound=/^[0-9a-f]{40}$/.test(packageManifest.packageCommit)&&/^[0-9a-f]{40}$/.test(packageManifest.packageTree);
 ok(prebind ? sentinel : bound,'package binding form for selected mode');
+const receiptSourceCommit = prebind ? 'HEAD' : packageManifest.packageCommit;
+ok(Array.isArray(v3Receipt?.sourceHashes) && JSON.stringify(v3Receipt.sourceHashes.map((row) => row?.path)) === JSON.stringify(RECEIPT_SOURCE_PATHS), 'receipt source hash exact path inventory/order');
+for (const [index, expectedPath] of RECEIPT_SOURCE_PATHS.entries()) {
+ const row = v3Receipt?.sourceHashes?.[index];
+ const shape = row && JSON.stringify(Object.keys(row).sort()) === JSON.stringify(['bytes','path','sha256']) && row.path === expectedPath && Number.isInteger(row.bytes) && row.bytes >= 0 && /^[0-9a-f]{64}$/.test(row.sha256);
+ const object = shape ? git(['show', `${receiptSourceCommit}:${expectedPath}`], null) : { status: 1, stdout: Buffer.alloc(0) };
+ ok(shape && object.status === 0 && object.stdout.length === row.bytes && digest(object.stdout) === row.sha256, `receipt source hash ${expectedPath}`);
+}
 if(!prebind&&bound){
  const object=git(['cat-file','-t',packageManifest.packageCommit]); const tree=git(['rev-parse',`${packageManifest.packageCommit}^{tree}`]);
  ok(object.status===0&&object.stdout.trim()==='commit','packageCommit real commit object'); ok(tree.status===0&&tree.stdout.trim()===packageManifest.packageTree,'packageTree exact commit tree');

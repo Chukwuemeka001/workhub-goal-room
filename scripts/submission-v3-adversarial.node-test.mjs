@@ -102,6 +102,36 @@ test('rejects omission of any exact required bound artifact', async () => {
   rejected(result, 'artifact omission');
 });
 
+test('rejects stale README identity in the V3 qualification receipt', async () => {
+  const result = await mutation('stale-receipt-readme', async (dir) => {
+    const relative = 'evaluation/v3/qualification-receipt.json';
+    const receipt = await json(join(dir, relative));
+    const readme = receipt.sourceHashes.find((row) => row.path === 'README.md');
+    Object.assign(readme, {
+      sha256: '2d7e8ab471242e9c5a773b7b6e336ad58ea8a20bdb985eee1cbd3a203eec32b5',
+      bytes: 12160,
+    });
+    await putJson(join(dir, relative), receipt);
+    await setPrebindSentinels(dir);
+    await syncArtifacts(dir, [relative]);
+  }, ['--prebind']);
+  rejected(result, 'stale V3 receipt README source identity');
+  assert.match(`${result.stdout}\n${result.stderr}`, /receipt source hash README\.md/);
+});
+
+test('rejects malformed sourceHash rows in the V3 qualification receipt', async () => {
+  const result = await mutation('malformed-receipt-source-hash', async (dir) => {
+    const relative = 'evaluation/v3/qualification-receipt.json';
+    const receipt = await json(join(dir, relative));
+    receipt.sourceHashes[0].bytes = String(receipt.sourceHashes[0].bytes);
+    await putJson(join(dir, relative), receipt);
+    await setPrebindSentinels(dir);
+    await syncArtifacts(dir, [relative]);
+  }, ['--prebind']);
+  rejected(result, 'malformed V3 receipt source hash');
+  assert.match(`${result.stdout}\n${result.stderr}`, /receipt source hash index\.html/);
+});
+
 test('rejects fake publication URL hidden behind pending prefix', async () => {
   const result = await mutation('pending-url', async (dir) => {
     const path = join(dir, 'submission/package-manifest.json'); const value = await json(path);

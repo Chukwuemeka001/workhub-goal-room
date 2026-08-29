@@ -6,8 +6,8 @@
     "commit": "5ac95d4bdab5f54beda0f90776c3918fd36136d2",
     "tree": "b6b50068e8119d02d1d9213286f14adf3cbc0db1"
   },
-  "packageCommit": "d79fbe78dd030576e445b755d52fb0a2d8c964af",
-  "packageTree": "94dc82e9f1fb9e763926d908749182c29b4cce2e",
+  "packageCommit": "PACKAGE_COMMIT_SENTINEL",
+  "packageTree": "PACKAGE_TREE_SENTINEL",
   "artifactCount": 51,
   "artifacts": [
     {
@@ -32,7 +32,7 @@
     },
     {
       "path": "evaluation/v3/qualification-receipt.json",
-      "sha256": "49ac8f9727a8ced216c1fcf670de2c37a13807fee49aed506486551b1ca223b2",
+      "sha256": "b7d5e2b8ab55deda8417748bf33b9df51388830d8ff07092a6284fee87a6151c",
       "bytes": 24405
     },
     {
@@ -42,18 +42,18 @@
     },
     {
       "path": "scripts/submission-v3-adversarial.node-test.mjs",
-      "sha256": "b5baae34fb58aa883eed497f3263e512afa6326f4d746bd2316b0edd35defabb",
-      "bytes": 14318
+      "sha256": "3b9a164ca1319b866f047d26504a25355125910a34772599639d6800033a9a25",
+      "bytes": 15777
     },
     {
       "path": "scripts/submission-v3-contract.mjs",
-      "bytes": 18445,
-      "sha256": "0ccfaf469d0cd40661503a538ac8161c373bcef4b87a8ae84883923a4feb1dcb"
+      "bytes": 19235,
+      "sha256": "76124d273775562ea8c13caac663e75dc107b918dfe5d0e11089a9b35c66ea4b"
     },
     {
       "path": "scripts/submission-v3-validate.mjs",
-      "sha256": "632effb8fdfcc5db229cdad0795823f75b60edf0e98552e61a78c10f19c1a773",
-      "bytes": 27213
+      "sha256": "d799255e6cbf8c1695a2884b95005246ed28a231d81c15323d9618c4669f17f3",
+      "bytes": 28211
     },
     {
       "path": "scripts/submission-v3-validator.node-test.mjs",
