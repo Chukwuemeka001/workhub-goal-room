@@ -148,6 +148,21 @@ test('rejects broad production security readiness overclaims', async () => {
   rejected(result, 'broad overclaim');
 });
 
+test('rejects stale README demo duration despite synchronized mutable package metadata', async () => {
+  const result = await mutation('stale-readme-duration', async (dir) => {
+    const relative = 'README.md';
+    const path = join(dir, relative);
+    const current = await readFile(path, 'utf8');
+    const stale = current.replace(/(\[`DEMO_SCRIPT\.md`\][^\n]+— )[^ ]+( narration\/timeline and reconstruction disclosure;)/, '$12:38$2');
+    assert.match(stale, /— 2:38 narration\/timeline and reconstruction disclosure;/);
+    await writeFile(path, stale);
+    await setPrebindSentinels(dir);
+    await syncArtifacts(dir, [relative]);
+  }, ['--prebind']);
+  rejected(result, 'stale README demo duration');
+  assert.match(`${result.stdout}\n${result.stderr}`, /README exact demo duration/);
+});
+
 test('rejects README wording that classifies the whole video as reconstruction', async () => {
   const result = await mutation('readme-whole-video-reconstruction', async (dir) => {
     const relative = 'README.md';

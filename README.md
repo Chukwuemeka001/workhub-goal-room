@@ -95,7 +95,7 @@ The V3 contract and mapping are in [`design/GOAL_ROOM_V3_VISUAL_CONTRACT.md`](de
 The current local V3 package is under [`submission/`](submission/):
 
 - [`DEVPOST_SUBMISSION.md`](submission/DEVPOST_SUBMISSION.md) — truthful judge copy and explicit pending publication gates;
-- [`DEMO_SCRIPT.md`](submission/DEMO_SCRIPT.md) — 2:38 narration/timeline and reconstruction disclosure;
+- [`DEMO_SCRIPT.md`](submission/DEMO_SCRIPT.md) — 2:33.84 narration/timeline and reconstruction disclosure;
 - [`V3_REQUIREMENTS.md`](submission/V3_REQUIREMENTS.md), [`V3_CLAIMS.md`](submission/V3_CLAIMS.md), and [`V3_AUDIT.md`](submission/V3_AUDIT.md) — current requirements, claim boundaries, and local audit;
 - [`assets/workhub-goal-room-architecture.html`](submission/assets/workhub-goal-room-architecture.html), [SVG](submission/assets/workhub-goal-room-architecture.svg), and [PNG](submission/assets/workhub-goal-room-architecture.png) — authority architecture;
 - [`assets/screenshots/manifest.json`](submission/assets/screenshots/manifest.json) — ten hash-bound current V3 evidence images;

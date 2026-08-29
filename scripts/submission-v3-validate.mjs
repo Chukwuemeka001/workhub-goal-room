@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { readFile, stat } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { resolve, dirname } from 'node:path';
-import { SOURCE_COMMIT, SOURCE_TREE, CAPTURE_DATE, RECORDER_SHA256, SCREENSHOTS, CUES, RECEIPT_SOURCE_PATHS, REQUIRED_ARTIFACTS, RECONSTRUCTED_INTERVALS, VIDEO_DISCLOSURE } from './submission-v3-contract.mjs';
+import { SOURCE_COMMIT, SOURCE_TREE, CAPTURE_DATE, RECORDER_SHA256, SCREENSHOTS, CUES, RECEIPT_SOURCE_PATHS, REQUIRED_ARTIFACTS, RECONSTRUCTED_INTERVALS, DEMO_DURATION, VIDEO_DISCLOSURE } from './submission-v3-contract.mjs';
 
 const root = process.cwd();
 const failures = [];
@@ -46,6 +46,7 @@ const devpost = await text('submission/DEVPOST_SUBMISSION.md');
 const claims = await text('submission/V3_CLAIMS.md');
 const demoScript = await text('submission/DEMO_SCRIPT.md');
 ok(readme.includes(VIDEO_DISCLOSURE.readme), 'README exact continuous-live/reconstructed-tail disclosure');
+ok(readme.includes(DEMO_DURATION.readmeExcerpt) && DEMO_DURATION.readmeExcerpt.includes(DEMO_DURATION.readmeDisplay), 'README exact demo duration');
 ok(devpost.includes(VIDEO_DISCLOSURE.devpost), 'Devpost exact continuous-live/reconstructed-tail disclosure');
 ok(claims.includes(VIDEO_DISCLOSURE.claims), 'claims exact continuous-live/reconstructed-tail disclosure');
 ok(demoScript.includes(VIDEO_DISCLOSURE.demoScript), 'demo script exact continuous-live/reconstructed-tail disclosure');
@@ -130,7 +131,7 @@ for (const pattern of [/descriptor\.execute/i,/tool\.execute\s*\(/i,/__phase7Exe
 const mediaPath = 'submission/assets/workhub-goal-room-demo.mp4'; const media = resolve(root,mediaPath);
 const probeRun = spawnSync('ffprobe',['-v','error','-show_entries','format=duration,size','-show_entries','stream=codec_name,codec_type,profile,width,height,sample_rate,channels','-of','json',media],{encoding:'utf8'});
 ok(probeRun.status === 0, 'ffprobe'); const probe = probeRun.status === 0 ? JSON.parse(probeRun.stdout) : {streams:[],format:{duration:0}}; const duration=Number(probe.format.duration);
-ok(duration > 153.2 && duration < 180, 'video duration contains all cues under 180s');
+ok(Math.abs(duration-DEMO_DURATION.mediaDurationSeconds)<=DEMO_DURATION.toleranceSeconds, 'frozen media duration');
 ok(probe.streams.some((s) => s.codec_type==='video' && s.codec_name==='h264' && s.profile==='High' && s.width===1440 && s.height===900), 'H.264 High 1440x900');
 ok(probe.streams.some((s) => s.codec_type==='audio' && s.codec_name==='aac' && s.profile==='LC' && s.sample_rate==='48000'), 'AAC-LC 48kHz');
 ok(spawnSync('ffmpeg',['-v','error','-i',media,'-f','null','-']).status === 0, 'full media decode');
@@ -148,6 +149,9 @@ ok(times.length===13 && times.every(Boolean), 'exact 13 SRT cues'); for(let i=0;
 const scenes=await json('submission/assets/workhub-goal-room-demo-scenes.json');
 ok(scenes?.schemaVersion===2 && scenes?.frozenSimilarityFloor===0.995 && scenes?.cues?.length===13, 'scene manifest identity/count/frozen floor');
 ok(JSON.stringify(scenes.cues)===JSON.stringify(CUES),'exact validator-owned cue contract (including cue 12)');
+const demoEndpointMatch=[...demoScript.matchAll(/–(\d+):(\d+(?:\.\d+)?)\s*\|/g)].at(-1);
+const demoEndpoint=demoEndpointMatch ? Number(demoEndpointMatch[1])*60+Number(demoEndpointMatch[2]) : Number.NaN;
+ok(demoEndpoint===DEMO_DURATION.finalEndpointSeconds && Math.abs(demoEndpoint-duration)<=DEMO_DURATION.toleranceSeconds, 'demo script final endpoint consistent with frozen media duration');
 for(let i=0;i<13;i++){
  const cue=CUES[i], caption=cueBlocks[i]?.split('\n').slice(2).join(' ') ?? '';
  ok(cue.cue===i+1 && cue.startSeconds===times[i][0] && cue.endSeconds===times[i][1] && cue.caption===caption,`cue ${i+1} frozen caption/time binding`);
@@ -179,6 +183,7 @@ ok(JSON.stringify(capture.reconstructedIntervals?.map(({scene})=>scene))===JSON.
 ok(capture.reconstructedIntervals?.[0]?.start===RECONSTRUCTED_INTERVALS[0].start && capture.reconstructedIntervals?.[0]?.end===RECONSTRUCTED_INTERVALS[0].end && capture.reconstructedIntervals?.[1]?.start===RECONSTRUCTED_INTERVALS[1].start, 'frozen reconstructed interval starts/mobile end');
 ok(capture.reconstructedIntervals?.every(({start,end})=>Number.isFinite(start)&&Number.isFinite(end)&&start>=0&&end>start&&end<=duration) && Math.abs(capture.reconstructedIntervals[1].end-duration)<0.001, 'receipt reconstructed intervals bounded by authoritative media duration');
 ok(Number(capture.media?.probe?.format?.duration)===duration, 'receipt probe duration equals authoritative ffprobe duration');
+ok(Math.abs(Number(capture.media?.probe?.format?.duration)-DEMO_DURATION.mediaDurationSeconds)<=DEMO_DURATION.toleranceSeconds && Math.abs(demoEndpoint-Number(capture.media?.probe?.format?.duration))<=DEMO_DURATION.toleranceSeconds, 'live receipt media duration consistent with demo endpoint');
 ok(scenes.reconstructedIntervals?.[0]?.startSeconds===RECONSTRUCTED_INTERVALS[0].start && scenes.reconstructedIntervals?.[0]?.endSeconds===RECONSTRUCTED_INTERVALS[0].end && scenes.reconstructedIntervals?.[1]?.startSeconds===RECONSTRUCTED_INTERVALS[1].start && Math.abs(scenes.reconstructedIntervals?.[1]?.endSeconds-duration)<0.001, 'scene reconstruction intervals bounded by authoritative media duration');
 
 // 10. Exact package inventory, immutable Git-object hashes, parent/tree binding, and child scope.
