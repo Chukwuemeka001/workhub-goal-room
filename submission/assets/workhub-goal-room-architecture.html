@@ -1,17 +1,42 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>WorkHub Goal Room architecture</title>
-<style>
-:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#020617;color:#e2e8f0;font-family:Inter,system-ui,sans-serif}main{max-width:1660px;margin:auto;padding:30px}.frame{border:1px solid #1e293b;border-radius:22px;overflow:hidden;box-shadow:0 30px 80px #0008;background:#020617}.frame img{display:block;width:100%;height:auto}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}.card{border:1px solid #1e293b;border-radius:16px;padding:20px;background:#0f172a}.card h2{font-size:15px;margin:0 0 10px;color:#67e8f9}.card p{font-size:13px;line-height:1.55;color:#cbd5e1;margin:0}@media(max-width:800px){main{padding:12px}.cards{grid-template-columns:1fr}}
-</style>
-</head>
-<body><main>
-<div class="frame"><img src="workhub-goal-room-architecture.svg" alt="WorkHub Goal Room governed WebMCP architecture"></div>
-<section class="cards">
-<div class="card"><h2>Callable, not all-powerful</h2><p>Exactly five WebMCP tools expose bounded agent requests. Owner confirmation, verification, acceptance, and external effects remain inaccessible.</p></div>
-<div class="card"><h2>One authority kernel</h2><p>The browser adapter and owner UI dispatch into the same deterministic state machine, which revalidates state, content, evidence, and legal frontier.</p></div>
-<div class="card"><h2>PASS ≠ acceptance</h2><p>Verification PASS permits an agent completion request. Only the owner may accept the exact verified candidate and close the Goal.</p></div>
-</section>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>WorkHub Goal Room V3 architecture</title><style>html,body{margin:0;background:#050914}main{max-width:1600px;margin:auto}svg{display:block;width:100%;height:auto}</style></head><body><main><svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+<title id="title">WorkHub Goal Room V3 authority architecture</title>
+<desc id="desc">Owner UI and exactly six Agent WebMCP tools enter one authority kernel. The production System adapter applies deterministic rules to exact candidate bytes. PASS enables an Agent completion request but never flows directly to Owner acceptance.</desc>
+<defs>
+ <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#172033" stroke-width="1"/></pattern>
+ <marker id="agentArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L8 3L0 6Z" fill="#22d3ee"/></marker>
+ <marker id="systemArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L8 3L0 6Z" fill="#a78bfa"/></marker>
+ <marker id="ownerArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L8 3L0 6Z" fill="#fbbf24"/></marker>
+ <style>
+ text{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;fill:#e5edf8}.h{font:700 30px system-ui,sans-serif}.sub{font-size:15px;fill:#94a3b8}.lane{font-size:14px;font-weight:700;letter-spacing:1px}.box{fill:#0b1220;stroke-width:2;rx:14}.label{font-size:19px;font-weight:700}.small{font-size:13px;fill:#cbd5e1}.tiny{font-size:12px;fill:#94a3b8}.agent{stroke:#22d3ee}.system{stroke:#a78bfa}.owner{stroke:#fbbf24}.neutral{stroke:#64748b}.agentFill{fill:#083344}.systemFill{fill:#2e1065}.ownerFill{fill:#422006}.neutralFill{fill:#111827}
+ </style>
+</defs>
+<rect width="1600" height="1000" fill="#050914"/><rect width="1600" height="1000" fill="url(#grid)"/>
+<text x="70" y="65" class="h">WorkHub Goal Room V3 — explicit authority, exact evidence</text>
+<text x="70" y="96" class="sub">Qualified product 5ac95d4bdab5f54beda0f90776c3918fd36136d2 · tree b6b50068e8119d02d1d9213286f14adf3cbc0db1</text>
+
+<!-- arrows behind boxes -->
+<path d="M310 295H505" class="owner" fill="none" stroke-width="4" marker-end="url(#ownerArrow)"/>
+<path d="M310 500H505" class="agent" fill="none" stroke-width="4" marker-end="url(#agentArrow)"/>
+<path d="M810 405H930V315H1020" class="system" fill="none" stroke-width="4" marker-end="url(#systemArrow)"/>
+<path d="M1185 385V500H1020" class="system" fill="none" stroke-width="4" marker-end="url(#systemArrow)"/>
+<path d="M810 500H1020" class="agent" fill="none" stroke-width="4" marker-end="url(#agentArrow)"/>
+<path d="M1185 575V690H1370" class="agent" fill="none" stroke-width="4" marker-end="url(#agentArrow)"/>
+<path d="M310 295V755H1370" class="owner" fill="none" stroke-width="4" marker-end="url(#ownerArrow)"/>
+
+<rect x="70" y="170" width="240" height="195" class="box owner ownerFill"/><text x="95" y="205" class="lane" fill="#fbbf24">OWNER AUTHORITY</text><text x="95" y="242" class="label">Native UI</text><text x="95" y="275" class="small">Intent · revise · confirm</text><text x="95" y="300" class="small">Exact-candidate accept</text><text x="95" y="333" class="tiny">Trusted human controls only</text>
+
+<rect x="70" y="405" width="240" height="255" class="box agent agentFill"/><text x="95" y="440" class="lane" fill="#22d3ee">AGENT AUTHORITY</text><text x="95" y="477" class="label">Six WebMCP tools</text><text x="95" y="510" class="small">get_goal_room_state</text><text x="95" y="533" class="small">propose_goal_contract</text><text x="95" y="556" class="small">propose_plan · claim_step</text><text x="95" y="579" class="small">submit_artifact</text><text x="95" y="602" class="small">request_completion</text><text x="95" y="635" class="tiny">No Owner/System/effect tools</text>
+
+<rect x="505" y="235" width="305" height="400" class="box neutral neutralFill"/><text x="535" y="275" class="lane" fill="#cbd5e1">ONE AUTHORITY KERNEL</text><text x="535" y="315" class="label">Goal Room</text><text x="535" y="355" class="small">State + version checks</text><text x="535" y="385" class="small">Idempotency + phase checks</text><text x="535" y="415" class="small">Goal / Plan / step binding</text><text x="535" y="445" class="small">Candidate version + SHA-256</text><text x="535" y="475" class="small">Immutable receipt chain</text><line x1="535" y1="505" x2="780" y2="505" stroke="#334155"/><text x="535" y="545" class="small">Current actor + legal frontier</text><text x="535" y="575" class="small">Fail-closed Agent dispatch</text><text x="535" y="605" class="tiny">Browser-local · no database/cloud</text>
+
+<rect x="1020" y="220" width="330" height="165" class="box system systemFill"/><text x="1050" y="255" class="lane" fill="#c4b5fd">SYSTEM AUTHORITY</text><text x="1050" y="292" class="label">Production verifier adapter</text><text x="1050" y="325" class="small">Automatic observation after submission</text><text x="1050" y="352" class="tiny">Not a tool · not an Owner control</text>
+
+<rect x="1020" y="430" width="330" height="145" class="box system systemFill"/><text x="1050" y="465" class="lane" fill="#c4b5fd">DETERMINISTIC RULE SET</text><text x="1050" y="503" class="label">workhub_goal_room_release/v1</text><text x="1050" y="535" class="small">FAIL / PASS bound to v2 + full digest</text>
+
+<rect x="1020" y="625" width="300" height="130" class="box agent agentFill"/><text x="1050" y="660" class="lane" fill="#22d3ee">AFTER EXACT PASS</text><text x="1050" y="698" class="label">Agent requests completion</text><text x="1050" y="727" class="small">PASS grants no acceptance authority</text>
+
+<rect x="1370" y="680" width="170" height="150" class="box owner ownerFill"/><text x="1390" y="715" class="lane" fill="#fbbf24">OWNER ONLY</text><text x="1390" y="750" class="small">Exact-candidate</text><text x="1390" y="777" class="small">acceptance</text><text x="1390" y="808" class="tiny">Sealed S14</text>
+
+<rect x="70" y="875" width="1470" height="75" rx="12" fill="#0b1220" stroke="#334155"/><line x1="100" y1="912" x2="150" y2="912" class="agent" stroke-width="5"/><text x="165" y="918" class="small">Agent call</text><line x1="330" y1="912" x2="380" y2="912" class="system" stroke-width="5"/><text x="395" y="918" class="small">System verdict</text><line x1="600" y1="912" x2="650" y2="912" class="owner" stroke-width="5"/><text x="665" y="918" class="small">Owner decision</text><text x="885" y="918" class="small">No accounts · persistence · database · cloud · external effects</text>
+</svg>
 </main></body></html>

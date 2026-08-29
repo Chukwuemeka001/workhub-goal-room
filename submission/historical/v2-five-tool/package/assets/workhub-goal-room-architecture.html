@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WorkHub Goal Room architecture</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#020617;color:#e2e8f0;font-family:Inter,system-ui,sans-serif}main{max-width:1660px;margin:auto;padding:30px}.frame{border:1px solid #1e293b;border-radius:22px;overflow:hidden;box-shadow:0 30px 80px #0008;background:#020617}.frame img{display:block;width:100%;height:auto}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}.card{border:1px solid #1e293b;border-radius:16px;padding:20px;background:#0f172a}.card h2{font-size:15px;margin:0 0 10px;color:#67e8f9}.card p{font-size:13px;line-height:1.55;color:#cbd5e1;margin:0}@media(max-width:800px){main{padding:12px}.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main>
+<div class="frame"><img src="workhub-goal-room-architecture.svg" alt="WorkHub Goal Room governed WebMCP architecture"></div>
+<section class="cards">
+<div class="card"><h2>Callable, not all-powerful</h2><p>Exactly five WebMCP tools expose bounded agent requests. Owner confirmation, verification, acceptance, and external effects remain inaccessible.</p></div>
+<div class="card"><h2>One authority kernel</h2><p>The browser adapter and owner UI dispatch into the same deterministic state machine, which revalidates state, content, evidence, and legal frontier.</p></div>
+<div class="card"><h2>PASS ≠ acceptance</h2><p>Verification PASS permits an agent completion request. Only the owner may accept the exact verified candidate and close the Goal.</p></div>
+</section>
+</main></body></html>

@@ -1,49 +1,69 @@
 {
-  "schemaVersion": 1,
-  "kind": "phase7-continuous-judge-demo-capture",
-  "browser": "Chrome/154.0.8027.0",
-  "capture": {
-    "mode": "Chrome DevTools Page.startScreencast of the functioning app",
-    "sourceUrl": "http://127.0.0.1:4191/",
-    "presentationFrameCount": 105,
-    "rawCaptureDurationSeconds": 148.78613558388315,
-    "recorderPath": "submission/scripts/record-live-demo.py",
-    "recorderSha256": "6238597df722ed9a513f228b43d194eb17eacd80ebd865b11463d59812f01aa9"
-  },
-  "visibleProof": [
-    "five descriptors captured from document.modelContext.registerTool",
-    "real get_goal_room_state callback and structured result",
-    "real malformed claim_step callback returning INVALID_TOOL_INPUT",
-    "visible demo cursor movement and owner/operator control activation",
-    "Plan confirmation",
-    "admitted step claim",
-    "Candidate v1 submission",
-    "deterministic verification FAIL",
-    "corrected Candidate v2 submission",
-    "deterministic verification PASS",
-    "completion request with owner-only frontier",
-    "owner acceptance",
-    "nine ordered immutable receipts",
-    "final no-action state"
+  "schemaVersion": 3,
+  "kind": "workhub-v3-local-demo-media-receipt",
+  "captureMode": "fresh-checkpoint reconstruction from qualified current production/native receipts",
+  "continuousAuthorityLineage": false,
+  "interactiveClaim": "The functioning production UI is visibly shown at qualified checkpoints; scenes are reconstructed and are not called one continuous transaction.",
+  "nativeClaim": "First scene is an explicitly labeled visualization of the exact native receipt; no autonomous model selection.",
+  "productCommit": "5ac95d4bdab5f54beda0f90776c3918fd36136d2",
+  "productTree": "b6b50068e8119d02d1d9213286f14adf3cbc0db1",
+  "sources": [
+    "evaluation/native-webmcp-v3/native-webmcp-receipt.json",
+    "evaluation/production-journey/qualification-receipt.json",
+    "evaluation/phase5-qualification.json"
   ],
-  "claimBoundary": "Native descriptor/callback inspection plus deterministic operator clicks; not autonomous model execution.",
-  "output": {
-    "path": "submission/assets/workhub-goal-room-demo.mp4",
-    "containerDurationSeconds": 150.033333,
-    "videoDurationSeconds": 150.033333,
-    "audioDurationSeconds": 149.952,
-    "width": 1440,
-    "height": 900,
-    "framesPerSecond": 30,
-    "videoCodec": "h264",
-    "audioCodec": "aac",
-    "sha256": "8a1745619ea4b1b6bda03898abd07a748bde2444b2fc26bc6a2dca9c126f094e"
+  "media": {
+    "video": {
+      "path": "submission/assets/workhub-goal-room-demo.mp4",
+      "sha256": "232a62c0e7dfc0855f397d3bb3fcd9bc004064504adeb3d9be0c1e478c5f8cce",
+      "bytes": 4752983
+    },
+    "narration": {
+      "path": "submission/assets/workhub-goal-room-demo-narration.ogg",
+      "sha256": "d75e5e00da328a431a1fc142daafa710c8dd17eb5b5c07a0e61a7390641af2c2",
+      "bytes": 853661
+    },
+    "captions": {
+      "path": "submission/assets/workhub-goal-room-demo.en.srt",
+      "sha256": "51ec26307a3a87403298cdbe6a78b734e1fdeb7c2687a3d5f8357f349f28aeda",
+      "bytes": 2850
+    },
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "index": 1,
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "sample_rate": "48000",
+          "channels": 1
+        }
+      ],
+      "format": {
+        "duration": "157.833333",
+        "size": "4752983"
+      }
+    }
   },
-  "captions": {
-    "path": "submission/assets/workhub-goal-room-demo.en.srt",
-    "cueCount": 10,
-    "lastCueEndSeconds": 149.085,
-    "withinAudio": true,
-    "sha256": "ac4a92b369093a59799fae95f13f21cf44e49c34b1d9a1c60b0bed4d6282a9cf"
-  }
+  "review": {
+    "fullDecode": "passed",
+    "sampledFrameCount": 10,
+    "contactSheet": "temporary locally reviewed and removed before commit",
+    "blackFramesObserved": 0,
+    "privateNotificationsObserved": 0,
+    "cursorLeaksObserved": 0,
+    "music": false,
+    "narrationLanguage": "en",
+    "semanticCaptionMatch": "same narration transcript; cue timing allocated by spoken-word weight",
+    "limitations": "Synthetic browser-local Goal; no accounts, backend persistence, external effects, autonomy reliability, or enterprise security."
+  },
+  "date": "2026-08-28"
 }

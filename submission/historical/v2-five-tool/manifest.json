@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "claimClass": "historical-v2-five-tool",
+  "captureDate": "2026-08-28",
+  "productCommit": "5ac95d4bdab5f54beda0f90776c3918fd36136d2",
+  "productTree": "b6b50068e8119d02d1d9213286f14adf3cbc0db1",
+  "entryCount": 25,
+  "entries": [
+    {
+      "originalPath": "submission/DEMO_SCRIPT.md",
+      "historicalPath": "submission/historical/v2-five-tool/package/DEMO_SCRIPT.md",
+      "sha256": "8d69f855ce7531ce4045b0ad1f12007232abca968c1c9e46e71648993b684328",
+      "bytes": 3333
+    },
+    {
+      "originalPath": "submission/DEVPOST_SUBMISSION.md",
+      "historicalPath": "submission/historical/v2-five-tool/package/DEVPOST_SUBMISSION.md",
+      "sha256": "1e5b8a0dec919efc7c146a000d7ce044e2e03557e044f9d4cf40a8776136d847",
+      "bytes": 7886
+    },
+    {
+      "originalPath": "submission/PHASE7_AUDIT.md",
+      "historicalPath": "submission/historical/v2-five-tool/package/PHASE7_AUDIT.md",
+      "sha256": "83888a1a076d650897a3c4139e2505a5269216c80ce1f360be5c8995f09eb13e",
+      "bytes": 7138
+    },
+    {
+      "originalPath": "submission/PHASE7_CLAIMS.md",
+      "historicalPath": "submission/historical/v2-five-tool/package/PHASE7_CLAIMS.md",
+      "sha256": "04902389f880895e4487a671f35d7735126fe38528448a3a13434396e767a08a",
+      "bytes": 4234
+    },
+    {
+      "originalPath": "submission/PHASE7_REQUIREMENTS.md",
+      "historicalPath": "submission/historical/v2-five-tool/package/PHASE7_REQUIREMENTS.md",
+      "sha256": "8aae6a37b2af1100102cc816c4e8a333b67d9ab34f9e84039d85ed8527b788f3",
+      "bytes": 2527
+    },
+    {
+      "originalPath": "submission/assets/live-demo-capture.json",
+      "historicalPath": "submission/historical/v2-five-tool/package/assets/live-demo-capture.json",
+      "sha256": "33eb56a9c90cead1f47c29748c7fade193e439d8057d40150a7303f7b6f7bcd5",
+      "bytes": 1907
+    },
+    {
+      "originalPath": "submission/assets/screenshots/01-plan-owner-gate.png",
+      "historicalPath": "submission/historical/v2-five-tool/package/assets/screenshots/01-plan-owner-gate.png",
+      "sha256": "116fd93c955780b4c0ff5acafc564ea01db581df28020170e5777e7fa6b7ff37",
+      "bytes": 299278
+    },
+    {
+      "originalPath": "submission/assets/screenshots/02-plan-confirmed.png",
+      "historicalPath": "submission/historical/v2-five-tool/package/assets/screenshots/02-plan-confirmed.png",
+      "sha256": "5ceeba92cb6681db6227c740bd9831820e742d04624b4a7b2d7b3aaeb66a8ede",
+      "bytes": 293094
+    },
+    {
+      "originalPath": "submission/assets/screenshots/03-step-claimed.png",
+      "historicalPath": "submission/historical/v2-five-tool/package/assets/screenshots/03-step-claimed.png",
+      "sha256": "0f30fccecf69af448936089871b37731be97f71309bbfeeb51d6dc9a0543e6ac",
+      "bytes": 296086
+    },
+    {
+      "originalPath": "submission/assets/screenshots/04-candidate-v1.png",
+      "historicalPath": "submission/historical/v2-five-tool/package/assets/screenshots/04-candidate-v1.png",
+      "sha256": "5447ca28a1c7e5576c57ee4cbe00d9bfa3de07e217b1af3a635d6d4535d412e2",
+      "bytes": 334832
+    },
+    {
+      "originalPath": "submission/assets/screenshots/05-verification-failed.png",
+      "historicalPath": "submission/historical/v2-five-tool/package/assets/screenshots/05-verification-failed.png",
+      "sha256": "0c46017858b9eec9f61ec2c46c20e7adfb4b4d51ed127e6236d6d989419fa30d",
+      "bytes": 325537
+    },
+    {
+      "originalPath": "submission/assets/screenshots/06-candidate-v2.png",
+      "historicalPath": "submission/historical/v2-five-tool/package/assets/screenshots/06-candidate-v2.png",
+      "sha256": "3e11c18b5d54e574945469598f474b40c1f9c1ee833a65d523fb26d8965520ff",
+      "bytes": 332106
+    },
+    {
+      "originalPath": "submission/assets/screenshots/07-verification-passed.png",
+      "historicalPath": "submission/historical/v2-five-tool/package/assets/screenshots/07-verification-passed.png",
+      "sha256": "11215abc71ab832304f10b583c5ef5c4b16691362c3519bb5cdcc347264b69ab",
+      "bytes": 327539
+    },
+    {
+      "originalPath": "submission/assets/screenshots/08-completion-requested.png",
+      "historicalPath": "submission/historical/v2-five-tool/package/assets/screenshots/08-completion-requested.png",
+      "sha256": "ecf3f0120213816cc40114908ebc439aaa84262cfe81a21315bc7e9e77a31849",
+      "bytes": 316959
+    },
+    {
+      "originalPath": "submission/assets/screenshots/09-goal-accepted.png",
+      "historicalPath": "submission/historical/v2-five-tool/package/assets/screenshots/09-goal-accepted.png",
+      "sha256": "01a1779cc3fec27f1f502b0898872f2d069938c9f34cebc7f29afb30d2efb49e",
+      "bytes": 317023
+    },
+    {
+      "originalPath": "submission/assets/screenshots/10-receipt-history.png",
+      "historicalPath": "submission/historical/v2-five-tool/package/assets/screenshots/10-receipt-history.png",
+      "sha256": "688ee8cc6823eae23629a3cb514c9c2e0a2ea93b591389a7e7a82f78cc8079d4",
+      "bytes": 148995
+    },
+    {
+      "originalPath": "submission/assets/screenshots/manifest.json",
+      "historicalPath": "submission/historical/v2-five-tool/package/assets/screenshots/manifest.json",
+      "sha256": "9c8ba0dd69bfb134af6ac8deb80e71f9b5878a63b6561cdb95d1283b0a6f92ec",
+      "bytes": 4124
+    },
+    {
+      "originalPath": "submission/assets/workhub-goal-room-architecture.html",
+      "historicalPath": "submission/historical/v2-five-tool/package/assets/workhub-goal-room-architecture.html",
+      "sha256": "b0b442f0e56c40ff21c66481cd935b1725771b2cea9130cafc791c8660f61635",
+      "bytes": 1706
+    },
+    {
+      "originalPath": "submission/assets/workhub-goal-room-architecture.png",
+      "historicalPath": "submission/historical/v2-five-tool/package/assets/workhub-goal-room-architecture.png",
+      "sha256": "bc29064ffff67d1e112cc395578e3ea720a3753f3aec60e2bfd2e75876bcc30b",
+      "bytes": 159598
+    },
+    {
+      "originalPath": "submission/assets/workhub-goal-room-architecture.svg",
+      "historicalPath": "submission/historical/v2-five-tool/package/assets/workhub-goal-room-architecture.svg",
+      "sha256": "23c23a7913bdf79f530cf55d3eac8cf4fc2a52d22e0ba5b6dc484ce2f3fda5f1",
+      "bytes": 7694
+    },
+    {
+      "originalPath": "submission/assets/workhub-goal-room-demo-narration.ogg",
+      "historicalPath": "submission/historical/v2-five-tool/package/assets/workhub-goal-room-demo-narration.ogg",
+      "sha256": "fa48658fd0b767b88a100b1373c3b273e07850fc81d79d5c4fa689ec5c258e00",
+      "bytes": 839021
+    },
+    {
+      "originalPath": "submission/assets/workhub-goal-room-demo.en.srt",
+      "historicalPath": "submission/historical/v2-five-tool/package/assets/workhub-goal-room-demo.en.srt",
+      "sha256": "ac4a92b369093a59799fae95f13f21cf44e49c34b1d9a1c60b0bed4d6282a9cf",
+      "bytes": 2006
+    },
+    {
+      "originalPath": "submission/assets/workhub-goal-room-demo.mp4",
+      "historicalPath": "submission/historical/v2-five-tool/package/assets/workhub-goal-room-demo.mp4",
+      "sha256": "8a1745619ea4b1b6bda03898abd07a748bde2444b2fc26bc6a2dca9c126f094e",
+      "bytes": 5920324
+    },
+    {
+      "originalPath": "submission/scripts/record-live-demo.py",
+      "historicalPath": "submission/historical/v2-five-tool/package/scripts/record-live-demo.py",
+      "sha256": "6238597df722ed9a513f228b43d194eb17eacd80ebd865b11463d59812f01aa9",
+      "bytes": 11728
+    },
+    {
+      "originalPath": "submission/scripts/v3-native-webmcp-proof.mjs",
+      "historicalPath": "submission/historical/v2-five-tool/package/scripts/v3-native-webmcp-proof.mjs",
+      "sha256": "18380b133dadc3753ed3b392733ba7521822fd95f8ee4b7f161e79bd50aeb174",
+      "bytes": 31854
+    }
+  ]
+}

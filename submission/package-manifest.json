@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 3,
+  "kind": "workhub-goal-room-v3-competition-package-binding",
+  "bindingPattern": "package commit P plus metadata-only child B; this file and V3_AUDIT.md are the only allowed child changes",
+  "sourceProduct": {
+    "commit": "5ac95d4bdab5f54beda0f90776c3918fd36136d2",
+    "tree": "b6b50068e8119d02d1d9213286f14adf3cbc0db1"
+  },
+  "packageCommit": "PACKAGE_COMMIT_SENTINEL",
+  "packageTree": "PACKAGE_TREE_SENTINEL",
+  "artifactCount": 33,
+  "artifacts": [
+    {
+      "path": "README.md",
+      "sha256": "2d7e8ab471242e9c5a773b7b6e336ad58ea8a20bdb985eee1cbd3a203eec32b5",
+      "bytes": 12160
+    },
+    {
+      "path": "evaluation/native-webmcp-v3/native-webmcp-receipt.json",
+      "sha256": "4f9b77e158c69d2d817e30d4b66f2451b4bab7daed4b71b3d65ee8b5b9750e77",
+      "bytes": 318070
+    },
+    {
+      "path": "evaluation/phase5-qualification.json",
+      "sha256": "1c93f02a255210597fac9b7b69ef8cdc6ba6926d6c320cdc5f310d2cd8d4eda1",
+      "bytes": 4004
+    },
+    {
+      "path": "evaluation/production-journey/qualification-receipt.json",
+      "sha256": "43b4b043910cb8148799b736971c3de1c13f132f916e96a55f4a0ee270a41725",
+      "bytes": 8180
+    },
+    {
+      "path": "evaluation/v3/qualification-receipt.json",
+      "sha256": "d3129c654562a17e269653b7842e6b5cb969dae944100ba7569cec0b03300b2c",
+      "bytes": 24405
+    },
+    {
+      "path": "package.json",
+      "sha256": "1ae1b1a6466f6970d4a7ae3c06ad8cb48f947d455d87cade5703a51040eb49a6",
+      "bytes": 2413
+    },
+    {
+      "path": "scripts/submission-v3-validate.mjs",
+      "sha256": "746903556369cd59cb8b87b3acaf1ea9339e6020ab29dca2c4ff8d15f5d08458",
+      "bytes": 10543
+    },
+    {
+      "path": "scripts/submission-v3-validator.node-test.mjs",
+      "sha256": "b3f8ad67e226f23b5fefe782b8ff557ef197bc9c90d4f58f8493bcb3fc18f9f0",
+      "bytes": 3350
+    },
+    {
+      "path": "submission/DEMO_SCRIPT.md",
+      "sha256": "1fa41a6853506310fa37e5e4961f1f7dad6bd105043247ad797d2a7221417d13",
+      "bytes": 3352
+    },
+    {
+      "path": "submission/DEVPOST_SUBMISSION.md",
+      "sha256": "5482fea40f5c3df6447d359eacb87ce23f2c54a4e83e866c09b84b7a6db7d545",
+      "bytes": 4038
+    },
+    {
+      "path": "submission/V3_CLAIMS.md",
+      "sha256": "637f59d858d47f11143862970118423d8aaaa3654f9b1b446ead2945dbfbdc21",
+      "bytes": 2063
+    },
+    {
+      "path": "submission/V3_REQUIREMENTS.md",
+      "sha256": "f1e5c7185897f86bceb17365a61dfcfd651ba3312b19a68b5bd5d5c23a3aa884",
+      "bytes": 1863
+    },
+    {
+      "path": "submission/assets/live-demo-capture.json",
+      "sha256": "6576743858cfbf5309ecd2c46d0d4265b1c6da83671311aaca77353c0514960e",
+      "bytes": 2517
+    },
+    {
+      "path": "submission/assets/screenshots/boundary-1199-mobile.png",
+      "sha256": "b2eaf0454940ea862fe973fe07a14db6bcf95119a69243f1b79c8903dc8ea503",
+      "bytes": 62045
+    },
+    {
+      "path": "submission/assets/screenshots/boundary-1200-desktop.png",
+      "sha256": "16f99404504d3c5bff1d56385a63bad4a2c83fb4ddd33f620521e555dc547828",
+      "bytes": 149046
+    },
+    {
+      "path": "submission/assets/screenshots/candidate-v1-system-fail.png",
+      "sha256": "d9afc7be8c3215241673e4507595df64e09e9409730f0538b8bd27675db82d81",
+      "bytes": 181257
+    },
+    {
+      "path": "submission/assets/screenshots/candidate-v2-pass-agent-next.png",
+      "sha256": "0f5a0febdd83d547a1266c368a5e512367f74b89521b9961ef41301a6db3f787",
+      "bytes": 214925
+    },
+    {
+      "path": "submission/assets/screenshots/goal-revision.png",
+      "sha256": "851b310b1c8f82396aa1bd8cb4b6834c7286744a5b8a98d510de40f6c0679d09",
+      "bytes": 165431
+    },
+    {
+      "path": "submission/assets/screenshots/manifest.json",
+      "sha256": "9e417f80d6e32757f4f7b3f466ada98715ae0be4458151ca4102d18690104323",
+      "bytes": 6735
+    },
+    {
+      "path": "submission/assets/screenshots/mobile-s14-frontier.png",
+      "sha256": "e655f8cca051a6681acfa9b6b98123338d555b8e7aa180bce3b3d1b572018ccb",
+      "bytes": 53705
+    },
+    {
+      "path": "submission/assets/screenshots/native-six-tool-context.png",
+      "sha256": "eb17115522c6605c319ce5e75288bee052d9d867afe83b03ddcfc8d0e2affc96",
+      "bytes": 158130
+    },
+    {
+      "path": "submission/assets/screenshots/plan-revision.png",
+      "sha256": "f45ed87614b319841ba6bf647b57b52b837c2910f14a79e0a5336040b590479e",
+      "bytes": 173484
+    },
+    {
+      "path": "submission/assets/screenshots/s13-exact-candidate-owner-modal.png",
+      "sha256": "36051c382c83275c753a1775d79b543e49a6d876a73c38047abb5061cbcd7be8",
+      "bytes": 141852
+    },
+    {
+      "path": "submission/assets/screenshots/s14-sealed-actorless.png",
+      "sha256": "3bbe41d03e838177eee7b78541efeccd17ed7a01928b0960d9f262f90f5a7abe",
+      "bytes": 161616
+    },
+    {
+      "path": "submission/assets/workhub-goal-room-architecture.html",
+      "sha256": "c6cf62175a2295de79b94f6add18acf5bdf05107f9d0d03015f51b779c26a0de",
+      "bytes": 6761
+    },
+    {
+      "path": "submission/assets/workhub-goal-room-architecture.png",
+      "sha256": "be2516dfba160328577b9c8a99fb2e54d8b7cf4f33d29d247824348859c41d04",
+      "bytes": 189838
+    },
+    {
+      "path": "submission/assets/workhub-goal-room-architecture.svg",
+      "sha256": "2f303315dea6009b61ecdc843ba3a46d25d9b3dcab34ecc4155c933d84eddfe2",
+      "bytes": 6434
+    },
+    {
+      "path": "submission/assets/workhub-goal-room-demo-narration.ogg",
+      "sha256": "d75e5e00da328a431a1fc142daafa710c8dd17eb5b5c07a0e61a7390641af2c2",
+      "bytes": 853661
+    },
+    {
+      "path": "submission/assets/workhub-goal-room-demo.en.srt",
+      "sha256": "51ec26307a3a87403298cdbe6a78b734e1fdeb7c2687a3d5f8357f349f28aeda",
+      "bytes": 2850
+    },
+    {
+      "path": "submission/assets/workhub-goal-room-demo.mp4",
+      "sha256": "232a62c0e7dfc0855f397d3bb3fcd9bc004064504adeb3d9be0c1e478c5f8cce",
+      "bytes": 4752983
+    },
+    {
+      "path": "submission/historical/v2-five-tool/manifest.json",
+      "sha256": "2226c96bf34c1b093a7f4735791a5fbdabdd3f82acae1b08b744227d0d23b947",
+      "bytes": 7630
+    },
+    {
+      "path": "submission/scripts/record-live-demo.py",
+      "sha256": "e65044c178d69b3e8b78bd903d9c9a1f75ab7346aa8a1dc3ae60470ce828a5ad",
+      "bytes": 4864
+    },
+    {
+      "path": "submission/scripts/v3-native-webmcp-proof.mjs",
+      "sha256": "18380b133dadc3753ed3b392733ba7521822fd95f8ee4b7f161e79bd50aeb174",
+      "bytes": 31854
+    }
+  ],
+  "publication": {
+    "publicUrl": "PENDING_OWNER_GATED_PUBLIC_URL",
+    "repositoryUrl": "PENDING_OWNER_GATED_REPOSITORY_URL",
+    "youtubeUrl": "PENDING_OWNER_GATED_YOUTUBE_URL",
+    "devpostStatus": "PENDING_OWNER_GATED_DEVPOST_SUBMISSION"
+  },
+  "claimBoundary": "Local package only. No push, deploy, upload, publication, or submission authority.",
+  "date": "2026-08-28"
+}

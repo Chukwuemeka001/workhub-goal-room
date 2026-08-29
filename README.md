@@ -82,27 +82,6 @@ npm run qa:v3:native
 
 This proves native browser registration, discovery, testing-API invocation, shared-state reflection, and the recorded governance boundaries. It does **not** prove autonomous model selection or repeated model reliability.
 
-### Historical five-tool checkpoint
-
-**The browser-native Phase 4 evidence was locally verified August 27, 2026 in Google Chrome Canary 154 with the exact `enable-webmcp-testing` and `devtools-webmcp-support` experiments enabled in an isolated profile.** That evidence predates the V3 Goal-inception tool addition and is retained as historical evidence, not rewritten as a six-tool native-browser claim.
-
-Observed runtime:
-
-```text
-document.modelContext: object
-registerTool: function
-getTools: function
-executeTool: function
-```
-
-At that historical checkpoint, Canary discovered the then-current five-tool surface and returned its strict serialized JSON Schemas. Browser-native testing-API invocation proved:
-
-1. an unknown-field state request was refused as `INVALID_TOOL_INPUT` with no state or receipt mutation;
-2. a legally premature `claim_step` was refused as `STEP_NOT_ADMITTED`, preserved the owner gate, and created a visible refusal receipt;
-3. after the owner confirmed Plan v1 in the UI, the same native `claim_step` path was accepted, advanced the room to `STEP_CLAIMED`, and created a visible accepted receipt.
-
-This proves registration, discovery, browser-native invocation, shared-state mutation, and governed refusal for that recorded checkpoint. V3 verifies its current static-six registration in deterministic local tests and does not upgrade the historical browser evidence into a new native-browser claim.
-
 ## V3 production-excluded qualification
 
 The [`qualification/`](qualification/) package replays 14 states through the real Goal Room kernel, current static-six WebMCP callbacks, internal verifier, and owner controller. Production [`index.html`](index.html) and [`src/main.ts`](src/main.ts) contain no qualification entry reference, and the production bundle is scanned for fixture tokens.
@@ -111,36 +90,19 @@ S09 is explicit test-only presentation metadata over a real `CANDIDATE_SUBMITTED
 
 The V3 contract and mapping are in [`design/GOAL_ROOM_V3_VISUAL_CONTRACT.md`](design/GOAL_ROOM_V3_VISUAL_CONTRACT.md) and [`design/TRANSLATION_LEDGER.md`](design/TRANSLATION_LEDGER.md). Deterministic visual, responsive, accessibility, hostile/zoom, bundle-exclusion, protected-byte, screenshot, and receipt evidence is written under [`evaluation/v3/`](evaluation/v3/).
 
-## Phase 6 fresh-model calibration
-
-The Phase 6 evaluator freezes 13 distinct state/frontier scenarios over the exact five production tool descriptors—including annotations and strict JSON Schemas. Each scenario receives one valid observation from a fresh, zero-tool Hermes one-shot session, returns one closed JSON decision, and is scored outside the model.
-
-Exact-descriptor results with `gpt-5.6-sol` through `openai-codex`:
-
-```text
-provider-free scorer conformance  13/13 positive · 7/7 negative
-fresh valid observations          13/13
-governance-clean decisions        13/13
-hard authority vetoes             0
-exact oracle matches              12/13
-launch attempts                    14 (one pre-response broken pipe)
-```
-
-The sole exact miss was governance-safe: the model stopped at owner acceptance with `ownerRequiredAfterDecision: true` but used the less precise `PASS_NOT_ACCEPTANCE` label instead of `OWNER_ACTION_REQUIRED`.
-
-This is N=1 per distinct scenario, not a repeated-case reliability estimate or a multi-model comparison. The complete protocol, two invalid descriptor-incomplete lineages, exact-descriptor transport failure, replacement observation, redacted usage, and claim limits are in [`evaluation/PHASE6_REPORT.md`](evaluation/PHASE6_REPORT.md).
-
 ## Competition package
 
-The judge-ready package is under [`submission/`](submission/):
+The current local V3 package is under [`submission/`](submission/):
 
-- [`DEVPOST_SUBMISSION.md`](submission/DEVPOST_SUBMISSION.md) — copy-ready submission narrative, testing instructions, limitations, and dated-work summary;
-- [`assets/workhub-goal-room-architecture.png`](submission/assets/workhub-goal-room-architecture.png) — governed WebMCP architecture;
-- [`assets/screenshots/`](submission/assets/screenshots/) — ten authoritative state and receipt-history captures;
-- [`assets/workhub-goal-room-demo.mp4`](submission/assets/workhub-goal-room-demo.mp4) — 2:30 continuous narrated judge demo;
-- [`PHASE7_AUDIT.md`](submission/PHASE7_AUDIT.md) — repository, live-app, accessibility, privacy, and media verification.
+- [`DEVPOST_SUBMISSION.md`](submission/DEVPOST_SUBMISSION.md) — truthful judge copy and explicit pending publication gates;
+- [`DEMO_SCRIPT.md`](submission/DEMO_SCRIPT.md) — 2:38 narration/timeline and reconstruction disclosure;
+- [`V3_REQUIREMENTS.md`](submission/V3_REQUIREMENTS.md), [`V3_CLAIMS.md`](submission/V3_CLAIMS.md), and [`V3_AUDIT.md`](submission/V3_AUDIT.md) — current requirements, claim boundaries, and local audit;
+- [`assets/workhub-goal-room-architecture.html`](submission/assets/workhub-goal-room-architecture.html), [SVG](submission/assets/workhub-goal-room-architecture.svg), and [PNG](submission/assets/workhub-goal-room-architecture.png) — authority architecture;
+- [`assets/screenshots/manifest.json`](submission/assets/screenshots/manifest.json) — ten hash-bound current V3 evidence images;
+- [`assets/workhub-goal-room-demo.mp4`](submission/assets/workhub-goal-room-demo.mp4) and [English captions](submission/assets/workhub-goal-room-demo.en.srt) — local narrated evidence reconstruction;
+- [`historical/v2-five-tool/manifest.json`](submission/historical/v2-five-tool/manifest.json) — byte-verified custody of the superseded package, never presented as current.
 
-The video is a continuous Chrome DevTools screencast of the functioning app. It visibly enumerates the native registrations, runs a real read-only callback and malformed-call refusal, then uses deterministic operator clicks for the complete journey. It does not claim autonomous model execution.
+The video is explicitly a fresh-checkpoint reconstruction from qualified production and native receipts. It does not claim one continuous authority transaction or autonomous model execution. Public app, repository, YouTube, and Devpost actions remain Owner-gated and pending.
 
 ## Full governed Goal journey
 

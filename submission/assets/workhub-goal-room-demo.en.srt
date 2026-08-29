@@ -1,39 +1,51 @@
 1
-00:00:00,000 --> 00:00:09,641
+00:00:00,000 --> 00:00:07,609
 WebMCP makes a website callable by agents. WorkHub Goal Room makes each call state-aware, authority-checked, evidence-bound, and owner-controlled.
 
 2
-00:00:10,648 --> 00:00:22,415
-A callable action is not automatically a legal action. An agent can act on stale state, bind evidence to the wrong Plan, or mistake a machine PASS for human acceptance.
+00:00:07,729 --> 00:00:24,216
+Here is the native boundary first. Canary returned six browser-native RegisteredTool descriptors. The Agent path is getTools, select the browser-returned tool, then executeTool with serialized JSON. There is no tool for Owner decisions, System verdicts, acceptance, or external effects.
 
 3
-00:00:23,390 --> 00:00:47,672
-Goal Room registers exactly five WebMCP tools. Every consequential call enters the same authority kernel, which revalidates actor, state, exact input, idempotency, evidence, and legal frontier. Invalid calls fail closed.
+00:00:24,336 --> 00:00:34,481
+The static registration list follows source order. This panel preserves the raw browser enumeration separately. No model autonomously selected a tool in this evidence.
 
 4
-00:00:48,649 --> 00:01:04,317
-Owner confirmation, verifier authorship, final acceptance, deployment, messaging, payments, and other external effects are intentionally not WebMCP tools.
+00:00:34,601 --> 00:00:45,169
+A malformed call can be rejected without changing state or receipts. The recorded S fourteen probe proves malformed-input atomicity, not a schema-valid terminal reducer refusal.
 
 5
-00:01:05,320 --> 00:01:23,650
-The agent proposed Plan v1, but work is blocked until the owner decides. The owner confirms the Plan. The agent claims an admitted step and submits exact candidate bytes and their SHA-256 digest.
+00:00:45,289 --> 00:00:57,971
+The journey starts with owner intent. The Agent proposes Goal Contract version one. The Owner asks for a revision, the Agent proposes version two, and only the Owner confirms it.
 
 6
-00:01:24,660 --> 00:01:37,749
-Candidate v1 enters deterministic verification and fails. The original evidence and FAIL receipt remain immutable. The agent submits corrected Candidate v2.
+00:00:58,091 --> 00:01:10,773
+The same boundary applies to planning. Plan version one is revised. Plan version two remains bound to confirmed Goal Contract version two, and the Owner confirms it before work begins.
 
 7
-00:01:38,708 --> 00:01:48,662
-The internal verifier records PASS. PASS does not accept the Goal. It only permits the agent to request completion for this exact candidate.
+00:01:10,893 --> 00:01:26,111
+The Agent claims the admitted step and submits Candidate version one. The production System adapter runs the deterministic rule set automatically and records FAIL. System verdict authorship is neither an Agent tool nor an Owner control.
 
 8
-00:01:49,658 --> 00:02:04,124
-The frontier moves to the owner. The agent and verifier are blocked. Only the owner can accept the verified candidate. After acceptance, no further governed action remains.
+00:01:26,231 --> 00:01:39,336
+The Agent corrects the evidence and submits Candidate version two. The same rules record PASS for the exact candidate version and SHA two fifty-six. The next actor is still the Agent.
 
 9
-00:02:05,072 --> 00:02:20,841
-The public repository contains the complete clean-room implementation, Apache-2.0 license, ninety tests, bounded reliability evidence, and run instructions. The demo uses synthetic browser-local state and creates no external effects.
+00:01:39,456 --> 00:01:46,642
+PASS does not mean accepted. PASS only permits the Agent to request completion for that exact candidate.
 
 10
-00:02:21,822 --> 00:02:29,085
-Humans and agents can share one state machine without sharing one authority level.
+00:01:46,762 --> 00:01:58,599
+After the request, the Owner sees Candidate version two, its full digest, the rule-set version, PASS, and the irreversible consequence. Only this trusted Owner interface can confirm acceptance.
+
+11
+00:01:58,719 --> 00:02:06,751
+S fourteen is sealed. The current actor is none, there are no controls, and there is no legal continuation.
+
+12
+00:02:06,871 --> 00:02:18,707
+The mobile projection keeps the same frontier, while the eleven ninety-nine and twelve hundred pixel captures prove which one of the two compositions is active at the boundary.
+
+13
+00:02:18,827 --> 00:02:33,200
+This competition edition is one synthetic browser-local Goal. It has no accounts, backend persistence, cloud service, database, external effects, or autonomous-model reliability claim. Public app, repository, YouTube, and Devpost actions remain pending Owner approval.

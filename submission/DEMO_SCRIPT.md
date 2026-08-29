@@ -1,47 +1,49 @@
-# Judge demo narration and timeline
+# WorkHub Goal Room V3 — demo narration and timeline
 
-**Target duration:** 2:30
+**Target:** 2:30 (hard limit: under 3:00)
 
-**Verified container duration:** 2:30.03
-
-**Mode:** Continuous Chrome DevTools screencast of the functioning app. It visibly enumerates native registrations, executes real captured callbacks, and uses deterministic operator clicks. This is not autonomous model execution.
+**Evidence mode:** Disclosed fresh-checkpoint reconstruction from qualified production and native receipts. Scenes are independent authoritative checkpoints, not one continuous authority transaction. No autonomous model selects tools.
 
 ## Narration
 
 WebMCP makes a website callable by agents. WorkHub Goal Room makes each call state-aware, authority-checked, evidence-bound, and owner-controlled.
 
-The problem is that a callable action is not automatically a legal action. An agent can act on stale state, bind evidence to the wrong Plan, or mistake a machine PASS for human acceptance.
+Here is the native boundary first. Canary returned six browser-native RegisteredTool descriptors. The Agent path is getTools, select the browser-returned tool, then executeTool with serialized JSON. There is no tool for Owner decisions, System verdicts, acceptance, or external effects.
 
-Goal Room registers exactly five WebMCP tools: read state, propose a Plan, claim a step, submit an artifact, and request completion. Every consequential call enters the same authority kernel that drives this interface. The kernel revalidates actor, state version, exact input, idempotency, Plan and candidate binding, evidence, and the current legal frontier. Malformed, stale, mismatched, or unauthorized calls fail closed.
+The static registration list follows source order. This panel preserves the raw browser enumeration separately. No model autonomously selected a tool in this evidence.
 
-Owner confirmation, verifier authorship, final acceptance, deployment, messaging, payments, and other external effects are intentionally not WebMCP tools.
+A malformed call can be rejected without changing state or receipts. The recorded S14 probe proves malformed-input atomicity, not a schema-valid terminal reducer refusal.
 
-Here is one governed release journey. The agent has proposed Plan v1, but work is blocked until the owner decides. The owner confirms the Plan. The agent may now claim only an admitted step, then submit exact candidate bytes and their SHA-256 digest.
+The journey starts with owner intent. The Agent proposes Goal Contract v1. The Owner asks for a revision, the Agent proposes v2, and only the Owner confirms it.
 
-Candidate v1 enters deterministic verification and fails. The original evidence and FAIL receipt remain immutable. The frontier returns to the agent, which submits corrected Candidate v2.
+The same boundary applies to planning. Plan v1 is revised. Plan v2 remains bound to confirmed Goal Contract v2, and the Owner confirms it before work begins.
 
-The internal verifier now records PASS. PASS does not accept the Goal. It only permits the agent to request completion for this exact candidate.
+The Agent claims the admitted step and submits Candidate v1. The production System adapter runs the deterministic rule set automatically and records FAIL. System verdict authorship is neither an Agent tool nor an Owner control.
 
-The frontier then moves to the owner. The agent and verifier are blocked. Only the owner can accept the verified candidate. After acceptance, every lifecycle stage is complete and there is no further governed action.
+The Agent corrects the evidence and submits Candidate v2. The same rules record PASS for the exact candidate version and SHA-256. The next actor is still the Agent.
 
-The public repository contains the full clean-room implementation, Apache-2.0 license, ninety tests, bounded reliability evidence, and all run instructions. The demo uses synthetic browser-local state and creates no external effects.
+PASS does not mean accepted. PASS only permits the Agent to request completion for that exact candidate.
 
-WorkHub Goal Room demonstrates a simple principle: humans and agents can share one state machine without sharing one authority level.
+After the request, the Owner sees Candidate v2, its full digest, the rule-set version, PASS, and the irreversible consequence. Only this trusted Owner interface can confirm acceptance.
 
-## Visual timeline
+S14 is sealed. The current actor is none, there are no controls, and there is no legal continuation.
 
-| Time | Visual |
+The mobile projection keeps the same frontier, while the 1199 and 1200 pixel captures prove which one of the two compositions is active at the boundary.
+
+This competition edition is one synthetic browser-local Goal. It has no accounts, backend persistence, cloud service, database, external effects, or autonomous-model reliability claim. Public app, repository, YouTube, and Devpost actions remain pending Owner approval.
+
+## Scene plan
+
+| Time | Visual and evidence class |
 |---:|---|
-| 0:00–0:06 | Live app title and WebMCP-connected state |
-| 0:06–0:17 | Five native registrations captured from `document.modelContext.registerTool` |
-| 0:17–0:28 | Real read-only callback and structured state result |
-| 0:28–0:38 | Real malformed callback, `INVALID_TOOL_INPUT`, unchanged frontier |
-| 0:38–0:50 | Owner Plan gate and visible confirmation click |
-| 0:50–1:09 | Step claim and Candidate v1 submission |
-| 1:09–1:20 | Deterministic FAIL |
-| 1:20–1:29 | Corrected Candidate v2 submission |
-| 1:29–1:41 | Deterministic PASS; emphasize PASS ≠ acceptance |
-| 1:41–1:53 | Completion request; owner is sole frontier |
-| 1:53–2:03 | Visible owner acceptance click and completed Goal |
-| 2:03–2:13 | Scroll to nine immutable receipts |
-| 2:13–2:30 | Return to final no-action state and claim boundary |
+| 0:00–0:12 | Defining claim; native-receipt visualization |
+| 0:12–0:30 | Six descriptors, raw enumeration, RegisteredTool invocation |
+| 0:30–0:43 | Malformed-input atomicity; explicit S14 limitation |
+| 0:43–1:00 | Goal revision checkpoint |
+| 1:00–1:15 | Plan revision checkpoint |
+| 1:15–1:32 | Candidate v1 automatic System FAIL |
+| 1:32–1:50 | Candidate v2 PASS, Agent next, non-acceptance |
+| 1:50–2:05 | Agent requests completion; PASS boundary |
+| 2:05–2:22 | S13 exact-candidate Owner modal |
+| 2:22–2:33 | S14 actorless sealed room |
+| 2:33–2:40 | Mobile/breakpoint evidence and honest limits |

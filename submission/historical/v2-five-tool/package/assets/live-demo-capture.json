@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "kind": "phase7-continuous-judge-demo-capture",
+  "browser": "Chrome/154.0.8027.0",
+  "capture": {
+    "mode": "Chrome DevTools Page.startScreencast of the functioning app",
+    "sourceUrl": "http://127.0.0.1:4191/",
+    "presentationFrameCount": 105,
+    "rawCaptureDurationSeconds": 148.78613558388315,
+    "recorderPath": "submission/scripts/record-live-demo.py",
+    "recorderSha256": "6238597df722ed9a513f228b43d194eb17eacd80ebd865b11463d59812f01aa9"
+  },
+  "visibleProof": [
+    "five descriptors captured from document.modelContext.registerTool",
+    "real get_goal_room_state callback and structured result",
+    "real malformed claim_step callback returning INVALID_TOOL_INPUT",
+    "visible demo cursor movement and owner/operator control activation",
+    "Plan confirmation",
+    "admitted step claim",
+    "Candidate v1 submission",
+    "deterministic verification FAIL",
+    "corrected Candidate v2 submission",
+    "deterministic verification PASS",
+    "completion request with owner-only frontier",
+    "owner acceptance",
+    "nine ordered immutable receipts",
+    "final no-action state"
+  ],
+  "claimBoundary": "Native descriptor/callback inspection plus deterministic operator clicks; not autonomous model execution.",
+  "output": {
+    "path": "submission/assets/workhub-goal-room-demo.mp4",
+    "containerDurationSeconds": 150.033333,
+    "videoDurationSeconds": 150.033333,
+    "audioDurationSeconds": 149.952,
+    "width": 1440,
+    "height": 900,
+    "framesPerSecond": 30,
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "sha256": "8a1745619ea4b1b6bda03898abd07a748bde2444b2fc26bc6a2dca9c126f094e"
+  },
+  "captions": {
+    "path": "submission/assets/workhub-goal-room-demo.en.srt",
+    "cueCount": 10,
+    "lastCueEndSeconds": 149.085,
+    "withinAudio": true,
+    "sha256": "ac4a92b369093a59799fae95f13f21cf44e49c34b1d9a1c60b0bed4d6282a9cf"
+  }
+}
