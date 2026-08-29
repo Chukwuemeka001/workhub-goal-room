@@ -1,4 +1,4 @@
-import { spawn } from "node:child_process";
+import { execFileSync, spawn } from "node:child_process";
 import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
 import { mkdtemp, mkdir, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
@@ -7,6 +7,17 @@ import { extname, join, resolve } from "node:path";
 import { resolveBrowserExecutable } from "./browser-resolver.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
+const productionPaths = ["index.html", "package.json", "vite.config.ts", "src"];
+function resolveTestedProductionIdentity() {
+  const explicitCommit = process.env.PHASE8_TESTED_PRODUCTION_COMMIT;
+  const explicitTree = process.env.PHASE8_TESTED_PRODUCTION_TREE;
+  if (Boolean(explicitCommit) !== Boolean(explicitTree)) throw new Error("Phase 8 provenance requires both PHASE8_TESTED_PRODUCTION_COMMIT and PHASE8_TESTED_PRODUCTION_TREE");
+  const commit = explicitCommit ?? execFileSync("git", ["-C", root, "log", "-1", "--format=%H", "--", ...productionPaths], { encoding: "utf8" }).trim();
+  const tree = explicitTree ?? execFileSync("git", ["-C", root, "rev-parse", `${commit}^{tree}`], { encoding: "utf8" }).trim();
+  if (!/^[0-9a-f]{40}$/.test(commit) || !/^[0-9a-f]{40}$/.test(tree)) throw new Error("Phase 8 provenance must be an exact 40-character lowercase Git commit/tree pair");
+  return { commit, tree };
+}
+const testedProduction = resolveTestedProductionIdentity();
 const output = join(root, "evaluation", "phase8");
 const profile = await mkdtemp(join(tmpdir(), "workhub-phase8-visual-"));
 const chromePath = resolveBrowserExecutable();
@@ -114,8 +125,8 @@ try {
     schemaVersion: 1,
     kind: "phase8-qa-only-production-projection-max-hostile",
     claimBoundary: "QA-only entry renders production desktop/mobile projections and components over states admitted through the real kernel, production WebMCP callbacks, verifier, and owner controller; this is distinct from native production evidence.",
-    testedProductionCommit: "c4602a9d5d1fde8451e76fcc1e6e0797f693d70c",
-    testedProductionTree: "c4c9b4105175df6284b49ebfca30b7b8f411f8b6",
+    testedProductionCommit: testedProduction.commit,
+    testedProductionTree: testedProduction.tree,
     producerBoundaries: rows.find((row) => row.state === "accepted").source,
     revisionProbe: rows.find((row) => row.state === "plan-revision").source,
     summary: {
