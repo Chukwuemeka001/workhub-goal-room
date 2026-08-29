@@ -6,8 +6,8 @@
     "commit": "5ac95d4bdab5f54beda0f90776c3918fd36136d2",
     "tree": "b6b50068e8119d02d1d9213286f14adf3cbc0db1"
   },
-  "packageCommit": "PACKAGE_COMMIT_SENTINEL",
-  "packageTree": "PACKAGE_TREE_SENTINEL",
+  "packageCommit": "540c8940ddb3c22e81e609de3d4d9751f0c4dde0",
+  "packageTree": "38f0c0fd9620e10b675f54f6d17ffbcc3f3adf19",
   "artifactCount": 51,
   "artifacts": [
     {
@@ -274,6 +274,6 @@
   },
   "claimBoundary": "Local package only. No push, deploy, upload, publication, or submission authority.",
   "date": "2026-08-28",
-  "artifactHashSource": "Working-tree bytes during non-qualifying --prebind construction; final metadata child binds immutable package parent Git objects",
+  "artifactHashSource": "Immutable Git objects at packageCommit; package-manifest.json and V3_AUDIT.md excluded to avoid self-reference",
   "verifiedArtifactCount": 51
 }
