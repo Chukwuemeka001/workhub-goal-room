@@ -7,8 +7,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "test": "npm run test:browser-resolver && vitest run --exclude qa/phase8VisualHarness.test.ts && npm run test:composition",
-    "test:browser-resolver": "node --test scripts/browser-resolver.node-test.mjs scripts/composition-production-qa-support.node-test.mjs scripts/desktop-qa-support.node-test.mjs scripts/production-build.node-test.mjs",
+    "test": "npm run test:browser-resolver && vitest run --exclude qa/phase8VisualHarness.test.ts && npm run test:composition && npm run qa:production-mobile",
+    "test:browser-resolver": "node --test scripts/browser-resolver.node-test.mjs scripts/composition-production-qa-support.node-test.mjs scripts/desktop-qa-support.node-test.mjs scripts/production-build.node-test.mjs && node --test scripts/production-mobile-evidence-positioning.node-test.mjs",
     "test:unit": "vitest run --exclude qa/phase8VisualHarness.test.ts",
     "test:phase8-visual": "vitest run qa/phase8VisualHarness.test.ts",
     "test:composition": "node scripts/composition-production-qa.mjs",
@@ -16,6 +16,7 @@
     "eval:phase6": "node --experimental-strip-types scripts/phase6-evaluate.ts",
     "eval:phase6:conformance": "npm run eval:phase6 -- conformance --out evaluation/phase6-conformance.json",
     "qa:mobile": "node scripts/mobile-qa.mjs",
+    "qa:production-mobile": "node scripts/production-mobile-qa.mjs",
     "qa:desktop": "node scripts/desktop-qa.mjs",
     "qa:phase8-visual": "node scripts/phase8-visual-qa.mjs",
     "test:v3": "vitest run qualification/v3Contract.test.ts qualification/v3Replay.test.ts qualification/v3Infrastructure.test.ts",

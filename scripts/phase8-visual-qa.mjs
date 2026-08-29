@@ -82,7 +82,7 @@ try {
   const keyboard = [];
   for (const viewport of [viewports[1], viewports[4]]) {
     await navigate("accepted", viewport.width, viewport.height, viewport.mobile);
-    const selector = viewport.family === "desktop" ? "#desktop-tab-goal" : "#mobile-tab-goal";
+    const selector = viewport.family === "desktop" ? "#desktop-tab-goal" : "#mobile-tab-now";
     await evaluate(`document.querySelector(${JSON.stringify(selector)}).focus()`);
     const authority = await evaluate("window.__phase8Qa.authorityJson()");
     const sequence = [];

@@ -212,7 +212,7 @@ try {
       state: verdict === "PASS" ? "candidate-v2-pass" : "candidate-v1-fail",
       threshold: 4.5,
     });
-    await click(desktop ? "#desktop-tab-goal" : "#mobile-tab-goal");
+    await click(desktop ? "#desktop-tab-goal" : "#mobile-tab-now");
   }
   function checkpoint(label, actor, trigger, value) {
     return { label, actor, trigger, stateVersion: value.currentStateVersion, phase: value.phase, currentActor: value.currentActor, nextLegalAction: value.nextLegalAction, candidate: value.candidate, verification: value.verification };
@@ -232,7 +232,7 @@ try {
   await setViewport(720, 450); await wait(50);
   const requiredZoomSelectors = [
     ".mobile-goal-title", ".mobile-actor", ".mobile-frontier-title", ".mobile-frontier-live", ".mobile-boundary",
-    "#mobile-owner-intent", ".mobile-intent-form button[type='submit']", "#mobile-tab-goal", "#mobile-tab-plan", "#mobile-tab-proof", "#mobile-tab-activity", ".judge-help summary",
+    "#mobile-owner-intent", ".mobile-intent-form button[type='submit']", "#mobile-tab-now", "#mobile-tab-plan", "#mobile-tab-proof", "#mobile-tab-activity", ".judge-help summary",
   ];
   const requiredContent = [];
   for (const selector of requiredZoomSelectors) {

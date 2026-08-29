@@ -3,7 +3,7 @@ import type { OwnerViewModel } from "./ownerView";
 import { createReceiptLabels } from "./ownerUi";
 import { createCustodyView, type CustodyView } from "./custodyView";
 
-export type MobileTabId = "goal" | "plan" | "proof" | "activity";
+export type MobileTabId = "now" | "plan" | "proof" | "activity";
 export type MobileActionKind =
   | "set-intent"
   | "revise-intent"
@@ -78,8 +78,8 @@ const chapterByPhase: Record<GoalRoomState["phase"], MobileView["chapter"]> = {
 };
 
 const tabs: MobileView["tabs"] = [
-  { id: "goal", label: "Goal", panelHeading: "Goal Contract" },
-  { id: "plan", label: "Plan", panelHeading: "Admitted Plan" },
+  { id: "now", label: "Now", panelHeading: "Current frontier" },
+  { id: "plan", label: "Plan", panelHeading: "Goal and Plan" },
   { id: "proof", label: "Proof", panelHeading: "Evidence and verification" },
   { id: "activity", label: "Activity", panelHeading: "Origin, decisions, and receipts" },
 ];

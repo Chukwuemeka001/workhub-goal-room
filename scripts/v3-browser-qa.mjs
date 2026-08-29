@@ -203,8 +203,8 @@ try {
         if (row.mainNames.length !== 1 || row.tabNames.length !== 4 || row.panelNames.length !== 1) modeFailures.push({ kind: "ax-tree", ...row });
       }
       await navigate("S14", viewport);
-      const activePrefix = viewport.expected === "mobile" ? "mobile" : "desktop";
-      await evaluate(`document.querySelector('#${activePrefix}-tab-goal').focus()`);
+      const selector = viewport.expected === "mobile" ? "#mobile-tab-now" : "#desktop-tab-goal";
+      await evaluate(`document.querySelector(${JSON.stringify(selector)}).focus()`);
       const initialOwnerCalls = await evaluate("window.__v3Qualification.ownerCalls()");
       const sequence = [];
       for (const key of ["ArrowRight", "End", "ArrowLeft", "Home"]) {
@@ -255,7 +255,8 @@ try {
       modeFailures.push({ kind: "zoom-hostile", zoom });
     }
     for (const viewport of [responsiveViewports[0], responsiveViewports[5], responsiveViewports[7]]) {
-      for (const tab of ["goal", "plan", "proof", "activity"]) {
+      const tabs = viewport.expected === "mobile" ? ["now", "plan", "proof", "activity"] : ["goal", "plan", "proof", "activity"];
+      for (const tab of tabs) {
         await navigate("S12", viewport, { tab, hostile: true });
         const measurement = await evaluate("window.__v3Qualification.measurements()");
         const row = { viewport, tab, overflow: measurement.overflow, hostile: measurement.hostile };

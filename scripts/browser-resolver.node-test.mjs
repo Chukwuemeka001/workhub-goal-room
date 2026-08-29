@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { chmod, mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { chmod, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
@@ -125,4 +125,14 @@ test("prioritizes a PATH executable over a macOS application fallback", async ()
       macosApplicationPaths: [macBrowser],
     }), pathBrowser);
   });
+});
+
+test("V3 keyboard QA targets Now on mobile and preserves Goal on desktop", async () => {
+  const source = await readFile(new URL("./v3-browser-qa.mjs", import.meta.url), "utf8");
+
+  assert.match(
+    source,
+    /const selector = viewport\.expected === "mobile" \? "#mobile-tab-now" : "#desktop-tab-goal";/,
+  );
+  assert.match(source, /document\.querySelector\(\$\{JSON\.stringify\(selector\)\}\)\.focus\(\)/);
 });

@@ -13,7 +13,7 @@ const check = (condition, message) => { if (!condition) failures.push(message); 
 const zoom = productionJourney.accessibility?.zoom200;
 const requiredZoomSelectors = [
   ".mobile-goal-title", ".mobile-actor", ".mobile-frontier-title", ".mobile-frontier-live", ".mobile-boundary",
-  "#mobile-owner-intent", ".mobile-intent-form button[type='submit']", "#mobile-tab-goal", "#mobile-tab-plan", "#mobile-tab-proof", "#mobile-tab-activity", ".judge-help summary",
+  "#mobile-owner-intent", ".mobile-intent-form button[type='submit']", "#mobile-tab-now", "#mobile-tab-plan", "#mobile-tab-proof", "#mobile-tab-activity", ".judge-help summary",
 ];
 check(zoom?.route === "/index.html", "production effective 200% record is absent or not bound to /index.html");
 check(zoom?.method === "halved-css-viewport-equivalent", "production zoom method is not a defensible effective 200% equivalent");

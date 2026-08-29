@@ -33,10 +33,12 @@ describe("dedicated production iPhone composition", () => {
     expect(mobileUi).toContain('text("h1", view.goal.title');
   });
 
-  it("uses Goal, Plan, Proof, Activity destinations with Goal selected first", () => {
-    expect(mobileUi).toContain('let activeTab: MobileTabId = "goal"');
-    for (const id of ["goal", "plan", "proof", "activity"]) expect(mobileUi).toContain(`activeTab === "${id}"`);
-    expect(mobileUi).not.toContain('activeTab === "now"');
+  it("uses Now, Plan, Proof, Activity destinations with Current frontier selected first", () => {
+    expect(mobileUi).toContain('let activeTab: MobileTabId = "now"');
+    for (const id of ["now", "plan", "proof", "activity"]) expect(mobileUi).toContain(`activeTab === "${id}"`);
+    expect(mobileUi).not.toContain('activeTab === "goal"');
+    expect(mobileUi).toContain('panel.append(text("h2", tab.panelHeading');
+    expect(mobileUi).toContain('if (activeTab === "now")');
   });
 
   it("exposes only controller-backed owner controls and authority-neutral tab switching", () => {

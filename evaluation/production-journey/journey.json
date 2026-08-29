@@ -679,7 +679,7 @@
           "reachable": true
         },
         {
-          "selector": "#mobile-tab-goal",
+          "selector": "#mobile-tab-now",
           "rendered": true,
           "reachable": true
         },
@@ -1569,8 +1569,8 @@
   "screenshots": [
     {
       "path": "evaluation/production-journey/effective-200pct-production-720x450.png",
-      "sha256": "f6f48e22dd3a757e8e2a08945b89aa266c20b3dc44221575e8f61cb246e473a2",
-      "bytes": 10749,
+      "sha256": "5c315ef94ae221a0e0da5ef1a679d1b5e9265dd0e7150c7cbed502dd486f9c93",
+      "bytes": 10670,
       "width": 720,
       "height": 450,
       "mode": "headless-cdp-production-entry"
@@ -1625,16 +1625,16 @@
     },
     {
       "path": "evaluation/production-journey/s14-mobile-393x852.png",
-      "sha256": "e655f8cca051a6681acfa9b6b98123338d555b8e7aa180bce3b3d1b572018ccb",
-      "bytes": 53705,
+      "sha256": "af617508f4edaa2ba1e228961fe4c98e5efe4edef00a111d3f549e4e0e6356b6",
+      "bytes": 44054,
       "width": 393,
       "height": 852,
       "mode": "headless-cdp-production-entry"
     },
     {
       "path": "evaluation/production-journey/breakpoint-xor-1199x900.png",
-      "sha256": "b2eaf0454940ea862fe973fe07a14db6bcf95119a69243f1b79c8903dc8ea503",
-      "bytes": 62045,
+      "sha256": "f78a0265f76d0aecb41e5cc9c7afe3e91dd8911811e2b1bb2163fa368ed58ed8",
+      "bytes": 51736,
       "width": 1199,
       "height": 900,
       "mode": "headless-cdp-production-entry"

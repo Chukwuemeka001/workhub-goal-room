@@ -114,8 +114,8 @@ describe("pure mobile authority projection", () => {
     for (const snapshot of all.values()) {
       const view = project(snapshot);
       expect(view.tabs).toEqual([
-        { id: "goal", label: "Goal", panelHeading: "Goal Contract" },
-        { id: "plan", label: "Plan", panelHeading: "Admitted Plan" },
+        { id: "now", label: "Now", panelHeading: "Current frontier" },
+        { id: "plan", label: "Plan", panelHeading: "Goal and Plan" },
         { id: "proof", label: "Proof", panelHeading: "Evidence and verification" },
         { id: "activity", label: "Activity", panelHeading: "Origin, decisions, and receipts" },
       ]);

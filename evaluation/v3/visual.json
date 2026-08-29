@@ -91,9 +91,9 @@
         "tablistCount": 1,
         "tabCount": 4,
         "selectedTabCount": 1,
-        "selectedTabId": "mobile-tab-goal",
+        "selectedTabId": "mobile-tab-now",
         "panelCount": 1,
-        "panelLabelledBy": "mobile-tab-goal"
+        "panelLabelledBy": "mobile-tab-now"
       },
       "controls": {
         "count": 6,
@@ -123,7 +123,7 @@
             "height": 58
           },
           {
-            "id": "mobile-tab-goal",
+            "id": "mobile-tab-now",
             "x": 8,
             "y": 796,
             "top": 796,
@@ -197,7 +197,7 @@
       },
       "staticTools": null,
       "focus": {
-        "activeId": "mobile-tab-goal",
+        "activeId": "mobile-tab-now",
         "activeElementMatches": true,
         "documentHasFocus": true,
         "focusMatches": true,
@@ -280,9 +280,9 @@
         "tablistCount": 1,
         "tabCount": 4,
         "selectedTabCount": 1,
-        "selectedTabId": "mobile-tab-goal",
+        "selectedTabId": "mobile-tab-now",
         "panelCount": 1,
-        "panelLabelledBy": "mobile-tab-goal"
+        "panelLabelledBy": "mobile-tab-now"
       },
       "controls": {
         "count": 4,
@@ -290,7 +290,7 @@
         "allHorizontallyReachable": true,
         "boxes": [
           {
-            "id": "mobile-tab-goal",
+            "id": "mobile-tab-now",
             "x": 8,
             "y": 796,
             "top": 796,
@@ -364,7 +364,7 @@
       },
       "staticTools": null,
       "focus": {
-        "activeId": "mobile-tab-goal",
+        "activeId": "mobile-tab-now",
         "activeElementMatches": true,
         "documentHasFocus": true,
         "focusMatches": true,
@@ -447,9 +447,9 @@
         "tablistCount": 1,
         "tabCount": 4,
         "selectedTabCount": 1,
-        "selectedTabId": "mobile-tab-goal",
+        "selectedTabId": "mobile-tab-now",
         "panelCount": 1,
-        "panelLabelledBy": "mobile-tab-goal"
+        "panelLabelledBy": "mobile-tab-now"
       },
       "controls": {
         "count": 4,
@@ -457,7 +457,7 @@
         "allHorizontallyReachable": true,
         "boxes": [
           {
-            "id": "mobile-tab-goal",
+            "id": "mobile-tab-now",
             "x": 8,
             "y": 796,
             "top": 796,
@@ -531,7 +531,7 @@
       },
       "staticTools": null,
       "focus": {
-        "activeId": "mobile-tab-goal",
+        "activeId": "mobile-tab-now",
         "activeElementMatches": true,
         "documentHasFocus": true,
         "focusMatches": true,
@@ -614,9 +614,9 @@
         "tablistCount": 1,
         "tabCount": 4,
         "selectedTabCount": 1,
-        "selectedTabId": "mobile-tab-goal",
+        "selectedTabId": "mobile-tab-now",
         "panelCount": 1,
-        "panelLabelledBy": "mobile-tab-goal"
+        "panelLabelledBy": "mobile-tab-now"
       },
       "controls": {
         "count": 4,
@@ -624,7 +624,7 @@
         "allHorizontallyReachable": true,
         "boxes": [
           {
-            "id": "mobile-tab-goal",
+            "id": "mobile-tab-now",
             "x": 8,
             "y": 796,
             "top": 796,
@@ -698,7 +698,7 @@
       },
       "staticTools": null,
       "focus": {
-        "activeId": "mobile-tab-goal",
+        "activeId": "mobile-tab-now",
         "activeElementMatches": true,
         "documentHasFocus": true,
         "focusMatches": true,
@@ -781,9 +781,9 @@
         "tablistCount": 1,
         "tabCount": 4,
         "selectedTabCount": 1,
-        "selectedTabId": "mobile-tab-goal",
+        "selectedTabId": "mobile-tab-now",
         "panelCount": 1,
-        "panelLabelledBy": "mobile-tab-goal"
+        "panelLabelledBy": "mobile-tab-now"
       },
       "controls": {
         "count": 4,
@@ -791,7 +791,7 @@
         "allHorizontallyReachable": true,
         "boxes": [
           {
-            "id": "mobile-tab-goal",
+            "id": "mobile-tab-now",
             "x": 8,
             "y": 796,
             "top": 796,
@@ -865,7 +865,7 @@
       },
       "staticTools": null,
       "focus": {
-        "activeId": "mobile-tab-goal",
+        "activeId": "mobile-tab-now",
         "activeElementMatches": true,
         "documentHasFocus": true,
         "focusMatches": true,
@@ -948,9 +948,9 @@
         "tablistCount": 1,
         "tabCount": 4,
         "selectedTabCount": 1,
-        "selectedTabId": "mobile-tab-goal",
+        "selectedTabId": "mobile-tab-now",
         "panelCount": 1,
-        "panelLabelledBy": "mobile-tab-goal"
+        "panelLabelledBy": "mobile-tab-now"
       },
       "controls": {
         "count": 4,
@@ -958,7 +958,7 @@
         "allHorizontallyReachable": true,
         "boxes": [
           {
-            "id": "mobile-tab-goal",
+            "id": "mobile-tab-now",
             "x": 8,
             "y": 796,
             "top": 796,
@@ -1032,7 +1032,7 @@
       },
       "staticTools": null,
       "focus": {
-        "activeId": "mobile-tab-goal",
+        "activeId": "mobile-tab-now",
         "activeElementMatches": true,
         "documentHasFocus": true,
         "focusMatches": true,
@@ -1115,9 +1115,9 @@
         "tablistCount": 1,
         "tabCount": 4,
         "selectedTabCount": 1,
-        "selectedTabId": "mobile-tab-goal",
+        "selectedTabId": "mobile-tab-now",
         "panelCount": 1,
-        "panelLabelledBy": "mobile-tab-goal"
+        "panelLabelledBy": "mobile-tab-now"
       },
       "controls": {
         "count": 5,
@@ -1136,7 +1136,7 @@
             "height": 44
           },
           {
-            "id": "mobile-tab-goal",
+            "id": "mobile-tab-now",
             "x": 8,
             "y": 796,
             "top": 796,
@@ -1210,7 +1210,7 @@
       },
       "staticTools": null,
       "focus": {
-        "activeId": "mobile-tab-goal",
+        "activeId": "mobile-tab-now",
         "activeElementMatches": true,
         "documentHasFocus": true,
         "focusMatches": true,
@@ -1293,9 +1293,9 @@
         "tablistCount": 1,
         "tabCount": 4,
         "selectedTabCount": 1,
-        "selectedTabId": "mobile-tab-goal",
+        "selectedTabId": "mobile-tab-now",
         "panelCount": 1,
-        "panelLabelledBy": "mobile-tab-goal"
+        "panelLabelledBy": "mobile-tab-now"
       },
       "controls": {
         "count": 4,
@@ -1303,7 +1303,7 @@
         "allHorizontallyReachable": true,
         "boxes": [
           {
-            "id": "mobile-tab-goal",
+            "id": "mobile-tab-now",
             "x": 8,
             "y": 796,
             "top": 796,
@@ -1377,7 +1377,7 @@
       },
       "staticTools": null,
       "focus": {
-        "activeId": "mobile-tab-goal",
+        "activeId": "mobile-tab-now",
         "activeElementMatches": true,
         "documentHasFocus": true,
         "focusMatches": true,
@@ -2951,7 +2951,7 @@
       "width": 393,
       "height": 852,
       "expected": "mobile",
-      "sha256": "0e99cc17c21323c14fbf89d7b695a7c2484a0cca4d55d7cf0de6264ad4372de4"
+      "sha256": "3ee790bcb8738c46b33900ea01ce7eb86bdb51696d0b84f1800650ca26c2e9cd"
     },
     {
       "path": "evaluation/v3/v3-s12-proof-1440x900.png",
@@ -2978,7 +2978,7 @@
       "width": 393,
       "height": 852,
       "expected": "mobile",
-      "sha256": "cf469f37b584ff74cc1598a4bc8bbda364e7fbf89463b599c1a58d127842595a"
+      "sha256": "d6e26100a52e628d0e30b910e113ed33e5f97382b3bf30d07e0dd8d8934bfafe"
     },
     {
       "path": "evaluation/v3/v3-s13-modal-1440x900.png",
@@ -2996,7 +2996,7 @@
       "width": 393,
       "height": 852,
       "expected": "mobile",
-      "sha256": "a19933d823a5eab81a9b4bb9d9f95c64b8485fef66a7ec92511930ee6ba208d2"
+      "sha256": "91aa6f205838c1e7c7bca5a43e0fe43512d5ada4ef971f1b21ce761a54fe46da"
     },
     {
       "path": "evaluation/v3/v3-s14-1440x900.png",
@@ -3014,7 +3014,7 @@
       "width": 393,
       "height": 852,
       "expected": "mobile",
-      "sha256": "23559f6178ba791276230c37666b42566e5b2c4c102c0d83c004991f0f66c51c"
+      "sha256": "ab1fad124266947fadf6f0ca10de65f4464bf0d7b63311f48651d078ca447cc5"
     },
     {
       "path": "evaluation/v3/v3-s12-boundary-mobile-1199x900.png",
@@ -3023,7 +3023,7 @@
       "width": 1199,
       "height": 900,
       "expected": "mobile",
-      "sha256": "878974106b29fa0bfe45368c19c6eec223dbf57866a7112be251e67ab3d15a94"
+      "sha256": "c8c35c10c74e849ba074f58cea9465cdf222f27373567cba7b00c6177af97533"
     },
     {
       "path": "evaluation/v3/v3-s12-boundary-desktop-1200x900.png",
@@ -3041,7 +3041,7 @@
       "width": 320,
       "height": 568,
       "expected": "mobile",
-      "sha256": "d0eb06393451868a38ac3102440696d05cc53ea4efe286ed823541ecf5bdfdf9"
+      "sha256": "ce0ddeb2d30f5ed74d00536aaba156afcb52e8b7ab9218deb2116e408b0171e5"
     },
     {
       "path": "evaluation/v3/v3-s03-hostile-1728x1117.png",

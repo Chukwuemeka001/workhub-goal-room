@@ -98,7 +98,7 @@ export function createMobileSurface(
   root: HTMLElement,
   actions: MobileSurfaceActions,
 ): { render(view: MobileView): void; selectedTab(): MobileTabId } {
-  let activeTab: MobileTabId = "goal";
+  let activeTab: MobileTabId = "now";
   let currentView: MobileView | null = null;
   const onSelectTab = (id: MobileTabId) => {
     activeTab = id;
@@ -214,7 +214,7 @@ export function createMobileSurface(
     panel.tabIndex = 0;
     const tab = view.tabs.find((entry) => entry.id === activeTab)!;
     panel.append(text("h2", tab.panelHeading, "mobile-panel-heading"));
-    if (activeTab === "goal") panel.append(text("p", view.goal.origin, "mobile-origin"), text("p", `Goal Contract ${view.goal.version ? `v${view.goal.version}` : "not admitted"} · ${view.goal.status.replaceAll("_", " ")}`), list("Done looks like", view.goal.doneLooksLike), list("Constraints", view.goal.constraints), list("Non-goals", view.goal.nonGoals));
+    if (activeTab === "now") panel.append(text("p", view.frontier.boundary), text("p", `Current status: ${view.status}`));
     if (activeTab === "plan") panel.append(renderPlan(view));
     if (activeTab === "proof") panel.append(renderProof(view));
     if (activeTab === "activity") panel.append(renderActivity(view));

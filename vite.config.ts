@@ -13,6 +13,7 @@ const publicJudgeHelp = {
 
 export default defineConfig({
   base: process.env.GITHUB_ACTIONS ? "/workhub-goal-room/" : "/",
+  build: { cssTarget: "safari16.3" },
   plugins: [publicJudgeHelp],
   test: {
     environment: "node",

@@ -46,6 +46,18 @@ test("committed Phase 5 evidence passes validation", () => {
   assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
 });
 
+test("requires the current Now tab selector and rejects the retired Goal tab selector", () => {
+  const current = runValidator(cloneJourney());
+  assert.equal(current.status, 0, `validator rejected current Now evidence\n${current.stdout}\n${current.stderr}`);
+
+  const retired = cloneJourney();
+  const now = retired.accessibility.zoom200.requiredContent.find((row) => row.selector === "#mobile-tab-now");
+  assert.ok(now, "fresh producer evidence must include #mobile-tab-now");
+  now.selector = "#mobile-tab-goal";
+  const result = runValidator(retired);
+  assert.notEqual(result.status, 0, `validator accepted retired Goal evidence\n${result.stdout}\n${result.stderr}`);
+});
+
 expectRejected("rejects a zoom receipt reduced from twelve required targets to eight", ({ zoom200 }) => {
   zoom200.requiredContent = zoom200.requiredContent.slice(0, 8);
 });

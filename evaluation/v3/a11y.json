@@ -97,9 +97,9 @@
         "tablistCount": 1,
         "tabCount": 4,
         "selectedTabCount": 1,
-        "selectedTabId": "mobile-tab-goal",
+        "selectedTabId": "mobile-tab-now",
         "panelCount": 1,
-        "panelLabelledBy": "mobile-tab-goal"
+        "panelLabelledBy": "mobile-tab-now"
       },
       "controls": {
         "count": 6,
@@ -129,7 +129,7 @@
             "height": 58
           },
           {
-            "id": "mobile-tab-goal",
+            "id": "mobile-tab-now",
             "x": 8,
             "y": 796,
             "top": 796,
@@ -203,7 +203,7 @@
       },
       "staticTools": null,
       "focus": {
-        "activeId": "mobile-tab-goal",
+        "activeId": "mobile-tab-now",
         "activeElementMatches": true,
         "documentHasFocus": true,
         "focusMatches": true,
@@ -286,9 +286,9 @@
         "tablistCount": 1,
         "tabCount": 4,
         "selectedTabCount": 1,
-        "selectedTabId": "mobile-tab-goal",
+        "selectedTabId": "mobile-tab-now",
         "panelCount": 1,
-        "panelLabelledBy": "mobile-tab-goal"
+        "panelLabelledBy": "mobile-tab-now"
       },
       "controls": {
         "count": 6,
@@ -318,7 +318,7 @@
             "height": 44
           },
           {
-            "id": "mobile-tab-goal",
+            "id": "mobile-tab-now",
             "x": 8,
             "y": 796,
             "top": 796,
@@ -392,7 +392,7 @@
       },
       "staticTools": null,
       "focus": {
-        "activeId": "mobile-tab-goal",
+        "activeId": "mobile-tab-now",
         "activeElementMatches": true,
         "documentHasFocus": true,
         "focusMatches": true,
@@ -475,9 +475,9 @@
         "tablistCount": 1,
         "tabCount": 4,
         "selectedTabCount": 1,
-        "selectedTabId": "mobile-tab-goal",
+        "selectedTabId": "mobile-tab-now",
         "panelCount": 1,
-        "panelLabelledBy": "mobile-tab-goal"
+        "panelLabelledBy": "mobile-tab-now"
       },
       "controls": {
         "count": 6,
@@ -507,7 +507,7 @@
             "height": 44
           },
           {
-            "id": "mobile-tab-goal",
+            "id": "mobile-tab-now",
             "x": 8,
             "y": 796,
             "top": 796,
@@ -581,7 +581,7 @@
       },
       "staticTools": null,
       "focus": {
-        "activeId": "mobile-tab-goal",
+        "activeId": "mobile-tab-now",
         "activeElementMatches": true,
         "documentHasFocus": true,
         "focusMatches": true,
@@ -664,9 +664,9 @@
         "tablistCount": 1,
         "tabCount": 4,
         "selectedTabCount": 1,
-        "selectedTabId": "mobile-tab-goal",
+        "selectedTabId": "mobile-tab-now",
         "panelCount": 1,
-        "panelLabelledBy": "mobile-tab-goal"
+        "panelLabelledBy": "mobile-tab-now"
       },
       "controls": {
         "count": 4,
@@ -674,7 +674,7 @@
         "allHorizontallyReachable": true,
         "boxes": [
           {
-            "id": "mobile-tab-goal",
+            "id": "mobile-tab-now",
             "x": 8,
             "y": 796,
             "top": 796,
@@ -748,7 +748,7 @@
       },
       "staticTools": null,
       "focus": {
-        "activeId": "mobile-tab-goal",
+        "activeId": "mobile-tab-now",
         "activeElementMatches": true,
         "documentHasFocus": true,
         "focusMatches": true,
@@ -831,9 +831,9 @@
         "tablistCount": 1,
         "tabCount": 4,
         "selectedTabCount": 1,
-        "selectedTabId": "mobile-tab-goal",
+        "selectedTabId": "mobile-tab-now",
         "panelCount": 1,
-        "panelLabelledBy": "mobile-tab-goal"
+        "panelLabelledBy": "mobile-tab-now"
       },
       "controls": {
         "count": 4,
@@ -841,7 +841,7 @@
         "allHorizontallyReachable": true,
         "boxes": [
           {
-            "id": "mobile-tab-goal",
+            "id": "mobile-tab-now",
             "x": 8,
             "y": 796,
             "top": 796,
@@ -915,7 +915,7 @@
       },
       "staticTools": null,
       "focus": {
-        "activeId": "mobile-tab-goal",
+        "activeId": "mobile-tab-now",
         "activeElementMatches": true,
         "documentHasFocus": true,
         "focusMatches": true,
@@ -998,9 +998,9 @@
         "tablistCount": 1,
         "tabCount": 4,
         "selectedTabCount": 1,
-        "selectedTabId": "mobile-tab-goal",
+        "selectedTabId": "mobile-tab-now",
         "panelCount": 1,
-        "panelLabelledBy": "mobile-tab-goal"
+        "panelLabelledBy": "mobile-tab-now"
       },
       "controls": {
         "count": 4,
@@ -1008,7 +1008,7 @@
         "allHorizontallyReachable": true,
         "boxes": [
           {
-            "id": "mobile-tab-goal",
+            "id": "mobile-tab-now",
             "x": 8,
             "y": 796,
             "top": 796,
@@ -1082,7 +1082,7 @@
       },
       "staticTools": null,
       "focus": {
-        "activeId": "mobile-tab-goal",
+        "activeId": "mobile-tab-now",
         "activeElementMatches": true,
         "documentHasFocus": true,
         "focusMatches": true,
@@ -1165,9 +1165,9 @@
         "tablistCount": 1,
         "tabCount": 4,
         "selectedTabCount": 1,
-        "selectedTabId": "mobile-tab-goal",
+        "selectedTabId": "mobile-tab-now",
         "panelCount": 1,
-        "panelLabelledBy": "mobile-tab-goal"
+        "panelLabelledBy": "mobile-tab-now"
       },
       "controls": {
         "count": 5,
@@ -1186,7 +1186,7 @@
             "height": 44
           },
           {
-            "id": "mobile-tab-goal",
+            "id": "mobile-tab-now",
             "x": 8,
             "y": 796,
             "top": 796,
@@ -1260,7 +1260,7 @@
       },
       "staticTools": null,
       "focus": {
-        "activeId": "mobile-tab-goal",
+        "activeId": "mobile-tab-now",
         "activeElementMatches": true,
         "documentHasFocus": true,
         "focusMatches": true,
@@ -1343,9 +1343,9 @@
         "tablistCount": 1,
         "tabCount": 4,
         "selectedTabCount": 1,
-        "selectedTabId": "mobile-tab-goal",
+        "selectedTabId": "mobile-tab-now",
         "panelCount": 1,
-        "panelLabelledBy": "mobile-tab-goal"
+        "panelLabelledBy": "mobile-tab-now"
       },
       "controls": {
         "count": 4,
@@ -1353,7 +1353,7 @@
         "allHorizontallyReachable": true,
         "boxes": [
           {
-            "id": "mobile-tab-goal",
+            "id": "mobile-tab-now",
             "x": 8,
             "y": 796,
             "top": 796,
@@ -1427,7 +1427,7 @@
       },
       "staticTools": null,
       "focus": {
-        "activeId": "mobile-tab-goal",
+        "activeId": "mobile-tab-now",
         "activeElementMatches": true,
         "documentHasFocus": true,
         "focusMatches": true,
@@ -4482,13 +4482,13 @@
         "WorkHub Goal Room mobile"
       ],
       "tabNames": [
-        "Goal",
+        "Now",
         "Plan",
         "Proof",
         "Activity"
       ],
       "panelNames": [
-        "Goal"
+        "Now"
       ]
     },
     {
@@ -4503,13 +4503,13 @@
         "WorkHub Goal Room mobile"
       ],
       "tabNames": [
-        "Goal",
+        "Now",
         "Plan",
         "Proof",
         "Activity"
       ],
       "panelNames": [
-        "Goal"
+        "Now"
       ]
     },
     {
@@ -4524,13 +4524,13 @@
         "WorkHub Goal Room mobile"
       ],
       "tabNames": [
-        "Goal",
+        "Now",
         "Plan",
         "Proof",
         "Activity"
       ],
       "panelNames": [
-        "Goal"
+        "Now"
       ]
     },
     {
@@ -4545,13 +4545,13 @@
         "WorkHub Goal Room mobile"
       ],
       "tabNames": [
-        "Goal",
+        "Now",
         "Plan",
         "Proof",
         "Activity"
       ],
       "panelNames": [
-        "Goal"
+        "Now"
       ]
     },
     {
@@ -4566,13 +4566,13 @@
         "WorkHub Goal Room mobile"
       ],
       "tabNames": [
-        "Goal",
+        "Now",
         "Plan",
         "Proof",
         "Activity"
       ],
       "panelNames": [
-        "Goal"
+        "Now"
       ]
     },
     {
@@ -4587,13 +4587,13 @@
         "WorkHub Goal Room mobile"
       ],
       "tabNames": [
-        "Goal",
+        "Now",
         "Plan",
         "Proof",
         "Activity"
       ],
       "panelNames": [
-        "Goal"
+        "Now"
       ]
     },
     {
@@ -4753,8 +4753,8 @@
         },
         {
           "key": "Home",
-          "activeId": "mobile-tab-goal",
-          "selected": "mobile-tab-goal",
+          "activeId": "mobile-tab-now",
+          "selected": "mobile-tab-now",
           "ownerCalls": []
         }
       ]

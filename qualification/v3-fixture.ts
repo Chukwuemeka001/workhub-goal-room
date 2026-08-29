@@ -51,7 +51,7 @@ mobile.render(createMobileView(state, ownerView, receipts));
 desktop.setConnection("Qualification fixture: real kernel replay", "registered");
 desktop.render(createDesktopView(state, ownerView, receipts));
 const requestedTab = query.get("tab");
-if (requestedTab && ["goal", "plan", "proof", "activity"].includes(requestedTab)) {
+if (requestedTab && ["now", "goal", "plan", "proof", "activity"].includes(requestedTab)) {
   mobileRoot.querySelector<HTMLButtonElement>(`#mobile-tab-${requestedTab}`)?.click();
   desktopRoot.querySelector<HTMLButtonElement>(`#desktop-tab-${requestedTab}`)?.click();
 }

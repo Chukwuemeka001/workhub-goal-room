@@ -33,6 +33,15 @@ async function build(githubActions) {
   for (const name of authoritative) {
     assert.deepEqual(await readFile(join(dist, name)), await readFile(join(root, name)), `${name} must be byte-identical to the authoritative root document`);
   }
+  return readFile(join(dist, files.find((path) => path.endsWith(".css"))), "utf8");
+}
+
+function assertSafari163MediaQueries(css, mode) {
+  const compact = css.replace(/\s+/g, "");
+  assert.match(compact, /\(max-width:1199px\)/, `${mode} CSS must retain the mobile max-width query Safari 16.3 parses`);
+  assert.match(compact, /\(min-width:1200px\)/, `${mode} CSS must retain the desktop min-width query Safari 16.3 parses`);
+  assert.doesNotMatch(compact, /\(width<=1199px\)/, `${mode} CSS must not use Safari 16.4+ mobile range syntax`);
+  assert.doesNotMatch(compact, /\(width>=1200px\)/, `${mode} CSS must not use Safari 16.4+ desktop range syntax`);
 }
 
 async function startStaticServer() {
@@ -53,6 +62,11 @@ async function startStaticServer() {
 }
 
 after(async () => { if (server) await new Promise((resolveClose) => server.close(resolveClose)); });
+
+test("root and Pages production CSS uses Safari 16.3-compatible breakpoint syntax", async () => {
+  assertSafari163MediaQueries(await build(false), "root");
+  assertSafari163MediaQueries(await build(true), "Pages");
+});
 
 test("local production build serves authoritative judge-help documents", async () => {
   await build(false);

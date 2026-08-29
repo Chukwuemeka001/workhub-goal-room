@@ -13,7 +13,7 @@ const base: MobileView = {
   ownerAttention: false,
   actionDock: { kind: "revise-intent", primaryLabel: "Revise owner intent", secondaryKind: null, secondaryLabel: null, waitingText: "No owner action is required right now." },
   tabs: [
-    { id: "goal", label: "Goal", panelHeading: "Goal Contract" },
+    { id: "now", label: "Now", panelHeading: "Current frontier" },
     { id: "plan", label: "Plan", panelHeading: "Goal and Plan" },
     { id: "proof", label: "Proof", panelHeading: "Evidence and verification" },
     { id: "activity", label: "Activity", panelHeading: "Origin, decisions, and receipts" },
