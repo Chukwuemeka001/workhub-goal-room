@@ -6,8 +6,8 @@
     "commit": "5ac95d4bdab5f54beda0f90776c3918fd36136d2",
     "tree": "b6b50068e8119d02d1d9213286f14adf3cbc0db1"
   },
-  "packageCommit": "PACKAGE_COMMIT_SENTINEL",
-  "packageTree": "PACKAGE_TREE_SENTINEL",
+  "packageCommit": "293f84cb0e688631364a00e19fa8845a01161d33",
+  "packageTree": "d0a171892f16b17df59b97668d1b68b6b518e1cf",
   "artifactCount": 50,
   "artifacts": [
     {
@@ -269,6 +269,6 @@
   },
   "claimBoundary": "Local package only. No push, deploy, upload, publication, or submission authority.",
   "date": "2026-08-28",
-  "artifactHashSource": "Working package candidate bytes; metadata-only child will bind immutable package Git objects",
+  "artifactHashSource": "Immutable Git objects at packageCommit; package-manifest.json and V3_AUDIT.md excluded to avoid self-reference",
   "verifiedArtifactCount": 50
 }
