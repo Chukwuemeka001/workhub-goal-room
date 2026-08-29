@@ -12,12 +12,13 @@ The repaired package is prepared for independent Phase 6 review. This audit is n
 - Current tool surface: exactly six browser-returned tools.
 - Recorder: executable Canary launcher/driver/capture/encoder with disposable profile cleanup and fail-closed WebMCP detection.
 - Interactive video: continuous live native governed lineage from 0:00 through sealed S14 at 2:06.8. It visibly includes trusted Owner pointer/typing, native Agent calls, Goal/Plan revision and confirmation, automatic System FAIL then corrected PASS, exact-candidate acceptance, and actorless S14.
-- Reconstruction disclosure: 2:06.9–2:18.7 is the source-bound mobile/breakpoint scene; 2:18.85–2:33.84 is the source-bound architecture/honest-limits scene.
-- Interactivity receipt: 632 screencast frames, 582 unique frames, 581 recorded transitions, 39 authority/input/verdict/scene events, and per-interval video frame-change checks.
+- Reconstruction disclosure: 2:06.9–2:18.7 is the source-bound mobile/breakpoint scene; 2:18.85–2:33.833 is the source-bound architecture/honest-limits scene, bounded by the regenerated media's ffprobe duration.
+- Interactivity receipt: 625 screencast frames, 580 unique frames, 579 recorded transitions, 39 authority/input/verdict/scene events, and per-interval video frame-change checks.
 - Architecture: exact machine-readable semantic edges; Agent cyan enters only browser tools→kernel; System violet runs kernel→production adapter→rules→kernel; Owner yellow enters trusted UI/acceptance→kernel. PASS has no direct edge to acceptance.
 - Scene alignment: all 13 cues bind caption text, semantic tokens, exact representative visual hashes, and frozen `ffmpeg-ssim-all >= 0.995` checks.
-- Media: H.264 High 1440×900 plus AAC-LC 48 kHz, 153.840 seconds, full decode, no black interval at the checked threshold, usable unclipped narration, no music.
-- Validator: exact 50-artifact inventory plus immutable package Git-object binding and ten isolated adversarial mutation tests.
+- Media: H.264 High 1440×900 plus AAC-LC 48 kHz, 153.833 seconds, full decode, no black interval at the checked threshold, usable unclipped narration, no music.
+- Validator: exact 51-artifact inventory, validator-owned frozen screenshot/cue/recorder contracts, immutable package Git-object binding, and isolated adversarial mutation tests.
+- Qualification boundary: the default validator qualifies only this exact package parent plus metadata-only binding child. `--prebind` is a non-qualifying builder check and never emits the final PASS verdict; this is not a generic arbitrary-package validator.
 - Scope: one synthetic browser-local Goal; no accounts, backend persistence, database, cloud service, external effects, autonomous-model reliability, security certification, deployment, or publication claim.
 
 ## Pending Owner gates
@@ -29,7 +30,7 @@ The repaired package is prepared for independent Phase 6 review. This audit is n
 
 ## Binding
 
-Package commit: `293f84cb0e688631364a00e19fa8845a01161d33`
-Package tree: `d0a171892f16b17df59b97668d1b68b6b518e1cf`
+Package commit: `PACKAGE_COMMIT_SENTINEL`
+Package tree: `PACKAGE_TREE_SENTINEL`
 
-The metadata-only child may change only this audit and `submission/package-manifest.json` to bind the exact package parent commit/tree and its 50 immutable artifact Git objects. Independent review remains required for Phase 6 exit.
+The metadata-only child may change only this audit and `submission/package-manifest.json` to bind the exact package parent commit/tree and its 51 immutable artifact Git objects. Independent review remains required for Phase 6 exit.

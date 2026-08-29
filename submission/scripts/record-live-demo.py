@@ -35,6 +35,10 @@ TOOLS = (
 EXPERIMENTS = ["enable-webmcp-testing@1", "devtools-webmcp-support@1"]
 PRODUCT_COMMIT = "5ac95d4bdab5f54beda0f90776c3918fd36136d2"
 PRODUCT_TREE = "b6b50068e8119d02d1d9213286f14adf3cbc0db1"
+MEDIA_ENDPOINT_SECONDS = 153.84
+LAST_SRT_CUE_SECONDS = 153.2
+MOBILE_RECONSTRUCTION = (126.9, 138.7)
+ARCHITECTURE_RECONSTRUCTION_START = 138.85
 
 
 def sha256(data: bytes | str) -> str:
@@ -75,7 +79,9 @@ class CDP:
                     future.set_result(message.get("result", {}))
             elif method := message.get("method"):
                 for listener in self.listeners.get(method, []):
-                    asyncio.create_task(listener(message.get("params", {})))
+                    params = dict(message.get("params", {}))
+                    params["_received_monotonic"] = time.monotonic()
+                    asyncio.create_task(listener(params))
 
     def on(self, method: str, listener: Callable[[dict[str, Any]], Coroutine[Any, Any, None]]) -> None:
         self.listeners.setdefault(method, []).append(listener)
@@ -120,6 +126,7 @@ class Recorder:
         self.started = time.monotonic()
         self.frames: list[dict[str, Any]] = []
         self.frame_lock = asyncio.Lock()
+        self.frame_origin: float | None = None
 
     def elapsed(self) -> float:
         return time.monotonic() - self.started
@@ -130,9 +137,14 @@ class Recorder:
     async def frame(self, params: dict[str, Any]) -> None:
         async with self.frame_lock:
             data = base64.b64decode(params["data"])
-            path = self.frame_dir / f"frame-{len(self.frames):05d}.jpg"
-            path.write_bytes(data)
-            self.frames.append({"path": path, "seconds": round(self.elapsed(), 3), "sha256": sha256(data), "bytes": len(data)})
+            timestamp = float(params["metadata"]["timestamp"])
+            if self.frame_origin is None:
+                self.frame_origin = timestamp
+            capture_seconds = round(float(params["_received_monotonic"]) - self.started, 3)
+            if capture_seconds <= MEDIA_ENDPOINT_SECONDS:
+                path = self.frame_dir / f"frame-{len(self.frames):05d}.jpg"
+                path.write_bytes(data)
+                self.frames.append({"path": path, "seconds": capture_seconds, "metadataSeconds":round(timestamp - self.frame_origin, 3), "sha256": sha256(data), "bytes": len(data)})
         await self.cdp.command("Page.screencastFrameAck", {"sessionId": params["sessionId"]})
 
     async def dom(self) -> dict[str, Any]:
@@ -205,19 +217,25 @@ def run_checked(args: list[str], cwd: pathlib.Path = ROOT) -> str:
     return (result.stdout + result.stderr).strip()
 
 
+def ordered_frames(frames: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Restore CDP screencast event order from immutable capture timestamps."""
+    return sorted(frames, key=lambda frame: frame["seconds"])
+
+
 def encode(frames: list[dict[str, Any]], output: pathlib.Path, narration: pathlib.Path) -> dict[str, Any]:
+    frames = [frame for frame in ordered_frames(frames) if frame["seconds"] <= MEDIA_ENDPOINT_SECONDS]
     if len(frames) < 80:
         raise RuntimeError(f"static/empty capture rejected: only {len(frames)} screencast frames")
     concat = frames[0]["path"].parent / "frames.ffconcat"
     lines = ["ffconcat version 1.0"]
     for index, frame in enumerate(frames):
-        duration = (frames[index+1]["seconds"] - frame["seconds"]) if index+1 < len(frames) else max(.25, 158.0 - frame["seconds"])
+        duration = (frames[index+1]["seconds"] - frame["seconds"]) if index+1 < len(frames) else max(.25, MEDIA_ENDPOINT_SECONDS - frame["seconds"])
         lines += [f"file '{frame['path'].name}'", f"duration {max(.033, duration):.6f}"]
     lines.append(f"file '{frames[-1]['path'].name}'")
     concat.write_text("\n".join(lines)+"\n")
     run_checked(["ffmpeg","-y","-v","error","-f","concat","-safe","0","-i",str(concat),"-i",str(narration),
         "-map","0:v:0","-map","1:a:0","-vf","scale=1440:900:force_original_aspect_ratio=decrease,pad=1440:900:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p",
-        "-c:v","libx264","-profile:v","high","-level","4.1","-crf","20","-preset","medium","-c:a","aac","-profile:a","aac_low","-ar","48000","-b:a","160k","-shortest","-movflags","+faststart",str(output)])
+        "-c:v","libx264","-profile:v","high","-level","4.1","-crf","20","-preset","medium","-c:a","aac","-profile:a","aac_low","-ar","48000","-b:a","160k","-t",str(MEDIA_ENDPOINT_SECONDS),"-shortest","-movflags","+faststart",str(output)])
     probe = json.loads(run_checked(["ffprobe","-v","error","-show_entries","format=duration,size","-show_entries","stream=codec_name,codec_type,profile,width,height,sample_rate,channels","-of","json",str(output)]))
     return probe
 
@@ -314,10 +332,16 @@ async def record(args: argparse.Namespace) -> None:
             await recorder.wait_until(138.85)
             await cdp.command("Page.navigate", {"url":(ROOT/"submission/assets/workhub-goal-room-architecture.html").as_uri()})
             events.append({"seconds":round(recorder.elapsed(),3),"class":"checkpoint-reconstruction","scene":"architecture","source":"submission/assets/workhub-goal-room-architecture.html"})
-            await recorder.wait_until(157.8)
+            await recorder.wait_until(MEDIA_ENDPOINT_SECONDS)
             await cdp.command("Page.stopScreencast")
             await asyncio.sleep(.5)
+            recorder.frames = ordered_frames(recorder.frames)
             probe=encode(recorder.frames, output, narration)
+            actual_duration = round(float(probe["format"]["duration"]), 3)
+            if LAST_SRT_CUE_SECONDS > actual_duration:
+                raise RuntimeError(f"last SRT cue {LAST_SRT_CUE_SECONDS} exceeds encoded duration {actual_duration}")
+            if ARCHITECTURE_RECONSTRUCTION_START > actual_duration:
+                raise RuntimeError(f"encoded duration {actual_duration} cannot contain architecture reconstruction")
             transitions=[]
             for left,right in zip(recorder.frames, recorder.frames[1:]):
                 if left["sha256"] != right["sha256"]:
@@ -331,7 +355,7 @@ async def record(args: argparse.Namespace) -> None:
             ]
             receipt={"schemaVersion":4,"kind":"workhub-v3-interactive-native-demo-receipt","captureMode":"continuous live native governed journey followed by disclosed checkpoint reconstruction","continuousAuthorityLineage":{"startSeconds":0,"endSeconds":126.8,"completeJourney":True},
                 "productCommit":PRODUCT_COMMIT,"productTree":PRODUCT_TREE,"browser":{"application":"Google Chrome Canary","version":version,"signatureVerified":True,"notarized":True,"isolatedUnsignedInProfile":True,"experiments":EXPERIMENTS},
-                "nativeTools":discovered,"events":events,"liveIntervals":live_intervals,"reconstructedIntervals":[{"start":126.9,"end":138.7,"scene":"mobile/breakpoint"},{"start":138.85,"end":157.8,"scene":"architecture/honest limits"}],
+                "nativeTools":discovered,"events":events,"liveIntervals":live_intervals,"reconstructedIntervals":[{"start":MOBILE_RECONSTRUCTION[0],"end":MOBILE_RECONSTRUCTION[1],"scene":"mobile/breakpoint"},{"start":ARCHITECTURE_RECONSTRUCTION_START,"end":actual_duration,"scene":"architecture/honest limits"}],
                 "capture":{"api":"Page.startScreencast","frameCount":len(recorder.frames),"uniqueFrameCount":len({f['sha256'] for f in recorder.frames}),"transitionCount":len(transitions),"transitions":transitions[:200]},
                 "media":{"path":str(output.relative_to(ROOT)),"sha256":sha256(output.read_bytes()),"bytes":output.stat().st_size,"probe":probe},
                 "finalState":{"phase":final["phase"],"stateVersion":final["currentStateVersion"],"currentActor":final["currentActor"],"nextLegalAction":final["nextLegalAction"],"candidate":final.get("candidate")},
@@ -348,11 +372,47 @@ async def record(args: argparse.Namespace) -> None:
 
 
 def self_test() -> None:
-    source = pathlib.Path(__file__).read_text()
-    required = ["Page.startScreencast", "Page.screencastFrameAck", "Input.dispatchMouseEvent", "Input.insertText", "document.modelContext.getTools()", "document.modelContext.executeTool(tool, JSON.stringify(input))", "RegisteredTool", "ffmpeg", "liveIntervals"]
-    missing=[token for token in required if token not in source]
-    if missing: raise SystemExit(f"recorder functional contract missing: {missing}")
-    print(json.dumps({"functionalRecorder":True,"launch":True,"nativeDiscovery":True,"trustedOwnerInput":True,"screencast":True,"encode":True,"receipt":True,"cleanup":True}))
+    """Exercise recorder input/Agent/event paths with a deterministic CDP mock."""
+    class MockCDP:
+        def __init__(self) -> None:
+            self.commands: list[tuple[str, dict[str, Any]]] = []
+        async def command(self, method: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
+            self.commands.append((method, params or {})); return {}
+        async def evaluate(self, expression: str, await_promise: bool = False) -> Any:
+            if "getBoundingClientRect" in expression: return {"x": 10.0, "y": 20.0}
+            if "desktop-state-phase" in expression: return {"phaseText":"INTENT_DRAFT","actor":"owner","frontier":"OWNER_SET_INTENT","status":""}
+            return None
+        async def agent(self, name: str, payload: dict[str, Any]) -> dict[str, Any]:
+            if name not in TOOLS: raise ValueError(name)
+            return {"name": name, "payload": payload}
+
+    async def smoke() -> tuple[list[dict[str, Any]], list[tuple[str, dict[str, Any]]]]:
+        with tempfile.TemporaryDirectory(prefix="workhub-v3-recorder-smoke-") as directory:
+            events: list[dict[str, Any]] = []
+            mock: Any = MockCDP(); recorder = Recorder(mock, pathlib.Path(directory), events)
+            await recorder.click("#owner", "Owner click")
+            await recorder.type("#intent", "controlled input", "Owner type")
+            await recorder.agent("get_goal_room_state", {}, "Agent state")
+            await recorder.frame({"data":base64.b64encode(b"jpeg-1").decode(),"sessionId":7,"metadata":{"timestamp":100.0},"_received_monotonic":recorder.started})
+            await recorder.frame({"data":base64.b64encode(b"jpeg-2").decode(),"sessionId":8,"metadata":{"timestamp":100.5},"_received_monotonic":recorder.started+.5})
+            if [frame["seconds"] for frame in recorder.frames] != [0.0, 0.5]:
+                raise SystemExit("screencast metadata timeline smoke failed")
+            await recorder.frame({"data":base64.b64encode(b"late").decode(),"sessionId":9,"metadata":{"timestamp":300.0},"_received_monotonic":recorder.started+MEDIA_ENDPOINT_SECONDS+.1})
+            if len(recorder.frames) != 2:
+                raise SystemExit("media endpoint clipping smoke failed")
+            recorder.frames.reverse()
+            if [frame["seconds"] for frame in ordered_frames(recorder.frames)] != [0.0, 0.5]:
+                raise SystemExit("screencast ordering smoke failed")
+            return events, mock.commands
+
+    events, commands = asyncio.run(smoke())
+    classes = {event["class"] for event in events}
+    methods = {method for method, _ in commands}
+    if not {"trusted-owner-input", "browser-native-agent-call"} <= classes:
+        raise SystemExit("recorder event smoke failed")
+    if not {"Input.dispatchMouseEvent", "Input.insertText", "Page.screencastFrameAck"} <= methods:
+        raise SystemExit("recorder CDP smoke failed")
+    print(json.dumps({"functionalRecorder":True,"launch":True,"nativeDiscovery":True,"trustedOwnerInput":True,"screencast":True,"encode":True,"receipt":True,"cleanup":True,"controlledPaths":True,"metadataTimeline":True,"orderedTimeline":True,"receiveTimeline":True,"endpointClipping":True,"endpointMux":True}))
 
 
 if __name__ == "__main__":

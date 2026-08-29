@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { readFile, stat } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { resolve, dirname } from 'node:path';
+import { SOURCE_COMMIT, SOURCE_TREE, CAPTURE_DATE, RECORDER_SHA256, SCREENSHOTS, CUES, REQUIRED_ARTIFACTS, RECONSTRUCTED_INTERVALS } from './submission-v3-contract.mjs';
 
 const root = process.cwd();
 const failures = [];
@@ -12,9 +13,8 @@ const json = async (path) => JSON.parse(await text(path));
 const digest = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const exists = async (path) => { try { await stat(resolve(root, path)); return true; } catch { return false; } };
 const git = (args, encoding = 'utf8') => spawnSync('git', args, { cwd: root, encoding, maxBuffer: 50 * 1024 * 1024 });
-const SOURCE_COMMIT = '5ac95d4bdab5f54beda0f90776c3918fd36136d2';
-const SOURCE_TREE = 'b6b50068e8119d02d1d9213286f14adf3cbc0db1';
-const CAPTURE_DATE = '2026-08-28';
+const prebind = process.argv.slice(2).length === 1 && process.argv[2] === '--prebind';
+ok(prebind || process.argv.length === 2, 'only supported option is --prebind');
 const tools = ['get_goal_room_state','propose_goal_contract','propose_plan','claim_step','submit_artifact','request_completion'];
 const currentDocs = ['README.md','submission/DEVPOST_SUBMISSION.md','submission/DEMO_SCRIPT.md','submission/V3_REQUIREMENTS.md','submission/V3_CLAIMS.md','submission/V3_AUDIT.md'];
 const historicalOriginalPaths = [
@@ -61,29 +61,25 @@ ok(terminal?.currentActor === 'none' && terminal?.nextLegalAction === 'GOAL_ACCE
 // 4. Screenshot provenance, dimensions, actor/frontier mapping, and source receipt.
 const screenshotManifestPath = 'submission/assets/screenshots/manifest.json';
 const shots = await json(screenshotManifestPath);
-const shotContract = {
- 'native-six-tool-context.png':['MULTI_CHECKPOINT','owner/agent/system','native six-descriptor discovery and RegisteredTool invocation context',1440,900,'evaluation/native-webmcp-v3/native-webmcp-receipt.json','native-receipt-visualization'],
- 'goal-revision.png':['GOAL_CONTRACT_REVISION_REQUESTED','agent','AGENT_PROPOSE_REVISED_GOAL_CONTRACT',1440,900,'evaluation/production-journey/qualification-receipt.json','production-checkpoint-copy'],
- 'plan-revision.png':['PLAN_REVISION_REQUESTED','agent','AGENT_PROPOSE_REVISED_PLAN',1440,900,'evaluation/production-journey/qualification-receipt.json','production-checkpoint-copy'],
- 'candidate-v1-system-fail.png':['VERIFICATION_FAILED','agent','AGENT_SUBMIT_CORRECTED_CANDIDATE',1440,900,'evaluation/production-journey/qualification-receipt.json','production-checkpoint-copy'],
- 'candidate-v2-pass-agent-next.png':['VERIFICATION_PASSED','agent','AGENT_REQUEST_COMPLETION; PASS is not acceptance',1440,900,'evaluation/production-journey/qualification-receipt.json','production-checkpoint-copy'],
- 's13-exact-candidate-owner-modal.png':['COMPLETION_REQUESTED','owner','OWNER_ACCEPT_OR_REQUEST_WORK',1440,900,'evaluation/production-journey/qualification-receipt.json','production-checkpoint-copy'],
- 's14-sealed-actorless.png':['GOAL_ACCEPTED','none','GOAL_ACCEPTED_NO_FURTHER_ACTION',1440,900,'evaluation/production-journey/qualification-receipt.json','production-checkpoint-copy'],
- 'mobile-s14-frontier.png':['GOAL_ACCEPTED','none','GOAL_ACCEPTED_NO_FURTHER_ACTION',393,852,'evaluation/production-journey/qualification-receipt.json','production-mobile-checkpoint-copy'],
- 'boundary-1199-mobile.png':['INTENT_DRAFT','owner','1199px mobile composition',1199,900,'evaluation/production-journey/qualification-receipt.json','production-responsive-boundary-copy'],
- 'boundary-1200-desktop.png':['INTENT_DRAFT','owner','1200px desktop composition',1200,900,'evaluation/production-journey/qualification-receipt.json','production-responsive-boundary-copy']
-};
+const canonicalShotFrames = SCREENSHOTS.map(({sourceObjectPath: _sourceObjectPath, ...frame}) => frame);
+const immutableProductionReceiptRun = git(['show', `${SOURCE_COMMIT}:evaluation/production-journey/qualification-receipt.json`]);
+let immutableProductionReceipt = {}; try { immutableProductionReceipt = JSON.parse(immutableProductionReceiptRun.stdout); } catch {}
+ok(immutableProductionReceiptRun.status === 0, 'immutable production screenshot receipt');
+const immutableReceiptShots = new Map((immutableProductionReceipt.screenshotHashes ?? []).map((row) => [row.path, row]));
 ok(shots?.schemaVersion === 3 && shots?.frameCount === 10 && shots?.frames?.length === 10 && new Set(shots.frames.map(({path}) => path)).size === 10, 'screenshot exact unique count');
-ok(JSON.stringify(shots.frames?.map(({path}) => path)) === JSON.stringify(Object.keys(shotContract)), 'screenshot exact inventory/order');
-for (const frame of shots.frames ?? []) {
-  const contract = shotContract[frame.path];
-  ok(Boolean(contract), `unexpected screenshot ${frame.path}`); if (!contract) continue;
-  const [state,actor,frontier,width,height,sourceReceipt,evidenceClass] = contract;
-  ok(frame.productionCommit === SOURCE_COMMIT && frame.productionTree === SOURCE_TREE && frame.captureDate === CAPTURE_DATE, `screenshot product/date ${frame.path}`);
-  ok(frame.state === state && frame.actor === actor && frame.frontier === frontier && frame.width === width && frame.height === height && frame.sourceReceipt === sourceReceipt && frame.evidenceClass === evidenceClass, `screenshot semantic mapping ${frame.path}`);
+ok(JSON.stringify(shots.frames) === JSON.stringify(canonicalShotFrames), 'screenshot exact validator-owned manifest contract');
+for (const contract of SCREENSHOTS) {
+  const frame = shots.frames?.find(({path}) => path === contract.path);
+  ok(Boolean(frame), `missing screenshot ${contract.path}`); if (!frame) continue;
   const bytes = await readFile(resolve(dirname(resolve(root,screenshotManifestPath)),frame.path));
-  ok(bytes.length === frame.bytes && digest(bytes) === frame.sha256 && bytes.readUInt32BE(16) === width && bytes.readUInt32BE(20) === height, `screenshot bytes/dimensions ${frame.path}`);
-  ok(await exists(sourceReceipt), `screenshot source receipt ${frame.path}`);
+  ok(bytes.length === contract.bytes && digest(bytes) === contract.sha256 && bytes.readUInt32BE(16) === contract.width && bytes.readUInt32BE(20) === contract.height, `screenshot canonical bytes/dimensions ${frame.path}`);
+  ok(await exists(contract.sourceReceipt), `screenshot source receipt ${frame.path}`);
+  if (contract.sourceObjectPath) {
+    const receiptRow = immutableReceiptShots.get(contract.sourceObjectPath);
+    ok(receiptRow?.sha256 === contract.sha256 && receiptRow?.bytes === contract.bytes && receiptRow?.width === contract.width && receiptRow?.height === contract.height, `screenshot immutable receipt mapping ${frame.path}`);
+    const sourceObject = git(['show', `${SOURCE_COMMIT}:${contract.sourceObjectPath}`], null);
+    ok(sourceObject.status === 0 && sourceObject.stdout.length === contract.bytes && digest(sourceObject.stdout) === contract.sha256 && Buffer.compare(sourceObject.stdout, bytes) === 0, `screenshot immutable product object parity ${frame.path}`);
+  }
 }
 
 // 5. Architecture semantic edges and representation parity.
@@ -108,14 +104,17 @@ ok(htmlSvg === svg.trim(), 'architecture HTML/SVG exact representation parity');
 const png = await readFile(resolve(root,'submission/assets/workhub-goal-room-architecture.png'));
 ok(png.readUInt32BE(16) === 1600 && png.readUInt32BE(20) === 1000 && digest(png) === '64f65ce10a2e7f0cab463fb077bb652d19ce039c0652c8bfb13a493a565fe096', 'architecture frozen rendered PNG');
 
-// 6. Recorder source must be executable and behaviorally complete, not comments.
+// 6. Recorder exact source plus structural and controlled executable smoke.
 const recorderPath = 'submission/scripts/record-live-demo.py';
 const recorder = await text(recorderPath);
-ok(recorder.length > 20000 && recorder.split('\n').filter((line) => line.trim() && !line.trim().startsWith('#')).length > 250, 'recorder substantive executable source');
+ok(digest(Buffer.from(recorder)) === RECORDER_SHA256, 'recorder exact validator-owned SHA-256');
+const astProgram = `import ast,json,sys\nt=ast.parse(open(sys.argv[1],encoding='utf8').read())\nclasses={n.name for n in ast.walk(t) if isinstance(n,ast.ClassDef)}\nfuncs={n.name for n in ast.walk(t) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))}\nattrs={n.attr for n in ast.walk(t) if isinstance(n,ast.Attribute)}\nprint(json.dumps({'classes':sorted(classes),'functions':sorted(funcs),'attributes':sorted(attrs)}))`;
+const astRun = spawnSync('python3',['-c',astProgram,resolve(root,recorderPath)],{cwd:root,encoding:'utf8'});
+let ast = {}; try { ast=JSON.parse(astRun.stdout); } catch {}
+ok(astRun.status === 0 && ['CDP','Recorder'].every((name)=>ast.classes?.includes(name)) && ['record','encode','frame','agent','click','type'].every((name)=>ast.functions?.includes(name)) && ['Popen','terminate','read_bytes','write_text'].every((name)=>ast.attributes?.includes(name)), 'recorder AST structural contract');
 const recorderSmoke = spawnSync('python3',[resolve(root,recorderPath),'--self-test'],{cwd:root,encoding:'utf8'});
 let recorderCapabilities = {}; try { recorderCapabilities=JSON.parse(recorderSmoke.stdout); } catch {}
-ok(recorderSmoke.status === 0 && ['functionalRecorder','launch','nativeDiscovery','trustedOwnerInput','screencast','encode','receipt','cleanup'].every((key) => recorderCapabilities[key] === true), 'recorder executable behavior smoke');
-for (const token of ['class CDP','class Recorder','async def record','def encode','Page.startScreencast','Page.screencastFrameAck','Input.dispatchMouseEvent','Input.insertText','document.modelContext.getTools()','document.modelContext.executeTool(tool, JSON.stringify(input))','RegisteredTool']) ok(recorder.includes(token), `recorder functional source ${token}`);
+ok(recorderSmoke.status === 0 && recorderCapabilities.controlledPaths === true && ['functionalRecorder','launch','nativeDiscovery','trustedOwnerInput','screencast','encode','receipt','cleanup'].every((key) => recorderCapabilities[key] === true), 'recorder controlled executable behavior smoke');
 for (const pattern of [/descriptor\.execute/i,/tool\.execute\s*\(/i,/__phase7Exec/i,/advance-demo/i,/replayGoalRoom/i,/recordVerification/i,/acceptGoal/i,/ownerController/i,/systemVerifierAdapter\./i]) ok(!pattern.test(recorder), `forbidden recorder path ${pattern}`);
 
 // 7. Media codec/decode/audio/black frame checks.
@@ -138,16 +137,15 @@ const cueBlocks=srt.trim().split(/\n\s*\n/); const timePattern=/(\d\d):(\d\d):(\
 const times=cueBlocks.map((block) => { const m=block.match(timePattern); return m ? [Number(m[1])*3600+Number(m[2])*60+Number(m[3])+Number(m[4])/1000,Number(m[5])*3600+Number(m[6])*60+Number(m[7])+Number(m[8])/1000] : null; });
 ok(times.length===13 && times.every(Boolean), 'exact 13 SRT cues'); for(let i=0;i<times.length;i++){ok(times[i][1]>times[i][0],`cue ${i+1} positive`);if(i)ok(times[i][0]>=times[i-1][1],`cue ${i+1} nonoverlap`);} ok(times.at(-1)?.[1] <= duration,'captions contained');
 const scenes=await json('submission/assets/workhub-goal-room-demo-scenes.json');
-const semanticIds=['thesis','native-six-tools','enumeration-limit','malformed-atomicity','goal-owner-decisions','plan-owner-decisions','automatic-system-fail','corrected-system-pass','pass-not-accepted','owner-exact-acceptance','sealed-s14','mobile-breakpoint','architecture-honest-limits'];
 ok(scenes?.schemaVersion===2 && scenes?.frozenSimilarityFloor===0.995 && scenes?.cues?.length===13, 'scene manifest identity/count/frozen floor');
-ok(JSON.stringify(scenes.cues?.map(({semanticId})=>semanticId))===JSON.stringify(semanticIds),'exact cue semantic IDs');
+ok(JSON.stringify(scenes.cues)===JSON.stringify(CUES),'exact validator-owned cue contract (including cue 12)');
 for(let i=0;i<13;i++){
- const cue=scenes.cues[i], caption=cueBlocks[i]?.split('\n').slice(2).join(' ') ?? '';
- ok(cue.cue===i+1 && cue.startSeconds===times[i][0] && cue.endSeconds===times[i][1] && cue.caption===caption,`cue ${i+1} caption/time binding`);
- ok(Array.isArray(cue.expectedSemanticTokens)&&cue.expectedSemanticTokens.length>=2&&cue.expectedSemanticTokens.every((token)=>caption.toLowerCase().includes(token.toLowerCase())),`cue ${i+1} semantic tokens`);
- ok(cue.similarity?.metric==='ffmpeg-ssim-all'&&cue.similarity?.minimum===0.995,`cue ${i+1} frozen SSIM`);
- const visual=await readFile(resolve(root,cue.expectedVisual.path)); ok(visual.length===cue.expectedVisual.bytes&&digest(visual)===cue.expectedVisual.sha256&&cue.expectedVisual.width===1440&&cue.expectedVisual.height===900,`cue ${i+1} exact visual hash/dimensions`);
- for(const second of cue.representativeSeconds??[]){const run=spawnSync('ffmpeg',['-v','info','-ss',String(second),'-i',media,'-i',resolve(root,cue.expectedVisual.path),'-filter_complex','[0:v][1:v]ssim','-frames:v','1','-f','null','-'],{encoding:'utf8',maxBuffer:10*1024*1024});const similarity=Number([...run.stderr.matchAll(/All:([0-9.]+)/g)].at(-1)?.[1]);ok(run.status===0&&similarity>=0.995,`cue ${i+1} representative SSIM ${similarity}`);}
+ const cue=CUES[i], caption=cueBlocks[i]?.split('\n').slice(2).join(' ') ?? '';
+ ok(cue.cue===i+1 && cue.startSeconds===times[i][0] && cue.endSeconds===times[i][1] && cue.caption===caption,`cue ${i+1} frozen caption/time binding`);
+ ok(cue.expectedSemanticTokens.every((token)=>caption.toLowerCase().includes(token.toLowerCase())),`cue ${i+1} frozen semantic tokens`);
+ ok(cue.similarity.metric==='ffmpeg-ssim-all'&&cue.similarity.minimum>=0.995,`cue ${i+1} frozen SSIM`);
+ const visual=await readFile(resolve(root,cue.expectedVisual.path)); ok(visual.length===cue.expectedVisual.bytes&&digest(visual)===cue.expectedVisual.sha256&&cue.expectedVisual.width===1440&&cue.expectedVisual.height===900,`cue ${i+1} canonical visual hash/dimensions`);
+ for(const second of cue.representativeSeconds){const run=spawnSync('ffmpeg',['-v','info','-ss',String(second),'-i',media,'-i',resolve(root,cue.expectedVisual.path),'-filter_complex','[0:v][1:v]ssim','-frames:v','1','-f','null','-'],{encoding:'utf8',maxBuffer:10*1024*1024});const similarity=Number([...run.stderr.matchAll(/All:([0-9.]+)/g)].at(-1)?.[1]);ok(run.status===0&&similarity>=0.995,`cue ${i+1} representative SSIM ${similarity}`);}
 }
 
 // 9. Genuine interactivity: receipt classes/state plus source-bound video changes in every live interval.
@@ -169,24 +167,21 @@ for(const interval of capture.liveIntervals??[]){
  ok(new Set(hashes).size===3,`live interval ${interval.id} actual video frame changes`);
 }
 ok(JSON.stringify(capture.reconstructedIntervals?.map(({scene})=>scene))===JSON.stringify(['mobile/breakpoint','architecture/honest limits']),'exact disclosed reconstructed intervals');
+ok(capture.reconstructedIntervals?.[0]?.start===RECONSTRUCTED_INTERVALS[0].start && capture.reconstructedIntervals?.[0]?.end===RECONSTRUCTED_INTERVALS[0].end && capture.reconstructedIntervals?.[1]?.start===RECONSTRUCTED_INTERVALS[1].start, 'frozen reconstructed interval starts/mobile end');
+ok(capture.reconstructedIntervals?.every(({start,end})=>Number.isFinite(start)&&Number.isFinite(end)&&start>=0&&end>start&&end<=duration) && Math.abs(capture.reconstructedIntervals[1].end-duration)<0.001, 'receipt reconstructed intervals bounded by authoritative media duration');
+ok(Number(capture.media?.probe?.format?.duration)===duration, 'receipt probe duration equals authoritative ffprobe duration');
+ok(scenes.reconstructedIntervals?.[0]?.startSeconds===RECONSTRUCTED_INTERVALS[0].start && scenes.reconstructedIntervals?.[0]?.endSeconds===RECONSTRUCTED_INTERVALS[0].end && scenes.reconstructedIntervals?.[1]?.startSeconds===RECONSTRUCTED_INTERVALS[1].start && Math.abs(scenes.reconstructedIntervals?.[1]?.endSeconds-duration)<0.001, 'scene reconstruction intervals bounded by authoritative media duration');
 
 // 10. Exact package inventory, immutable Git-object hashes, parent/tree binding, and child scope.
 const packageManifest=await json('submission/package-manifest.json');
 ok(packageManifest?.sourceProduct?.commit===SOURCE_COMMIT&&packageManifest?.sourceProduct?.tree===SOURCE_TREE,'package source product');
 ok(Array.isArray(packageManifest?.artifacts)&&packageManifest.artifactCount===packageManifest.artifacts.length&&packageManifest.verifiedArtifactCount===packageManifest.artifacts.length,'package exact artifact counts');
 ok(new Set(packageManifest.artifacts?.map(({path})=>path)).size===packageManifest.artifacts?.length,'package artifact paths unique');
-const exactRequiredArtifacts = [
- 'README.md','evaluation/native-webmcp-v3/native-webmcp-receipt.json','evaluation/phase5-qualification.json','evaluation/production-journey/qualification-receipt.json','evaluation/v3/qualification-receipt.json','package.json',
- 'scripts/submission-v3-adversarial.node-test.mjs','scripts/submission-v3-validate.mjs','scripts/submission-v3-validator.node-test.mjs','submission/DEMO_SCRIPT.md','submission/DEVPOST_SUBMISSION.md','submission/V3_CLAIMS.md','submission/V3_REQUIREMENTS.md','submission/assets/cue-12-mobile-breakpoint.png',
- ...Array.from({length:13},(_,i)=>`submission/assets/cue-frames/cue-${String(i+1).padStart(2,'0')}.png`),
- 'submission/assets/live-demo-capture.json','submission/assets/screenshots/boundary-1199-mobile.png','submission/assets/screenshots/boundary-1200-desktop.png','submission/assets/screenshots/candidate-v1-system-fail.png','submission/assets/screenshots/candidate-v2-pass-agent-next.png','submission/assets/screenshots/goal-revision.png','submission/assets/screenshots/manifest.json','submission/assets/screenshots/mobile-s14-frontier.png','submission/assets/screenshots/native-six-tool-context.png','submission/assets/screenshots/plan-revision.png','submission/assets/screenshots/s13-exact-candidate-owner-modal.png','submission/assets/screenshots/s14-sealed-actorless.png',
- 'submission/assets/workhub-goal-room-architecture.edges.json','submission/assets/workhub-goal-room-architecture.html','submission/assets/workhub-goal-room-architecture.png','submission/assets/workhub-goal-room-architecture.svg','submission/assets/workhub-goal-room-demo-narration.ogg','submission/assets/workhub-goal-room-demo-scenes.json','submission/assets/workhub-goal-room-demo.en.srt','submission/assets/workhub-goal-room-demo.mp4','submission/historical/v2-five-tool/manifest.json','submission/scripts/record-live-demo.py','submission/scripts/v3-native-webmcp-proof.mjs'
-];
-ok(JSON.stringify(packageManifest.artifacts?.map(({path})=>path))===JSON.stringify(exactRequiredArtifacts),'package exact required 50-artifact inventory/order');
+ok(JSON.stringify(packageManifest.artifacts?.map(({path})=>path))===JSON.stringify(REQUIRED_ARTIFACTS),'package exact validator-owned required artifact inventory/order');
 const sentinel=packageManifest.packageCommit==='PACKAGE_COMMIT_SENTINEL'&&packageManifest.packageTree==='PACKAGE_TREE_SENTINEL';
 const bound=/^[0-9a-f]{40}$/.test(packageManifest.packageCommit)&&/^[0-9a-f]{40}$/.test(packageManifest.packageTree);
-ok(sentinel||bound,'package binding form');
-if(bound){
+ok(prebind ? sentinel : bound,'package binding form for selected mode');
+if(!prebind&&bound){
  const object=git(['cat-file','-t',packageManifest.packageCommit]); const tree=git(['rev-parse',`${packageManifest.packageCommit}^{tree}`]);
  ok(object.status===0&&object.stdout.trim()==='commit','packageCommit real commit object'); ok(tree.status===0&&tree.stdout.trim()===packageManifest.packageTree,'packageTree exact commit tree');
  const headParent=git(['rev-parse','HEAD^']); ok(headParent.status===0&&headParent.stdout.trim()===packageManifest.packageCommit,'packageCommit exact HEAD parent');
@@ -195,7 +190,7 @@ if(bound){
 for(const artifact of packageManifest.artifacts??[]){
  ok(artifact&&typeof artifact.path==='string'&&Number.isInteger(artifact.bytes)&&/^[0-9a-f]{64}$/.test(artifact.sha256),`artifact shape ${JSON.stringify(artifact)}`); if(!artifact?.path)continue;
  const bytes=await readFile(resolve(root,artifact.path)); ok(bytes.length===artifact.bytes&&digest(bytes)===artifact.sha256,`artifact working bytes ${artifact.path}`);
- if(bound){const object=git(['show',`${packageManifest.packageCommit}:${artifact.path}`],null);ok(object.status===0&&object.stdout.length===artifact.bytes&&digest(object.stdout)===artifact.sha256,`artifact immutable package Git object ${artifact.path}`);}
+ if(!prebind&&bound){const object=git(['show',`${packageManifest.packageCommit}:${artifact.path}`],null);ok(object.status===0&&object.stdout.length===artifact.bytes&&digest(object.stdout)===artifact.sha256,`artifact immutable package Git object ${artifact.path}`);}
 }
 
 // 11. Exact publication sentinels and broad overclaim rejection.
@@ -208,5 +203,6 @@ for(const pattern of overclaims)ok(!pattern.test(publicText),`affirmative overcl
 // 12. Protected authority parity.
 for(const [path,expected] of Object.entries(phase5.protectedStartGitObjects??{})){const actual=git(['hash-object',path]).stdout.trim();ok(actual===expected,`protected parity ${path}`);}
 
-if(failures.length){console.error(`qa:submission:v3 FAIL (${failures.length})\n- ${failures.join('\n- ')}`);process.exit(1);}
-console.log(`qa:submission:v3 PASS · 12 hardened gates · ${shots.frames.length} screenshots · ${duration.toFixed(3)}s H.264 High/AAC-LC · 13/13 cue visuals · ${capture.capture.uniqueFrameCount} unique live frames`);
+if(failures.length){console.error(`qa:submission:v3${prebind?' --prebind':''} FAIL (${failures.length})\n- ${failures.join('\n- ')}`);process.exit(1);}
+if(prebind) console.log(`qa:submission:v3 --prebind builder checks complete · NON-QUALIFYING · no final gate verdict`);
+else console.log(`qa:submission:v3 PASS · exact-package qualification · 15 anchored gates · ${shots.frames.length} screenshots · ${duration.toFixed(3)}s H.264 High/AAC-LC · 13/13 cue visuals · ${capture.capture.uniqueFrameCount} unique live frames`);

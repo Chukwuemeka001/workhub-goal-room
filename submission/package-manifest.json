@@ -6,9 +6,9 @@
     "commit": "5ac95d4bdab5f54beda0f90776c3918fd36136d2",
     "tree": "b6b50068e8119d02d1d9213286f14adf3cbc0db1"
   },
-  "packageCommit": "293f84cb0e688631364a00e19fa8845a01161d33",
-  "packageTree": "d0a171892f16b17df59b97668d1b68b6b518e1cf",
-  "artifactCount": 50,
+  "packageCommit": "PACKAGE_COMMIT_SENTINEL",
+  "packageTree": "PACKAGE_TREE_SENTINEL",
+  "artifactCount": 51,
   "artifacts": [
     {
       "path": "README.md",
@@ -42,13 +42,18 @@
     },
     {
       "path": "scripts/submission-v3-adversarial.node-test.mjs",
-      "sha256": "e0857d1fbf2a7ab1e968d5fe76237ce4674ce8080b4f96c365049a971c5b5ac2",
-      "bytes": 7375
+      "sha256": "3d7db36cb0429c06d4ee650c3b5f35b46d27aa4ec7a24b282170b76efbaed29d",
+      "bytes": 12501
+    },
+    {
+      "path": "scripts/submission-v3-contract.mjs",
+      "bytes": 17167,
+      "sha256": "d714b91e2b0c71f5d9eb550f782815d55678da35fe80ef91a34eff113206ff07"
     },
     {
       "path": "scripts/submission-v3-validate.mjs",
-      "sha256": "55b5aff9bf27a9fefa9d0c8fda092bc62322c807b89d06ada01f081301b1a24b",
-      "bytes": 27655
+      "sha256": "eed5ae0527f5c65bcfdcb734f01e8f1fa4d21d6e7e2616fb1433e45041f9f1e5",
+      "bytes": 26185
     },
     {
       "path": "scripts/submission-v3-validator.node-test.mjs",
@@ -72,8 +77,8 @@
     },
     {
       "path": "submission/V3_REQUIREMENTS.md",
-      "sha256": "600eedac5b7ce5190d9fad3e1df4148d7bb2121eb33b671180446fe71fc89e81",
-      "bytes": 2188
+      "sha256": "92ae6e999c7a6a735bcfbb621553d6595a6e5b52c09e3cbb63c53d412e7ff439",
+      "bytes": 2598
     },
     {
       "path": "submission/assets/cue-12-mobile-breakpoint.png",
@@ -147,8 +152,8 @@
     },
     {
       "path": "submission/assets/live-demo-capture.json",
-      "sha256": "ba6740442c2a415d9b02a247019c5b69182d051d25dd066a54b0324d082dbe0c",
-      "bytes": 138726
+      "sha256": "933a5d301bd2e5e3dae0529820342cd3cacbeedb478e219ab717cb3d6e00e387",
+      "bytes": 138185
     },
     {
       "path": "submission/assets/screenshots/boundary-1199-mobile.png",
@@ -232,8 +237,8 @@
     },
     {
       "path": "submission/assets/workhub-goal-room-demo-scenes.json",
-      "sha256": "eade8e61c64914748332394481e33fc6d47bea16e6d8ff3de80e4b896614c94c",
-      "bytes": 13029
+      "sha256": "4216b436f4dc29d619439ec37526002e658b8a2731bbb6a44fc2c1de1144dc6c",
+      "bytes": 13030
     },
     {
       "path": "submission/assets/workhub-goal-room-demo.en.srt",
@@ -242,8 +247,8 @@
     },
     {
       "path": "submission/assets/workhub-goal-room-demo.mp4",
-      "sha256": "caed0e6792fd62c6561c7c12cb867cdd2b9bf776f24e2212d8b82bead0420a60",
-      "bytes": 5773055
+      "sha256": "a82622d372296ff4640343ba57e3955891b6f542b879f9dd29bed34ebafc9f4f",
+      "bytes": 5833417
     },
     {
       "path": "submission/historical/v2-five-tool/manifest.json",
@@ -252,8 +257,8 @@
     },
     {
       "path": "submission/scripts/record-live-demo.py",
-      "sha256": "ae3d7ed8b640d9515a00a4529d3e6fa7ba5a7dd6548ab738feabee2776ec1149",
-      "bytes": 27254
+      "sha256": "28d7960c5e0a7f93d55f6c9ecba20ccdeaddc88bf0f786bd137a8fb3487402f3",
+      "bytes": 31455
     },
     {
       "path": "submission/scripts/v3-native-webmcp-proof.mjs",
@@ -269,6 +274,6 @@
   },
   "claimBoundary": "Local package only. No push, deploy, upload, publication, or submission authority.",
   "date": "2026-08-28",
-  "artifactHashSource": "Immutable Git objects at packageCommit; package-manifest.json and V3_AUDIT.md excluded to avoid self-reference",
-  "verifiedArtifactCount": 50
+  "artifactHashSource": "Working-tree bytes during non-qualifying --prebind construction; final metadata child binds immutable package parent Git objects",
+  "verifiedArtifactCount": 51
 }

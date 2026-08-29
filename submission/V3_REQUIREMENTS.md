@@ -20,6 +20,8 @@ The current package must validate Phase 3 production, Phase 4 native, and Phase 
 
 The native claim is limited to Canary discovery and invocation of browser-returned `RegisteredTool` objects. Static registration order is source-derived; raw enumeration is observed separately. S14 proves malformed-input atomicity, not a schema-valid terminal reducer refusal. Actor totals are chronology-derived. No autonomous model selection is claimed.
 
+Final `qa:submission:v3` is an exact-package qualification gate: it accepts only a metadata child whose parent is the bound package commit and whose child diff contains only `submission/V3_AUDIT.md` and `submission/package-manifest.json`. The separately named `--prebind` mode is a non-qualifying construction check and cannot emit final PASS. The validator is not a generic validator for arbitrary packages.
+
 Cue 12 must be bound by `submission/assets/workhub-goal-room-demo-scenes.json` to the exact mobile and 1199/1200 screenshot source hashes. Representative frames at 130 and 135 seconds must meet the committed `ffmpeg-ssim-all` threshold against the labelled 1440×900 cue visual; metadata-only codec checks are insufficient.
 
 ## Scope boundary

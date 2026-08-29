@@ -22,12 +22,20 @@ async function syncArtifacts(dir, paths) {
   }
   await putJson(path, manifest);
 }
-async function mutation(name, mutate) {
+async function setPrebindSentinels(dir) {
+  const path = join(dir, 'submission/package-manifest.json');
+  const manifest = await json(path);
+  manifest.packageCommit = 'PACKAGE_COMMIT_SENTINEL';
+  manifest.packageTree = 'PACKAGE_TREE_SENTINEL';
+  await putJson(path, manifest);
+}
+async function mutation(name, mutate, args = []) {
   const dir = await mkdtemp(join(tmpdir(), `phase6-adversarial-${name}-`));
   try {
     await cp(root, dir, { recursive: true, filter: (source) => !source.includes('/node_modules') && !source.includes('/dist') });
+    await syncArtifacts(dir, ['scripts/submission-v3-adversarial.node-test.mjs']);
     await mutate(dir);
-    return spawnSync(process.execPath, [validator], { cwd: dir, encoding: 'utf8' });
+    return spawnSync(process.execPath, [validator, ...args], { cwd: dir, encoding: 'utf8' });
   } finally { await rm(dir, { recursive: true, force: true }); }
 }
 function rejected(result, label) {
@@ -122,4 +130,81 @@ test('rejects lowered SSIM floor and cue visual substitution', async () => {
     await putJson(scenePath, value); await syncArtifacts(dir, ['submission/assets/cue-12-mobile-breakpoint.png', 'submission/assets/workhub-goal-room-demo-scenes.json']);
   });
   rejected(result, 'lowered SSIM and substituted visual');
+});
+
+test('final qualification rejects the supported prebind sentinels', async () => {
+  const result = await mutation('sentinel-final', setPrebindSentinels);
+  rejected(result, 'sentinel final qualification');
+});
+
+test('rejects synchronized materially false cue 7 self-description', async () => {
+  const result = await mutation('cue7-synchronized-false', async (dir) => {
+    const falseCaption = 'The Owner directly records PASS and accepts Candidate version one';
+    const srtPath = join(dir, 'submission/assets/workhub-goal-room-demo.en.srt');
+    const scenesPath = join(dir, 'submission/assets/workhub-goal-room-demo-scenes.json');
+    await writeFile(srtPath, (await readFile(srtPath, 'utf8')).replace('The Agent claims the admitted step and submits Candidate version one. The production System adapter runs the deterministic rule set automatically and records FAIL. System verdict authorship is neither an Agent tool nor an Owner control.', falseCaption));
+    const scenes = await json(scenesPath);
+    scenes.cues[6].caption = falseCaption;
+    scenes.cues[6].expectedSemanticTokens = ['Owner directly records PASS', 'accepts Candidate version one'];
+    await putJson(scenesPath, scenes);
+    await setPrebindSentinels(dir);
+    await syncArtifacts(dir, ['submission/assets/workhub-goal-room-demo.en.srt', 'submission/assets/workhub-goal-room-demo-scenes.json']);
+  }, ['--prebind']);
+  rejected(result, 'synchronized false cue 7');
+});
+
+test('rejects a valid-dimension black production checkpoint with regenerated hashes', async () => {
+  const result = await mutation('black-production-checkpoint', async (dir) => {
+    const relative = 'submission/assets/screenshots/goal-revision.png';
+    const screenshotPath = join(dir, relative);
+    const rendered = spawnSync('ffmpeg', ['-y', '-v', 'error', '-f', 'lavfi', '-i', 'color=black:s=1440x900', '-frames:v', '1', screenshotPath]);
+    assert.equal(rendered.status, 0, rendered.stderr?.toString());
+    const bytes = await readFile(screenshotPath);
+    const manifestPath = join(dir, 'submission/assets/screenshots/manifest.json');
+    const manifest = await json(manifestPath);
+    Object.assign(manifest.frames.find(({ path }) => path === 'goal-revision.png'), { bytes: bytes.length, sha256: sha256(bytes) });
+    await putJson(manifestPath, manifest);
+    await setPrebindSentinels(dir);
+    await syncArtifacts(dir, [relative, 'submission/assets/screenshots/manifest.json']);
+  }, ['--prebind']);
+  rejected(result, 'black production checkpoint');
+});
+
+test('rejects a large self-attesting dead-data recorder stub', async () => {
+  const result = await mutation('dead-recorder-stub', async (dir) => {
+    const relative = 'submission/scripts/record-live-demo.py';
+    const tokens = ['class CDP','class Recorder','async def record','def encode','Page.startScreencast','Page.screencastFrameAck','Input.dispatchMouseEvent','Input.insertText','document.modelContext.getTools()','document.modelContext.executeTool(tool, JSON.stringify(input))','RegisteredTool'];
+    const dead = [
+      '#!/usr/bin/env python3', 'import json', `TOKENS = ${JSON.stringify(tokens)}`,
+      ...Array.from({ length: 900 }, (_, index) => `dead_${index} = ${JSON.stringify(`unused-${index}-${'x'.repeat(24)}`)}`),
+      "print(json.dumps({'functionalRecorder':True,'launch':True,'nativeDiscovery':True,'trustedOwnerInput':True,'screencast':True,'encode':True,'receipt':True,'cleanup':True}))",
+    ].join('\n');
+    await writeFile(join(dir, relative), `${dead}\n`);
+    await setPrebindSentinels(dir);
+    await syncArtifacts(dir, [relative]);
+  }, ['--prebind']);
+  rejected(result, 'dead-data recorder');
+});
+
+test('recorder smoke proves screencast metadata drives encoded timing', () => {
+  const result = spawnSync('python3', [join(root, 'submission/scripts/record-live-demo.py'), '--self-test'], { cwd: root, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  const receipt = JSON.parse(result.stdout);
+  assert.equal(receipt.metadataTimeline, true);
+  assert.equal(receipt.orderedTimeline, true);
+  assert.equal(receipt.receiveTimeline, true);
+  assert.equal(receipt.endpointClipping, true);
+  assert.equal(receipt.endpointMux, true);
+});
+
+test('rejects a reconstructed receipt interval beyond actual media duration', async () => {
+  const result = await mutation('receipt-overrun', async (dir) => {
+    const relative = 'submission/assets/live-demo-capture.json';
+    const receipt = await json(join(dir, relative));
+    receipt.reconstructedIntervals[1].end = 157.8;
+    await putJson(join(dir, relative), receipt);
+    await setPrebindSentinels(dir);
+    await syncArtifacts(dir, [relative]);
+  }, ['--prebind']);
+  rejected(result, 'receipt interval beyond media');
 });
