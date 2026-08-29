@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "kind": "phase8-qa-only-production-projection-max-hostile",
   "claimBoundary": "QA-only entry renders production desktop/mobile projections and components over states admitted through the real kernel, production WebMCP callbacks, verifier, and owner controller; this is distinct from native production evidence.",
-  "testedProductionCommit": "c4602a9d5d1fde8451e76fcc1e6e0797f693d70c",
-  "testedProductionTree": "c4c9b4105175df6284b49ebfca30b7b8f411f8b6",
+  "testedProductionCommit": "c4f158177d869ae15ff1b04061283ad5cd4c0fd6",
+  "testedProductionTree": "0e6f5845738e21f9e5d29067e00cd70dde42f357",
   "producerBoundaries": {
     "stateVersion": 16,
     "phase": "GOAL_ACCEPTED",
