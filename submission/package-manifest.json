@@ -6,8 +6,8 @@
     "commit": "5ac95d4bdab5f54beda0f90776c3918fd36136d2",
     "tree": "b6b50068e8119d02d1d9213286f14adf3cbc0db1"
   },
-  "packageCommit": "PACKAGE_COMMIT_SENTINEL",
-  "packageTree": "PACKAGE_TREE_SENTINEL",
+  "packageCommit": "89c2391c9c152dbb1043c655628e657353144205",
+  "packageTree": "6884aea7ffaedd41587ad4d550b18ab0f82ed921",
   "artifactCount": 33,
   "artifacts": [
     {
@@ -183,5 +183,7 @@
     "devpostStatus": "PENDING_OWNER_GATED_DEVPOST_SUBMISSION"
   },
   "claimBoundary": "Local package only. No push, deploy, upload, publication, or submission authority.",
-  "date": "2026-08-28"
+  "date": "2026-08-28",
+  "artifactHashSource": "Git objects at packageCommit; package-manifest.json and V3_AUDIT.md excluded to avoid self-reference",
+  "verifiedArtifactCount": 33
 }

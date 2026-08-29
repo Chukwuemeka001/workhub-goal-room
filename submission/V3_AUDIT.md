@@ -27,7 +27,7 @@ Package content is prepared for independent Phase 6 review. This audit is not th
 
 ## Binding
 
-Package commit: `PACKAGE_COMMIT_SENTINEL`  
-Package tree: `PACKAGE_TREE_SENTINEL`
+Package commit: `89c2391c9c152dbb1043c655628e657353144205`
+Package tree: `6884aea7ffaedd41587ad4d550b18ab0f82ed921`
 
 The metadata-only child replaces only the binding sentinel file and records Git-object hashes of package artifacts. It does not rewrite bound media or copy. Independent review remains required for Phase 6 exit.
