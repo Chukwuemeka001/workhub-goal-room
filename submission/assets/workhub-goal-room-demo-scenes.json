@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "kind": "workhub-v3-demo-scene-alignment",
+  "media": "submission/assets/workhub-goal-room-demo.mp4",
+  "captions": "submission/assets/workhub-goal-room-demo.en.srt",
+  "timelineContext": [
+    {
+      "name": "sealed-s14",
+      "startSeconds": 118.719,
+      "endSeconds": 126.751,
+      "expectedEvidence": "S14 actorless sealed room"
+    },
+    {
+      "name": "cue-12-mobile-breakpoint",
+      "cue": 12,
+      "startSeconds": 126.871,
+      "endSeconds": 138.707,
+      "expectedEvidence": "mobile frontier plus 1199 mobile composition and 1200 desktop composition"
+    },
+    {
+      "name": "architecture-honest-limits",
+      "startSeconds": 138.827,
+      "endSeconds": 153.2,
+      "expectedEvidence": "architecture and honest limitations"
+    }
+  ],
+  "validatedScene": {
+    "name": "cue-12-mobile-breakpoint",
+    "cue": 12,
+    "expectedVisual": {
+      "path": "submission/assets/cue-12-mobile-breakpoint.png",
+      "sha256": "33167f14d897f33619064470d8dc86900f8c681cb30a3e14af5717ff51a6d462",
+      "bytes": 226318,
+      "width": 1440,
+      "height": 900
+    },
+    "requiredLabelTokens": [
+      "JUDGE ZOOM · MOBILE 393×852",
+      "1199 PX · MOBILE COMPOSITION",
+      "1200 PX · DESKTOP COMPOSITION"
+    ],
+    "sources": [
+      {
+        "path": "submission/assets/screenshots/mobile-s14-frontier.png",
+        "sha256": "e655f8cca051a6681acfa9b6b98123338d555b8e7aa180bce3b3d1b572018ccb"
+      },
+      {
+        "path": "submission/assets/screenshots/boundary-1199-mobile.png",
+        "sha256": "b2eaf0454940ea862fe973fe07a14db6bcf95119a69243f1b79c8903dc8ea503"
+      },
+      {
+        "path": "submission/assets/screenshots/boundary-1200-desktop.png",
+        "sha256": "16f99404504d3c5bff1d56385a63bad4a2c83fb4ddd33f620521e555dc547828"
+      }
+    ],
+    "representativeSeconds": [
+      130,
+      135
+    ],
+    "similarity": {
+      "metric": "ffmpeg-ssim-all",
+      "minimum": 0.995
+    }
+  },
+  "truthBoundary": "Checkpoint reconstruction and presentation continuity only; not continuous lineage, live execution, or autonomous model selection."
+}

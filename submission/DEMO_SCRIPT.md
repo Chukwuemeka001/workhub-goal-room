@@ -41,9 +41,10 @@ This competition edition is one synthetic browser-local Goal. It has no accounts
 | 0:30–0:43 | Malformed-input atomicity; explicit S14 limitation |
 | 0:43–1:00 | Goal revision checkpoint |
 | 1:00–1:15 | Plan revision checkpoint |
-| 1:15–1:32 | Candidate v1 automatic System FAIL |
-| 1:32–1:50 | Candidate v2 PASS, Agent next, non-acceptance |
-| 1:50–2:05 | Agent requests completion; PASS boundary |
-| 2:05–2:22 | S13 exact-candidate Owner modal |
-| 2:22–2:33 | S14 actorless sealed room |
-| 2:33–2:40 | Mobile/breakpoint evidence and honest limits |
+| 1:15–1:26.111 | Candidate v1 automatic System FAIL |
+| 1:26.231–1:39.336 | Candidate v2 PASS, Agent next, non-acceptance |
+| 1:39.456–1:46.642 | Agent requests completion; PASS boundary |
+| 1:46.762–1:58.599 | S13 exact-candidate Owner modal |
+| 1:58.719–2:06.751 | S14 actorless sealed room |
+| 2:06.871–2:18.707 | Labelled mobile judge zoom plus 1199 mobile / 1200 desktop composition evidence |
+| 2:18.827–2:33.200 | Architecture and honest limits |

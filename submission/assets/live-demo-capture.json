@@ -15,8 +15,8 @@
   "media": {
     "video": {
       "path": "submission/assets/workhub-goal-room-demo.mp4",
-      "sha256": "232a62c0e7dfc0855f397d3bb3fcd9bc004064504adeb3d9be0c1e478c5f8cce",
-      "bytes": 4752983
+      "sha256": "b9742e77e93a0d500a9eb21f40c2db1ebce225bc310adff11776807856e46e48",
+      "bytes": 5213363
     },
     "narration": {
       "path": "submission/assets/workhub-goal-room-demo-narration.ogg",
@@ -48,15 +48,24 @@
         }
       ],
       "format": {
-        "duration": "157.833333",
-        "size": "4752983"
+        "duration": "157.766667",
+        "size": "5213363"
       }
     }
   },
   "review": {
     "fullDecode": "passed",
-    "sampledFrameCount": 10,
-    "contactSheet": "temporary locally reviewed and removed before commit",
+    "sampledFrameCount": 16,
+    "sampledFrameSeconds": [120, 125, 130, 135, 140, 150],
+    "sampledFrameSequence": "S14, S14, mobile/breakpoint, mobile/breakpoint, architecture, architecture",
+    "contactSheet": "temporary public-safe 6-frame contact sheet reviewed locally and removed before commit",
+    "sceneAlignment": {
+      "manifest": "submission/assets/workhub-goal-room-demo-scenes.json",
+      "cue12RepresentativeSeconds": [130, 135],
+      "metric": "ffmpeg-ssim-all",
+      "minimum": 0.995,
+      "observed": [0.999312, 0.999312]
+    },
     "blackFramesObserved": 0,
     "privateNotificationsObserved": 0,
     "cursorLeaksObserved": 0,

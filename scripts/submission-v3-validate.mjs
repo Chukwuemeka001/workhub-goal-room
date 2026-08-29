@@ -97,20 +97,52 @@ ok(times.at(-1)?.[1] <= duration, 'SRT final cue contained');
 for (const phrase of ['six browser-native RegisteredTool descriptors','PASS does not mean accepted','no accounts, backend persistence','No model autonomously selected']) ok(srt.includes(phrase), `caption claim ${phrase}`);
 for (const pattern of stale) ok(!pattern.test(srt), `stale caption token ${pattern}`);
 
-// 12. Package manifest hashes and sentinel/bound pattern.
+// 12. Cue-12 visual semantics and deterministic representative-frame alignment.
+const scenes = await json('submission/assets/workhub-goal-room-demo-scenes.json');
+const cue12 = scenes.validatedScene;
+const cue12Context = scenes.timelineContext.find(({name}) => name === 'cue-12-mobile-breakpoint');
+ok(cue12?.cue === 12 && cue12?.name === 'cue-12-mobile-breakpoint', 'cue 12 scene identity');
+ok(cue12Context?.startSeconds === times[11]?.[0] && cue12Context?.endSeconds === times[11]?.[1], 'cue 12 scene/SRT boundaries');
+ok(scenes.timelineContext.some(({name,startSeconds,endSeconds}) => name === 'sealed-s14' && startSeconds === 118.719 && endSeconds === 126.751), 'S14 scene boundary');
+ok(scenes.timelineContext.some(({name,startSeconds}) => name === 'architecture-honest-limits' && startSeconds === 138.827), 'final architecture scene boundary');
+const requiredSceneLabels = ['JUDGE ZOOM · MOBILE 393×852','1199 PX · MOBILE COMPOSITION','1200 PX · DESKTOP COMPOSITION'];
+ok(JSON.stringify(cue12?.requiredLabelTokens) === JSON.stringify(requiredSceneLabels), 'cue 12 required label tokens');
+const expectedVisualPath = cue12?.expectedVisual?.path;
+if (expectedVisualPath) {
+  const expectedVisual = await readFile(resolve(root, expectedVisualPath));
+  ok(expectedVisual.length === cue12.expectedVisual.bytes && hash(expectedVisual) === cue12.expectedVisual.sha256, 'cue 12 expected visual hash');
+} else ok(false, 'cue 12 expected visual path');
+const requiredSceneSources = new Map([
+  ['submission/assets/screenshots/mobile-s14-frontier.png','e655f8cca051a6681acfa9b6b98123338d555b8e7aa180bce3b3d1b572018ccb'],
+  ['submission/assets/screenshots/boundary-1199-mobile.png','b2eaf0454940ea862fe973fe07a14db6bcf95119a69243f1b79c8903dc8ea503'],
+  ['submission/assets/screenshots/boundary-1200-desktop.png','16f99404504d3c5bff1d56385a63bad4a2c83fb4ddd33f620521e555dc547828'],
+]);
+for (const [path, expectedHash] of requiredSceneSources) {
+  const source = cue12?.sources?.find((entry) => entry.path === path);
+  ok(source?.sha256 === expectedHash && hash(await readFile(resolve(root, path))) === expectedHash, `cue 12 source hash ${path}`);
+}
+ok(JSON.stringify(cue12?.representativeSeconds) === JSON.stringify([130,135]) && cue12?.similarity?.metric === 'ffmpeg-ssim-all', 'cue 12 representative frame contract');
+for (const second of cue12?.representativeSeconds ?? []) {
+  const similarityRun = spawnSync('ffmpeg', ['-v','info','-ss',String(second),'-i',media,'-i',resolve(root, expectedVisualPath),'-filter_complex','[0:v][1:v]ssim','-frames:v','1','-f','null','-'], {encoding:'utf8',maxBuffer:10*1024*1024});
+  const similarity = Number([...similarityRun.stderr.matchAll(/All:([0-9.]+)/g)].at(-1)?.[1]);
+  ok(similarityRun.status === 0 && Number.isFinite(similarity) && similarity >= cue12.similarity.minimum, `cue 12 frame similarity at ${second}s (${similarity})`);
+}
+
+// 13. Package manifest hashes and sentinel/bound pattern.
 const packageManifest = await json('submission/package-manifest.json');
 ok(packageManifest.sourceProduct.commit === '5ac95d4bdab5f54beda0f90776c3918fd36136d2' && packageManifest.sourceProduct.tree === 'b6b50068e8119d02d1d9213286f14adf3cbc0db1', 'source product binding');
 ok(packageManifest.artifactCount === packageManifest.artifacts.length && packageManifest.artifactCount >= 25, 'artifact manifest count');
+for (const path of ['submission/assets/cue-12-mobile-breakpoint.png','submission/assets/workhub-goal-room-demo-scenes.json']) ok(packageManifest.artifacts.some((artifact) => artifact.path === path), `scene artifact manifest ${path}`);
 for (const artifact of packageManifest.artifacts) { const bytes = await readFile(resolve(root, artifact.path)); ok(bytes.length === artifact.bytes && hash(bytes) === artifact.sha256, `artifact hash ${artifact.path}`); }
 const sentinel = packageManifest.packageCommit === 'PACKAGE_COMMIT_SENTINEL' && packageManifest.packageTree === 'PACKAGE_TREE_SENTINEL';
 const bound = /^[0-9a-f]{40}$/.test(packageManifest.packageCommit) && /^[0-9a-f]{40}$/.test(packageManifest.packageTree);
 ok(sentinel || bound, 'package commit/tree binding form');
 
-// 13. Publication remains Owner-gated.
+// 14. Publication remains Owner-gated.
 for (const value of Object.values(packageManifest.publication)) ok(/^PENDING_OWNER_GATED_/.test(value), `publication gate ${value}`);
 for (const marker of ['PENDING_OWNER_GATED_PUBLIC_URL','PENDING_OWNER_GATED_REPOSITORY_URL','PENDING_OWNER_GATED_YOUTUBE_URL','PENDING_OWNER_GATED_DEVPOST_SUBMISSION']) ok(devpost.includes(marker), `Devpost pending marker ${marker}`);
 
-// 14. Reject affirmative overclaims and preserve protected Git objects.
+// 15. Reject affirmative overclaims and preserve protected Git objects.
 for (const pattern of [/proves autonomous model reliability/i, /enterprise[- ]secure/i, /production-ready/i, /durable backend persistence/i, /creates external effects/i]) ok(!pattern.test(current + '\n' + srt), `overclaim ${pattern}`);
 const protectedObjects = phase5.protectedStartGitObjects;
 for (const [path, expected] of Object.entries(protectedObjects)) {
@@ -122,4 +154,4 @@ if (fail.length) {
   console.error(`qa:submission:v3 FAIL (${fail.length})\n- ${fail.join('\n- ')}`);
   process.exit(1);
 }
-console.log(`qa:submission:v3 PASS · 14/14 matrix items · ${shots.frames.length} screenshots · ${duration.toFixed(3)}s H.264/AAC`);
+console.log(`qa:submission:v3 PASS · 15/15 matrix items · ${shots.frames.length} screenshots · ${duration.toFixed(3)}s H.264/AAC · cue-12 SSIM aligned`);

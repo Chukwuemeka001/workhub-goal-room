@@ -14,7 +14,8 @@ Package content is prepared for independent Phase 6 review. This audit is not th
 - Native proof: Canary 154.0.8028.0; raw enumeration preserved; browser-returned RegisteredTool invocation.
 - Current screenshots: 10 public-safe images bound by manifest.
 - Architecture: semantic Owner/Agent/System lanes; PASS has no direct edge to acceptance.
-- Video: disclosed fresh-checkpoint reconstruction, not a continuous authority transaction.
+- Video: disclosed fresh-checkpoint reconstruction, not a continuous authority transaction; S14 remains at 118.719–126.751, labelled mobile/breakpoint evidence fills cue 12 at 126.871–138.707, and architecture/honest limits resume after 138.827.
+- Scene alignment: cue-12 source hashes and label tokens are committed; frames at 130 and 135 seconds meet deterministic `ffmpeg-ssim-all >= 0.995` validation against the 1440×900 cue visual.
 - Captions/narration: English, no music.
 - Scope: one synthetic browser-local Goal; no accounts, backend persistence, database, cloud service, external effects, autonomous-model reliability, or enterprise-security claim.
 
@@ -27,7 +28,7 @@ Package content is prepared for independent Phase 6 review. This audit is not th
 
 ## Binding
 
-Package commit: `89c2391c9c152dbb1043c655628e657353144205`
-Package tree: `6884aea7ffaedd41587ad4d550b18ab0f82ed921`
+Package commit: `PACKAGE_COMMIT_SENTINEL`
+Package tree: `PACKAGE_TREE_SENTINEL`
 
 The metadata-only child replaces only the binding sentinel file and records Git-object hashes of package artifacts. It does not rewrite bound media or copy. Independent review remains required for Phase 6 exit.
