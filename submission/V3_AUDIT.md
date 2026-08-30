@@ -30,7 +30,7 @@ The repaired package is prepared for independent Phase 6 review. This audit is n
 
 ## Binding
 
-Package commit: `333b41c9f5cb91919856b277196a1d1aa92a3f9a`
-Package tree: `f08cc8a589e361bfbd77c7fc1995c6133fb10861`
+Package commit: `PACKAGE_COMMIT_SENTINEL`
+Package tree: `PACKAGE_TREE_SENTINEL`
 
 The metadata-only child may change only this audit and `submission/package-manifest.json` to bind the exact package parent commit/tree and its 51 immutable artifact Git objects. Independent review remains required for Phase 6 exit.

@@ -1,16 +1,16 @@
 {
   "schemaVersion": 2,
   "kind": "phase8-evidence-manifest",
-  "evidenceCommit": "d0c7ed48655ec173e5f0387bf9c87579442fef12",
-  "evidenceTree": "3a0073233eea23fc470d708ee5f8b119d84bce95",
+  "evidenceCommit": "87f328294890ef2d0d645af2e4f5c4744644c8e4",
+  "evidenceTree": "1d033d6979a2796d080ed83d7508e350e7e74e01",
   "hashAlgorithm": "sha256",
   "nonRecursiveBinding": "Hashes bind artifacts already present in evidence commit E. This manifest does not hash itself or qualification.json, and neither file claims its future metadata commit SHA.",
   "provenanceLayers": {
     "refreshedVisualProjection": {
       "testedProductionCommit": "c4f158177d869ae15ff1b04061283ad5cd4c0fd6",
       "testedProductionTree": "0e6f5845738e21f9e5d29067e00cd70dde42f357",
-      "evidenceCommit": "d0c7ed48655ec173e5f0387bf9c87579442fef12",
-      "evidenceTree": "3a0073233eea23fc470d708ee5f8b119d84bce95",
+      "evidenceCommit": "87f328294890ef2d0d645af2e4f5c4744644c8e4",
+      "evidenceTree": "1d033d6979a2796d080ed83d7508e350e7e74e01",
       "artifacts": [
         "evaluation/phase8/visual-max-hostile.json",
         "evaluation/phase8/visual-goal-1440x900.png",
@@ -25,7 +25,7 @@
         "qa/phase8-visual-fixture.ts",
         "qa/phase8VisualHarness.test.ts"
       ],
-      "claimBoundary": "QA-only production projections; visual ledger/PNGs generated at E3, with provenance runner and regression closed at R2; not native browser WebMCP evidence.",
+      "claimBoundary": "QA-only production projections; visual ledger/PNGs generated at E3, with provenance runner and preoccupied-port regression closed at R3; not native browser WebMCP evidence.",
       "generatedVisualLedgerCommit": "780ee67476b988c221fc0c938b8bfc254c0f1a8e",
       "generatedVisualLedgerTree": "5c0641c07b54917ae24c94afe055fd02646b2e37"
     },
@@ -101,7 +101,7 @@
     },
     {
       "path": "scripts/phase8-visual-qa.mjs",
-      "sha256": "36eeb2a43dd9416c8692a735b438ac77850738d74c62ed09167019b3d0d7cbc8",
+      "sha256": "188ca636b3d7651101d2db952d9130ab060f80b7bf71adb9e7c4138cc02f2cd3",
       "bytes": 15223
     },
     {
