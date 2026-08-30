@@ -1,12 +1,12 @@
 {
   "schemaVersion": 3,
   "kind": "phase8-deterministic-qualification",
-  "evidenceCommit": "87f328294890ef2d0d645af2e4f5c4744644c8e4",
-  "evidenceTree": "1d033d6979a2796d080ed83d7508e350e7e74e01",
+  "evidenceCommit": "129058f93986dfc4101a600fe16cc11ce18d5dc2",
+  "evidenceTree": "14d8cd62a36d5b14046e9a51d5bef4443b393a7e",
   "metadataBinding": "This metadata-only child binds exact evidence commit E. The final metadata commit is reported from Git rather than recursively embedded here.",
   "manifest": {
     "path": "evaluation/phase8/manifest.json",
-    "sha256": "0bb454db17394ee78db57736308f7e2771f3e03673b52eef9142a20dfbdff99d",
+    "sha256": "db13605cb912b56533465838b71e0572bcb92f9592bf22254172efe83c5ec384",
     "selfReferenceExcluded": true
   },
   "scope": "qualification-only tests and evidence; no production authority, UI, or CSS changes",
@@ -136,8 +136,8 @@
     "determinism": "two consecutive qa:phase8-visual runs on the exact tested commit produced byte-identical ledger and mobile PNG hashes",
     "testedProductionCommit": "c4f158177d869ae15ff1b04061283ad5cd4c0fd6",
     "testedProductionTree": "0e6f5845738e21f9e5d29067e00cd70dde42f357",
-    "evidenceCommit": "87f328294890ef2d0d645af2e4f5c4744644c8e4",
-    "evidenceTree": "1d033d6979a2796d080ed83d7508e350e7e74e01",
+    "evidenceCommit": "129058f93986dfc4101a600fe16cc11ce18d5dc2",
+    "evidenceTree": "14d8cd62a36d5b14046e9a51d5bef4443b393a7e",
     "generatedVisualLedgerCommit": "780ee67476b988c221fc0c938b8bfc254c0f1a8e",
     "generatedVisualLedgerTree": "5c0641c07b54917ae24c94afe055fd02646b2e37"
   },
@@ -168,9 +168,9 @@
     "dedicatedPhase8Qa": "64 rows; 8 AX rows; 2 trusted-keyboard groups; 5 representative screenshots; 0 failures; refreshed ledger records Now as the initial mobile tab",
     "bundleFixtureExclusion": "no Phase8 fixture tokens in production HTML/JS/CSS",
     "privacyScan": "no private home paths or secret-like fields in evaluation/phase8",
-    "productSourceDiff": "R3 changes only Phase 8 QA runner/test robustness relative to B4; production build inputs and bytes remain unchanged",
+    "productSourceDiff": "R4 changes only Phase 8 QA runner/test URL resolution relative to B5; production build inputs and bytes remain unchanged",
     "independentExactCommitReview": "pending; builder did not self-claim independent review",
-    "provenancePortIsolation": "focused fixed-port RED; dynamic override GREEN; externally preoccupied 4189 GREEN; invalid override fails before profile creation with zero temp leak; canonical Node 23 + positioning 1 + provenance 1"
+    "provenancePortIsolation": "fixed-port RED; dynamic override GREEN; externally preoccupied 4189 GREEN; invalid override zero leak; GitHub Actions Pages-base RED then GREEN; canonical GITHUB_ACTIONS=true npm test PASS"
   },
   "regressionReferencesOnly": [
     "evaluation/desktop-phase6/measurements.json",
