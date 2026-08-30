@@ -19,10 +19,10 @@ function resolveTestedProductionIdentity() {
 }
 const testedProduction = resolveTestedProductionIdentity();
 const output = join(root, "evaluation", "phase8");
-const profile = await mkdtemp(join(tmpdir(), "workhub-phase8-visual-"));
-const chromePath = resolveBrowserExecutable();
 const port = Number(process.env.PHASE8_QA_PORT ?? "4189");
 if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error("PHASE8_QA_PORT must be an integer from 1 through 65535");
+const profile = await mkdtemp(join(tmpdir(), "workhub-phase8-visual-"));
+const chromePath = resolveBrowserExecutable();
 const origin = `http://127.0.0.1:${port}`;
 const states = ["goal", "goal-revision", "plan", "plan-revision", "fail", "pass", "completion", "accepted"];
 const viewports = [

@@ -17,10 +17,16 @@ test("Phase 8 visual evidence identifies the exact latest production-input commi
   const expectedTree = git("rev-parse", `${expectedCommit}^{tree}`);
   const root = mkdtempSync(join(tmpdir(), "phase8-provenance-"));
   const checkout = join(root, "checkout");
-  const legacyPortBlocker = spawn(process.execPath, ["-e", "require('node:net').createServer((socket)=>socket.destroy()).listen(4189,'127.0.0.1',()=>console.log('ready'))"], { stdio: ["ignore", "pipe", "inherit"] });
+  const legacyPortBlocker = spawn(process.execPath, ["-e", "require('node:net').createServer((socket)=>socket.destroy()).listen(4189,'127.0.0.1',()=>console.log('ready'))"], { stdio: ["ignore", "pipe", "pipe"] });
+  let blockerStderr = "";
+  legacyPortBlocker.stderr.on("data", (chunk) => { blockerStderr += chunk; });
   const reservation = createServer();
   try {
-    await new Promise((resolveReady, reject) => { legacyPortBlocker.once("error", reject); legacyPortBlocker.stdout.once("data", resolveReady); });
+    await new Promise((resolveReady, reject) => {
+      legacyPortBlocker.once("error", reject);
+      legacyPortBlocker.stdout.once("data", resolveReady);
+      legacyPortBlocker.once("exit", (code) => code === 1 && blockerStderr.includes("EADDRINUSE") ? resolveReady() : reject(new Error(`legacy port blocker exited ${code}: ${blockerStderr}`)));
+    });
     await listen(reservation, 0);
     const port = reservation.address().port;
     await close(reservation);
@@ -34,7 +40,7 @@ test("Phase 8 visual evidence identifies the exact latest production-input commi
     assert.equal(evidence.testedProductionTree, expectedTree);
   } finally {
     if (reservation.listening) await close(reservation);
-    legacyPortBlocker.kill("SIGTERM");
+    if (legacyPortBlocker.exitCode === null) legacyPortBlocker.kill("SIGTERM");
     try { execFileSync("git", ["-C", repo, "worktree", "remove", "--force", checkout], { stdio: "ignore" }); } catch {}
     rmSync(root, { recursive: true, force: true });
   }
