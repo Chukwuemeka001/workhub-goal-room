@@ -1,28 +1,126 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "kind": "phase8-evidence-manifest",
-  "evidenceCommit": "bd8302dd5977d6b58875a9fe62961a82dfdab9b8",
-  "evidenceTree": "6b7537a5b894aee95d615a9a02207f3e96434454",
-  "testedProductionCommit": "0ace539fcd60c16dac3546007536fb3795d298e1",
-  "testedProductionTree": "99728977846afaf81cb7a10e77f748afa8fa29d9",
+  "evidenceCommit": "780ee67476b988c221fc0c938b8bfc254c0f1a8e",
+  "evidenceTree": "5c0641c07b54917ae24c94afe055fd02646b2e37",
   "hashAlgorithm": "sha256",
   "nonRecursiveBinding": "Hashes bind artifacts already present in evidence commit E. This manifest does not hash itself or qualification.json, and neither file claims its future metadata commit SHA.",
+  "provenanceLayers": {
+    "refreshedVisualProjection": {
+      "testedProductionCommit": "c4f158177d869ae15ff1b04061283ad5cd4c0fd6",
+      "testedProductionTree": "0e6f5845738e21f9e5d29067e00cd70dde42f357",
+      "evidenceCommit": "780ee67476b988c221fc0c938b8bfc254c0f1a8e",
+      "evidenceTree": "5c0641c07b54917ae24c94afe055fd02646b2e37",
+      "artifacts": [
+        "evaluation/phase8/visual-max-hostile.json",
+        "evaluation/phase8/visual-goal-1440x900.png",
+        "evaluation/phase8/visual-fail-1440x900.png",
+        "evaluation/phase8/visual-accepted-1440x900.png",
+        "evaluation/phase8/visual-completion-393x852.png",
+        "evaluation/phase8/visual-accepted-393x552.png",
+        "evaluation/phase8/replay-visual.mjs",
+        "scripts/phase8-visual-qa.mjs",
+        "qa/phase8-authoritative.ts",
+        "qa/phase8-visual-fixture.html",
+        "qa/phase8-visual-fixture.ts",
+        "qa/phase8VisualHarness.test.ts"
+      ],
+      "claimBoundary": "QA-only production projections; not native browser WebMCP evidence."
+    },
+    "historicalNativeCanary": {
+      "testedProductionCommit": "c4602a9d5d1fde8451e76fcc1e6e0797f693d70c",
+      "testedProductionTree": "c4c9b4105175df6284b49ebfca30b7b8f411f8b6",
+      "originalEvidenceCommit": "717650ee828e30bc39aacfda798e5592a725567a",
+      "originalEvidenceTree": "69e1c3a614c27bab432047f938495475c31180df",
+      "artifacts": [
+        "evaluation/phase8/cdp-transcript.redacted.json",
+        "evaluation/phase8/native-canary.json",
+        "evaluation/phase8/native-goal-1440x900.png",
+        "evaluation/phase8/replay-native.mjs"
+      ],
+      "claimBoundary": "Historical Chrome Canary native registration/discovery/testing-API evidence retained byte-identically; not regenerated for the mobile successor."
+    }
+  },
   "artifacts": [
-    {"path":"evaluation/phase8/visual-max-hostile.json","sha256":"19fbf5a46524dd2b8e029a3c45bf12c090e04d7a69d633f0ddc625e8a4affab9","bytes":811501},
-    {"path":"evaluation/phase8/native-canary.json","sha256":"6e6e154628a9eac72666b38d5c3cd1e053a877ab7413301be1f1e4251e8a3498","bytes":10345},
-    {"path":"evaluation/phase8/cdp-transcript.redacted.json","sha256":"a62d0c97a1b38366cea9ec5d83be004a5088ef55a8d3b45f774ad2f6f6af3576","bytes":10698},
-    {"path":"evaluation/phase8/native-goal-1440x900.png","sha256":"b62d9c3f8223408094d0f6a818b6d49dd4e5adebb842ddf09e88cc6070f8afa4","bytes":96914},
-    {"path":"evaluation/phase8/visual-goal-1440x900.png","sha256":"c941479320bc6875ca85806ecf055c135f62ac530731ceaf06c48be9eb553100","bytes":145077},
-    {"path":"evaluation/phase8/visual-fail-1440x900.png","sha256":"3cbeb115be58585f856cc12faf29e2b5e7202fa5308ef03c720a6827e87c1cde","bytes":145380},
-    {"path":"evaluation/phase8/visual-accepted-1440x900.png","sha256":"985f79518481eeeccde55da543b0f396d34bc574905034e13769503f495d630c","bytes":144637},
-    {"path":"evaluation/phase8/visual-completion-393x852.png","sha256":"37c12e71f8ba3ce7bea550e44b7acbe451325e1607a04605dec9c6cb9cc41ff1","bytes":97815},
-    {"path":"evaluation/phase8/visual-accepted-393x552.png","sha256":"b6b60384ba5e4aaab183a3b46142bd9367853c357a2c5967a0d8d3b042c7aebc","bytes":64829},
-    {"path":"evaluation/phase8/replay-native.mjs","sha256":"1e954fb61ac76790cc5c371aeca5c04ca969bb0ceae0220ae0816a52d4f10e93","bytes":12747},
-    {"path":"evaluation/phase8/replay-visual.mjs","sha256":"128b7d7ecf0b69403928cc80eb5e1dd9a802df180924e50486594e15f9675828","bytes":138},
-    {"path":"scripts/phase8-visual-qa.mjs","sha256":"73b8e3a89bf9bf16e8687f9e99ac570334827cf2894e6a07de9723dd98d29da5","bytes":14099},
-    {"path":"qa/phase8-authoritative.ts","sha256":"2da23b5d474f40c4f5c8181a77b29fc7874621b487053c72251526134a27dc5b","bytes":6519},
-    {"path":"qa/phase8-visual-fixture.html","sha256":"f1cf357775ca1986da7ff95d55af695975f7fd710b9c2dd1a7ec6dc974394f45","bytes":926},
-    {"path":"qa/phase8-visual-fixture.ts","sha256":"d582a5c076b0312bf7ea7642ad4907ac29eea814f49779a89b91428ee256e5c7","bytes":9349},
-    {"path":"qa/phase8VisualHarness.test.ts","sha256":"3c485febed835218957d24a19a3ed19e9df059944fa5182916a5bf64bb830bc0","bytes":4688}
+    {
+      "path": "evaluation/phase8/visual-max-hostile.json",
+      "sha256": "01d9852a63afddd8c0840ee9f3d92475fb7045bdcc0c2ad1c8715464ee6f4a0c",
+      "bytes": 811501
+    },
+    {
+      "path": "evaluation/phase8/native-canary.json",
+      "sha256": "6e6e154628a9eac72666b38d5c3cd1e053a877ab7413301be1f1e4251e8a3498",
+      "bytes": 10345
+    },
+    {
+      "path": "evaluation/phase8/cdp-transcript.redacted.json",
+      "sha256": "a62d0c97a1b38366cea9ec5d83be004a5088ef55a8d3b45f774ad2f6f6af3576",
+      "bytes": 10698
+    },
+    {
+      "path": "evaluation/phase8/native-goal-1440x900.png",
+      "sha256": "b62d9c3f8223408094d0f6a818b6d49dd4e5adebb842ddf09e88cc6070f8afa4",
+      "bytes": 96914
+    },
+    {
+      "path": "evaluation/phase8/visual-goal-1440x900.png",
+      "sha256": "c941479320bc6875ca85806ecf055c135f62ac530731ceaf06c48be9eb553100",
+      "bytes": 145077
+    },
+    {
+      "path": "evaluation/phase8/visual-fail-1440x900.png",
+      "sha256": "3cbeb115be58585f856cc12faf29e2b5e7202fa5308ef03c720a6827e87c1cde",
+      "bytes": 145380
+    },
+    {
+      "path": "evaluation/phase8/visual-accepted-1440x900.png",
+      "sha256": "985f79518481eeeccde55da543b0f396d34bc574905034e13769503f495d630c",
+      "bytes": 144637
+    },
+    {
+      "path": "evaluation/phase8/visual-completion-393x852.png",
+      "sha256": "37c12e71f8ba3ce7bea550e44b7acbe451325e1607a04605dec9c6cb9cc41ff1",
+      "bytes": 97815
+    },
+    {
+      "path": "evaluation/phase8/visual-accepted-393x552.png",
+      "sha256": "b6b60384ba5e4aaab183a3b46142bd9367853c357a2c5967a0d8d3b042c7aebc",
+      "bytes": 64829
+    },
+    {
+      "path": "evaluation/phase8/replay-native.mjs",
+      "sha256": "1e954fb61ac76790cc5c371aeca5c04ca969bb0ceae0220ae0816a52d4f10e93",
+      "bytes": 12747
+    },
+    {
+      "path": "evaluation/phase8/replay-visual.mjs",
+      "sha256": "128b7d7ecf0b69403928cc80eb5e1dd9a802df180924e50486594e15f9675828",
+      "bytes": 138
+    },
+    {
+      "path": "scripts/phase8-visual-qa.mjs",
+      "sha256": "ffef86ef2ab8ad1fac185ede6fe096078283fe518400aad9823c4c3f6bb1ab1f",
+      "bytes": 15051
+    },
+    {
+      "path": "qa/phase8-authoritative.ts",
+      "sha256": "2da23b5d474f40c4f5c8181a77b29fc7874621b487053c72251526134a27dc5b",
+      "bytes": 6519
+    },
+    {
+      "path": "qa/phase8-visual-fixture.html",
+      "sha256": "f1cf357775ca1986da7ff95d55af695975f7fd710b9c2dd1a7ec6dc974394f45",
+      "bytes": 926
+    },
+    {
+      "path": "qa/phase8-visual-fixture.ts",
+      "sha256": "d582a5c076b0312bf7ea7642ad4907ac29eea814f49779a89b91428ee256e5c7",
+      "bytes": 9349
+    },
+    {
+      "path": "qa/phase8VisualHarness.test.ts",
+      "sha256": "3c485febed835218957d24a19a3ed19e9df059944fa5182916a5bf64bb830bc0",
+      "bytes": 4688
+    }
   ]
 }
