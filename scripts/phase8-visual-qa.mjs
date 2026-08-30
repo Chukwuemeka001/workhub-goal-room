@@ -4,6 +4,7 @@ import { existsSync } from "node:fs";
 import { mkdtemp, mkdir, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { extname, join, resolve } from "node:path";
+import { resolveConfig } from "vite";
 import { resolveBrowserExecutable } from "./browser-resolver.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
@@ -24,6 +25,8 @@ if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error("PHASE8
 const profile = await mkdtemp(join(tmpdir(), "workhub-phase8-visual-"));
 const chromePath = resolveBrowserExecutable();
 const origin = `http://127.0.0.1:${port}`;
+const { base } = await resolveConfig({}, "serve");
+const fixtureUrl = `${origin}${base}qa/phase8-visual-fixture.html`;
 const states = ["goal", "goal-revision", "plan", "plan-revision", "fail", "pass", "completion", "accepted"];
 const viewports = [
   { family: "desktop", width: 1280, height: 800, mobile: false },
@@ -62,7 +65,7 @@ try {
   }
   if (fixtureLeaks.length) throw new Error(`Phase8 fixture leaked into production bundle: ${JSON.stringify(fixtureLeaks)}`);
   server = spawn("npm", ["run", "dev", "--", "--host", "127.0.0.1", "--port", String(port), "--strictPort"], { cwd: root, stdio: "ignore" });
-  await waitFor(async () => (await fetch(`${origin}/qa/phase8-visual-fixture.html`)).ok, "Phase8 Vite fixture");
+  await waitFor(async () => (await fetch(fixtureUrl)).ok, "Phase8 Vite fixture");
   chrome = spawn(chromePath, ["--headless=new", "--disable-gpu", "--disable-extensions", "--disable-component-extensions-with-background-pages", "--hide-scrollbars", "--remote-debugging-port=0", `--user-data-dir=${profile}`, "about:blank"], { stdio: "ignore" });
   const activePort = await waitFor(async () => (await readFile(join(profile, "DevToolsActivePort"), "utf8")).split("\n")[0], "Chrome DevTools");
   const tabs = await (await fetch(`http://127.0.0.1:${activePort}/json`)).json();
@@ -73,7 +76,7 @@ try {
   const call = (method, params = {}) => new Promise((resolveCall, reject) => { const id = ++nextId; const timer = setTimeout(() => { pending.delete(id); reject(new Error(`CDP timeout: ${method}`)); }, 60000); pending.set(id, { resolve: resolveCall, reject, timer }); socket.send(JSON.stringify({ id, method, params })); });
   await call("Page.enable"); await call("Runtime.enable"); await call("Accessibility.enable");
   async function evaluate(expression) { const response = await call("Runtime.evaluate", { expression, returnByValue: true, awaitPromise: true }); if (response.exceptionDetails) throw new Error(response.exceptionDetails.exception?.description ?? response.exceptionDetails.text); return response.result.value; }
-  async function navigate(state, width, height, mobile) { await call("Emulation.setDeviceMetricsOverride", { width, height, deviceScaleFactor: 1, mobile, screenWidth: width, screenHeight: height }); await call("Page.navigate", { url: `${origin}/qa/phase8-visual-fixture.html?state=${state}` }); await waitFor(async () => evaluate("document.readyState==='complete' && Boolean(window.__phase8Qa)"), `${state} ${width}x${height}`); }
+  async function navigate(state, width, height, mobile) { await call("Emulation.setDeviceMetricsOverride", { width, height, deviceScaleFactor: 1, mobile, screenWidth: width, screenHeight: height }); await call("Page.navigate", { url: `${fixtureUrl}?state=${state}` }); await waitFor(async () => evaluate("document.readyState==='complete' && Boolean(window.__phase8Qa)"), `${state} ${width}x${height}`); }
   async function pressKey(key) { const code = key; const vk = key === "Home" ? 36 : key === "End" ? 35 : key === "ArrowLeft" ? 37 : 39; await call("Input.dispatchKeyEvent", { type: "keyDown", key, code, windowsVirtualKeyCode: vk }); await call("Input.dispatchKeyEvent", { type: "keyUp", key, code, windowsVirtualKeyCode: vk }); }
   const rows = [];
   for (const viewport of viewports) for (const state of states) {

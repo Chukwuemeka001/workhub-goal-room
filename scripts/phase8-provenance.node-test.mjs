@@ -33,7 +33,7 @@ test("Phase 8 visual evidence identifies the exact latest production-input commi
     execFileSync("git", ["-C", repo, "worktree", "add", "--detach", checkout, "HEAD"], { stdio: "ignore" });
     copyFileSync(join(repo, "scripts/phase8-visual-qa.mjs"), join(checkout, "scripts/phase8-visual-qa.mjs"));
     symlinkSync(join(repo, "node_modules"), join(checkout, "node_modules"));
-    const run = spawnSync("node", ["scripts/phase8-visual-qa.mjs"], { cwd: checkout, encoding: "utf8", timeout: 120_000, env: { ...process.env, PHASE8_QA_PORT: String(port) } });
+    const run = spawnSync("node", ["scripts/phase8-visual-qa.mjs"], { cwd: checkout, encoding: "utf8", timeout: 120_000, env: { ...process.env, GITHUB_ACTIONS: "true", PHASE8_QA_PORT: String(port) } });
     assert.equal(run.status, 0, run.stderr || run.stdout);
     const evidence = JSON.parse(readFileSync(join(checkout, "evaluation/phase8/visual-max-hostile.json"), "utf8"));
     assert.equal(evidence.testedProductionCommit, expectedCommit);
