@@ -6,8 +6,8 @@
     "commit": "5ac95d4bdab5f54beda0f90776c3918fd36136d2",
     "tree": "b6b50068e8119d02d1d9213286f14adf3cbc0db1"
   },
-  "packageCommit": "7568b5133777026d9d8617c99f0a14e2665f36ad",
-  "packageTree": "696d8ba6c780a3f0a8e8f8ebe9d54bc8fe5b8df8",
+  "packageCommit": "PACKAGE_COMMIT_SENTINEL",
+  "packageTree": "PACKAGE_TREE_SENTINEL",
   "artifactCount": 51,
   "artifacts": [
     {
@@ -47,8 +47,8 @@
     },
     {
       "path": "scripts/submission-v3-contract.mjs",
-      "bytes": 19534,
-      "sha256": "774b9983e26455cf1964e4f1eb74e6dafab027b5b5461a824cdc0a151fb6b9e9"
+      "bytes": 19055,
+      "sha256": "f67ce5e0069c8a3bdd1d0bba24135c00b8a3bba6e899db45ff12fda47d4ee083"
     },
     {
       "path": "scripts/submission-v3-validate.mjs",
@@ -62,8 +62,8 @@
     },
     {
       "path": "submission/DEMO_SCRIPT.md",
-      "sha256": "31e2b6b51e2b6b69f91a9d32828304da444ab953e251ca03ff69acdc3fd9ae95",
-      "bytes": 3742
+      "sha256": "7bcf70ba0c4b44dc0052a6c522f57f5e6600034085a1d07c4797bf274f37e99d",
+      "bytes": 3569
     },
     {
       "path": "submission/DEVPOST_SUBMISSION.md",
@@ -152,8 +152,8 @@
     },
     {
       "path": "submission/assets/live-demo-capture.json",
-      "sha256": "933a5d301bd2e5e3dae0529820342cd3cacbeedb478e219ab717cb3d6e00e387",
-      "bytes": 138185
+      "sha256": "fa55f0bcbe99a817c1aec9eaeafa1af64adaa5a705e448a35c615bc4af4502bf",
+      "bytes": 138771
     },
     {
       "path": "submission/assets/screenshots/boundary-1199-mobile.png",
@@ -237,18 +237,18 @@
     },
     {
       "path": "submission/assets/workhub-goal-room-demo-scenes.json",
-      "sha256": "4216b436f4dc29d619439ec37526002e658b8a2731bbb6a44fc2c1de1144dc6c",
-      "bytes": 13030
+      "sha256": "cd2b6ee6ef4b701ae6a3a40098cf0b6d3cda7841a8290f0d10bd68e99ea95e2e",
+      "bytes": 12554
     },
     {
       "path": "submission/assets/workhub-goal-room-demo.en.srt",
-      "sha256": "51ec26307a3a87403298cdbe6a78b734e1fdeb7c2687a3d5f8357f349f28aeda",
-      "bytes": 2850
+      "sha256": "7046006e8b671de6dd0fb6e5087322d77deb4c5c4233b8bbb9eead3145e08f7a",
+      "bytes": 2371
     },
     {
       "path": "submission/assets/workhub-goal-room-demo.mp4",
-      "sha256": "a82622d372296ff4640343ba57e3955891b6f542b879f9dd29bed34ebafc9f4f",
-      "bytes": 5833417
+      "sha256": "71794ab0a11d13b90321ee5e084aa16c68a3ff805b9049bc829fd52efe61af0b",
+      "bytes": 5550752
     },
     {
       "path": "submission/historical/v2-five-tool/manifest.json",

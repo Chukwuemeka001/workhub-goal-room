@@ -4,33 +4,35 @@
 
 **Evidence mode:** Continuous live native governed interaction from 0:00 through sealed S14 at 2:06.8. The mobile/breakpoint interval at 2:06.9–2:18.7 and architecture interval at 2:18.85–2:33.84 are disclosed source-bound reconstructions. No autonomous model selects tools.
 
+**Voiceover:** Synthetic `en-US-AndrewMultilingualNeural` narration replaced after capture. The H.264 visual stream is copied without re-encoding; captions match the revised narration.
+
 ## Narration
 
-WebMCP makes a website callable by agents. WorkHub Goal Room makes each call state-aware, authority-checked, evidence-bound, and owner-controlled.
+WebMCP makes websites callable by agents. WorkHub makes each call state-aware, evidence-bound, and owner-controlled.
 
-Here is the native boundary first. Canary returned six browser-native RegisteredTool descriptors. The Agent path is getTools, select the browser-returned tool, then executeTool with serialized JSON. There is no tool for Owner decisions, System verdicts, acceptance, or external effects.
+Canary returned six browser-native RegisteredTool descriptors. The Agent selects the browser-returned tool, then calls executeTool with JSON. Owner decisions, System verdicts, acceptance, and external effects stay unavailable.
 
-The static registration list follows source order. This panel preserves the raw browser enumeration separately. No model autonomously selected a tool in this evidence.
+Source order and raw browser enumeration are shown separately. No model autonomously selected a tool in this evidence.
 
-A malformed call can be rejected without changing state or receipts. The recorded S14 probe proves malformed-input atomicity, not a schema-valid terminal reducer refusal.
+Malformed input is rejected without changing state or receipts. This proves malformed-input atomicity—not a terminal reducer refusal.
 
-The journey starts with owner intent. The Agent proposes Goal Contract v1. The Owner asks for a revision, the Agent proposes v2, and only the Owner confirms it.
+The journey begins with owner intent. The Agent proposes Goal Contract one. The Owner requests revision, receives version two, and only the Owner confirms it.
 
-The same boundary applies to planning. Plan v1 is revised. Plan v2 remains bound to confirmed Goal Contract v2, and the Owner confirms it before work begins.
+Planning follows the same boundary. Plan version one is revised. Plan two remains bound to Goal Contract two, and the Owner confirms it before work starts.
 
-The Agent claims the admitted step and submits Candidate v1. The production System adapter runs the deterministic rule set automatically and records FAIL. System verdict authorship is neither an Agent tool nor an Owner control.
+The Agent submits Candidate one. The System adapter runs deterministic rules automatically and records FAIL. Verdict authorship belongs to neither Agent nor Owner.
 
-The Agent corrects the evidence and submits Candidate v2. The same rules record PASS for the exact candidate version and SHA-256. The next actor is still the Agent.
+The Agent corrects the evidence and submits Candidate version two. The same rules record PASS for its exact version and SHA-256. The Agent remains next.
 
-PASS does not mean accepted. PASS only permits the Agent to request completion for that exact candidate.
+PASS does not mean accepted. It only lets the Agent request completion for that exact candidate.
 
-After the request, the Owner sees Candidate v2, its full digest, the rule-set version, PASS, and the irreversible consequence. Only this trusted Owner interface can confirm acceptance.
+The Owner sees Candidate two, its full digest, rule version, PASS, and the irreversible consequence. Only the trusted Owner interface can accept it.
 
-S14 is sealed. The current actor is none, there are no controls, and there is no legal continuation.
+S fourteen is sealed. The current actor is none, there are no controls, and there is no legal continuation.
 
-The mobile projection keeps the same frontier, while the 1199 and 1200 pixel captures prove which one of the two compositions is active at the boundary.
+The mobile view keeps the same frontier. The eleven ninety-nine and twelve hundred pixel captures prove which composition is active at the boundary.
 
-This competition edition is one synthetic browser-local Goal. It has no accounts, backend persistence, cloud service, database, external effects, or autonomous-model reliability claim. Public app, repository, YouTube, and Devpost actions remain pending Owner approval.
+This synthetic browser-local Goal has no accounts, backend persistence, database, cloud service, external effects, or autonomous-model reliability claim. YouTube and Devpost remain pending Owner approval.
 
 ## Scene plan
 

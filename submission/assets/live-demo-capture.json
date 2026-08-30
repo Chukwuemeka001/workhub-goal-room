@@ -3868,8 +3868,8 @@
   },
   "media": {
     "path": "submission/assets/workhub-goal-room-demo.mp4",
-    "sha256": "a82622d372296ff4640343ba57e3955891b6f542b879f9dd29bed34ebafc9f4f",
-    "bytes": 5833417,
+    "sha256": "71794ab0a11d13b90321ee5e084aa16c68a3ff805b9049bc829fd52efe61af0b",
+    "bytes": 5550752,
     "probe": {
       "programs": [],
       "stream_groups": [],
@@ -3891,8 +3891,18 @@
       ],
       "format": {
         "duration": "153.833333",
-        "size": "5833417"
+        "size": "5550752"
       }
+    },
+    "postProduction": {
+      "narrationReplacedAfterCapture": true,
+      "voiceProvider": "Microsoft Edge neural TTS",
+      "voice": "en-US-AndrewMultilingualNeural",
+      "visualStreamCopiedWithoutReencode": true,
+      "visualStreamMd5": "785cbf6a6f121ecb6b67570b933b40f8",
+      "sourceQualifiedMediaSha256": "a82622d372296ff4640343ba57e3955891b6f542b879f9dd29bed34ebafc9f4f",
+      "captionsReauthoredToMatchNarration": true,
+      "claimBoundary": "Synthetic narration was replaced after capture; the governed visual journey and reconstruction intervals are unchanged."
     }
   },
   "finalState": {
