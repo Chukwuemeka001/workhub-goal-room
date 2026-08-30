@@ -1,12 +1,12 @@
 {
   "schemaVersion": 3,
   "kind": "phase8-deterministic-qualification",
-  "evidenceCommit": "780ee67476b988c221fc0c938b8bfc254c0f1a8e",
-  "evidenceTree": "5c0641c07b54917ae24c94afe055fd02646b2e37",
+  "evidenceCommit": "d0c7ed48655ec173e5f0387bf9c87579442fef12",
+  "evidenceTree": "3a0073233eea23fc470d708ee5f8b119d84bce95",
   "metadataBinding": "This metadata-only child binds exact evidence commit E. The final metadata commit is reported from Git rather than recursively embedded here.",
   "manifest": {
     "path": "evaluation/phase8/manifest.json",
-    "sha256": "6afa36a9b2e42db03fe6fa3ba717de2d7a554f2f91d6d64a996ead0f7625bd6b",
+    "sha256": "f28cf1f9786226aafa5ed3d922037acf6e2794fd58057730d10ea3d84246825b",
     "selfReferenceExcluded": true
   },
   "scope": "qualification-only tests and evidence; no production authority, UI, or CSS changes",
@@ -136,8 +136,10 @@
     "determinism": "two consecutive qa:phase8-visual runs on the exact tested commit produced byte-identical ledger and mobile PNG hashes",
     "testedProductionCommit": "c4f158177d869ae15ff1b04061283ad5cd4c0fd6",
     "testedProductionTree": "0e6f5845738e21f9e5d29067e00cd70dde42f357",
-    "evidenceCommit": "780ee67476b988c221fc0c938b8bfc254c0f1a8e",
-    "evidenceTree": "5c0641c07b54917ae24c94afe055fd02646b2e37"
+    "evidenceCommit": "d0c7ed48655ec173e5f0387bf9c87579442fef12",
+    "evidenceTree": "3a0073233eea23fc470d708ee5f8b119d84bce95",
+    "generatedVisualLedgerCommit": "780ee67476b988c221fc0c938b8bfc254c0f1a8e",
+    "generatedVisualLedgerTree": "5c0641c07b54917ae24c94afe055fd02646b2e37"
   },
   "nativeProductionEvidence": {
     "ledger": "evaluation/phase8/native-canary.json",
@@ -166,8 +168,9 @@
     "dedicatedPhase8Qa": "64 rows; 8 AX rows; 2 trusted-keyboard groups; 5 representative screenshots; 0 failures; refreshed ledger records Now as the initial mobile tab",
     "bundleFixtureExclusion": "no Phase8 fixture tokens in production HTML/JS/CSS",
     "privacyScan": "no private home paths or secret-like fields in evaluation/phase8",
-    "productSourceDiff": "E3 changes only regenerated Phase 8 visual evidence relative to exact R1; production build bytes are 5/5 identical",
-    "independentExactCommitReview": "pending; builder did not self-claim independent review"
+    "productSourceDiff": "R2 changes only Phase 8 QA runner/test port isolation relative to B3; production build inputs and bytes remain unchanged",
+    "independentExactCommitReview": "pending; builder did not self-claim independent review",
+    "provenancePortIsolation": "focused fixed-port RED; PHASE8_QA_PORT override GREEN; canonical Node 23 + positioning 1 + provenance 1"
   },
   "regressionReferencesOnly": [
     "evaluation/desktop-phase6/measurements.json",

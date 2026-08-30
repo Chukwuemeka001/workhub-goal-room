@@ -1,16 +1,16 @@
 {
   "schemaVersion": 2,
   "kind": "phase8-evidence-manifest",
-  "evidenceCommit": "780ee67476b988c221fc0c938b8bfc254c0f1a8e",
-  "evidenceTree": "5c0641c07b54917ae24c94afe055fd02646b2e37",
+  "evidenceCommit": "d0c7ed48655ec173e5f0387bf9c87579442fef12",
+  "evidenceTree": "3a0073233eea23fc470d708ee5f8b119d84bce95",
   "hashAlgorithm": "sha256",
   "nonRecursiveBinding": "Hashes bind artifacts already present in evidence commit E. This manifest does not hash itself or qualification.json, and neither file claims its future metadata commit SHA.",
   "provenanceLayers": {
     "refreshedVisualProjection": {
       "testedProductionCommit": "c4f158177d869ae15ff1b04061283ad5cd4c0fd6",
       "testedProductionTree": "0e6f5845738e21f9e5d29067e00cd70dde42f357",
-      "evidenceCommit": "780ee67476b988c221fc0c938b8bfc254c0f1a8e",
-      "evidenceTree": "5c0641c07b54917ae24c94afe055fd02646b2e37",
+      "evidenceCommit": "d0c7ed48655ec173e5f0387bf9c87579442fef12",
+      "evidenceTree": "3a0073233eea23fc470d708ee5f8b119d84bce95",
       "artifacts": [
         "evaluation/phase8/visual-max-hostile.json",
         "evaluation/phase8/visual-goal-1440x900.png",
@@ -25,7 +25,9 @@
         "qa/phase8-visual-fixture.ts",
         "qa/phase8VisualHarness.test.ts"
       ],
-      "claimBoundary": "QA-only production projections; not native browser WebMCP evidence."
+      "claimBoundary": "QA-only production projections; visual ledger/PNGs generated at E3, with provenance runner and regression closed at R2; not native browser WebMCP evidence.",
+      "generatedVisualLedgerCommit": "780ee67476b988c221fc0c938b8bfc254c0f1a8e",
+      "generatedVisualLedgerTree": "5c0641c07b54917ae24c94afe055fd02646b2e37"
     },
     "historicalNativeCanary": {
       "testedProductionCommit": "c4602a9d5d1fde8451e76fcc1e6e0797f693d70c",
@@ -99,8 +101,8 @@
     },
     {
       "path": "scripts/phase8-visual-qa.mjs",
-      "sha256": "ffef86ef2ab8ad1fac185ede6fe096078283fe518400aad9823c4c3f6bb1ab1f",
-      "bytes": 15051
+      "sha256": "36eeb2a43dd9416c8692a735b438ac77850738d74c62ed09167019b3d0d7cbc8",
+      "bytes": 15223
     },
     {
       "path": "qa/phase8-authoritative.ts",
