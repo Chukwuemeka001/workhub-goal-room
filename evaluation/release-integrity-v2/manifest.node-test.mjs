@@ -39,7 +39,7 @@ test("packet manifest binds the exact local evaluation inventory and bytes", asy
   }
 });
 
-test("packet manifest marks the frozen gate true only for exact bytes and authoritative references", async () => {
+test("packet records the qualified frozen gate without publishing local-only inputs", async () => {
   const manifest = JSON.parse(await readFile(join(root, "manifest.json"), "utf8"));
   const provenance = await verifyArtifactProvenance({
     repoRoot,
@@ -47,32 +47,40 @@ test("packet manifest marks the frozen gate true only for exact bytes and author
     proofManifestPath: "evaluation/autonomous-webmcp-win-sprint/manifest.json",
     rollbackPatchPath: "evaluation/release-integrity-v2/artifacts/rollback.patch",
   });
-  assert.equal(provenance.matched, true);
-  assert.equal(manifest.frozenArtifactGate.matched, provenance.matched);
-  assert.equal(manifest.frozenArtifactGate.exactInputHashesMatch, provenance.hashesMatch);
-  assert.equal(manifest.frozenArtifactGate.structuralReferencesMatch, provenance.referencesValid);
-  assert.deepEqual(manifest.frozenArtifactGate.actualSha256, provenance.actual);
-  assert.deepEqual(
-    {
-      candidateManifestSha256: manifest.frozenArtifactGate.candidateManifestSha256,
-      proofManifestSha256: manifest.frozenArtifactGate.proofManifestSha256,
-      rollbackPatchSha256: manifest.frozenArtifactGate.rollbackPatchSha256,
-    },
-    provenance.expected,
-  );
+  const recorded = {
+    candidateManifestSha256: manifest.frozenArtifactGate.candidateManifestSha256,
+    proofManifestSha256: manifest.frozenArtifactGate.proofManifestSha256,
+    rollbackPatchSha256: manifest.frozenArtifactGate.rollbackPatchSha256,
+  };
+  assert.deepEqual(manifest.frozenArtifactGate.actualSha256, recorded);
+  assert.equal(manifest.frozenArtifactGate.exactInputHashesMatch, true);
+  assert.equal(manifest.frozenArtifactGate.structuralReferencesMatch, true);
+  assert.equal(manifest.frozenArtifactGate.matched, true);
   assert.deepEqual(manifest.frozenArtifactGate.missing, []);
   assert.deepEqual(manifest.localOnlyProvenanceInputs, [
     {
       role: "candidate-manifest",
       path: "artifacts/candidate-manifest.json",
-      sha256: provenance.actual.candidateManifestSha256,
+      sha256: recorded.candidateManifestSha256,
       publicationReady: false,
     },
     {
       role: "rollback-patch",
       path: "artifacts/rollback.patch",
-      sha256: provenance.actual.rollbackPatchSha256,
+      sha256: recorded.rollbackPatchSha256,
       publicationReady: false,
     },
   ]);
+  if (provenance.error === "ARTIFACT_BYTES_MISSING") {
+    assert.deepEqual(provenance.expected, recorded);
+    assert.deepEqual(provenance.missing.sort(), [
+      "evaluation/release-integrity-v2/artifacts/candidate-manifest.json",
+      "evaluation/release-integrity-v2/artifacts/rollback.patch",
+    ]);
+    assert.equal(provenance.actual.proofManifestSha256, recorded.proofManifestSha256);
+    return;
+  }
+  assert.equal(provenance.matched, true);
+  assert.deepEqual(provenance.expected, recorded);
+  assert.deepEqual(provenance.actual, recorded);
 });

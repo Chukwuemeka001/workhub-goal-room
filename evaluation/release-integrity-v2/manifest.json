@@ -4,8 +4,8 @@
   "files": [
     {
       "path": "README.md",
-      "bytes": 4540,
-      "sha256": "0d7114b917259ca4d796140ec075f68ce964daf4614e783503cfa4f78f051f14"
+      "bytes": 5114,
+      "sha256": "850df472345021a8629b602c22402019d77a66a444688cbcd1d5632445838a9b"
     },
     {
       "path": "evaluator.test.ts",
@@ -19,8 +19,8 @@
     },
     {
       "path": "manifest.node-test.mjs",
-      "bytes": 3257,
-      "sha256": "140976a7b717ffddfc5ebc9fb9d9b366cbbe926370f86ff33ac9c94aa63c7fdd"
+      "bytes": 3628,
+      "sha256": "0cf3b1ed645716dda076373b65ab9e93ed9d5c734e4de5cd0ab5f7a49bba85a6"
     },
     {
       "path": "protectedParity.mjs",

@@ -48,9 +48,11 @@ The exact three frozen inputs are present, so the command passes only while ever
 npm run qa:release-provenance-v2
 ```
 
+The two private inputs are intentionally excluded from a promotable Git commit. In a clean checkout, `npm run eval:release-integrity-v2` therefore validates the recorded frozen gate, the public proof-manifest bytes, the local-only exclusions, and the provenance verifier's substitution controls without pretending to re-read absent private bytes. `npm run qa:release-provenance-v2` is the separate fail-closed revalidation gate: it succeeds only in the qualified private workspace where all three exact inputs are supplied.
+
 The copied candidate manifest and rollback patch under `artifacts/` are local-only provenance inputs, not publication-ready packet files. The candidate bytes retain an absolute private source-machine location. The verifier deliberately does not inspect, normalize, compare, or print that value; it reads only the authoritative digest references and emits only frozen/actual digests. Publishing either copied artifact would cross the documented boundary and would require a separately qualified replacement identity.
 
-`manifest.json` therefore preserves the executable/report inventory separately from these two local-only inputs. Its frozen gate records `matched: true` only while the tests recompute all three exact hashes and the authoritative structural references.
+`manifest.json` therefore preserves the executable/report inventory separately from these two local-only inputs. Its frozen gate records the qualification-time result. The explicit private-workspace provenance command is what recomputes all three exact hashes and authoritative structural references.
 
 ## Rollback and public-change gate
 
