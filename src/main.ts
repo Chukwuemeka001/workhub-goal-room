@@ -13,6 +13,8 @@ import { createDesktopView } from "./desktopView";
 import { createDesktopSurface } from "./desktopUi";
 import { createAcceptanceDialog, type AcceptanceDialogNodes } from "./acceptanceDialog";
 import { containRevisionDialogFocus, createRevisionDialogFocusReturn } from "./revisionDialog";
+import { assuranceFixtures } from "./assurance/assuranceFixtures";
+import { createAssuranceCockpit } from "./assurance/assuranceUi";
 
 function requiredElement<T extends HTMLElement>(id: string): T {
   const element = document.getElementById(id);
@@ -97,6 +99,9 @@ function render(view: OwnerViewModel) {
 }
 controller = createOwnerDecisionController({ room, render });
 controller.render();
+createAssuranceCockpit(requiredElement("assurance-cockpit"), assuranceFixtures, {
+  releaseGuardianRoot: requiredElement("desktop-room"),
+});
 const systemVerifier = createSystemVerifierAdapter({
   room,
   onSettled: () => render(createOwnerViewModel(room.getState(), room.getReceipts())),

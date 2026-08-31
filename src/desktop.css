@@ -16,6 +16,34 @@
   --d-pass: #78cda0;
   --d-fail: #e49a61;
 }
+.assurance-cockpit {
+  width: min(1600px, 100%);
+  margin: 0 auto;
+  max-height: min(700px, 78dvh);
+  overflow: auto;
+  padding: 20px clamp(26px, 3.2vw, 58px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  border-bottom: 1px solid var(--d-line-strong);
+  background: linear-gradient(120deg, #101517, #0c0e10 72%);
+}
+.assurance-cockpit header, .assurance-cockpit > label, .assurance-cockpit > select,
+.assurance-cockpit .assurance-boundary, .assurance-cockpit .assurance-escalate, .assurance-cockpit .assurance-handoff-status { grid-column: 1 / -1; }
+.release-guardian-path { width: min(1600px, 100%); margin: 0 auto; padding: 16px clamp(26px, 3.2vw, 58px); border-bottom: 1px solid var(--d-line-strong); color: var(--d-owner); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.assurance-cockpit header { display: grid; gap: 6px; }
+.assurance-cockpit h2 { font-family: Georgia, "Times New Roman", ui-serif, serif; font-size: clamp(1.7rem, 2.6vw, 2.7rem); font-weight: 500; }
+.assurance-cockpit h3 { margin-bottom: 8px; color: var(--d-muted); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.assurance-cockpit p, .assurance-cockpit li, .assurance-cockpit label, .assurance-cockpit a { color: var(--d-soft); font-size: 0.74rem; line-height: 1.5; overflow-wrap: anywhere; }
+.assurance-cockpit ul { margin: 0; padding-left: 18px; }
+.assurance-cockpit select { min-height: 44px; padding: 9px 12px; border: 1px solid var(--d-line-strong); color: #f6f3ec; background: #0d0f10; }
+.assurance-cockpit section { padding: 16px; border: 1px solid var(--d-line); background: rgba(9, 10, 11, 0.54); }
+.assurance-decision { display: inline-block; margin-bottom: 8px; color: var(--d-pass); font-size: 0.8rem; letter-spacing: 0.08em; }
+.assurance-decision[data-decision="ESCALATE"] { color: var(--d-fail); }
+.assurance-decision[data-decision="REQUEST_EVIDENCE"] { color: var(--d-owner); }
+.assurance-escalate { min-height: 44px; padding: 10px 16px; border: 1px solid #c58939; color: #211607; background: var(--d-owner); font-weight: 760; }
+.assurance-boundary { padding-left: 12px; border-left: 3px solid var(--d-owner); }
+.assurance-cockpit :focus-visible { outline: 3px solid #f0bd72; outline-offset: 3px; }
 .desktop-room, .desktop-room * { min-width: 0; }
 .desktop-room p, .desktop-room h1, .desktop-room h2, .desktop-room h3,
 .desktop-room li, .desktop-room code, .desktop-room blockquote {
