@@ -50,6 +50,17 @@
           <div><dt>SHA-256</dt><dd><code id="acceptance-candidate-digest"></code></dd></div>
           <div><dt>PASS rule set</dt><dd><code id="acceptance-rule-set"></code></dd></div>
         </dl>
+        <div id="acceptance-release-binding" class="acceptance-release-binding">
+          <p class="dialog-label">EXACT RELEASE PROOF CUSTODY</p>
+          <dl class="acceptance-binding">
+            <div><dt>Verifier profile</dt><dd><code id="acceptance-release-profile"></code></dd></div>
+            <div><dt>Source base commit</dt><dd><code id="acceptance-release-source-base"></code></dd></div>
+            <div><dt>Candidate manifest SHA-256</dt><dd><code id="acceptance-release-candidate-manifest"></code></dd></div>
+            <div><dt>Proof manifest SHA-256</dt><dd><code id="acceptance-release-proof-manifest"></code></dd></div>
+            <div><dt>Rollback patch</dt><dd><code id="acceptance-release-rollback-patch"></code></dd></div>
+          </dl>
+        </div>
+        <p id="acceptance-release-consequence" class="acceptance-release-consequence"></p>
         <div class="dialog-actions">
           <button id="cancel-acceptance" class="button secondary" type="button">Cancel</button>
           <button id="confirm-acceptance" class="button primary" type="submit">Confirm acceptance</button>

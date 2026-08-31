@@ -1,3 +1,4 @@
+import { createReleaseGuardianEnvelope } from "./verifier/releaseRules";
 /// <reference types="node" />
 import { createHash } from "node:crypto";
 import { describe, expect, it } from "vitest";
@@ -15,8 +16,8 @@ const goal = {
   openQuestions: [],
 };
 const steps = [{ id: "release", title: "Ship <img src=x onerror=alert(1)> exact release" }];
-const failContent = JSON.stringify({ publicUrl: "http://bad.test", demoDurationSeconds: 181, verificationCommand: "npm run build" });
-const passContent = JSON.stringify({ publicUrl: "https://example.test/goal-room", demoDurationSeconds: 180, verificationCommand: "npm test" });
+const failContent = createReleaseGuardianEnvelope({ proofManifestSha256: "a9a9aac7896a3583a0db78ec5e801e906f0872659e1bf6d36922d091b4294c60" });
+const passContent = createReleaseGuardianEnvelope();
 const digest = (text: string) => createHash("sha256").update(text).digest("hex");
 
 type Snapshot = { state: GoalRoomState; receipts: Receipt[] };
@@ -101,11 +102,7 @@ describe("pure mobile authority projection", () => {
     expect(completion.activity).not.toHaveProperty("conversation");
 
     const fail = project(all.get("fail")!);
-    expect(fail.proof.findings).toEqual([
-      "DEMO_DURATION_OUT_OF_RANGE",
-      "PUBLIC_URL_MUST_BE_HTTPS",
-      "VERIFICATION_COMMAND_MISMATCH",
-    ]);
+    expect(fail.proof.findings).toEqual(["PROOF_MANIFEST_MISMATCH"]);
     expect(fail.plan.revisionDelta).toBe("Preserve <em>exact</em> Plan title binding");
   });
 
@@ -130,5 +127,19 @@ describe("pure mobile authority projection", () => {
       expect.objectContaining({ version: 1, verdict: "FAIL" }),
       expect.objectContaining({ version: 2, verdict: "PASS" }),
     ]);
+  });
+
+  it("withholds the Owner release dock when authoritative v2 receipt custody is absent", async () => {
+    const all = await checkpoints();
+    const state = all.get("completion")!.state;
+    const ownerView = createOwnerViewModel(state, []);
+    const mobile = createMobileView(state, ownerView, []);
+    expect(ownerView.actions.acceptGoal.visible).toBe(false);
+    expect(mobile.actionDock).toMatchObject({ kind: "waiting", primaryLabel: null });
+    expect(mobile.frontier).toMatchObject({
+      actor: "none",
+      text: "Owner acceptance unavailable without authoritative v2 custody",
+    });
+    expect(mobile.custody.releaseCustody).toBeNull();
   });
 });

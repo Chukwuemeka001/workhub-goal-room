@@ -1,3 +1,4 @@
+import { createReleaseGuardianEnvelope } from "./verifier/releaseRules";
 import { describe, expect, it, vi } from "vitest";
 import { createGoalRoom, type GoalRoomState } from "./core/goalRoom";
 import { installGoalRoomTools } from "./webmcp";
@@ -271,11 +272,7 @@ describe("Phase 7 repair round 1", () => {
     recovery = await expectStateParity(tools, room);
     expect(recovery.recentRefusal).toEqual({ reasonCode: "PLAN_PROPOSAL_NOT_ALLOWED", missingConditions: [] });
 
-    const content = JSON.stringify({
-      publicUrl: "https://example.test/release",
-      demoDurationSeconds: 90,
-      verificationCommand: "npm test",
-    });
+    const content = createReleaseGuardianEnvelope();
     const sha256 = await digestText(content);
     await tools.get("submit_artifact").execute({
       expectedStateVersion: 9, idempotencyKey: "candidate-v1", planVersion: 2,

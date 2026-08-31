@@ -99,7 +99,7 @@ exports[`Phase 8 installed-surface full journey qualification > replays the exac
   {
     "accepted": false,
     "candidates": [
-      "1:a6d69ea5902a",
+      "1:f1949fb677e0",
     ],
     "goalVersions": [
       "1:REVISION_REQUESTED",
@@ -117,7 +117,7 @@ exports[`Phase 8 installed-surface full journey qualification > replays the exac
   {
     "accepted": false,
     "candidates": [
-      "1:a6d69ea5902a",
+      "1:f1949fb677e0",
     ],
     "goalVersions": [
       "1:REVISION_REQUESTED",
@@ -130,15 +130,15 @@ exports[`Phase 8 installed-surface full journey qualification > replays the exac
     ],
     "receipts": 14,
     "verdicts": [
-      "FAIL:a6d69ea5902a",
+      "FAIL:f1949fb677e0",
     ],
     "version": 12,
   },
   {
     "accepted": false,
     "candidates": [
-      "1:a6d69ea5902a",
-      "2:ece21ee47720",
+      "1:f1949fb677e0",
+      "2:850d1b62cb42",
     ],
     "goalVersions": [
       "1:REVISION_REQUESTED",
@@ -151,16 +151,16 @@ exports[`Phase 8 installed-surface full journey qualification > replays the exac
     ],
     "receipts": 16,
     "verdicts": [
-      "FAIL:a6d69ea5902a",
-      "PASS:ece21ee47720",
+      "FAIL:f1949fb677e0",
+      "PASS:850d1b62cb42",
     ],
     "version": 14,
   },
   {
     "accepted": false,
     "candidates": [
-      "1:a6d69ea5902a",
-      "2:ece21ee47720",
+      "1:f1949fb677e0",
+      "2:850d1b62cb42",
     ],
     "goalVersions": [
       "1:REVISION_REQUESTED",
@@ -173,16 +173,16 @@ exports[`Phase 8 installed-surface full journey qualification > replays the exac
     ],
     "receipts": 17,
     "verdicts": [
-      "FAIL:a6d69ea5902a",
-      "PASS:ece21ee47720",
+      "FAIL:f1949fb677e0",
+      "PASS:850d1b62cb42",
     ],
     "version": 15,
   },
   {
     "accepted": true,
     "candidates": [
-      "1:a6d69ea5902a",
-      "2:ece21ee47720",
+      "1:f1949fb677e0",
+      "2:850d1b62cb42",
     ],
     "goalVersions": [
       "1:REVISION_REQUESTED",
@@ -195,8 +195,8 @@ exports[`Phase 8 installed-surface full journey qualification > replays the exac
     ],
     "receipts": 18,
     "verdicts": [
-      "FAIL:a6d69ea5902a",
-      "PASS:ece21ee47720",
+      "FAIL:f1949fb677e0",
+      "PASS:850d1b62cb42",
     ],
     "version": 16,
   },

@@ -1,5 +1,7 @@
 import type { MobileView, MobileTabId } from "./mobileView";
 import type { AcceptanceBinding } from "./acceptanceDialog";
+import { AGENT_LAUNCH_PROMPT, copyAgentLaunchPrompt, prefillReleaseReviewIntent } from "./releaseQuickstart";
+import { RELEASE_MATCHED_TUPLE_STATEMENT, RELEASE_VERIFICATION_CLAIM_BOUNDARY } from "./verifier/releaseRules";
 
 export type MobileSurfaceActions = {
   onSetIntent(intent: string): Promise<void>;
@@ -60,6 +62,27 @@ function renderProof(view: MobileView) {
   if (view.proof.passIsNotAcceptance) fragment.append(text("p", "PASS means the explicit checks succeeded. PASS does not accept the Goal.", "mobile-proof-boundary pass"));
   if (view.proof.completionCandidateDigest) fragment.append(text("p", `Completion request bound to ${view.proof.completionCandidateDigest}`));
   if (view.proof.acceptedCandidateDigest) fragment.append(text("p", `Owner acceptance bound to ${view.proof.acceptedCandidateDigest}`));
+  const release = view.custody.releaseCustody;
+  if (release) {
+    const custody = el("dl", "mobile-release-custody");
+    for (const [label, value] of [
+      ["Verifier profile", release.profile],
+      ["Source base commit", release.sourceBaseCommit],
+      ["Candidate manifest SHA-256", release.candidateManifestSha256],
+      ["Proof manifest SHA-256", release.proofManifestSha256],
+      ["Rollback patch", release.compactRollbackPatch],
+    ] as const) {
+      const row = el("div");
+      row.append(text("dt", label), text("dd", value));
+      custody.append(row);
+    }
+    fragment.append(
+      text("h3", "Exact release proof custody"),
+      text("p", RELEASE_MATCHED_TUPLE_STATEMENT),
+      custody,
+      text("p", RELEASE_VERIFICATION_CLAIM_BOUNDARY, "mobile-proof-boundary pass"),
+    );
+  }
   if (view.proof.history.length) {
     const history = el("ol", "mobile-candidate-history");
     for (const entry of view.proof.history) {
@@ -123,16 +146,19 @@ export function createMobileSurface(
     const frontier = el("article", "mobile-frontier");
     frontier.dataset.actor = view.frontier.actor;
     frontier.dataset.attention = String(view.ownerAttention);
-    const frontierHeading = text("h2", view.frontier.text, "mobile-frontier-title");
+    const frontierTitle = view.actionDock.kind === "set-intent" ? "A passing agent build is not an authorized release." : view.frontier.text;
+    const frontierLive = view.frontier.liveText;
+    const frontierBoundary = view.frontier.boundary;
+    const frontierHeading = text("h2", frontierTitle, "mobile-frontier-title");
     frontierHeading.id = "mobile-frontier-heading";
-    const live = text("p", view.frontier.liveText, "mobile-frontier-live");
+    const live = text("p", frontierLive, "mobile-frontier-live");
     live.setAttribute("role", "status");
     live.setAttribute("aria-live", "polite");
     live.setAttribute("aria-atomic", "true");
     const authorityLabel = view.frontier.actor === "none"
       ? "ROOM SEALED · NO CURRENT AUTHORITY"
       : `Authority now · ${view.frontier.actor.toUpperCase()}`;
-    frontier.append(text("p", authorityLabel, "mobile-actor"), frontierHeading, live, text("p", view.frontier.boundary, "mobile-boundary"));
+    frontier.append(text("p", authorityLabel, "mobile-actor"), frontierHeading, live, text("p", frontierBoundary, "mobile-boundary"));
 
     const actionDock = el("section", "mobile-action-dock");
     actionDock.setAttribute("aria-label", "Owner action");
@@ -148,6 +174,24 @@ export function createMobileSurface(
       if (view.actionDock.kind === "revise-intent") input.value = view.goal.title;
       const submit = text("button", view.actionDock.primaryLabel ?? "Save intent", "mobile-button primary");
       submit.type = "submit";
+      const quickstart = el("section", "mobile-release-quickstart"); quickstart.setAttribute("aria-label", "Release Guardian quickstart");
+      const example = text("button", "Use release-review example", "mobile-button secondary"); example.type = "button";
+      example.addEventListener("click", () => prefillReleaseReviewIntent(input));
+      const prompt = el("details", "mobile-agent-prompt");
+      const copy = text("button", "Copy agent launch prompt", "mobile-button secondary"); copy.type = "button";
+      const copyStatus = text("span", "Prompt is also shown below.", "mobile-copy-status"); copyStatus.setAttribute("role", "status"); copyStatus.setAttribute("aria-live", "polite");
+      copy.addEventListener("click", async () => {
+        const result = await copyAgentLaunchPrompt(navigator.clipboard);
+        copyStatus.textContent = result === "copied" ? "Agent launch prompt copied." : "Clipboard unavailable. Select the prompt below.";
+      });
+      prompt.append(text("summary", "Show bounded agent prompt"), text("code", AGENT_LAUNCH_PROMPT), copy, copyStatus);
+      quickstart.append(
+        text("p", "RELEASE GUARDIAN QUICKSTART", "mobile-brand"),
+        text("p", "Agent contributes. System verifies. Owner accepts the exact candidate.", "mobile-quickstart-promise"),
+        text("p", "Start with a concrete release-review intent, then hand the bounded prompt to a WebMCP-capable agent.", "mobile-quickstart-audience"),
+        example,
+        prompt,
+      );
       input.addEventListener("input", () => input.setCustomValidity(""));
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -158,6 +202,7 @@ export function createMobileSurface(
         try { await actions.onSetIntent(intent); } finally { submit.disabled = false; }
       });
       form.append(label, input, submit);
+      frontier.append(quickstart);
       actionDock.append(form);
     } else if (view.actionDock.primaryLabel) {
       if (view.actionDock.secondaryKind) {
@@ -170,7 +215,7 @@ export function createMobileSurface(
       primary.type = "button";
       primary.addEventListener("click", async () => {
         if (view.actionDock.kind === "accept-goal" && view.custody.candidate && view.custody.verification?.verdict === "PASS") {
-          actions.onOpenAcceptance({ candidateVersion: view.custody.candidate.version, digest: view.custody.candidate.digest, compactDigest: view.custody.candidate.compactDigest, ruleSet: view.custody.verification.ruleSet });
+          actions.onOpenAcceptance({ candidateVersion: view.custody.candidate.version, digest: view.custody.candidate.digest, compactDigest: view.custody.candidate.compactDigest, ruleSet: view.custody.verification.ruleSet, release: view.custody.releaseCustody });
           return;
         }
         primary.disabled = true;

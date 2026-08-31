@@ -145,6 +145,19 @@
 .desktop-intent-form { display: grid; gap: 9px; }
 .desktop-intent-form label { color: var(--d-soft); font-size: 0.73rem; }
 .desktop-intent-form textarea { width: 100%; min-height: 112px; resize: vertical; padding: 12px; border: 1px solid var(--d-line-strong); border-radius: 3px; color: #f6f3ec; background: #0d0f10; line-height: 1.48; }
+.desktop-owner-action:has(.desktop-release-quickstart) { justify-content: flex-start; max-height: 620px; overflow: auto; }
+.desktop-release-quickstart { display: grid; gap: 10px; padding-bottom: 17px; border-bottom: 1px solid var(--d-line); }
+.desktop-release-quickstart h3 { color: #f7f5ef; font-family: Georgia, "Times New Roman", ui-serif, serif; font-size: 1.25rem; font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; }
+.desktop-quickstart-promise { color: var(--d-soft); font-size: 0.76rem; font-weight: 720; line-height: 1.48; }
+.desktop-quickstart-audience { color: var(--d-muted); font-size: 0.7rem; line-height: 1.48; }
+.desktop-agent-prompt { display: grid; gap: 9px; color: var(--d-soft); font-size: 0.7rem; }
+.desktop-agent-prompt summary { min-height: 44px; display: flex; align-items: center; color: var(--d-agent); cursor: pointer; }
+.desktop-agent-prompt code { display: block; max-height: 150px; padding: 11px; overflow: auto; border: 1px solid var(--d-line); color: var(--d-soft); background: #0b0d0e; line-height: 1.52; overflow-wrap: anywhere; white-space: normal; }
+.desktop-copy-status { display: block; color: var(--d-muted); font-size: 0.67rem; line-height: 1.4; }
+.desktop-release-custody { display: grid; margin-top: 11px; border-top: 1px solid var(--d-line); }
+.desktop-release-custody > div { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--d-line); }
+.desktop-release-custody dt { color: var(--d-muted); font-size: 0.68rem; }
+.desktop-release-custody dd { min-width: 0; color: var(--d-soft); font-size: 0.7rem; overflow-wrap: anywhere; word-break: break-word; }
 
 .desktop-inspector { min-height: 430px; border-top: 1px solid var(--d-line-strong); border-bottom: 1px solid var(--d-line-strong); background: #0d0f10; overflow: hidden; }
 .desktop-inspector-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-bottom: 1px solid var(--d-line); }
@@ -196,6 +209,7 @@
 .desktop-tab:focus, .desktop-tab:focus-visible,
 .desktop-detail summary:focus, .desktop-detail summary:focus-visible,
 .desktop-intent-form textarea:focus, .desktop-intent-form textarea:focus-visible,
+.desktop-agent-prompt summary:focus, .desktop-agent-prompt summary:focus-visible,
 .desktop-inspector-panel:focus, .desktop-inspector-panel:focus-visible {
   outline-color: #f0bd72 !important;
   outline-style: solid !important;

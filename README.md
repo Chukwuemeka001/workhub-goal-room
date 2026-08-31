@@ -129,25 +129,15 @@ PASS does not accept the Goal.
 
 ## Deterministic release rules
 
-The synthetic public candidate is exact JSON with only these fields:
+Rule set `workhub_goal_room_release/v2` accepts one canonical byte sequence only:
 
-```json
-{
-  "publicUrl": "https://example.test/goal-room",
-  "demoDurationSeconds": 180,
-  "verificationCommand": "npm test"
-}
+```text
+{"profile":"release_guardian/v2","publicUrl":"https://chukwuemeka001.github.io/workhub-goal-room/","demoDurationSeconds":154,"verificationCommand":"npm test","sourceBaseCommit":"089745dd595934147dcad71ece28097346b709c5","candidateManifestSha256":"96d1dc3f7678fcb3159c7d8eb963f199633145579e14adfa51fee64e9b0989c2","proofManifestSha256":"a9a9aac7896a3583a0db78ec5e801e906f0872659e1bf6d36922d091b4294c66","rollbackPatchSha256":"c78bacab6f06855426deea32ce900323aaba25761ae8133cb99d1e3b738770d4"}
 ```
 
-Rule set `workhub_goal_room_release/v1` checks:
+The field order and whitespace are identity-bearing. Duplicate keys, reordered keys, alternate whitespace, any substituted identity, any other URL, and any duration other than exactly 154 seconds fail. The room's internal deterministic verifier alone records the closed, sorted finding list; live callers cannot author System v1/v2 verdicts or reuse a verifier idempotency result across candidates.
 
-- no more than 4 KiB of UTF-8 candidate content;
-- exact closed JSON shape;
-- a parseable `https:` URL with a non-empty hostname;
-- integer demo duration from 1 through 180;
-- verification command exactly `npm test`.
-
-The room's internal deterministic verifier alone records the closed, sorted finding list. WebMCP callers cannot inject `RECORD_VERIFICATION` or reuse PASS for changed bytes.
+A v2 PASS means only: “The submitted package matched the prequalified identity tuple.” WorkHub did not run tests, inspect deployment bytes, measure duration, validate rollback applicability, or independently prove the manifests belong together. PASS remains distinct from Owner acceptance.
 
 ## Authority model
 

@@ -1,3 +1,4 @@
+import { createReleaseGuardianEnvelope } from "./verifier/releaseRules";
 import { describe, expect, it } from "vitest";
 import { createGoalRoom } from "./core/goalRoom";
 import { createOwnerViewModel } from "./ownerView";
@@ -31,10 +32,7 @@ describe("Goal Room owner view model", () => {
     });
     expectReadOnlyFrontier("agent");
 
-    const content = JSON.stringify({
-      publicUrl: "http://example.test", demoDurationSeconds: 181,
-      verificationCommand: "npm run build",
-    });
+    const content = createReleaseGuardianEnvelope({ proofManifestSha256: "a9a9aac7896a3583a0db78ec5e801e906f0872659e1bf6d36922d091b4294c60" });
     const bytes = new TextEncoder().encode(content);
     const hash = await crypto.subtle.digest("SHA-256", bytes);
     const sha256 = [...new Uint8Array(hash)]
@@ -50,10 +48,7 @@ describe("Goal Room owner view model", () => {
     await room.verifyActiveCandidate("read-only-verification-fail");
     expectReadOnlyFrontier("agent");
 
-    const correctedContent = JSON.stringify({
-      publicUrl: "https://example.test", demoDurationSeconds: 180,
-      verificationCommand: "npm test",
-    });
+    const correctedContent = createReleaseGuardianEnvelope();
     const correctedBytes = new TextEncoder().encode(correctedContent);
     const correctedHash = await crypto.subtle.digest("SHA-256", correctedBytes);
     const correctedSha256 = [...new Uint8Array(correctedHash)]
@@ -271,11 +266,7 @@ describe("Goal Room owner view model", () => {
         .map((byte) => byte.toString(16).padStart(2, "0"))
         .join("");
     };
-    const failedContent = JSON.stringify({
-      publicUrl: "http://example.test",
-      demoDurationSeconds: 181,
-      verificationCommand: "npm run build",
-    });
+    const failedContent = createReleaseGuardianEnvelope({ proofManifestSha256: "a9a9aac7896a3583a0db78ec5e801e906f0872659e1bf6d36922d091b4294c60" });
     const failedSha = await digest(failedContent);
     await room.dispatch({
       type: "SUBMIT_CANDIDATE",
@@ -323,20 +314,12 @@ describe("Goal Room owner view model", () => {
         candidateVersion: 1,
         digest: failedSha,
         verdict: "FAIL",
-        ruleSet: "workhub_goal_room_release/v1",
-        findingCodes: [
-          "DEMO_DURATION_OUT_OF_RANGE",
-          "PUBLIC_URL_MUST_BE_HTTPS",
-          "VERIFICATION_COMMAND_MISMATCH",
-        ],
+        ruleSet: "workhub_goal_room_release/v2",
+        findingCodes: ["PROOF_MANIFEST_MISMATCH"],
       },
     });
 
-    const passedContent = JSON.stringify({
-      publicUrl: "https://example.test",
-      demoDurationSeconds: 180,
-      verificationCommand: "npm test",
-    });
+    const passedContent = createReleaseGuardianEnvelope();
     const passedSha = await digest(passedContent);
     await room.dispatch({
       type: "SUBMIT_CANDIDATE",
@@ -375,7 +358,7 @@ describe("Goal Room owner view model", () => {
         candidateVersion: 2,
         digest: passedSha,
         verdict: "PASS",
-        ruleSet: "workhub_goal_room_release/v1",
+        ruleSet: "workhub_goal_room_release/v2",
         findingCodes: [],
       },
     });

@@ -39,6 +39,13 @@ const acceptanceDialog = createAcceptanceDialog({
   digest: requiredElement("acceptance-candidate-digest"),
   ruleSet: requiredElement("acceptance-rule-set"),
   consequence: requiredElement("acceptance-dialog-consequence"),
+  releaseGroup: requiredElement("acceptance-release-binding"),
+  releaseProfile: requiredElement("acceptance-release-profile"),
+  releaseSourceBaseCommit: requiredElement("acceptance-release-source-base"),
+  releaseCandidateManifest: requiredElement("acceptance-release-candidate-manifest"),
+  releaseProofManifest: requiredElement("acceptance-release-proof-manifest"),
+  releaseRollbackPatch: requiredElement("acceptance-release-rollback-patch"),
+  releaseConsequence: requiredElement("acceptance-release-consequence"),
 } as unknown as AcceptanceDialogNodes, async () => controller.acceptGoal());
 const room = createGoalRoom({ ownerIntent: null });
 let controller: ReturnType<typeof createOwnerDecisionController>;

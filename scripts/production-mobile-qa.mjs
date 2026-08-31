@@ -16,6 +16,19 @@ const evidenceRoot = exportedEvidence
   : await mkdtemp(join(tmpdir(), "workhub-production-mobile-evidence-"));
 const wait = (ms) => new Promise((resolveWait) => setTimeout(resolveWait, ms));
 const digest = (value) => createHash("sha256").update(value).digest("hex");
+const exactReleaseEnvelope = () => ({
+  profile: "release_guardian/v2",
+  publicUrl: "https://chukwuemeka001.github.io/workhub-goal-room/",
+  demoDurationSeconds: 154,
+  verificationCommand: "npm test",
+  sourceBaseCommit: "089745dd595934147dcad71ece28097346b709c5",
+  candidateManifestSha256: "96d1dc3f7678fcb3159c7d8eb963f199633145579e14adfa51fee64e9b0989c2",
+  proofManifestSha256: "a9a9aac7896a3583a0db78ec5e801e906f0872659e1bf6d36922d091b4294c66",
+  rollbackPatchSha256: "c78bacab6f06855426deea32ce900323aaba25761ae8133cb99d1e3b738770d4",
+});
+if (digest(JSON.stringify(exactReleaseEnvelope())) !== "850d1b62cb4243650372ded9c3ba50926c9b304467d13e9705c03f3d2684fb15") {
+  throw new Error("Frozen JavaScript release envelope diverged from canonical v2 bytes");
+}
 const matrix = [
   ...[375, 393, 430].flatMap((width) => [1, 3].map((dpr) => ({ width, height: width === 375 ? 812 : width === 393 ? 852 : 932, dpr }))),
   { width: 393, height: 552, dpr: 3, dynamicHeight: true },
@@ -46,7 +59,7 @@ async function filesUnder(directory) {
 
 await run("npm", ["run", "build"]);
 await mkdir(evidenceRoot, { recursive: true });
-const { base } = await resolveConfig({}, "build");
+const { base } = await resolveConfig({ configLoader: "runner" }, "build");
 const productionFiles = await filesUnder(dist);
 const fixtureTokens = ["__mobileQa", "qa/mobile-fixture", "qualification/v3-fixture", "__v3Qualification"];
 const fixtureLeaks = [];
@@ -215,7 +228,7 @@ try {
   await invoke("propose_plan", { expectedStateVersion: 3, idempotencyKey: "mobile-plan", goalContractVersion: 1, steps: [{ id: "qualify", title: "Qualify production mobile states" }] });
   await click(".mobile-action-dock .mobile-button.primary"); await expectState(5, "PLAN_CONFIRMED");
   await invoke("claim_step", { expectedStateVersion: 5, idempotencyKey: "mobile-claim", planVersion: 1, stepId: "qualify" });
-  const content = JSON.stringify({ publicUrl: "https://example.test/mobile", demoDurationSeconds: 180, verificationCommand: "npm test" });
+  const content = JSON.stringify(exactReleaseEnvelope());
   const sha256 = digest(content);
   await invoke("submit_artifact", { expectedStateVersion: 6, idempotencyKey: "mobile-candidate", planVersion: 1, stepId: "qualify", content, sha256 });
   current = await expectState(8, "VERIFICATION_PASSED");
@@ -240,7 +253,7 @@ try {
   })()`);
   report.states.S13.dialog = s13Dialog;
   const expectedConsequence = "This acceptance is irreversible. It seals the Goal Room for this exact PASS-bound candidate.";
-  if (!s13Dialog.open || !s13Dialog.visible || s13Dialog.labelledBy !== "acceptance-dialog-title" || s13Dialog.describedBy !== "acceptance-dialog-consequence" || s13Dialog.title !== "Accept Candidate v1?" || s13Dialog.candidateVersion !== "Candidate v1" || s13Dialog.candidateDisplay !== `Candidate v1 (${expectedCompactDigest})` || !/^[0-9a-f]{64}$/.test(s13Dialog.digest ?? "") || s13Dialog.digest !== sha256 || s13Dialog.ruleSet !== "workhub_goal_room_release/v1" || s13Dialog.consequence !== expectedConsequence || s13Dialog.activeElementId !== "cancel-acceptance" || !s13Dialog.confirmVisible || !s13Dialog.confirmEnabled || s13Dialog.confirmLabel !== "Confirm acceptance") fail("S13-dialog", "visible acceptance dialog must expose exact accessible PASS-bound candidate evidence with initial focus on Cancel", { expected: { candidateVersion: "Candidate v1", candidateDisplay: `Candidate v1 (${expectedCompactDigest})`, digest: sha256, ruleSet: "workhub_goal_room_release/v1", consequence: expectedConsequence }, observed: s13Dialog });
+  if (!s13Dialog.open || !s13Dialog.visible || s13Dialog.labelledBy !== "acceptance-dialog-title" || s13Dialog.describedBy !== "acceptance-dialog-consequence" || s13Dialog.title !== "Accept Candidate v1?" || s13Dialog.candidateVersion !== "Candidate v1" || s13Dialog.candidateDisplay !== `Candidate v1 (${expectedCompactDigest})` || !/^[0-9a-f]{64}$/.test(s13Dialog.digest ?? "") || s13Dialog.digest !== sha256 || s13Dialog.ruleSet !== "workhub_goal_room_release/v2" || s13Dialog.consequence !== expectedConsequence || s13Dialog.activeElementId !== "cancel-acceptance" || !s13Dialog.confirmVisible || !s13Dialog.confirmEnabled || s13Dialog.confirmLabel !== "Confirm acceptance") fail("S13-dialog", "visible acceptance dialog must expose exact accessible PASS-bound candidate evidence with initial focus on Cancel", { expected: { candidateVersion: "Candidate v1", candidateDisplay: `Candidate v1 (${expectedCompactDigest})`, digest: sha256, ruleSet: "workhub_goal_room_release/v2", consequence: expectedConsequence }, observed: s13Dialog });
   await screenshot("s13-owner-acceptance");
   await click("#confirm-acceptance");
   current = await expectState(10, "GOAL_ACCEPTED");

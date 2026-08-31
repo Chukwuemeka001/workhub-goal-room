@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "kind": "workhub-release-integrity-v2",
+  "deterministic": true,
+  "attacks": [
+    {
+      "id": "obsolete-three-field-candidate",
+      "boundary": "closed-v2-envelope",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "FAIL:INVALID_ARTIFACT_SHAPE"
+    },
+    {
+      "id": "candidate-manifest-substitution",
+      "boundary": "closed-v2-envelope",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "FAIL:CANDIDATE_MANIFEST_MISMATCH"
+    },
+    {
+      "id": "proof-manifest-substitution",
+      "boundary": "closed-v2-envelope",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "FAIL:PROOF_MANIFEST_MISMATCH"
+    },
+    {
+      "id": "rollback-patch-substitution",
+      "boundary": "closed-v2-envelope",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "FAIL:ROLLBACK_PATCH_MISMATCH"
+    },
+    {
+      "id": "source-base-substitution",
+      "boundary": "closed-v2-envelope",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "FAIL:SOURCE_BASE_COMMIT_MISMATCH"
+    },
+    {
+      "id": "alternate-valid-https-url",
+      "boundary": "closed-v2-envelope",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "FAIL:PUBLIC_URL_MISMATCH"
+    },
+    {
+      "id": "alternate-valid-duration",
+      "boundary": "closed-v2-envelope",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "FAIL:DEMO_DURATION_MISMATCH"
+    },
+    {
+      "id": "duplicate-json-key",
+      "boundary": "closed-v2-envelope",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "FAIL:NON_CANONICAL_ARTIFACT_SERIALIZATION"
+    },
+    {
+      "id": "reordered-json-keys",
+      "boundary": "closed-v2-envelope",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "FAIL:NON_CANONICAL_ARTIFACT_SERIALIZATION"
+    },
+    {
+      "id": "alternate-json-whitespace",
+      "boundary": "closed-v2-envelope",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "FAIL:NON_CANONICAL_ARTIFACT_SERIALIZATION"
+    },
+    {
+      "id": "stale-state-version",
+      "boundary": "optimistic-concurrency",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "false:STALE_STATE"
+    },
+    {
+      "id": "evidence-mismatch-then-completion",
+      "boundary": "pass-before-completion",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "false:VERIFICATION_REQUIRED"
+    },
+    {
+      "id": "wrong-completion-candidate-digest",
+      "boundary": "candidate-completion-binding",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "false:VERIFICATION_REQUIRED"
+    },
+    {
+      "id": "externally-authored-system-v1",
+      "boundary": "system-verdict-authority",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "INVALID_COMMAND"
+    },
+    {
+      "id": "externally-authored-system-v2",
+      "boundary": "system-verdict-authority",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "INVALID_COMMAND"
+    },
+    {
+      "id": "agent-authored-system-verdict",
+      "boundary": "system-verdict-authority",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "INVALID_COMMAND"
+    },
+    {
+      "id": "agent-authored-owner-acceptance",
+      "boundary": "owner-only-acceptance",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "false:OWNER_ONLY"
+    },
+    {
+      "id": "cross-candidate-verifier-key-reuse",
+      "boundary": "idempotency-candidate-binding",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "IDEMPOTENCY_KEY_REUSE"
+    },
+    {
+      "id": "mutation-after-pass",
+      "boundary": "pass-candidate-immutability",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "false:STEP_CLAIM_REQUIRED"
+    },
+    {
+      "id": "mutation-after-seal",
+      "boundary": "terminal-sealing",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "false:STEP_CLAIM_REQUIRED"
+    },
+    {
+      "id": "fabricated-resealed-v1-ledger",
+      "boundary": "allowlisted-v1-provenance",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "HISTORICAL_V1_PROVENANCE_REQUIRED"
+    },
+    {
+      "id": "spliced-resealed-v1-ledger",
+      "boundary": "allowlisted-v1-provenance",
+      "blocked": true,
+      "unexpectedMutations": 0,
+      "unauthorizedAcceptances": 0,
+      "observation": "HISTORICAL_V1_PROVENANCE_REQUIRED"
+    }
+  ],
+  "counts": {
+    "attempted": 22,
+    "blocked": 22,
+    "unexpectedMutations": 0,
+    "unauthorizedAcceptances": 0
+  },
+  "positiveControl": {
+    "passed": true,
+    "phase": "GOAL_ACCEPTED",
+    "candidateSha256": "850d1b62cb4243650372ded9c3ba50926c9b304467d13e9705c03f3d2684fb15",
+    "verificationRuleSet": "workhub_goal_room_release/v2",
+    "ownerAccepted": true,
+    "sealed": true,
+    "claim": "The submitted package matched the prequalified identity tuple."
+  }
+}

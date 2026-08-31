@@ -1,13 +1,14 @@
+import { createReleaseGuardianEnvelope } from "../src/verifier/releaseRules";
 import { createGoalRoom, type GoalRoomState, type Receipt } from "../src/core/goalRoom";
 
 export type DesktopCheckpoint = { state: GoalRoomState; receipts: Receipt[] };
 
 export const hostile = "<img src=x onerror=alert(1)>";
-export const failContent = JSON.stringify({ publicUrl: "http://bad.test", demoDurationSeconds: 181, verificationCommand: "npm run build" });
-export const passContent = JSON.stringify({ publicUrl: "https://example.test/goal-room", demoDurationSeconds: 180, verificationCommand: "npm test" });
+export const failContent = createReleaseGuardianEnvelope({ proofManifestSha256: "a9a9aac7896a3583a0db78ec5e801e906f0872659e1bf6d36922d091b4294c60" });
+export const passContent = createReleaseGuardianEnvelope();
 const knownDigests = new Map([
-  [failContent, "7bb1bb5f50b22429cc8c361f5b53de0458b317ebced5d0fc5869bf5ae3439169"],
-  [passContent, "7bb959aebadc1b0d557990440771bda517f53dfeca69b78f651650c941ffdf27"],
+  [failContent, "f1949fb677e0f683b2c5e8cbdc432532f0e5e9f334dc136df4526038e83f9901"],
+  [passContent, "850d1b62cb4243650372ded9c3ba50926c9b304467d13e9705c03f3d2684fb15"],
 ]);
 export const digest = (text: string) => {
   const value = knownDigests.get(text);

@@ -1,3 +1,4 @@
+import { createReleaseGuardianEnvelope } from "./verifier/releaseRules";
 import { describe, expect, it, vi } from "vitest";
 import { createGoalRoom } from "./core/goalRoom";
 import { installGoalRoomTools } from "./webmcp";
@@ -400,11 +401,7 @@ describe("governed Goal Room WebMCP tools", () => {
       planVersion: 1,
       stepId: "artifact",
     });
-    const content = JSON.stringify({
-      publicUrl: "https://example.test/release",
-      demoDurationSeconds: 90,
-      verificationCommand: "npm test",
-    });
+    const content = createReleaseGuardianEnvelope();
     const sha256 = await digestText(content);
     await room.dispatch({
       type: "SUBMIT_CANDIDATE",
@@ -497,11 +494,7 @@ describe("governed Goal Room WebMCP tools", () => {
     const tool = registerTool.mock.calls
       .map(([definition]) => definition)
       .find(({ name }) => name === "submit_artifact");
-    const content = JSON.stringify({
-      publicUrl: "https://example.test/release",
-      demoDurationSeconds: 90,
-      verificationCommand: "npm test",
-    });
+    const content = createReleaseGuardianEnvelope();
     const sha256 = await digestText(content);
 
     expect(tool.inputSchema).toMatchObject({

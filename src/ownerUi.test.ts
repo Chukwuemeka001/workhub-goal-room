@@ -1,3 +1,4 @@
+import { createReleaseGuardianEnvelope } from "./verifier/releaseRules";
 import { describe, expect, it } from "vitest";
 import { createGoalRoom } from "./core/goalRoom";
 import { createOwnerViewModel } from "./ownerView";
@@ -83,11 +84,7 @@ describe("owner UI policies", () => {
       planVersion: 1,
       stepId: "artifact",
     });
-    const content = JSON.stringify({
-      publicUrl: "https://example.test",
-      demoDurationSeconds: 180,
-      verificationCommand: "npm test",
-    });
+    const content = createReleaseGuardianEnvelope();
     const bytes = new TextEncoder().encode(content);
     const digest = await crypto.subtle.digest("SHA-256", bytes);
     const sha256 = [...new Uint8Array(digest)]

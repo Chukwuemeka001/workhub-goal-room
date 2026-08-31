@@ -1,5 +1,10 @@
 import type { GoalRoomState, PlanStep, Receipt } from "./core/goalRoom";
 import { createGoalContractView, type GoalContractView } from "./goalContractView";
+import {
+  RELEASE_MATCHED_TUPLE_STATEMENT,
+  RELEASE_VERIFICATION_CLAIM_BOUNDARY,
+} from "./verifier/releaseRules";
+import { createCustodyView } from "./custodyView";
 
 export type LifecycleStage = {
   id: "plan" | "claim" | "evidence" | "verify" | "completion" | "acceptance";
@@ -139,6 +144,7 @@ export function createOwnerViewModel(
 ): OwnerViewModel {
   const common = baseView(state, receipts);
   const plan = state.activePlan;
+  const authoritativeRelease = createCustodyView(state, receipts).releaseCustody !== null;
   if (state.phase === "INTENT_DRAFT") {
     if (state.ownerIntent === null) {
       return {
@@ -362,17 +368,21 @@ export function createOwnerViewModel(
       ...common,
       statusLabel: "Verified result. Awaiting owner acceptance",
       ownerAttention: {
-        required: true,
+        required: authoritativeRelease,
         title: `Accept Candidate v${state.activeCandidate?.version ?? "not recorded"}?`,
-        body: "The candidate passed deterministic checks. Only you can accept the Goal.",
+        body: authoritativeRelease
+          ? `${RELEASE_MATCHED_TUPLE_STATEMENT} Only you can accept the Goal. ${RELEASE_VERIFICATION_CLAIM_BOUNDARY}`
+          : "The candidate passed its recorded deterministic rules. Only you can accept the Goal.",
       },
       actions: {
         ...hiddenActions(plan.version),
-        acceptGoal: { visible: true, label: "Accept Goal" },
+        acceptGoal: { visible: authoritativeRelease, label: "Accept Goal" },
       },
       nextLegalAction: {
-        label: "Owner may accept this exact verified candidate",
-        actor: "owner",
+        label: authoritativeRelease
+          ? "Owner may accept this exact verified candidate"
+          : "Owner acceptance unavailable without authoritative v2 custody",
+        actor: authoritativeRelease ? "owner" : "none",
       },
     };
   }
@@ -384,7 +394,9 @@ export function createOwnerViewModel(
       ownerAttention: {
         required: false,
         title: "Goal complete",
-        body: "The owner accepted the exact candidate that passed deterministic verification.",
+        body: authoritativeRelease
+          ? `${RELEASE_MATCHED_TUPLE_STATEMENT} The owner accepted the exact PASS-bound candidate. ${RELEASE_VERIFICATION_CLAIM_BOUNDARY}`
+          : "A historical Owner acceptance is recorded; authoritative v2 release custody is unavailable.",
       },
       actions: hiddenActions(plan.version),
       nextLegalAction: {

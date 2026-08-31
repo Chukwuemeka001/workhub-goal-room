@@ -1,3 +1,4 @@
+import { createReleaseGuardianEnvelope } from "../src/verifier/releaseRules";
 import { createGoalRoom } from "../src/core/goalRoom";
 import { createOwnerDecisionController } from "../src/ownerController";
 import { installGoalRoomTools } from "../src/webmcp";
@@ -97,7 +98,7 @@ export async function buildPhase8Authority(checkpoint: Phase8Checkpoint) {
   await invoke("claim_step", {
     expectedStateVersion: 9, idempotencyKey: "phase8-claim", planVersion: 2, stepId: stepsV2[0].id,
   });
-  const failedContent = JSON.stringify({ publicUrl: "http://phase8.invalid", demoDurationSeconds: 181, verificationCommand: "npm run build" });
+  const failedContent = createReleaseGuardianEnvelope({ proofManifestSha256: "a9a9aac7896a3583a0db78ec5e801e906f0872659e1bf6d36922d091b4294c60" });
   const failedSha = await sha256(failedContent);
   await invoke("submit_artifact", {
     expectedStateVersion: 10, idempotencyKey: "phase8-candidate-fail", planVersion: 2,
@@ -105,7 +106,7 @@ export async function buildPhase8Authority(checkpoint: Phase8Checkpoint) {
   });
   await room.verifyActiveCandidate("phase8-verify-fail");
   if (checkpoint === "fail") return result();
-  const passedContent = JSON.stringify({ publicUrl: "https://phase8.example.test", demoDurationSeconds: 180, verificationCommand: "npm test" });
+  const passedContent = createReleaseGuardianEnvelope();
   const passedSha = await sha256(passedContent);
   await invoke("submit_artifact", {
     expectedStateVersion: 12, idempotencyKey: "phase8-candidate-pass", planVersion: 2,

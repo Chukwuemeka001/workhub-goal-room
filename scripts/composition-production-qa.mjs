@@ -66,7 +66,7 @@ async function filesUnder(directory) {
 
 async function runCompositionQa() {
 const chromePath = resolveBrowserExecutable();
-const { base } = await resolveConfig({}, "build");
+const { base } = await resolveConfig({ configLoader: "runner" }, "build");
 await run("npm", ["run", "build"]);
 const productionFiles = await filesUnder(dist);
 const forbiddenFixtureTokens = ["__mobileQa", "__desktopQa", "qa/mobile-fixture", "qa/desktop-fixture"];

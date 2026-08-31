@@ -64,4 +64,22 @@ describe("pure desktop Mission Room projection", () => {
       expect.objectContaining({ version: 2, verdict: "PASS" }),
     ]);
   });
+
+  it("withholds every Owner release action when authoritative v2 receipt custody is absent", async () => {
+    const all = await createDesktopCheckpoints();
+    const state = all.get("completion")!.state;
+    const ownerView = createOwnerViewModel(state, []);
+    const desktop = createDesktopView(state, ownerView, []);
+    expect(ownerView.actions.acceptGoal.visible).toBe(false);
+    expect(ownerView.nextLegalAction).toEqual({
+      label: "Owner acceptance unavailable without authoritative v2 custody",
+      actor: "none",
+    });
+    expect(desktop.ownerAction).toMatchObject({ kind: "waiting", visible: false });
+    expect(desktop.custody).toMatchObject({
+      currentActor: null,
+      ownerAttention: false,
+      releaseCustody: null,
+    });
+  });
 });
