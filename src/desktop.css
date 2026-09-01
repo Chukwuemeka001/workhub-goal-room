@@ -38,6 +38,14 @@
 .assurance-cockpit ul { margin: 0; padding-left: 18px; }
 .assurance-cockpit select { min-height: 44px; padding: 9px 12px; border: 1px solid var(--d-line-strong); color: #f6f3ec; background: #0d0f10; }
 .assurance-cockpit section { padding: 16px; border: 1px solid var(--d-line); background: rgba(9, 10, 11, 0.54); }
+.assurance-cockpit .assurance-claim-verification { grid-column: 1 / -1; min-width: 0; display: grid; gap: 12px; }
+.assurance-claim-verification textarea { width: 100%; min-height: 150px; resize: vertical; padding: 10px 12px; border: 1px solid var(--d-line-strong); color: #f6f3ec; background: #0d0f10; font: 0.72rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.assurance-claim-verification .assurance-untrusted { unicode-bidi: isolate; overflow-wrap: anywhere; word-break: break-word; }
+.assurance-output-preview { display: block; max-width: 100%; max-height: 12rem; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; unicode-bidi: isolate; }
+.assurance-executable-receipt { min-width: 0; max-width: 100%; overflow: hidden; }
+.assurance-claim-verification details { min-width: 0; }
+.assurance-claim-verification summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; }
+.assurance-claim-row { min-width: 0; padding: 12px; border-top: 1px solid var(--d-line); overflow-wrap: anywhere; }
 .assurance-decision { display: inline-block; margin-bottom: 8px; color: var(--d-pass); font-size: 0.8rem; letter-spacing: 0.08em; }
 .assurance-decision[data-decision="ESCALATE"] { color: var(--d-fail); }
 .assurance-decision[data-decision="REQUEST_EVIDENCE"] { color: var(--d-owner); }

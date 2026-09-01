@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { evaluateAgentChange, type AgentChangeSnapshot } from "./agentChangeAssurance";
+import { evaluateAgentChange, evaluateConnectedAgentChange, type AgentChangeSnapshot } from "./agentChangeAssurance";
 
 const SHA_A = "a".repeat(40);
 const SHA_B = "b".repeat(40);
@@ -52,6 +52,43 @@ describe("evaluateAgentChange routing", () => {
     const result = evaluateAgentChange(cleanSnapshot({ claims: [{ kind: "tests_added" }] }));
     expect(result).toMatchObject({ valid: true, decision: "ESCALATE" });
     if (result.valid) expect(result.findings[0].detail).toBe("tests_added is unsupported by the declared changed-path list.");
+  });
+
+  it("refuses malformed connected policy-path custody without invoking accessors or throwing", () => {
+    const sparse = Array(1) as string[];
+    expect(evaluateConnectedAgentChange(cleanSnapshot(), sparse)).toEqual({
+      valid: false,
+      code: "INVALID_ASSURANCE_SNAPSHOT",
+      authority: "NONE",
+      identityBasis: "DECLARED_UNVERIFIED",
+    });
+    let getterCalls = 0;
+    const accessor = [] as string[];
+    Object.defineProperty(accessor, "0", { enumerable: true, configurable: true, get: () => { getterCalls++; return "src/auth/old.ts"; } });
+    accessor.length = 1;
+    expect(evaluateConnectedAgentChange(cleanSnapshot(), accessor)).toEqual({
+      valid: false,
+      code: "INVALID_ASSURANCE_SNAPSHOT",
+      authority: "NONE",
+      identityBasis: "DECLARED_UNVERIFIED",
+    });
+    expect(getterCalls).toBe(0);
+  });
+
+  it("keeps diff-size accounting on destinations while evaluating admitted rename-source risk", () => {
+    const destinations = Array.from({ length: 10 }, (_, index) => `src/renamed-${index}.ts`);
+    const touched = destinations.flatMap((path, index) => [path, index === 0 ? "src/auth/old.ts" : `src/old-${index}.ts`]);
+    const result = evaluateConnectedAgentChange(cleanSnapshot({
+      changedPaths: destinations,
+      claims: [],
+      evidence: [],
+      requiredEvidenceKinds: ["unit", "build"],
+    }), touched);
+    expect(result).toMatchObject({ valid: true, decision: "ESCALATE", riskTier: "HIGH" });
+    if (result.valid) {
+      expect(result.findings).toEqual(expect.arrayContaining([{ code: "HIGH_RISK_PATH", subject: "src/auth/old.ts", detail: expect.any(String) }]));
+      expect(result.findings.some((finding) => finding.code === "LARGE_CHANGE")).toBe(false);
+    }
   });
 
   it.each(["src/auth/session.ts", "db/migrations/001.sql", "infra/deploy/main.tf", ".github/workflows/ci.yml", "config/runtime.json", ".env.production", "package-lock.json"])("escalates local v1 policy path %s", (path) => {

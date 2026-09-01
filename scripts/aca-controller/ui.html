@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>WorkHub Agent Change Assurance</title>
+  <link rel="stylesheet" href="/ui.css">
+</head>
+<body data-session="__ACA_SESSION__">
+  <main id="cockpit">
+    <header><p class="eyebrow">CONNECTED LOCAL · POINT-IN-TIME</p><h1>WorkHub Agent Change Assurance</h1><p>Authority: NONE</p></header>
+    <div class="actions"><button id="observe" type="button">Observe exact local candidate</button><button id="cancel" type="button" hidden>Cancel observation</button></div>
+    <p id="lifecycle" role="status" aria-live="polite" aria-atomic="true">IDLE · No live evidence has been observed.</p>
+    <section id="result"></section>
+  </main>
+  <script src="/ui.js" defer></script>
+</body>
+</html>

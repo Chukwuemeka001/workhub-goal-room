@@ -121,7 +121,8 @@ describe("production Goal inception UI", () => {
     expect(assuranceUi).toContain('querySelector<HTMLTextAreaElement>("#desktop-owner-intent")');
     expect(assuranceUi).not.toMatch(/\.innerHTML\s*=/);
     expect(assuranceUi).toContain("Authority: ${result.authority}");
-    expect(assuranceUi).toContain("No escalation, command, verification, or Owner decision occurred.");
+    expect(assuranceUi).toContain("No Release Guardian submission, command, escalation, or Owner decision occurred.");
+    expect(assuranceUi).toContain("The local claim comparison above remains the only verification performed.");
     expect(assuranceFixtures).toContain("https://github.com/openai/codex/issues/8404");
     expect(assuranceFixtures).toContain("https://github.com/openai/codex/issues/30751");
     expect(assuranceFixtures).toContain("https://arxiv.org/abs/2601.04886v2");

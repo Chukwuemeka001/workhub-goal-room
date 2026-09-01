@@ -1,3 +1,5 @@
+import { isSensitivePathLocalV1 } from "./pathPolicy";
+
 export const EVIDENCE_KINDS = ["unit", "lint", "build", "github_ci", "preview", "security_review"] as const;
 export const PRODUCER_KINDS = ["agent", "independent_ci", "human_reviewer", "local_tool"] as const;
 export type EvidenceKind = (typeof EVIDENCE_KINDS)[number];
@@ -109,10 +111,19 @@ function canonicalPath(value: unknown): value is string {
 function unique<T>(values: readonly T[]): boolean { return new Set(values).size === values.length; }
 function validCount(value: unknown): value is number { return typeof value === "number" && Number.isSafeInteger(value) && value >= 0; }
 function denseArray(value: unknown): value is unknown[] {
-  return Array.isArray(value)
-    && Object.getPrototypeOf(value) === Array.prototype
-    && Object.keys(value).length === value.length
-    && value.every((_, index) => Object.hasOwn(value, index));
+  try {
+    if (!Array.isArray(value) || Object.getPrototypeOf(value) !== Array.prototype) return false;
+    const descriptors = Object.getOwnPropertyDescriptors(value);
+    const lengthDescriptor = Object.getOwnPropertyDescriptor(value, "length");
+    if (!lengthDescriptor || !Object.hasOwn(lengthDescriptor, "value") || !Number.isSafeInteger(lengthDescriptor.value) || lengthDescriptor.value < 0) return false;
+    const keys = Reflect.ownKeys(value);
+    if (keys.length !== lengthDescriptor.value + 1 || !keys.every((key) => typeof key === "string")) return false;
+    for (let index = 0; index < lengthDescriptor.value; index++) {
+      const descriptor = descriptors[String(index)];
+      if (!descriptor || !Object.hasOwn(descriptor, "value") || descriptor.enumerable !== true) return false;
+    }
+    return true;
+  } catch { return false; }
 }
 function validStringList(value: unknown, pathMode = false): value is string[] {
   return denseArray(value) && value.length > 0 && value.every(pathMode ? canonicalPath : nonEmptyString) && unique(value);
@@ -154,35 +165,7 @@ function deepFreeze<T>(value: T): T {
   }
   return value;
 }
-function isDependencyLockfile(basename: string): boolean {
-  return basename.endsWith(".lock")
-    || basename.endsWith(".lockfile")
-    || basename === "packages.lock.json"
-    || basename === "package.resolved"
-    || basename === "package-lock.json"
-    || basename === "npm-shrinkwrap.json"
-    || basename === "pnpm-lock.yaml"
-    || basename === "bun.lockb"
-    || basename === "go.sum";
-}
-function isHighRiskPath(path: string): boolean {
-  const segments = path.toLowerCase().split("/");
-  const basename = segments.at(-1) ?? "";
-  const sensitiveNames = [
-    "auth", "authentication", "authorization", "permissions", "iam", "rbac", "acl",
-    "security", "migration", "migrations", "schema", "infra", "infrastructure",
-    "deploy", "ci", "cd", "pipeline", "pipelines", "workflow", "workflows",
-    "secret", "secrets", "config",
-  ];
-  const basenameStem = basename.includes(".") ? basename.slice(0, basename.indexOf(".")) : basename;
-  return segments.some((segment) => sensitiveNames.includes(segment))
-    || sensitiveNames.includes(basenameStem)
-    || (segments[0] === ".github" && segments[1] === "workflows")
-    || basename === ".env" || basename.startsWith(".env.")
-    || isDependencyLockfile(basename);
-}
-
-export function evaluateAgentChange(input: unknown): AssuranceResult {
+function evaluateAgentChangeWithPolicyPaths(input: unknown, policyTouchedPaths?: readonly string[]): AssuranceResult {
   const value = admitSnapshot(input);
   if (!value) return INVALID;
   const findings: AssuranceFinding[] = [];
@@ -203,7 +186,7 @@ export function evaluateAgentChange(input: unknown): AssuranceResult {
     if (candidatePasses.length > 0 && !independent) add("SELF_VERIFIED_ONLY", kind, `${kind} has only agent or declared non-independent evidence.`);
     return { kind, state: failed ? "FAILED" as const : candidatePasses.length > 0 ? "CANDIDATE_BOUND" as const : matching.length > 0 ? "OTHER_CANDIDATE" as const : "MISSING" as const, independent };
   });
-  const highRiskPath = [...value.changedPaths].sort(compareCodePoints).find(isHighRiskPath);
+  const highRiskPath = [...(policyTouchedPaths ?? value.changedPaths)].sort(compareCodePoints).find(isSensitivePathLocalV1);
   if (highRiskPath) add("HIGH_RISK_PATH", highRiskPath, `Local v1 policy-sensitive path changed: ${highRiskPath}`);
   const largeChange = value.additions + value.deletions >= LARGE_CHANGE_LINE_THRESHOLD || value.changedPaths.length >= LARGE_CHANGE_PATH_THRESHOLD;
   if (largeChange) add("LARGE_CHANGE", `${value.changedPaths.length}:${value.additions + value.deletions}`, `Local v1 policy threshold reached: ${LARGE_CHANGE_PATH_THRESHOLD} paths or ${LARGE_CHANGE_LINE_THRESHOLD} changed lines.`);
@@ -220,8 +203,14 @@ export function evaluateAgentChange(input: unknown): AssuranceResult {
   return deepFreeze({ valid: true, authority: "NONE", identityBasis: "DECLARED_UNVERIFIED", decision, riskTier: highRiskPath ? "HIGH" : largeChange ? "MEDIUM" : "LOW", findings, evidenceBindings, nextAction });
 }
 
-export function evaluateConnectedAgentChange(input: unknown): ConnectedAssuranceResult {
-  const result = evaluateAgentChange(input);
+export function evaluateAgentChange(input: unknown): AssuranceResult {
+  return evaluateAgentChangeWithPolicyPaths(input);
+}
+
+export function evaluateConnectedAgentChange(input: unknown, policyTouchedPaths?: readonly string[]): ConnectedAssuranceResult {
+  if (policyTouchedPaths !== undefined && (!denseArray(policyTouchedPaths) || policyTouchedPaths.length === 0 || !policyTouchedPaths.every(canonicalPath))) return INVALID;
+  const admittedPolicyPaths = policyTouchedPaths as readonly string[] | undefined;
+  const result = evaluateAgentChangeWithPolicyPaths(input, admittedPolicyPaths === undefined ? undefined : [...new Set(admittedPolicyPaths)]);
   if (!result.valid) return result;
   return deepFreeze({
     ...result,

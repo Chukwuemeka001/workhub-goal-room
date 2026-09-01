@@ -10,7 +10,7 @@
     "test": "npm run test:browser-resolver && vitest run --configLoader runner --exclude qa/phase8VisualHarness.test.ts && npm run test:composition && npm run qa:production-mobile",
     "test:browser-resolver": "node --test scripts/browser-resolver.node-test.mjs scripts/composition-production-qa-support.node-test.mjs scripts/desktop-qa-support.node-test.mjs scripts/production-build.node-test.mjs && node --test scripts/production-mobile-evidence-positioning.node-test.mjs && node --test scripts/phase8-provenance.node-test.mjs",
     "test:unit": "vitest run --configLoader runner --exclude qa/phase8VisualHarness.test.ts",
-    "test:assurance-connected": "node --test scripts/agent-change-assurance-connected.node-test.mjs scripts/agent-change-assurance-connected.parent.node-test.mjs scripts/agent-change-assurance-vite-plugin.node-test.mjs && vitest run --configLoader runner src/assurance/connectedAssurance.test.ts src/assurance/assuranceUi.test.ts src/assurance/agentChangeAssurance.test.ts src/mainProduction.test.ts",
+    "test:assurance-connected": "node --test scripts/aca-controller/*.node-test.mjs scripts/aca-sandbox/*.node-test.mjs scripts/agent-change-assurance-connected.node-test.mjs scripts/agent-change-assurance-connected.parent.node-test.mjs scripts/agent-change-assurance-vite-plugin.node-test.mjs && vitest run --configLoader runner src/assurance/connectedAssurance.test.ts src/assurance/assuranceUi.test.ts src/assurance/agentChangeAssurance.test.ts src/mainProduction.test.ts",
     "test:phase8-visual": "vitest run --configLoader runner qa/phase8VisualHarness.test.ts",
     "test:composition": "node scripts/composition-production-qa.mjs",
     "test:watch": "vitest",
