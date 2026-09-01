@@ -108,6 +108,12 @@ describe("production Goal inception UI", () => {
     expect(html.indexOf('id="assurance-cockpit"')).toBeLessThan(html.indexOf('id="release-guardian-path"'));
     expect(html.indexOf('id="release-guardian-path"')).toBeLessThan(html.indexOf('id="desktop-room"'));
     expect(main).toContain("createAssuranceCockpit");
+    expect(main).toContain('fetch("/__agent-change-assurance"');
+    expect(main).toContain('"x-workhub-local-verifier": "observe-v2"');
+    expect(main).not.toContain("JSON.stringify({ claims: [] })");
+    expect(main).toContain("fetchObservation: import.meta.env.DEV ? fetchLocalAssuranceObservation : undefined");
+    const fetchCapability = main.slice(main.indexOf("async function fetchLocalAssuranceObservation"), main.indexOf("const dialog"));
+    expect(fetchCapability).not.toMatch(/room|controller|dispatch/);
     expect(main).toContain('releaseGuardianRoot: requiredElement("desktop-room")');
     expect(main).not.toContain('ownerIntent: requiredElement<HTMLTextAreaElement>("desktop-owner-intent")');
     expect(main).not.toContain("onEscalate");

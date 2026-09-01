@@ -22,6 +22,23 @@ function requiredElement<T extends HTMLElement>(id: string): T {
   return element as T;
 }
 
+async function fetchLocalAssuranceObservation(): Promise<unknown> {
+  const response = await fetch("/__agent-change-assurance", {
+    method: "POST",
+    headers: { "content-type": "application/json", "x-workhub-local-verifier": "observe-v2" },
+    credentials: "same-origin",
+    cache: "no-store",
+  });
+  if (!/^application\/json(?:\s*;|$)/i.test(response.headers.get("content-type") ?? "")) throw new Error("LOCAL_VERIFIER_UNAVAILABLE");
+  const value: unknown = await response.json();
+  if (!response.ok) {
+    const code = value !== null && typeof value === "object" && Object.hasOwn(value, "code") ? String((value as { code: unknown }).code) : "LOCAL_VERIFIER_UNAVAILABLE";
+    if (["BASE_UNRESOLVED", "BASE_NOT_ANCESTOR", "EMPTY_CHANGE", "SOURCE_MOVED", "GIT_OBSERVATION_TIMEOUT", "REPOSITORY_ROOT_MISMATCH", "BUSY"].includes(code)) throw new Error(code);
+    throw new Error("LOCAL_VERIFIER_UNAVAILABLE");
+  }
+  return value;
+}
+
 const dialog = requiredElement<HTMLDialogElement>("revision-dialog");
 const revisionDialogTitle = requiredElement("revision-dialog-title");
 const revisionDialogCopy = requiredElement("revision-dialog-copy");
@@ -101,6 +118,7 @@ controller = createOwnerDecisionController({ room, render });
 controller.render();
 createAssuranceCockpit(requiredElement("assurance-cockpit"), assuranceFixtures, {
   releaseGuardianRoot: requiredElement("desktop-room"),
+  fetchObservation: import.meta.env.DEV ? fetchLocalAssuranceObservation : undefined,
 });
 const systemVerifier = createSystemVerifierAdapter({
   room,

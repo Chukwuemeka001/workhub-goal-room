@@ -201,11 +201,22 @@ This phase does **not** implement or claim:
 
 ## Local development
 
+The production build is static and browser-only. It installs no local verifier endpoint and starts in `STATIC_UNAVAILABLE` with no live recommendation or receipt.
+
+Development serving can optionally install a loopback-only, read-only Git observation endpoint. The verifier pins `/usr/bin/git`, disables replacement objects, and requires its configured repository root to equal Git's canonical top-level. Configure an explicit full base commit at process startup, then deliberately click **Observe exact local candidate**:
+
+```bash
+WORKHUB_ACA_BASE_COMMIT=<full-exact-commit> npm run dev
+```
+
+The browser request is empty and cannot select a repository, candidate, base, ref, claim, path, check, command, environment, timeout, output, or scratch directory. The verifier captures current `HEAD` only on that explicit click and observes unreplaced Git objects, tracked dirtiness, and the untracked-path inventory. It never guesses a base. The rendered result is a point-in-time snapshot, not a continuing live subscription; repository changes after the response are not monitored, so reobserve before relying on it.
+
+Executable checks fail closed. Unit and build checks remain `INDETERMINATE / NOT RUN`: the reason is `SANDBOX_UNAVAILABLE` when no provider qualifies, `SANDBOX_POLICY_UNAVAILABLE` when qualification fails, or `SANDBOX_EXECUTION_NOT_IMPLEMENTED` when a provider qualifies but v2 still has no execution path. No package script, candidate Vite/Vitest configuration, or other candidate code executes. This local observation is not GitHub/CI evidence, merge authority, deployment authority, or Owner acceptance.
+
 ```bash
 npm ci
 npm test
 npm run qa:v3:all
-npm run dev
 ```
 
 ## Production build

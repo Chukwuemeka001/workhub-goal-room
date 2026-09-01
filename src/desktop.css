@@ -34,7 +34,7 @@
 .assurance-cockpit header { display: grid; gap: 6px; }
 .assurance-cockpit h2 { font-family: Georgia, "Times New Roman", ui-serif, serif; font-size: clamp(1.7rem, 2.6vw, 2.7rem); font-weight: 500; }
 .assurance-cockpit h3 { margin-bottom: 8px; color: var(--d-muted); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; }
-.assurance-cockpit p, .assurance-cockpit li, .assurance-cockpit label, .assurance-cockpit a { color: var(--d-soft); font-size: 0.74rem; line-height: 1.5; overflow-wrap: anywhere; }
+.assurance-cockpit p, .assurance-cockpit li, .assurance-cockpit label, .assurance-cockpit a, .assurance-cockpit code { color: var(--d-soft); font-size: 0.74rem; line-height: 1.5; overflow-wrap: anywhere; word-break: break-word; }
 .assurance-cockpit ul { margin: 0; padding-left: 18px; }
 .assurance-cockpit select { min-height: 44px; padding: 9px 12px; border: 1px solid var(--d-line-strong); color: #f6f3ec; background: #0d0f10; }
 .assurance-cockpit section { padding: 16px; border: 1px solid var(--d-line); background: rgba(9, 10, 11, 0.54); }
@@ -42,6 +42,8 @@
 .assurance-decision[data-decision="ESCALATE"] { color: var(--d-fail); }
 .assurance-decision[data-decision="REQUEST_EVIDENCE"] { color: var(--d-owner); }
 .assurance-escalate { min-height: 44px; padding: 10px 16px; border: 1px solid #c58939; color: #211607; background: var(--d-owner); font-weight: 760; }
+.assurance-cockpit > button { min-height: 44px; padding: 10px 16px; border: 1px solid var(--d-line-strong); color: #f6f3ec; background: #171a1b; }
+.assurance-verifier-status { grid-column: 1 / -1; color: var(--d-owner) !important; font-weight: 760; letter-spacing: 0.08em; }
 .assurance-boundary { padding-left: 12px; border-left: 3px solid var(--d-owner); }
 .assurance-cockpit :focus-visible { outline: 3px solid #f0bd72; outline-offset: 3px; }
 .desktop-room, .desktop-room * { min-width: 0; }

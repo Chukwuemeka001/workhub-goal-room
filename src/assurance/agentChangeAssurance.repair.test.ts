@@ -62,8 +62,12 @@ describe("Agent Change Assurance runtime authority admission", () => {
 });
 
 describe("Agent Change Assurance fail-closed policy semantics", () => {
-  it.each(["./src/a.ts", "src/../.github/workflows/x.yml", "src//a.ts", "src\\a.ts", "/src/a.ts", "src/%2fsecret", "src/é.ts", "src/\u0000a.ts"])("rejects noncanonical Git path %j", (path) => {
+  it.each(["./src/a.ts", "src/../.github/workflows/x.yml", "src//a.ts", "src\\a.ts", "/src/a.ts", "src/%2fsecret", "src/é.ts", "src/\u0000a.ts"])("rejects noncanonical Git path %j", (path) => {
     expect(evaluateAgentChange(admittedSnapshot({ changedPaths: [path], claims: [{ kind: "files_changed_only", paths: [path] }] }))).toMatchObject({ valid: false, code: "INVALID_ASSURANCE_SNAPSHOT" });
+  });
+
+  it("admits canonical NFC Git paths", () => {
+    expect(evaluateAgentChange(admittedSnapshot({ changedPaths: ["src/é.ts"], claims: [{ kind: "files_changed_only", paths: ["src/é.ts"] }] }))).toMatchObject({ valid: true });
   });
 
   it("escalates a config-sensitive path hidden after a benign path", () => {

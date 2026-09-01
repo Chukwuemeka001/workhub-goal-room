@@ -1,5 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { defineConfig } from "vitest/config";
+import { createAgentChangeAssurancePlugin } from "./scripts/agent-change-assurance-vite-plugin.mjs";
 
 const root = new URL("./", import.meta.url);
 const publicJudgeHelp = {
@@ -14,7 +15,10 @@ const publicJudgeHelp = {
 export default defineConfig({
   base: process.env.GITHUB_ACTIONS ? "/workhub-goal-room/" : "/",
   build: { cssTarget: "safari16.3" },
-  plugins: [publicJudgeHelp],
+  plugins: [publicJudgeHelp, createAgentChangeAssurancePlugin({
+    repositoryRoot: new URL(".", root).pathname,
+    baseCommit: process.env.WORKHUB_ACA_BASE_COMMIT,
+  })],
   test: {
     environment: "node",
     coverage: {

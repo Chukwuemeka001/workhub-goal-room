@@ -73,6 +73,13 @@ export interface InvalidAssuranceResult {
   readonly identityBasis: "DECLARED_UNVERIFIED";
 }
 export type AssuranceResult = ValidAssuranceResult | InvalidAssuranceResult;
+export type ConnectedAssuranceResult =
+  | (Omit<ValidAssuranceResult, "identityBasis"> & {
+      readonly identityBasis: "LOCAL_GIT_OBSERVED";
+      readonly claimBasis: "NOT_OBSERVED";
+      readonly evidenceBasis: "NO_EXECUTABLE_EVIDENCE";
+    })
+  | InvalidAssuranceResult;
 
 export const LARGE_CHANGE_LINE_THRESHOLD = 500;
 export const LARGE_CHANGE_PATH_THRESHOLD = 20;
@@ -94,7 +101,7 @@ function nonEmptyString(value: unknown): value is string {
   return typeof value === "string" && value.trim() === value && value.length > 0 && value.length <= 1000;
 }
 function canonicalPath(value: unknown): value is string {
-  if (typeof value !== "string" || value.length === 0 || value.length > 500 || !/^[\x20-\x7e]+$/.test(value)) return false;
+  if (typeof value !== "string" || value.length === 0 || new TextEncoder().encode(value).length > 500 || value.normalize("NFC") !== value || /[\u0000-\u001f\u007f]/.test(value)) return false;
   if (value.startsWith("/") || value.endsWith("/") || value.includes("\\") || /%2f|%5c/i.test(value)) return false;
   const segments = value.split("/");
   return segments.every((segment) => segment !== "" && segment !== "." && segment !== "..");
@@ -211,4 +218,15 @@ export function evaluateAgentChange(input: unknown): AssuranceResult {
       ? `Provide candidate-bound independent evidence${machineClaimPresent ? "" : " and a supported machine-checkable claim"} for the declared candidate.`
       : "Prepare Release Guardian review for the declared contradiction or local v1 policy risk; no command has been issued.";
   return deepFreeze({ valid: true, authority: "NONE", identityBasis: "DECLARED_UNVERIFIED", decision, riskTier: highRiskPath ? "HIGH" : largeChange ? "MEDIUM" : "LOW", findings, evidenceBindings, nextAction });
+}
+
+export function evaluateConnectedAgentChange(input: unknown): ConnectedAssuranceResult {
+  const result = evaluateAgentChange(input);
+  if (!result.valid) return result;
+  return deepFreeze({
+    ...result,
+    identityBasis: "LOCAL_GIT_OBSERVED",
+    claimBasis: "NOT_OBSERVED",
+    evidenceBasis: "NO_EXECUTABLE_EVIDENCE",
+  });
 }
