@@ -6,6 +6,7 @@ import {
 } from "../src/core/goalRoom";
 import { createOwnerDecisionController } from "../src/ownerController";
 import { installGoalRoomTools } from "../src/webmcp";
+import { createReleaseGuardianEnvelope } from "../src/verifier/releaseRules";
 
 export const V3_HOSTILE_MARKERS = [
   "<script>v3Qualification()</script>",
@@ -68,14 +69,6 @@ function boundedText(prefix: string, length: number, fill = "X") {
 
 function maximumList(label: string, marker: string) {
   return Array.from({ length: 16 }, (_, index) => boundedText(`${label} ${index + 1}: ${marker} `, 500, "L"));
-}
-
-function maximumCandidateContent(publicUrlPrefix: string, demoDurationSeconds: number, verificationCommand: string) {
-  const empty = JSON.stringify({ publicUrl: "", demoDurationSeconds, verificationCommand });
-  const publicUrl = boundedText(publicUrlPrefix, 4 * 1024 - empty.length, "p");
-  const content = JSON.stringify({ publicUrl, demoDurationSeconds, verificationCommand });
-  if (new TextEncoder().encode(content).length !== 4 * 1024) throw new Error("V3_INVALID_CANDIDATE_BOUNDARY_FIXTURE");
-  return content;
 }
 
 export async function buildV3QualificationReplay(options: { hostile?: boolean } = {}) {
@@ -195,10 +188,8 @@ export async function buildV3QualificationReplay(options: { hostile?: boolean } 
   });
   await snap("S08");
 
-  const failedContent = options.hostile ? maximumCandidateContent("http://v3.invalid/", 181, "npm run build") : JSON.stringify({
-    publicUrl: "http://v3.invalid",
-    demoDurationSeconds: 181,
-    verificationCommand: "npm run build",
+  const failedContent = createReleaseGuardianEnvelope({
+    proofManifestSha256: "a9a9aac7896a3583a0db78ec5e801e906f0872659e1bf6d36922d091b4294c60",
   });
   const failedSha = await sha256Text(failedContent);
   await invoke("submit_artifact", {
@@ -214,11 +205,7 @@ export async function buildV3QualificationReplay(options: { hostile?: boolean } 
   await room.verifyActiveCandidate("v3-system-verify-v1");
   await snap("S10");
 
-  const passedContent = options.hostile ? maximumCandidateContent("https://v3.example.test/goal-room/", 180, "npm test") : JSON.stringify({
-    publicUrl: "https://v3.example.test/goal-room",
-    demoDurationSeconds: 180,
-    verificationCommand: "npm test",
-  });
+  const passedContent = createReleaseGuardianEnvelope();
   const passedSha = await sha256Text(passedContent);
   await invoke("submit_artifact", {
     expectedStateVersion: 12,

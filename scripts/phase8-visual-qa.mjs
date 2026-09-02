@@ -25,7 +25,7 @@ if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error("PHASE8
 const profile = await mkdtemp(join(tmpdir(), "workhub-phase8-visual-"));
 const chromePath = resolveBrowserExecutable();
 const origin = `http://127.0.0.1:${port}`;
-const { base } = await resolveConfig({}, "serve");
+const { base } = await resolveConfig({ configLoader: "runner" }, "serve");
 const fixtureUrl = `${origin}${base}qa/phase8-visual-fixture.html`;
 const states = ["goal", "goal-revision", "plan", "plan-revision", "fail", "pass", "completion", "accepted"];
 const viewports = [

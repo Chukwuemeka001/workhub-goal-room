@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 2,
+  "kind": "workhub-release-integrity-v2-packet",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 5114,
+      "sha256": "850df472345021a8629b602c22402019d77a66a444688cbcd1d5632445838a9b"
+    },
+    {
+      "path": "evaluator.test.ts",
+      "bytes": 1667,
+      "sha256": "0a0c6636d40eecc0b54ede878ff7a59cb9c7779c89d497abb6b35915d5905e90"
+    },
+    {
+      "path": "evaluator.ts",
+      "bytes": 18154,
+      "sha256": "7c7c2a5c1054a632b398b071856c7b5a30e682b7b7982591ae1ed35abbeaefc1"
+    },
+    {
+      "path": "manifest.node-test.mjs",
+      "bytes": 3628,
+      "sha256": "0cf3b1ed645716dda076373b65ab9e93ed9d5c734e4de5cd0ab5f7a49bba85a6"
+    },
+    {
+      "path": "protectedParity.mjs",
+      "bytes": 2209,
+      "sha256": "325e9cc4e8a7037925f8c11197516e1eb39c458a1aa49381abeca60ec4221ff1"
+    },
+    {
+      "path": "protectedParity.node-test.mjs",
+      "bytes": 1327,
+      "sha256": "7f23858151babe53e05cda94d400115ea2fc0844f6c5746da83636cf3fe42d1e"
+    },
+    {
+      "path": "provenance.mjs",
+      "bytes": 4003,
+      "sha256": "cafb723d20bc3645b802a2dabf39907b20a2011fd413c1613d2ce203e0eef1eb"
+    },
+    {
+      "path": "provenance.node-test.mjs",
+      "bytes": 3171,
+      "sha256": "fa321c26a532f69452caf85a1d8a56e69f932ca6287c1f45fe6eaeee31d4415a"
+    },
+    {
+      "path": "report.json",
+      "bytes": 5875,
+      "sha256": "9948ff3b44163e1f82800c7508efdf7c51d87c3a6c95009c1b190ce0684a704c"
+    },
+    {
+      "path": "reportVerifier.test.ts",
+      "bytes": 2348,
+      "sha256": "e536314ea81e128e78dd8a61dfbf887e6bdc7cf9d5db5e159e9549053f25281f"
+    },
+    {
+      "path": "reportVerifier.ts",
+      "bytes": 6130,
+      "sha256": "d50403bfad806fd7ca121297801fa3a8e53ddc8fde778fb8f8901fa0d4e89015"
+    }
+  ],
+  "localOnlyProvenanceInputs": [
+    {
+      "role": "candidate-manifest",
+      "path": "artifacts/candidate-manifest.json",
+      "sha256": "96d1dc3f7678fcb3159c7d8eb963f199633145579e14adfa51fee64e9b0989c2",
+      "publicationReady": false
+    },
+    {
+      "role": "rollback-patch",
+      "path": "artifacts/rollback.patch",
+      "sha256": "c78bacab6f06855426deea32ce900323aaba25761ae8133cb99d1e3b738770d4",
+      "publicationReady": false
+    }
+  ],
+  "frozenArtifactGate": {
+    "candidateManifestSha256": "96d1dc3f7678fcb3159c7d8eb963f199633145579e14adfa51fee64e9b0989c2",
+    "proofManifestSha256": "a9a9aac7896a3583a0db78ec5e801e906f0872659e1bf6d36922d091b4294c66",
+    "rollbackPatchSha256": "c78bacab6f06855426deea32ce900323aaba25761ae8133cb99d1e3b738770d4",
+    "actualSha256": {
+      "candidateManifestSha256": "96d1dc3f7678fcb3159c7d8eb963f199633145579e14adfa51fee64e9b0989c2",
+      "proofManifestSha256": "a9a9aac7896a3583a0db78ec5e801e906f0872659e1bf6d36922d091b4294c66",
+      "rollbackPatchSha256": "c78bacab6f06855426deea32ce900323aaba25761ae8133cb99d1e3b738770d4"
+    },
+    "exactInputHashesMatch": true,
+    "structuralReferencesMatch": true,
+    "matched": true,
+    "missing": []
+  }
+}

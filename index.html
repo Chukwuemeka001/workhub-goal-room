@@ -10,6 +10,8 @@
   <body>
     <main id="mobile-room" class="mobile-room" aria-label="WorkHub Goal Room mobile"></main>
     <div class="desktop-surface">
+      <section id="assurance-cockpit" class="assurance-cockpit" aria-label="Agent Change Assurance exception cockpit"></section>
+      <h2 id="release-guardian-path" class="release-guardian-path">High-assurance escalation path - Release Guardian</h2>
       <main id="desktop-room" class="desktop-room" aria-label="WorkHub Goal Room desktop Mission Room"></main>
     </div>
 
@@ -19,6 +21,7 @@
         <div class="judge-help-copy">
           <p>Use a qualifying ChatGPT in-app browser or Chrome/Canary with WebMCP support. State stays in this browser lifecycle. Reload starts a fresh room.</p>
           <p>No login or credentials are required. The room has no external effects and demonstrates one synthetic Goal only. PASS is not owner acceptance.</p>
+          <p>Agent Change Assurance is a desktop-only exception cockpit for submitted snapshot declarations and research-derived illustrative fixtures. It does not fetch GitHub, hash repository bytes, run CI, or inspect deployments.</p>
           <p><a href="./SECURITY.md">Security scope</a> <a href="./PRIVACY.md">Privacy boundary</a></p>
         </div>
       </details>
@@ -50,6 +53,17 @@
           <div><dt>SHA-256</dt><dd><code id="acceptance-candidate-digest"></code></dd></div>
           <div><dt>PASS rule set</dt><dd><code id="acceptance-rule-set"></code></dd></div>
         </dl>
+        <div id="acceptance-release-binding" class="acceptance-release-binding">
+          <p class="dialog-label">EXACT RELEASE PROOF CUSTODY</p>
+          <dl class="acceptance-binding">
+            <div><dt>Verifier profile</dt><dd><code id="acceptance-release-profile"></code></dd></div>
+            <div><dt>Source base commit</dt><dd><code id="acceptance-release-source-base"></code></dd></div>
+            <div><dt>Candidate manifest SHA-256</dt><dd><code id="acceptance-release-candidate-manifest"></code></dd></div>
+            <div><dt>Proof manifest SHA-256</dt><dd><code id="acceptance-release-proof-manifest"></code></dd></div>
+            <div><dt>Rollback patch</dt><dd><code id="acceptance-release-rollback-patch"></code></dd></div>
+          </dl>
+        </div>
+        <p id="acceptance-release-consequence" class="acceptance-release-consequence"></p>
         <div class="dialog-actions">
           <button id="cancel-acceptance" class="button secondary" type="button">Cancel</button>
           <button id="confirm-acceptance" class="button primary" type="submit">Confirm acceptance</button>

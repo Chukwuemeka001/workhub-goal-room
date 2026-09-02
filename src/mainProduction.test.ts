@@ -1,3 +1,5 @@
+/// <reference types="node" />
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import html from "../index.html?raw";
 import main from "./main.ts?raw";
@@ -5,6 +7,10 @@ import desktopUi from "./desktopUi.ts?raw";
 import mobileUi from "./mobileUi.ts?raw";
 import acceptance from "./acceptanceDialog.ts?raw";
 import systemVerifierAdapter from "./systemVerifierAdapter.ts?raw";
+import assuranceUi from "./assurance/assuranceUi.ts?raw";
+import assuranceFixtures from "./assurance/assuranceFixtures.ts?raw";
+
+const desktopCss = readFileSync(new URL("./desktop.css", import.meta.url), "utf8");
 
 describe("production Goal inception UI", () => {
   it("boots explicit empty V2 intent capture with semantic owner controls", () => {
@@ -95,5 +101,34 @@ describe("production Goal inception UI", () => {
   it("sends no referrer while leaving CSP absent until full qualifying-client proof exists", () => {
     expect(html).toContain('<meta name="referrer" content="no-referrer" />');
     expect(html).not.toMatch(/Content-Security-Policy/i);
+  });
+
+  it("integrates a capability-narrow declared-snapshot cockpit without authority expansion", () => {
+    expect(html.indexOf('id="assurance-cockpit"')).toBeGreaterThan(-1);
+    expect(html.indexOf('id="assurance-cockpit"')).toBeLessThan(html.indexOf('id="release-guardian-path"'));
+    expect(html.indexOf('id="release-guardian-path"')).toBeLessThan(html.indexOf('id="desktop-room"'));
+    expect(main).toContain("createAssuranceCockpit");
+    expect(main).toContain('fetch("/__agent-change-assurance"');
+    expect(main).toContain('"x-workhub-local-verifier": "observe-v2"');
+    expect(main).not.toContain("JSON.stringify({ claims: [] })");
+    expect(main).toContain("fetchObservation: import.meta.env.DEV ? fetchLocalAssuranceObservation : undefined");
+    const fetchCapability = main.slice(main.indexOf("async function fetchLocalAssuranceObservation"), main.indexOf("const dialog"));
+    expect(fetchCapability).not.toMatch(/room|controller|dispatch/);
+    expect(main).toContain('releaseGuardianRoot: requiredElement("desktop-room")');
+    expect(main).not.toContain('ownerIntent: requiredElement<HTMLTextAreaElement>("desktop-owner-intent")');
+    expect(main).not.toContain("onEscalate");
+    expect(assuranceUi).not.toMatch(/onEscalate|room\.dispatch|controller\.|installGoalRoomTools|registerTool/);
+    expect(assuranceUi).toContain('querySelector<HTMLTextAreaElement>("#desktop-owner-intent")');
+    expect(assuranceUi).not.toMatch(/\.innerHTML\s*=/);
+    expect(assuranceUi).toContain("Authority: ${result.authority}");
+    expect(assuranceUi).toContain("No Release Guardian submission, command, escalation, or Owner decision occurred.");
+    expect(assuranceUi).toContain("The local claim comparison above remains the only verification performed.");
+    expect(assuranceFixtures).toContain("https://github.com/openai/codex/issues/8404");
+    expect(assuranceFixtures).toContain("https://github.com/openai/codex/issues/30751");
+    expect(assuranceFixtures).toContain("https://arxiv.org/abs/2601.04886v2");
+    expect(desktopCss).toContain(".assurance-cockpit");
+    expect(desktopCss).toContain("max-height: min(700px, 78dvh)");
+    expect(html).toContain("High-assurance escalation path - Release Guardian");
+    expect(html).toContain("desktop-only exception cockpit");
   });
 });

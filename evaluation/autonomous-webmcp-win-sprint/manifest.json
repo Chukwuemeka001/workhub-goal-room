@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "kind": "workhub-autonomous-webmcp-win-sprint-evidence",
+  "recordedAt": "2026-08-31T03:08:13.678634+00:00",
+  "testedProduct": {
+    "baseCommit": "089745dd595934147dcad71ece28097346b709c5",
+    "trackedDiffPaths": [
+      "src/desktop.css",
+      "src/desktopUi.ts",
+      "src/mobileUi.ts",
+      "src/style.css"
+    ],
+    "trackedDiffSha256": "e4260ce56cf59554145996226833f11b4f41d777ebae19b0cb8d0dc178cc486c",
+    "candidateSourceHashes": [
+      {
+        "path": "src/releaseQuickstart.ts",
+        "bytes": 1157,
+        "sha256": "6af0ba602bb65118e3c93678d98742f28412d8b5434c9962bfa1c90dc7fe41e8"
+      },
+      {
+        "path": "src/releaseQuickstart.test.ts",
+        "bytes": 1757,
+        "sha256": "94190b1e17099e95e9d6be489e0d25e896c5f119c8d8784b933808175b683fed"
+      },
+      {
+        "path": "src/releaseQuickstartUi.test.ts",
+        "bytes": 3506,
+        "sha256": "7a065c89a1755db3c8e0dcda6aa4a88769fa28652231d4ae81e4f8cfa8e877c6"
+      },
+      {
+        "path": "src/desktopUi.ts",
+        "bytes": 17394,
+        "sha256": "25e0cc8420b3e90fb7c536ee3d695e80dcbfac5331f4fb605f896f209678f742"
+      },
+      {
+        "path": "src/mobileUi.ts",
+        "bytes": 13825,
+        "sha256": "1f12117f987fd6b00d54d4b47544101c325d49cf87846e797ab952439e827b17"
+      },
+      {
+        "path": "src/desktop.css",
+        "bytes": 15312,
+        "sha256": "0f15d409bbf3395ad14d0766404624f087c0b1e7a30bed0f4f3bf24a754cbbb0"
+      },
+      {
+        "path": "src/style.css",
+        "bytes": 13927,
+        "sha256": "0f5865682090badc4b7ae8957c4d2c8e8d194d75d13899174cdeaf82203181d9"
+      }
+    ]
+  },
+  "browser": {
+    "application": "Google Chrome Canary",
+    "version": "154.0.8034.0",
+    "features": [
+      "WebMCPTesting",
+      "DevToolsWebMCPSupport"
+    ]
+  },
+  "model": {
+    "providerRoute": "xAI OAuth through loopback Hermes proxy",
+    "identifier": "grok-build-0.1"
+  },
+  "claimBoundary": "N=1 accepted autonomous Goal proposal with one redundant confirmation read; not protocol-exact or reliability evidence.",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 3301,
+      "sha256": "39aa219b756a960181f4241520effab52226a1fa218c3a1af91b8fd69ff41254"
+    },
+    {
+      "path": "harness/adapters.mjs",
+      "bytes": 5175,
+      "sha256": "995ce470b35472d8d1517e36f40f028750c3223d83c98ffe44105f55a863ae81"
+    },
+    {
+      "path": "harness/adapters.node-test.mjs",
+      "bytes": 5040,
+      "sha256": "086081ba68e377488d74e9166a3dccc6f010cd44c22954dc6200627874d7ec3d"
+    },
+    {
+      "path": "harness/autonomous-core.mjs",
+      "bytes": 8271,
+      "sha256": "d159b72ff32ae25f3e28dfe057638f125703e16b0f27dab26064149e60a5737d"
+    },
+    {
+      "path": "harness/autonomous-core.node-test.mjs",
+      "bytes": 6971,
+      "sha256": "4f511dfde3a43fec9e80055578b7972d6aebd4ccae334136698bcfde33ad03a2"
+    },
+    {
+      "path": "harness/capture-page.mjs",
+      "bytes": 2029,
+      "sha256": "0c21f631762ca426c2c38e870b883c79df742acec37aa6e985b1a1adb5925742"
+    },
+    {
+      "path": "harness/owner-setup.mjs",
+      "bytes": 4873,
+      "sha256": "38e28ac7dc9942c03aab6e0dbff75ecb0aaebcf4bc8d7e57b0c0ea628873df5c"
+    },
+    {
+      "path": "harness/run-trial.mjs",
+      "bytes": 2969,
+      "sha256": "dfae4e35d626b01cf30c40af729d7320e3908954acbae3eb2b549bac22e767a2"
+    },
+    {
+      "path": "receipts/owner-gate-01.json",
+      "bytes": 62354,
+      "sha256": "b0920a246704b748e6985006d0fa30ee028bbcc8427dac1b244265ac8ffabf07"
+    },
+    {
+      "path": "receipts/positive-01.json",
+      "bytes": 119000,
+      "sha256": "e221f04361a397a9620cb4f3e18d7ec1462e28e0dfa364d2d04aacb7c1a79465"
+    },
+    {
+      "path": "receipts/positive-owner-setup.json",
+      "bytes": 1056,
+      "sha256": "be8ddfec5bac6c036d01603eeaa38a9c46f5c2bd4e8cc38c05e9dd8adafbe34c"
+    },
+    {
+      "path": "screenshots/positive-owner-frontier-1440x900.png",
+      "bytes": 227068,
+      "sha256": "a1291e400745344177924feb6de8e50888a06d04885f91c6ba87e060c8bf9701"
+    },
+    {
+      "path": "verify.mjs",
+      "bytes": 6752,
+      "sha256": "750d57411775380c1823344776c593bfc4e148e495151ad578dac39ae2e9f290"
+    },
+    {
+      "path": "verify.node-test.mjs",
+      "bytes": 4891,
+      "sha256": "915294509881b41f5b042141ac78a63b36ecc8c958d49ae7fc0e42dd94532e6e"
+    }
+  ]
+}

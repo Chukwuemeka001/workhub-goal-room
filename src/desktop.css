@@ -16,6 +16,44 @@
   --d-pass: #78cda0;
   --d-fail: #e49a61;
 }
+.assurance-cockpit {
+  width: min(1600px, 100%);
+  margin: 0 auto;
+  max-height: min(700px, 78dvh);
+  overflow: auto;
+  padding: 20px clamp(26px, 3.2vw, 58px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  border-bottom: 1px solid var(--d-line-strong);
+  background: linear-gradient(120deg, #101517, #0c0e10 72%);
+}
+.assurance-cockpit header, .assurance-cockpit > label, .assurance-cockpit > select,
+.assurance-cockpit .assurance-boundary, .assurance-cockpit .assurance-escalate, .assurance-cockpit .assurance-handoff-status { grid-column: 1 / -1; }
+.release-guardian-path { width: min(1600px, 100%); margin: 0 auto; padding: 16px clamp(26px, 3.2vw, 58px); border-bottom: 1px solid var(--d-line-strong); color: var(--d-owner); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.assurance-cockpit header { display: grid; gap: 6px; }
+.assurance-cockpit h2 { font-family: Georgia, "Times New Roman", ui-serif, serif; font-size: clamp(1.7rem, 2.6vw, 2.7rem); font-weight: 500; }
+.assurance-cockpit h3 { margin-bottom: 8px; color: var(--d-muted); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.assurance-cockpit p, .assurance-cockpit li, .assurance-cockpit label, .assurance-cockpit a, .assurance-cockpit code { color: var(--d-soft); font-size: 0.74rem; line-height: 1.5; overflow-wrap: anywhere; word-break: break-word; }
+.assurance-cockpit ul { margin: 0; padding-left: 18px; }
+.assurance-cockpit select { min-height: 44px; padding: 9px 12px; border: 1px solid var(--d-line-strong); color: #f6f3ec; background: #0d0f10; }
+.assurance-cockpit section { padding: 16px; border: 1px solid var(--d-line); background: rgba(9, 10, 11, 0.54); }
+.assurance-cockpit .assurance-claim-verification { grid-column: 1 / -1; min-width: 0; display: grid; gap: 12px; }
+.assurance-claim-verification textarea { width: 100%; min-height: 150px; resize: vertical; padding: 10px 12px; border: 1px solid var(--d-line-strong); color: #f6f3ec; background: #0d0f10; font: 0.72rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.assurance-claim-verification .assurance-untrusted { unicode-bidi: isolate; overflow-wrap: anywhere; word-break: break-word; }
+.assurance-output-preview { display: block; max-width: 100%; max-height: 12rem; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; unicode-bidi: isolate; }
+.assurance-executable-receipt { min-width: 0; max-width: 100%; overflow: hidden; }
+.assurance-claim-verification details { min-width: 0; }
+.assurance-claim-verification summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; }
+.assurance-claim-row { min-width: 0; padding: 12px; border-top: 1px solid var(--d-line); overflow-wrap: anywhere; }
+.assurance-decision { display: inline-block; margin-bottom: 8px; color: var(--d-pass); font-size: 0.8rem; letter-spacing: 0.08em; }
+.assurance-decision[data-decision="ESCALATE"] { color: var(--d-fail); }
+.assurance-decision[data-decision="REQUEST_EVIDENCE"] { color: var(--d-owner); }
+.assurance-escalate { min-height: 44px; padding: 10px 16px; border: 1px solid #c58939; color: #211607; background: var(--d-owner); font-weight: 760; }
+.assurance-cockpit > button { min-height: 44px; padding: 10px 16px; border: 1px solid var(--d-line-strong); color: #f6f3ec; background: #171a1b; }
+.assurance-verifier-status { grid-column: 1 / -1; color: var(--d-owner) !important; font-weight: 760; letter-spacing: 0.08em; }
+.assurance-boundary { padding-left: 12px; border-left: 3px solid var(--d-owner); }
+.assurance-cockpit :focus-visible { outline: 3px solid #f0bd72; outline-offset: 3px; }
 .desktop-room, .desktop-room * { min-width: 0; }
 .desktop-room p, .desktop-room h1, .desktop-room h2, .desktop-room h3,
 .desktop-room li, .desktop-room code, .desktop-room blockquote {
@@ -145,6 +183,19 @@
 .desktop-intent-form { display: grid; gap: 9px; }
 .desktop-intent-form label { color: var(--d-soft); font-size: 0.73rem; }
 .desktop-intent-form textarea { width: 100%; min-height: 112px; resize: vertical; padding: 12px; border: 1px solid var(--d-line-strong); border-radius: 3px; color: #f6f3ec; background: #0d0f10; line-height: 1.48; }
+.desktop-owner-action:has(.desktop-release-quickstart) { justify-content: flex-start; max-height: 620px; overflow: auto; }
+.desktop-release-quickstart { display: grid; gap: 10px; padding-bottom: 17px; border-bottom: 1px solid var(--d-line); }
+.desktop-release-quickstart h3 { color: #f7f5ef; font-family: Georgia, "Times New Roman", ui-serif, serif; font-size: 1.25rem; font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; }
+.desktop-quickstart-promise { color: var(--d-soft); font-size: 0.76rem; font-weight: 720; line-height: 1.48; }
+.desktop-quickstart-audience { color: var(--d-muted); font-size: 0.7rem; line-height: 1.48; }
+.desktop-agent-prompt { display: grid; gap: 9px; color: var(--d-soft); font-size: 0.7rem; }
+.desktop-agent-prompt summary { min-height: 44px; display: flex; align-items: center; color: var(--d-agent); cursor: pointer; }
+.desktop-agent-prompt code { display: block; max-height: 150px; padding: 11px; overflow: auto; border: 1px solid var(--d-line); color: var(--d-soft); background: #0b0d0e; line-height: 1.52; overflow-wrap: anywhere; white-space: normal; }
+.desktop-copy-status { display: block; color: var(--d-muted); font-size: 0.67rem; line-height: 1.4; }
+.desktop-release-custody { display: grid; margin-top: 11px; border-top: 1px solid var(--d-line); }
+.desktop-release-custody > div { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--d-line); }
+.desktop-release-custody dt { color: var(--d-muted); font-size: 0.68rem; }
+.desktop-release-custody dd { min-width: 0; color: var(--d-soft); font-size: 0.7rem; overflow-wrap: anywhere; word-break: break-word; }
 
 .desktop-inspector { min-height: 430px; border-top: 1px solid var(--d-line-strong); border-bottom: 1px solid var(--d-line-strong); background: #0d0f10; overflow: hidden; }
 .desktop-inspector-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-bottom: 1px solid var(--d-line); }
@@ -196,6 +247,7 @@
 .desktop-tab:focus, .desktop-tab:focus-visible,
 .desktop-detail summary:focus, .desktop-detail summary:focus-visible,
 .desktop-intent-form textarea:focus, .desktop-intent-form textarea:focus-visible,
+.desktop-agent-prompt summary:focus, .desktop-agent-prompt summary:focus-visible,
 .desktop-inspector-panel:focus, .desktop-inspector-panel:focus-visible {
   outline-color: #f0bd72 !important;
   outline-style: solid !important;

@@ -1,6 +1,7 @@
 import {
   RELEASE_RULE_SET_ID,
   RELEASE_RULE_SET_VERSION,
+  verifyHistoricalReleaseCandidateV1ForReplay,
   verifyReleaseCandidate,
   type ReleaseFindingCode,
 } from "../verifier/releaseRules";
@@ -274,6 +275,15 @@ export type Receipt = {
   stateVersion: number;
 };
 
+export const HISTORICAL_V1_REPLAY_ALLOWLIST = Object.freeze([
+  Object.freeze({
+    inputSha256: "1a18f00a32bf9782c8f688ce5291c68a6482a808c2c6aec821302202bc5158ef",
+    receiptCount: 22,
+    receiptRootHash: "27dd043bfbefc422de2d76214f3170f6717cb3f44618bf350dcc492849803c5f",
+    ledgerSha256: "8a3895275bbbcdd6271a34db8127907199c9d36033c13badb1a60b5bd36e999a",
+  }),
+] as const);
+
 function initialState(input: GoalRoomInput): GoalRoomState {
   if ("ownerIntent" in input) {
     const ownerIntent = input.ownerIntent === null
@@ -391,7 +401,10 @@ function isGoalContractList(value: unknown, allowEmpty = false): value is string
     value.every((item) => isBoundedGoalString(item, 500));
 }
 
-function validateCommand(value: unknown): asserts value is Command {
+function validateCommand(
+  value: unknown,
+  options: { allowHistoricalVerificationV1?: boolean } = {},
+): asserts value is Command {
   if (!isPlainRecord(value)) throw new Error("INVALID_COMMAND");
   const commonValid =
     Number.isSafeInteger(value.expectedStateVersion) &&
@@ -592,7 +605,10 @@ function validateCommand(value: unknown): asserts value is Command {
       typeof value.candidateSha256 !== "string" ||
       !LOWER_HEX_64.test(value.candidateSha256) ||
       value.ruleSetId !== RELEASE_RULE_SET_ID ||
-      value.ruleSetVersion !== RELEASE_RULE_SET_VERSION ||
+      (
+        value.ruleSetVersion !== RELEASE_RULE_SET_VERSION &&
+        !(options.allowHistoricalVerificationV1 && value.ruleSetVersion === 1)
+      ) ||
       (value.verdict !== "PASS" && value.verdict !== "FAIL") ||
       !Array.isArray(value.findingCodes) ||
       value.findingCodes.some((code) => typeof code !== "string")
@@ -949,6 +965,7 @@ function evaluate(
   state: GoalRoomState,
   command: Command,
   observedCandidateDigest?: string,
+  options: { replayHistoricalVerificationV1?: boolean } = {},
 ): DispatchResult {
   if (command.expectedStateVersion !== state.stateVersion) {
     return {
@@ -1160,7 +1177,9 @@ function evaluate(
     ) {
       throw new Error("VERIFICATION_NOT_ALLOWED");
     }
-    const expected = verifyReleaseCandidate(state.activeCandidate.content);
+    const expected = options.replayHistoricalVerificationV1 && Number(command.ruleSetVersion) === 1
+      ? verifyHistoricalReleaseCandidateV1ForReplay(state.activeCandidate.content)
+      : verifyReleaseCandidate(state.activeCandidate.content);
     if (
       command.ruleSetId !== expected.ruleSetId ||
       command.ruleSetVersion !== expected.ruleSetVersion ||
@@ -1384,6 +1403,12 @@ export function createGoalRoom(input: GoalRoomInput) {
     verifyActiveCandidate(idempotencyKey: string): Promise<DispatchResult> {
       const operation = dispatchTail.then(async () => {
         let command = verificationCommands.get(idempotencyKey);
+        if (
+          command &&
+          state.activeCandidate?.sha256 !== command.candidateSha256
+        ) {
+          throw new Error("IDEMPOTENCY_KEY_REUSE");
+        }
         if (!command) {
           if (state.phase !== "CANDIDATE_SUBMITTED" || !state.activeCandidate) {
             throw new Error("VERIFICATION_NOT_ALLOWED");
@@ -1423,6 +1448,24 @@ export async function replayGoalRoom(
   input: GoalRoomInput,
   receipts: Receipt[],
 ): Promise<GoalRoomState> {
+  const containsHistoricalV1 = receipts.some((receipt) =>
+    receipt.command.type === "RECORD_VERIFICATION" &&
+    Number(receipt.command.ruleSetVersion) === 1
+  );
+  if (containsHistoricalV1) {
+    const provenance = {
+      inputSha256: await sha256(input),
+      receiptCount: receipts.length,
+      receiptRootHash: receipts.at(-1)?.hash ?? "GENESIS",
+      ledgerSha256: await sha256(receipts),
+    };
+    const allowlisted = HISTORICAL_V1_REPLAY_ALLOWLIST.some(
+      (entry) => canonical(entry) === canonical(provenance),
+    );
+    if (!allowlisted) {
+      throw new Error("HISTORICAL_V1_PROVENANCE_REQUIRED");
+    }
+  }
   let state = initialState(input);
   let previousHash = "GENESIS";
   const idempotency = new Map<string, string>();
@@ -1442,7 +1485,7 @@ export async function replayGoalRoom(
       throw new Error("RECEIPT_HASH_MISMATCH");
     }
 
-    validateCommand(receipt.command);
+    validateCommand(receipt.command, { allowHistoricalVerificationV1: true });
     const commandValue = canonical(receipt.command);
     const priorCommand = idempotency.get(receipt.command.idempotencyKey);
     if (priorCommand !== undefined) {
@@ -1456,7 +1499,9 @@ export async function replayGoalRoom(
       receipt.command.type === "SUBMIT_CANDIDATE"
         ? await sha256Text(receipt.command.content)
         : undefined;
-    const expected = evaluate(state, receipt.command, observedCandidateDigest);
+    const expected = evaluate(state, receipt.command, observedCandidateDigest, {
+      replayHistoricalVerificationV1: true,
+    });
     if (
       receipt.accepted !== expected.accepted ||
       receipt.reasonCode !== expected.reasonCode ||

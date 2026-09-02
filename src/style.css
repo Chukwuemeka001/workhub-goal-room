@@ -125,6 +125,13 @@ h1, h2, h3, p, dl, dd { margin: 0; }
 }
 .acceptance-binding dt { color: var(--quiet); font-size: 0.72rem; }
 .acceptance-binding dd { min-width: 0; color: var(--text-soft); font-size: 0.78rem; overflow-wrap: anywhere; word-break: break-word; }
+.acceptance-release-binding[hidden] { display: none; }
+.acceptance-release-binding { display: grid; gap: 10px; }
+.acceptance-release-consequence { color: var(--text-soft); font-size: 0.78rem; font-weight: 700; line-height: 1.5; overflow-wrap: anywhere; }
+.mobile-release-custody { display: grid; margin-top: 13px; border-top: 1px solid var(--line); }
+.mobile-release-custody > div { display: grid; gap: 4px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+.mobile-release-custody dt { color: var(--quiet); font-size: 0.7rem; }
+.mobile-release-custody dd { min-width: 0; color: var(--text-soft); font-size: 0.76rem; overflow-wrap: anywhere; word-break: break-word; }
 .dialog-actions { display: flex; justify-content: flex-end; gap: 10px; }
 
 :focus-visible {
@@ -228,6 +235,14 @@ button:focus, textarea:focus, summary:focus, [tabindex]:focus {
   }
   .mobile-frontier-live { margin-top: 17px; color: #dfddd6; font-size: 0.84rem; font-weight: 700; line-height: 1.5; }
   .mobile-boundary { margin-top: 10px; color: var(--muted); font-size: 0.79rem; line-height: 1.55; }
+  .mobile-release-quickstart { display: grid; gap: 11px; margin-top: 22px; padding-top: 19px; border-top: 1px solid var(--line); overflow-wrap: anywhere; }
+  .mobile-release-quickstart h3 { color: #f7f5ef; font-family: Georgia, "Times New Roman", ui-serif, serif; font-size: 1.35rem; font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; }
+  .mobile-quickstart-promise { color: var(--text-soft); font-size: 0.82rem; font-weight: 720; line-height: 1.5; }
+  .mobile-quickstart-audience { color: var(--muted); font-size: 0.76rem; line-height: 1.5; }
+  .mobile-agent-prompt { display: grid; gap: 10px; color: var(--text-soft); font-size: 0.75rem; }
+  .mobile-agent-prompt summary { min-height: 44px; display: flex; align-items: center; color: var(--agent); cursor: pointer; }
+  .mobile-agent-prompt code { display: block; max-height: 180px; padding: 12px; overflow: auto; border: 1px solid var(--line); color: var(--text-soft); background: #0b0d0e; line-height: 1.55; overflow-wrap: anywhere; white-space: normal; }
+  .mobile-copy-status { display: block; color: var(--muted); font-size: 0.7rem; line-height: 1.45; }
   .mobile-details { padding-top: 13px; }
   .mobile-tab-panel { padding: 17px 2px 28px; outline: 0; }
   .mobile-panel-heading {

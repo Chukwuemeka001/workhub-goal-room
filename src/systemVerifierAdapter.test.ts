@@ -1,3 +1,4 @@
+import { createReleaseGuardianEnvelope } from "./verifier/releaseRules";
 import { describe, expect, it, vi } from "vitest";
 import { createGoalRoom, type DispatchResult, type GoalRoomState } from "./core/goalRoom";
 import { createSystemVerifierAdapter } from "./systemVerifierAdapter";
@@ -198,11 +199,7 @@ describe("production System verifier adapter", () => {
       type: "CLAIM_STEP", actor: "agent", expectedStateVersion: 2,
       idempotencyKey: "claim", planVersion: 1, stepId: "artifact",
     });
-    const failedContent = JSON.stringify({
-      publicUrl: "http://example.test",
-      demoDurationSeconds: 181,
-      verificationCommand: "npm run build",
-    });
+    const failedContent = createReleaseGuardianEnvelope({ proofManifestSha256: "a9a9aac7896a3583a0db78ec5e801e906f0872659e1bf6d36922d091b4294c60" });
     await room.dispatch({
       type: "SUBMIT_CANDIDATE", actor: "agent", expectedStateVersion: 3,
       idempotencyKey: "candidate-v1", planVersion: 1, stepId: "artifact",
@@ -213,11 +210,7 @@ describe("production System verifier adapter", () => {
     adapter.observe({ toolName: "submit_artifact", result: { accepted: true } });
     await vi.waitFor(() => expect(room.getState().phase).toBe("VERIFICATION_FAILED"));
 
-    const passingContent = JSON.stringify({
-      publicUrl: "https://example.test",
-      demoDurationSeconds: 180,
-      verificationCommand: "npm test",
-    });
+    const passingContent = createReleaseGuardianEnvelope();
     await room.dispatch({
       type: "SUBMIT_CANDIDATE", actor: "agent", expectedStateVersion: 5,
       idempotencyKey: "candidate-v2", planVersion: 1, stepId: "artifact",

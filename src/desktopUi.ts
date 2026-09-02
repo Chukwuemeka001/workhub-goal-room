@@ -1,5 +1,7 @@
 import type { DesktopTabId, DesktopView } from "./desktopView";
 import type { AcceptanceBinding } from "./acceptanceDialog";
+import { AGENT_LAUNCH_PROMPT, copyAgentLaunchPrompt, prefillReleaseReviewIntent } from "./releaseQuickstart";
+import { RELEASE_MATCHED_TUPLE_STATEMENT, RELEASE_VERIFICATION_CLAIM_BOUNDARY } from "./verifier/releaseRules";
 
 export type DesktopSurfaceActions = {
   onSetIntent(intent: string): Promise<void>;
@@ -66,6 +68,27 @@ export function createDesktopSurface(root: HTMLElement, actions: DesktopSurfaceA
     if (data.passIsNotAcceptance) fragment.append(text("p", "PASS means the explicit checks succeeded. PASS does not accept the Goal.", "desktop-pass-boundary"));
     if (data.completionBinding) fragment.append(text("p", `Completion request bound to ${data.completionBinding}`, "desktop-binding"));
     if (data.acceptanceBinding) fragment.append(text("p", `Owner acceptance bound to ${data.acceptanceBinding}`, "desktop-binding"));
+    const release = view.custody.releaseCustody;
+    if (release) {
+      fragment.append(text("h3", "Exact release proof custody", "desktop-subheading"));
+      const list = el("dl", "desktop-release-custody");
+      for (const [label, value] of [
+        ["Verifier profile", release.profile],
+        ["Source base commit", release.sourceBaseCommit],
+        ["Candidate manifest SHA-256", release.candidateManifestSha256],
+        ["Proof manifest SHA-256", release.proofManifestSha256],
+        ["Rollback patch", release.compactRollbackPatch],
+      ] as const) {
+        const row = el("div");
+        row.append(text("dt", label), text("dd", value));
+        list.append(row);
+      }
+      fragment.append(
+        text("p", RELEASE_MATCHED_TUPLE_STATEMENT, "desktop-binding"),
+        list,
+        text("p", RELEASE_VERIFICATION_CLAIM_BOUNDARY, "desktop-pass-boundary"),
+      );
+    }
     if (data.history.length) {
       fragment.append(text("h3", "Candidate history", "desktop-subheading"));
       const history = el("ol", "desktop-candidate-history");
@@ -119,8 +142,11 @@ export function createDesktopSurface(root: HTMLElement, actions: DesktopSurfaceA
     const now = el("section", "desktop-now"); now.dataset.actor = view.now.actor; now.dataset.attention = String(view.now.ownerAttention); now.setAttribute("aria-labelledby", "desktop-now-heading");
     const nowCopy = el("div", "desktop-now-copy");
     const actor = text("p", view.ownerAction.kind === "terminal" ? "TERMINAL · OWNER ACCEPTED" : `${view.now.actor.toUpperCase()} ACTS NOW`, "desktop-actor");
-    const nowHeading = text("h2", view.now.title); nowHeading.id = "desktop-now-heading";
-    nowCopy.append(text("p", view.now.ownerAttention ? "WHAT NEEDS YOU" : "NOW", "desktop-label"), actor, nowHeading, text("p", view.now.legalAction, "desktop-legal-action"), text("p", view.now.boundary, "desktop-boundary"));
+    const nowTitle = view.ownerAction.kind === "set-intent" ? "A passing agent build is not an authorized release." : view.now.title;
+    const nowLegalAction = view.now.legalAction;
+    const nowBoundary = view.now.boundary;
+    const nowHeading = text("h2", nowTitle); nowHeading.id = "desktop-now-heading";
+    nowCopy.append(text("p", view.now.ownerAttention ? "WHAT NEEDS YOU" : "NOW", "desktop-label"), actor, nowHeading, text("p", nowLegalAction, "desktop-legal-action"), text("p", nowBoundary, "desktop-boundary"));
     if (view.now.compactDigest) nowCopy.append(text("code", `Candidate ${view.now.compactDigest}`, "desktop-compact-digest"));
     const owner = el("section", "desktop-owner-action"); owner.setAttribute("aria-label", "Owner action");
     if (view.ownerAction.kind === "set-intent" || view.ownerAction.kind === "revise-intent") {
@@ -128,9 +154,27 @@ export function createDesktopSurface(root: HTMLElement, actions: DesktopSurfaceA
       const label = text("label", "Owner intent"); const input = el("textarea"); input.id = "desktop-owner-intent"; label.htmlFor = input.id;
       input.required = true; input.maxLength = 1000; input.rows = 3; if (view.ownerAction.kind === "revise-intent") input.value = view.goal.title;
       const submit = text("button", view.ownerAction.label ?? "Save intent", "desktop-action primary"); submit.type = "submit";
+      const quickstart = el("section", "desktop-release-quickstart"); quickstart.setAttribute("aria-label", "Release Guardian quickstart");
+      const example = text("button", "Use release-review example", "desktop-action secondary"); example.type = "button";
+      example.addEventListener("click", () => prefillReleaseReviewIntent(input));
+      const prompt = el("details", "desktop-agent-prompt");
+      const copy = text("button", "Copy agent launch prompt", "desktop-action secondary"); copy.type = "button";
+      const copyStatus = text("span", "Prompt is also shown below.", "desktop-copy-status"); copyStatus.setAttribute("role", "status"); copyStatus.setAttribute("aria-live", "polite");
+      copy.addEventListener("click", async () => {
+        const result = await copyAgentLaunchPrompt(navigator.clipboard);
+        copyStatus.textContent = result === "copied" ? "Agent launch prompt copied." : "Clipboard unavailable. Select the prompt below.";
+      });
+      prompt.append(text("summary", "Show bounded agent prompt"), text("code", AGENT_LAUNCH_PROMPT), copy, copyStatus);
+      quickstart.append(
+        text("p", "RELEASE GUARDIAN QUICKSTART", "desktop-label"),
+        text("p", "Agent contributes. System verifies. Owner accepts the exact candidate.", "desktop-quickstart-promise"),
+        text("p", "Start with a concrete release-review intent, then hand the bounded prompt to a WebMCP-capable agent.", "desktop-quickstart-audience"),
+        example,
+        prompt,
+      );
       input.addEventListener("input", () => input.setCustomValidity(""));
       form.addEventListener("submit", async (event) => { event.preventDefault(); input.setCustomValidity(""); const intent = input.value.trim(); if (!intent || intent.length > 1000) { input.setCustomValidity("Enter between 1 and 1000 non-whitespace characters."); input.reportValidity(); input.focus(); return; } submit.disabled = true; try { await actions.onSetIntent(intent); } finally { submit.disabled = false; } });
-      form.append(label, input, submit); owner.append(form);
+      form.append(label, input, submit); owner.append(quickstart, form);
     } else if (view.ownerAction.visible && view.ownerAction.label) {
       if (view.ownerAction.secondaryKind) {
         const secondary = text("button", view.ownerAction.secondaryLabel ?? "Request revision", "desktop-action secondary"); secondary.type = "button";
@@ -145,6 +189,7 @@ export function createDesktopSurface(root: HTMLElement, actions: DesktopSurfaceA
             digest: view.custody.candidate.digest,
             compactDigest: view.custody.candidate.compactDigest,
             ruleSet: view.custody.verification.ruleSet,
+            release: view.custody.releaseCustody,
           });
           return;
         }

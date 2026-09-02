@@ -1,3 +1,4 @@
+import { createReleaseGuardianEnvelope } from "./verifier/releaseRules";
 import { describe, expect, it } from "vitest";
 import { createGoalRoom } from "./core/goalRoom";
 import { createOwnerDecisionController } from "./ownerController";
@@ -130,7 +131,7 @@ describe("owner decision controller", () => {
     await room.dispatch({ type: "PROPOSE_PLAN", actor: "agent", expectedStateVersion: 0, idempotencyKey: "p", steps: [{ id: "s", title: "Ship" }] });
     await room.dispatch({ type: "CONFIRM_PLAN", actor: "owner", expectedStateVersion: 1, idempotencyKey: "cp", planVersion: 1 });
     await room.dispatch({ type: "CLAIM_STEP", actor: "agent", expectedStateVersion: 2, idempotencyKey: "c", planVersion: 1, stepId: "s" });
-    const content = JSON.stringify({ publicUrl: "https://example.test", demoDurationSeconds: 180, verificationCommand: "npm test" });
+    const content = createReleaseGuardianEnvelope();
     const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(content));
     const sha256 = [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
     await room.dispatch({ type: "SUBMIT_CANDIDATE", actor: "agent", expectedStateVersion: 3, idempotencyKey: "s", planVersion: 1, stepId: "s", content, sha256 });

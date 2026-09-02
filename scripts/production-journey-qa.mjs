@@ -13,6 +13,19 @@ const chromePath = resolveBrowserExecutable();
 const browserVersion = spawnSync(chromePath, ["--version"], { encoding: "utf8" }).stdout.trim();
 const wait = (ms) => new Promise((resolveWait) => setTimeout(resolveWait, ms));
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
+const exactReleaseEnvelope = () => ({
+  profile: "release_guardian/v2",
+  publicUrl: "https://chukwuemeka001.github.io/workhub-goal-room/",
+  demoDurationSeconds: 154,
+  verificationCommand: "npm test",
+  sourceBaseCommit: "089745dd595934147dcad71ece28097346b709c5",
+  candidateManifestSha256: "96d1dc3f7678fcb3159c7d8eb963f199633145579e14adfa51fee64e9b0989c2",
+  proofManifestSha256: "a9a9aac7896a3583a0db78ec5e801e906f0872659e1bf6d36922d091b4294c66",
+  rollbackPatchSha256: "c78bacab6f06855426deea32ce900323aaba25761ae8133cb99d1e3b738770d4",
+});
+if (sha256(JSON.stringify(exactReleaseEnvelope())) !== "850d1b62cb4243650372ded9c3ba50926c9b304467d13e9705c03f3d2684fb15") {
+  throw new Error("Frozen JavaScript release envelope diverged from canonical v2 bytes");
+}
 const hostile = (length) => (`<img src=x onerror=__PRODUCTION_JOURNEY_INJECTION__()>😀&"'` + "X".repeat(length)).slice(0, length);
 
 async function waitFor(predicate, label, attempts = 240) {
@@ -292,7 +305,7 @@ try {
   const badDigest = await invoke("submit_artifact", { expectedStateVersion: 10, idempotencyKey: "pj-bad-digest", planVersion: 2, stepId: "release", content: "{}", sha256: "0".repeat(64) });
   if (badDigest.accepted !== false) throw new Error("Digest mismatch accepted");
 
-  const failedContent = JSON.stringify({ publicUrl: "http://example.test/production", demoDurationSeconds: 181, verificationCommand: "npm run build" });
+  const failedContent = JSON.stringify({ ...exactReleaseEnvelope(), proofManifestSha256: "a9a9aac7896a3583a0db78ec5e801e906f0872659e1bf6d36922d091b4294c60" });
   const failedSha = sha256(failedContent);
   const submit1Input = { expectedStateVersion: 10, idempotencyKey: "pj-candidate-v1", planVersion: 2, stepId: "release", content: failedContent, sha256: failedSha };
   const submit1 = await invoke("submit_artifact", submit1Input); if (!submit1.accepted) throw new Error("Candidate v1 refused");
@@ -309,7 +322,7 @@ try {
   if (prematureCompletion.accepted !== false) throw new Error("Premature completion accepted");
   const v1 = structuredClone(current.state.candidateHistory[0]); const failRecord = structuredClone(current.state.verificationHistory[0]);
 
-  const passedContent = JSON.stringify({ publicUrl: "https://example.test/production", demoDurationSeconds: 180, verificationCommand: "npm test" });
+  const passedContent = JSON.stringify(exactReleaseEnvelope());
   const passedSha = sha256(passedContent);
   await invoke("submit_artifact", { expectedStateVersion: 12, idempotencyKey: "pj-candidate-v2", planVersion: 2, stepId: "release", content: passedContent, sha256: passedSha });
   current = await expectState(14, "VERIFICATION_PASSED");
@@ -329,7 +342,7 @@ try {
   await evaluate(`window.__pjAcceptanceTrigger=document.querySelector(${JSON.stringify(triggerSelector)})`);
   await click(triggerSelector);
   const modal = await evaluate(`(() => { const d=document.querySelector('#acceptance-dialog'); return {open:d.open,version:document.querySelector('#acceptance-candidate-version').textContent,digest:document.querySelector('#acceptance-candidate-digest').textContent,ruleSet:document.querySelector('#acceptance-rule-set').textContent,consequence:document.querySelector('#acceptance-dialog-consequence').textContent,focusInside:d.contains(document.activeElement)}; })()`);
-  if (!modal.open || !modal.version.startsWith("Candidate v2 ") || modal.digest !== passedSha || modal.ruleSet !== "workhub_goal_room_release/v1" || !modal.consequence.includes("irreversible") || !modal.focusInside) throw new Error(`S13 modal binding mismatch: ${JSON.stringify(modal)}`);
+  if (!modal.open || !modal.version.startsWith("Candidate v2 ") || modal.digest !== passedSha || modal.ruleSet !== "workhub_goal_room_release/v2" || !modal.consequence.includes("irreversible") || !modal.focusInside) throw new Error(`S13 modal binding mismatch: ${JSON.stringify(modal)}`);
   await screenshot("s13-exact-candidate-modal");
   await call("Input.dispatchKeyEvent", { type: "keyDown", key: "Escape", code: "Escape", windowsVirtualKeyCode: 27 }); await call("Input.dispatchKeyEvent", { type: "keyUp", key: "Escape", code: "Escape", windowsVirtualKeyCode: 27 });
   const escape = await evaluate(`({open:document.querySelector('#acceptance-dialog').open,focusReturned:document.activeElement===window.__pjAcceptanceTrigger})`);

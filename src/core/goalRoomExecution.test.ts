@@ -1,3 +1,4 @@
+import { createReleaseGuardianEnvelope } from "../verifier/releaseRules";
 import { describe, expect, it } from "vitest";
 import { createGoalRoom, replayGoalRoom } from "./goalRoom";
 
@@ -76,11 +77,7 @@ describe("Goal Room candidate custody", () => {
       planVersion: 1,
       stepId: "artifact",
     });
-    const content = JSON.stringify({
-      publicUrl: "https://example.test/goal-room",
-      demoDurationSeconds: 180,
-      verificationCommand: "npm test",
-    });
+    const content = createReleaseGuardianEnvelope();
     const sha256 = await digestText(content);
 
     const result = await room.dispatch({
@@ -125,11 +122,7 @@ describe("Goal Room candidate custody", () => {
       planVersion: 1,
       stepId: "artifact",
     });
-    const content = JSON.stringify({
-      publicUrl: "https://example.test/goal-room",
-      demoDurationSeconds: 180,
-      verificationCommand: "npm test",
-    });
+    const content = createReleaseGuardianEnvelope();
     const sha256 = await digestText(content);
     await room.dispatch({
       type: "SUBMIT_CANDIDATE",
@@ -152,7 +145,7 @@ describe("Goal Room candidate custody", () => {
         idempotencyKey: "injected-pass",
         candidateSha256: sha256,
         ruleSetId: "workhub_goal_room_release",
-        ruleSetVersion: 1,
+        ruleSetVersion: 2,
         verdict: "PASS",
         findingCodes: [],
       }),
@@ -171,11 +164,7 @@ describe("Goal Room candidate custody", () => {
       planVersion: 1,
       stepId: "artifact",
     });
-    const failedContent = JSON.stringify({
-      publicUrl: "http://example.test/goal-room",
-      demoDurationSeconds: 181,
-      verificationCommand: "npm run build",
-    });
+    const failedContent = createReleaseGuardianEnvelope({ proofManifestSha256: "a9a9aac7896a3583a0db78ec5e801e906f0872659e1bf6d36922d091b4294c60" });
     const failedSha256 = await digestText(failedContent);
     await room.dispatch({
       type: "SUBMIT_CANDIDATE",
@@ -197,19 +186,11 @@ describe("Goal Room candidate custody", () => {
       activeVerification: {
         candidateSha256: failedSha256,
         verdict: "FAIL",
-        findingCodes: [
-          "DEMO_DURATION_OUT_OF_RANGE",
-          "PUBLIC_URL_MUST_BE_HTTPS",
-          "VERIFICATION_COMMAND_MISMATCH",
-        ],
+        findingCodes: ["PROOF_MANIFEST_MISMATCH"],
       },
     });
 
-    const correctedContent = JSON.stringify({
-      publicUrl: "https://example.test/goal-room",
-      demoDurationSeconds: 180,
-      verificationCommand: "npm test",
-    });
+    const correctedContent = createReleaseGuardianEnvelope();
     const correctedSha256 = await digestText(correctedContent);
     const corrected = await room.dispatch({
       type: "SUBMIT_CANDIDATE",
@@ -249,11 +230,7 @@ describe("Goal Room candidate custody", () => {
       planVersion: 1,
       stepId: "artifact",
     });
-    const content = JSON.stringify({
-      publicUrl: "https://example.test/goal-room",
-      demoDurationSeconds: 180,
-      verificationCommand: "npm test",
-    });
+    const content = createReleaseGuardianEnvelope();
     const sha256 = await digestText(content);
     await room.dispatch({
       type: "SUBMIT_CANDIDATE",
@@ -283,7 +260,7 @@ describe("Goal Room candidate custody", () => {
       activeVerification: {
         candidateSha256: sha256,
         ruleSetId: "workhub_goal_room_release",
-        ruleSetVersion: 1,
+        ruleSetVersion: 2,
         verdict: "PASS",
         findingCodes: [],
         actor: "system",
@@ -365,11 +342,7 @@ describe("Goal Room candidate custody", () => {
   it("refuses candidate submission before the exact step is claimed", async () => {
     const { room } = await confirmedRoom();
     const before = room.getState();
-    const content = JSON.stringify({
-      publicUrl: "https://example.test/goal-room",
-      demoDurationSeconds: 180,
-      verificationCommand: "npm test",
-    });
+    const content = createReleaseGuardianEnvelope();
 
     const result = await room.dispatch({
       type: "SUBMIT_CANDIDATE",
@@ -404,11 +377,7 @@ describe("Goal Room governed completion", () => {
       planVersion: 1,
       stepId: "artifact",
     });
-    const content = JSON.stringify({
-      publicUrl: "https://example.test/goal-room",
-      demoDurationSeconds: 180,
-      verificationCommand: "npm test",
-    });
+    const content = createReleaseGuardianEnvelope();
     const sha256 = await digestText(content);
     await room.dispatch({
       type: "SUBMIT_CANDIDATE",
@@ -482,11 +451,7 @@ describe("Goal Room governed completion", () => {
       planVersion: 1,
       stepId: "artifact",
     });
-    const content = JSON.stringify({
-      publicUrl: "https://example.test/goal-room",
-      demoDurationSeconds: 180,
-      verificationCommand: "npm test",
-    });
+    const content = createReleaseGuardianEnvelope();
     const sha256 = await digestText(content);
     await room.dispatch({
       type: "SUBMIT_CANDIDATE",
@@ -536,11 +501,7 @@ describe("Goal Room governed completion", () => {
       planVersion: 1,
       stepId: "artifact",
     });
-    const content = JSON.stringify({
-      publicUrl: "https://example.test/goal-room",
-      demoDurationSeconds: 180,
-      verificationCommand: "npm test",
-    });
+    const content = createReleaseGuardianEnvelope();
     const sha256 = await digestText(content);
     await room.dispatch({
       type: "SUBMIT_CANDIDATE",
@@ -590,11 +551,7 @@ describe("Goal Room governed completion", () => {
       planVersion: 1,
       stepId: "artifact",
     });
-    const content = JSON.stringify({
-      publicUrl: "https://example.test/goal-room",
-      demoDurationSeconds: 180,
-      verificationCommand: "npm test",
-    });
+    const content = createReleaseGuardianEnvelope();
     const sha256 = await digestText(content);
     await room.dispatch({
       type: "SUBMIT_CANDIDATE",
@@ -658,11 +615,7 @@ describe("Goal Room governed completion", () => {
       planVersion: 1,
       stepId: "artifact",
     });
-    const content = JSON.stringify({
-      publicUrl: "https://example.test/goal-room",
-      demoDurationSeconds: 180,
-      verificationCommand: "npm test",
-    });
+    const content = createReleaseGuardianEnvelope();
     const sha256 = await digestText(content);
     await room.dispatch({
       type: "SUBMIT_CANDIDATE",
@@ -770,5 +723,168 @@ describe("Goal Room admitted-step custody", () => {
       ownerRequired: false,
     });
     expect(room.getState()).toEqual(before);
+  });
+});
+
+describe("live ruleset is v2-only and historical v1 stays replay-only", () => {
+  async function claimedRoom() {
+    const { input, room } = await confirmedRoom();
+    await room.dispatch({
+      type: "CLAIM_STEP",
+      actor: "agent",
+      expectedStateVersion: 2,
+      idempotencyKey: "claim-artifact",
+      planVersion: 1,
+      stepId: "artifact",
+    });
+    return { input, room };
+  }
+
+  async function submit(
+    room: Awaited<ReturnType<typeof claimedRoom>>["room"],
+    content: string,
+  ) {
+    const sha256 = await digestText(content);
+    await room.dispatch({
+      type: "SUBMIT_CANDIDATE",
+      actor: "agent",
+      expectedStateVersion: 3,
+      idempotencyKey: "candidate-v1",
+      planVersion: 1,
+      stepId: "artifact",
+      content,
+      sha256,
+    });
+    return sha256;
+  }
+
+  it("emits ruleSetVersion 2 for every live System verification", async () => {
+    const { room } = await claimedRoom();
+    await submit(room, createReleaseGuardianEnvelope());
+
+    await room.verifyActiveCandidate("live-verify");
+
+    expect(room.getState().activeVerification).toMatchObject({
+      ruleSetId: "workhub_goal_room_release",
+      ruleSetVersion: 2,
+      verdict: "PASS",
+      actor: "system",
+    });
+    expect(
+      room.getState().verificationHistory.every((record) => record.ruleSetVersion === 2),
+    ).toBe(true);
+  });
+
+  it("grades an obsolete v1 three-field artifact under v2 instead of reviving v1", async () => {
+    const { room } = await claimedRoom();
+    const historicalV1Artifact = JSON.stringify({
+      publicUrl: "https://example.test/production",
+      demoDurationSeconds: 180,
+      verificationCommand: "npm test",
+    });
+    await submit(room, historicalV1Artifact);
+
+    await room.verifyActiveCandidate("live-verify-historical-shape");
+
+    expect(room.getState()).toMatchObject({
+      phase: "VERIFICATION_FAILED",
+      activeVerification: {
+        ruleSetVersion: 2,
+        verdict: "FAIL",
+        findingCodes: ["INVALID_ARTIFACT_SHAPE"],
+      },
+    });
+  });
+
+  it("refuses an externally authored System verification command declaring v1", async () => {
+    const { room } = await claimedRoom();
+    const sha256 = await submit(room, createReleaseGuardianEnvelope());
+
+    await expect(
+      room.dispatch({
+        type: "RECORD_VERIFICATION",
+        actor: "system",
+        expectedStateVersion: 4,
+        idempotencyKey: "forged-v1-verdict",
+        candidateSha256: sha256,
+        ruleSetId: "workhub_goal_room_release",
+        ruleSetVersion: 1,
+        verdict: "PASS",
+        findingCodes: [],
+      } as never),
+    ).rejects.toThrow("INVALID_COMMAND");
+
+    expect(room.getState().phase).toBe("CANDIDATE_SUBMITTED");
+    expect(room.getState().activeVerification).toBeNull();
+    expect(
+      room.getReceipts().some((receipt) => receipt.command.type === "RECORD_VERIFICATION"),
+    ).toBe(false);
+  });
+
+  it("refuses an externally authored System verification command declaring v2", async () => {
+    const { room } = await claimedRoom();
+    const sha256 = await submit(room, createReleaseGuardianEnvelope());
+
+    await expect(
+      room.dispatch({
+        type: "RECORD_VERIFICATION",
+        actor: "system",
+        expectedStateVersion: 4,
+        idempotencyKey: "forged-v2-verdict",
+        candidateSha256: sha256,
+        ruleSetId: "workhub_goal_room_release",
+        ruleSetVersion: 2,
+        verdict: "PASS",
+        findingCodes: [],
+      } as never),
+    ).rejects.toThrow("INVALID_COMMAND");
+
+    expect(room.getState().phase).toBe("CANDIDATE_SUBMITTED");
+  });
+
+  it("replays a live v2 ledger byte-identically", async () => {
+    const { input, room } = await claimedRoom();
+    await submit(room, createReleaseGuardianEnvelope());
+    await room.verifyActiveCandidate("live-verify");
+
+    expect(await replayGoalRoom(input, room.getReceipts())).toEqual(room.getState());
+  });
+
+  it("rejects verifier-key reuse when a corrected candidate replaces the failed candidate", async () => {
+    const { room } = await claimedRoom();
+    const failedContent = createReleaseGuardianEnvelope({
+      proofManifestSha256: "a9a9aac7896a3583a0db78ec5e801e906f0872659e1bf6d36922d091b4294c60",
+    });
+    await submit(room, failedContent);
+    await room.verifyActiveCandidate("shared-verifier-key");
+
+    const corrected = createReleaseGuardianEnvelope();
+    const correctedSha256 = await digestText(corrected);
+    await room.dispatch({
+      type: "SUBMIT_CANDIDATE",
+      actor: "agent",
+      expectedStateVersion: 5,
+      idempotencyKey: "candidate-v2",
+      planVersion: 1,
+      stepId: "artifact",
+      content: corrected,
+      sha256: correctedSha256,
+    });
+    const before = room.getState();
+
+    await expect(room.verifyActiveCandidate("shared-verifier-key")).rejects.toThrow(
+      "IDEMPOTENCY_KEY_REUSE",
+    );
+    expect(room.getState()).toEqual(before);
+    expect(room.getState()).toMatchObject({
+      phase: "CANDIDATE_SUBMITTED",
+      activeCandidate: { sha256: correctedSha256 },
+      activeVerification: null,
+    });
+
+    await expect(room.verifyActiveCandidate("corrected-verifier-key")).resolves.toMatchObject({
+      accepted: true,
+      nextLegalAction: "AGENT_REQUEST_COMPLETION",
+    });
   });
 });

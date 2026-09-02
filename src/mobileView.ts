@@ -2,6 +2,7 @@ import type { GoalRoomState, Receipt } from "./core/goalRoom";
 import type { OwnerViewModel } from "./ownerView";
 import { createReceiptLabels } from "./ownerUi";
 import { createCustodyView, type CustodyView } from "./custodyView";
+import { RELEASE_V2_PASSED_CHECKS } from "./verifier/releaseRules";
 
 export type MobileTabId = "now" | "plan" | "proof" | "activity";
 export type MobileActionKind =
@@ -116,7 +117,7 @@ function actionDock(state: GoalRoomState, view: OwnerViewModel): MobileView["act
       waitingText: view.ownerAttention.body,
     };
   }
-  if (state.phase === "COMPLETION_REQUESTED") {
+  if (state.phase === "COMPLETION_REQUESTED" && view.actions.acceptGoal.visible) {
     return { ...waiting, kind: "accept-goal", primaryLabel: view.actions.acceptGoal.label };
   }
   if (state.phase === "GOAL_ACCEPTED") return { ...waiting, kind: "terminal" };
@@ -150,9 +151,7 @@ export function createMobileView(
   const verification = state.activeVerification;
   const verificationByDigest = new Map(state.verificationHistory.map((record) => [record.candidateSha256, record.verdict]));
   const custody = createCustodyView(state, receipts);
-  const checks = verification?.verdict === "PASS"
-    ? ["HTTPS public URL passed", "Demo duration is within 180 seconds", "Verification command is exactly npm test"]
-    : [];
+  const checks = custody.releaseCustody ? [...RELEASE_V2_PASSED_CHECKS] : [];
 
   return {
     chapter: chapterByPhase[state.phase],

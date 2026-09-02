@@ -1,8 +1,20 @@
+import type { ReleaseCustody } from "./custodyView";
+import {
+  RELEASE_MATCHED_TUPLE_STATEMENT,
+  RELEASE_VERIFICATION_CLAIM_BOUNDARY,
+} from "./verifier/releaseRules";
+
 export type AcceptanceBinding = {
   candidateVersion: number;
   digest: string;
   compactDigest: string;
   ruleSet: string;
+  /**
+   * Release identities parsed from the already-submitted candidate. Null when
+   * the candidate is not an exactly shaped release envelope, in which case the
+   * dialog omits the release rows rather than inventing values.
+   */
+  release?: ReleaseCustody | null;
 };
 
 type EventLike = { preventDefault(): void; key?: string; shiftKey?: boolean };
@@ -11,6 +23,7 @@ type EventNode = {
 };
 type TextNode = { textContent: string | null };
 type FocusNode = EventNode & { focus(): void; isConnected?: boolean };
+type ReleaseRowNode = { hidden: boolean };
 
 export type AcceptanceDialogNodes = {
   dialog: EventNode & {
@@ -27,7 +40,18 @@ export type AcceptanceDialogNodes = {
   digest: TextNode;
   ruleSet: TextNode;
   consequence: TextNode;
+  releaseGroup: ReleaseRowNode;
+  releaseProfile: TextNode;
+  releaseSourceBaseCommit: TextNode;
+  releaseCandidateManifest: TextNode;
+  releaseProofManifest: TextNode;
+  releaseRollbackPatch: TextNode;
+  releaseConsequence: TextNode;
 };
+
+export const ACCEPTANCE_RELEASE_CONSEQUENCE =
+  `${RELEASE_MATCHED_TUPLE_STATEMENT} Accepting seals this exact proof manifest to these exact candidate bytes. A proof manifest belonging to different candidate bytes cannot be accepted. ${RELEASE_VERIFICATION_CLAIM_BOUNDARY}`;
+const ACCEPTANCE_NO_RELEASE_BINDING = "No release envelope identities are recorded for this candidate.";
 
 export function createAcceptanceDialog(
   nodes: AcceptanceDialogNodes,
@@ -89,6 +113,16 @@ export function createAcceptanceDialog(
       nodes.digest.textContent = binding.digest;
       nodes.ruleSet.textContent = binding.ruleSet;
       nodes.consequence.textContent = "This acceptance is irreversible. It seals the Goal Room for this exact PASS-bound candidate.";
+      const release = binding.release ?? null;
+      nodes.releaseGroup.hidden = release === null;
+      nodes.releaseProfile.textContent = release?.profile ?? "";
+      nodes.releaseSourceBaseCommit.textContent = release?.sourceBaseCommit ?? "";
+      nodes.releaseCandidateManifest.textContent = release?.candidateManifestSha256 ?? "";
+      nodes.releaseProofManifest.textContent = release?.proofManifestSha256 ?? "";
+      nodes.releaseRollbackPatch.textContent = release?.compactRollbackPatch ?? "";
+      nodes.releaseConsequence.textContent = release === null
+        ? ACCEPTANCE_NO_RELEASE_BINDING
+        : ACCEPTANCE_RELEASE_CONSEQUENCE;
       nodes.dialog.showModal();
       nodes.cancel.focus();
     },

@@ -3,6 +3,7 @@ import type { OwnerViewModel } from "./ownerView";
 import { createReceiptLabels } from "./ownerUi";
 import { createCustodyView, type CustodyView } from "./custodyView";
 import { createToolSurfaceView, type ToolSurfaceView } from "./toolSurfaceView";
+import { RELEASE_V2_PASSED_CHECKS } from "./verifier/releaseRules";
 
 export type DesktopTabId = "goal" | "plan" | "proof" | "activity";
 export type DesktopOwnerActionKind = "set-intent" | "revise-intent" | "confirm-goal" | "confirm-plan" | "accept-goal" | "waiting" | "terminal";
@@ -85,7 +86,9 @@ function ownerAction(state: GoalRoomState, view: OwnerViewModel): DesktopView["o
   if (state.phase === "INTENT_DRAFT") return { ...waiting, visible: true, kind: state.ownerIntent === null ? "set-intent" : "revise-intent", label: view.actions.setIntent.label };
   if (state.phase === "GOAL_CONTRACT_PROPOSED") return { ...waiting, visible: true, kind: "confirm-goal", label: view.actions.confirm.label, secondaryKind: "request-goal-revision", secondaryLabel: view.actions.revise.label };
   if (state.phase === "PLAN_PROPOSED") return { ...waiting, visible: true, kind: "confirm-plan", label: view.actions.confirm.label, secondaryKind: "request-plan-revision", secondaryLabel: view.actions.revise.label };
-  if (state.phase === "COMPLETION_REQUESTED") return { ...waiting, visible: true, kind: "accept-goal", label: view.actions.acceptGoal.label };
+  if (state.phase === "COMPLETION_REQUESTED" && view.actions.acceptGoal.visible) {
+    return { ...waiting, visible: true, kind: "accept-goal", label: view.actions.acceptGoal.label };
+  }
   if (state.phase === "GOAL_ACCEPTED") return { ...waiting, kind: "terminal" };
   return { ...waiting, kind: "waiting" };
 }
@@ -99,7 +102,8 @@ export function createDesktopView(state: GoalRoomState, view: OwnerViewModel, re
   const priorGoalRevision = [...state.goalContractHistory].reverse().find((entry) => entry.revisionRequest)?.revisionRequest?.note ?? null;
   const priorPlanRevision = [...state.planHistory].reverse().find((entry) => entry.revisionRequest)?.revisionRequest?.note ?? null;
   const candidateDigest = state.activeCandidate?.sha256 ?? null;
-  const passedChecks = verification?.verdict === "PASS" ? ["HTTPS public URL passed", "Demo duration is within 180 seconds", "Verification command is exactly npm test"] : [];
+  const custody = createCustodyView(state, receipts);
+  const passedChecks = custody.releaseCustody ? [...RELEASE_V2_PASSED_CHECKS] : [];
   const verificationByDigest = new Map(state.verificationHistory.map((record) => [record.candidateSha256, record.verdict]));
   return {
     goal: { title: goal?.goal ?? state.ownerIntent ?? "Goal not yet admitted", version: goal?.version ?? null, status: goal?.status ?? "NOT_ADMITTED", origin: origin(state) },
@@ -110,7 +114,7 @@ export function createDesktopView(state: GoalRoomState, view: OwnerViewModel, re
       boundary: view.ownerAttention.body, ownerAttention: view.ownerAttention.required,
       compactDigest: candidateDigest ? `${candidateDigest.slice(0, 10)}…${candidateDigest.slice(-8)}` : null,
     },
-    custody: createCustodyView(state, receipts),
+    custody,
     toolSurface: createToolSurfaceView(state),
     ownerAction: ownerAction(state, view), tabs: tabs.map((tab) => ({ ...tab })),
     inspectors: {

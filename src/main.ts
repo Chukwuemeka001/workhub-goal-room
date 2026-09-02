@@ -13,11 +13,30 @@ import { createDesktopView } from "./desktopView";
 import { createDesktopSurface } from "./desktopUi";
 import { createAcceptanceDialog, type AcceptanceDialogNodes } from "./acceptanceDialog";
 import { containRevisionDialogFocus, createRevisionDialogFocusReturn } from "./revisionDialog";
+import { assuranceFixtures } from "./assurance/assuranceFixtures";
+import { createAssuranceCockpit } from "./assurance/assuranceUi";
 
 function requiredElement<T extends HTMLElement>(id: string): T {
   const element = document.getElementById(id);
   if (!element) throw new Error(`Missing required element: #${id}`);
   return element as T;
+}
+
+async function fetchLocalAssuranceObservation(): Promise<unknown> {
+  const response = await fetch("/__agent-change-assurance", {
+    method: "POST",
+    headers: { "content-type": "application/json", "x-workhub-local-verifier": "observe-v2" },
+    credentials: "same-origin",
+    cache: "no-store",
+  });
+  if (!/^application\/json(?:\s*;|$)/i.test(response.headers.get("content-type") ?? "")) throw new Error("LOCAL_VERIFIER_UNAVAILABLE");
+  const value: unknown = await response.json();
+  if (!response.ok) {
+    const code = value !== null && typeof value === "object" && Object.hasOwn(value, "code") ? String((value as { code: unknown }).code) : "LOCAL_VERIFIER_UNAVAILABLE";
+    if (["BASE_UNRESOLVED", "BASE_NOT_ANCESTOR", "EMPTY_CHANGE", "SOURCE_MOVED", "GIT_OBSERVATION_TIMEOUT", "REPOSITORY_ROOT_MISMATCH", "BUSY"].includes(code)) throw new Error(code);
+    throw new Error("LOCAL_VERIFIER_UNAVAILABLE");
+  }
+  return value;
 }
 
 const dialog = requiredElement<HTMLDialogElement>("revision-dialog");
@@ -39,6 +58,13 @@ const acceptanceDialog = createAcceptanceDialog({
   digest: requiredElement("acceptance-candidate-digest"),
   ruleSet: requiredElement("acceptance-rule-set"),
   consequence: requiredElement("acceptance-dialog-consequence"),
+  releaseGroup: requiredElement("acceptance-release-binding"),
+  releaseProfile: requiredElement("acceptance-release-profile"),
+  releaseSourceBaseCommit: requiredElement("acceptance-release-source-base"),
+  releaseCandidateManifest: requiredElement("acceptance-release-candidate-manifest"),
+  releaseProofManifest: requiredElement("acceptance-release-proof-manifest"),
+  releaseRollbackPatch: requiredElement("acceptance-release-rollback-patch"),
+  releaseConsequence: requiredElement("acceptance-release-consequence"),
 } as unknown as AcceptanceDialogNodes, async () => controller.acceptGoal());
 const room = createGoalRoom({ ownerIntent: null });
 let controller: ReturnType<typeof createOwnerDecisionController>;
@@ -90,6 +116,10 @@ function render(view: OwnerViewModel) {
 }
 controller = createOwnerDecisionController({ room, render });
 controller.render();
+createAssuranceCockpit(requiredElement("assurance-cockpit"), assuranceFixtures, {
+  releaseGuardianRoot: requiredElement("desktop-room"),
+  fetchObservation: import.meta.env.DEV ? fetchLocalAssuranceObservation : undefined,
+});
 const systemVerifier = createSystemVerifierAdapter({
   room,
   onSettled: () => render(createOwnerViewModel(room.getState(), room.getReceipts())),

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "kind": "workhub-owner-intent-setup",
+  "mechanism": "trusted CDP Input mouse and insertText outside the model evaluation client",
+  "pageUrl": "http://127.0.0.1:4177/?autonomous-positive-01=1",
+  "intent": "Govern this agent-generated web release. Require an immutable Goal and Plan, deterministic evidence for the exact candidate, and my explicit acceptance before the room seals.",
+  "intentSha256": "81b68db101f58843cb05917f0d2d3ad44a3b3a78697635a63f2c2c2598503d51",
+  "before": {
+    "phaseText": "STATE v0 · INTENT DRAFT",
+    "stateVersion": 0,
+    "frontier": "A passing agent build is not an authorized release.",
+    "inputValue": ""
+  },
+  "after": {
+    "phaseText": "STATE v1 · INTENT DRAFT",
+    "stateVersion": 1,
+    "frontier": "Agent must propose a Goal Contract",
+    "inputValue": "Govern this agent-generated web release. Require an immutable Goal and Plan, deterministic evidence for the exact candidate, and my explicit acceptance before the room seals."
+  },
+  "recordedAt": "2026-08-31T01:40:26.041Z"
+}
