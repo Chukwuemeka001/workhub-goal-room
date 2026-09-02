@@ -18,7 +18,7 @@ test("pull requests test with read-only authority while Pages effects remain mai
   const deploy = source.slice(source.indexOf("  deploy:\n"));
   assert.ok(deploy.includes(`  deploy:\n    ${condition}`));
   assert.match(deploy, /    permissions:\n      contents: read\n      pages: write\n      id-token: write\n/);
-  assert.ok(source.includes("      - uses: actions/checkout@v4\n        with:\n          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}"));
+  assert.ok(source.includes("      - uses: actions/checkout@v4\n        with:\n          fetch-depth: 0\n          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}"));
   assert.ok(source.includes("      - run: node --test .github/workflows/deploy.node-test.mjs\n      - run: npm test"));
   assert.match(source, /    concurrency:\n      group: pages\n      cancel-in-progress: true\n/);
   assert.doesNotMatch(source.slice(0, source.indexOf("jobs:\n")), /\nconcurrency:\n/);
