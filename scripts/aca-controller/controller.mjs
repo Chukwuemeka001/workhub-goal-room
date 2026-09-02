@@ -9,6 +9,7 @@ import { createDockerCliIO, createDurableJournal, qualifyDocker, recoverJournal,
 import { admitConnectedV3Envelope, admitConnectedV4Envelope, createCheckReceipt, createConnectedV3Envelope, createConnectedV4Envelope } from "./receipt.mjs";
 import { verifyInstalledController } from "./install.mjs";
 import { GITHUB_FAILURES, acquireGithubCredential, createClosedGithubHttpsAdapter, createFixtureGithubEngine, validateGithubStartup } from "./github.mjs";
+import { admitExactPrHandoff, createExactPrHandoff } from "./workflow.mjs";
 
 const UI_HTML = readFileSync(new URL("./ui.html", import.meta.url), "utf8");
 const UI_JS = readFileSync(new URL("./ui.js", import.meta.url), "utf8");
@@ -24,6 +25,9 @@ function createControllerServer(engine, createHttpServer = createServer) {
   const capability = randomBytes(32).toString("hex");
   let authority = "";
   let active = null;
+  let workflowPreview = null;
+  let closed = false;
+  let epoch = 0;
   const authorized = request => {
     if (!loopback(request) || request.headers.host !== authority || request.headers["x-forwarded-host"] !== undefined || request.headers.forwarded !== undefined) return "AUTHORITY_REQUIRED";
     if (request.headers.origin !== `http://${authority}`) return "ORIGIN_REQUIRED";
@@ -36,16 +40,23 @@ function createControllerServer(engine, createHttpServer = createServer) {
   const server = createHttpServer(async (request, response) => {
     if (!loopback(request)) { json(response, 403, { code: "LOOPBACK_REQUIRED" }); return; }
     if (request.headers.host !== authority || request.headers["x-forwarded-host"] !== undefined || request.headers.forwarded !== undefined) { json(response, 403, { code: "AUTHORITY_REQUIRED" }); return; }
+    if (closed) { json(response, 503, { code: "CONTROLLER_CLOSED", authority: "NONE" }); return; }
     if (request.method === "GET" && request.url === "/") { response.writeHead(200, { ...securityHeaders, "content-type": "text/html; charset=utf-8" }); response.end(UI_HTML.replace("__ACA_SESSION__", capability)); return; }
     if (request.method === "GET" && request.url === "/ui.js") { response.writeHead(200, { ...securityHeaders, "content-type": "text/javascript; charset=utf-8" }); response.end(UI_JS); return; }
     if (request.method === "GET" && request.url === "/ui.css") { response.writeHead(200, { ...securityHeaders, "content-type": "text/css; charset=utf-8" }); response.end(UI_CSS); return; }
     if (request.method === "GET" && request.url === "/api/status") { json(response, 200, { schema: "agent-change-assurance/controller-capability-v1", available: true, authority: "NONE" }); return; }
     if (request.method === "OPTIONS") { json(response, 405, { code: "OPTIONS_REJECTED" }); return; }
-    if (request.method !== "POST" || !["/api/observe", "/api/cancel"].includes(request.url)) { json(response, 404, { code: "NOT_FOUND" }); return; }
+    if (request.method !== "POST" || !["/api/observe", "/api/cancel", "/api/workflow-preview"].includes(request.url)) { json(response, 404, { code: "NOT_FOUND" }); return; }
     const refusal = authorized(request);
     if (refusal) { json(response, refusal === "JSON_REQUIRED" ? 415 : 403, { code: refusal }); return; }
     try { await emptyBody(request); } catch { json(response, 400, { code: "EMPTY_BODY_REQUIRED" }); return; }
+    if (request.url === "/api/workflow-preview") {
+      if (active || !workflowPreview) { json(response, 409, { code: "WORKFLOW_PREVIEW_UNAVAILABLE", authority: "NONE" }); return; }
+      json(response, 200, workflowPreview, { "x-workhub-aca-admission": "exact-pr-handoff-v1" });
+      return;
+    }
     if (request.url === "/api/cancel") {
+      workflowPreview = null;
       if (!active) { json(response, 409, { code: "NO_ACTIVE_GENERATION", authority: "NONE" }); return; }
       const target = active; target.abort.abort();
       try { await target.promise; } catch { /* the runner owns the terminal classification */ }
@@ -53,15 +64,24 @@ function createControllerServer(engine, createHttpServer = createServer) {
       return;
     }
     if (active || engine.isParked?.()) { json(response, 409, { code: "BUSY", authority: "NONE" }); return; }
+    workflowPreview = null;
     const abort = new AbortController();
-    const generation = { abort, promise: null };
+    const generation = { abort, promise: null, epoch: ++epoch };
     const operation = Promise.resolve().then(() => engine.observe({ signal: abort.signal }));
     generation.promise = operation; active = generation;
-    try { json(response, 200, await operation, { "x-workhub-aca-admission": engine.admissionHeader ?? "connected-v3-exact" }); }
-    catch(error) { const code=abort.signal.aborted?"CANCELLED":GITHUB_FAILURES.includes(error?.code)?error.code:"CONTROLLER_FAILURE";json(response, 500, { code, authority: "NONE" }); }
+    const cancelled = () => abort.signal.aborted || closed || generation.epoch !== epoch;
+    try {
+      const value = await operation;
+      if (cancelled()) throw Object.assign(new Error("CANCELLED"), { code: "CANCELLED" });
+      const projected = engine.createWorkflowPreview?.(value) ?? null;
+      if (cancelled()) throw Object.assign(new Error("CANCELLED"), { code: "CANCELLED" });
+      workflowPreview = projected;
+      json(response, 200, value, { "x-workhub-aca-admission": engine.admissionHeader ?? "connected-v3-exact" });
+    }
+    catch(error) { workflowPreview=null;const code=cancelled()?"CANCELLED":GITHUB_FAILURES.includes(error?.code)?error.code:"CONTROLLER_FAILURE";json(response, 500, { code, authority: "NONE" }); }
     finally { if (active === generation) active = null; }
   });
-  return Object.freeze({ server, setAuthority: value => { authority = value; } });
+  return Object.freeze({ server, setAuthority: value => { authority = value; }, shutdown: () => { if (!closed) { closed = true; epoch += 1; workflowPreview = null; active?.abort.abort(); } return active?.promise?.catch(() => {}) ?? Promise.resolve(); } });
 }
 
 async function startControllerEngine(engine, { createHttpServer } = {}) {
@@ -71,8 +91,14 @@ async function startControllerEngine(engine, { createHttpServer } = {}) {
   const port = address.port;
   const authority = `127.0.0.1:${port}`;
   controller.setAuthority(authority);
-  let closed = false;
-  return Object.freeze({ host: "127.0.0.1", port, authority, close: () => { if (closed) return Promise.resolve(); closed = true; return new Promise((resolve, reject) => controller.server.close(error => { engine.destroy?.(); error ? reject(error) : resolve(); })); } });
+  let closePromise = null;
+  const close=()=>{
+    if(closePromise)return closePromise;
+    const settlement=controller.shutdown(),stopped=new Promise((resolve,reject)=>controller.server.close(error=>error?reject(error):resolve()));
+    closePromise=(async()=>{const results=await Promise.allSettled([settlement,stopped]),lifecycleFailure=results.find(result=>result.status==="rejected");let cleanupFailure;try{await engine.destroy?.()}catch(error){cleanupFailure=error}if(lifecycleFailure)throw lifecycleFailure.reason;if(cleanupFailure)throw cleanupFailure})();
+    return closePromise;
+  };
+  return Object.freeze({ host: "127.0.0.1", port, authority, close });
 }
 
 const CONFIG_KEYS = Object.freeze(["schema", "installRoot", "repositoryRoot", "displayName", "scratchParent", "journalPath", "parentCommit", "baseCommit", "baseTree", "allowedPaths", "requiredOverlayPaths", "excludedPrefixes", "lockfile", "docker", "verifierSpecDigest"]);
@@ -91,7 +117,7 @@ function validateProductionConfig(config) {
 }
 
 const readCredentialFd=async fd=>{const chunks=[],buffer=Buffer.alloc(4097);let offset=0;while(offset<buffer.length){const count=readSync(fd,buffer,offset,buffer.length-offset,null);if(!count)break;offset+=count}chunks.push(buffer.subarray(0,offset));return Buffer.concat(chunks)};
-const DEFAULT_ADAPTERS = Object.freeze({ verifyInstalledController, createDurableJournal, createDockerCliIO, recoverJournal, qualifyDocker, captureSnapshot, revalidateSnapshot, createSnapshotTarStream, runSnapshotChecks, createCheckReceipt, createConnectedV3Envelope, admitConnectedV3Envelope,createConnectedV4Envelope,admitConnectedV4Envelope,acquireGithubCredential,createGithubTransport:createClosedGithubHttpsAdapter,createGithubEngine:createFixtureGithubEngine,readCredentialFd,closeCredentialFd:async fd=>closeSync(fd) });
+const DEFAULT_ADAPTERS = Object.freeze({ verifyInstalledController, createDurableJournal, createDockerCliIO, recoverJournal, qualifyDocker, captureSnapshot, revalidateSnapshot, createSnapshotTarStream, runSnapshotChecks, createCheckReceipt, createConnectedV3Envelope, admitConnectedV3Envelope,createConnectedV4Envelope,admitConnectedV4Envelope,createExactPrHandoff,admitExactPrHandoff,acquireGithubCredential,createGithubTransport:createClosedGithubHttpsAdapter,createGithubEngine:createFixtureGithubEngine,readCredentialFd,closeCredentialFd:async fd=>closeSync(fd) });
 const emptyOutput = () => Object.freeze({ sha256: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", observedBytes: 0, preview: "", truncated: false, limitExceeded: false });
 const commandIds = Object.freeze({ unit: ["unit-vitest"], build: ["build-typescript", "build-vite"] });
 const sameQualification = (left, right) => JSON.stringify(left) === JSON.stringify(right);
@@ -104,12 +130,14 @@ const classifyTerminalReason = (value, aborted = false) => {
 
 async function createProductionEngine(config, suppliedAdapters = {}) {
   const adapters = { ...DEFAULT_ADAPTERS, ...suppliedAdapters };
+  const handoffSources = new WeakMap();
   await adapters.verifyInstalledController(config.installRoot);
   let githubEngine=null,githubTransport=null,token=null;
+  const destroyGithub=async()=>{let failure;try{await githubTransport?.destroy?.()}catch(error){failure=error}finally{token?.fill?.(0)}if(failure)throw failure};
   if(config.github){
     if(config.github.permissionAttestation!=="READ_ONLY_DECLARED")throw new Error("CREDENTIAL_SCOPE_UNQUALIFIED");
     token=await adapters.acquireGithubCredential(config.github,{readFd:adapters.readCredentialFd,closeFd:adapters.closeCredentialFd});
-    try{githubTransport=adapters.createGithubTransport(config.github,token);githubEngine=adapters.createGithubEngine(config.github,{request:(coordinate,options)=>githubTransport.request(coordinate,options),revalidateLocal:async(local,options)=>{if(options?.signal?.aborted)throw new Error("CANCELLED");const fresh=await adapters.captureSnapshot({root:config.repositoryRoot,scratchParent:config.scratchParent,parentCommit:config.parentCommit,baseCommit:config.baseCommit,baseTree:config.baseTree,allowedPaths:config.allowedPaths,requiredOverlayPaths:config.requiredOverlayPaths,excludedPrefixes:config.excludedPrefixes});try{if(fresh.snapshotDigest!==local.snapshotDigest)throw new Error("LOCAL_SOURCE_MOVED")}finally{await fresh.cleanup()}}})}catch(error){githubTransport?.destroy?.();token?.fill?.(0);throw error}
+    try{githubTransport=adapters.createGithubTransport(config.github,token);githubEngine=adapters.createGithubEngine(config.github,{request:(coordinate,options)=>githubTransport.request(coordinate,options),revalidateLocal:async(local,options)=>{if(options?.signal?.aborted)throw new Error("CANCELLED");const fresh=await adapters.captureSnapshot({root:config.repositoryRoot,scratchParent:config.scratchParent,parentCommit:config.parentCommit,baseCommit:config.baseCommit,baseTree:config.baseTree,allowedPaths:config.allowedPaths,requiredOverlayPaths:config.requiredOverlayPaths,excludedPrefixes:config.excludedPrefixes});try{if(fresh.snapshotDigest!==local.snapshotDigest)throw new Error("LOCAL_SOURCE_MOVED")}finally{await fresh.cleanup()}}})}catch(error){try{await destroyGithub()}catch{/* preserve connector construction failure */}throw error}
   }
   try {
   const journal = await adapters.createDurableJournal(config.journalPath);
@@ -158,24 +186,26 @@ async function createProductionEngine(config, suppliedAdapters = {}) {
     if(!githubEngine)return admission.envelope;
     let external;try{external=await githubEngine.observe({local:{snapshotDigest:repository.snapshotDigest,parentCommit:repository.parentCommit,baseCommit:repository.baseCommit,trackedState:"DIRTY"},signal})}catch(error){if(signal?.aborted)throw Object.assign(new Error("CANCELLED"),{code:"CANCELLED"});if(error?.code==="LOCAL_SOURCE_MOVED"||error?.code==="CANCELLED")throw error;if(GITHUB_FAILURES.includes(error?.code))return externalUnavailable(admission.envelope,error.code);throw error}
     if(signal?.aborted)throw Object.assign(new Error("CANCELLED"),{code:"CANCELLED"});
-    const github=githubEngine.trustedTuple(external),v4=adapters.createConnectedV4Envelope({local:admission.envelope,external,github}),v4Admission=adapters.admitConnectedV4Envelope(v4,github);if(!v4Admission.valid)throw new Error("CONTROLLER_ENVELOPE_REFUSED");return v4Admission.envelope;
+    const github=githubEngine.trustedTuple(external),v4=adapters.createConnectedV4Envelope({local:admission.envelope,external,github}),v4Admission=adapters.admitConnectedV4Envelope(v4,github);if(!v4Admission.valid)throw new Error("CONTROLLER_ENVELOPE_REFUSED");handoffSources.set(v4Admission.envelope,github);return v4Admission.envelope;
   };
-  return Object.freeze({ observe, admissionHeader:githubEngine?"connected-v4-exact":"connected-v3-exact", isParked: () => Boolean(operationIo.isParked?.()),destroy:()=>{githubTransport?.destroy?.();token?.fill?.(0)} });
+  const createWorkflowPreview=value=>{const github=handoffSources.get(value);if(!github)return null;const candidate=adapters.createExactPrHandoff({connected:value,github}),admission=adapters.admitExactPrHandoff(candidate,{connected:value,github});if(!admission.valid)throw new Error("CONTROLLER_ENVELOPE_REFUSED");return admission.handoff};
+  return Object.freeze({ observe, createWorkflowPreview, admissionHeader:githubEngine?"connected-v4-exact":"connected-v3-exact", isParked: () => Boolean(operationIo.isParked?.()),destroy:destroyGithub });
   } catch (error) {
-    githubTransport?.destroy?.(); token?.fill?.(0); throw error;
+    try { await destroyGithub(); } catch { /* preserve the startup failure */ } throw error;
   }
 }
 
 export async function startProductionController(rawConfig, adapters = {}) {
   const config = validateProductionConfig(rawConfig); let engine;
   try { engine = await createProductionEngine(config, adapters); return await startControllerEngine(engine, { createHttpServer: adapters.createHttpServer }); }
-  catch (error) { engine?.destroy?.(); throw error; }
+  catch (error) { try { await engine?.destroy?.(); } catch { /* preserve the startup failure */ } throw error; }
 }
 
-export async function startFixtureQualificationController({ localEngine, githubEngine, compose }) {
-  if (!localEngine || !githubEngine || typeof localEngine.observe !== "function" || typeof githubEngine.observe !== "function" || typeof compose !== "function") throw new Error("FIXTURE_CONFIG_REFUSED");
+export async function startFixtureQualificationController({ localEngine, githubEngine, compose, project }) {
+  if (!localEngine || !githubEngine || typeof localEngine.observe !== "function" || typeof githubEngine.observe !== "function" || typeof compose !== "function" || project !== undefined && typeof project !== "function") throw new Error("FIXTURE_CONFIG_REFUSED");
   const engine = Object.freeze({
     admissionHeader: "connected-v4-exact",
+    createWorkflowPreview: project,
     async observe({ signal }) {
       const local = await localEngine.observe({ signal });
       if (signal.aborted) throw Object.assign(new Error("CANCELLED"), { code: "CANCELLED" });

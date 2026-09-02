@@ -19,12 +19,31 @@ const controllerProjection = value => {
     if(!plain(external)||external.authority!=="NONE"||!Array.isArray(external.checkRuns)||!Array.isArray(external.statuses)||(!available&&!unavailable))return null;
   }
   const passed = local.receipts.filter(receipt => receipt.state === "PASS").length, failed = local.receipts.filter(receipt => receipt.state === "FAIL").length, indeterminate = 2 - passed - failed, completed = passed + failed, completeness = completed === 2 ? "complete" : completed === 1 ? "partial" : "absent";
-  return Object.freeze({ schema:value.schema, qualification: local.qualification, receipts: local.receipts, repository: local.repository, external, authority: "NONE", aggregate: Object.freeze({ passed, failed, indeterminate, complete: completed === 2, sentence: `${passed} of 2 required checks passed; ${failed} failed; ${indeterminate} indeterminate; executable evidence is ${completeness}; ${indeterminate ? "missing/indeterminate requirements remain" : "no missing/indeterminate requirements"}.` }) });
+  return Object.freeze({ schema:value.schema, envelopeDigest:value.envelopeDigest??null, qualification: local.qualification, receipts: local.receipts, repository: local.repository, external, authority: "NONE", aggregate: Object.freeze({ passed, failed, indeterminate, complete: completed === 2, sentence: `${passed} of 2 required checks passed; ${failed} failed; ${indeterminate} indeterminate; executable evidence is ${completeness}; ${indeterminate ? "missing/indeterminate requirements remain" : "no missing/indeterminate requirements"}.` }) });
+};
+const handoffProjection=(value,sourceEnvelopeDigest)=>{
+  if(!plain(value)||value.schema!=="aca-exact-pr-handoff/v1"||value.authority!=="NONE"||value.effect!=="NOT_ATTEMPTED"||value.effectCapability!=="ABSENT"||value.writeAuthorization!=="ABSENT"||value.sourceEnvelopeDigest!==sourceEnvelopeDigest||value.writebackEligibility!=="BLOCKED_LOCAL_SNAPSHOT_NOT_REMOTE"||!/^[0-9a-f]{64}$/.test(value.handoffDigest??""))return null;
+  const repository=value.repository,pull=value.pull,relationship=value.relationship,observation=value.observation,routing=value.routing;
+  if(!plain(repository)||!plain(pull)||!plain(relationship)||!plain(observation)||!plain(routing)||!Number.isSafeInteger(repository.id)||repository.id<=0||!/^[A-Za-z0-9_-]{1,128}$/.test(repository.nodeId??"")||!/^[A-Za-z0-9_.-]{1,100}$/.test(repository.owner??"")||!/^[A-Za-z0-9_.-]{1,100}$/.test(repository.name??"")||!Number.isSafeInteger(pull.number)||pull.number<=0||!/^[0-9a-f]{40}$/.test(pull.headSha??"")||!/^[0-9a-f]{40}$/.test(pull.baseSha??"")||relationship.candidateCoverage!=="NOT_LOCAL_DIRTY_SNAPSHOT"||!["PARENT_COMMIT_ONLY","REMOTE_HEAD_DIFFERS"].includes(relationship.candidateRelation)||!["REQUEST_EVIDENCE","ESCALATE"].includes(routing.decision))return null;
+  const canonical=`https://github.com/${repository.owner}/${repository.name}/pull/${pull.number}`;if(pull.url!==canonical)return null;
+  try{const target=new URL(pull.url);if(target.protocol!=="https:"||target.hostname!=="github.com"||target.port||target.username||target.password||target.search||target.hash||target.pathname!==`/${repository.owner}/${repository.name}/pull/${pull.number}`)return null}catch{return null}
+  return Object.freeze(value);
 };
 const headers = () => ({ "Content-Type": "application/json", "X-WorkHub-ACA-Session": session });
 const focusMounted = heading => { heading.focus(); heading.scrollIntoView({ block: "nearest" }); };
-function renderEnvelope(value) {
+function renderEnvelope(value,handoff=null) {
   const heading = node("h2", "EXECUTABLE EVIDENCE · CONNECTED"); heading.tabIndex = -1;
+  const handoffSections=[];
+  if(handoff){
+    const section=node("section");section.className="workflow-handoff";
+    const title=node("h3","Exact PR handoff · read-only");
+    const decision=node("p",`Routing: ${handoff.routing.decision} · ${handoff.routing.reason}`);decision.className="workflow-decision";
+    const counts=node("p",`External records: ${handoff.observation.failed} failed · ${handoff.observation.pending} pending · ${handoff.observation.passed} succeeded · ${handoff.observation.total} total.`);
+    const observed=node("p",`Observed head ${handoff.pull.headSha} · ${handoff.observation.finishedAt} · Point-in-time; not monitored.`);
+    const link=node("a",`Open PR #${handoff.pull.number} on GitHub`);link.href=handoff.pull.url;link.target="_blank";link.rel="noopener noreferrer";link.className="workflow-link";link.setAttribute("aria-label",`Open GitHub repository ${handoff.repository.owner}/${handoff.repository.name} pull request ${handoff.pull.number} in a new tab`);
+    section.append(title,node("p","Authority: NONE"),decision,node("p",`Candidate coverage: ${handoff.relationship.candidateCoverage} · Relation: ${handoff.relationship.candidateRelation}`),node("p",handoff.summary),counts,observed,node("p","The PR may have moved since observation. Reobserve before relying on its current head."),link,node("p","Effect: NOT_ATTEMPTED · Effect capability: ABSENT · Write authorization: ABSENT"));
+    handoffSections.push(section);
+  }
   const aggregate = node("section"); aggregate.append(node("h3", "Required check aggregate"), node("p", value.aggregate.sentence), node("p", "Authority: NONE"));
   const qualification = node("section"); qualification.append(node("h3", "Sandbox qualification"), node("p", `QUALIFIED · ${value.qualification.policyVersion}`), node("p", `Image ${value.qualification.imageId.slice(0, 20)}… · spec ${value.qualification.verifierSpecDigest.slice(0, 16)}…`));
   const full = node("details"); full.append(node("summary", "Full sandbox binding"), node("code", `image ${value.qualification.imageId} · verifier spec ${value.qualification.verifierSpecDigest}`)); qualification.append(full);
@@ -59,7 +78,7 @@ function renderEnvelope(value) {
     }
   }
   const warning = node("p", "Candidate code ran only inside a qualified local sandbox. PASS does not prove correctness, coverage, security, safety, approval, readiness, mergeability, deployment, Release Guardian submission, or Owner decision. Evidence is candidate-bound and not independent."); warning.className = "warning";
-  root.replaceChildren(heading, aggregate, ...externalSections, qualification, checks, binding, warning); observe.textContent = "Reobserve exact local candidate"; focusMounted(heading);
+  root.replaceChildren(heading, ...handoffSections, aggregate, ...externalSections, qualification, checks, binding, warning); observe.textContent = "Reobserve exact local candidate"; focusMounted(heading);
 }
 function renderUnavailable(code) { const heading = node("h2", "SANDBOX QUALIFICATION · UNAVAILABLE"); heading.tabIndex = -1; root.replaceChildren(heading, node("p", `${code} · No candidate check ran and no executable evidence was produced.`)); lifecycle.textContent = "UNAVAILABLE · Sandbox qualification did not admit execution."; focusMounted(heading); }
 observe.addEventListener("click", async () => {
@@ -74,7 +93,14 @@ observe.addEventListener("click", async () => {
     if (!response.ok) { if (["SANDBOX_UNAVAILABLE","SANDBOX_POLICY_UNAVAILABLE"].includes(value?.code)) { renderUnavailable(value.code); return; } throw new Error("INVALID_CONNECTED_OBSERVATION"); }
     const expected=["agent-change-assurance/connected-v4","agent-change-assurance/external-unavailable-v1"].includes(value.schema)?"connected-v4-exact":"connected-v3-exact";
     if (response.headers.get("x-workhub-aca-admission") !== expected || !projection) throw new Error("INVALID_CONNECTED_OBSERVATION");
-    renderEnvelope(projection); lifecycle.textContent = "CONNECTED · Controller-rederived exact sandbox projection admitted.";
+    let handoff=null;
+    if(value.schema==="agent-change-assurance/connected-v4"){
+      const previewResponse=await fetch("/api/workflow-preview",{method:"POST",headers:headers(),body:"",signal:active.signal});
+      const previewValue=await previewResponse.json();if(current!==generation)return;
+      handoff=handoffProjection(previewValue,projection.envelopeDigest);
+      if(!previewResponse.ok||previewResponse.headers.get("x-workhub-aca-admission")!=="exact-pr-handoff-v1"||!handoff)throw new Error("INVALID_EXACT_PR_HANDOFF");
+    }
+    renderEnvelope(projection,handoff); lifecycle.textContent = "CONNECTED · Controller-rederived exact sandbox projection admitted.";
   } catch (error) {
     if (current !== generation) return;
     const cancelled = error.name === "AbortError";

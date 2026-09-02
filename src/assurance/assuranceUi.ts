@@ -56,8 +56,8 @@ export function createAssuranceCockpit(root: HTMLElement, fixtures: readonly Ass
     root.replaceChildren(header("LOCAL OBSERVATION · REFUSED", "The requested local observation failed closed."), status, boundary, ...actions());
   };
   const renderExternalConnectorUnavailable = () => {
-    const status=node("p","External evidence is available only in the installed trusted controller.");status.setAttribute("role","status");status.className="assurance-verifier-status";
-    const boundary=node("p","EXTERNAL_CONNECTOR_UNAVAILABLE · This integrated cockpit does not admit or reinterpret connected-v4 provider objects. Use the installed controller for normalized external evidence. Authority: NONE.");boundary.className="assurance-boundary";
+    const status=node("p","External evidence is available only in the installed trusted external-evidence service.");status.setAttribute("role","status");status.className="assurance-verifier-status";
+    const boundary=node("p","EXTERNAL_CONNECTOR_UNAVAILABLE · This integrated cockpit does not admit or reinterpret connected-v4 provider objects. Use the installed external-evidence service for normalized external evidence. Authority: NONE.");boundary.className="assurance-boundary";
     root.replaceChildren(header("EXTERNAL CONNECTOR · UNAVAILABLE","The connected-v4 response was detected and refused at this capability boundary."),status,boundary,...actions());
   };
   const renderDemo = (fixture: AssuranceFixture) => {

@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { chmod, lstat, mkdir, open, readFile, rename, stat } from "node:fs/promises";
 import { join } from "node:path";
 
-const FILES = Object.freeze(["controller.mjs", "docker.mjs", "github.mjs", "install.mjs", "output.mjs", "receipt.mjs", "snapshot.mjs", "ui.html", "ui.js", "ui.css"]);
+const FILES = Object.freeze(["controller.mjs", "docker.mjs", "github.mjs", "install.mjs", "output.mjs", "receipt.mjs", "snapshot.mjs", "workflow.mjs", "ui.html", "ui.js", "ui.css"]);
 const digest = bytes => createHash("sha256").update(bytes).digest("hex");
 const canonical = value => JSON.stringify(value);
 const fail = () => { throw new Error("INSTALLED_CONTROLLER_MOVED"); };
